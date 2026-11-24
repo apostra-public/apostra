@@ -24859,6 +24859,10 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     '\n    For kinds decision and intelligence_run: at or before this date-time.\n    '
     buyingMode: NotRequired[Literal["brief", "wholesale", "refine"]]
     '\n    For kind intelligence_run: runs of this mode; brief is the buyer briefs the Briefs page lists.\n    '
+    unreadOnly: NotRequired[bool]
+    '\n    For kind notification: only the notifications you have not read.\n    '
+    releaseView: NotRequired[Literal["for_you", "explore", "all", "board"]]
+    '\n    For release_update: for_you (default), explore, all, or board (features by stage).\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -25201,6 +25205,10 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     '\n    For kinds decision and intelligence_run: at or before this date-time.\n    '
     buyingMode: NotRequired[Literal["brief", "wholesale", "refine"]]
     '\n    For kind intelligence_run: runs of this mode; brief is the buyer briefs the Briefs page lists.\n    '
+    unreadOnly: NotRequired[bool]
+    '\n    For kind notification: only the notifications you have not read.\n    '
+    releaseView: NotRequired[Literal["for_you", "explore", "all", "board"]]
+    '\n    For release_update: for_you (default), explore, all, or board (features by stage).\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -25477,6 +25485,10 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(Type
     '\n    For kinds decision and intelligence_run: at or before this date-time.\n    '
     buyingMode: NotRequired[Literal["brief", "wholesale", "refine"]]
     '\n    For kind intelligence_run: runs of this mode; brief is the buyer briefs the Briefs page lists.\n    '
+    unreadOnly: NotRequired[bool]
+    '\n    For kind notification: only the notifications you have not read.\n    '
+    releaseView: NotRequired[Literal["for_you", "explore", "all", "board"]]
+    '\n    For release_update: for_you (default), explore, all, or board (features by stage).\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -25780,6 +25792,10 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDi
     '\n    For kinds decision and intelligence_run: at or before this date-time.\n    '
     buyingMode: NotRequired[Literal["brief", "wholesale", "refine"]]
     '\n    For kind intelligence_run: runs of this mode; brief is the buyer briefs the Briefs page lists.\n    '
+    unreadOnly: NotRequired[bool]
+    '\n    For kind notification: only the notifications you have not read.\n    '
+    releaseView: NotRequired[Literal["for_you", "explore", "all", "board"]]
+    '\n    For release_update: for_you (default), explore, all, or board (features by stage).\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -26090,6 +26106,10 @@ class SearchInputKindAdServerTargetingFilter(TypedDict):
     '\n    For kinds decision and intelligence_run: at or before this date-time.\n    '
     buyingMode: NotRequired[Literal["brief", "wholesale", "refine"]]
     '\n    For kind intelligence_run: runs of this mode; brief is the buyer briefs the Briefs page lists.\n    '
+    unreadOnly: NotRequired[bool]
+    '\n    For kind notification: only the notifications you have not read.\n    '
+    releaseView: NotRequired[Literal["for_you", "explore", "all", "board"]]
+    '\n    For release_update: for_you (default), explore, all, or board (features by stage).\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -26157,7 +26177,7 @@ class SearchInputKindAdServerTargetingFilterProperty(TypedDict):
     type: Literal["domain", "subdomain", "network_id", "ios_bundle", "android_package", "apple_app_store_id", "google_play_id", "roku_store_id", "fire_tv_asin", "samsung_app_id", "apple_tv_bundle", "bundle_id", "venue_id", "screen_id", "openooh_venue_type", "rss_url", "apple_podcast_id", "spotify_collection_id", "podcast_guid", "station_id", "facility_id"]
     value: str
 
-class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndIntelligenceRunAndLibraryRequestAndAskAndConversationAndBuyerAgentAndProjectAndDimensionAndSession(TypedDict):
+class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndIntelligenceRunAndLibraryRequestAndAskAndNotificationAndReleaseUpdateAndConversationAndBuyerAgentAndProjectAndDimensionAndSession(TypedDict):
     accountId: NotRequired[int | str]
     query: NotRequired[str]
     '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn and creative_session take no query.\n    '
@@ -26173,7 +26193,7 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     '\n    What to search: objects, docs, or specs. When omitted, a call with query searches all three and a call without query lists objects. docs and specs need a query, except an agreement read by document and revision.\n    '
     docsScope: NotRequired[Literal["caller_relevant", "public_research"]]
     '\n    Which docs to rank. caller_relevant (the default) skips docs written for other account types; public_research searches every public doc.\n    '
-    kind: Literal["agent", "skill", "inventory_source", "material", "coverage", "wholesale_product", "playbook_version", "business_rules_version", "house_discount", "connection", "account_relationship", "seller", "advertiser", "advertiser_grant", "signal", "work_item", "campaign", "creative_format", "creative_engine", "media_buy", "rfp", "rfp_turn", "intelligence_run", "library_request", "ask", "conversation", "buyer_agent", "project", "dimension", "session"]
+    kind: Literal["agent", "skill", "inventory_source", "material", "coverage", "wholesale_product", "playbook_version", "business_rules_version", "house_discount", "connection", "account_relationship", "seller", "advertiser", "advertiser_grant", "signal", "work_item", "campaign", "creative_format", "creative_engine", "media_buy", "rfp", "rfp_turn", "intelligence_run", "library_request", "ask", "notification", "release_update", "conversation", "buyer_agent", "project", "dimension", "session"]
     sponsoredBuyerCustomerId: NotRequired[str]
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
@@ -26182,7 +26202,7 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
-    filter: NotRequired[SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndIntelligenceRunAndLibraryRequestAndAskAndConversationAndBuyerAgentAndProjectAndDimensionAndSessionFilter]
+    filter: NotRequired[SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndIntelligenceRunAndLibraryRequestAndAskAndNotificationAndReleaseUpdateAndConversationAndBuyerAgentAndProjectAndDimensionAndSessionFilter]
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
     '\n    A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds account and member.\n    '
@@ -26191,7 +26211,9 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     groupBy: NotRequired[str]
     '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).\n    '
 
-class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndIntelligenceRunAndLibraryRequestAndAskAndConversationAndBuyerAgentAndProjectAndDimensionAndSessionFilter(TypedDict):
+SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndIntelligenceRunAndLibraryRequestAndAskAndConversationAndBuyerAgentAndProjectAndDimensionAndSession: TypeAlias = SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndIntelligenceRunAndLibraryRequestAndAskAndNotificationAndReleaseUpdateAndConversationAndBuyerAgentAndProjectAndDimensionAndSession
+
+class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndIntelligenceRunAndLibraryRequestAndAskAndNotificationAndReleaseUpdateAndConversationAndBuyerAgentAndProjectAndDimensionAndSessionFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
     ids: NotRequired[list[str]]
@@ -26200,7 +26222,7 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.\n    '
     memberOf: NotRequired[int]
     '\n    For kind seller (buyer account): the sellers that belong to this network, by the network\'s seller Account id. Membership comes from properties\' own adagents.json files. Not with sellerAccountIds.\n    '
-    property: NotRequired[SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndIntelligenceRunAndLibraryRequestAndAskAndConversationAndBuyerAgentAndProjectAndDimensionAndSessionFilterProperty]
+    property: NotRequired[SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndIntelligenceRunAndLibraryRequestAndAskAndNotificationAndReleaseUpdateAndConversationAndBuyerAgentAndProjectAndDimensionAndSessionFilterProperty]
     '\n    For kind seller (buyer account): the sellers that can sell this property, best claim first (propertyAccess.rank), from the property\'s own adagents.json. Only a domain, such as {"type":"domain","value":"nu.nl"}. Needs country.\n    '
     country: NotRequired[str]
     '\n    For kind seller (buyer account): with property, the country to buy it in, as an ISO 3166-1 alpha-2 code. Needs property.\n    '
@@ -26400,6 +26422,10 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     '\n    For kinds decision and intelligence_run: at or before this date-time.\n    '
     buyingMode: NotRequired[Literal["brief", "wholesale", "refine"]]
     '\n    For kind intelligence_run: runs of this mode; brief is the buyer briefs the Briefs page lists.\n    '
+    unreadOnly: NotRequired[bool]
+    '\n    For kind notification: only the notifications you have not read.\n    '
+    releaseView: NotRequired[Literal["for_you", "explore", "all", "board"]]
+    '\n    For release_update: for_you (default), explore, all, or board (features by stage).\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -26463,19 +26489,23 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     conversationStartedBefore: NotRequired[str]
     '\n    For kind conversation: chats started at or before this UTC time.\n    '
 
-class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndIntelligenceRunAndLibraryRequestAndAskAndConversationAndBuyerAgentAndProjectAndDimensionAndSessionFilterProperty(TypedDict):
+SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndIntelligenceRunAndLibraryRequestAndAskAndConversationAndBuyerAgentAndProjectAndDimensionAndSessionFilter: TypeAlias = SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndIntelligenceRunAndLibraryRequestAndAskAndNotificationAndReleaseUpdateAndConversationAndBuyerAgentAndProjectAndDimensionAndSessionFilter
+
+class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndIntelligenceRunAndLibraryRequestAndAskAndNotificationAndReleaseUpdateAndConversationAndBuyerAgentAndProjectAndDimensionAndSessionFilterProperty(TypedDict):
     type: Literal["domain", "subdomain", "network_id", "ios_bundle", "android_package", "apple_app_store_id", "google_play_id", "roku_store_id", "fire_tv_asin", "samsung_app_id", "apple_tv_bundle", "bundle_id", "venue_id", "screen_id", "openooh_venue_type", "rss_url", "apple_podcast_id", "spotify_collection_id", "podcast_guid", "station_id", "facility_id"]
     value: str
 
-SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAskAndConversationAndBuyerAgentAndDimensionAndSession: TypeAlias = SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndIntelligenceRunAndLibraryRequestAndAskAndConversationAndBuyerAgentAndProjectAndDimensionAndSession
+SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndIntelligenceRunAndLibraryRequestAndAskAndConversationAndBuyerAgentAndProjectAndDimensionAndSessionFilterProperty: TypeAlias = SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndIntelligenceRunAndLibraryRequestAndAskAndNotificationAndReleaseUpdateAndConversationAndBuyerAgentAndProjectAndDimensionAndSessionFilterProperty
 
-SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAskAndConversationAndBuyerAgentAndDimensionAndSessionFilter: TypeAlias = SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndIntelligenceRunAndLibraryRequestAndAskAndConversationAndBuyerAgentAndProjectAndDimensionAndSessionFilter
+SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAskAndConversationAndBuyerAgentAndDimensionAndSession: TypeAlias = SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndIntelligenceRunAndLibraryRequestAndAskAndNotificationAndReleaseUpdateAndConversationAndBuyerAgentAndProjectAndDimensionAndSession
 
-SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAskAndConversationAndBuyerAgentAndProjectAndDimensionAndSession: TypeAlias = SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndIntelligenceRunAndLibraryRequestAndAskAndConversationAndBuyerAgentAndProjectAndDimensionAndSession
+SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAskAndConversationAndBuyerAgentAndDimensionAndSessionFilter: TypeAlias = SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndIntelligenceRunAndLibraryRequestAndAskAndNotificationAndReleaseUpdateAndConversationAndBuyerAgentAndProjectAndDimensionAndSessionFilter
 
-SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAskAndConversationAndBuyerAgentAndProjectAndDimensionAndSessionFilter: TypeAlias = SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndIntelligenceRunAndLibraryRequestAndAskAndConversationAndBuyerAgentAndProjectAndDimensionAndSessionFilter
+SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAskAndConversationAndBuyerAgentAndProjectAndDimensionAndSession: TypeAlias = SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndIntelligenceRunAndLibraryRequestAndAskAndNotificationAndReleaseUpdateAndConversationAndBuyerAgentAndProjectAndDimensionAndSession
 
-SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAskAndConversationAndBuyerAgentAndProjectAndDimensionAndSessionFilterProperty: TypeAlias = SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndIntelligenceRunAndLibraryRequestAndAskAndConversationAndBuyerAgentAndProjectAndDimensionAndSessionFilterProperty
+SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAskAndConversationAndBuyerAgentAndProjectAndDimensionAndSessionFilter: TypeAlias = SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndIntelligenceRunAndLibraryRequestAndAskAndNotificationAndReleaseUpdateAndConversationAndBuyerAgentAndProjectAndDimensionAndSessionFilter
+
+SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAskAndConversationAndBuyerAgentAndProjectAndDimensionAndSessionFilterProperty: TypeAlias = SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndIntelligenceRunAndLibraryRequestAndAskAndNotificationAndReleaseUpdateAndConversationAndBuyerAgentAndProjectAndDimensionAndSessionFilterProperty
 
 class SearchInputKindBuyerRfp(TypedDict):
     accountId: NotRequired[int | str]
@@ -26720,6 +26750,10 @@ class SearchInputKindBuyerRfpFilter(TypedDict):
     '\n    For kinds decision and intelligence_run: at or before this date-time.\n    '
     buyingMode: NotRequired[Literal["brief", "wholesale", "refine"]]
     '\n    For kind intelligence_run: runs of this mode; brief is the buyer briefs the Briefs page lists.\n    '
+    unreadOnly: NotRequired[bool]
+    '\n    For kind notification: only the notifications you have not read.\n    '
+    releaseView: NotRequired[Literal["for_you", "explore", "all", "board"]]
+    '\n    For release_update: for_you (default), explore, all, or board (features by stage).\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -27064,6 +27098,10 @@ class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     '\n    For kinds decision and intelligence_run: at or before this date-time.\n    '
     buyingMode: NotRequired[Literal["brief", "wholesale", "refine"]]
     '\n    For kind intelligence_run: runs of this mode; brief is the buyer briefs the Briefs page lists.\n    '
+    unreadOnly: NotRequired[bool]
+    '\n    For kind notification: only the notifications you have not read.\n    '
+    releaseView: NotRequired[Literal["for_you", "explore", "all", "board"]]
+    '\n    For release_update: for_you (default), explore, all, or board (features by stage).\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -27372,6 +27410,10 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     '\n    For kinds decision and intelligence_run: at or before this date-time.\n    '
     buyingMode: NotRequired[Literal["brief", "wholesale", "refine"]]
     '\n    For kind intelligence_run: runs of this mode; brief is the buyer briefs the Briefs page lists.\n    '
+    unreadOnly: NotRequired[bool]
+    '\n    For kind notification: only the notifications you have not read.\n    '
+    releaseView: NotRequired[Literal["for_you", "explore", "all", "board"]]
+    '\n    For release_update: for_you (default), explore, all, or board (features by stage).\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -27680,6 +27722,10 @@ class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     '\n    For kinds decision and intelligence_run: at or before this date-time.\n    '
     buyingMode: NotRequired[Literal["brief", "wholesale", "refine"]]
     '\n    For kind intelligence_run: runs of this mode; brief is the buyer briefs the Briefs page lists.\n    '
+    unreadOnly: NotRequired[bool]
+    '\n    For kind notification: only the notifications you have not read.\n    '
+    releaseView: NotRequired[Literal["for_you", "explore", "all", "board"]]
+    '\n    For release_update: for_you (default), explore, all, or board (features by stage).\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -27954,6 +28000,10 @@ class SearchInputKindCreativeFilter(TypedDict):
     '\n    For kinds decision and intelligence_run: at or before this date-time.\n    '
     buyingMode: NotRequired[Literal["brief", "wholesale", "refine"]]
     '\n    For kind intelligence_run: runs of this mode; brief is the buyer briefs the Briefs page lists.\n    '
+    unreadOnly: NotRequired[bool]
+    '\n    For kind notification: only the notifications you have not read.\n    '
+    releaseView: NotRequired[Literal["for_you", "explore", "all", "board"]]
+    '\n    For release_update: for_you (default), explore, all, or board (features by stage).\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -28332,6 +28382,10 @@ class SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter(TypedDict):
     '\n    For kinds decision and intelligence_run: at or before this date-time.\n    '
     buyingMode: NotRequired[Literal["brief", "wholesale", "refine"]]
     '\n    For kind intelligence_run: runs of this mode; brief is the buyer briefs the Briefs page lists.\n    '
+    unreadOnly: NotRequired[bool]
+    '\n    For kind notification: only the notifications you have not read.\n    '
+    releaseView: NotRequired[Literal["for_you", "explore", "all", "board"]]
+    '\n    For release_update: for_you (default), explore, all, or board (features by stage).\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -28728,6 +28782,10 @@ class SearchInputKindProposalFilter(TypedDict):
     '\n    For kinds decision and intelligence_run: at or before this date-time.\n    '
     buyingMode: NotRequired[Literal["brief", "wholesale", "refine"]]
     '\n    For kind intelligence_run: runs of this mode; brief is the buyer briefs the Briefs page lists.\n    '
+    unreadOnly: NotRequired[bool]
+    '\n    For kind notification: only the notifications you have not read.\n    '
+    releaseView: NotRequired[Literal["for_you", "explore", "all", "board"]]
+    '\n    For release_update: for_you (default), explore, all, or board (features by stage).\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -29038,6 +29096,10 @@ class SearchInputKindSourceAccountFilter(TypedDict):
     '\n    For kinds decision and intelligence_run: at or before this date-time.\n    '
     buyingMode: NotRequired[Literal["brief", "wholesale", "refine"]]
     '\n    For kind intelligence_run: runs of this mode; brief is the buyer briefs the Briefs page lists.\n    '
+    unreadOnly: NotRequired[bool]
+    '\n    For kind notification: only the notifications you have not read.\n    '
+    releaseView: NotRequired[Literal["for_you", "explore", "all", "board"]]
+    '\n    For release_update: for_you (default), explore, all, or board (features by stage).\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -29139,7 +29201,7 @@ class SearchInputKindTargetingValue(TypedDict):
     groupBy: NotRequired[str]
     '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).\n    '
 
-SearchInput: TypeAlias = "SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndIntelligenceRunAndLibraryRequestAndAskAndConversationAndBuyerAgentAndProjectAndDimensionAndSession | SearchInputKindCreativeAssetAndCatalog | SearchInputKindEventSource | SearchInputKindProposal | SearchInputKindCreativeWithFilterAndFilterCampaignId | SearchInputKindCreative | SearchInputKindCreativeCollectionWithFilterCampaignId | SearchInputKindCreativeCollectionWithFilterAdvertiserId | SearchInputKindCreativeSessionWithFilterCampaignId | SearchInputKindCreativeSessionWithFilterAdvertiserId | SearchInputKindAdServerTargeting | SearchInputKindInventorySourceItem | SearchInputKindSourceAccount | SearchInputKindTargetingValue | SearchInputKindBuyerRfp | SearchInputDocsScopeCallerRelevantAndPublicResearchWithQuery | SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocument | SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision | SearchInputDocsScopeCallerRelevantAndPublicResearch"
+SearchInput: TypeAlias = "SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndIntelligenceRunAndLibraryRequestAndAskAndNotificationAndReleaseUpdateAndConversationAndBuyerAgentAndProjectAndDimensionAndSession | SearchInputKindCreativeAssetAndCatalog | SearchInputKindEventSource | SearchInputKindProposal | SearchInputKindCreativeWithFilterAndFilterCampaignId | SearchInputKindCreative | SearchInputKindCreativeCollectionWithFilterCampaignId | SearchInputKindCreativeCollectionWithFilterAdvertiserId | SearchInputKindCreativeSessionWithFilterCampaignId | SearchInputKindCreativeSessionWithFilterAdvertiserId | SearchInputKindAdServerTargeting | SearchInputKindInventorySourceItem | SearchInputKindSourceAccount | SearchInputKindTargetingValue | SearchInputKindBuyerRfp | SearchInputDocsScopeCallerRelevantAndPublicResearchWithQuery | SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocument | SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision | SearchInputDocsScopeCallerRelevantAndPublicResearch"
 
 class SearchInputKindTargetingValueFilter(TypedDict):
     system: Literal["nielsen_dma", "iso_3166_1", "iso_3166_2"]
@@ -29161,7 +29223,7 @@ class SearchRequestLabelFilterEntry(TypedDict):
 
 class SearchResult(TypedDict):
     sources: list[Literal["objects", "docs", "specs"]]
-    objects: NotRequired[SearchSuccessV3CampaignListResponse | SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchBrandPageOutput | SearchSuccessSearchBrandSourcePageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchInventorySourceItemPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchIntelligenceRunPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchDecisionPageOutput | SearchSuccessSearchApprovalPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchBuyerRfpPageOutput | SearchSuccessSearchAgentRecordPageOutput | SearchSuccessSearchTargetingValuePageOutput | SearchSuccessSearchProjectPageOutput | SearchSuccessSearchSessionPageOutput | SearchResultObjectsWithGroupByAndGroupsAndTotal | SearchResultObjectsKindMaterial | SearchResultObjectsKindMixed]
+    objects: NotRequired[SearchSuccessV3CampaignListResponse | SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchBrandPageOutput | SearchSuccessSearchBrandSourcePageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchInventorySourceItemPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchIntelligenceRunPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchDecisionPageOutput | SearchSuccessSearchApprovalPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchNotificationPageOutput | SearchSuccessSearchReleaseUpdatePageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchBuyerRfpPageOutput | SearchSuccessSearchAgentRecordPageOutput | SearchSuccessSearchTargetingValuePageOutput | SearchSuccessSearchProjectPageOutput | SearchSuccessSearchSessionPageOutput | SearchResultObjectsWithGroupByAndGroupsAndTotal | SearchResultObjectsKindMaterial | SearchResultObjectsKindMixed]
     objectsUnavailable: NotRequired[str]
     knowledge: NotRequired[list[JsonValue]]
     knowledgeRelevance: NotRequired[JsonValue]
@@ -29182,7 +29244,7 @@ class SearchResultObjectsKindMaterial(TypedDict):
 class SearchResultObjectsKindMixed(TypedDict):
     outcome: Literal["mixed"]
     kind: Literal["mixed"]
-    sections: list[SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchBrandPageOutput | SearchSuccessSearchBrandSourcePageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchInventorySourceItemPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchIntelligenceRunPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchDecisionPageOutput | SearchSuccessSearchApprovalPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchBuyerRfpPageOutput | SearchSuccessSearchAgentRecordPageOutput | SearchSuccessSearchTargetingValuePageOutput | SearchSuccessSearchProjectPageOutput | SearchSuccessSearchSessionPageOutput | SearchSuccessSearchAccountUnavailableOutput | SearchSuccessSearchMemberUnavailableOutput | SearchSuccessSearchAgentUnavailableOutput | SearchSuccessSearchSkillUnavailableOutput | SearchSuccessSearchInventorySourceUnavailableOutput | SearchSuccessSearchMaterialUnavailableOutput | SearchSuccessSearchCoverageUnavailableOutput | SearchSuccessSearchWholesaleProductUnavailableOutput | SearchSuccessSearchPlaybookVersionUnavailableOutput | SearchSuccessSearchBusinessRulesVersionUnavailableOutput | SearchSuccessSearchHouseDiscountUnavailableOutput | SearchSuccessSearchConnectionUnavailableOutput | SearchSuccessSearchAccountRelationshipUnavailableOutput | SearchSuccessSearchSourceAccountUnavailableOutput | SearchSuccessSearchSellerUnavailableOutput | SearchSuccessSearchAdvertiserUnavailableOutput | SearchSuccessSearchAdvertiserGrantUnavailableOutput | SearchSuccessSearchBrandUnavailableOutput | SearchSuccessSearchBrandSourceUnavailableOutput | SearchSuccessSearchSignalUnavailableOutput | SearchSuccessSearchAdServerTargetingUnavailableOutput | SearchSuccessSearchInventorySourceItemUnavailableOutput | SearchSuccessSearchWorkItemUnavailableOutput | SearchSuccessSearchCampaignUnavailableOutput | SearchSuccessSearchCatalogUnavailableOutput | SearchSuccessSearchEventSourceUnavailableOutput | SearchSuccessSearchPropertyListUnavailableOutput | SearchSuccessSearchCreativeUnavailableOutput | SearchSuccessSearchCreativeFormatUnavailableOutput | SearchSuccessSearchCreativeAssetUnavailableOutput | SearchSuccessSearchCreativeEngineUnavailableOutput | SearchSuccessSearchCreativeSessionUnavailableOutput | SearchSuccessSearchCreativeCollectionUnavailableOutput | SearchSuccessSearchMediaBuyUnavailableOutput | SearchSuccessSearchProposalUnavailableOutput | SearchSuccessSearchRfpUnavailableOutput | SearchSuccessSearchRfpTurnUnavailableOutput | SearchSuccessSearchIntelligenceRunUnavailableOutput | SearchSuccessSearchLibraryRequestUnavailableOutput | SearchSuccessSearchDecisionUnavailableOutput | SearchSuccessSearchApprovalUnavailableOutput | SearchSuccessSearchAskUnavailableOutput | SearchSuccessSearchConversationUnavailableOutput | SearchSuccessSearchBuyerAgentUnavailableOutput | SearchSuccessSearchDimensionUnavailableOutput | SearchSuccessSearchBuyerRfpUnavailableOutput | SearchSuccessSearchAgentRecordUnavailableOutput | SearchSuccessSearchTargetingValueUnavailableOutput | SearchSuccessSearchProjectUnavailableOutput | SearchSuccessSearchSessionUnavailableOutput]
+    sections: list[SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchBrandPageOutput | SearchSuccessSearchBrandSourcePageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchInventorySourceItemPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchIntelligenceRunPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchDecisionPageOutput | SearchSuccessSearchApprovalPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchNotificationPageOutput | SearchSuccessSearchReleaseUpdatePageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchBuyerRfpPageOutput | SearchSuccessSearchAgentRecordPageOutput | SearchSuccessSearchTargetingValuePageOutput | SearchSuccessSearchProjectPageOutput | SearchSuccessSearchSessionPageOutput | SearchSuccessSearchAccountUnavailableOutput | SearchSuccessSearchMemberUnavailableOutput | SearchSuccessSearchAgentUnavailableOutput | SearchSuccessSearchSkillUnavailableOutput | SearchSuccessSearchInventorySourceUnavailableOutput | SearchSuccessSearchMaterialUnavailableOutput | SearchSuccessSearchCoverageUnavailableOutput | SearchSuccessSearchWholesaleProductUnavailableOutput | SearchSuccessSearchPlaybookVersionUnavailableOutput | SearchSuccessSearchBusinessRulesVersionUnavailableOutput | SearchSuccessSearchHouseDiscountUnavailableOutput | SearchSuccessSearchConnectionUnavailableOutput | SearchSuccessSearchAccountRelationshipUnavailableOutput | SearchSuccessSearchSourceAccountUnavailableOutput | SearchSuccessSearchSellerUnavailableOutput | SearchSuccessSearchAdvertiserUnavailableOutput | SearchSuccessSearchAdvertiserGrantUnavailableOutput | SearchSuccessSearchBrandUnavailableOutput | SearchSuccessSearchBrandSourceUnavailableOutput | SearchSuccessSearchSignalUnavailableOutput | SearchSuccessSearchAdServerTargetingUnavailableOutput | SearchSuccessSearchInventorySourceItemUnavailableOutput | SearchSuccessSearchWorkItemUnavailableOutput | SearchSuccessSearchCampaignUnavailableOutput | SearchSuccessSearchCatalogUnavailableOutput | SearchSuccessSearchEventSourceUnavailableOutput | SearchSuccessSearchPropertyListUnavailableOutput | SearchSuccessSearchCreativeUnavailableOutput | SearchSuccessSearchCreativeFormatUnavailableOutput | SearchSuccessSearchCreativeAssetUnavailableOutput | SearchSuccessSearchCreativeEngineUnavailableOutput | SearchSuccessSearchCreativeSessionUnavailableOutput | SearchSuccessSearchCreativeCollectionUnavailableOutput | SearchSuccessSearchMediaBuyUnavailableOutput | SearchSuccessSearchProposalUnavailableOutput | SearchSuccessSearchRfpUnavailableOutput | SearchSuccessSearchRfpTurnUnavailableOutput | SearchSuccessSearchIntelligenceRunUnavailableOutput | SearchSuccessSearchLibraryRequestUnavailableOutput | SearchSuccessSearchDecisionUnavailableOutput | SearchSuccessSearchApprovalUnavailableOutput | SearchSuccessSearchAskUnavailableOutput | SearchSuccessSearchNotificationUnavailableOutput | SearchSuccessSearchReleaseUpdateUnavailableOutput | SearchSuccessSearchConversationUnavailableOutput | SearchSuccessSearchBuyerAgentUnavailableOutput | SearchSuccessSearchDimensionUnavailableOutput | SearchSuccessSearchBuyerRfpUnavailableOutput | SearchSuccessSearchAgentRecordUnavailableOutput | SearchSuccessSearchTargetingValueUnavailableOutput | SearchSuccessSearchProjectUnavailableOutput | SearchSuccessSearchSessionUnavailableOutput]
 
 class SearchResultObjectsWithGroupByAndGroupsAndTotal(TypedDict):
     kind: str
@@ -31624,6 +31686,70 @@ class SearchSuccessSearchMemberUnavailableOutput(TypedDict):
     unavailable: str
     message: str
 
+class SearchSuccessSearchNotificationPageOutput(TypedDict):
+    total: NotRequired[SearchSuccessSearchNotificationPageOutputTotal]
+    totalLowerBound: NotRequired[SearchSuccessSearchNotificationPageOutputTotalLowerBound]
+    returned: NotRequired[SearchSuccessSearchNotificationPageOutputReturned]
+    hasMore: NotRequired[SearchSuccessSearchNotificationPageOutputHasMore]
+    truncated: NotRequired[SearchSuccessSearchNotificationPageOutputTruncated]
+    nextCursor: NotRequired[SearchSuccessSearchNotificationPageOutputNextCursor]
+    results: SearchSuccessSearchNotificationPageOutputResults
+    outcome: Literal["page_notification"]
+    kind: Literal["notification"]
+
+SearchSuccessSearchNotificationPageOutputHasMore: TypeAlias = bool
+
+SearchSuccessSearchNotificationPageOutputNextCursor: TypeAlias = str
+
+class SearchSuccessSearchNotificationPageOutputResultsItem(TypedDict):
+    advertiserId: NotRequired[str]
+    name: NotRequired[str | None]
+    sandbox: NotRequired[bool]
+    sourceType: NotRequired[Literal["inline", "url", "file"] | None]
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
+    lastChangeSummary: NotRequired[SearchSuccessSearchNotificationPageOutputResultsItemLastChangeSummaryValue | None]
+    '\n    Items in the latest version against the one before it.\n    '
+    transform: NotRequired[SearchSuccessSearchNotificationPageOutputResultsItemTransformValue | None]
+    '\n    The active transform, if any.\n    '
+    refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchNotificationPageOutputResultsItemCreativeFit]
+
+SearchSuccessSearchNotificationPageOutputResults: TypeAlias = "list[SearchSuccessSearchNotificationPageOutputResultsItem]"
+
+class SearchSuccessSearchNotificationPageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
+
+class SearchSuccessSearchNotificationPageOutputResultsItemLastChangeSummaryValue(TypedDict):
+    added: int
+    updated: int
+    unchanged: int
+    removed: int
+
+class SearchSuccessSearchNotificationPageOutputResultsItemTransformValue(TypedDict):
+    name: str
+    updatedAt: str
+
+SearchSuccessSearchNotificationPageOutputReturned: TypeAlias = float
+
+SearchSuccessSearchNotificationPageOutputTotal: TypeAlias = float
+
+SearchSuccessSearchNotificationPageOutputTotalLowerBound: TypeAlias = float
+
+SearchSuccessSearchNotificationPageOutputTruncated: TypeAlias = bool
+
+SearchSuccessSearchNotificationPageOutputValue: TypeAlias = JsonValue
+
+class SearchSuccessSearchNotificationUnavailableOutput(TypedDict):
+    outcome: Literal["unavailable_notification"]
+    kind: Literal["notification"]
+    unavailable: str
+    message: str
+
 class SearchSuccessSearchPlaybookVersionPageOutput(TypedDict):
     total: NotRequired[SearchSuccessSearchPlaybookVersionPageOutputTotal]
     totalLowerBound: NotRequired[SearchSuccessSearchPlaybookVersionPageOutputTotalLowerBound]
@@ -31877,6 +32003,70 @@ SearchSuccessSearchProposalPageOutputValue: TypeAlias = JsonValue
 class SearchSuccessSearchProposalUnavailableOutput(TypedDict):
     outcome: Literal["unavailable_proposal"]
     kind: Literal["proposal"]
+    unavailable: str
+    message: str
+
+class SearchSuccessSearchReleaseUpdatePageOutput(TypedDict):
+    total: NotRequired[SearchSuccessSearchReleaseUpdatePageOutputTotal]
+    totalLowerBound: NotRequired[SearchSuccessSearchReleaseUpdatePageOutputTotalLowerBound]
+    returned: NotRequired[SearchSuccessSearchReleaseUpdatePageOutputReturned]
+    hasMore: NotRequired[SearchSuccessSearchReleaseUpdatePageOutputHasMore]
+    truncated: NotRequired[SearchSuccessSearchReleaseUpdatePageOutputTruncated]
+    nextCursor: NotRequired[SearchSuccessSearchReleaseUpdatePageOutputNextCursor]
+    results: SearchSuccessSearchReleaseUpdatePageOutputResults
+    outcome: Literal["page_release_update"]
+    kind: Literal["release_update"]
+
+SearchSuccessSearchReleaseUpdatePageOutputHasMore: TypeAlias = bool
+
+SearchSuccessSearchReleaseUpdatePageOutputNextCursor: TypeAlias = str
+
+class SearchSuccessSearchReleaseUpdatePageOutputResultsItem(TypedDict):
+    advertiserId: NotRequired[str]
+    name: NotRequired[str | None]
+    sandbox: NotRequired[bool]
+    sourceType: NotRequired[Literal["inline", "url", "file"] | None]
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
+    lastChangeSummary: NotRequired[SearchSuccessSearchReleaseUpdatePageOutputResultsItemLastChangeSummaryValue | None]
+    '\n    Items in the latest version against the one before it.\n    '
+    transform: NotRequired[SearchSuccessSearchReleaseUpdatePageOutputResultsItemTransformValue | None]
+    '\n    The active transform, if any.\n    '
+    refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchReleaseUpdatePageOutputResultsItemCreativeFit]
+
+SearchSuccessSearchReleaseUpdatePageOutputResults: TypeAlias = "list[SearchSuccessSearchReleaseUpdatePageOutputResultsItem]"
+
+class SearchSuccessSearchReleaseUpdatePageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
+
+class SearchSuccessSearchReleaseUpdatePageOutputResultsItemLastChangeSummaryValue(TypedDict):
+    added: int
+    updated: int
+    unchanged: int
+    removed: int
+
+class SearchSuccessSearchReleaseUpdatePageOutputResultsItemTransformValue(TypedDict):
+    name: str
+    updatedAt: str
+
+SearchSuccessSearchReleaseUpdatePageOutputReturned: TypeAlias = float
+
+SearchSuccessSearchReleaseUpdatePageOutputTotal: TypeAlias = float
+
+SearchSuccessSearchReleaseUpdatePageOutputTotalLowerBound: TypeAlias = float
+
+SearchSuccessSearchReleaseUpdatePageOutputTruncated: TypeAlias = bool
+
+SearchSuccessSearchReleaseUpdatePageOutputValue: TypeAlias = JsonValue
+
+class SearchSuccessSearchReleaseUpdateUnavailableOutput(TypedDict):
+    outcome: Literal["unavailable_release_update"]
+    kind: Literal["release_update"]
     unavailable: str
     message: str
 

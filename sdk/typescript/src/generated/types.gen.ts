@@ -41675,7 +41675,7 @@ export type SearchData = {
          * Which docs to rank. caller_relevant (the default) skips docs written for other account types; public_research searches every public doc.
          */
         docsScope?: 'caller_relevant' | 'public_research';
-        kind: 'agent' | 'skill' | 'inventory_source' | 'material' | 'coverage' | 'wholesale_product' | 'playbook_version' | 'business_rules_version' | 'house_discount' | 'connection' | 'account_relationship' | 'seller' | 'advertiser' | 'advertiser_grant' | 'signal' | 'work_item' | 'campaign' | 'creative_format' | 'creative_engine' | 'media_buy' | 'rfp' | 'rfp_turn' | 'intelligence_run' | 'library_request' | 'ask' | 'conversation' | 'buyer_agent' | 'project' | 'dimension' | 'session';
+        kind: 'agent' | 'skill' | 'inventory_source' | 'material' | 'coverage' | 'wholesale_product' | 'playbook_version' | 'business_rules_version' | 'house_discount' | 'connection' | 'account_relationship' | 'seller' | 'advertiser' | 'advertiser_grant' | 'signal' | 'work_item' | 'campaign' | 'creative_format' | 'creative_engine' | 'media_buy' | 'rfp' | 'rfp_turn' | 'intelligence_run' | 'library_request' | 'ask' | 'notification' | 'release_update' | 'conversation' | 'buyer_agent' | 'project' | 'dimension' | 'session';
         /**
          * For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.
          */
@@ -42115,6 +42115,14 @@ export type SearchData = {
              * For kind intelligence_run: runs of this mode; brief is the buyer briefs the Briefs page lists.
              */
             buyingMode?: 'brief' | 'wholesale' | 'refine';
+            /**
+             * For kind notification: only the notifications you have not read.
+             */
+            unreadOnly?: boolean;
+            /**
+             * For release_update: for_you (default), explore, all, or board (features by stage).
+             */
+            releaseView?: 'for_you' | 'explore' | 'all' | 'board';
             /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
@@ -42722,6 +42730,14 @@ export type SearchData = {
              * For kind intelligence_run: runs of this mode; brief is the buyer briefs the Briefs page lists.
              */
             buyingMode?: 'brief' | 'wholesale' | 'refine';
+            /**
+             * For kind notification: only the notifications you have not read.
+             */
+            unreadOnly?: boolean;
+            /**
+             * For release_update: for_you (default), explore, all, or board (features by stage).
+             */
+            releaseView?: 'for_you' | 'explore' | 'all' | 'board';
             /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
@@ -43398,6 +43414,14 @@ export type SearchData = {
              */
             buyingMode?: 'brief' | 'wholesale' | 'refine';
             /**
+             * For kind notification: only the notifications you have not read.
+             */
+            unreadOnly?: boolean;
+            /**
+             * For release_update: for_you (default), explore, all, or board (features by stage).
+             */
+            releaseView?: 'for_you' | 'explore' | 'all' | 'board';
+            /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
             accountId?: number;
@@ -44001,6 +44025,14 @@ export type SearchData = {
              */
             buyingMode?: 'brief' | 'wholesale' | 'refine';
             /**
+             * For kind notification: only the notifications you have not read.
+             */
+            unreadOnly?: boolean;
+            /**
+             * For release_update: for_you (default), explore, all, or board (features by stage).
+             */
+            releaseView?: 'for_you' | 'explore' | 'all' | 'board';
+            /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
             accountId?: number;
@@ -44600,6 +44632,14 @@ export type SearchData = {
              * For kind intelligence_run: runs of this mode; brief is the buyer briefs the Briefs page lists.
              */
             buyingMode?: 'brief' | 'wholesale' | 'refine';
+            /**
+             * For kind notification: only the notifications you have not read.
+             */
+            unreadOnly?: boolean;
+            /**
+             * For release_update: for_you (default), explore, all, or board (features by stage).
+             */
+            releaseView?: 'for_you' | 'explore' | 'all' | 'board';
             /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
@@ -45203,6 +45243,14 @@ export type SearchData = {
              * For kind intelligence_run: runs of this mode; brief is the buyer briefs the Briefs page lists.
              */
             buyingMode?: 'brief' | 'wholesale' | 'refine';
+            /**
+             * For kind notification: only the notifications you have not read.
+             */
+            unreadOnly?: boolean;
+            /**
+             * For release_update: for_you (default), explore, all, or board (features by stage).
+             */
+            releaseView?: 'for_you' | 'explore' | 'all' | 'board';
             /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
@@ -45806,6 +45854,14 @@ export type SearchData = {
              * For kind intelligence_run: runs of this mode; brief is the buyer briefs the Briefs page lists.
              */
             buyingMode?: 'brief' | 'wholesale' | 'refine';
+            /**
+             * For kind notification: only the notifications you have not read.
+             */
+            unreadOnly?: boolean;
+            /**
+             * For release_update: for_you (default), explore, all, or board (features by stage).
+             */
+            releaseView?: 'for_you' | 'explore' | 'all' | 'board';
             /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
@@ -46540,6 +46596,14 @@ export type SearchData = {
              */
             buyingMode?: 'brief' | 'wholesale' | 'refine';
             /**
+             * For kind notification: only the notifications you have not read.
+             */
+            unreadOnly?: boolean;
+            /**
+             * For release_update: for_you (default), explore, all, or board (features by stage).
+             */
+            releaseView?: 'for_you' | 'explore' | 'all' | 'board';
+            /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
             accountId?: number;
@@ -47227,6 +47291,14 @@ export type SearchData = {
              */
             buyingMode?: 'brief' | 'wholesale' | 'refine';
             /**
+             * For kind notification: only the notifications you have not read.
+             */
+            unreadOnly?: boolean;
+            /**
+             * For release_update: for_you (default), explore, all, or board (features by stage).
+             */
+            releaseView?: 'for_you' | 'explore' | 'all' | 'board';
+            /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
             accountId?: number;
@@ -47906,6 +47978,14 @@ export type SearchData = {
              */
             buyingMode?: 'brief' | 'wholesale' | 'refine';
             /**
+             * For kind notification: only the notifications you have not read.
+             */
+            unreadOnly?: boolean;
+            /**
+             * For release_update: for_you (default), explore, all, or board (features by stage).
+             */
+            releaseView?: 'for_you' | 'explore' | 'all' | 'board';
+            /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
             accountId?: number;
@@ -48511,6 +48591,14 @@ export type SearchData = {
              * For kind intelligence_run: runs of this mode; brief is the buyer briefs the Briefs page lists.
              */
             buyingMode?: 'brief' | 'wholesale' | 'refine';
+            /**
+             * For kind notification: only the notifications you have not read.
+             */
+            unreadOnly?: boolean;
+            /**
+             * For release_update: for_you (default), explore, all, or board (features by stage).
+             */
+            releaseView?: 'for_you' | 'explore' | 'all' | 'board';
             /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
@@ -49118,6 +49206,14 @@ export type SearchData = {
              * For kind intelligence_run: runs of this mode; brief is the buyer briefs the Briefs page lists.
              */
             buyingMode?: 'brief' | 'wholesale' | 'refine';
+            /**
+             * For kind notification: only the notifications you have not read.
+             */
+            unreadOnly?: boolean;
+            /**
+             * For release_update: for_you (default), explore, all, or board (features by stage).
+             */
+            releaseView?: 'for_you' | 'explore' | 'all' | 'board';
             /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
@@ -49726,6 +49822,14 @@ export type SearchData = {
              */
             buyingMode?: 'brief' | 'wholesale' | 'refine';
             /**
+             * For kind notification: only the notifications you have not read.
+             */
+            unreadOnly?: boolean;
+            /**
+             * For release_update: for_you (default), explore, all, or board (features by stage).
+             */
+            releaseView?: 'for_you' | 'explore' | 'all' | 'board';
+            /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
             accountId?: number;
@@ -50333,6 +50437,14 @@ export type SearchData = {
              */
             buyingMode?: 'brief' | 'wholesale' | 'refine';
             /**
+             * For kind notification: only the notifications you have not read.
+             */
+            unreadOnly?: boolean;
+            /**
+             * For release_update: for_you (default), explore, all, or board (features by stage).
+             */
+            releaseView?: 'for_you' | 'explore' | 'all' | 'board';
+            /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
             accountId?: number;
@@ -50579,7 +50691,7 @@ export type SearchResponses = {
     200: {
         data: {
             sources: Array<'objects' | 'docs' | 'specs'>;
-            objects?: SearchSuccessV3CampaignListResponse | SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchBrandPageOutput | SearchSuccessSearchBrandSourcePageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchInventorySourceItemPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchIntelligenceRunPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchDecisionPageOutput | SearchSuccessSearchApprovalPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchBuyerRfpPageOutput | SearchSuccessSearchAgentRecordPageOutput | SearchSuccessSearchTargetingValuePageOutput | SearchSuccessSearchProjectPageOutput | SearchSuccessSearchSessionPageOutput | {
+            objects?: SearchSuccessV3CampaignListResponse | SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchBrandPageOutput | SearchSuccessSearchBrandSourcePageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchInventorySourceItemPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchIntelligenceRunPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchDecisionPageOutput | SearchSuccessSearchApprovalPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchNotificationPageOutput | SearchSuccessSearchReleaseUpdatePageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchBuyerRfpPageOutput | SearchSuccessSearchAgentRecordPageOutput | SearchSuccessSearchTargetingValuePageOutput | SearchSuccessSearchProjectPageOutput | SearchSuccessSearchSessionPageOutput | {
                 kind: string;
                 groupBy: string;
                 total: number;
@@ -50607,7 +50719,7 @@ export type SearchResponses = {
             } | {
                 outcome: 'mixed';
                 kind: 'mixed';
-                sections: Array<SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchBrandPageOutput | SearchSuccessSearchBrandSourcePageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchInventorySourceItemPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchIntelligenceRunPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchDecisionPageOutput | SearchSuccessSearchApprovalPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchBuyerRfpPageOutput | SearchSuccessSearchAgentRecordPageOutput | SearchSuccessSearchTargetingValuePageOutput | SearchSuccessSearchProjectPageOutput | SearchSuccessSearchSessionPageOutput | SearchSuccessSearchAccountUnavailableOutput | SearchSuccessSearchMemberUnavailableOutput | SearchSuccessSearchAgentUnavailableOutput | SearchSuccessSearchSkillUnavailableOutput | SearchSuccessSearchInventorySourceUnavailableOutput | SearchSuccessSearchMaterialUnavailableOutput | SearchSuccessSearchCoverageUnavailableOutput | SearchSuccessSearchWholesaleProductUnavailableOutput | SearchSuccessSearchPlaybookVersionUnavailableOutput | SearchSuccessSearchBusinessRulesVersionUnavailableOutput | SearchSuccessSearchHouseDiscountUnavailableOutput | SearchSuccessSearchConnectionUnavailableOutput | SearchSuccessSearchAccountRelationshipUnavailableOutput | SearchSuccessSearchSourceAccountUnavailableOutput | SearchSuccessSearchSellerUnavailableOutput | SearchSuccessSearchAdvertiserUnavailableOutput | SearchSuccessSearchAdvertiserGrantUnavailableOutput | SearchSuccessSearchBrandUnavailableOutput | SearchSuccessSearchBrandSourceUnavailableOutput | SearchSuccessSearchSignalUnavailableOutput | SearchSuccessSearchAdServerTargetingUnavailableOutput | SearchSuccessSearchInventorySourceItemUnavailableOutput | SearchSuccessSearchWorkItemUnavailableOutput | SearchSuccessSearchCampaignUnavailableOutput | SearchSuccessSearchCatalogUnavailableOutput | SearchSuccessSearchEventSourceUnavailableOutput | SearchSuccessSearchPropertyListUnavailableOutput | SearchSuccessSearchCreativeUnavailableOutput | SearchSuccessSearchCreativeFormatUnavailableOutput | SearchSuccessSearchCreativeAssetUnavailableOutput | SearchSuccessSearchCreativeEngineUnavailableOutput | SearchSuccessSearchCreativeSessionUnavailableOutput | SearchSuccessSearchCreativeCollectionUnavailableOutput | SearchSuccessSearchMediaBuyUnavailableOutput | SearchSuccessSearchProposalUnavailableOutput | SearchSuccessSearchRfpUnavailableOutput | SearchSuccessSearchRfpTurnUnavailableOutput | SearchSuccessSearchIntelligenceRunUnavailableOutput | SearchSuccessSearchLibraryRequestUnavailableOutput | SearchSuccessSearchDecisionUnavailableOutput | SearchSuccessSearchApprovalUnavailableOutput | SearchSuccessSearchAskUnavailableOutput | SearchSuccessSearchConversationUnavailableOutput | SearchSuccessSearchBuyerAgentUnavailableOutput | SearchSuccessSearchDimensionUnavailableOutput | SearchSuccessSearchBuyerRfpUnavailableOutput | SearchSuccessSearchAgentRecordUnavailableOutput | SearchSuccessSearchTargetingValueUnavailableOutput | SearchSuccessSearchProjectUnavailableOutput | SearchSuccessSearchSessionUnavailableOutput>;
+                sections: Array<SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchBrandPageOutput | SearchSuccessSearchBrandSourcePageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchInventorySourceItemPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchIntelligenceRunPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchDecisionPageOutput | SearchSuccessSearchApprovalPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchNotificationPageOutput | SearchSuccessSearchReleaseUpdatePageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchBuyerRfpPageOutput | SearchSuccessSearchAgentRecordPageOutput | SearchSuccessSearchTargetingValuePageOutput | SearchSuccessSearchProjectPageOutput | SearchSuccessSearchSessionPageOutput | SearchSuccessSearchAccountUnavailableOutput | SearchSuccessSearchMemberUnavailableOutput | SearchSuccessSearchAgentUnavailableOutput | SearchSuccessSearchSkillUnavailableOutput | SearchSuccessSearchInventorySourceUnavailableOutput | SearchSuccessSearchMaterialUnavailableOutput | SearchSuccessSearchCoverageUnavailableOutput | SearchSuccessSearchWholesaleProductUnavailableOutput | SearchSuccessSearchPlaybookVersionUnavailableOutput | SearchSuccessSearchBusinessRulesVersionUnavailableOutput | SearchSuccessSearchHouseDiscountUnavailableOutput | SearchSuccessSearchConnectionUnavailableOutput | SearchSuccessSearchAccountRelationshipUnavailableOutput | SearchSuccessSearchSourceAccountUnavailableOutput | SearchSuccessSearchSellerUnavailableOutput | SearchSuccessSearchAdvertiserUnavailableOutput | SearchSuccessSearchAdvertiserGrantUnavailableOutput | SearchSuccessSearchBrandUnavailableOutput | SearchSuccessSearchBrandSourceUnavailableOutput | SearchSuccessSearchSignalUnavailableOutput | SearchSuccessSearchAdServerTargetingUnavailableOutput | SearchSuccessSearchInventorySourceItemUnavailableOutput | SearchSuccessSearchWorkItemUnavailableOutput | SearchSuccessSearchCampaignUnavailableOutput | SearchSuccessSearchCatalogUnavailableOutput | SearchSuccessSearchEventSourceUnavailableOutput | SearchSuccessSearchPropertyListUnavailableOutput | SearchSuccessSearchCreativeUnavailableOutput | SearchSuccessSearchCreativeFormatUnavailableOutput | SearchSuccessSearchCreativeAssetUnavailableOutput | SearchSuccessSearchCreativeEngineUnavailableOutput | SearchSuccessSearchCreativeSessionUnavailableOutput | SearchSuccessSearchCreativeCollectionUnavailableOutput | SearchSuccessSearchMediaBuyUnavailableOutput | SearchSuccessSearchProposalUnavailableOutput | SearchSuccessSearchRfpUnavailableOutput | SearchSuccessSearchRfpTurnUnavailableOutput | SearchSuccessSearchIntelligenceRunUnavailableOutput | SearchSuccessSearchLibraryRequestUnavailableOutput | SearchSuccessSearchDecisionUnavailableOutput | SearchSuccessSearchApprovalUnavailableOutput | SearchSuccessSearchAskUnavailableOutput | SearchSuccessSearchNotificationUnavailableOutput | SearchSuccessSearchReleaseUpdateUnavailableOutput | SearchSuccessSearchConversationUnavailableOutput | SearchSuccessSearchBuyerAgentUnavailableOutput | SearchSuccessSearchDimensionUnavailableOutput | SearchSuccessSearchBuyerRfpUnavailableOutput | SearchSuccessSearchAgentRecordUnavailableOutput | SearchSuccessSearchTargetingValueUnavailableOutput | SearchSuccessSearchProjectUnavailableOutput | SearchSuccessSearchSessionUnavailableOutput>;
                 [key: string]: unknown;
             };
             objectsUnavailable?: string;
@@ -53383,6 +53495,79 @@ export type SearchSuccessSearchMemberUnavailableOutput = {
     [key: string]: unknown;
 };
 
+export type SearchSuccessSearchNotificationPageOutput = {
+    total?: SearchSuccessSearchNotificationPageOutputTotal;
+    totalLowerBound?: SearchSuccessSearchNotificationPageOutputTotalLowerBound;
+    returned?: SearchSuccessSearchNotificationPageOutputReturned;
+    hasMore?: SearchSuccessSearchNotificationPageOutputHasMore;
+    truncated?: SearchSuccessSearchNotificationPageOutputTruncated;
+    nextCursor?: SearchSuccessSearchNotificationPageOutputNextCursor;
+    results: SearchSuccessSearchNotificationPageOutputResults;
+    outcome: 'page_notification';
+    kind: 'notification';
+    [key: string]: SearchSuccessSearchNotificationPageOutputValue | SearchSuccessSearchNotificationPageOutputTotal | SearchSuccessSearchNotificationPageOutputTotalLowerBound | SearchSuccessSearchNotificationPageOutputReturned | SearchSuccessSearchNotificationPageOutputHasMore | SearchSuccessSearchNotificationPageOutputTruncated | SearchSuccessSearchNotificationPageOutputNextCursor | SearchSuccessSearchNotificationPageOutputResults | 'page_notification' | 'notification' | undefined;
+};
+
+export type SearchSuccessSearchNotificationPageOutputHasMore = boolean;
+
+export type SearchSuccessSearchNotificationPageOutputNextCursor = string;
+
+export type SearchSuccessSearchNotificationPageOutputResults = Array<{
+    advertiserId?: string;
+    name?: string | null;
+    sandbox?: boolean;
+    /**
+     * Where the items come from: url when url is set, file when file is set.
+     */
+    sourceType?: 'inline' | 'url' | 'file' | null;
+    /**
+     * Items in the latest version against the one before it.
+     */
+    lastChangeSummary?: {
+        added: number;
+        updated: number;
+        unchanged: number;
+        removed: number;
+    } | null;
+    /**
+     * The active transform, if any.
+     */
+    transform?: {
+        name: string;
+        updatedAt: string;
+    } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
+    [key: string]: unknown;
+}>;
+
+export type SearchSuccessSearchNotificationPageOutputReturned = number;
+
+export type SearchSuccessSearchNotificationPageOutputTotal = number;
+
+export type SearchSuccessSearchNotificationPageOutputTotalLowerBound = number;
+
+export type SearchSuccessSearchNotificationPageOutputTruncated = boolean;
+
+export type SearchSuccessSearchNotificationPageOutputValue = unknown;
+
+export type SearchSuccessSearchNotificationUnavailableOutput = {
+    outcome: 'unavailable_notification';
+    kind: 'notification';
+    unavailable: string;
+    message: string;
+    [key: string]: unknown;
+};
+
 export type SearchSuccessSearchPlaybookVersionPageOutput = {
     total?: SearchSuccessSearchPlaybookVersionPageOutputTotal;
     totalLowerBound?: SearchSuccessSearchPlaybookVersionPageOutputTotalLowerBound;
@@ -53670,6 +53855,79 @@ export type SearchSuccessSearchProposalPageOutputValue = unknown;
 export type SearchSuccessSearchProposalUnavailableOutput = {
     outcome: 'unavailable_proposal';
     kind: 'proposal';
+    unavailable: string;
+    message: string;
+    [key: string]: unknown;
+};
+
+export type SearchSuccessSearchReleaseUpdatePageOutput = {
+    total?: SearchSuccessSearchReleaseUpdatePageOutputTotal;
+    totalLowerBound?: SearchSuccessSearchReleaseUpdatePageOutputTotalLowerBound;
+    returned?: SearchSuccessSearchReleaseUpdatePageOutputReturned;
+    hasMore?: SearchSuccessSearchReleaseUpdatePageOutputHasMore;
+    truncated?: SearchSuccessSearchReleaseUpdatePageOutputTruncated;
+    nextCursor?: SearchSuccessSearchReleaseUpdatePageOutputNextCursor;
+    results: SearchSuccessSearchReleaseUpdatePageOutputResults;
+    outcome: 'page_release_update';
+    kind: 'release_update';
+    [key: string]: SearchSuccessSearchReleaseUpdatePageOutputValue | SearchSuccessSearchReleaseUpdatePageOutputTotal | SearchSuccessSearchReleaseUpdatePageOutputTotalLowerBound | SearchSuccessSearchReleaseUpdatePageOutputReturned | SearchSuccessSearchReleaseUpdatePageOutputHasMore | SearchSuccessSearchReleaseUpdatePageOutputTruncated | SearchSuccessSearchReleaseUpdatePageOutputNextCursor | SearchSuccessSearchReleaseUpdatePageOutputResults | 'page_release_update' | 'release_update' | undefined;
+};
+
+export type SearchSuccessSearchReleaseUpdatePageOutputHasMore = boolean;
+
+export type SearchSuccessSearchReleaseUpdatePageOutputNextCursor = string;
+
+export type SearchSuccessSearchReleaseUpdatePageOutputResults = Array<{
+    advertiserId?: string;
+    name?: string | null;
+    sandbox?: boolean;
+    /**
+     * Where the items come from: url when url is set, file when file is set.
+     */
+    sourceType?: 'inline' | 'url' | 'file' | null;
+    /**
+     * Items in the latest version against the one before it.
+     */
+    lastChangeSummary?: {
+        added: number;
+        updated: number;
+        unchanged: number;
+        removed: number;
+    } | null;
+    /**
+     * The active transform, if any.
+     */
+    transform?: {
+        name: string;
+        updatedAt: string;
+    } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
+    [key: string]: unknown;
+}>;
+
+export type SearchSuccessSearchReleaseUpdatePageOutputReturned = number;
+
+export type SearchSuccessSearchReleaseUpdatePageOutputTotal = number;
+
+export type SearchSuccessSearchReleaseUpdatePageOutputTotalLowerBound = number;
+
+export type SearchSuccessSearchReleaseUpdatePageOutputTruncated = boolean;
+
+export type SearchSuccessSearchReleaseUpdatePageOutputValue = unknown;
+
+export type SearchSuccessSearchReleaseUpdateUnavailableOutput = {
+    outcome: 'unavailable_release_update';
+    kind: 'release_update';
     unavailable: string;
     message: string;
     [key: string]: unknown;
