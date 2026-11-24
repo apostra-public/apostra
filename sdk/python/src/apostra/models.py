@@ -11204,6 +11204,16 @@ class SaveAdvertiserInstructionsSuccessSaveAdvertiserInstructionsSuccessUpdatedW
 
 SaveAdvertiserInstructionsResult: TypeAlias = "SaveAdvertiserInstructionsSuccessSaveAdvertiserInstructionsSuccessCreated | SaveAdvertiserInstructionsSuccessSaveAdvertiserInstructionsSuccessUpdated | SaveAdvertiserInstructionsSuccessSaveAdvertiserInstructionsSuccessUnchanged | SaveAdvertiserInstructionsSuccessSaveAdvertiserInstructionsSuccessCreatedWithoutReadback | SaveAdvertiserInstructionsSuccessSaveAdvertiserInstructionsSuccessUpdatedWithoutReadback"
 
+class SaveAdvertiserRequestAdvertiserAssetRule(TypedDict):
+    role: NotRequired[Literal["product", "logo", "background", "reference", "copy", "audio", "video"]]
+    '\n    Asset role. Give this or assetId.\n    '
+    assetId: NotRequired[str]
+    '\n    Library asset. Give this or role.\n    '
+    use: Literal["unaltered", "adaptable"]
+    '\n    unaltered: exactly as uploaded. adaptable: may be transformed.\n    '
+    note: NotRequired[str]
+    '\n    Why, for example "never cropped".\n    '
+
 class SaveAdvertiserRequestAdvertiserBrandProfilePendingDifferenceObjectEntry(TypedDict):
     key: str
     '\n    Field name in a flat pending-difference value.\n    '
@@ -11221,6 +11231,8 @@ class SaveAdvertiserRequestAdvertiserBrandProfileStated(TypedDict):
     '\n    Advertiser-stated override of its canonical AdCP industry code, read ahead of the industry classified from the brand\'s published brand.json.\n    '
     voice: NotRequired[SaveAdvertiserRequestAdvertiserBrandProfileStatedVoice]
     '\n    Voice guidance.\n    '
+    assetRules: NotRequired[list[SaveAdvertiserRequestAdvertiserAssetRule]]
+    '\n    How generation may treat each kind of asset. An asset rule beats a role rule, then the default (product and logo: unaltered).\n    '
     bannedTerms: NotRequired[list[str]]
     '\n    Banned copy terms.\n    '
     disclaimers: NotRequired[list[SaveAdvertiserRequestAdvertiserBrandProfileStatedDisclaimersItem]]
