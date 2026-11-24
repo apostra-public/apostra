@@ -1946,6 +1946,7 @@ paths:
                         - media_buy_approval
                         - modular_source
                         - contract_conflict
+                        - gam_cleanup
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
@@ -3323,6 +3324,7 @@ paths:
                         - media_buy_approval
                         - modular_source
                         - contract_conflict
+                        - gam_cleanup
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
@@ -4677,6 +4679,7 @@ paths:
                         - media_buy_approval
                         - modular_source
                         - contract_conflict
+                        - gam_cleanup
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
@@ -6016,6 +6019,7 @@ paths:
                         - media_buy_approval
                         - modular_source
                         - contract_conflict
+                        - gam_cleanup
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
@@ -7356,6 +7360,7 @@ paths:
                         - media_buy_approval
                         - modular_source
                         - contract_conflict
+                        - gam_cleanup
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
@@ -8703,6 +8708,7 @@ paths:
                         - media_buy_approval
                         - modular_source
                         - contract_conflict
+                        - gam_cleanup
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
@@ -10043,6 +10049,7 @@ paths:
                         - media_buy_approval
                         - modular_source
                         - contract_conflict
+                        - gam_cleanup
                     include:
                       not: {}
                     items:
@@ -11283,6 +11290,7 @@ paths:
                         - media_buy_approval
                         - modular_source
                         - contract_conflict
+                        - gam_cleanup
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
@@ -12625,6 +12633,7 @@ paths:
                         - media_buy_approval
                         - modular_source
                         - contract_conflict
+                        - gam_cleanup
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
@@ -13971,6 +13980,7 @@ paths:
                         - media_buy_approval
                         - modular_source
                         - contract_conflict
+                        - gam_cleanup
                     include:
                       not: {}
                     items:
@@ -15214,6 +15224,7 @@ paths:
                         - media_buy_approval
                         - modular_source
                         - contract_conflict
+                        - gam_cleanup
                     include:
                       not: {}
                     items:
@@ -16451,6 +16462,7 @@ paths:
                         - media_buy_approval
                         - modular_source
                         - contract_conflict
+                        - gam_cleanup
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
@@ -17791,6 +17803,7 @@ paths:
                         - media_buy_approval
                         - modular_source
                         - contract_conflict
+                        - gam_cleanup
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
@@ -19137,6 +19150,7 @@ paths:
                         - media_buy_approval
                         - modular_source
                         - contract_conflict
+                        - gam_cleanup
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
@@ -20482,6 +20496,7 @@ paths:
                         - media_buy_approval
                         - modular_source
                         - contract_conflict
+                        - gam_cleanup
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
@@ -21827,6 +21842,7 @@ paths:
                         - media_buy_approval
                         - modular_source
                         - contract_conflict
+                        - gam_cleanup
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
@@ -23172,6 +23188,7 @@ paths:
                         - media_buy_approval
                         - modular_source
                         - contract_conflict
+                        - gam_cleanup
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
@@ -24517,6 +24534,7 @@ paths:
                         - media_buy_approval
                         - modular_source
                         - contract_conflict
+                        - gam_cleanup
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
@@ -25863,6 +25881,7 @@ paths:
                         - media_buy_approval
                         - modular_source
                         - contract_conflict
+                        - gam_cleanup
                     include:
                       not: {}
                     items:
@@ -27106,6 +27125,7 @@ paths:
                         - media_buy_approval
                         - modular_source
                         - contract_conflict
+                        - gam_cleanup
                     include:
                       not: {}
                     items:
@@ -33881,14 +33901,25 @@ paths:
                   type: string
                 include:
                   description: >-
-                    Buyer accounts only. setup adds the setup checklist and a page of sellers, each with its next step
-                    as a tool call.
-                  maxItems: 1
+                    setup (buyer accounts only) adds the setup checklist and a page of sellers, each with its next step
+                    as a tool call. pendingOperations (seller accounts only) adds what is waiting on someone.
+                  maxItems: 2
                   type: array
                   items:
                     type: string
                     enum:
                       - setup
+                      - pendingOperations
+                manualWorkTake:
+                  description: 'With include pendingOperations: manual source work items to return, 1 to 200. Default 200.'
+                  type: integer
+                  minimum: 1
+                  maximum: 200
+                manualWorkSkip:
+                  description: 'With include pendingOperations: items to skip, from manualSourceWork.nextOffset.'
+                  type: integer
+                  minimum: 0
+                  maximum: 9007199254740991
                 sellersCursor:
                   description: 'Buyer accounts only, with include setup: the setup.sellers.nextCursor of the previous page.'
                   type: string
@@ -34415,6 +34446,19 @@ paths:
                         minimum: 0
                         maximum: 9007199254740991
                       libraryRequirementsDiagnostic:
+                        type: string
+                      pendingOperations:
+                        description: >-
+                          With include pendingOperations: groups of what is waiting on someone, each with a count and
+                          present only when not empty, so {} means nothing is waiting. Null when the read failed (see
+                          pendingOperationsDiagnostic).
+                        anyOf:
+                          - type: object
+                            propertyNames:
+                              type: string
+                            additionalProperties: {}
+                          - type: 'null'
+                      pendingOperationsDiagnostic:
                         type: string
                       blockers:
                         type: array
@@ -67989,11 +68033,13 @@ paths:
     post:
       operationId: save_work_item
       summary: >-
-        Decide a creative or media-buy approval, overrule a spend conflict, or complete a modular-source follow-up.
-        Repeats preserve evidence; retry, evaluation, and reassignment stay on the approvals Page.
+        Decide a creative or media-buy approval, overrule a spend conflict, complete a modular-source follow-up, or
+        resolve a failed GAM order. Repeats preserve evidence; retry, evaluation, and reassignment stay on the approvals
+        Page.
       description: >-
-        Decide a creative or media-buy approval, overrule a spend conflict, or complete a modular-source follow-up.
-        Repeats preserve evidence; retry, evaluation, and reassignment stay on the approvals Page.
+        Decide a creative or media-buy approval, overrule a spend conflict, complete a modular-source follow-up, or
+        resolve a failed GAM order. Repeats preserve evidence; retry, evaluation, and reassignment stay on the approvals
+        Page.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -68024,6 +68070,7 @@ paths:
                     - media_buy_approval
                     - modular_source
                     - contract_conflict
+                    - gam_cleanup
                   description: Workstream owning this item.
                 id:
                   type: string
@@ -68048,6 +68095,29 @@ paths:
                   description: Required for `creative_review`; copy contentDigest from the exact search or get result.
                   type: string
                   pattern: ^[a-f0-9]{64}$
+                gamCleanup:
+                  description: Required for `gam_cleanup`.
+                  type: object
+                  properties:
+                    mode:
+                      type: string
+                      enum:
+                        - archive
+                        - manual
+                      description: 'archive: the platform re-checks and archives the order. manual: you cleaned it up in GAM.'
+                    orderId:
+                      type: string
+                      minLength: 1
+                      description: The order id from the work item, as your confirmation.
+                    note:
+                      description: 'Required for manual: what you did in GAM.'
+                      type: string
+                      minLength: 1
+                      maxLength: 500
+                  required:
+                    - mode
+                    - orderId
+                  additionalProperties: false
                 result:
                   description: Modular completion fields named by requiredResultFields, one entry per field. Never secrets.
                   maxItems: 50
@@ -68163,6 +68233,71 @@ paths:
                       - properties:
                           reviewerNotes:
                             pattern: \S
+                - if:
+                    properties:
+                      kind:
+                        const: gam_cleanup
+                    required:
+                      - kind
+                  then:
+                    allOf:
+                      - required:
+                          - gamCleanup
+                      - properties:
+                          status:
+                            const: completed
+                        required:
+                          - status
+                      - allOf:
+                          - not:
+                              required:
+                                - expectedContentDigest
+                          - not:
+                              required:
+                                - result
+                          - not:
+                              required:
+                                - sourceId
+                          - not:
+                              required:
+                                - reviewerNotes
+                - if:
+                    required:
+                      - gamCleanup
+                  then:
+                    properties:
+                      kind:
+                        const: gam_cleanup
+                    required:
+                      - kind
+                - if:
+                    required:
+                      - gamCleanup
+                  then:
+                    properties:
+                      gamCleanup:
+                        allOf:
+                          - if:
+                              properties:
+                                mode:
+                                  const: manual
+                              required:
+                                - mode
+                            then:
+                              required:
+                                - note
+                          - if:
+                              properties:
+                                mode:
+                                  const: archive
+                              required:
+                                - mode
+                            then:
+                              not:
+                                required:
+                                  - note
+                    required:
+                      - gamCleanup
                 - if:
                     not:
                       properties:
@@ -68656,14 +68791,16 @@ paths:
                         workItemKind:
                           description: >-
                             For kind work_item: one queue. creative_review and media_buy_approval are approval
-                            decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up
-                            work on a source and accepts the top-level sourceId.
+                            decisions; contract_conflict is a spend conflict to overrule; gam_cleanup is a failed GAM
+                            order to archive or record as cleaned up; modular_source is follow-up work on a source and
+                            accepts the top-level sourceId.
                           type: string
                           enum:
                             - creative_review
                             - media_buy_approval
                             - modular_source
                             - contract_conflict
+                            - gam_cleanup
                         queue:
                           description: >-
                             For kind work_item: only pending approvals in this queue: overdue (past their deadline) or
@@ -70621,14 +70758,16 @@ paths:
                         workItemKind:
                           description: >-
                             For kind work_item: one queue. creative_review and media_buy_approval are approval
-                            decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up
-                            work on a source and accepts the top-level sourceId.
+                            decisions; contract_conflict is a spend conflict to overrule; gam_cleanup is a failed GAM
+                            order to archive or record as cleaned up; modular_source is follow-up work on a source and
+                            accepts the top-level sourceId.
                           type: string
                           enum:
                             - creative_review
                             - media_buy_approval
                             - modular_source
                             - contract_conflict
+                            - gam_cleanup
                         queue:
                           description: >-
                             For kind work_item: only pending approvals in this queue: overdue (past their deadline) or
@@ -73388,14 +73527,16 @@ paths:
                         workItemKind:
                           description: >-
                             For kind work_item: one queue. creative_review and media_buy_approval are approval
-                            decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up
-                            work on a source and accepts the top-level sourceId.
+                            decisions; contract_conflict is a spend conflict to overrule; gam_cleanup is a failed GAM
+                            order to archive or record as cleaned up; modular_source is follow-up work on a source and
+                            accepts the top-level sourceId.
                           type: string
                           enum:
                             - creative_review
                             - media_buy_approval
                             - modular_source
                             - contract_conflict
+                            - gam_cleanup
                         queue:
                           description: >-
                             For kind work_item: only pending approvals in this queue: overdue (past their deadline) or
@@ -75354,14 +75495,16 @@ paths:
                         workItemKind:
                           description: >-
                             For kind work_item: one queue. creative_review and media_buy_approval are approval
-                            decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up
-                            work on a source and accepts the top-level sourceId.
+                            decisions; contract_conflict is a spend conflict to overrule; gam_cleanup is a failed GAM
+                            order to archive or record as cleaned up; modular_source is follow-up work on a source and
+                            accepts the top-level sourceId.
                           type: string
                           enum:
                             - creative_review
                             - media_buy_approval
                             - modular_source
                             - contract_conflict
+                            - gam_cleanup
                         queue:
                           description: >-
                             For kind work_item: only pending approvals in this queue: overdue (past their deadline) or
@@ -77304,14 +77447,16 @@ paths:
                         workItemKind:
                           description: >-
                             For kind work_item: one queue. creative_review and media_buy_approval are approval
-                            decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up
-                            work on a source and accepts the top-level sourceId.
+                            decisions; contract_conflict is a spend conflict to overrule; gam_cleanup is a failed GAM
+                            order to archive or record as cleaned up; modular_source is follow-up work on a source and
+                            accepts the top-level sourceId.
                           type: string
                           enum:
                             - creative_review
                             - media_buy_approval
                             - modular_source
                             - contract_conflict
+                            - gam_cleanup
                         queue:
                           description: >-
                             For kind work_item: only pending approvals in this queue: overdue (past their deadline) or
@@ -79262,14 +79407,16 @@ paths:
                         workItemKind:
                           description: >-
                             For kind work_item: one queue. creative_review and media_buy_approval are approval
-                            decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up
-                            work on a source and accepts the top-level sourceId.
+                            decisions; contract_conflict is a spend conflict to overrule; gam_cleanup is a failed GAM
+                            order to archive or record as cleaned up; modular_source is follow-up work on a source and
+                            accepts the top-level sourceId.
                           type: string
                           enum:
                             - creative_review
                             - media_buy_approval
                             - modular_source
                             - contract_conflict
+                            - gam_cleanup
                         queue:
                           description: >-
                             For kind work_item: only pending approvals in this queue: overdue (past their deadline) or
@@ -81219,14 +81366,16 @@ paths:
                         workItemKind:
                           description: >-
                             For kind work_item: one queue. creative_review and media_buy_approval are approval
-                            decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up
-                            work on a source and accepts the top-level sourceId.
+                            decisions; contract_conflict is a spend conflict to overrule; gam_cleanup is a failed GAM
+                            order to archive or record as cleaned up; modular_source is follow-up work on a source and
+                            accepts the top-level sourceId.
                           type: string
                           enum:
                             - creative_review
                             - media_buy_approval
                             - modular_source
                             - contract_conflict
+                            - gam_cleanup
                         queue:
                           description: >-
                             For kind work_item: only pending approvals in this queue: overdue (past their deadline) or
@@ -84826,14 +84975,16 @@ paths:
                         workItemKind:
                           description: >-
                             For kind work_item: one queue. creative_review and media_buy_approval are approval
-                            decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up
-                            work on a source and accepts the top-level sourceId.
+                            decisions; contract_conflict is a spend conflict to overrule; gam_cleanup is a failed GAM
+                            order to archive or record as cleaned up; modular_source is follow-up work on a source and
+                            accepts the top-level sourceId.
                           type: string
                           enum:
                             - creative_review
                             - media_buy_approval
                             - modular_source
                             - contract_conflict
+                            - gam_cleanup
                         queue:
                           description: >-
                             For kind work_item: only pending approvals in this queue: overdue (past their deadline) or
@@ -87610,14 +87761,16 @@ paths:
                         workItemKind:
                           description: >-
                             For kind work_item: one queue. creative_review and media_buy_approval are approval
-                            decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up
-                            work on a source and accepts the top-level sourceId.
+                            decisions; contract_conflict is a spend conflict to overrule; gam_cleanup is a failed GAM
+                            order to archive or record as cleaned up; modular_source is follow-up work on a source and
+                            accepts the top-level sourceId.
                           type: string
                           enum:
                             - creative_review
                             - media_buy_approval
                             - modular_source
                             - contract_conflict
+                            - gam_cleanup
                         queue:
                           description: >-
                             For kind work_item: only pending approvals in this queue: overdue (past their deadline) or
@@ -90389,14 +90542,16 @@ paths:
                         workItemKind:
                           description: >-
                             For kind work_item: one queue. creative_review and media_buy_approval are approval
-                            decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up
-                            work on a source and accepts the top-level sourceId.
+                            decisions; contract_conflict is a spend conflict to overrule; gam_cleanup is a failed GAM
+                            order to archive or record as cleaned up; modular_source is follow-up work on a source and
+                            accepts the top-level sourceId.
                           type: string
                           enum:
                             - creative_review
                             - media_buy_approval
                             - modular_source
                             - contract_conflict
+                            - gam_cleanup
                         queue:
                           description: >-
                             For kind work_item: only pending approvals in this queue: overdue (past their deadline) or
@@ -92353,14 +92508,16 @@ paths:
                         workItemKind:
                           description: >-
                             For kind work_item: one queue. creative_review and media_buy_approval are approval
-                            decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up
-                            work on a source and accepts the top-level sourceId.
+                            decisions; contract_conflict is a spend conflict to overrule; gam_cleanup is a failed GAM
+                            order to archive or record as cleaned up; modular_source is follow-up work on a source and
+                            accepts the top-level sourceId.
                           type: string
                           enum:
                             - creative_review
                             - media_buy_approval
                             - modular_source
                             - contract_conflict
+                            - gam_cleanup
                         queue:
                           description: >-
                             For kind work_item: only pending approvals in this queue: overdue (past their deadline) or
@@ -94314,14 +94471,16 @@ paths:
                         workItemKind:
                           description: >-
                             For kind work_item: one queue. creative_review and media_buy_approval are approval
-                            decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up
-                            work on a source and accepts the top-level sourceId.
+                            decisions; contract_conflict is a spend conflict to overrule; gam_cleanup is a failed GAM
+                            order to archive or record as cleaned up; modular_source is follow-up work on a source and
+                            accepts the top-level sourceId.
                           type: string
                           enum:
                             - creative_review
                             - media_buy_approval
                             - modular_source
                             - contract_conflict
+                            - gam_cleanup
                         queue:
                           description: >-
                             For kind work_item: only pending approvals in this queue: overdue (past their deadline) or
@@ -96275,14 +96434,16 @@ paths:
                         workItemKind:
                           description: >-
                             For kind work_item: one queue. creative_review and media_buy_approval are approval
-                            decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up
-                            work on a source and accepts the top-level sourceId.
+                            decisions; contract_conflict is a spend conflict to overrule; gam_cleanup is a failed GAM
+                            order to archive or record as cleaned up; modular_source is follow-up work on a source and
+                            accepts the top-level sourceId.
                           type: string
                           enum:
                             - creative_review
                             - media_buy_approval
                             - modular_source
                             - contract_conflict
+                            - gam_cleanup
                         queue:
                           description: >-
                             For kind work_item: only pending approvals in this queue: overdue (past their deadline) or
@@ -98237,14 +98398,16 @@ paths:
                         workItemKind:
                           description: >-
                             For kind work_item: one queue. creative_review and media_buy_approval are approval
-                            decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up
-                            work on a source and accepts the top-level sourceId.
+                            decisions; contract_conflict is a spend conflict to overrule; gam_cleanup is a failed GAM
+                            order to archive or record as cleaned up; modular_source is follow-up work on a source and
+                            accepts the top-level sourceId.
                           type: string
                           enum:
                             - creative_review
                             - media_buy_approval
                             - modular_source
                             - contract_conflict
+                            - gam_cleanup
                         queue:
                           description: >-
                             For kind work_item: only pending approvals in this queue: overdue (past their deadline) or

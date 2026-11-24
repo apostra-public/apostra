@@ -2380,7 +2380,7 @@ class GetInputKindAdvertiserAccess(TypedDict):
     '\n    Meta preview placement; the default is facebook_feed. A Creative is offered only the placements its format declares.\n    '
     pageId: NotRequired[str]
     '\n    creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.\n    '
-    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
+    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict", "gam_cleanup"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "capabilities", "creativeFormats", "publisherProperties", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "analytics", "prebid", "commitmentRecord", "scores", "discoveryCard", "decisionRecord", "briefArtifact", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "reporting_status", "pendingChange", "operations", "accounts", "brandProfile", "presence", "surfaceResults", "library", "paidResults", "inventory", "preview", "platform_preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "contracts", "paymentMethods", "invoiceHistory", "payouts", "reads", "reasoning", "canvas", "canvas_source", "canvas_versions", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview", "product_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report\n    '
@@ -2523,7 +2523,7 @@ class GetInputKindAgentAndBuyerAgentAndProjectAndSkillAndInventorySourceAndAdver
     '\n    Meta preview placement; the default is facebook_feed. A Creative is offered only the placements its format declares.\n    '
     pageId: NotRequired[str]
     '\n    creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.\n    '
-    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
+    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict", "gam_cleanup"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "capabilities", "creativeFormats", "publisherProperties", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "analytics", "prebid", "commitmentRecord", "scores", "discoveryCard", "decisionRecord", "briefArtifact", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "reporting_status", "pendingChange", "operations", "accounts", "brandProfile", "presence", "surfaceResults", "library", "paidResults", "inventory", "preview", "platform_preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "contracts", "paymentMethods", "invoiceHistory", "payouts", "reads", "reasoning", "canvas", "canvas_source", "canvas_versions", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview", "product_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report\n    '
@@ -2680,7 +2680,7 @@ class GetInputKindAgentRecord(TypedDict):
     '\n    Meta preview placement; the default is facebook_feed. A Creative is offered only the placements its format declares.\n    '
     pageId: NotRequired[str]
     '\n    creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.\n    '
-    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
+    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict", "gam_cleanup"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
     items: NotRequired[GetInputKindAgentRecordItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -2819,7 +2819,7 @@ class GetInputKindAudience(TypedDict):
     '\n    Meta preview placement; the default is facebook_feed. A Creative is offered only the placements its format declares.\n    '
     pageId: NotRequired[str]
     '\n    creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.\n    '
-    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
+    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict", "gam_cleanup"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "capabilities", "creativeFormats", "publisherProperties", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "analytics", "prebid", "commitmentRecord", "scores", "discoveryCard", "decisionRecord", "briefArtifact", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "reporting_status", "pendingChange", "operations", "accounts", "brandProfile", "presence", "surfaceResults", "library", "paidResults", "inventory", "preview", "platform_preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "contracts", "paymentMethods", "invoiceHistory", "payouts", "reads", "reasoning", "canvas", "canvas_source", "canvas_versions", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview", "product_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report\n    '
@@ -2962,7 +2962,7 @@ class GetInputKindBuyerRfp(TypedDict):
     '\n    Meta preview placement; the default is facebook_feed. A Creative is offered only the placements its format declares.\n    '
     pageId: NotRequired[str]
     '\n    creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.\n    '
-    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
+    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict", "gam_cleanup"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
     items: NotRequired[GetInputKindBuyerRfpItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -3103,7 +3103,7 @@ class GetInputKindCatalogAndEventSource(TypedDict):
     '\n    Meta preview placement; the default is facebook_feed. A Creative is offered only the placements its format declares.\n    '
     pageId: NotRequired[str]
     '\n    creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.\n    '
-    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
+    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict", "gam_cleanup"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "capabilities", "creativeFormats", "publisherProperties", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "analytics", "prebid", "commitmentRecord", "scores", "discoveryCard", "decisionRecord", "briefArtifact", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "reporting_status", "pendingChange", "operations", "accounts", "brandProfile", "presence", "surfaceResults", "library", "paidResults", "inventory", "preview", "platform_preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "contracts", "paymentMethods", "invoiceHistory", "payouts", "reads", "reasoning", "canvas", "canvas_source", "canvas_versions", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview", "product_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report\n    '
@@ -3246,7 +3246,7 @@ class GetInputKindConnection(TypedDict):
     '\n    Meta preview placement; the default is facebook_feed. A Creative is offered only the placements its format declares.\n    '
     pageId: NotRequired[str]
     '\n    creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.\n    '
-    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
+    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict", "gam_cleanup"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "capabilities", "creativeFormats", "publisherProperties", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "analytics", "prebid", "commitmentRecord", "scores", "discoveryCard", "decisionRecord", "briefArtifact", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "reporting_status", "pendingChange", "operations", "accounts", "brandProfile", "presence", "surfaceResults", "library", "paidResults", "inventory", "preview", "platform_preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "contracts", "paymentMethods", "invoiceHistory", "payouts", "reads", "reasoning", "canvas", "canvas_source", "canvas_versions", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview", "product_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report\n    '
@@ -3389,7 +3389,7 @@ class GetInputKindCreativeAndCreativeCollectionWithAdvertiserId(TypedDict):
     '\n    Meta preview placement; the default is facebook_feed. A Creative is offered only the placements its format declares.\n    '
     pageId: NotRequired[str]
     '\n    creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.\n    '
-    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
+    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict", "gam_cleanup"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "capabilities", "creativeFormats", "publisherProperties", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "analytics", "prebid", "commitmentRecord", "scores", "discoveryCard", "decisionRecord", "briefArtifact", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "reporting_status", "pendingChange", "operations", "accounts", "brandProfile", "presence", "surfaceResults", "library", "paidResults", "inventory", "preview", "platform_preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "contracts", "paymentMethods", "invoiceHistory", "payouts", "reads", "reasoning", "canvas", "canvas_source", "canvas_versions", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview", "product_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report\n    '
@@ -3530,7 +3530,7 @@ class GetInputKindCreativeAndCreativeCollectionWithSourceId(TypedDict):
     '\n    Meta preview placement; the default is facebook_feed. A Creative is offered only the placements its format declares.\n    '
     pageId: NotRequired[str]
     '\n    creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.\n    '
-    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
+    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict", "gam_cleanup"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "capabilities", "creativeFormats", "publisherProperties", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "analytics", "prebid", "commitmentRecord", "scores", "discoveryCard", "decisionRecord", "briefArtifact", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "reporting_status", "pendingChange", "operations", "accounts", "brandProfile", "presence", "surfaceResults", "library", "paidResults", "inventory", "preview", "platform_preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "contracts", "paymentMethods", "invoiceHistory", "payouts", "reads", "reasoning", "canvas", "canvas_source", "canvas_versions", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview", "product_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report\n    '
@@ -3673,7 +3673,7 @@ class GetInputKindCreativeEngine(TypedDict):
     '\n    Meta preview placement; the default is facebook_feed. A Creative is offered only the placements its format declares.\n    '
     pageId: NotRequired[str]
     '\n    creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.\n    '
-    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
+    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict", "gam_cleanup"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
     items: NotRequired[GetInputKindCreativeEngineItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -3814,7 +3814,7 @@ class GetInputKindCreativeFormat(TypedDict):
     '\n    Meta preview placement; the default is facebook_feed. A Creative is offered only the placements its format declares.\n    '
     pageId: NotRequired[str]
     '\n    creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.\n    '
-    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
+    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict", "gam_cleanup"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
     items: NotRequired[GetInputKindCreativeFormatItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -3955,7 +3955,7 @@ class GetInputKindCreativeSession(TypedDict):
     '\n    Meta preview placement; the default is facebook_feed. A Creative is offered only the placements its format declares.\n    '
     pageId: NotRequired[str]
     '\n    creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.\n    '
-    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
+    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict", "gam_cleanup"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
     items: NotRequired[GetInputKindCreativeSessionItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -4096,7 +4096,7 @@ class GetInputKindMaterial(TypedDict):
     '\n    Meta preview placement; the default is facebook_feed. A Creative is offered only the placements its format declares.\n    '
     pageId: NotRequired[str]
     '\n    creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.\n    '
-    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
+    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict", "gam_cleanup"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "capabilities", "creativeFormats", "publisherProperties", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "analytics", "prebid", "commitmentRecord", "scores", "discoveryCard", "decisionRecord", "briefArtifact", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "reporting_status", "pendingChange", "operations", "accounts", "brandProfile", "presence", "surfaceResults", "library", "paidResults", "inventory", "preview", "platform_preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "contracts", "paymentMethods", "invoiceHistory", "payouts", "reads", "reasoning", "canvas", "canvas_source", "canvas_versions", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview", "product_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report\n    '
@@ -4239,7 +4239,7 @@ class GetInputKindProposal(TypedDict):
     '\n    Meta preview placement; the default is facebook_feed. A Creative is offered only the placements its format declares.\n    '
     pageId: NotRequired[str]
     '\n    creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.\n    '
-    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
+    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict", "gam_cleanup"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "capabilities", "creativeFormats", "publisherProperties", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "analytics", "prebid", "commitmentRecord", "scores", "discoveryCard", "decisionRecord", "briefArtifact", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "reporting_status", "pendingChange", "operations", "accounts", "brandProfile", "presence", "surfaceResults", "library", "paidResults", "inventory", "preview", "platform_preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "contracts", "paymentMethods", "invoiceHistory", "payouts", "reads", "reasoning", "canvas", "canvas_source", "canvas_versions", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview", "product_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report\n    '
@@ -4382,7 +4382,7 @@ class GetInputKindSeller(TypedDict):
     '\n    Meta preview placement; the default is facebook_feed. A Creative is offered only the placements its format declares.\n    '
     pageId: NotRequired[str]
     '\n    creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.\n    '
-    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
+    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict", "gam_cleanup"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "capabilities", "creativeFormats", "publisherProperties", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "analytics", "prebid", "commitmentRecord", "scores", "propertyClaims", "collections", "discoveryCard", "decisionRecord", "briefArtifact", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "reporting_status", "pendingChange", "operations", "accounts", "brandProfile", "presence", "surfaceResults", "library", "paidResults", "inventory", "preview", "platform_preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "contracts", "paymentMethods", "invoiceHistory", "payouts", "reads", "reasoning", "canvas", "canvas_source", "canvas_versions", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview", "product_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report\n    '
@@ -4525,7 +4525,7 @@ class GetInputKindSession(TypedDict):
     '\n    Meta preview placement; the default is facebook_feed. A Creative is offered only the placements its format declares.\n    '
     pageId: NotRequired[str]
     '\n    creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.\n    '
-    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
+    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict", "gam_cleanup"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "capabilities", "creativeFormats", "publisherProperties", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "analytics", "prebid", "commitmentRecord", "scores", "discoveryCard", "decisionRecord", "briefArtifact", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "reporting_status", "pendingChange", "operations", "accounts", "brandProfile", "presence", "surfaceResults", "library", "paidResults", "inventory", "preview", "platform_preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "contracts", "paymentMethods", "invoiceHistory", "payouts", "reads", "reasoning", "canvas", "canvas_source", "canvas_versions", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview", "product_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report\n    '
@@ -4668,7 +4668,7 @@ class GetInputKindSourceOptionsAndListingAndMediaKitAndPlaybookAndBusinessRulesA
     '\n    Meta preview placement; the default is facebook_feed. A Creative is offered only the placements its format declares.\n    '
     pageId: NotRequired[str]
     '\n    creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.\n    '
-    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
+    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict", "gam_cleanup"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "capabilities", "creativeFormats", "publisherProperties", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "analytics", "prebid", "commitmentRecord", "scores", "discoveryCard", "decisionRecord", "briefArtifact", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "reporting_status", "pendingChange", "operations", "accounts", "brandProfile", "presence", "surfaceResults", "library", "paidResults", "inventory", "preview", "platform_preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "contracts", "paymentMethods", "invoiceHistory", "payouts", "reads", "reasoning", "canvas", "canvas_source", "canvas_versions", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview", "product_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report\n    '
@@ -4825,7 +4825,7 @@ class GetInputKindWholesaleProductWithAdvertiserId(TypedDict):
     '\n    Meta preview placement; the default is facebook_feed. A Creative is offered only the placements its format declares.\n    '
     pageId: NotRequired[str]
     '\n    creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.\n    '
-    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
+    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict", "gam_cleanup"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "capabilities", "creativeFormats", "publisherProperties", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "analytics", "prebid", "commitmentRecord", "scores", "discoveryCard", "decisionRecord", "briefArtifact", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "reporting_status", "pendingChange", "operations", "accounts", "brandProfile", "presence", "surfaceResults", "library", "paidResults", "inventory", "preview", "platform_preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "contracts", "paymentMethods", "invoiceHistory", "payouts", "reads", "reasoning", "canvas", "canvas_source", "canvas_versions", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview", "product_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report\n    '
@@ -4966,7 +4966,7 @@ class GetInputKindWholesaleProductWithSourceId(TypedDict):
     '\n    Meta preview placement; the default is facebook_feed. A Creative is offered only the placements its format declares.\n    '
     pageId: NotRequired[str]
     '\n    creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.\n    '
-    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
+    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict", "gam_cleanup"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "capabilities", "creativeFormats", "publisherProperties", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "analytics", "prebid", "commitmentRecord", "scores", "discoveryCard", "decisionRecord", "briefArtifact", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "reporting_status", "pendingChange", "operations", "accounts", "brandProfile", "presence", "surfaceResults", "library", "paidResults", "inventory", "preview", "platform_preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "contracts", "paymentMethods", "invoiceHistory", "payouts", "reads", "reasoning", "canvas", "canvas_source", "canvas_versions", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview", "product_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report\n    '
@@ -5123,7 +5123,7 @@ class GetInputKindWorkItem(TypedDict):
     '\n    Meta preview placement; the default is facebook_feed. A Creative is offered only the placements its format declares.\n    '
     pageId: NotRequired[str]
     '\n    creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.\n    '
-    workItemKind: Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]
+    workItemKind: Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict", "gam_cleanup"]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "capabilities", "creativeFormats", "publisherProperties", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "analytics", "prebid", "commitmentRecord", "scores", "discoveryCard", "decisionRecord", "briefArtifact", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "reporting_status", "pendingChange", "operations", "accounts", "brandProfile", "presence", "surfaceResults", "library", "paidResults", "inventory", "preview", "platform_preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "contracts", "paymentMethods", "invoiceHistory", "payouts", "reads", "reasoning", "canvas", "canvas_source", "canvas_versions", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview", "product_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report\n    '
@@ -7381,8 +7381,12 @@ GetSellerReportingReceiptsSuccessReceiptsItemReceivedTotalsViews: TypeAlias = st
 class GetStatusInput(TypedDict):
     cursor: NotRequired[str]
     '\n    accounts.nextCursor\n    '
-    include: NotRequired[list[Literal["setup"]]]
-    '\n    Buyer accounts only. setup adds the setup checklist and a page of sellers, each with its next step as a tool call.\n    '
+    include: NotRequired[list[Literal["setup", "pendingOperations"]]]
+    '\n    setup (buyer accounts only) adds the setup checklist and a page of sellers, each with its next step as a tool call. pendingOperations (seller accounts only) adds what is waiting on someone.\n    '
+    manualWorkTake: NotRequired[int]
+    '\n    With include pendingOperations: manual source work items to return, 1 to 200. Default 200.\n    '
+    manualWorkSkip: NotRequired[int]
+    '\n    With include pendingOperations: items to skip, from manualSourceWork.nextOffset.\n    '
     sellersCursor: NotRequired[str]
     '\n    Buyer accounts only, with include setup: the setup.sellers.nextCursor of the previous page.\n    '
     changes: NotRequired[GetStatusInputChanges]
@@ -7421,6 +7425,9 @@ class GetStatusResult(TypedDict):
     libraryRequirements: NotRequired[list[GetStatusResultLibraryRequirementsItem] | None]
     libraryRequirementsOmitted: NotRequired[int]
     libraryRequirementsDiagnostic: NotRequired[str]
+    pendingOperations: NotRequired[dict[str, JsonValue] | None]
+    '\n    With include pendingOperations: groups of what is waiting on someone, each with a count and present only when not empty, so {} means nothing is waiting. Null when the read failed (see pendingOperationsDiagnostic).\n    '
+    pendingOperationsDiagnostic: NotRequired[str]
     blockers: list[GetStatusResultBlockersItem]
     nextActions: list[GetStatusResultNextActionsItem]
     reachableAccounts: list[GetStatusResultReachableAccountsItem]
@@ -24552,7 +24559,7 @@ SaveWholesaleProductResult: TypeAlias = "SaveWholesaleProductSuccessSaveWholesal
 SaveWholesaleProductSuccessSellerSaveReplayedMaterialReceipt: TypeAlias = dict[str, JsonValue]
 
 class SaveWorkItemInput(TypedDict):
-    kind: Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]
+    kind: Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict", "gam_cleanup"]
     '\n    Workstream owning this item.\n    '
     id: str
     '\n    Work-item identifier from search or get.\n    '
@@ -24564,12 +24571,22 @@ class SaveWorkItemInput(TypedDict):
     '\n    Note preserved with the decision. Required for `contract_conflict`: your reason for the overrule.\n    '
     expectedContentDigest: NotRequired[str]
     '\n    Required for `creative_review`; copy contentDigest from the exact search or get result.\n    '
+    gamCleanup: NotRequired[SaveWorkItemInputGamCleanup]
+    '\n    Required for `gam_cleanup`.\n    '
     result: NotRequired[list[SaveWorkItemRequestWorkItemResultEntry]]
     '\n    Modular completion fields named by requiredResultFields, one entry per field. Never secrets.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
+
+class SaveWorkItemInputGamCleanup(TypedDict):
+    mode: Literal["archive", "manual"]
+    '\n    archive: the platform re-checks and archives the order. manual: you cleaned it up in GAM.\n    '
+    orderId: str
+    '\n    The order id from the work item, as your confirmation.\n    '
+    note: NotRequired[str]
+    '\n    Required for manual: what you did in GAM.\n    '
 
 class SaveWorkItemRequestModularDailyDelivery(TypedDict):
     date: str
@@ -24689,8 +24706,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     '\n    For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2 (region).\n    '
     names: NotRequired[list[str]]
     '\n    For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.\n    '
-    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
-    '\n    For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.\n    '
+    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict", "gam_cleanup"]]
+    '\n    For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; gam_cleanup is a failed GAM order to archive or record as cleaned up; modular_source is follow-up work on a source and accepts the top-level sourceId.\n    '
     queue: NotRequired[Literal["overdue", "unowned"]]
     '\n    For kind work_item: only pending approvals in this queue: overdue (past their deadline) or unowned (nobody assigned). Follow-up tasks have no queues.\n    '
     buyerDomain: NotRequired[str]
@@ -25035,8 +25052,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     '\n    For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2 (region).\n    '
     names: NotRequired[list[str]]
     '\n    For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.\n    '
-    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
-    '\n    For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.\n    '
+    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict", "gam_cleanup"]]
+    '\n    For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; gam_cleanup is a failed GAM order to archive or record as cleaned up; modular_source is follow-up work on a source and accepts the top-level sourceId.\n    '
     queue: NotRequired[Literal["overdue", "unowned"]]
     '\n    For kind work_item: only pending approvals in this queue: overdue (past their deadline) or unowned (nobody assigned). Follow-up tasks have no queues.\n    '
     buyerDomain: NotRequired[str]
@@ -25315,8 +25332,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(Type
     '\n    For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2 (region).\n    '
     names: NotRequired[list[str]]
     '\n    For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.\n    '
-    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
-    '\n    For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.\n    '
+    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict", "gam_cleanup"]]
+    '\n    For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; gam_cleanup is a failed GAM order to archive or record as cleaned up; modular_source is follow-up work on a source and accepts the top-level sourceId.\n    '
     queue: NotRequired[Literal["overdue", "unowned"]]
     '\n    For kind work_item: only pending approvals in this queue: overdue (past their deadline) or unowned (nobody assigned). Follow-up tasks have no queues.\n    '
     buyerDomain: NotRequired[str]
@@ -25622,8 +25639,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDi
     '\n    For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2 (region).\n    '
     names: NotRequired[list[str]]
     '\n    For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.\n    '
-    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
-    '\n    For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.\n    '
+    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict", "gam_cleanup"]]
+    '\n    For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; gam_cleanup is a failed GAM order to archive or record as cleaned up; modular_source is follow-up work on a source and accepts the top-level sourceId.\n    '
     queue: NotRequired[Literal["overdue", "unowned"]]
     '\n    For kind work_item: only pending approvals in this queue: overdue (past their deadline) or unowned (nobody assigned). Follow-up tasks have no queues.\n    '
     buyerDomain: NotRequired[str]
@@ -25936,8 +25953,8 @@ class SearchInputKindAdServerTargetingFilter(TypedDict):
     '\n    For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2 (region).\n    '
     names: NotRequired[list[str]]
     '\n    For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.\n    '
-    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
-    '\n    For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.\n    '
+    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict", "gam_cleanup"]]
+    '\n    For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; gam_cleanup is a failed GAM order to archive or record as cleaned up; modular_source is follow-up work on a source and accepts the top-level sourceId.\n    '
     queue: NotRequired[Literal["overdue", "unowned"]]
     '\n    For kind work_item: only pending approvals in this queue: overdue (past their deadline) or unowned (nobody assigned). Follow-up tasks have no queues.\n    '
     buyerDomain: NotRequired[str]
@@ -26252,8 +26269,8 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     '\n    For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2 (region).\n    '
     names: NotRequired[list[str]]
     '\n    For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.\n    '
-    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
-    '\n    For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.\n    '
+    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict", "gam_cleanup"]]
+    '\n    For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; gam_cleanup is a failed GAM order to archive or record as cleaned up; modular_source is follow-up work on a source and accepts the top-level sourceId.\n    '
     queue: NotRequired[Literal["overdue", "unowned"]]
     '\n    For kind work_item: only pending approvals in this queue: overdue (past their deadline) or unowned (nobody assigned). Follow-up tasks have no queues.\n    '
     buyerDomain: NotRequired[str]
@@ -26580,8 +26597,8 @@ class SearchInputKindBuyerRfpFilter(TypedDict):
     '\n    For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2 (region).\n    '
     names: NotRequired[list[str]]
     '\n    For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.\n    '
-    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
-    '\n    For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.\n    '
+    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict", "gam_cleanup"]]
+    '\n    For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; gam_cleanup is a failed GAM order to archive or record as cleaned up; modular_source is follow-up work on a source and accepts the top-level sourceId.\n    '
     queue: NotRequired[Literal["overdue", "unowned"]]
     '\n    For kind work_item: only pending approvals in this queue: overdue (past their deadline) or unowned (nobody assigned). Follow-up tasks have no queues.\n    '
     buyerDomain: NotRequired[str]
@@ -26928,8 +26945,8 @@ class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     '\n    For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2 (region).\n    '
     names: NotRequired[list[str]]
     '\n    For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.\n    '
-    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
-    '\n    For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.\n    '
+    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict", "gam_cleanup"]]
+    '\n    For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; gam_cleanup is a failed GAM order to archive or record as cleaned up; modular_source is follow-up work on a source and accepts the top-level sourceId.\n    '
     queue: NotRequired[Literal["overdue", "unowned"]]
     '\n    For kind work_item: only pending approvals in this queue: overdue (past their deadline) or unowned (nobody assigned). Follow-up tasks have no queues.\n    '
     buyerDomain: NotRequired[str]
@@ -27242,8 +27259,8 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     '\n    For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2 (region).\n    '
     names: NotRequired[list[str]]
     '\n    For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.\n    '
-    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
-    '\n    For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.\n    '
+    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict", "gam_cleanup"]]
+    '\n    For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; gam_cleanup is a failed GAM order to archive or record as cleaned up; modular_source is follow-up work on a source and accepts the top-level sourceId.\n    '
     queue: NotRequired[Literal["overdue", "unowned"]]
     '\n    For kind work_item: only pending approvals in this queue: overdue (past their deadline) or unowned (nobody assigned). Follow-up tasks have no queues.\n    '
     buyerDomain: NotRequired[str]
@@ -27554,8 +27571,8 @@ class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     '\n    For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2 (region).\n    '
     names: NotRequired[list[str]]
     '\n    For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.\n    '
-    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
-    '\n    For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.\n    '
+    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict", "gam_cleanup"]]
+    '\n    For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; gam_cleanup is a failed GAM order to archive or record as cleaned up; modular_source is follow-up work on a source and accepts the top-level sourceId.\n    '
     queue: NotRequired[Literal["overdue", "unowned"]]
     '\n    For kind work_item: only pending approvals in this queue: overdue (past their deadline) or unowned (nobody assigned). Follow-up tasks have no queues.\n    '
     buyerDomain: NotRequired[str]
@@ -27832,8 +27849,8 @@ class SearchInputKindCreativeFilter(TypedDict):
     '\n    For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2 (region).\n    '
     names: NotRequired[list[str]]
     '\n    For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.\n    '
-    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
-    '\n    For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.\n    '
+    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict", "gam_cleanup"]]
+    '\n    For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; gam_cleanup is a failed GAM order to archive or record as cleaned up; modular_source is follow-up work on a source and accepts the top-level sourceId.\n    '
     queue: NotRequired[Literal["overdue", "unowned"]]
     '\n    For kind work_item: only pending approvals in this queue: overdue (past their deadline) or unowned (nobody assigned). Follow-up tasks have no queues.\n    '
     buyerDomain: NotRequired[str]
@@ -28214,8 +28231,8 @@ class SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter(TypedDict):
     '\n    For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2 (region).\n    '
     names: NotRequired[list[str]]
     '\n    For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.\n    '
-    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
-    '\n    For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.\n    '
+    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict", "gam_cleanup"]]
+    '\n    For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; gam_cleanup is a failed GAM order to archive or record as cleaned up; modular_source is follow-up work on a source and accepts the top-level sourceId.\n    '
     queue: NotRequired[Literal["overdue", "unowned"]]
     '\n    For kind work_item: only pending approvals in this queue: overdue (past their deadline) or unowned (nobody assigned). Follow-up tasks have no queues.\n    '
     buyerDomain: NotRequired[str]
@@ -28612,8 +28629,8 @@ class SearchInputKindProposalFilter(TypedDict):
     '\n    For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2 (region).\n    '
     names: NotRequired[list[str]]
     '\n    For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.\n    '
-    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
-    '\n    For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.\n    '
+    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict", "gam_cleanup"]]
+    '\n    For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; gam_cleanup is a failed GAM order to archive or record as cleaned up; modular_source is follow-up work on a source and accepts the top-level sourceId.\n    '
     queue: NotRequired[Literal["overdue", "unowned"]]
     '\n    For kind work_item: only pending approvals in this queue: overdue (past their deadline) or unowned (nobody assigned). Follow-up tasks have no queues.\n    '
     buyerDomain: NotRequired[str]
@@ -28926,8 +28943,8 @@ class SearchInputKindSourceAccountFilter(TypedDict):
     '\n    For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2 (region).\n    '
     names: NotRequired[list[str]]
     '\n    For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.\n    '
-    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
-    '\n    For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.\n    '
+    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict", "gam_cleanup"]]
+    '\n    For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; gam_cleanup is a failed GAM order to archive or record as cleaned up; modular_source is follow-up work on a source and accepts the top-level sourceId.\n    '
     queue: NotRequired[Literal["overdue", "unowned"]]
     '\n    For kind work_item: only pending approvals in this queue: overdue (past their deadline) or unowned (nobody assigned). Follow-up tasks have no queues.\n    '
     buyerDomain: NotRequired[str]
