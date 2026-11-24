@@ -67213,9 +67213,9 @@ paths:
                 sourceId:
                   type: string
                   minLength: 1
-                  description: The inventory source that holds the product, as returned by `search`. Not an ESA connection id.
+                  description: Inventory source from `search`, not an ESA connection id.
                 id:
-                  description: The wholesale product to change. Omit to create a new one. Only the fields you pass are changed.
+                  description: Product to change; omit to create. Omitted fields stay unchanged.
                   type: string
                   minLength: 1
                 name:
@@ -67226,9 +67226,7 @@ paths:
                   description: Buyer-facing description.
                   type: string
                 status:
-                  description: >-
-                    `draft` is hidden from buyers. `active` is eligible for buyer discovery, subject to the warmed
-                    catalogue and pricing gates. `archived` is off the market.
+                  description: '`draft` is hidden; `active` is discoverable when eligible; `archived` is off market.'
                   type: string
                   enum:
                     - draft
@@ -67369,6 +67367,83 @@ paths:
                         description: Auction floor per unit, in this currency. Not with fixed_price.
                         type: number
                         minimum: 0
+                      parameters:
+                        description: AdCP time or DOOH flat-rate parameters, when the source supports them.
+                        anyOf:
+                          - type: object
+                            properties:
+                              time_unit:
+                                type: string
+                                const: week
+                                description: Whole weeks.
+                              min_duration:
+                                description: Minimum weeks.
+                                type: integer
+                                minimum: 1
+                                maximum: 9007199254740991
+                              max_duration:
+                                description: Maximum weeks.
+                                type: integer
+                                minimum: 1
+                                maximum: 9007199254740991
+                              ext:
+                                description: AdCP extensions.
+                                additionalProperties: true
+                            required:
+                              - time_unit
+                            additionalProperties: {}
+                          - type: object
+                            properties:
+                              type:
+                                type: string
+                                const: dooh
+                                description: DOOH pricing.
+                              sov_percentage:
+                                type: number
+                                minimum: 0
+                                maximum: 100
+                                description: Share of voice, percent.
+                              slot_span:
+                                description: Consecutive slots.
+                                type: integer
+                                minimum: 1
+                                maximum: 9007199254740991
+                              loop_position:
+                                description: Loop position.
+                                type: string
+                                minLength: 1
+                              loop_duration_seconds:
+                                description: Loop duration in seconds.
+                                type: integer
+                                minimum: 1
+                                maximum: 9007199254740991
+                              min_plays_per_hour:
+                                description: Minimum hourly plays.
+                                type: integer
+                                minimum: 1
+                                maximum: 9007199254740991
+                              venue_package:
+                                description: Venue package.
+                                type: string
+                              duration_hours:
+                                description: Duration in hours.
+                                type: number
+                                minimum: 0
+                              daypart:
+                                description: Daypart.
+                                type: string
+                              estimated_impressions:
+                                description: Estimated impressions.
+                                type: integer
+                                minimum: 0
+                                maximum: 9007199254740991
+                              ext:
+                                description: AdCP extensions.
+                                additionalProperties: true
+                            required:
+                              - type
+                              - sov_percentage
+                            additionalProperties: {}
                       min_spend_per_package:
                         description: Least spend per package, in this currency.
                         type: number
@@ -67525,7 +67600,7 @@ paths:
                       - interstitial
                       - standalone
                 eligibleAccountIds:
-                  description: Buyer accountIds that may see and book it, replaced whole. null opens it to every buyer; omit keeps.
+                  description: Allowed buyer accountIds. Replaces all; null opens to all; omit keeps.
                   anyOf:
                     - minItems: 1
                       maxItems: 50
@@ -67535,7 +67610,7 @@ paths:
                         minLength: 1
                     - type: 'null'
                 confirmVisibilityImpact:
-                  description: 'Required to restrict an open, live product: it hides it from every other buyer at once.'
+                  description: Required to restrict an open live product, hiding it from other buyers.
                   type: boolean
                 collections:
                   description: 'AdCP collections: the shows sold. [] = not disclosed. null clears; omit keeps.'
@@ -67559,7 +67634,7 @@ paths:
                         additionalProperties: {}
                     - type: 'null'
                 installments:
-                  description: 'AdCP installments: the episodes sold, each with a collection_ref. null clears; omit keeps.'
+                  description: Episodes sold with collection_ref. null clears; omit keeps.
                   anyOf:
                     - type: array
                       items:
@@ -67624,14 +67699,14 @@ paths:
                       additionalProperties: false
                     - type: 'null'
                 dryRun:
-                  description: Validate a new product without writing it; on GAM it returns lineItemTargeting. Creates only.
+                  description: 'Create only: validate without writing; GAM returns lineItemTargeting.'
                   type: boolean
                 delete:
-                  description: Permanently remove this product — only once it is archived, and it cannot be undone.
+                  description: Permanently delete an archived product; cannot be undone.
                   type: boolean
                   const: true
                 confirmName:
-                  description: For delete only. The product's exact stored name, read back to confirm the one to remove.
+                  description: 'Delete only: exact stored product name.'
                   type: string
                   minLength: 1
                 prebidIntegrationActive:
