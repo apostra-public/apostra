@@ -20543,7 +20543,7 @@ export type SaveBillingData = {
          */
         idempotencyKey?: string;
         /**
-         * Accept or switch plans; returns approval_required. Send alone.
+         * Accept or switch plans; returns approval_required or plan_accepted. Send alone.
          */
         plan?: SaveBillingRequestSaveBillingPlan;
         /**
