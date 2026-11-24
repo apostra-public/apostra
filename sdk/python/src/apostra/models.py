@@ -11910,6 +11910,8 @@ class SaveAgentInput(TypedDict):
     '\n    Allow certification buys.\n    '
     isArchived: NotRequired[bool]
     '\n    Archive or restore.\n    '
+    runCreativeConformance: NotRequired[Literal[True]]
+    '\n    Run creative conformance.\n    '
     operator: NotRequired[SaveAgentInputOperatorKindEXISTING | SaveAgentInputOperatorKindNEW]
     '\n    New Agent operator.\n    '
     idempotencyKey: NotRequired[str]
@@ -12077,6 +12079,18 @@ class SaveAgentResultKindAgentWithObjectDisplayNameObject(TypedDict):
     displayName: str
     certificationRequested: NotRequired[bool]
     isArchived: NotRequired[bool]
+    creativeConformance: NotRequired[SaveAgentResultKindAgentWithObjectDisplayNameObjectCreativeConformance]
+
+class SaveAgentResultKindAgentWithObjectDisplayNameObjectCreativeConformance(TypedDict):
+    runId: str
+    outcome: Literal["passed", "failed"]
+    stepsRun: int
+    failedSteps: list[SaveAgentResultKindAgentWithObjectDisplayNameObjectCreativeConformanceFailedStepsItem]
+
+class SaveAgentResultKindAgentWithObjectDisplayNameObjectCreativeConformanceFailedStepsItem(TypedDict):
+    id: str
+    title: str
+    error: str | None
 
 class SaveAgentResultKindAgentWithObjectProductModeAndObjectScope(TypedDict):
     kind: Literal["agent"]
@@ -24995,7 +25009,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     '\n    For kind session (RFP sessions): the channel the session ran over, such as chat, mcp, or email.\n    '
     updatedAfter: NotRequired[str]
     '\n    For kind session: sessions updated strictly after this instant.\n    '
-    sessionSource: NotRequired[Literal["murph_conversation_v1", "storefront_rfp_v1", "storefront_media_buy_v1", "storefront_compose_run_v1", "live_certification_run_v1"]]
+    sessionSource: NotRequired[Literal["murph_conversation_v1", "storefront_rfp_v1", "storefront_media_buy_v1", "storefront_compose_run_v1", "live_certification_run_v1", "agent_activity_v1"]]
     '\n    For kind session: read one source only. Omitted, sessions come from every source you can read. Filters marked (RFP sessions) need the RFP source; a source you cannot read is refused.\n    '
     buyer: NotRequired[list[str]]
     '\n    For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP. A label, not an account id.\n    '
@@ -25341,7 +25355,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     '\n    For kind session (RFP sessions): the channel the session ran over, such as chat, mcp, or email.\n    '
     updatedAfter: NotRequired[str]
     '\n    For kind session: sessions updated strictly after this instant.\n    '
-    sessionSource: NotRequired[Literal["murph_conversation_v1", "storefront_rfp_v1", "storefront_media_buy_v1", "storefront_compose_run_v1", "live_certification_run_v1"]]
+    sessionSource: NotRequired[Literal["murph_conversation_v1", "storefront_rfp_v1", "storefront_media_buy_v1", "storefront_compose_run_v1", "live_certification_run_v1", "agent_activity_v1"]]
     '\n    For kind session: read one source only. Omitted, sessions come from every source you can read. Filters marked (RFP sessions) need the RFP source; a source you cannot read is refused.\n    '
     buyer: NotRequired[list[str]]
     '\n    For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP. A label, not an account id.\n    '
@@ -25621,7 +25635,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(Type
     '\n    For kind session (RFP sessions): the channel the session ran over, such as chat, mcp, or email.\n    '
     updatedAfter: NotRequired[str]
     '\n    For kind session: sessions updated strictly after this instant.\n    '
-    sessionSource: NotRequired[Literal["murph_conversation_v1", "storefront_rfp_v1", "storefront_media_buy_v1", "storefront_compose_run_v1", "live_certification_run_v1"]]
+    sessionSource: NotRequired[Literal["murph_conversation_v1", "storefront_rfp_v1", "storefront_media_buy_v1", "storefront_compose_run_v1", "live_certification_run_v1", "agent_activity_v1"]]
     '\n    For kind session: read one source only. Omitted, sessions come from every source you can read. Filters marked (RFP sessions) need the RFP source; a source you cannot read is refused.\n    '
     buyer: NotRequired[list[str]]
     '\n    For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP. A label, not an account id.\n    '
@@ -25928,7 +25942,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDi
     '\n    For kind session (RFP sessions): the channel the session ran over, such as chat, mcp, or email.\n    '
     updatedAfter: NotRequired[str]
     '\n    For kind session: sessions updated strictly after this instant.\n    '
-    sessionSource: NotRequired[Literal["murph_conversation_v1", "storefront_rfp_v1", "storefront_media_buy_v1", "storefront_compose_run_v1", "live_certification_run_v1"]]
+    sessionSource: NotRequired[Literal["murph_conversation_v1", "storefront_rfp_v1", "storefront_media_buy_v1", "storefront_compose_run_v1", "live_certification_run_v1", "agent_activity_v1"]]
     '\n    For kind session: read one source only. Omitted, sessions come from every source you can read. Filters marked (RFP sessions) need the RFP source; a source you cannot read is refused.\n    '
     buyer: NotRequired[list[str]]
     '\n    For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP. A label, not an account id.\n    '
@@ -26242,7 +26256,7 @@ class SearchInputKindAdServerTargetingFilter(TypedDict):
     '\n    For kind session (RFP sessions): the channel the session ran over, such as chat, mcp, or email.\n    '
     updatedAfter: NotRequired[str]
     '\n    For kind session: sessions updated strictly after this instant.\n    '
-    sessionSource: NotRequired[Literal["murph_conversation_v1", "storefront_rfp_v1", "storefront_media_buy_v1", "storefront_compose_run_v1", "live_certification_run_v1"]]
+    sessionSource: NotRequired[Literal["murph_conversation_v1", "storefront_rfp_v1", "storefront_media_buy_v1", "storefront_compose_run_v1", "live_certification_run_v1", "agent_activity_v1"]]
     '\n    For kind session: read one source only. Omitted, sessions come from every source you can read. Filters marked (RFP sessions) need the RFP source; a source you cannot read is refused.\n    '
     buyer: NotRequired[list[str]]
     '\n    For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP. A label, not an account id.\n    '
@@ -26558,7 +26572,7 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     '\n    For kind session (RFP sessions): the channel the session ran over, such as chat, mcp, or email.\n    '
     updatedAfter: NotRequired[str]
     '\n    For kind session: sessions updated strictly after this instant.\n    '
-    sessionSource: NotRequired[Literal["murph_conversation_v1", "storefront_rfp_v1", "storefront_media_buy_v1", "storefront_compose_run_v1", "live_certification_run_v1"]]
+    sessionSource: NotRequired[Literal["murph_conversation_v1", "storefront_rfp_v1", "storefront_media_buy_v1", "storefront_compose_run_v1", "live_certification_run_v1", "agent_activity_v1"]]
     '\n    For kind session: read one source only. Omitted, sessions come from every source you can read. Filters marked (RFP sessions) need the RFP source; a source you cannot read is refused.\n    '
     buyer: NotRequired[list[str]]
     '\n    For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP. A label, not an account id.\n    '
@@ -26886,7 +26900,7 @@ class SearchInputKindBuyerRfpFilter(TypedDict):
     '\n    For kind session (RFP sessions): the channel the session ran over, such as chat, mcp, or email.\n    '
     updatedAfter: NotRequired[str]
     '\n    For kind session: sessions updated strictly after this instant.\n    '
-    sessionSource: NotRequired[Literal["murph_conversation_v1", "storefront_rfp_v1", "storefront_media_buy_v1", "storefront_compose_run_v1", "live_certification_run_v1"]]
+    sessionSource: NotRequired[Literal["murph_conversation_v1", "storefront_rfp_v1", "storefront_media_buy_v1", "storefront_compose_run_v1", "live_certification_run_v1", "agent_activity_v1"]]
     '\n    For kind session: read one source only. Omitted, sessions come from every source you can read. Filters marked (RFP sessions) need the RFP source; a source you cannot read is refused.\n    '
     buyer: NotRequired[list[str]]
     '\n    For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP. A label, not an account id.\n    '
@@ -27234,7 +27248,7 @@ class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     '\n    For kind session (RFP sessions): the channel the session ran over, such as chat, mcp, or email.\n    '
     updatedAfter: NotRequired[str]
     '\n    For kind session: sessions updated strictly after this instant.\n    '
-    sessionSource: NotRequired[Literal["murph_conversation_v1", "storefront_rfp_v1", "storefront_media_buy_v1", "storefront_compose_run_v1", "live_certification_run_v1"]]
+    sessionSource: NotRequired[Literal["murph_conversation_v1", "storefront_rfp_v1", "storefront_media_buy_v1", "storefront_compose_run_v1", "live_certification_run_v1", "agent_activity_v1"]]
     '\n    For kind session: read one source only. Omitted, sessions come from every source you can read. Filters marked (RFP sessions) need the RFP source; a source you cannot read is refused.\n    '
     buyer: NotRequired[list[str]]
     '\n    For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP. A label, not an account id.\n    '
@@ -27546,7 +27560,7 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     '\n    For kind session (RFP sessions): the channel the session ran over, such as chat, mcp, or email.\n    '
     updatedAfter: NotRequired[str]
     '\n    For kind session: sessions updated strictly after this instant.\n    '
-    sessionSource: NotRequired[Literal["murph_conversation_v1", "storefront_rfp_v1", "storefront_media_buy_v1", "storefront_compose_run_v1", "live_certification_run_v1"]]
+    sessionSource: NotRequired[Literal["murph_conversation_v1", "storefront_rfp_v1", "storefront_media_buy_v1", "storefront_compose_run_v1", "live_certification_run_v1", "agent_activity_v1"]]
     '\n    For kind session: read one source only. Omitted, sessions come from every source you can read. Filters marked (RFP sessions) need the RFP source; a source you cannot read is refused.\n    '
     buyer: NotRequired[list[str]]
     '\n    For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP. A label, not an account id.\n    '
@@ -27858,7 +27872,7 @@ class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     '\n    For kind session (RFP sessions): the channel the session ran over, such as chat, mcp, or email.\n    '
     updatedAfter: NotRequired[str]
     '\n    For kind session: sessions updated strictly after this instant.\n    '
-    sessionSource: NotRequired[Literal["murph_conversation_v1", "storefront_rfp_v1", "storefront_media_buy_v1", "storefront_compose_run_v1", "live_certification_run_v1"]]
+    sessionSource: NotRequired[Literal["murph_conversation_v1", "storefront_rfp_v1", "storefront_media_buy_v1", "storefront_compose_run_v1", "live_certification_run_v1", "agent_activity_v1"]]
     '\n    For kind session: read one source only. Omitted, sessions come from every source you can read. Filters marked (RFP sessions) need the RFP source; a source you cannot read is refused.\n    '
     buyer: NotRequired[list[str]]
     '\n    For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP. A label, not an account id.\n    '
@@ -28136,7 +28150,7 @@ class SearchInputKindCreativeFilter(TypedDict):
     '\n    For kind session (RFP sessions): the channel the session ran over, such as chat, mcp, or email.\n    '
     updatedAfter: NotRequired[str]
     '\n    For kind session: sessions updated strictly after this instant.\n    '
-    sessionSource: NotRequired[Literal["murph_conversation_v1", "storefront_rfp_v1", "storefront_media_buy_v1", "storefront_compose_run_v1", "live_certification_run_v1"]]
+    sessionSource: NotRequired[Literal["murph_conversation_v1", "storefront_rfp_v1", "storefront_media_buy_v1", "storefront_compose_run_v1", "live_certification_run_v1", "agent_activity_v1"]]
     '\n    For kind session: read one source only. Omitted, sessions come from every source you can read. Filters marked (RFP sessions) need the RFP source; a source you cannot read is refused.\n    '
     buyer: NotRequired[list[str]]
     '\n    For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP. A label, not an account id.\n    '
@@ -28518,7 +28532,7 @@ class SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter(TypedDict):
     '\n    For kind session (RFP sessions): the channel the session ran over, such as chat, mcp, or email.\n    '
     updatedAfter: NotRequired[str]
     '\n    For kind session: sessions updated strictly after this instant.\n    '
-    sessionSource: NotRequired[Literal["murph_conversation_v1", "storefront_rfp_v1", "storefront_media_buy_v1", "storefront_compose_run_v1", "live_certification_run_v1"]]
+    sessionSource: NotRequired[Literal["murph_conversation_v1", "storefront_rfp_v1", "storefront_media_buy_v1", "storefront_compose_run_v1", "live_certification_run_v1", "agent_activity_v1"]]
     '\n    For kind session: read one source only. Omitted, sessions come from every source you can read. Filters marked (RFP sessions) need the RFP source; a source you cannot read is refused.\n    '
     buyer: NotRequired[list[str]]
     '\n    For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP. A label, not an account id.\n    '
@@ -28918,7 +28932,7 @@ class SearchInputKindProposalFilter(TypedDict):
     '\n    For kind session (RFP sessions): the channel the session ran over, such as chat, mcp, or email.\n    '
     updatedAfter: NotRequired[str]
     '\n    For kind session: sessions updated strictly after this instant.\n    '
-    sessionSource: NotRequired[Literal["murph_conversation_v1", "storefront_rfp_v1", "storefront_media_buy_v1", "storefront_compose_run_v1", "live_certification_run_v1"]]
+    sessionSource: NotRequired[Literal["murph_conversation_v1", "storefront_rfp_v1", "storefront_media_buy_v1", "storefront_compose_run_v1", "live_certification_run_v1", "agent_activity_v1"]]
     '\n    For kind session: read one source only. Omitted, sessions come from every source you can read. Filters marked (RFP sessions) need the RFP source; a source you cannot read is refused.\n    '
     buyer: NotRequired[list[str]]
     '\n    For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP. A label, not an account id.\n    '
@@ -29232,7 +29246,7 @@ class SearchInputKindSourceAccountFilter(TypedDict):
     '\n    For kind session (RFP sessions): the channel the session ran over, such as chat, mcp, or email.\n    '
     updatedAfter: NotRequired[str]
     '\n    For kind session: sessions updated strictly after this instant.\n    '
-    sessionSource: NotRequired[Literal["murph_conversation_v1", "storefront_rfp_v1", "storefront_media_buy_v1", "storefront_compose_run_v1", "live_certification_run_v1"]]
+    sessionSource: NotRequired[Literal["murph_conversation_v1", "storefront_rfp_v1", "storefront_media_buy_v1", "storefront_compose_run_v1", "live_certification_run_v1", "agent_activity_v1"]]
     '\n    For kind session: read one source only. Omitted, sessions come from every source you can read. Filters marked (RFP sessions) need the RFP source; a source you cannot read is refused.\n    '
     buyer: NotRequired[list[str]]
     '\n    For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP. A label, not an account id.\n    '

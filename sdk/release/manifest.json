@@ -2186,6 +2186,8 @@
       "SaveAgentResultKindAgentWithObjectCreatedAndObjectDisplayNameAndObjectHrefAndObjectRoleObjectTestStart": "object",
       "SaveAgentResultKindAgentWithObjectDisplayName": "object",
       "SaveAgentResultKindAgentWithObjectDisplayNameObject": "object",
+      "SaveAgentResultKindAgentWithObjectDisplayNameObjectCreativeConformance": "object",
+      "SaveAgentResultKindAgentWithObjectDisplayNameObjectCreativeConformanceFailedStepsItem": "object",
       "SaveAgentResultKindAgentWithObjectProductModeAndObjectScope": "object",
       "SaveAgentResultKindAgentWithObjectProductModeAndObjectScopeObject": "object",
       "SaveAgentResultKindBuyerAgent": "object",
