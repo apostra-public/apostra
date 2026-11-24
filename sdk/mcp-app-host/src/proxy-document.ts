@@ -47,6 +47,13 @@ export interface McpAppProxyDocumentInput {
   allow?: string
   /** Pins the proxy canvas to the host's colour scheme. */
   colorScheme?: 'light' | 'dark'
+  /**
+   * The host page's content security policy nonce. The proxy is a `srcdoc`
+   * frame, so it inherits the host page's `script-src`; under a policy that
+   * allows scripts only by nonce, its relay script needs the same nonce. Stamp
+   * the app document's scripts with `stampScriptNonce` before passing it.
+   */
+  nonce?: string
 }
 
 /**
@@ -113,7 +120,8 @@ export function buildMcpAppProxyDocument(
       else if (type !== ${scriptString(MCP_APP_DOCUMENT_REPLACED_MESSAGE)}) parent.postMessage(event.data, '*');
     });
   })();`
-  return `<!doctype html><html><head><meta http-equiv="Content-Security-Policy" content="${escapeAttribute(input.policy)}"><style>${style}</style></head><body><textarea id="agent-mcp-app-document" hidden="">${escapeText(input.appDocument)}</textarea><script>${relay}</script></body></html>`
+  const nonce = input.nonce ? ` nonce="${escapeAttribute(input.nonce)}"` : ''
+  return `<!doctype html><html><head><meta http-equiv="Content-Security-Policy" content="${escapeAttribute(input.policy)}"><style>${style}</style></head><body><textarea id="agent-mcp-app-document" hidden="">${escapeText(input.appDocument)}</textarea><script${nonce}>${relay}</script></body></html>`
 }
 
 function escapeText(value: string): string {
