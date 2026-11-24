@@ -29780,7 +29780,7 @@ export type SaveInventorySourceData = {
          */
         dryRun?: boolean;
         /**
-         * Link this seller's inventory as a source. The seller must have approved your account. Send alone, or with status ACTIVE to activate it.
+         * Link this seller's inventory as a source. The seller must be listed; it approves each account you ask it for. Send alone, or with status ACTIVE to activate it.
          */
         sellerId?: number;
         /**
