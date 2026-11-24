@@ -429,6 +429,7 @@
       "GetDeliverySuccessGoalProgressVendor": "object",
       "GetDeliverySuccessGoalProgressVendorAttestedBasis": "object",
       "GetDeliverySuccessMediaBuyDeliveryFreshness": "object",
+      "GetDeliverySuccessMediaBuyDeliveryFreshnessNotAttributed": "object",
       "GetDeliverySuccessMediaBuyDeliveryFreshnessSellerValue": "object",
       "GetDeliverySuccessMetricDatumReachUnit": "scalar",
       "GetDeliverySuccessMetricDatumReachWindow": "object",

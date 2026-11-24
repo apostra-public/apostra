@@ -1142,7 +1142,7 @@ class GetDeliverySuccessDeliveryFreshness(TypedDict):
     staleMediaBuys: int
     '\n    Stale media buys in scope, listed or not.\n    '
     mediaBuys: list[GetDeliverySuccessMediaBuyDeliveryFreshness]
-    '\n    Each booked media buy in scope whose flight overlaps the period, at most 50: stale buys first, most overdue first, then by mediaBuyId.\n    '
+    '\n    Each booked media buy in scope whose flight overlaps the period, at most 50: stale buys first, most overdue first, then buys with notAttributed, then by mediaBuyId.\n    '
     mediaBuysOmitted: NotRequired[int]
     '\n    Media buys in scope left out of mediaBuys by its cap. Absent when none.\n    '
 
@@ -2014,7 +2014,12 @@ class GetDeliverySuccessMediaBuyDeliveryFreshness(TypedDict):
     overdueDays: int
     '\n    Due days inside the flight after lastDayHeld, up to dueThrough, with no delivery row.\n    '
     stale: bool
-    '\n    True when overdueDays is 1 or more: the seller delivery Apostra holds is behind. Missing data, not zero delivery.\n    '
+    '\n    True when overdueDays is 1 or more: the seller delivery Apostra holds is behind. Missing data, not zero delivery. Never true for a buy with notAttributed.\n    '
+    notAttributed: NotRequired[GetDeliverySuccessMediaBuyDeliveryFreshnessNotAttributed]
+    '\n    Present only when the buy is left out of the delivery rows because another of the account\'s media buys has the same seller media buy id, so Apostra cannot say which of them the seller\'s delivery belongs to. Its delivery is unknown, not zero and not late: lastDayHeld is null, overdueDays is 0 and stale is false. Tell Apostra support, who fix the duplicate.\n    '
+
+class GetDeliverySuccessMediaBuyDeliveryFreshnessNotAttributed(TypedDict):
+    reason: Literal["seller_media_buy_id_shared"]
 
 class GetDeliverySuccessMediaBuyDeliveryFreshnessSellerValue(TypedDict):
     id: str

@@ -754,7 +754,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Rechecks a managed ad-server connection or an external agent with no-spend get_products and catalog refresh. Returns checks, open findings, evidence and readiness; changes no source configuration, creates no media buy. scope picks another probe: accounts, inventory, connection, capabilities, brief."
+    "summary": "Rechecks a managed ad-server connection or an external agent with no-spend get_products and catalog refresh. Returns checks, open findings, evidence and readiness; changes no source configuration, creates no media buy. scope picks another probe."
   },
   "request_buyer_child_account": {
     "path": "/tools/request_buyer_child_account",

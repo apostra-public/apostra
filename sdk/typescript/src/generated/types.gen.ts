@@ -7266,7 +7266,7 @@ export type GetDeliverySuccessDeliveryFreshness = {
      */
     staleMediaBuys: number;
     /**
-     * Each booked media buy in scope whose flight overlaps the period, at most 50: stale buys first, most overdue first, then by mediaBuyId.
+     * Each booked media buy in scope whose flight overlaps the period, at most 50: stale buys first, most overdue first, then buys with notAttributed, then by mediaBuyId.
      */
     mediaBuys: Array<GetDeliverySuccessMediaBuyDeliveryFreshness>;
     /**
@@ -8282,9 +8282,15 @@ export type GetDeliverySuccessMediaBuyDeliveryFreshness = {
      */
     overdueDays: number;
     /**
-     * True when overdueDays is 1 or more: the seller delivery Apostra holds is behind. Missing data, not zero delivery.
+     * True when overdueDays is 1 or more: the seller delivery Apostra holds is behind. Missing data, not zero delivery. Never true for a buy with notAttributed.
      */
     stale: boolean;
+    /**
+     * Present only when the buy is left out of the delivery rows because another of the account's media buys has the same seller media buy id, so Apostra cannot say which of them the seller's delivery belongs to. Its delivery is unknown, not zero and not late: lastDayHeld is null, overdueDays is 0 and stale is false. Tell Apostra support, who fix the duplicate.
+     */
+    notAttributed?: {
+        reason: 'seller_media_buy_id_shared';
+    };
 };
 
 export type GetDeliverySuccessMetricDatumReachUnit = 'individuals' | 'households' | 'devices' | 'accounts' | 'cookies' | 'custom';
