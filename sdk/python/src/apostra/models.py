@@ -398,8 +398,8 @@ class GetDeliveryInput(TypedDict):
     '\n    Group-by dimensions; campaign delivery also accepts labels.<dimension_key>, and property (tracker impressions per site or app, with date). Omit for leaf grain.\n    '
     sponsoredBuyerCustomerId: NotRequired[str]
     '\n    Server-issued self-serve buyer child scope from the Campaigns Page launch.\n    '
-    report: NotRequired[Literal["delivery", "campaign_delivery", "live_campaign_delivery", "margin", "live_ad_delivery"]]
-    '\n    Select seller delivery, stored campaign delivery, live provider campaign delivery, margin, or live per-ad delivery for one campaign.\n    '
+    report: NotRequired[Literal["delivery", "campaign_delivery", "live_campaign_delivery", "margin", "live_ad_delivery", "campaign_creative_delivery"]]
+    '\n    Select seller delivery, stored campaign delivery, live provider campaign delivery, margin, live per-ad delivery for one campaign, or stored per-creative delivery by day with each creative\'s first delivery date.\n    '
     range: NotRequired[GetDeliveryInputRange]
     '\n    Dates (max 90 days) or lifetime for delivery. Margin: one closed calendar month, a publisher statement.\n    '
     filters: NotRequired[GetDeliveryInputFilters]
@@ -430,6 +430,8 @@ class GetDeliveryInputFilters(TypedDict):
     '\n    Filter to one buyer-facing package.\n    '
     productId: NotRequired[str]
     '\n    Filter to one product.\n    '
+    creativeId: NotRequired[str]
+    '\n    campaign_creative_delivery: filter to one creative.\n    '
 
 class GetDeliveryInputRange(TypedDict):
     startDate: NotRequired[str]
@@ -438,6 +440,61 @@ class GetDeliveryInputRange(TypedDict):
     '\n    Inclusive delivery date, YYYY-MM-DD.\n    '
     lifetime: NotRequired[Literal[True]]
     '\n    Campaign delivery only: provider-supported or stored history, no dates.\n    '
+
+class GetDeliveryResultReportCampaignCreativeDelivery(TypedDict):
+    report: Literal["campaign_creative_delivery"]
+    query: GetDeliveryResultReportCampaignCreativeDeliveryQuery
+    media_buy_deliveries: list[GetDeliverySuccessCampaignCreativeMediaBuy]
+    coverage: GetDeliveryResultReportCampaignCreativeDeliveryCoverage
+    page: GetDeliveryResultReportCampaignCreativeDeliveryPage
+    semantics: GetDeliveryResultReportCampaignCreativeDeliverySemantics
+
+class GetDeliveryResultReportCampaignCreativeDeliveryCoverage(TypedDict):
+    mediaBuysInScope: float
+    throughDate: NotRequired[str]
+    unread: GetDeliveryResultReportCampaignCreativeDeliveryCoverageUnread
+
+class GetDeliveryResultReportCampaignCreativeDeliveryCoverageUnread(TypedDict):
+    count: float
+    truncated: bool
+    campaigns: list[GetDeliveryResultReportCampaignCreativeDeliveryCoverageUnreadCampaignsItem]
+
+class GetDeliveryResultReportCampaignCreativeDeliveryCoverageUnreadCampaignsItem(TypedDict):
+    campaignId: str
+    campaignName: str
+    management: Literal["managed", "tracked"]
+    reason: Literal["no_creative_rows"]
+
+class GetDeliveryResultReportCampaignCreativeDeliveryPage(TypedDict):
+    limit: float
+    returned: float
+    truncated: bool
+    nextCursor: NotRequired[str]
+
+class GetDeliveryResultReportCampaignCreativeDeliveryQuery(TypedDict):
+    range: GetDeliveryResultReportCampaignCreativeDeliveryQueryRange
+    filters: GetDeliveryResultReportCampaignCreativeDeliveryQueryFilters
+
+class GetDeliveryResultReportCampaignCreativeDeliveryQueryFilters(TypedDict):
+    advertiserId: NotRequired[str]
+    campaignId: NotRequired[str]
+    mediaBuyId: NotRequired[str]
+    packageId: NotRequired[str]
+    creativeId: NotRequired[str]
+
+class GetDeliveryResultReportCampaignCreativeDeliveryQueryRange(TypedDict):
+    startDate: str
+    endDate: str
+
+class GetDeliveryResultReportCampaignCreativeDeliverySemantics(TypedDict):
+    sourceOperation: Literal["stored_creative_delivery_days"]
+    genericFallback: Literal[False]
+    measurement: Literal["excluded"]
+    aggregation: str
+    missingValues: str
+    freshness: str
+    finality: str
+    billingEligibility: str
 
 class GetDeliveryResultReportCampaignDelivery(TypedDict):
     report: Literal["campaign_delivery"]
@@ -822,7 +879,7 @@ class GetDeliveryResultReportMargin(TypedDict):
     synthetic: NotRequired[GetDeliverySuccessSynthetic]
     '\n    Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.\n    '
 
-GetDeliveryResult: TypeAlias = "GetDeliveryResultReportDelivery | GetDeliveryResultReportCampaignDelivery | GetDeliveryResultReportMargin | GetDeliveryResultReportLiveCampaignDelivery | GetDeliveryResultReportCampaignPropertyDelivery | GetDeliveryResultReportLiveAdDelivery"
+GetDeliveryResult: TypeAlias = "GetDeliveryResultReportDelivery | GetDeliveryResultReportCampaignDelivery | GetDeliveryResultReportMargin | GetDeliveryResultReportLiveCampaignDelivery | GetDeliveryResultReportCampaignPropertyDelivery | GetDeliveryResultReportLiveAdDelivery | GetDeliveryResultReportCampaignCreativeDelivery"
 
 class GetDeliverySuccessAdDailyDelivery(TypedDict):
     impressions: NotRequired[GetDeliverySuccessAdDailyDeliveryImpressions]
@@ -931,6 +988,50 @@ GetDeliverySuccessAdPackageDeliveryImpressions: TypeAlias = float
 
 GetDeliverySuccessAdPackageDeliverySpend: TypeAlias = float
 
+class GetDeliverySuccessCampaignCreativeDelivery(TypedDict):
+    creative_id: str
+    creative_name: NotRequired[str]
+    impressions: NotRequired[float]
+    spend: NotRequired[float]
+    clicks: NotRequired[float]
+    ctr: NotRequired[float]
+    conversions: NotRequired[float]
+    conversion_value: NotRequired[float]
+    views: NotRequired[float]
+    completed_views: NotRequired[float]
+    cpm: NotRequired[float]
+    cost_per_click: NotRequired[float]
+    cost_per_acquisition: NotRequired[float]
+    roas: NotRequired[float]
+    creative_in_library: NotRequired[bool]
+    '\n    true for a creative in the advertiser\'s Library, false when Apostra or the seller assigned the id to a creative made in the platform\'s own tools. Absent when the seller did not say.\n    '
+    platform_ads: NotRequired[list[GetDeliverySuccessCampaignCreativeDeliveryPlatformAdsItem]]
+    first_delivery_date: NotRequired[str]
+    '\n    The first day the creative delivered in any of the advertiser campaigns, over all stored history and not only the range.\n    '
+    first_delivery_exact: NotRequired[bool]
+    '\n    true only when history rules out earlier delivery; false means it first delivered on or before first_delivery_date.\n    '
+    daily_breakdown: list[GetDeliverySuccessCreativeDailyDelivery]
+    daily_breakdown_truncated: NotRequired[Literal[True]]
+    daily_breakdown_truncated_before: NotRequired[str]
+
+class GetDeliverySuccessCampaignCreativeDeliveryPlatformAdsItem(TypedDict):
+    platform_ad_id: str
+    platform_ad_name: str | None
+
+class GetDeliverySuccessCampaignCreativeMediaBuy(TypedDict):
+    media_buy_id: str
+    campaignId: str
+    campaignName: str
+    management: Literal["managed", "tracked"]
+    by_package: list[GetDeliverySuccessCampaignCreativePackage]
+
+class GetDeliverySuccessCampaignCreativePackage(TypedDict):
+    package_id: str
+    currency: str | None
+    by_creative: list[GetDeliverySuccessCampaignCreativeDelivery]
+    by_creative_truncated: bool
+    '\n    true when the seller cut this package creative list on a day in the range.\n    '
+
 class GetDeliverySuccessCampaignDeliveryCoverage(TypedDict):
     inFlightCampaigns: int
     '\n    Campaigns in scope with a current media buy that was booked or running during the range.\n    '
@@ -978,6 +1079,36 @@ class GetDeliverySuccessCampaignGoalProgressMediaBuy(TypedDict):
     campaignId: str | None
     progress: GetDeliverySuccessGoalProgress | None
     deliveryGoal: GetDeliverySuccessGetDeliveryGoal
+
+class GetDeliverySuccessCreativeDailyDelivery(TypedDict):
+    impressions: NotRequired[float]
+    spend: NotRequired[float]
+    clicks: NotRequired[float]
+    ctr: NotRequired[float]
+    conversions: NotRequired[float]
+    conversion_value: NotRequired[float]
+    views: NotRequired[float]
+    completed_views: NotRequired[float]
+    reach: NotRequired[float]
+    reach_unit: NotRequired[Literal["individuals", "households", "devices", "accounts", "cookies", "custom"]]
+    reach_window: NotRequired[GetDeliverySuccessCreativeDailyDeliveryReachWindow]
+    frequency: NotRequired[float]
+    by_event_type: NotRequired[list[GetDeliverySuccessCreativeDailyDeliveryByEventTypeItem]]
+    date: str
+
+class GetDeliverySuccessCreativeDailyDeliveryByEventTypeItem(TypedDict):
+    event_type: Literal["page_view", "view_content", "select_content", "select_item", "search", "share", "add_to_cart", "remove_from_cart", "viewed_cart", "add_to_wishlist", "initiate_checkout", "add_payment_info", "purchase", "refund", "lead", "qualify_lead", "close_convert_lead", "disqualify_lead", "complete_registration", "subscribe", "follow", "content_view", "watch_milestone", "start_trial", "app_install", "app_launch", "contact", "schedule", "donate", "submit_application", "custom"]
+    event_source_id: NotRequired[str]
+    count: float
+    value: NotRequired[float]
+
+class GetDeliverySuccessCreativeDailyDeliveryReachWindow(TypedDict):
+    kind: Literal["cumulative", "period", "rolling"]
+    period: NotRequired[GetDeliverySuccessCreativeDailyDeliveryReachWindowPeriod]
+
+class GetDeliverySuccessCreativeDailyDeliveryReachWindowPeriod(TypedDict):
+    interval: int
+    unit: Literal["seconds", "minutes", "hours", "days", "campaign"]
 
 GetDeliverySuccessCurrencyConversionsOmitted: TypeAlias = int
 
@@ -1942,6 +2073,8 @@ class GetDeliverySuccessQueryFilters(TypedDict):
     '\n    Filter to one buyer-facing package.\n    '
     productId: NotRequired[str]
     '\n    Filter to one product.\n    '
+    creativeId: NotRequired[str]
+    '\n    campaign_creative_delivery: filter to one creative.\n    '
 
 class GetDeliverySuccessQueryRange(TypedDict):
     startDate: NotRequired[str]
@@ -11471,10 +11604,18 @@ class SaveAdvertiserResultActionArchived(TypedDict):
 class SaveAdvertiserResultActionBrandResolved(TypedDict):
     action: Literal["brand_resolved"]
     brand: SaveAdvertiserResultActionBrandResolvedBrand
+    footprintProposal: SaveAdvertiserResultActionBrandResolvedFootprintProposal
 
 class SaveAdvertiserResultActionBrandResolvedBrand(TypedDict):
     domain: str
     resolved: bool
+    pending: NotRequired[bool]
+    verified: bool
+
+class SaveAdvertiserResultActionBrandResolvedFootprintProposal(TypedDict):
+    brandCountries: list[Literal["AD", "AE", "AF", "AG", "AI", "AL", "AM", "AO", "AQ", "AR", "AS", "AT", "AU", "AW", "AX", "AZ", "BA", "BB", "BD", "BE", "BF", "BG", "BH", "BI", "BJ", "BL", "BM", "BN", "BO", "BQ", "BR", "BS", "BT", "BV", "BW", "BY", "BZ", "CA", "CC", "CD", "CF", "CG", "CH", "CI", "CK", "CL", "CM", "CN", "CO", "CR", "CU", "CV", "CW", "CX", "CY", "CZ", "DE", "DJ", "DK", "DM", "DO", "DZ", "EC", "EE", "EG", "EH", "ER", "ES", "ET", "FI", "FJ", "FK", "FM", "FO", "FR", "GA", "GB", "GD", "GE", "GF", "GG", "GH", "GI", "GL", "GM", "GN", "GP", "GQ", "GR", "GS", "GT", "GU", "GW", "GY", "HK", "HM", "HN", "HR", "HT", "HU", "ID", "IE", "IL", "IM", "IN", "IO", "IQ", "IR", "IS", "IT", "JE", "JM", "JO", "JP", "KE", "KG", "KH", "KI", "KM", "KN", "KP", "KR", "KW", "KY", "KZ", "LA", "LB", "LC", "LI", "LK", "LR", "LS", "LT", "LU", "LV", "LY", "MA", "MC", "MD", "ME", "MF", "MG", "MH", "MK", "ML", "MM", "MN", "MO", "MP", "MQ", "MR", "MS", "MT", "MU", "MV", "MW", "MX", "MY", "MZ", "NA", "NC", "NE", "NF", "NG", "NI", "NL", "NO", "NP", "NR", "NU", "NZ", "OM", "PA", "PE", "PF", "PG", "PH", "PK", "PL", "PM", "PN", "PR", "PS", "PT", "PW", "PY", "QA", "RE", "RO", "RS", "RU", "RW", "SA", "SB", "SC", "SD", "SE", "SG", "SH", "SI", "SJ", "SK", "SL", "SM", "SN", "SO", "SR", "SS", "ST", "SV", "SX", "SY", "SZ", "TC", "TD", "TF", "TG", "TH", "TJ", "TK", "TL", "TM", "TN", "TO", "TR", "TT", "TV", "TW", "TZ", "UA", "UG", "UM", "US", "UY", "UZ", "VA", "VC", "VE", "VG", "VI", "VN", "VU", "WF", "WS", "YE", "YT", "ZA", "ZM", "ZW"]]
+    channels: list[Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]]
+    basis: str
 
 class SaveAdvertiserResultActionBulkArchived(TypedDict):
     advertiserIds: SaveAdvertiserSuccessAdvertiserIds
@@ -11493,6 +11634,7 @@ class SaveAdvertiserResultActionCreated(TypedDict):
     creativeResync: NotRequired[SaveAdvertiserSuccessCreativeResync]
     currencyDefaulted: NotRequired[SaveAdvertiserSuccessCurrencyDefaulted]
     timezoneDefaulted: NotRequired[SaveAdvertiserSuccessTimezoneDefaulted]
+    brandUnverified: NotRequired[SaveAdvertiserSuccessBrandUnverified]
     receipt: NotRequired[SaveAdvertiserSuccessReceipt]
     action: Literal["created"]
 
@@ -11552,6 +11694,7 @@ class SaveAdvertiserResultActionRestored(TypedDict):
     creativeResync: NotRequired[SaveAdvertiserSuccessCreativeResync]
     currencyDefaulted: NotRequired[SaveAdvertiserSuccessCurrencyDefaulted]
     timezoneDefaulted: NotRequired[SaveAdvertiserSuccessTimezoneDefaulted]
+    brandUnverified: NotRequired[SaveAdvertiserSuccessBrandUnverified]
     receipt: NotRequired[SaveAdvertiserSuccessReceipt]
     action: Literal["restored"]
 
@@ -11560,6 +11703,7 @@ class SaveAdvertiserResultActionUnchanged(TypedDict):
     creativeResync: NotRequired[SaveAdvertiserSuccessCreativeResync]
     currencyDefaulted: NotRequired[SaveAdvertiserSuccessCurrencyDefaulted]
     timezoneDefaulted: NotRequired[SaveAdvertiserSuccessTimezoneDefaulted]
+    brandUnverified: NotRequired[SaveAdvertiserSuccessBrandUnverified]
     receipt: NotRequired[SaveAdvertiserSuccessReceipt]
     action: Literal["unchanged"]
 
@@ -11568,6 +11712,7 @@ class SaveAdvertiserResultActionUpdated(TypedDict):
     creativeResync: NotRequired[SaveAdvertiserSuccessCreativeResync]
     currencyDefaulted: NotRequired[SaveAdvertiserSuccessCurrencyDefaulted]
     timezoneDefaulted: NotRequired[SaveAdvertiserSuccessTimezoneDefaulted]
+    brandUnverified: NotRequired[SaveAdvertiserSuccessBrandUnverified]
     receipt: NotRequired[SaveAdvertiserSuccessReceipt]
     action: Literal["updated"]
 
@@ -11617,6 +11762,8 @@ class SaveAdvertiserSuccessAdvertiserIdentityChangeReceipt(TypedDict):
     brandLinkId: str
 
 SaveAdvertiserSuccessAdvertiserIds: TypeAlias = list[str]
+
+SaveAdvertiserSuccessBrandUnverified: TypeAlias = bool
 
 class SaveAdvertiserSuccessCreativeResync(TypedDict):
     creativeCount: int
