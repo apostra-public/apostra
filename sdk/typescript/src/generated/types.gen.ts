@@ -16364,14 +16364,24 @@ export type RefreshInventorySourceHealthData = {
     body: {
         sourceId: unknown;
     } & {
+        brief?: unknown;
+    } & unknown & {
         /**
          * Exact source ID. Managed ad-server sources use a connection test; external sales agents use discovery checks.
          */
         sourceId: string;
         /**
-         * health (default) rechecks the source. accounts asks the source to list its accounts again, for sources that take account mappings.
+         * health (default) rechecks the source. accounts re-lists its accounts. inventory refreshes a managed ad-server source, connection tests it, capabilities re-checks one ad-server capability or an external agent, brief dry-runs a buyer brief on a modular source.
          */
-        scope?: 'health' | 'accounts';
+        scope?: 'health' | 'accounts' | 'inventory' | 'connection' | 'capabilities' | 'brief';
+        /**
+         * With scope capabilities on an ad-server source: which one.
+         */
+        capability?: 'reporting' | 'forecasting';
+        /**
+         * With scope brief: the buyer brief to test.
+         */
+        brief?: string;
         /**
          * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
          */
@@ -16462,7 +16472,7 @@ export type RefreshInventorySourceHealthResponses = {
      * Typed operation result
      */
     200: {
-        data: RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthChecked | RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthAccountsListed;
+        data: RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthChecked | RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthAccountsListed | RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthInventoryRefreshed | RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthConnectionTested | RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthCapabilitiesChecked | RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthBriefTested;
         error: null;
     };
     /**
@@ -16497,6 +16507,66 @@ export type RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthAccou
     };
 };
 
+export type RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthBriefTested = {
+    sourceId: string;
+    scope: 'brief';
+    brief: {
+        ok: boolean;
+        dryRun: true;
+        persistedProducts: boolean;
+        buyerBookable: boolean;
+        intelligenceRunId: string | null;
+        result: {
+            kind: 'ok' | 'error';
+            code: string | null;
+            message: string | null;
+        };
+        productCount: number;
+        products: Array<{
+            productId: string | null;
+            name: string | null;
+            reasoning: string | null;
+        }>;
+        productsTruncated: boolean;
+    };
+};
+
+export type RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthCapabilitiesChecked = {
+    sourceId: string;
+    scope: 'capabilities';
+    capabilities: {
+        kind: 'ad_server';
+        capability: 'reporting' | 'forecasting';
+        capabilityState: 'unknown' | 'available' | 'awaiting_vendor_permission';
+        status: string;
+        probePerformed: boolean;
+        recoveryStarted: boolean;
+        syncRunId: string | null;
+        message: string;
+        agentId?: never;
+        version?: never;
+        tools?: never;
+        requireOperatorAuth?: never;
+        defaultBilling?: never;
+        supportedBillings?: never;
+    } | {
+        kind: 'agent';
+        agentId: string;
+        version: string;
+        tools: Array<string>;
+        requireOperatorAuth: boolean;
+        defaultBilling: string | null;
+        supportedBillings: Array<string>;
+        capability?: never;
+        capabilityState?: never;
+        status?: never;
+        probePerformed?: never;
+        recoveryStarted?: never;
+        syncRunId?: never;
+        message?: never;
+    };
+};
+
 export type RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthChecked = {
     sourceId: string;
     outcome: 'passed' | 'empty' | 'failed' | 'not_reached';
@@ -16524,6 +16594,36 @@ export type RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthCheck
         status: string;
         canTransact: boolean;
         reason: string | null;
+    };
+};
+
+export type RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthConnectionTested = {
+    sourceId: string;
+    scope: 'connection';
+    connection: {
+        success: boolean;
+        error: string | null;
+        errorCode: string | null;
+        remediation: string | null;
+        testedAt: string;
+        capabilityChecks: Array<{
+            capability: string;
+            status: string;
+            message: string | null;
+        }>;
+    };
+};
+
+export type RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthInventoryRefreshed = {
+    sourceId: string;
+    scope: 'inventory';
+    inventory: {
+        status: 'started' | 'already_running';
+        syncRunIds: {
+            [key: string]: string;
+        };
+        startedAt: string | null;
+        runningSyncTypes: Array<string>;
     };
 };
 
