@@ -2038,6 +2038,7 @@ paths:
                           - payouts
                           - reads
                           - reasoning
+                          - revisions
                           - canvas
                           - canvas_source
                           - canvas_versions
@@ -2226,6 +2227,11 @@ paths:
                       description: >-
                         For kind playbook: read this past version with its content, for example to save it again as
                         current. For business_rules, with businessRulesPolicy.
+                      type: integer
+                      minimum: 1
+                      maximum: 9007199254740991
+                    revision:
+                      description: 'For kind workspace_file: the revision to read, not the current one.'
                       type: integer
                       minimum: 1
                       maximum: 9007199254740991
@@ -2748,6 +2754,28 @@ paths:
                           - kind
                     - if:
                         required:
+                          - revision
+                      then:
+                        properties:
+                          kind:
+                            const: workspace_file
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: revisions
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: workspace_file
+                        required:
+                          - kind
+                    - if:
+                        required:
                           - buyerAccountId
                       then:
                         properties:
@@ -3185,6 +3213,7 @@ paths:
                               - work_item
                               - buyer_rfp
                               - agent_record
+                              - workspace_file
                         required:
                           - kind
                 - type: object
@@ -3436,6 +3465,7 @@ paths:
                           - payouts
                           - reads
                           - reasoning
+                          - revisions
                           - canvas
                           - canvas_source
                           - canvas_versions
@@ -3624,6 +3654,11 @@ paths:
                       description: >-
                         For kind playbook: read this past version with its content, for example to save it again as
                         current. For business_rules, with businessRulesPolicy.
+                      type: integer
+                      minimum: 1
+                      maximum: 9007199254740991
+                    revision:
+                      description: 'For kind workspace_file: the revision to read, not the current one.'
                       type: integer
                       minimum: 1
                       maximum: 9007199254740991
@@ -4141,6 +4176,28 @@ paths:
                         properties:
                           kind:
                             const: playbook
+                        required:
+                          - kind
+                    - if:
+                        required:
+                          - revision
+                      then:
+                        properties:
+                          kind:
+                            const: workspace_file
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: revisions
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: workspace_file
                         required:
                           - kind
                     - if:
@@ -4807,6 +4864,7 @@ paths:
                           - payouts
                           - reads
                           - reasoning
+                          - revisions
                           - canvas
                           - canvas_source
                           - canvas_versions
@@ -4995,6 +5053,11 @@ paths:
                       description: >-
                         For kind playbook: read this past version with its content, for example to save it again as
                         current. For business_rules, with businessRulesPolicy.
+                      type: integer
+                      minimum: 1
+                      maximum: 9007199254740991
+                    revision:
+                      description: 'For kind workspace_file: the revision to read, not the current one.'
                       type: integer
                       minimum: 1
                       maximum: 9007199254740991
@@ -5512,6 +5575,28 @@ paths:
                         properties:
                           kind:
                             const: playbook
+                        required:
+                          - kind
+                    - if:
+                        required:
+                          - revision
+                      then:
+                        properties:
+                          kind:
+                            const: workspace_file
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: revisions
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: workspace_file
                         required:
                           - kind
                     - if:
@@ -6165,6 +6250,7 @@ paths:
                           - payouts
                           - reads
                           - reasoning
+                          - revisions
                           - canvas
                           - canvas_source
                           - canvas_versions
@@ -6353,6 +6439,11 @@ paths:
                       description: >-
                         For kind playbook: read this past version with its content, for example to save it again as
                         current. For business_rules, with businessRulesPolicy.
+                      type: integer
+                      minimum: 1
+                      maximum: 9007199254740991
+                    revision:
+                      description: 'For kind workspace_file: the revision to read, not the current one.'
                       type: integer
                       minimum: 1
                       maximum: 9007199254740991
@@ -6871,6 +6962,28 @@ paths:
                         properties:
                           kind:
                             const: playbook
+                        required:
+                          - kind
+                    - if:
+                        required:
+                          - revision
+                      then:
+                        properties:
+                          kind:
+                            const: workspace_file
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: revisions
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: workspace_file
                         required:
                           - kind
                     - if:
@@ -7524,6 +7637,7 @@ paths:
                           - payouts
                           - reads
                           - reasoning
+                          - revisions
                           - canvas
                           - canvas_source
                           - canvas_versions
@@ -7712,6 +7826,11 @@ paths:
                       description: >-
                         For kind playbook: read this past version with its content, for example to save it again as
                         current. For business_rules, with businessRulesPolicy.
+                      type: integer
+                      minimum: 1
+                      maximum: 9007199254740991
+                    revision:
+                      description: 'For kind workspace_file: the revision to read, not the current one.'
                       type: integer
                       minimum: 1
                       maximum: 9007199254740991
@@ -8230,6 +8349,28 @@ paths:
                         properties:
                           kind:
                             const: playbook
+                        required:
+                          - kind
+                    - if:
+                        required:
+                          - revision
+                      then:
+                        properties:
+                          kind:
+                            const: workspace_file
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: revisions
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: workspace_file
                         required:
                           - kind
                     - if:
@@ -8890,6 +9031,7 @@ paths:
                           - payouts
                           - reads
                           - reasoning
+                          - revisions
                           - canvas
                           - canvas_source
                           - canvas_versions
@@ -9078,6 +9220,11 @@ paths:
                       description: >-
                         For kind playbook: read this past version with its content, for example to save it again as
                         current. For business_rules, with businessRulesPolicy.
+                      type: integer
+                      minimum: 1
+                      maximum: 9007199254740991
+                    revision:
+                      description: 'For kind workspace_file: the revision to read, not the current one.'
                       type: integer
                       minimum: 1
                       maximum: 9007199254740991
@@ -9597,6 +9744,28 @@ paths:
                         properties:
                           kind:
                             const: playbook
+                        required:
+                          - kind
+                    - if:
+                        required:
+                          - revision
+                      then:
+                        properties:
+                          kind:
+                            const: workspace_file
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: revisions
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: workspace_file
                         required:
                           - kind
                     - if:
@@ -10336,6 +10505,11 @@ paths:
                       type: integer
                       minimum: 1
                       maximum: 9007199254740991
+                    revision:
+                      description: 'For kind workspace_file: the revision to read, not the current one.'
+                      type: integer
+                      minimum: 1
+                      maximum: 9007199254740991
                     businessRulesPolicy:
                       description: 'For kind business_rules with version: the policy that numbers it.'
                       type: string
@@ -10852,6 +11026,28 @@ paths:
                         properties:
                           kind:
                             const: playbook
+                        required:
+                          - kind
+                    - if:
+                        required:
+                          - revision
+                      then:
+                        properties:
+                          kind:
+                            const: workspace_file
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: revisions
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: workspace_file
                         required:
                           - kind
                     - if:
@@ -11506,6 +11702,7 @@ paths:
                           - payouts
                           - reads
                           - reasoning
+                          - revisions
                           - canvas
                           - canvas_source
                           - canvas_versions
@@ -11694,6 +11891,11 @@ paths:
                       description: >-
                         For kind playbook: read this past version with its content, for example to save it again as
                         current. For business_rules, with businessRulesPolicy.
+                      type: integer
+                      minimum: 1
+                      maximum: 9007199254740991
+                    revision:
+                      description: 'For kind workspace_file: the revision to read, not the current one.'
                       type: integer
                       minimum: 1
                       maximum: 9007199254740991
@@ -12213,6 +12415,28 @@ paths:
                         properties:
                           kind:
                             const: playbook
+                        required:
+                          - kind
+                    - if:
+                        required:
+                          - revision
+                      then:
+                        properties:
+                          kind:
+                            const: workspace_file
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: revisions
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: workspace_file
                         required:
                           - kind
                     - if:
@@ -12867,6 +13091,7 @@ paths:
                           - payouts
                           - reads
                           - reasoning
+                          - revisions
                           - canvas
                           - canvas_source
                           - canvas_versions
@@ -13055,6 +13280,11 @@ paths:
                       description: >-
                         For kind playbook: read this past version with its content, for example to save it again as
                         current. For business_rules, with businessRulesPolicy.
+                      type: integer
+                      minimum: 1
+                      maximum: 9007199254740991
+                    revision:
+                      description: 'For kind workspace_file: the revision to read, not the current one.'
                       type: integer
                       minimum: 1
                       maximum: 9007199254740991
@@ -13574,6 +13804,28 @@ paths:
                         properties:
                           kind:
                             const: playbook
+                        required:
+                          - kind
+                    - if:
+                        required:
+                          - revision
+                      then:
+                        properties:
+                          kind:
+                            const: workspace_file
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: revisions
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: workspace_file
                         required:
                           - kind
                     - if:
@@ -14319,6 +14571,11 @@ paths:
                       type: integer
                       minimum: 1
                       maximum: 9007199254740991
+                    revision:
+                      description: 'For kind workspace_file: the revision to read, not the current one.'
+                      type: integer
+                      minimum: 1
+                      maximum: 9007199254740991
                     businessRulesPolicy:
                       description: 'For kind business_rules with version: the policy that numbers it.'
                       type: string
@@ -14834,6 +15091,28 @@ paths:
                         properties:
                           kind:
                             const: playbook
+                        required:
+                          - kind
+                    - if:
+                        required:
+                          - revision
+                      then:
+                        properties:
+                          kind:
+                            const: workspace_file
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: revisions
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: workspace_file
                         required:
                           - kind
                     - if:
@@ -15579,6 +15858,11 @@ paths:
                       type: integer
                       minimum: 1
                       maximum: 9007199254740991
+                    revision:
+                      description: 'For kind workspace_file: the revision to read, not the current one.'
+                      type: integer
+                      minimum: 1
+                      maximum: 9007199254740991
                     businessRulesPolicy:
                       description: 'For kind business_rules with version: the policy that numbers it.'
                       type: string
@@ -16094,6 +16378,28 @@ paths:
                         properties:
                           kind:
                             const: playbook
+                        required:
+                          - kind
+                    - if:
+                        required:
+                          - revision
+                      then:
+                        properties:
+                          kind:
+                            const: workspace_file
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: revisions
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: workspace_file
                         required:
                           - kind
                     - if:
@@ -16746,6 +17052,7 @@ paths:
                           - payouts
                           - reads
                           - reasoning
+                          - revisions
                           - canvas
                           - canvas_source
                           - canvas_versions
@@ -16934,6 +17241,11 @@ paths:
                       description: >-
                         For kind playbook: read this past version with its content, for example to save it again as
                         current. For business_rules, with businessRulesPolicy.
+                      type: integer
+                      minimum: 1
+                      maximum: 9007199254740991
+                    revision:
+                      description: 'For kind workspace_file: the revision to read, not the current one.'
                       type: integer
                       minimum: 1
                       maximum: 9007199254740991
@@ -17453,6 +17765,28 @@ paths:
                         properties:
                           kind:
                             const: playbook
+                        required:
+                          - kind
+                    - if:
+                        required:
+                          - revision
+                      then:
+                        properties:
+                          kind:
+                            const: workspace_file
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: revisions
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: workspace_file
                         required:
                           - kind
                     - if:
@@ -18105,6 +18439,7 @@ paths:
                           - payouts
                           - reads
                           - reasoning
+                          - revisions
                           - canvas
                           - canvas_source
                           - canvas_versions
@@ -18293,6 +18628,11 @@ paths:
                       description: >-
                         For kind playbook: read this past version with its content, for example to save it again as
                         current. For business_rules, with businessRulesPolicy.
+                      type: integer
+                      minimum: 1
+                      maximum: 9007199254740991
+                    revision:
+                      description: 'For kind workspace_file: the revision to read, not the current one.'
                       type: integer
                       minimum: 1
                       maximum: 9007199254740991
@@ -18812,6 +19152,28 @@ paths:
                         properties:
                           kind:
                             const: playbook
+                        required:
+                          - kind
+                    - if:
+                        required:
+                          - revision
+                      then:
+                        properties:
+                          kind:
+                            const: workspace_file
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: revisions
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: workspace_file
                         required:
                           - kind
                     - if:
@@ -19470,6 +19832,7 @@ paths:
                           - payouts
                           - reads
                           - reasoning
+                          - revisions
                           - canvas
                           - canvas_source
                           - canvas_versions
@@ -19658,6 +20021,11 @@ paths:
                       description: >-
                         For kind playbook: read this past version with its content, for example to save it again as
                         current. For business_rules, with businessRulesPolicy.
+                      type: integer
+                      minimum: 1
+                      maximum: 9007199254740991
+                    revision:
+                      description: 'For kind workspace_file: the revision to read, not the current one.'
                       type: integer
                       minimum: 1
                       maximum: 9007199254740991
@@ -20176,6 +20544,28 @@ paths:
                         properties:
                           kind:
                             const: playbook
+                        required:
+                          - kind
+                    - if:
+                        required:
+                          - revision
+                      then:
+                        properties:
+                          kind:
+                            const: workspace_file
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: revisions
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: workspace_file
                         required:
                           - kind
                     - if:
@@ -20834,6 +21224,7 @@ paths:
                           - payouts
                           - reads
                           - reasoning
+                          - revisions
                           - canvas
                           - canvas_source
                           - canvas_versions
@@ -21022,6 +21413,11 @@ paths:
                       description: >-
                         For kind playbook: read this past version with its content, for example to save it again as
                         current. For business_rules, with businessRulesPolicy.
+                      type: integer
+                      minimum: 1
+                      maximum: 9007199254740991
+                    revision:
+                      description: 'For kind workspace_file: the revision to read, not the current one.'
                       type: integer
                       minimum: 1
                       maximum: 9007199254740991
@@ -21540,6 +21936,28 @@ paths:
                         properties:
                           kind:
                             const: playbook
+                        required:
+                          - kind
+                    - if:
+                        required:
+                          - revision
+                      then:
+                        properties:
+                          kind:
+                            const: workspace_file
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: revisions
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: workspace_file
                         required:
                           - kind
                     - if:
@@ -22198,6 +22616,7 @@ paths:
                           - payouts
                           - reads
                           - reasoning
+                          - revisions
                           - canvas
                           - canvas_source
                           - canvas_versions
@@ -22386,6 +22805,11 @@ paths:
                       description: >-
                         For kind playbook: read this past version with its content, for example to save it again as
                         current. For business_rules, with businessRulesPolicy.
+                      type: integer
+                      minimum: 1
+                      maximum: 9007199254740991
+                    revision:
+                      description: 'For kind workspace_file: the revision to read, not the current one.'
                       type: integer
                       minimum: 1
                       maximum: 9007199254740991
@@ -22904,6 +23328,28 @@ paths:
                         properties:
                           kind:
                             const: playbook
+                        required:
+                          - kind
+                    - if:
+                        required:
+                          - revision
+                      then:
+                        properties:
+                          kind:
+                            const: workspace_file
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: revisions
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: workspace_file
                         required:
                           - kind
                     - if:
@@ -23562,6 +24008,7 @@ paths:
                           - payouts
                           - reads
                           - reasoning
+                          - revisions
                           - canvas
                           - canvas_source
                           - canvas_versions
@@ -23750,6 +24197,11 @@ paths:
                       description: >-
                         For kind playbook: read this past version with its content, for example to save it again as
                         current. For business_rules, with businessRulesPolicy.
+                      type: integer
+                      minimum: 1
+                      maximum: 9007199254740991
+                    revision:
+                      description: 'For kind workspace_file: the revision to read, not the current one.'
                       type: integer
                       minimum: 1
                       maximum: 9007199254740991
@@ -24268,6 +24720,28 @@ paths:
                         properties:
                           kind:
                             const: playbook
+                        required:
+                          - kind
+                    - if:
+                        required:
+                          - revision
+                      then:
+                        properties:
+                          kind:
+                            const: workspace_file
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: revisions
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: workspace_file
                         required:
                           - kind
                     - if:
@@ -24926,6 +25400,7 @@ paths:
                           - payouts
                           - reads
                           - reasoning
+                          - revisions
                           - canvas
                           - canvas_source
                           - canvas_versions
@@ -25114,6 +25589,11 @@ paths:
                       description: >-
                         For kind playbook: read this past version with its content, for example to save it again as
                         current. For business_rules, with businessRulesPolicy.
+                      type: integer
+                      minimum: 1
+                      maximum: 9007199254740991
+                    revision:
+                      description: 'For kind workspace_file: the revision to read, not the current one.'
                       type: integer
                       minimum: 1
                       maximum: 9007199254740991
@@ -25633,6 +26113,28 @@ paths:
                         properties:
                           kind:
                             const: playbook
+                        required:
+                          - kind
+                    - if:
+                        required:
+                          - revision
+                      then:
+                        properties:
+                          kind:
+                            const: workspace_file
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: revisions
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: workspace_file
                         required:
                           - kind
                     - if:
@@ -26378,6 +26880,11 @@ paths:
                       type: integer
                       minimum: 1
                       maximum: 9007199254740991
+                    revision:
+                      description: 'For kind workspace_file: the revision to read, not the current one.'
+                      type: integer
+                      minimum: 1
+                      maximum: 9007199254740991
                     businessRulesPolicy:
                       description: 'For kind business_rules with version: the policy that numbers it.'
                       type: string
@@ -26893,6 +27400,28 @@ paths:
                         properties:
                           kind:
                             const: playbook
+                        required:
+                          - kind
+                    - if:
+                        required:
+                          - revision
+                      then:
+                        properties:
+                          kind:
+                            const: workspace_file
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: revisions
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: workspace_file
                         required:
                           - kind
                     - if:
@@ -27638,6 +28167,11 @@ paths:
                       type: integer
                       minimum: 1
                       maximum: 9007199254740991
+                    revision:
+                      description: 'For kind workspace_file: the revision to read, not the current one.'
+                      type: integer
+                      minimum: 1
+                      maximum: 9007199254740991
                     businessRulesPolicy:
                       description: 'For kind business_rules with version: the policy that numbers it.'
                       type: string
@@ -28153,6 +28687,1420 @@ paths:
                         properties:
                           kind:
                             const: playbook
+                        required:
+                          - kind
+                    - if:
+                        required:
+                          - revision
+                      then:
+                        properties:
+                          kind:
+                            const: workspace_file
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: revisions
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: workspace_file
+                        required:
+                          - kind
+                    - if:
+                        required:
+                          - buyerAccountId
+                      then:
+                        properties:
+                          kind:
+                            const: media_buy
+                        required:
+                          - kind
+                    - if:
+                        required:
+                          - advertiserId
+                      then:
+                        properties:
+                          kind:
+                            enum:
+                              - seller
+                              - event_source
+                              - creative
+                              - creative_format
+                              - creative_collection
+                              - catalog
+                              - audience
+                              - advertiser_access
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          kind:
+                            const: audience
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - advertiserId
+                    - if:
+                        properties:
+                          kind:
+                            const: advertiser_access
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - advertiserId
+                    - if:
+                        properties:
+                          kind:
+                            const: creative_format
+                        required:
+                          - kind
+                      then:
+                        allOf:
+                          - required:
+                              - advertiserId
+                          - allOf:
+                              - not:
+                                  required:
+                                    - sourceId
+                              - not:
+                                  required:
+                                    - include
+                    - if:
+                        anyOf:
+                          - required:
+                              - productQueryId
+                          - required:
+                              - productRevision
+                      then:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: seller
+                            required:
+                              - kind
+                          - required:
+                              - advertiserId
+                          - properties:
+                              include:
+                                contains:
+                                  const: products
+                            required:
+                              - include
+                          - required:
+                              - productQueryId
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: products
+                        required:
+                          - include
+                      then:
+                        anyOf:
+                          - allOf:
+                              - properties:
+                                  kind:
+                                    const: seller
+                                required:
+                                  - kind
+                              - required:
+                                  - advertiserId
+                          - properties:
+                              kind:
+                                const: proposal
+                            required:
+                              - kind
+                          - properties:
+                              kind:
+                                const: media_buy
+                            required:
+                              - kind
+                    - if:
+                        required:
+                          - subscriptionsOffset
+                      then:
+                        properties:
+                          kind:
+                            const: notification_config
+                        required:
+                          - kind
+                    - if:
+                        required:
+                          - feedbackOffset
+                      then:
+                        properties:
+                          kind:
+                            const: rfp_turn
+                        required:
+                          - kind
+                    - if:
+                        required:
+                          - representationOffset
+                      then:
+                        properties:
+                          kind:
+                            const: rfp_turn
+                        required:
+                          - kind
+                    - if:
+                        required:
+                          - representationCursor
+                      then:
+                        properties:
+                          kind:
+                            const: rfp_turn
+                        required:
+                          - kind
+                    - if:
+                        required:
+                          - audienceOffset
+                      then:
+                        properties:
+                          kind:
+                            const: audience
+                        required:
+                          - kind
+                    - if:
+                        required:
+                          - proposalProductsCursor
+                      then:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: proposal
+                            required:
+                              - kind
+                          - properties:
+                              include:
+                                contains:
+                                  const: products
+                            required:
+                              - include
+                    - not:
+                        allOf:
+                          - required:
+                              - representationCursor
+                          - required:
+                              - representationOffset
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: discounts
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: playbook
+                        required:
+                          - kind
+                    - if:
+                        anyOf:
+                          - properties:
+                              include:
+                                contains:
+                                  const: listing
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: discoveryCard
+                            required:
+                              - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: readiness
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: teaching
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: analytics
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: prebid
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        anyOf:
+                          - properties:
+                              include:
+                                contains:
+                                  const: decisionRecord
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: briefArtifact
+                            required:
+                              - include
+                      then:
+                        properties:
+                          kind:
+                            const: intelligence_run
+                        required:
+                          - kind
+                    - if:
+                        anyOf:
+                          - properties:
+                              include:
+                                contains:
+                                  const: poweredByAgent
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: testRuns
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: capabilities
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: creativeFormats
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: publisherProperties
+                            required:
+                              - include
+                      then:
+                        properties:
+                          kind:
+                            const: inventory_source
+                        required:
+                          - kind
+                    - if:
+                        anyOf:
+                          - properties:
+                              include:
+                                contains:
+                                  const: operating
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: entitlements
+                            required:
+                              - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: certification
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: agent
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: accounts
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: advertiser
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: validationRuns
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: agent
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: webhookDeliveries
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: agent
+                        required:
+                          - kind
+                    - if:
+                        required:
+                          - validationRunId
+                      then:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: agent
+                            required:
+                              - kind
+                          - properties:
+                              include:
+                                contains:
+                                  const: diagnostics
+                            required:
+                              - include
+                - type: object
+                  properties:
+                    kind:
+                      const: workspace_file
+                    id:
+                      description: >-
+                        The id from search or an earlier result; never guess one. For skill, an exact id the user gave
+                        also works. A brand's id is its domain, or domain/brand_id. Omit it for singleton kinds,
+                        audience, and a property_list report read by reportId. A work_item also needs workItemKind.
+                      type: string
+                      minLength: 1
+                    after:
+                      description: >-
+                        For kind session: pageNextAfter from the previous read to get the next page of events, or
+                        resumeAfter to catch up later.
+                      type: string
+                      minLength: 1
+                      maxLength: 1024
+                    through:
+                      description: >-
+                        For kind session, with after: the snapshotThrough from the previous read, so new events do not
+                        shift the pages.
+                      type: string
+                      minLength: 1
+                      maxLength: 1024
+                    limit:
+                      description: 'For kind session: events per page, default 50. Lower it if a page is too large to return.'
+                      type: integer
+                      minimum: 1
+                      maximum: 100
+                    threadStates:
+                      description: 'For a Project conversation: keep only thread starts in these states.'
+                      minItems: 1
+                      maxItems: 32
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - needs_you
+                          - evaluating
+                          - new
+                          - drafted
+                          - fixed
+                          - no_action_needed
+                    openThreads:
+                      description: 'For a Project conversation: keep only open threads.'
+                      type: boolean
+                      const: true
+                    buyerAccountId:
+                      description: >-
+                        For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone
+                        is ambiguous across buyers.
+                      type: integer
+                      exclusiveMinimum: 0
+                      maximum: 9007199254740991
+                    memberAccountId:
+                      description: 'Required for kind member: the account the member belongs to, this account or a direct child.'
+                      type: integer
+                      exclusiveMinimum: 0
+                      maximum: 9007199254740991
+                    accountId:
+                      description: >-
+                        The Apostra accountId this call runs in, from get_status. On a member read without
+                        memberAccountId: deprecated, read as memberAccountId.
+                      type: integer
+                      exclusiveMinimum: 0
+                      maximum: 9007199254740991
+                    advertiserId:
+                      description: >-
+                        The owning advertiser id. Required for event_source, catalog, creative_format, audience, and
+                        property_list (except a report read). creative and creative_collection take this or a campaign
+                        sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser
+                        to price include products for and read partnerStatus for, instead of the account.
+                      type: string
+                      pattern: ^[1-9]\d*$
+                    reportId:
+                      description: >-
+                        For kind property_list with include report: the report id returned by a save_property_list
+                        check. No list id is needed.
+                      type: string
+                      minLength: 1
+                    identifierOffset:
+                      description: 'For kind property_list: where to start the next page of identifiers, from the previous read.'
+                      type: integer
+                      minimum: 0
+                      maximum: 9007199254740991
+                    identifierCategory:
+                      description: >-
+                        For kind property_list: which identifiers to page through: all (the default), unresolved, or
+                        registered.
+                      type: string
+                      enum:
+                        - all
+                        - unresolved
+                        - registered
+                    productQueryId:
+                      description: >-
+                        For kind seller with include products and advertiserId: the productQueryId from the previous
+                        read, to poll products that were still loading.
+                      type: string
+                      minLength: 1
+                      maxLength: 128
+                    productRevision:
+                      description: >-
+                        For kind seller, with productQueryId: the productRevision from the previous read, so only
+                        changes since then come back.
+                      type: integer
+                      minimum: 0
+                      maximum: 9007199254740991
+                    validationRunId:
+                      description: 'For kind agent with include diagnostics: one validation run id taken from validationRuns.'
+                      type: string
+                      format: uuid
+                      pattern: >-
+                        ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                    variantId:
+                      description: 'creative_session preview: a variants[].build_variant_id; omit for the saved draft.'
+                      type: string
+                      minLength: 1
+                    placement:
+                      description: >-
+                        Meta preview placement; the default is facebook_feed. A Creative is offered only the placements
+                        its format declares.
+                      type: string
+                      enum:
+                        - facebook_feed
+                        - instagram_feed
+                        - facebook_stories
+                        - instagram_stories
+                        - facebook_reels
+                        - instagram_reels
+                    pageId:
+                      description: >-
+                        creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account
+                        with several Pages and a Creative that keeps none.
+                      type: string
+                      minLength: 1
+                    sourceId:
+                      description: >-
+                        Which scope holds the object. Required for wholesale_product and modular_source work_item: the
+                        inventory source id from search. signal: the ad-server source; omit for a seller-catalog signal.
+                        creative, creative_collection, creative_session: the campaign id. creative_asset: the advertiser
+                        id.
+                      type: string
+                      minLength: 1
+                    workItemKind:
+                      description: >-
+                        Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other
+                        queues take no sourceId.
+                      type: string
+                      enum:
+                        - creative_review
+                        - media_buy_approval
+                        - modular_source
+                        - contract_conflict
+                        - gam_cleanup
+                    include:
+                      description: >-
+                        inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
+                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId).
+                        playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
+                        validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
+                        products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief,
+                        products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection:
+                        inventory. catalog: items, history. material: source_access, repeats, options.pages keys but
+                        candidates. property_list: report
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - diagnostics
+                          - adServerConnection
+                          - adServerStatus
+                          - syncHistory
+                          - sandboxAccount
+                          - modularReadiness
+                          - poweredByAgent
+                          - testRuns
+                          - capabilities
+                          - creativeFormats
+                          - publisherProperties
+                          - mappingWorkspace
+                          - mediaBuys
+                          - proposals
+                          - creatives
+                          - recentActivity
+                          - deliverySummary
+                          - sourceIdentity
+                          - tracking
+                          - propertyLists
+                          - sellerScorecard
+                          - pulse
+                          - progress
+                          - versions
+                          - discounts
+                          - rate_card
+                          - price_paid
+                          - effectiveOverlaySupport
+                          - approvalRouting
+                          - listing
+                          - identity
+                          - chatgpt
+                          - files
+                          - messaging
+                          - readiness
+                          - operating
+                          - entitlements
+                          - teaching
+                          - analytics
+                          - prebid
+                          - commitmentRecord
+                          - scores
+                          - discoveryCard
+                          - decisionRecord
+                          - briefArtifact
+                          - brief
+                          - products
+                          - evaluation
+                          - certification
+                          - validationRuns
+                          - webhookDeliveries
+                          - liveStatus
+                          - reporting_status
+                          - pendingChange
+                          - operations
+                          - accounts
+                          - brandProfile
+                          - presence
+                          - surfaceResults
+                          - library
+                          - paidResults
+                          - inventory
+                          - preview
+                          - platform_preview
+                          - attachTargets
+                          - items
+                          - history
+                          - report
+                          - mediaBilling
+                          - usageDetail
+                          - pricing
+                          - contracts
+                          - paymentMethods
+                          - invoiceHistory
+                          - payouts
+                          - reads
+                          - reasoning
+                          - revisions
+                          - canvas
+                          - canvas_source
+                          - canvas_versions
+                          - lifecycle
+                          - capacity
+                          - source_access
+                          - rendition_blocks
+                          - visual_assets
+                          - extraction_diagnostics
+                          - composition_receipts
+                          - repeats
+                          - usage
+                          - rate_card_preview
+                          - avails_sheet_preview
+                          - product_sheet_preview
+                    items:
+                      description: 'For kind catalog with include items: which items to return and the cursor for the next page.'
+                      type: object
+                      properties:
+                        filter:
+                          description: Filters for the catalog items page; every filter given must match.
+                          type: object
+                          properties:
+                            ids:
+                              description: Only catalog items with these exact AdCP item keys (e.g. hotel_id), up to 50.
+                              maxItems: 50
+                              type: array
+                              items:
+                                type: string
+                                minLength: 1
+                            gtins:
+                              description: Only catalog items with these exact product GTINs, up to 50.
+                              maxItems: 50
+                              type: array
+                              items:
+                                type: string
+                                minLength: 8
+                                maxLength: 14
+                            tags:
+                              description: Only catalog items carrying any of these tags.
+                              maxItems: 50
+                              type: array
+                              items:
+                                type: string
+                                minLength: 1
+                                maxLength: 64
+                            category:
+                              description: Only catalog items in exactly this category.
+                              type: string
+                              minLength: 1
+                              maxLength: 255
+                            text:
+                              description: Only catalog items whose text contains this phrase.
+                              type: string
+                              minLength: 1
+                              maxLength: 1000
+                          additionalProperties: false
+                        cursor:
+                          description: The cursor from the previous catalog items page.
+                          type: string
+                          minLength: 1
+                          maxLength: 128
+                      additionalProperties: false
+                    options:
+                      description: >-
+                        For kind material: which revision to read, paging for each collection, and selectors that narrow
+                        them.
+                      type: object
+                      properties:
+                        sourceRevision:
+                          description: Read this exact past source revision instead of the current one.
+                          type: integer
+                          exclusiveMinimum: 0
+                          maximum: 9007199254740991
+                        renditionRevision:
+                          description: Read this rendition of the source revision; omit for the active rendition.
+                          type: integer
+                          exclusiveMinimum: 0
+                          maximum: 9007199254740991
+                        pages:
+                          description: >-
+                            Paging for each collection in a material read. A candidates page needs no include; a page
+                            for any other collection applies only when you also request its matching include.
+                          type: object
+                          properties:
+                            candidates:
+                              description: >-
+                                Page through the extracted facts proposed for the playbook, rules, products, or seller
+                                profile. Default 25 rows; no include needed.
+                              $ref: '#/components/schemas/get_request_OptionsPagesCandidates'
+                            rendition_blocks:
+                              description: >-
+                                Page through extracted text blocks in reading order. Needs include rendition_blocks;
+                                default 50 rows.
+                              $ref: '#/components/schemas/get_request_OptionsPagesRenditionBlocks'
+                            visual_assets:
+                              description: Page through extracted images. Needs include visual_assets; default 25 rows, at most 50.
+                              $ref: '#/components/schemas/get_request_OptionsPagesVisualAssets'
+                            extraction_diagnostics:
+                              description: >-
+                                Page through extraction warnings and errors. Needs include extraction_diagnostics;
+                                default 50 rows.
+                              $ref: '#/components/schemas/get_request_OptionsPagesExtractionDiagnostics'
+                            composition_receipts:
+                              description: >-
+                                Page through records of this material being used in RFP responses. Needs include
+                                composition_receipts; default 50 rows.
+                              $ref: '#/components/schemas/get_request_OptionsPagesCompositionReceipts'
+                            usage:
+                              description: >-
+                                Page through where this material was used. Needs include usage; at most 48 rows, sent to
+                                the app rather than to you.
+                              $ref: '#/components/schemas/get_request_OptionsPagesUsage'
+                            product_sheet:
+                              description: Page through the rows of a product-sheet preview. Needs include product_sheet_preview.
+                              $ref: '#/components/schemas/get_request_OptionsPagesProductSheet'
+                          additionalProperties: false
+                        select:
+                          description: >-
+                            Narrow the text blocks, images, and usage returned. A selector is ignored for collections it
+                            does not apply to.
+                          type: object
+                          properties:
+                            blockKinds:
+                              description: Keep only text blocks of these kinds, such as heading, table, or speaker_notes.
+                              maxItems: 9
+                              type: array
+                              items:
+                                type: string
+                                enum:
+                                  - heading
+                                  - paragraph
+                                  - list
+                                  - table
+                                  - caption
+                                  - speaker_notes
+                                  - ocr
+                                  - accessibility_text
+                                  - other
+                            unitId:
+                              description: Limit text blocks, images, and usage to one page, slide, or sheet by its unit ID.
+                              type: string
+                              minLength: 1
+                              maxLength: 80
+                            assetKinds:
+                              description: Keep only images of these kinds, such as photo, logo, or chart.
+                              maxItems: 8
+                              type: array
+                              items:
+                                type: string
+                                enum:
+                                  - photo
+                                  - illustration
+                                  - logo
+                                  - chart
+                                  - diagram
+                                  - screenshot
+                                  - background
+                                  - other
+                            reusePolicies:
+                              description: >-
+                                Keep only images whose reuse rights are any of these, for example allowed or
+                                requires_approval.
+                              maxItems: 4
+                              type: array
+                              items:
+                                type: string
+                                enum:
+                                  - allowed
+                                  - requires_approval
+                                  - prohibited
+                                  - unknown
+                            assetStatuses:
+                              description: Keep only images whose extraction finished as ready, degraded, or failed.
+                              maxItems: 3
+                              type: array
+                              items:
+                                type: string
+                                enum:
+                                  - ready
+                                  - degraded
+                                  - failed
+                          additionalProperties: false
+                      additionalProperties: false
+                    version:
+                      description: >-
+                        For kind playbook: read this past version with its content, for example to save it again as
+                        current. For business_rules, with businessRulesPolicy.
+                      type: integer
+                      minimum: 1
+                      maximum: 9007199254740991
+                    revision:
+                      description: 'For kind workspace_file: the revision to read, not the current one.'
+                      type: integer
+                      minimum: 1
+                      maximum: 9007199254740991
+                    businessRulesPolicy:
+                      description: 'For kind business_rules with version: the policy that numbers it.'
+                      type: string
+                      enum:
+                        - brief_acceptance
+                        - creative_policy
+                    subscriptionsOffset:
+                      description: >-
+                        For kind notification_config: where to start the next page of notification and agent event
+                        subscriptions, which come newest first.
+                      type: integer
+                      minimum: 0
+                      maximum: 9007199254740991
+                    connectionAccountsOffset:
+                      description: 'For kind connection: where to start the next page of provider accounts found on the connection.'
+                      type: integer
+                      minimum: 0
+                      maximum: 9007199254740991
+                    connectionMappingsOffset:
+                      description: 'For kind connection: where to start the next page of advertiser-to-account mappings.'
+                      type: integer
+                      minimum: 0
+                      maximum: 9007199254740991
+                    connectionAccountId:
+                      description: >-
+                        Required for kind connection with include inventory: the accounts[].id whose event sources and
+                        audiences to list.
+                      type: string
+                      pattern: ^[1-9]\d{0,18}$
+                    connectionInventoryOffset:
+                      description: 'For kind connection with include inventory: where to start the next page, 50 per page.'
+                      type: integer
+                      minimum: 0
+                      maximum: 9007199254740991
+                    connectionInventoryObjectType:
+                      description: 'For kind connection with include inventory: limit the page to seller audiences or event sources.'
+                      type: string
+                      enum:
+                        - audience
+                        - event_source
+                    connectionTarget:
+                      description: >-
+                        For kind connection: the seller or creative engine you expect this connection to reach. The read
+                        fails if it reaches another one.
+                      type: object
+                      properties:
+                        kind:
+                          type: string
+                          enum:
+                            - seller
+                            - creative_engine
+                          description: Whether the target is a seller or a creative engine.
+                        sellerAccountId:
+                          description: >-
+                            For kind seller: the seller's Account id. Not the seller object's id, which is a different
+                            number.
+                          type: integer
+                          exclusiveMinimum: 0
+                          maximum: 9007199254740991
+                        engineAccountId:
+                          description: >-
+                            For kind creative_engine: the engine's Account id. Not the engine object's id, which is a
+                            different number.
+                          type: integer
+                          exclusiveMinimum: 0
+                          maximum: 2147483647
+                      required:
+                        - kind
+                      additionalProperties: false
+                    feedbackOffset:
+                      description: 'For kind rfp_turn: where to start the next page of feedback, 20 per page.'
+                      type: integer
+                      minimum: 0
+                      maximum: 9007199254740991
+                    representationOffset:
+                      description: >-
+                        For kind rfp_turn: where to start the next page of representations, 50 per page. Not with
+                        representationCursor.
+                      type: integer
+                      minimum: 0
+                      maximum: 9007199254740991
+                    representationCursor:
+                      description: >-
+                        For kind rfp_turn: the representations cursor from the previous read, which keeps pages stable.
+                        Not with representationOffset.
+                      type: string
+                      minLength: 1
+                      maxLength: 2048
+                    audienceOffset:
+                      description: 'For kind audience: where to start the next page of audiences, 50 per page; default 0.'
+                      type: integer
+                      minimum: 0
+                      maximum: 9007199254740991
+                    proposalProductsCursor:
+                      description: >-
+                        For kind proposal with include products: the cursor from the previous products page of the same
+                        proposal.
+                      type: string
+                      minLength: 1
+                      maxLength: 2048
+                    canvasSourceCursor:
+                      description: 'For include canvas_source: the nextCursor from the previous page of the same canvas.'
+                      type: string
+                      minLength: 1
+                      maxLength: 1024
+                  required:
+                    - kind
+                    - id
+                  additionalProperties: false
+                  allOf:
+                    - if:
+                        anyOf:
+                          - required:
+                              - after
+                          - required:
+                              - through
+                          - required:
+                              - limit
+                      then:
+                        properties:
+                          kind:
+                            const: session
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          kind:
+                            const: skill
+                        required:
+                          - kind
+                      then:
+                        not:
+                          required:
+                            - include
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: preview
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: creative
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: attachTargets
+                        required:
+                          - include
+                      then:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: creative
+                            required:
+                              - kind
+                          - required:
+                              - advertiserId
+                    - if:
+                        properties:
+                          kind:
+                            const: catalog
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - advertiserId
+                    - if:
+                        properties:
+                          items:
+                            properties:
+                              filter:
+                                required:
+                                  - status
+                            required:
+                              - filter
+                        required:
+                          - items
+                      then:
+                        properties:
+                          items:
+                            properties:
+                              filter:
+                                properties:
+                                  status:
+                                    const: approved
+                            required:
+                              - filter
+                        required:
+                          - items
+                    - if:
+                        required:
+                          - items
+                      then:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: catalog
+                            required:
+                              - kind
+                          - properties:
+                              include:
+                                contains:
+                                  const: items
+                            required:
+                              - include
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: items
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: catalog
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          kind:
+                            const: creative_session
+                        required:
+                          - kind
+                      then:
+                        not:
+                          required:
+                            - include
+                    - if:
+                        properties:
+                          kind:
+                            const: creative_session
+                        required:
+                          - kind
+                      then:
+                        not:
+                          allOf:
+                            - required:
+                                - sourceId
+                            - required:
+                                - advertiserId
+                    - if:
+                        properties:
+                          kind:
+                            const: creative_engine
+                        required:
+                          - kind
+                      then:
+                        not:
+                          required:
+                            - include
+                    - if:
+                        properties:
+                          kind:
+                            const: event_source
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - advertiserId
+                    - if:
+                        required:
+                          - connectionTarget
+                      then:
+                        properties:
+                          kind:
+                            const: connection
+                        required:
+                          - kind
+                    - if:
+                        required:
+                          - connectionMappingsOffset
+                      then:
+                        properties:
+                          kind:
+                            const: connection
+                        required:
+                          - kind
+                    - if:
+                        required:
+                          - connectionAccountsOffset
+                      then:
+                        properties:
+                          kind:
+                            const: connection
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: inventory
+                        required:
+                          - include
+                      then:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: connection
+                            required:
+                              - kind
+                          - required:
+                              - connectionAccountId
+                    - if:
+                        required:
+                          - connectionAccountId
+                      then:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: connection
+                            required:
+                              - kind
+                          - properties:
+                              include:
+                                contains:
+                                  const: inventory
+                            required:
+                              - include
+                    - if:
+                        required:
+                          - connectionInventoryOffset
+                      then:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: connection
+                            required:
+                              - kind
+                          - properties:
+                              include:
+                                contains:
+                                  const: inventory
+                            required:
+                              - include
+                    - if:
+                        required:
+                          - connectionInventoryObjectType
+                      then:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: connection
+                            required:
+                              - kind
+                          - properties:
+                              include:
+                                contains:
+                                  const: inventory
+                            required:
+                              - include
+                    - if:
+                        properties:
+                          kind:
+                            const: wholesale_product
+                        required:
+                          - kind
+                      then:
+                        oneOf:
+                          - allOf:
+                              - required:
+                                  - sourceId
+                              - not:
+                                  required:
+                                    - advertiserId
+                          - allOf:
+                              - not:
+                                  required:
+                                    - sourceId
+                              - required:
+                                  - advertiserId
+                    - if:
+                        required:
+                          - options
+                      then:
+                        properties:
+                          kind:
+                            const: material
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          kind:
+                            enum:
+                              - creative_collection
+                              - creative
+                        required:
+                          - kind
+                      then:
+                        oneOf:
+                          - allOf:
+                              - required:
+                                  - sourceId
+                              - not:
+                                  required:
+                                    - advertiserId
+                          - allOf:
+                              - not:
+                                  required:
+                                    - sourceId
+                              - required:
+                                  - advertiserId
+                    - if:
+                        properties:
+                          kind:
+                            const: work_item
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - workItemKind
+                    - if:
+                        properties:
+                          workItemKind:
+                            const: modular_source
+                        required:
+                          - workItemKind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        required:
+                          - queue
+                      then:
+                        properties:
+                          kind:
+                            const: work_item
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          workItemKind:
+                            const: modular_source
+                        required:
+                          - workItemKind
+                      then:
+                        not:
+                          required:
+                            - queue
+                    - if:
+                        allOf:
+                          - required:
+                              - queue
+                          - required:
+                              - status
+                      then:
+                        properties:
+                          status:
+                            const: pending
+                        required:
+                          - status
+                    - if:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: work_item
+                            required:
+                              - kind
+                          - not:
+                              properties:
+                                workItemKind:
+                                  const: modular_source
+                              required:
+                                - workItemKind
+                      then:
+                        not:
+                          required:
+                            - sourceId
+                    - if:
+                        properties:
+                          kind:
+                            enum:
+                              - audience
+                              - advertiser_access
+                        required:
+                          - kind
+                      then:
+                        not:
+                          required:
+                            - id
+                    - if:
+                        allOf:
+                          - not:
+                              properties:
+                                kind:
+                                  enum:
+                                    - source_options
+                                    - listing
+                                    - media_kit
+                                    - playbook
+                                    - business_rules
+                                    - coverage
+                                    - distribution
+                                    - notification_config
+                                    - audience
+                                    - advertiser_access
+                                    - seller
+                              required:
+                                - kind
+                      then:
+                        required:
+                          - id
+                    - if:
+                        required:
+                          - version
+                      then:
+                        properties:
+                          kind:
+                            const: playbook
+                        required:
+                          - kind
+                    - if:
+                        required:
+                          - revision
+                      then:
+                        properties:
+                          kind:
+                            const: workspace_file
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: revisions
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: workspace_file
                         required:
                           - kind
                     - if:
@@ -29997,6 +31945,7 @@ paths:
                               - dimension
                               - buyer_rfp
                               - agent_record
+                              - workspace_file
                               - property_list
                               - creative
                               - creative_format
@@ -69992,11 +71941,8 @@ paths:
                           type: string
                           minLength: 1
                         mediaType:
-                          description: 'For kind inventory_source_item: narrow to a media type.'
+                          description: 'inventory_source_item: display or video. workspace_file: a file type, such as text/x-python.'
                           type: string
-                          enum:
-                            - display
-                            - video
                         environmentType:
                           description: 'For kind inventory_source_item: narrow to an environment.'
                           type: string
@@ -70124,10 +72070,14 @@ paths:
                             - project
                             - person
                         projectId:
-                          description: 'For kind agent_record: only this Project’s memory (a Project id).'
-                          type: string
-                          minLength: 1
-                          maxLength: 64
+                          description: >-
+                            For kind agent_record or workspace_file: only this Project’s (a Project id); for
+                            workspace_file, null means the account’s.
+                          anyOf:
+                            - type: string
+                              minLength: 1
+                              maxLength: 64
+                            - type: 'null'
                         recordType:
                           description: 'For kind agent_record: only facts, events or instructions.'
                           type: string
@@ -70147,6 +72097,11 @@ paths:
                         includeSuperseded:
                           description: 'For kind agent_record: true also returns records a newer one on the same topic replaced.'
                           type: boolean
+                        pathPrefix:
+                          description: 'For kind workspace_file: a path prefix, such as reports/.'
+                          type: string
+                          minLength: 1
+                          maxLength: 512
                         propertyListPurpose:
                           description: 'For kind property_list: only include lists or only exclude lists.'
                           type: string
@@ -70186,7 +72141,9 @@ paths:
                             are not paused. For campaign it applies only with phase active.
                           type: boolean
                         isArchived:
-                          description: 'Campaign, creative, buyer media_buy, agent_record: true archived (forgotten); false active.'
+                          description: >-
+                            Campaign, creative, buyer media_buy, agent_record, workspace_file: true archived
+                            (forgotten); false active.
                           type: boolean
                         sort:
                           description: >-
@@ -70489,7 +72446,7 @@ paths:
                             - discord
                             - fax
                         updatedAfter:
-                          description: 'For kind session: sessions updated strictly after this instant.'
+                          description: 'For kinds session and workspace_file: updated strictly after this instant.'
                           type: string
                           format: date-time
                           pattern: >-
@@ -71960,11 +73917,8 @@ paths:
                           type: string
                           minLength: 1
                         mediaType:
-                          description: 'For kind inventory_source_item: narrow to a media type.'
+                          description: 'inventory_source_item: display or video. workspace_file: a file type, such as text/x-python.'
                           type: string
-                          enum:
-                            - display
-                            - video
                         environmentType:
                           description: 'For kind inventory_source_item: narrow to an environment.'
                           type: string
@@ -72092,10 +74046,14 @@ paths:
                             - project
                             - person
                         projectId:
-                          description: 'For kind agent_record: only this Project’s memory (a Project id).'
-                          type: string
-                          minLength: 1
-                          maxLength: 64
+                          description: >-
+                            For kind agent_record or workspace_file: only this Project’s (a Project id); for
+                            workspace_file, null means the account’s.
+                          anyOf:
+                            - type: string
+                              minLength: 1
+                              maxLength: 64
+                            - type: 'null'
                         recordType:
                           description: 'For kind agent_record: only facts, events or instructions.'
                           type: string
@@ -72115,6 +74073,11 @@ paths:
                         includeSuperseded:
                           description: 'For kind agent_record: true also returns records a newer one on the same topic replaced.'
                           type: boolean
+                        pathPrefix:
+                          description: 'For kind workspace_file: a path prefix, such as reports/.'
+                          type: string
+                          minLength: 1
+                          maxLength: 512
                         propertyListPurpose:
                           description: 'For kind property_list: only include lists or only exclude lists.'
                           type: string
@@ -72154,7 +74117,9 @@ paths:
                             are not paused. For campaign it applies only with phase active.
                           type: boolean
                         isArchived:
-                          description: 'Campaign, creative, buyer media_buy, agent_record: true archived (forgotten); false active.'
+                          description: >-
+                            Campaign, creative, buyer media_buy, agent_record, workspace_file: true archived
+                            (forgotten); false active.
                           type: boolean
                         sort:
                           description: >-
@@ -72457,7 +74422,7 @@ paths:
                             - discord
                             - fax
                         updatedAfter:
-                          description: 'For kind session: sessions updated strictly after this instant.'
+                          description: 'For kinds session and workspace_file: updated strictly after this instant.'
                           type: string
                           format: date-time
                           pattern: >-
@@ -74730,11 +76695,8 @@ paths:
                           type: string
                           minLength: 1
                         mediaType:
-                          description: 'For kind inventory_source_item: narrow to a media type.'
+                          description: 'inventory_source_item: display or video. workspace_file: a file type, such as text/x-python.'
                           type: string
-                          enum:
-                            - display
-                            - video
                         environmentType:
                           description: 'For kind inventory_source_item: narrow to an environment.'
                           type: string
@@ -74862,10 +76824,14 @@ paths:
                             - project
                             - person
                         projectId:
-                          description: 'For kind agent_record: only this Project’s memory (a Project id).'
-                          type: string
-                          minLength: 1
-                          maxLength: 64
+                          description: >-
+                            For kind agent_record or workspace_file: only this Project’s (a Project id); for
+                            workspace_file, null means the account’s.
+                          anyOf:
+                            - type: string
+                              minLength: 1
+                              maxLength: 64
+                            - type: 'null'
                         recordType:
                           description: 'For kind agent_record: only facts, events or instructions.'
                           type: string
@@ -74885,6 +76851,11 @@ paths:
                         includeSuperseded:
                           description: 'For kind agent_record: true also returns records a newer one on the same topic replaced.'
                           type: boolean
+                        pathPrefix:
+                          description: 'For kind workspace_file: a path prefix, such as reports/.'
+                          type: string
+                          minLength: 1
+                          maxLength: 512
                         propertyListPurpose:
                           description: 'For kind property_list: only include lists or only exclude lists.'
                           type: string
@@ -74924,7 +76895,9 @@ paths:
                             are not paused. For campaign it applies only with phase active.
                           type: boolean
                         isArchived:
-                          description: 'Campaign, creative, buyer media_buy, agent_record: true archived (forgotten); false active.'
+                          description: >-
+                            Campaign, creative, buyer media_buy, agent_record, workspace_file: true archived
+                            (forgotten); false active.
                           type: boolean
                         sort:
                           description: >-
@@ -75227,7 +77200,7 @@ paths:
                             - discord
                             - fax
                         updatedAfter:
-                          description: 'For kind session: sessions updated strictly after this instant.'
+                          description: 'For kinds session and workspace_file: updated strictly after this instant.'
                           type: string
                           format: date-time
                           pattern: >-
@@ -76699,11 +78672,8 @@ paths:
                           type: string
                           minLength: 1
                         mediaType:
-                          description: 'For kind inventory_source_item: narrow to a media type.'
+                          description: 'inventory_source_item: display or video. workspace_file: a file type, such as text/x-python.'
                           type: string
-                          enum:
-                            - display
-                            - video
                         environmentType:
                           description: 'For kind inventory_source_item: narrow to an environment.'
                           type: string
@@ -76822,10 +78792,14 @@ paths:
                             - project
                             - person
                         projectId:
-                          description: 'For kind agent_record: only this Project’s memory (a Project id).'
-                          type: string
-                          minLength: 1
-                          maxLength: 64
+                          description: >-
+                            For kind agent_record or workspace_file: only this Project’s (a Project id); for
+                            workspace_file, null means the account’s.
+                          anyOf:
+                            - type: string
+                              minLength: 1
+                              maxLength: 64
+                            - type: 'null'
                         recordType:
                           description: 'For kind agent_record: only facts, events or instructions.'
                           type: string
@@ -76845,6 +78819,11 @@ paths:
                         includeSuperseded:
                           description: 'For kind agent_record: true also returns records a newer one on the same topic replaced.'
                           type: boolean
+                        pathPrefix:
+                          description: 'For kind workspace_file: a path prefix, such as reports/.'
+                          type: string
+                          minLength: 1
+                          maxLength: 512
                         propertyListPurpose:
                           description: 'For kind property_list: only include lists or only exclude lists.'
                           type: string
@@ -76884,7 +78863,9 @@ paths:
                             are not paused. For campaign it applies only with phase active.
                           type: boolean
                         isArchived:
-                          description: 'Campaign, creative, buyer media_buy, agent_record: true archived (forgotten); false active.'
+                          description: >-
+                            Campaign, creative, buyer media_buy, agent_record, workspace_file: true archived
+                            (forgotten); false active.
                           type: boolean
                         sort:
                           description: >-
@@ -77187,7 +79168,7 @@ paths:
                             - discord
                             - fax
                         updatedAfter:
-                          description: 'For kind session: sessions updated strictly after this instant.'
+                          description: 'For kinds session and workspace_file: updated strictly after this instant.'
                           type: string
                           format: date-time
                           pattern: >-
@@ -78652,11 +80633,8 @@ paths:
                           type: string
                           minLength: 1
                         mediaType:
-                          description: 'For kind inventory_source_item: narrow to a media type.'
+                          description: 'inventory_source_item: display or video. workspace_file: a file type, such as text/x-python.'
                           type: string
-                          enum:
-                            - display
-                            - video
                         environmentType:
                           description: 'For kind inventory_source_item: narrow to an environment.'
                           type: string
@@ -78784,10 +80762,14 @@ paths:
                             - project
                             - person
                         projectId:
-                          description: 'For kind agent_record: only this Project’s memory (a Project id).'
-                          type: string
-                          minLength: 1
-                          maxLength: 64
+                          description: >-
+                            For kind agent_record or workspace_file: only this Project’s (a Project id); for
+                            workspace_file, null means the account’s.
+                          anyOf:
+                            - type: string
+                              minLength: 1
+                              maxLength: 64
+                            - type: 'null'
                         recordType:
                           description: 'For kind agent_record: only facts, events or instructions.'
                           type: string
@@ -78807,6 +80789,11 @@ paths:
                         includeSuperseded:
                           description: 'For kind agent_record: true also returns records a newer one on the same topic replaced.'
                           type: boolean
+                        pathPrefix:
+                          description: 'For kind workspace_file: a path prefix, such as reports/.'
+                          type: string
+                          minLength: 1
+                          maxLength: 512
                         propertyListPurpose:
                           description: 'For kind property_list: only include lists or only exclude lists.'
                           type: string
@@ -78846,7 +80833,9 @@ paths:
                             are not paused. For campaign it applies only with phase active.
                           type: boolean
                         isArchived:
-                          description: 'Campaign, creative, buyer media_buy, agent_record: true archived (forgotten); false active.'
+                          description: >-
+                            Campaign, creative, buyer media_buy, agent_record, workspace_file: true archived
+                            (forgotten); false active.
                           type: boolean
                         sort:
                           description: >-
@@ -79144,7 +81133,7 @@ paths:
                             - discord
                             - fax
                         updatedAfter:
-                          description: 'For kind session: sessions updated strictly after this instant.'
+                          description: 'For kinds session and workspace_file: updated strictly after this instant.'
                           type: string
                           format: date-time
                           pattern: >-
@@ -80613,11 +82602,8 @@ paths:
                           type: string
                           minLength: 1
                         mediaType:
-                          description: 'For kind inventory_source_item: narrow to a media type.'
+                          description: 'inventory_source_item: display or video. workspace_file: a file type, such as text/x-python.'
                           type: string
-                          enum:
-                            - display
-                            - video
                         environmentType:
                           description: 'For kind inventory_source_item: narrow to an environment.'
                           type: string
@@ -80736,10 +82722,14 @@ paths:
                             - project
                             - person
                         projectId:
-                          description: 'For kind agent_record: only this Project’s memory (a Project id).'
-                          type: string
-                          minLength: 1
-                          maxLength: 64
+                          description: >-
+                            For kind agent_record or workspace_file: only this Project’s (a Project id); for
+                            workspace_file, null means the account’s.
+                          anyOf:
+                            - type: string
+                              minLength: 1
+                              maxLength: 64
+                            - type: 'null'
                         recordType:
                           description: 'For kind agent_record: only facts, events or instructions.'
                           type: string
@@ -80759,6 +82749,11 @@ paths:
                         includeSuperseded:
                           description: 'For kind agent_record: true also returns records a newer one on the same topic replaced.'
                           type: boolean
+                        pathPrefix:
+                          description: 'For kind workspace_file: a path prefix, such as reports/.'
+                          type: string
+                          minLength: 1
+                          maxLength: 512
                         propertyListPurpose:
                           description: 'For kind property_list: only include lists or only exclude lists.'
                           type: string
@@ -80798,7 +82793,9 @@ paths:
                             are not paused. For campaign it applies only with phase active.
                           type: boolean
                         isArchived:
-                          description: 'Campaign, creative, buyer media_buy, agent_record: true archived (forgotten); false active.'
+                          description: >-
+                            Campaign, creative, buyer media_buy, agent_record, workspace_file: true archived
+                            (forgotten); false active.
                           type: boolean
                         sort:
                           description: >-
@@ -81101,7 +83098,7 @@ paths:
                             - discord
                             - fax
                         updatedAfter:
-                          description: 'For kind session: sessions updated strictly after this instant.'
+                          description: 'For kinds session and workspace_file: updated strictly after this instant.'
                           type: string
                           format: date-time
                           pattern: >-
@@ -82573,11 +84570,8 @@ paths:
                           type: string
                           minLength: 1
                         mediaType:
-                          description: 'For kind inventory_source_item: narrow to a media type.'
+                          description: 'inventory_source_item: display or video. workspace_file: a file type, such as text/x-python.'
                           type: string
-                          enum:
-                            - display
-                            - video
                         environmentType:
                           description: 'For kind inventory_source_item: narrow to an environment.'
                           type: string
@@ -82705,10 +84699,14 @@ paths:
                             - project
                             - person
                         projectId:
-                          description: 'For kind agent_record: only this Project’s memory (a Project id).'
-                          type: string
-                          minLength: 1
-                          maxLength: 64
+                          description: >-
+                            For kind agent_record or workspace_file: only this Project’s (a Project id); for
+                            workspace_file, null means the account’s.
+                          anyOf:
+                            - type: string
+                              minLength: 1
+                              maxLength: 64
+                            - type: 'null'
                         recordType:
                           description: 'For kind agent_record: only facts, events or instructions.'
                           type: string
@@ -82728,6 +84726,11 @@ paths:
                         includeSuperseded:
                           description: 'For kind agent_record: true also returns records a newer one on the same topic replaced.'
                           type: boolean
+                        pathPrefix:
+                          description: 'For kind workspace_file: a path prefix, such as reports/.'
+                          type: string
+                          minLength: 1
+                          maxLength: 512
                         propertyListPurpose:
                           description: 'For kind property_list: only include lists or only exclude lists.'
                           type: string
@@ -82767,7 +84770,9 @@ paths:
                             are not paused. For campaign it applies only with phase active.
                           type: boolean
                         isArchived:
-                          description: 'Campaign, creative, buyer media_buy, agent_record: true archived (forgotten); false active.'
+                          description: >-
+                            Campaign, creative, buyer media_buy, agent_record, workspace_file: true archived
+                            (forgotten); false active.
                           type: boolean
                         sort:
                           description: >-
@@ -83065,7 +85070,7 @@ paths:
                             - discord
                             - fax
                         updatedAfter:
-                          description: 'For kind session: sessions updated strictly after this instant.'
+                          description: 'For kinds session and workspace_file: updated strictly after this instant.'
                           type: string
                           format: date-time
                           pattern: >-
@@ -86183,11 +88188,8 @@ paths:
                           type: string
                           minLength: 1
                         mediaType:
-                          description: 'For kind inventory_source_item: narrow to a media type.'
+                          description: 'inventory_source_item: display or video. workspace_file: a file type, such as text/x-python.'
                           type: string
-                          enum:
-                            - display
-                            - video
                         environmentType:
                           description: 'For kind inventory_source_item: narrow to an environment.'
                           type: string
@@ -86315,10 +88317,14 @@ paths:
                             - project
                             - person
                         projectId:
-                          description: 'For kind agent_record: only this Project’s memory (a Project id).'
-                          type: string
-                          minLength: 1
-                          maxLength: 64
+                          description: >-
+                            For kind agent_record or workspace_file: only this Project’s (a Project id); for
+                            workspace_file, null means the account’s.
+                          anyOf:
+                            - type: string
+                              minLength: 1
+                              maxLength: 64
+                            - type: 'null'
                         recordType:
                           description: 'For kind agent_record: only facts, events or instructions.'
                           type: string
@@ -86338,6 +88344,11 @@ paths:
                         includeSuperseded:
                           description: 'For kind agent_record: true also returns records a newer one on the same topic replaced.'
                           type: boolean
+                        pathPrefix:
+                          description: 'For kind workspace_file: a path prefix, such as reports/.'
+                          type: string
+                          minLength: 1
+                          maxLength: 512
                         propertyListPurpose:
                           description: 'For kind property_list: only include lists or only exclude lists.'
                           type: string
@@ -86377,7 +88388,9 @@ paths:
                             are not paused. For campaign it applies only with phase active.
                           type: boolean
                         isArchived:
-                          description: 'Campaign, creative, buyer media_buy, agent_record: true archived (forgotten); false active.'
+                          description: >-
+                            Campaign, creative, buyer media_buy, agent_record, workspace_file: true archived
+                            (forgotten); false active.
                           type: boolean
                         sort:
                           description: >-
@@ -86680,7 +88693,7 @@ paths:
                             - discord
                             - fax
                         updatedAfter:
-                          description: 'For kind session: sessions updated strictly after this instant.'
+                          description: 'For kinds session and workspace_file: updated strictly after this instant.'
                           type: string
                           format: date-time
                           pattern: >-
@@ -87976,11 +89989,8 @@ paths:
                           type: string
                           minLength: 1
                         mediaType:
-                          description: 'For kind inventory_source_item: narrow to a media type.'
+                          description: 'inventory_source_item: display or video. workspace_file: a file type, such as text/x-python.'
                           type: string
-                          enum:
-                            - display
-                            - video
                         environmentType:
                           description: 'For kind inventory_source_item: narrow to an environment.'
                           type: string
@@ -88970,11 +90980,8 @@ paths:
                           type: string
                           minLength: 1
                         mediaType:
-                          description: 'For kind inventory_source_item: narrow to a media type.'
+                          description: 'inventory_source_item: display or video. workspace_file: a file type, such as text/x-python.'
                           type: string
-                          enum:
-                            - display
-                            - video
                         environmentType:
                           description: 'For kind inventory_source_item: narrow to an environment.'
                           type: string
@@ -89102,10 +91109,14 @@ paths:
                             - project
                             - person
                         projectId:
-                          description: 'For kind agent_record: only this Project’s memory (a Project id).'
-                          type: string
-                          minLength: 1
-                          maxLength: 64
+                          description: >-
+                            For kind agent_record or workspace_file: only this Project’s (a Project id); for
+                            workspace_file, null means the account’s.
+                          anyOf:
+                            - type: string
+                              minLength: 1
+                              maxLength: 64
+                            - type: 'null'
                         recordType:
                           description: 'For kind agent_record: only facts, events or instructions.'
                           type: string
@@ -89125,6 +91136,11 @@ paths:
                         includeSuperseded:
                           description: 'For kind agent_record: true also returns records a newer one on the same topic replaced.'
                           type: boolean
+                        pathPrefix:
+                          description: 'For kind workspace_file: a path prefix, such as reports/.'
+                          type: string
+                          minLength: 1
+                          maxLength: 512
                         propertyListPurpose:
                           description: 'For kind property_list: only include lists or only exclude lists.'
                           type: string
@@ -89164,7 +91180,9 @@ paths:
                             are not paused. For campaign it applies only with phase active.
                           type: boolean
                         isArchived:
-                          description: 'Campaign, creative, buyer media_buy, agent_record: true archived (forgotten); false active.'
+                          description: >-
+                            Campaign, creative, buyer media_buy, agent_record, workspace_file: true archived
+                            (forgotten); false active.
                           type: boolean
                         sort:
                           description: >-
@@ -89467,7 +91485,7 @@ paths:
                             - discord
                             - fax
                         updatedAfter:
-                          description: 'For kind session: sessions updated strictly after this instant.'
+                          description: 'For kinds session and workspace_file: updated strictly after this instant.'
                           type: string
                           format: date-time
                           pattern: >-
@@ -91752,11 +93770,8 @@ paths:
                           type: string
                           minLength: 1
                         mediaType:
-                          description: 'For kind inventory_source_item: narrow to a media type.'
+                          description: 'inventory_source_item: display or video. workspace_file: a file type, such as text/x-python.'
                           type: string
-                          enum:
-                            - display
-                            - video
                         environmentType:
                           description: 'For kind inventory_source_item: narrow to an environment.'
                           type: string
@@ -91884,10 +93899,14 @@ paths:
                             - project
                             - person
                         projectId:
-                          description: 'For kind agent_record: only this Project’s memory (a Project id).'
-                          type: string
-                          minLength: 1
-                          maxLength: 64
+                          description: >-
+                            For kind agent_record or workspace_file: only this Project’s (a Project id); for
+                            workspace_file, null means the account’s.
+                          anyOf:
+                            - type: string
+                              minLength: 1
+                              maxLength: 64
+                            - type: 'null'
                         recordType:
                           description: 'For kind agent_record: only facts, events or instructions.'
                           type: string
@@ -91907,6 +93926,11 @@ paths:
                         includeSuperseded:
                           description: 'For kind agent_record: true also returns records a newer one on the same topic replaced.'
                           type: boolean
+                        pathPrefix:
+                          description: 'For kind workspace_file: a path prefix, such as reports/.'
+                          type: string
+                          minLength: 1
+                          maxLength: 512
                         propertyListPurpose:
                           description: 'For kind property_list: only include lists or only exclude lists.'
                           type: string
@@ -91946,7 +93970,9 @@ paths:
                             are not paused. For campaign it applies only with phase active.
                           type: boolean
                         isArchived:
-                          description: 'Campaign, creative, buyer media_buy, agent_record: true archived (forgotten); false active.'
+                          description: >-
+                            Campaign, creative, buyer media_buy, agent_record, workspace_file: true archived
+                            (forgotten); false active.
                           type: boolean
                         sort:
                           description: >-
@@ -92249,7 +94275,7 @@ paths:
                             - discord
                             - fax
                         updatedAfter:
-                          description: 'For kind session: sessions updated strictly after this instant.'
+                          description: 'For kinds session and workspace_file: updated strictly after this instant.'
                           type: string
                           format: date-time
                           pattern: >-
@@ -93719,11 +95745,8 @@ paths:
                           type: string
                           minLength: 1
                         mediaType:
-                          description: 'For kind inventory_source_item: narrow to a media type.'
+                          description: 'inventory_source_item: display or video. workspace_file: a file type, such as text/x-python.'
                           type: string
-                          enum:
-                            - display
-                            - video
                         environmentType:
                           description: 'For kind inventory_source_item: narrow to an environment.'
                           type: string
@@ -93851,10 +95874,14 @@ paths:
                             - project
                             - person
                         projectId:
-                          description: 'For kind agent_record: only this Project’s memory (a Project id).'
-                          type: string
-                          minLength: 1
-                          maxLength: 64
+                          description: >-
+                            For kind agent_record or workspace_file: only this Project’s (a Project id); for
+                            workspace_file, null means the account’s.
+                          anyOf:
+                            - type: string
+                              minLength: 1
+                              maxLength: 64
+                            - type: 'null'
                         recordType:
                           description: 'For kind agent_record: only facts, events or instructions.'
                           type: string
@@ -93874,6 +95901,11 @@ paths:
                         includeSuperseded:
                           description: 'For kind agent_record: true also returns records a newer one on the same topic replaced.'
                           type: boolean
+                        pathPrefix:
+                          description: 'For kind workspace_file: a path prefix, such as reports/.'
+                          type: string
+                          minLength: 1
+                          maxLength: 512
                         propertyListPurpose:
                           description: 'For kind property_list: only include lists or only exclude lists.'
                           type: string
@@ -93913,7 +95945,9 @@ paths:
                             are not paused. For campaign it applies only with phase active.
                           type: boolean
                         isArchived:
-                          description: 'Campaign, creative, buyer media_buy, agent_record: true archived (forgotten); false active.'
+                          description: >-
+                            Campaign, creative, buyer media_buy, agent_record, workspace_file: true archived
+                            (forgotten); false active.
                           type: boolean
                         sort:
                           description: >-
@@ -94216,7 +96250,7 @@ paths:
                             - discord
                             - fax
                         updatedAfter:
-                          description: 'For kind session: sessions updated strictly after this instant.'
+                          description: 'For kinds session and workspace_file: updated strictly after this instant.'
                           type: string
                           format: date-time
                           pattern: >-
@@ -95683,11 +97717,8 @@ paths:
                           type: string
                           minLength: 1
                         mediaType:
-                          description: 'For kind inventory_source_item: narrow to a media type.'
+                          description: 'inventory_source_item: display or video. workspace_file: a file type, such as text/x-python.'
                           type: string
-                          enum:
-                            - display
-                            - video
                         environmentType:
                           description: 'For kind inventory_source_item: narrow to an environment.'
                           type: string
@@ -95815,10 +97846,14 @@ paths:
                             - project
                             - person
                         projectId:
-                          description: 'For kind agent_record: only this Project’s memory (a Project id).'
-                          type: string
-                          minLength: 1
-                          maxLength: 64
+                          description: >-
+                            For kind agent_record or workspace_file: only this Project’s (a Project id); for
+                            workspace_file, null means the account’s.
+                          anyOf:
+                            - type: string
+                              minLength: 1
+                              maxLength: 64
+                            - type: 'null'
                         recordType:
                           description: 'For kind agent_record: only facts, events or instructions.'
                           type: string
@@ -95838,6 +97873,11 @@ paths:
                         includeSuperseded:
                           description: 'For kind agent_record: true also returns records a newer one on the same topic replaced.'
                           type: boolean
+                        pathPrefix:
+                          description: 'For kind workspace_file: a path prefix, such as reports/.'
+                          type: string
+                          minLength: 1
+                          maxLength: 512
                         propertyListPurpose:
                           description: 'For kind property_list: only include lists or only exclude lists.'
                           type: string
@@ -95877,7 +97917,9 @@ paths:
                             are not paused. For campaign it applies only with phase active.
                           type: boolean
                         isArchived:
-                          description: 'Campaign, creative, buyer media_buy, agent_record: true archived (forgotten); false active.'
+                          description: >-
+                            Campaign, creative, buyer media_buy, agent_record, workspace_file: true archived
+                            (forgotten); false active.
                           type: boolean
                         sort:
                           description: >-
@@ -96180,7 +98222,7 @@ paths:
                             - discord
                             - fax
                         updatedAfter:
-                          description: 'For kind session: sessions updated strictly after this instant.'
+                          description: 'For kinds session and workspace_file: updated strictly after this instant.'
                           type: string
                           format: date-time
                           pattern: >-
@@ -97647,11 +99689,8 @@ paths:
                           type: string
                           minLength: 1
                         mediaType:
-                          description: 'For kind inventory_source_item: narrow to a media type.'
+                          description: 'inventory_source_item: display or video. workspace_file: a file type, such as text/x-python.'
                           type: string
-                          enum:
-                            - display
-                            - video
                         environmentType:
                           description: 'For kind inventory_source_item: narrow to an environment.'
                           type: string
@@ -97779,10 +99818,14 @@ paths:
                             - project
                             - person
                         projectId:
-                          description: 'For kind agent_record: only this Project’s memory (a Project id).'
-                          type: string
-                          minLength: 1
-                          maxLength: 64
+                          description: >-
+                            For kind agent_record or workspace_file: only this Project’s (a Project id); for
+                            workspace_file, null means the account’s.
+                          anyOf:
+                            - type: string
+                              minLength: 1
+                              maxLength: 64
+                            - type: 'null'
                         recordType:
                           description: 'For kind agent_record: only facts, events or instructions.'
                           type: string
@@ -97802,6 +99845,11 @@ paths:
                         includeSuperseded:
                           description: 'For kind agent_record: true also returns records a newer one on the same topic replaced.'
                           type: boolean
+                        pathPrefix:
+                          description: 'For kind workspace_file: a path prefix, such as reports/.'
+                          type: string
+                          minLength: 1
+                          maxLength: 512
                         propertyListPurpose:
                           description: 'For kind property_list: only include lists or only exclude lists.'
                           type: string
@@ -97841,7 +99889,9 @@ paths:
                             are not paused. For campaign it applies only with phase active.
                           type: boolean
                         isArchived:
-                          description: 'Campaign, creative, buyer media_buy, agent_record: true archived (forgotten); false active.'
+                          description: >-
+                            Campaign, creative, buyer media_buy, agent_record, workspace_file: true archived
+                            (forgotten); false active.
                           type: boolean
                         sort:
                           description: >-
@@ -98144,7 +100194,7 @@ paths:
                             - discord
                             - fax
                         updatedAfter:
-                          description: 'For kind session: sessions updated strictly after this instant.'
+                          description: 'For kinds session and workspace_file: updated strictly after this instant.'
                           type: string
                           format: date-time
                           pattern: >-
@@ -99612,11 +101662,8 @@ paths:
                           type: string
                           minLength: 1
                         mediaType:
-                          description: 'For kind inventory_source_item: narrow to a media type.'
+                          description: 'inventory_source_item: display or video. workspace_file: a file type, such as text/x-python.'
                           type: string
-                          enum:
-                            - display
-                            - video
                         environmentType:
                           description: 'For kind inventory_source_item: narrow to an environment.'
                           type: string
@@ -99744,10 +101791,14 @@ paths:
                             - project
                             - person
                         projectId:
-                          description: 'For kind agent_record: only this Project’s memory (a Project id).'
-                          type: string
-                          minLength: 1
-                          maxLength: 64
+                          description: >-
+                            For kind agent_record or workspace_file: only this Project’s (a Project id); for
+                            workspace_file, null means the account’s.
+                          anyOf:
+                            - type: string
+                              minLength: 1
+                              maxLength: 64
+                            - type: 'null'
                         recordType:
                           description: 'For kind agent_record: only facts, events or instructions.'
                           type: string
@@ -99767,6 +101818,11 @@ paths:
                         includeSuperseded:
                           description: 'For kind agent_record: true also returns records a newer one on the same topic replaced.'
                           type: boolean
+                        pathPrefix:
+                          description: 'For kind workspace_file: a path prefix, such as reports/.'
+                          type: string
+                          minLength: 1
+                          maxLength: 512
                         propertyListPurpose:
                           description: 'For kind property_list: only include lists or only exclude lists.'
                           type: string
@@ -99806,7 +101862,9 @@ paths:
                             are not paused. For campaign it applies only with phase active.
                           type: boolean
                         isArchived:
-                          description: 'Campaign, creative, buyer media_buy, agent_record: true archived (forgotten); false active.'
+                          description: >-
+                            Campaign, creative, buyer media_buy, agent_record, workspace_file: true archived
+                            (forgotten); false active.
                           type: boolean
                         sort:
                           description: >-
@@ -100109,7 +102167,7 @@ paths:
                             - discord
                             - fax
                         updatedAfter:
-                          description: 'For kind session: sessions updated strictly after this instant.'
+                          description: 'For kinds session and workspace_file: updated strictly after this instant.'
                           type: string
                           format: date-time
                           pattern: >-
@@ -101358,6 +103416,7 @@ paths:
                               - $ref: '#/components/schemas/search_success_SearchDimensionPageOutput'
                               - $ref: '#/components/schemas/search_success_SearchBuyerRfpPageOutput'
                               - $ref: '#/components/schemas/search_success_SearchAgentRecordPageOutput'
+                              - $ref: '#/components/schemas/search_success_SearchWorkspaceFilePageOutput'
                               - $ref: '#/components/schemas/search_success_SearchTargetingValuePageOutput'
                               - $ref: '#/components/schemas/search_success_SearchProjectPageOutput'
                               - $ref: '#/components/schemas/search_success_SearchSessionPageOutput'
@@ -101483,6 +103542,7 @@ paths:
                                     - $ref: '#/components/schemas/search_success_SearchDimensionPageOutput'
                                     - $ref: '#/components/schemas/search_success_SearchBuyerRfpPageOutput'
                                     - $ref: '#/components/schemas/search_success_SearchAgentRecordPageOutput'
+                                    - $ref: '#/components/schemas/search_success_SearchWorkspaceFilePageOutput'
                                     - $ref: '#/components/schemas/search_success_SearchTargetingValuePageOutput'
                                     - $ref: '#/components/schemas/search_success_SearchProjectPageOutput'
                                     - $ref: '#/components/schemas/search_success_SearchSessionPageOutput'
@@ -101535,6 +103595,7 @@ paths:
                                     - $ref: '#/components/schemas/search_success_SearchDimensionUnavailableOutput'
                                     - $ref: '#/components/schemas/search_success_SearchBuyerRfpUnavailableOutput'
                                     - $ref: '#/components/schemas/search_success_SearchAgentRecordUnavailableOutput'
+                                    - $ref: '#/components/schemas/search_success_SearchWorkspaceFileUnavailableOutput'
                                     - $ref: '#/components/schemas/search_success_SearchTargetingValueUnavailableOutput'
                                     - $ref: '#/components/schemas/search_success_SearchProjectUnavailableOutput'
                                     - $ref: '#/components/schemas/search_success_SearchSessionUnavailableOutput'
@@ -137408,6 +139469,35 @@ components:
         - kind
       additionalProperties:
         $ref: '#/components/schemas/search_success_SearchAgentRecordPageOutputValue'
+    search_success_SearchWorkspaceFilePageOutput:
+      type: object
+      properties:
+        total:
+          $ref: '#/components/schemas/search_success_SearchWorkspaceFilePageOutputTotal'
+        totalLowerBound:
+          $ref: '#/components/schemas/search_success_SearchWorkspaceFilePageOutputTotalLowerBound'
+        returned:
+          $ref: '#/components/schemas/search_success_SearchWorkspaceFilePageOutputReturned'
+        hasMore:
+          $ref: '#/components/schemas/search_success_SearchWorkspaceFilePageOutputHasMore'
+        truncated:
+          $ref: '#/components/schemas/search_success_SearchWorkspaceFilePageOutputTruncated'
+        nextCursor:
+          $ref: '#/components/schemas/search_success_SearchWorkspaceFilePageOutputNextCursor'
+        results:
+          $ref: '#/components/schemas/search_success_SearchWorkspaceFilePageOutputResults'
+        outcome:
+          type: string
+          const: page_workspace_file
+        kind:
+          type: string
+          const: workspace_file
+      required:
+        - results
+        - outcome
+        - kind
+      additionalProperties:
+        $ref: '#/components/schemas/search_success_SearchWorkspaceFilePageOutputValue'
     search_success_SearchTargetingValuePageOutput:
       type: object
       properties:
@@ -138416,6 +140506,25 @@ components:
         kind:
           type: string
           const: agent_record
+        unavailable:
+          type: string
+        message:
+          type: string
+      required:
+        - outcome
+        - kind
+        - unavailable
+        - message
+      additionalProperties: {}
+    search_success_SearchWorkspaceFileUnavailableOutput:
+      type: object
+      properties:
+        outcome:
+          type: string
+          const: unavailable_workspace_file
+        kind:
+          type: string
+          const: workspace_file
         unavailable:
           type: string
         message:
@@ -143752,6 +145861,113 @@ components:
             additionalProperties: false
         additionalProperties: {}
     search_success_SearchAgentRecordPageOutputValue: {}
+    search_success_SearchWorkspaceFilePageOutputTotal:
+      type: number
+    search_success_SearchWorkspaceFilePageOutputTotalLowerBound:
+      type: number
+    search_success_SearchWorkspaceFilePageOutputReturned:
+      type: number
+    search_success_SearchWorkspaceFilePageOutputHasMore:
+      type: boolean
+    search_success_SearchWorkspaceFilePageOutputTruncated:
+      type: boolean
+    search_success_SearchWorkspaceFilePageOutputNextCursor:
+      type: string
+    search_success_SearchWorkspaceFilePageOutputResults:
+      type: array
+      items:
+        type: object
+        properties:
+          advertiserId:
+            type: string
+          name:
+            type:
+              - string
+              - 'null'
+          sandbox:
+            type: boolean
+          sourceType:
+            anyOf:
+              - type: string
+                enum:
+                  - inline
+                  - url
+                  - file
+              - type: 'null'
+            description: 'Where the items come from: url when url is set, file when file is set.'
+          lastChangeSummary:
+            anyOf:
+              - type: object
+                properties:
+                  added:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  updated:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  unchanged:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  removed:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                required:
+                  - added
+                  - updated
+                  - unchanged
+                  - removed
+                additionalProperties: false
+              - type: 'null'
+            description: Items in the latest version against the one before it.
+          transform:
+            anyOf:
+              - type: object
+                properties:
+                  name:
+                    type: string
+                  updatedAt:
+                    type: string
+                required:
+                  - name
+                  - updatedAt
+                additionalProperties: false
+              - type: 'null'
+            description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
+        additionalProperties: {}
+    search_success_SearchWorkspaceFilePageOutputValue: {}
     search_success_SearchTargetingValuePageOutputTotal:
       type: number
     search_success_SearchTargetingValuePageOutputTotalLowerBound:
