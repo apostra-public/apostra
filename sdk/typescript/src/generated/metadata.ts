@@ -1659,6 +1659,25 @@ export const operations = {
     ],
     "summary": "Find objects in this account, or answer questions from the docs. Pass kind to list one object type, query to match text, or both. Before a multi-step task, search kind skill for a workflow. Reread a docs hit with its document (and revision, for agreements) before you cite it."
   },
+  "start_certification_run": {
+    "path": "/tools/start_certification_run",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": true,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:write"
+        ]
+      }
+    ],
+    "summary": "Starts a live certification run now for an agent you own or a source of yours bound to it. It places small test buys through the source, once an hour per source. A refusal names the time the next run is allowed, or why Apostra could not read the agent."
+  },
   "test_creative_macros": {
     "path": "/tools/test_creative_macros",
     "method": "POST",

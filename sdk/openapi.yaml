@@ -100515,6 +100515,177 @@ paths:
           content:
             application/json:
               schema: *ref_88
+  /tools/start_certification_run:
+    post:
+      operationId: start_certification_run
+      summary: >-
+        Starts a live certification run now for an agent you own or a source of yours bound to it. It places small test
+        buys through the source, once an hour per source. A refusal names the time the next run is allowed, or why
+        Apostra could not read the agent.
+      description: >-
+        Starts a live certification run now for an agent you own or a source of yours bound to it. It places small test
+        buys through the source, once an hour per source. A refusal names the time the next run is allowed, or why
+        Apostra could not read the agent.
+      security:
+        - apiKeyAuth: []
+        - m2mOAuth:
+            - interchange:write
+      parameters:
+        - name: X-SCOPE3-CUSTOMER-ID
+          in: header
+          required: false
+          deprecated: true
+          description: >-
+            Deprecated: send accountId in the request body instead. Retires on the announced removal date. If both are
+            sent they must name the same account.
+          schema:
+            type: string
+            pattern: ^[1-9][0-9]*$
+        - *ref_8
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sourceId:
+                  description: >-
+                    Exact source ID to certify through. Required for a seller. An agent owner may leave it out when the
+                    agent has exactly one bound source.
+                  type: string
+                  minLength: 1
+                  maxLength: 255
+                agentId:
+                  description: The agent to certify, for an owner. Without sourceId it must have exactly one bound source.
+                  type: string
+                  format: uuid
+                  pattern: >-
+                    ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                expectedAccountId:
+                  description: Apostra accountId you are working in (from get_status). The write fails if the account has changed.
+                  anyOf:
+                    - type: integer
+                      minimum: 1
+                    - type: string
+                      pattern: ^[1-9][0-9]*$
+                accountId:
+                  description: Apostra accountId this call runs in, from get_status.
+                  anyOf:
+                    - type: integer
+                      minimum: 1
+                    - type: string
+                      pattern: ^[1-9][0-9]*$
+              additionalProperties: false
+      responses:
+        '200':
+          description: Typed operation result
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      sourceId:
+                        type: string
+                      run:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                          startedAt:
+                            type: string
+                          familyCount:
+                            type: integer
+                            minimum: 0
+                            maximum: 9007199254740991
+                        required:
+                          - id
+                          - startedAt
+                          - familyCount
+                        additionalProperties: false
+                      nextRunAllowedAt:
+                        type: string
+                    required:
+                      - sourceId
+                      - run
+                      - nextRunAllowedAt
+                    additionalProperties: false
+                  error:
+                    type: 'null'
+                required:
+                  - data
+                  - error
+        '202': *ref_9
+        '400':
+          description: Invalid operation input
+          content:
+            application/json:
+              schema: &ref_89
+                $ref: '#/components/schemas/V3ToolErrorResponse'
+        '401':
+          description: Missing or invalid API credential
+          content:
+            application/json:
+              schema: *ref_89
+        '402':
+          description: Account credit limit exceeded
+          content:
+            application/json:
+              schema: *ref_89
+        '403':
+          description: The credential or account cannot perform this operation
+          content:
+            application/json:
+              schema: *ref_89
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema: *ref_89
+        '409':
+          description: Operation conflicts with current resource state
+          content:
+            application/json:
+              schema: *ref_89
+        '413':
+          description: Request body exceeds the accepted size
+          content:
+            application/json:
+              schema: *ref_89
+        '415':
+          description: Request body encoding or character set is unsupported
+          content:
+            application/json:
+              schema: *ref_89
+        '422':
+          description: Operation cannot process the supplied input
+          content:
+            application/json:
+              schema: *ref_89
+        '429':
+          description: Request rate limit exceeded
+          content:
+            application/json:
+              schema: *ref_89
+        '500':
+          description: Unexpected operation failure
+          content:
+            application/json:
+              schema: *ref_89
+        '501':
+          description: Recognised operation behaviour is not implemented
+          content:
+            application/json:
+              schema: *ref_89
+        '503':
+          description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
+          content:
+            application/json:
+              schema: *ref_89
   /tools/test_creative_macros:
     post:
       operationId: test_creative_macros
@@ -101082,68 +101253,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_89
+              schema: &ref_90
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_89
+              schema: *ref_90
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_89
+              schema: *ref_90
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_89
+              schema: *ref_90
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_89
+              schema: *ref_90
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_89
+              schema: *ref_90
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_89
+              schema: *ref_90
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_89
+              schema: *ref_90
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_89
+              schema: *ref_90
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_89
+              schema: *ref_90
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_89
+              schema: *ref_90
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_89
+              schema: *ref_90
         '503':
           description: A required service is unavailable
           content:
             application/json:
-              schema: *ref_89
+              schema: *ref_90
   /tools/upload_creative_asset:
     post:
       operationId: upload_creative_asset
@@ -101333,68 +101504,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_90
+              schema: &ref_91
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_90
+              schema: *ref_91
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_90
+              schema: *ref_91
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_90
+              schema: *ref_91
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_90
+              schema: *ref_91
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_90
+              schema: *ref_91
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_90
+              schema: *ref_91
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_90
+              schema: *ref_91
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_90
+              schema: *ref_91
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_90
+              schema: *ref_91
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_90
+              schema: *ref_91
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_90
+              schema: *ref_91
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_90
+              schema: *ref_91
 components:
   securitySchemes:
     apiKeyAuth:

@@ -668,6 +668,14 @@ class Apostra(SyncTransport):
         "Find objects in this account, or answer questions from the docs. Pass kind to list one object type, query to match text, or both. Before a multi-step task, search kind skill for a workflow. Reread a docs hit with its document (and revision, for agreements) before you cite it. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SearchResult], self._request_with_response("search", input, account_id=account_id, timeout=timeout))
 
+    def start_certification_run(self, input: models.StartCertificationRunInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.StartCertificationRunResult:
+        "Starts a live certification run now for an agent you own or a source of yours bound to it. It places small test buys through the source, once an hour per source. A refusal names the time the next run is allowed, or why Apostra could not read the agent."
+        return cast("models.StartCertificationRunResult", self._request("start_certification_run", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
+    def start_certification_run_with_response(self, input: models.StartCertificationRunInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.StartCertificationRunResult]:
+        "Starts a live certification run now for an agent you own or a source of yours bound to it. It places small test buys through the source, once an hour per source. A refusal names the time the next run is allowed, or why Apostra could not read the agent. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.StartCertificationRunResult], self._request_with_response("start_certification_run", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
     def test_creative_macros(self, input: models.TestCreativeMacrosInput, *, account_id: str | None = None, timeout: float | None = None) -> models.TestCreativeMacrosResult:
         "Dry-runs one tracker URL through exact raw input, canonical AdCP compilation, recipient translation, and deterministic synthetic substitution. Use it before preview or trafficking; unresolved required macros fail closed."
         return cast("models.TestCreativeMacrosResult", self._request("test_creative_macros", input, account_id=account_id, timeout=timeout))
@@ -1348,6 +1356,14 @@ class AsyncApostra(AsyncTransport):
     async def search_with_response(self, input: models.SearchInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.SearchResult]:
         "Find objects in this account, or answer questions from the docs. Pass kind to list one object type, query to match text, or both. Before a multi-step task, search kind skill for a workflow. Reread a docs hit with its document (and revision, for agreements) before you cite it. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SearchResult], await self._request_with_response("search", input, account_id=account_id, timeout=timeout))
+
+    async def start_certification_run(self, input: models.StartCertificationRunInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.StartCertificationRunResult:
+        "Starts a live certification run now for an agent you own or a source of yours bound to it. It places small test buys through the source, once an hour per source. A refusal names the time the next run is allowed, or why Apostra could not read the agent."
+        return cast("models.StartCertificationRunResult", await self._request("start_certification_run", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
+    async def start_certification_run_with_response(self, input: models.StartCertificationRunInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.StartCertificationRunResult]:
+        "Starts a live certification run now for an agent you own or a source of yours bound to it. It places small test buys through the source, once an hour per source. A refusal names the time the next run is allowed, or why Apostra could not read the agent. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.StartCertificationRunResult], await self._request_with_response("start_certification_run", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def test_creative_macros(self, input: models.TestCreativeMacrosInput, *, account_id: str | None = None, timeout: float | None = None) -> models.TestCreativeMacrosResult:
         "Dry-runs one tracker URL through exact raw input, canonical AdCP compilation, recipient translation, and deterministic synthetic substitution. Use it before preview or trafficking; unresolved required macros fail closed."
