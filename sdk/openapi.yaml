@@ -44068,6 +44068,10 @@ paths:
                 isArchived:
                   description: Archive or restore.
                   type: boolean
+                runCreativeConformance:
+                  description: Run creative conformance.
+                  type: boolean
+                  const: true
                 operator:
                   description: New Agent operator.
                   oneOf:
@@ -44456,6 +44460,45 @@ paths:
                                 type: boolean
                               isArchived:
                                 type: boolean
+                              creativeConformance:
+                                type: object
+                                properties:
+                                  runId:
+                                    type: string
+                                  outcome:
+                                    type: string
+                                    enum:
+                                      - passed
+                                      - failed
+                                  stepsRun:
+                                    type: integer
+                                    minimum: 0
+                                    maximum: 9007199254740991
+                                  failedSteps:
+                                    maxItems: 10
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        id:
+                                          type: string
+                                        title:
+                                          type: string
+                                        error:
+                                          type:
+                                            - string
+                                            - 'null'
+                                      required:
+                                        - id
+                                        - title
+                                        - error
+                                      additionalProperties: false
+                                required:
+                                  - runId
+                                  - outcome
+                                  - stepsRun
+                                  - failedSteps
+                                additionalProperties: false
                             required:
                               - agentId
                               - displayName
@@ -70015,6 +70058,7 @@ paths:
                             - storefront_media_buy_v1
                             - storefront_compose_run_v1
                             - live_certification_run_v1
+                            - agent_activity_v1
                         buyer:
                           description: >-
                             For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP.
@@ -71982,6 +72026,7 @@ paths:
                             - storefront_media_buy_v1
                             - storefront_compose_run_v1
                             - live_certification_run_v1
+                            - agent_activity_v1
                         buyer:
                           description: >-
                             For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP.
@@ -74751,6 +74796,7 @@ paths:
                             - storefront_media_buy_v1
                             - storefront_compose_run_v1
                             - live_certification_run_v1
+                            - agent_activity_v1
                         buyer:
                           description: >-
                             For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP.
@@ -76710,6 +76756,7 @@ paths:
                             - storefront_media_buy_v1
                             - storefront_compose_run_v1
                             - live_certification_run_v1
+                            - agent_activity_v1
                         buyer:
                           description: >-
                             For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP.
@@ -78666,6 +78713,7 @@ paths:
                             - storefront_media_buy_v1
                             - storefront_compose_run_v1
                             - live_certification_run_v1
+                            - agent_activity_v1
                         buyer:
                           description: >-
                             For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP.
@@ -80622,6 +80670,7 @@ paths:
                             - storefront_media_buy_v1
                             - storefront_compose_run_v1
                             - live_certification_run_v1
+                            - agent_activity_v1
                         buyer:
                           description: >-
                             For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP.
@@ -82585,6 +82634,7 @@ paths:
                             - storefront_media_buy_v1
                             - storefront_compose_run_v1
                             - live_certification_run_v1
+                            - agent_activity_v1
                         buyer:
                           description: >-
                             For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP.
@@ -86199,6 +86249,7 @@ paths:
                             - storefront_media_buy_v1
                             - storefront_compose_run_v1
                             - live_certification_run_v1
+                            - agent_activity_v1
                         buyer:
                           description: >-
                             For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP.
@@ -88985,6 +89036,7 @@ paths:
                             - storefront_media_buy_v1
                             - storefront_compose_run_v1
                             - live_certification_run_v1
+                            - agent_activity_v1
                         buyer:
                           description: >-
                             For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP.
@@ -91766,6 +91818,7 @@ paths:
                             - storefront_media_buy_v1
                             - storefront_compose_run_v1
                             - live_certification_run_v1
+                            - agent_activity_v1
                         buyer:
                           description: >-
                             For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP.
@@ -93732,6 +93785,7 @@ paths:
                             - storefront_media_buy_v1
                             - storefront_compose_run_v1
                             - live_certification_run_v1
+                            - agent_activity_v1
                         buyer:
                           description: >-
                             For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP.
@@ -95695,6 +95749,7 @@ paths:
                             - storefront_media_buy_v1
                             - storefront_compose_run_v1
                             - live_certification_run_v1
+                            - agent_activity_v1
                         buyer:
                           description: >-
                             For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP.
@@ -97658,6 +97713,7 @@ paths:
                             - storefront_media_buy_v1
                             - storefront_compose_run_v1
                             - live_certification_run_v1
+                            - agent_activity_v1
                         buyer:
                           description: >-
                             For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP.
@@ -99622,6 +99678,7 @@ paths:
                             - storefront_media_buy_v1
                             - storefront_compose_run_v1
                             - live_certification_run_v1
+                            - agent_activity_v1
                         buyer:
                           description: >-
                             For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP.

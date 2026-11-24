@@ -19535,6 +19535,10 @@ export type SaveAgentData = {
          */
         isArchived?: boolean;
         /**
+         * Run creative conformance.
+         */
+        runCreativeConformance?: true;
+        /**
          * New Agent operator.
          */
         operator?: {
@@ -19956,6 +19960,16 @@ export type SaveAgentResponses = {
                 displayName: string;
                 certificationRequested?: boolean;
                 isArchived?: boolean;
+                creativeConformance?: {
+                    runId: string;
+                    outcome: 'passed' | 'failed';
+                    stepsRun: number;
+                    failedSteps: Array<{
+                        id: string;
+                        title: string;
+                        error: string | null;
+                    }>;
+                };
             };
         };
         error: null;
@@ -42355,7 +42369,7 @@ export type SearchData = {
             /**
              * For kind session: read one source only. Omitted, sessions come from every source you can read. Filters marked (RFP sessions) need the RFP source; a source you cannot read is refused.
              */
-            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1' | 'live_certification_run_v1';
+            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1' | 'live_certification_run_v1' | 'agent_activity_v1';
             /**
              * For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP. A label, not an account id.
              */
@@ -42970,7 +42984,7 @@ export type SearchData = {
             /**
              * For kind session: read one source only. Omitted, sessions come from every source you can read. Filters marked (RFP sessions) need the RFP source; a source you cannot read is refused.
              */
-            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1' | 'live_certification_run_v1';
+            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1' | 'live_certification_run_v1' | 'agent_activity_v1';
             /**
              * For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP. A label, not an account id.
              */
@@ -43653,7 +43667,7 @@ export type SearchData = {
             /**
              * For kind session: read one source only. Omitted, sessions come from every source you can read. Filters marked (RFP sessions) need the RFP source; a source you cannot read is refused.
              */
-            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1' | 'live_certification_run_v1';
+            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1' | 'live_certification_run_v1' | 'agent_activity_v1';
             /**
              * For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP. A label, not an account id.
              */
@@ -44264,7 +44278,7 @@ export type SearchData = {
             /**
              * For kind session: read one source only. Omitted, sessions come from every source you can read. Filters marked (RFP sessions) need the RFP source; a source you cannot read is refused.
              */
-            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1' | 'live_certification_run_v1';
+            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1' | 'live_certification_run_v1' | 'agent_activity_v1';
             /**
              * For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP. A label, not an account id.
              */
@@ -44872,7 +44886,7 @@ export type SearchData = {
             /**
              * For kind session: read one source only. Omitted, sessions come from every source you can read. Filters marked (RFP sessions) need the RFP source; a source you cannot read is refused.
              */
-            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1' | 'live_certification_run_v1';
+            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1' | 'live_certification_run_v1' | 'agent_activity_v1';
             /**
              * For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP. A label, not an account id.
              */
@@ -45483,7 +45497,7 @@ export type SearchData = {
             /**
              * For kind session: read one source only. Omitted, sessions come from every source you can read. Filters marked (RFP sessions) need the RFP source; a source you cannot read is refused.
              */
-            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1' | 'live_certification_run_v1';
+            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1' | 'live_certification_run_v1' | 'agent_activity_v1';
             /**
              * For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP. A label, not an account id.
              */
@@ -46094,7 +46108,7 @@ export type SearchData = {
             /**
              * For kind session: read one source only. Omitted, sessions come from every source you can read. Filters marked (RFP sessions) need the RFP source; a source you cannot read is refused.
              */
-            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1' | 'live_certification_run_v1';
+            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1' | 'live_certification_run_v1' | 'agent_activity_v1';
             /**
              * For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP. A label, not an account id.
              */
@@ -46835,7 +46849,7 @@ export type SearchData = {
             /**
              * For kind session: read one source only. Omitted, sessions come from every source you can read. Filters marked (RFP sessions) need the RFP source; a source you cannot read is refused.
              */
-            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1' | 'live_certification_run_v1';
+            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1' | 'live_certification_run_v1' | 'agent_activity_v1';
             /**
              * For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP. A label, not an account id.
              */
@@ -47530,7 +47544,7 @@ export type SearchData = {
             /**
              * For kind session: read one source only. Omitted, sessions come from every source you can read. Filters marked (RFP sessions) need the RFP source; a source you cannot read is refused.
              */
-            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1' | 'live_certification_run_v1';
+            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1' | 'live_certification_run_v1' | 'agent_activity_v1';
             /**
              * For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP. A label, not an account id.
              */
@@ -48217,7 +48231,7 @@ export type SearchData = {
             /**
              * For kind session: read one source only. Omitted, sessions come from every source you can read. Filters marked (RFP sessions) need the RFP source; a source you cannot read is refused.
              */
-            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1' | 'live_certification_run_v1';
+            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1' | 'live_certification_run_v1' | 'agent_activity_v1';
             /**
              * For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP. A label, not an account id.
              */
@@ -48831,7 +48845,7 @@ export type SearchData = {
             /**
              * For kind session: read one source only. Omitted, sessions come from every source you can read. Filters marked (RFP sessions) need the RFP source; a source you cannot read is refused.
              */
-            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1' | 'live_certification_run_v1';
+            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1' | 'live_certification_run_v1' | 'agent_activity_v1';
             /**
              * For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP. A label, not an account id.
              */
@@ -49446,7 +49460,7 @@ export type SearchData = {
             /**
              * For kind session: read one source only. Omitted, sessions come from every source you can read. Filters marked (RFP sessions) need the RFP source; a source you cannot read is refused.
              */
-            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1' | 'live_certification_run_v1';
+            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1' | 'live_certification_run_v1' | 'agent_activity_v1';
             /**
              * For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP. A label, not an account id.
              */
@@ -50061,7 +50075,7 @@ export type SearchData = {
             /**
              * For kind session: read one source only. Omitted, sessions come from every source you can read. Filters marked (RFP sessions) need the RFP source; a source you cannot read is refused.
              */
-            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1' | 'live_certification_run_v1';
+            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1' | 'live_certification_run_v1' | 'agent_activity_v1';
             /**
              * For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP. A label, not an account id.
              */
@@ -50676,7 +50690,7 @@ export type SearchData = {
             /**
              * For kind session: read one source only. Omitted, sessions come from every source you can read. Filters marked (RFP sessions) need the RFP source; a source you cannot read is refused.
              */
-            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1' | 'live_certification_run_v1';
+            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1' | 'live_certification_run_v1' | 'agent_activity_v1';
             /**
              * For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP. A label, not an account id.
              */
