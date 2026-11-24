@@ -28956,6 +28956,10 @@ export type SaveDirectedCampaignSubscriptionData = {
          */
         unsubscribe?: boolean;
         /**
+         * Months of per-creative daily history to backfill (Meta: 1-37, default 14). Needs creative history on the account.
+         */
+        creativeHistoryMonths?: number;
+        /**
          * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
          */
         expectedAccountId?: number | string;
