@@ -955,14 +955,14 @@ export class Apostra extends Transport {
   /** Manage collections. Create with one owner and name: campaignId or advertiserId. Only advertiser mutations of an existing collection need expectedUpdatedAt; campaign writes and creates do not. isArchived archives or restores advertiser collections. Returns the data together with response headers and request ID. */
   saveCreativeCollectionWithResponse(input: SaveCreativeCollectionInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveCreativeCollectionResult>> { return this.requestDetailed("save_creative_collection", input, options) }
   /**
-   * Save a Creative Session for image, video, or voice/audio (including radio spots) from a brief: its draft, selected output, approval, or finalisation. It never generates; generate_variants does. To save an approved output to the Library, finalise it with destination library.
+   * Save a Creative Session for image, video, or voice/audio (including radio spots) from a brief: its draft, selected output, approval, or finalisation. It never generates; generate_variants does. Save to the Library with destination library, or a composer draft with finalizeToLibrary.
    *
    * @example
    * await client.saveCreativeSession(input, { idempotencyKey: 'stable-key' })
    */
   saveCreativeSession(input: SaveCreativeSessionInput, options: WriteRequestOptions): Promise<SaveCreativeSessionResult> { return this.request("save_creative_session", input, options) }
 
-  /** Save a Creative Session for image, video, or voice/audio (including radio spots) from a brief: its draft, selected output, approval, or finalisation. It never generates; generate_variants does. To save an approved output to the Library, finalise it with destination library. Returns the data together with response headers and request ID. */
+  /** Save a Creative Session for image, video, or voice/audio (including radio spots) from a brief: its draft, selected output, approval, or finalisation. It never generates; generate_variants does. Save to the Library with destination library, or a composer draft with finalizeToLibrary. Returns the data together with response headers and request ID. */
   saveCreativeSessionWithResponse(input: SaveCreativeSessionInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveCreativeSessionResult>> { return this.requestDetailed("save_creative_session", input, options) }
   /**
    * Create a dimension, or update an existing dimension by its id. Tags is built in and open. Labels belong only to objects in appliesTo.

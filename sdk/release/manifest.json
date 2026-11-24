@@ -3080,6 +3080,7 @@
       "SaveInventorySourceSuccessSaveInventorySourceSuccessOwnAgentConnectionForm": "object",
       "SaveInventorySourceSuccessSaveInventorySourceSuccessOwnAgentConnectionFormBindingTarget": "object",
       "SaveInventorySourceSuccessSaveInventorySourceSuccessOwnAgentConnectionFormConnectionContract": "map",
+      "SaveInventorySourceSuccessSaveInventorySourceSuccessOwnAgentConnectionFormTestStorefront": "object",
       "SaveInventorySourceSuccessSaveInventorySourceSuccessUnchanged": "object",
       "SaveInventorySourceSuccessSaveInventorySourceSuccessUnchangedModuleConfig": "object",
       "SaveInventorySourceSuccessSaveInventorySourceSuccessUnchangedObject": "map",
