@@ -21607,7 +21607,33 @@ export type SaveBusinessRulesData = {
          */
         accountMaxAutoAcceptPaymentTerms?: 'net_15' | 'net_30' | 'net_45' | 'net_60' | 'net_90' | 'prepay';
         /**
-         * Required to move any approval to auto, media buys from manual to ai_assisted, to lengthen accountMaxAutoAcceptPaymentTerms under account auto, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.
+         * Per-operator rows, each replacing its operator's row; a default row is removed. accept/review apply only to a verified operator, reject to any claim.
+         */
+        accountApprovalOperators?: Array<{
+            /**
+             * Operator domain.
+             */
+            operator: string;
+            /**
+             * AdCP operator unit.
+             */
+            operator_unit?: {
+                /**
+                 * Unit id.
+                 */
+                id: string;
+            };
+            /**
+             * null: operator row, else accountApproval.
+             */
+            admission?: 'accept' | 'review' | 'reject' | null;
+            /**
+             * Default operator.
+             */
+            accountScope?: 'operator' | 'operator_brand';
+        }>;
+        /**
+         * Required to move any approval to auto, media buys from manual to ai_assisted, to lengthen accountMaxAutoAcceptPaymentTerms under account auto, to accept an operator that accountApproval would review, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.
          */
         acknowledgeNoHumanReview?: boolean;
         /**
