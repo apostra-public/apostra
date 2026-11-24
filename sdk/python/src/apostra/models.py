@@ -24112,15 +24112,15 @@ class SaveWholesaleProductInput(TypedDict):
     materialCandidate: NotRequired[SaveWholesaleProductInputMaterialCandidate]
     '\n    Exact get(material) provenance; include only to confirm that candidate.\n    '
     sourceId: str
-    '\n    The inventory source that holds the product, as returned by `search`. Not an ESA connection id.\n    '
+    '\n    Inventory source from `search`, not an ESA connection id.\n    '
     id: NotRequired[str]
-    '\n    The wholesale product to change. Omit to create a new one. Only the fields you pass are changed.\n    '
+    '\n    Product to change; omit to create. Omitted fields stay unchanged.\n    '
     name: NotRequired[str]
     '\n    Buyer-facing product name.\n    '
     description: NotRequired[str]
     '\n    Buyer-facing description.\n    '
     status: NotRequired[Literal["draft", "active", "archived"]]
-    '\n    `draft` is hidden from buyers. `active` is eligible for buyer discovery, subject to the warmed catalogue and pricing gates. `archived` is off the market.\n    '
+    '\n    `draft` is hidden; `active` is discoverable when eligible; `archived` is off market.\n    '
     deliveryType: NotRequired[Literal["guaranteed", "non_guaranteed"]]
     '\n    Every price sells under it. Required on create with pricingOptions.\n    '
     channels: NotRequired[list[Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]]]
@@ -24142,23 +24142,23 @@ class SaveWholesaleProductInput(TypedDict):
     videoPlacementTypes: NotRequired[list[Literal["instream", "accompanying_content", "interstitial", "standalone"]]]
     '\n    AdCP video placement types. [] clears; omit keeps.\n    '
     eligibleAccountIds: NotRequired[list[str] | None]
-    '\n    Buyer accountIds that may see and book it, replaced whole. null opens it to every buyer; omit keeps.\n    '
+    '\n    Allowed buyer accountIds. Replaces all; null opens to all; omit keeps.\n    '
     confirmVisibilityImpact: NotRequired[bool]
-    '\n    Required to restrict an open, live product: it hides it from every other buyer at once.\n    '
+    '\n    Required to restrict an open live product, hiding it from other buyers.\n    '
     collections: NotRequired[list[SaveWholesaleProductInputCollectionsItem] | None]
     '\n    AdCP collections: the shows sold. [] = not disclosed. null clears; omit keeps.\n    '
     installments: NotRequired[list[SaveWholesaleProductInputInstallmentsItem] | None]
-    '\n    AdCP installments: the episodes sold, each with a collection_ref. null clears; omit keeps.\n    '
+    '\n    Episodes sold with collection_ref. null clears; omit keeps.\n    '
     collectionTargetingAllowed: NotRequired[bool | None]
     '\n    AdCP: buyers may buy some of the shows. Only if the ad server books that. null clears.\n    '
     holdPolicy: NotRequired[SaveWholesaleProductInputHoldPolicyValue | None]
     '\n    AdCP hold_policy. Refused with available: true unless the source can hold. null clears.\n    '
     dryRun: NotRequired[bool]
-    '\n    Validate a new product without writing it; on GAM it returns lineItemTargeting. Creates only.\n    '
+    '\n    Create only: validate without writing; GAM returns lineItemTargeting.\n    '
     delete: NotRequired[Literal[True]]
-    '\n    Permanently remove this product — only once it is archived, and it cannot be undone.\n    '
+    '\n    Permanently delete an archived product; cannot be undone.\n    '
     confirmName: NotRequired[str]
-    '\n    For delete only. The product\'s exact stored name, read back to confirm the one to remove.\n    '
+    '\n    Delete only: exact stored product name.\n    '
     prebidIntegrationActive: NotRequired[bool]
     '\n    Declare that the Scope3 Prebid module runs on this product\'s inventory. Set true only if installed.\n    '
     sourceMaterialId: NotRequired[str]
@@ -24273,8 +24273,44 @@ class SaveWholesaleProductInputPricingOptionsItem(TypedDict):
     '\n    Price per unit of the model. Omit for an auction.\n    '
     floor_price: NotRequired[float]
     '\n    Auction floor per unit, in this currency. Not with fixed_price.\n    '
+    parameters: NotRequired[SaveWholesaleProductInputPricingOptionsItemParametersTimeUnitWeek | SaveWholesaleProductInputPricingOptionsItemParametersTypeDooh]
+    '\n    AdCP time or DOOH flat-rate parameters, when the source supports them.\n    '
     min_spend_per_package: NotRequired[float]
     '\n    Least spend per package, in this currency.\n    '
+
+class SaveWholesaleProductInputPricingOptionsItemParametersTimeUnitWeek(TypedDict):
+    time_unit: Literal["week"]
+    '\n    Whole weeks.\n    '
+    min_duration: NotRequired[int]
+    '\n    Minimum weeks.\n    '
+    max_duration: NotRequired[int]
+    '\n    Maximum weeks.\n    '
+    ext: NotRequired[JsonValue]
+    '\n    AdCP extensions.\n    '
+
+class SaveWholesaleProductInputPricingOptionsItemParametersTypeDooh(TypedDict):
+    type: Literal["dooh"]
+    '\n    DOOH pricing.\n    '
+    sov_percentage: float
+    '\n    Share of voice, percent.\n    '
+    slot_span: NotRequired[int]
+    '\n    Consecutive slots.\n    '
+    loop_position: NotRequired[str]
+    '\n    Loop position.\n    '
+    loop_duration_seconds: NotRequired[int]
+    '\n    Loop duration in seconds.\n    '
+    min_plays_per_hour: NotRequired[int]
+    '\n    Minimum hourly plays.\n    '
+    venue_package: NotRequired[str]
+    '\n    Venue package.\n    '
+    duration_hours: NotRequired[float]
+    '\n    Duration in hours.\n    '
+    daypart: NotRequired[str]
+    '\n    Daypart.\n    '
+    estimated_impressions: NotRequired[int]
+    '\n    Estimated impressions.\n    '
+    ext: NotRequired[JsonValue]
+    '\n    AdCP extensions.\n    '
 
 class SaveWholesaleProductRequestFixedTargetingKeyValuesExcludeItem(TypedDict):
     key_id: SaveWholesaleProductRequestFixedTargetingKeyValuesExcludeItemKeyId

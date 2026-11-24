@@ -40621,11 +40621,11 @@ export type SaveWholesaleProductData = {
             advertiserRef?: string;
         };
         /**
-         * The inventory source that holds the product, as returned by `search`. Not an ESA connection id.
+         * Inventory source from `search`, not an ESA connection id.
          */
         sourceId: string;
         /**
-         * The wholesale product to change. Omit to create a new one. Only the fields you pass are changed.
+         * Product to change; omit to create. Omitted fields stay unchanged.
          */
         id?: string;
         /**
@@ -40637,7 +40637,7 @@ export type SaveWholesaleProductData = {
          */
         description?: string;
         /**
-         * `draft` is hidden from buyers. `active` is eligible for buyer discovery, subject to the warmed catalogue and pricing gates. `archived` is off the market.
+         * `draft` is hidden; `active` is discoverable when eligible; `archived` is off market.
          */
         status?: 'draft' | 'active' | 'archived';
         /**
@@ -40695,6 +40695,74 @@ export type SaveWholesaleProductData = {
              * Auction floor per unit, in this currency. Not with fixed_price.
              */
             floor_price?: number;
+            /**
+             * AdCP time or DOOH flat-rate parameters, when the source supports them.
+             */
+            parameters?: {
+                /**
+                 * Whole weeks.
+                 */
+                time_unit: 'week';
+                /**
+                 * Minimum weeks.
+                 */
+                min_duration?: number;
+                /**
+                 * Maximum weeks.
+                 */
+                max_duration?: number;
+                /**
+                 * AdCP extensions.
+                 */
+                ext?: unknown;
+                [key: string]: unknown;
+            } | {
+                /**
+                 * DOOH pricing.
+                 */
+                type: 'dooh';
+                /**
+                 * Share of voice, percent.
+                 */
+                sov_percentage: number;
+                /**
+                 * Consecutive slots.
+                 */
+                slot_span?: number;
+                /**
+                 * Loop position.
+                 */
+                loop_position?: string;
+                /**
+                 * Loop duration in seconds.
+                 */
+                loop_duration_seconds?: number;
+                /**
+                 * Minimum hourly plays.
+                 */
+                min_plays_per_hour?: number;
+                /**
+                 * Venue package.
+                 */
+                venue_package?: string;
+                /**
+                 * Duration in hours.
+                 */
+                duration_hours?: number;
+                /**
+                 * Daypart.
+                 */
+                daypart?: string;
+                /**
+                 * Estimated impressions.
+                 */
+                estimated_impressions?: number;
+                /**
+                 * AdCP extensions.
+                 */
+                ext?: unknown;
+                [key: string]: unknown;
+            };
             /**
              * Least spend per package, in this currency.
              */
@@ -40787,11 +40855,11 @@ export type SaveWholesaleProductData = {
          */
         videoPlacementTypes?: Array<'instream' | 'accompanying_content' | 'interstitial' | 'standalone'>;
         /**
-         * Buyer accountIds that may see and book it, replaced whole. null opens it to every buyer; omit keeps.
+         * Allowed buyer accountIds. Replaces all; null opens to all; omit keeps.
          */
         eligibleAccountIds?: Array<string> | null;
         /**
-         * Required to restrict an open, live product: it hides it from every other buyer at once.
+         * Required to restrict an open live product, hiding it from other buyers.
          */
         confirmVisibilityImpact?: boolean;
         /**
@@ -40809,7 +40877,7 @@ export type SaveWholesaleProductData = {
             [key: string]: unknown;
         }> | null;
         /**
-         * AdCP installments: the episodes sold, each with a collection_ref. null clears; omit keeps.
+         * Episodes sold with collection_ref. null clears; omit keeps.
          */
         installments?: Array<{
             /**
@@ -40870,15 +40938,15 @@ export type SaveWholesaleProductData = {
             rankable?: boolean;
         } | null;
         /**
-         * Validate a new product without writing it; on GAM it returns lineItemTargeting. Creates only.
+         * Create only: validate without writing; GAM returns lineItemTargeting.
          */
         dryRun?: boolean;
         /**
-         * Permanently remove this product — only once it is archived, and it cannot be undone.
+         * Permanently delete an archived product; cannot be undone.
          */
         delete?: true;
         /**
-         * For delete only. The product's exact stored name, read back to confirm the one to remove.
+         * Delete only: exact stored product name.
          */
         confirmName?: string;
         /**

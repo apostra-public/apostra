@@ -4134,6 +4134,8 @@
       "SaveWholesaleProductInputInstallmentsItemCollectionRef": "object",
       "SaveWholesaleProductInputMaterialCandidate": "object",
       "SaveWholesaleProductInputPricingOptionsItem": "object",
+      "SaveWholesaleProductInputPricingOptionsItemParametersTimeUnitWeek": "object",
+      "SaveWholesaleProductInputPricingOptionsItemParametersTypeDooh": "object",
       "SaveWholesaleProductRequestFixedTargetingKeyValuesExclude": "other",
       "SaveWholesaleProductRequestFixedTargetingKeyValuesExcludeItem": "object",
       "SaveWholesaleProductRequestFixedTargetingKeyValuesExcludeItemKeyId": "scalar",
