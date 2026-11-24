@@ -17311,6 +17311,8 @@ class SaveDirectedCampaignSubscriptionInput(TypedDict):
     '\n    Required for third-party AdCP sources. Omit for standard adapter connections.\n    '
     unsubscribe: NotRequired[bool]
     '\n    true = stop sync and retire local mirrors.\n    '
+    creativeHistoryMonths: NotRequired[int]
+    '\n    Months of per-creative daily history to backfill (Meta: 1-37, default 14). Needs creative history on the account.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
 
