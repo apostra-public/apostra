@@ -12928,7 +12928,7 @@ class SaveBusinessRulesInputMaterialCandidate(TypedDict):
     advertiserRef: NotRequired[str]
     '\n    Required exact advertiser scope for advertiser-confidential Material.\n    '
 
-class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsGuaranteedOverForecastAdvertisingPolicyDisclosureWithAccountApproval(TypedDict):
+class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsAdvertisingPolicyDisclosureWithAccountApproval(TypedDict):
     materialCandidate: NotRequired[SaveBusinessRulesInputMaterialCandidate]
     '\n    Exact get(material) provenance; include only to confirm that candidate.\n    '
     policy: NotRequired[SaveBusinessRulesRequestSaveBusinessRulesPolicy]
@@ -12943,8 +12943,6 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalA
     '\n    New buyer accounts: auto accepts those within accountMaxAutoAcceptPaymentTerms; manual queues every one for review.\n    '
     accountMaxAutoAcceptPaymentTerms: NotRequired[Literal["net_15", "net_30", "net_45", "net_60", "net_90", "prepay"]]
     '\n    Longest payment terms accountApproval auto accepts without review; prepay is shortest. Default net_60.\n    '
-    guaranteedOverForecast: NotRequired[Literal["overbook", "hold_for_review"]]
-    '\n    Guaranteed buys over the ad server forecast: send anyway, or hold for review.\n    '
     acknowledgeNoHumanReview: NotRequired[bool]
     '\n    Required to move any approval to auto, media buys from manual to ai_assisted, to lengthen accountMaxAutoAcceptPaymentTerms under account auto, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
@@ -12954,7 +12952,7 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalA
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
 
-class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsGuaranteedOverForecastAdvertisingPolicyDisclosureWithAccountMaxAutoAcceptPaymentTerms(TypedDict):
+class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsAdvertisingPolicyDisclosureWithAccountMaxAutoAcceptPaymentTerms(TypedDict):
     materialCandidate: NotRequired[SaveBusinessRulesInputMaterialCandidate]
     '\n    Exact get(material) provenance; include only to confirm that candidate.\n    '
     policy: NotRequired[SaveBusinessRulesRequestSaveBusinessRulesPolicy]
@@ -12969,8 +12967,6 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalA
     '\n    New buyer accounts: auto accepts those within accountMaxAutoAcceptPaymentTerms; manual queues every one for review.\n    '
     accountMaxAutoAcceptPaymentTerms: Literal["net_15", "net_30", "net_45", "net_60", "net_90", "prepay"]
     '\n    Longest payment terms accountApproval auto accepts without review; prepay is shortest. Default net_60.\n    '
-    guaranteedOverForecast: NotRequired[Literal["overbook", "hold_for_review"]]
-    '\n    Guaranteed buys over the ad server forecast: send anyway, or hold for review.\n    '
     acknowledgeNoHumanReview: NotRequired[bool]
     '\n    Required to move any approval to auto, media buys from manual to ai_assisted, to lengthen accountMaxAutoAcceptPaymentTerms under account auto, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
@@ -12980,7 +12976,7 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalA
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
 
-class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsGuaranteedOverForecastAdvertisingPolicyDisclosureWithAdvertisingPolicyDisclosure(TypedDict):
+class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsAdvertisingPolicyDisclosureWithAdvertisingPolicyDisclosure(TypedDict):
     materialCandidate: NotRequired[SaveBusinessRulesInputMaterialCandidate]
     '\n    Exact get(material) provenance; include only to confirm that candidate.\n    '
     policy: NotRequired[SaveBusinessRulesRequestSaveBusinessRulesPolicy]
@@ -12995,8 +12991,6 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalA
     '\n    New buyer accounts: auto accepts those within accountMaxAutoAcceptPaymentTerms; manual queues every one for review.\n    '
     accountMaxAutoAcceptPaymentTerms: NotRequired[Literal["net_15", "net_30", "net_45", "net_60", "net_90", "prepay"]]
     '\n    Longest payment terms accountApproval auto accepts without review; prepay is shortest. Default net_60.\n    '
-    guaranteedOverForecast: NotRequired[Literal["overbook", "hold_for_review"]]
-    '\n    Guaranteed buys over the ad server forecast: send anyway, or hold for review.\n    '
     acknowledgeNoHumanReview: NotRequired[bool]
     '\n    Required to move any approval to auto, media buys from manual to ai_assisted, to lengthen accountMaxAutoAcceptPaymentTerms under account auto, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: list[Literal["brief_acceptance", "creative_policy"]]
@@ -13006,7 +13000,7 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalA
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
 
-class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsGuaranteedOverForecastAdvertisingPolicyDisclosureWithCreativeApproval(TypedDict):
+class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsAdvertisingPolicyDisclosureWithCreativeApproval(TypedDict):
     materialCandidate: NotRequired[SaveBusinessRulesInputMaterialCandidate]
     '\n    Exact get(material) provenance; include only to confirm that candidate.\n    '
     policy: NotRequired[SaveBusinessRulesRequestSaveBusinessRulesPolicy]
@@ -13021,8 +13015,6 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalA
     '\n    New buyer accounts: auto accepts those within accountMaxAutoAcceptPaymentTerms; manual queues every one for review.\n    '
     accountMaxAutoAcceptPaymentTerms: NotRequired[Literal["net_15", "net_30", "net_45", "net_60", "net_90", "prepay"]]
     '\n    Longest payment terms accountApproval auto accepts without review; prepay is shortest. Default net_60.\n    '
-    guaranteedOverForecast: NotRequired[Literal["overbook", "hold_for_review"]]
-    '\n    Guaranteed buys over the ad server forecast: send anyway, or hold for review.\n    '
     acknowledgeNoHumanReview: NotRequired[bool]
     '\n    Required to move any approval to auto, media buys from manual to ai_assisted, to lengthen accountMaxAutoAcceptPaymentTerms under account auto, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
@@ -13032,33 +13024,7 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalA
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
 
-class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsGuaranteedOverForecastAdvertisingPolicyDisclosureWithGuaranteedOverForecast(TypedDict):
-    materialCandidate: NotRequired[SaveBusinessRulesInputMaterialCandidate]
-    '\n    Exact get(material) provenance; include only to confirm that candidate.\n    '
-    policy: NotRequired[SaveBusinessRulesRequestSaveBusinessRulesPolicy]
-    '\n    Both policies in one write. Prefer policies.\n    '
-    policies: NotRequired[SaveBusinessRulesRequestSaveBusinessRulesPolicies]
-    '\n    Change each policy on its own: publish text, save a draft, or make a version live.\n    '
-    creativeApproval: NotRequired[Literal["auto", "manual"]]
-    '\n    auto approves creatives with no review; manual queues them.\n    '
-    mediaBuyApproval: NotRequired[Literal["auto", "manual", "ai_assisted"]]
-    '\n    auto skips review; ai_assisted queues unless clearly within policy; manual queues every buy.\n    '
-    accountApproval: NotRequired[Literal["auto", "manual"]]
-    '\n    New buyer accounts: auto accepts those within accountMaxAutoAcceptPaymentTerms; manual queues every one for review.\n    '
-    accountMaxAutoAcceptPaymentTerms: NotRequired[Literal["net_15", "net_30", "net_45", "net_60", "net_90", "prepay"]]
-    '\n    Longest payment terms accountApproval auto accepts without review; prepay is shortest. Default net_60.\n    '
-    guaranteedOverForecast: Literal["overbook", "hold_for_review"]
-    '\n    Guaranteed buys over the ad server forecast: send anyway, or hold for review.\n    '
-    acknowledgeNoHumanReview: NotRequired[bool]
-    '\n    Required to move any approval to auto, media buys from manual to ai_assisted, to lengthen accountMaxAutoAcceptPaymentTerms under account auto, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
-    advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
-    '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
-    expectedAccountId: NotRequired[int | str]
-    '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
-    accountId: NotRequired[int | str]
-    '\n    Apostra accountId this call runs in, from get_status.\n    '
-
-class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsGuaranteedOverForecastAdvertisingPolicyDisclosureWithMediaBuyApproval(TypedDict):
+class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsAdvertisingPolicyDisclosureWithMediaBuyApproval(TypedDict):
     materialCandidate: NotRequired[SaveBusinessRulesInputMaterialCandidate]
     '\n    Exact get(material) provenance; include only to confirm that candidate.\n    '
     policy: NotRequired[SaveBusinessRulesRequestSaveBusinessRulesPolicy]
@@ -13073,8 +13039,6 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalA
     '\n    New buyer accounts: auto accepts those within accountMaxAutoAcceptPaymentTerms; manual queues every one for review.\n    '
     accountMaxAutoAcceptPaymentTerms: NotRequired[Literal["net_15", "net_30", "net_45", "net_60", "net_90", "prepay"]]
     '\n    Longest payment terms accountApproval auto accepts without review; prepay is shortest. Default net_60.\n    '
-    guaranteedOverForecast: NotRequired[Literal["overbook", "hold_for_review"]]
-    '\n    Guaranteed buys over the ad server forecast: send anyway, or hold for review.\n    '
     acknowledgeNoHumanReview: NotRequired[bool]
     '\n    Required to move any approval to auto, media buys from manual to ai_assisted, to lengthen accountMaxAutoAcceptPaymentTerms under account auto, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
@@ -13084,19 +13048,27 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalA
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
 
-SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAdvertisingPolicyDisclosureWithAdvertisingPolicyDisclosure: TypeAlias = SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsGuaranteedOverForecastAdvertisingPolicyDisclosureWithAdvertisingPolicyDisclosure
+SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsGuaranteedOverForecastAdvertisingPolicyDisclosureWithAccountApproval: TypeAlias = SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsAdvertisingPolicyDisclosureWithAccountApproval
 
-SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAdvertisingPolicyDisclosureWithCreativeApproval: TypeAlias = SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsGuaranteedOverForecastAdvertisingPolicyDisclosureWithCreativeApproval
+SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsGuaranteedOverForecastAdvertisingPolicyDisclosureWithAccountMaxAutoAcceptPaymentTerms: TypeAlias = SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsAdvertisingPolicyDisclosureWithAccountMaxAutoAcceptPaymentTerms
 
-SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAdvertisingPolicyDisclosureWithMediaBuyApproval: TypeAlias = SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsGuaranteedOverForecastAdvertisingPolicyDisclosureWithMediaBuyApproval
+SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsGuaranteedOverForecastAdvertisingPolicyDisclosureWithAdvertisingPolicyDisclosure: TypeAlias = SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsAdvertisingPolicyDisclosureWithAdvertisingPolicyDisclosure
 
-SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverForecastAdvertisingPolicyDisclosureWithAdvertisingPolicyDisclosure: TypeAlias = SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsGuaranteedOverForecastAdvertisingPolicyDisclosureWithAdvertisingPolicyDisclosure
+SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsGuaranteedOverForecastAdvertisingPolicyDisclosureWithCreativeApproval: TypeAlias = SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsAdvertisingPolicyDisclosureWithCreativeApproval
 
-SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverForecastAdvertisingPolicyDisclosureWithCreativeApproval: TypeAlias = SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsGuaranteedOverForecastAdvertisingPolicyDisclosureWithCreativeApproval
+SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsGuaranteedOverForecastAdvertisingPolicyDisclosureWithMediaBuyApproval: TypeAlias = SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsAdvertisingPolicyDisclosureWithMediaBuyApproval
 
-SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverForecastAdvertisingPolicyDisclosureWithGuaranteedOverForecast: TypeAlias = SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsGuaranteedOverForecastAdvertisingPolicyDisclosureWithGuaranteedOverForecast
+SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAdvertisingPolicyDisclosureWithAdvertisingPolicyDisclosure: TypeAlias = SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsAdvertisingPolicyDisclosureWithAdvertisingPolicyDisclosure
 
-SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverForecastAdvertisingPolicyDisclosureWithMediaBuyApproval: TypeAlias = SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsGuaranteedOverForecastAdvertisingPolicyDisclosureWithMediaBuyApproval
+SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAdvertisingPolicyDisclosureWithCreativeApproval: TypeAlias = SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsAdvertisingPolicyDisclosureWithCreativeApproval
+
+SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAdvertisingPolicyDisclosureWithMediaBuyApproval: TypeAlias = SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsAdvertisingPolicyDisclosureWithMediaBuyApproval
+
+SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverForecastAdvertisingPolicyDisclosureWithAdvertisingPolicyDisclosure: TypeAlias = SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsAdvertisingPolicyDisclosureWithAdvertisingPolicyDisclosure
+
+SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverForecastAdvertisingPolicyDisclosureWithCreativeApproval: TypeAlias = SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsAdvertisingPolicyDisclosureWithCreativeApproval
+
+SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverForecastAdvertisingPolicyDisclosureWithMediaBuyApproval: TypeAlias = SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsAdvertisingPolicyDisclosureWithMediaBuyApproval
 
 class SaveBusinessRulesInputWithPolicies(TypedDict):
     materialCandidate: NotRequired[SaveBusinessRulesInputMaterialCandidate]
@@ -13113,8 +13085,6 @@ class SaveBusinessRulesInputWithPolicies(TypedDict):
     '\n    New buyer accounts: auto accepts those within accountMaxAutoAcceptPaymentTerms; manual queues every one for review.\n    '
     accountMaxAutoAcceptPaymentTerms: NotRequired[Literal["net_15", "net_30", "net_45", "net_60", "net_90", "prepay"]]
     '\n    Longest payment terms accountApproval auto accepts without review; prepay is shortest. Default net_60.\n    '
-    guaranteedOverForecast: NotRequired[Literal["overbook", "hold_for_review"]]
-    '\n    Guaranteed buys over the ad server forecast: send anyway, or hold for review.\n    '
     acknowledgeNoHumanReview: NotRequired[bool]
     '\n    Required to move any approval to auto, media buys from manual to ai_assisted, to lengthen accountMaxAutoAcceptPaymentTerms under account auto, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
@@ -13139,8 +13109,6 @@ class SaveBusinessRulesInputWithPolicy(TypedDict):
     '\n    New buyer accounts: auto accepts those within accountMaxAutoAcceptPaymentTerms; manual queues every one for review.\n    '
     accountMaxAutoAcceptPaymentTerms: NotRequired[Literal["net_15", "net_30", "net_45", "net_60", "net_90", "prepay"]]
     '\n    Longest payment terms accountApproval auto accepts without review; prepay is shortest. Default net_60.\n    '
-    guaranteedOverForecast: NotRequired[Literal["overbook", "hold_for_review"]]
-    '\n    Guaranteed buys over the ad server forecast: send anyway, or hold for review.\n    '
     acknowledgeNoHumanReview: NotRequired[bool]
     '\n    Required to move any approval to auto, media buys from manual to ai_assisted, to lengthen accountMaxAutoAcceptPaymentTerms under account auto, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
@@ -13150,7 +13118,7 @@ class SaveBusinessRulesInputWithPolicy(TypedDict):
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
 
-SaveBusinessRulesInput: TypeAlias = "SaveBusinessRulesInputWithPolicy | SaveBusinessRulesInputWithPolicies | SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsGuaranteedOverForecastAdvertisingPolicyDisclosureWithCreativeApproval | SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsGuaranteedOverForecastAdvertisingPolicyDisclosureWithMediaBuyApproval | SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsGuaranteedOverForecastAdvertisingPolicyDisclosureWithAccountApproval | SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsGuaranteedOverForecastAdvertisingPolicyDisclosureWithAccountMaxAutoAcceptPaymentTerms | SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsGuaranteedOverForecastAdvertisingPolicyDisclosureWithGuaranteedOverForecast | SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsGuaranteedOverForecastAdvertisingPolicyDisclosureWithAdvertisingPolicyDisclosure"
+SaveBusinessRulesInput: TypeAlias = "SaveBusinessRulesInputWithPolicy | SaveBusinessRulesInputWithPolicies | SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsAdvertisingPolicyDisclosureWithCreativeApproval | SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsAdvertisingPolicyDisclosureWithMediaBuyApproval | SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsAdvertisingPolicyDisclosureWithAccountApproval | SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsAdvertisingPolicyDisclosureWithAccountMaxAutoAcceptPaymentTerms | SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsAdvertisingPolicyDisclosureWithAdvertisingPolicyDisclosure"
 
 class SaveBusinessRulesRequestSaveBusinessRulesPolicies(TypedDict):
     briefAcceptance: NotRequired[SaveBusinessRulesRequestSaveBusinessRulesPolicyChange]

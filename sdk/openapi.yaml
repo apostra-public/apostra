@@ -46687,12 +46687,6 @@ paths:
                     - net_60
                     - net_90
                     - prepay
-                guaranteedOverForecast:
-                  description: 'Guaranteed buys over the ad server forecast: send anyway, or hold for review.'
-                  type: string
-                  enum:
-                    - overbook
-                    - hold_for_review
                 acknowledgeNoHumanReview:
                   description: >-
                     Required to move any approval to auto, media buys from manual to ai_assisted, to lengthen
@@ -46974,8 +46968,6 @@ paths:
                             - accountApproval
                         - required:
                             - accountMaxAutoAcceptPaymentTerms
-                        - required:
-                            - guaranteedOverForecast
                         - required:
                             - advertisingPolicyDisclosure
       responses:
