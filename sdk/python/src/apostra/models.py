@@ -12354,7 +12354,7 @@ class SaveBillingInput(TypedDict):
     idempotencyKey: NotRequired[str]
     '\n    Key for paymentTerms (optional), paymentMethod and payNow (required); repeat it to read the outcome. A rejected, expired or failed approval needs a new key.\n    '
     plan: NotRequired[SaveBillingRequestSaveBillingPlan]
-    '\n    Accept or switch plans; returns approval_required. Send alone.\n    '
+    '\n    Accept or switch plans; returns approval_required or plan_accepted. Send alone.\n    '
     offerResponse: NotRequired[SaveBillingRequestSaveBillingOfferResponse]
     '\n    Decline the offer or decide later. Send alone.\n    '
     renewal: NotRequired[SaveBillingRequestSaveBillingRenewal]
