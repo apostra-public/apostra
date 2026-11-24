@@ -110920,7 +110920,6 @@ components:
                 - ui://agentic-api/conversation-history/mcp-app.html
                 - ui://agentic-api/agent-v2/mcp-app.html
                 - ui://agentic-api/developer-home/mcp-app.html
-                - ui://agentic-api/agents/mcp-app.html
                 - ui://agentic-api/create-agent/mcp-app.html
                 - ui://agentic-api/claim-agent/mcp-app.html
                 - ui://agentic-api/buyer-account-admission/mcp-app.html
