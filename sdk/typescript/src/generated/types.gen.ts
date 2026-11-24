@@ -6219,9 +6219,9 @@ export type GetDeliveryData = {
          */
         sponsoredBuyerCustomerId?: string;
         /**
-         * Select seller delivery, stored campaign delivery, live provider campaign delivery, margin, or live per-ad delivery for one campaign.
+         * Select seller delivery, stored campaign delivery, live provider campaign delivery, margin, live per-ad delivery for one campaign, or stored per-creative delivery by day with each creative's first delivery date.
          */
-        report?: 'delivery' | 'campaign_delivery' | 'live_campaign_delivery' | 'margin' | 'live_ad_delivery';
+        report?: 'delivery' | 'campaign_delivery' | 'live_campaign_delivery' | 'margin' | 'live_ad_delivery' | 'campaign_creative_delivery';
         /**
          * Metrics; omit for report defaults.
          */
@@ -6283,6 +6283,10 @@ export type GetDeliveryData = {
              * Filter to one product.
              */
             productId?: string;
+            /**
+             * campaign_creative_delivery: filter to one creative.
+             */
+            creativeId?: string;
         };
         /**
          * campaign_delivery only: ISO-4217 currency to convert money into at each day's rate.
@@ -6427,6 +6431,7 @@ export type GetDeliveryResponses = {
             currency?: never;
             reporting_period?: never;
             by_package?: never;
+            media_buy_deliveries?: never;
         } | {
             report: 'campaign_delivery';
             query: GetDeliverySuccessQuery;
@@ -6476,6 +6481,7 @@ export type GetDeliveryResponses = {
             currency?: never;
             reporting_period?: never;
             by_package?: never;
+            media_buy_deliveries?: never;
         } | {
             report: 'margin';
             query: GetDeliverySuccessQuery;
@@ -6525,6 +6531,7 @@ export type GetDeliveryResponses = {
             currency?: never;
             reporting_period?: never;
             by_package?: never;
+            media_buy_deliveries?: never;
         } | {
             report: 'live_campaign_delivery';
             query: {
@@ -6778,6 +6785,7 @@ export type GetDeliveryResponses = {
             currency?: never;
             reporting_period?: never;
             by_package?: never;
+            media_buy_deliveries?: never;
         } | {
             report: 'campaign_property_delivery';
             query: GetDeliverySuccessQuery;
@@ -6814,6 +6822,7 @@ export type GetDeliveryResponses = {
             currency?: never;
             reporting_period?: never;
             by_package?: never;
+            media_buy_deliveries?: never;
         } | {
             report: 'live_ad_delivery';
             query: {
@@ -6866,6 +6875,72 @@ export type GetDeliveryResponses = {
             delivery?: never;
             deliverySummary?: never;
             propertyDelivery?: never;
+            media_buy_deliveries?: never;
+        } | {
+            report: 'campaign_creative_delivery';
+            query: {
+                range: {
+                    startDate: string;
+                    endDate: string;
+                };
+                filters: {
+                    advertiserId?: string;
+                    campaignId?: string;
+                    mediaBuyId?: string;
+                    packageId?: string;
+                    creativeId?: string;
+                };
+            };
+            media_buy_deliveries: Array<GetDeliverySuccessCampaignCreativeMediaBuy>;
+            coverage: {
+                mediaBuysInScope: number;
+                throughDate?: string;
+                unread: {
+                    count: number;
+                    truncated: boolean;
+                    campaigns: Array<{
+                        campaignId: string;
+                        campaignName: string;
+                        management: 'managed' | 'tracked';
+                        reason: 'no_creative_rows';
+                    }>;
+                };
+            };
+            page: {
+                limit: number;
+                returned: number;
+                truncated: boolean;
+                nextCursor?: string;
+            };
+            semantics: {
+                sourceOperation: 'stored_creative_delivery_days';
+                genericFallback: false;
+                measurement: 'excluded';
+                aggregation: string;
+                missingValues: string;
+                freshness: string;
+                finality: string;
+                billingEligibility: string;
+            };
+            period?: never;
+            rows?: never;
+            totals?: never;
+            totalsByFinality?: never;
+            goalProgress?: never;
+            deliveryFreshness?: never;
+            currencyConversions?: never;
+            currencyConversionsOmitted?: never;
+            conversion?: never;
+            siteOutcomes?: never;
+            synthetic?: never;
+            campaignId?: never;
+            delivery?: never;
+            deliverySummary?: never;
+            authority?: never;
+            propertyDelivery?: never;
+            currency?: never;
+            reporting_period?: never;
+            by_package?: never;
         };
         error: null;
     };
@@ -7000,6 +7075,61 @@ export type GetDeliverySuccessAdPackageDeliverySpend = number;
 
 export type GetDeliverySuccessAdPackageDeliveryValue = unknown;
 
+export type GetDeliverySuccessCampaignCreativeDelivery = {
+    creative_id: string;
+    creative_name?: string;
+    impressions?: number;
+    spend?: number;
+    clicks?: number;
+    ctr?: number;
+    conversions?: number;
+    conversion_value?: number;
+    views?: number;
+    completed_views?: number;
+    cpm?: number;
+    cost_per_click?: number;
+    cost_per_acquisition?: number;
+    roas?: number;
+    /**
+     * true for a creative in the advertiser's Library, false when Apostra or the seller assigned the id to a creative made in the platform's own tools. Absent when the seller did not say.
+     */
+    creative_in_library?: boolean;
+    platform_ads?: Array<{
+        platform_ad_id: string;
+        platform_ad_name: string | null;
+    }>;
+    /**
+     * The first day the creative delivered in any of the advertiser campaigns, over all stored history and not only the range.
+     */
+    first_delivery_date?: string;
+    /**
+     * true only when history rules out earlier delivery; false means it first delivered on or before first_delivery_date.
+     */
+    first_delivery_exact?: boolean;
+    daily_breakdown: Array<GetDeliverySuccessCreativeDailyDelivery>;
+    daily_breakdown_truncated?: true;
+    daily_breakdown_truncated_before?: string;
+    [key: string]: unknown;
+};
+
+export type GetDeliverySuccessCampaignCreativeMediaBuy = {
+    media_buy_id: string;
+    campaignId: string;
+    campaignName: string;
+    management: 'managed' | 'tracked';
+    by_package: Array<GetDeliverySuccessCampaignCreativePackage>;
+};
+
+export type GetDeliverySuccessCampaignCreativePackage = {
+    package_id: string;
+    currency: string | null;
+    by_creative: Array<GetDeliverySuccessCampaignCreativeDelivery>;
+    /**
+     * true when the seller cut this package creative list on a day in the range.
+     */
+    by_creative_truncated: boolean;
+};
+
 export type GetDeliverySuccessCampaignDeliveryCoverage = {
     /**
      * Campaigns in scope with a current media buy that was booked or running during the range.
@@ -7050,6 +7180,38 @@ export type GetDeliverySuccessCampaignGoalProgressMediaBuy = {
     campaignId: string | null;
     progress: GetDeliverySuccessGoalProgress | null;
     deliveryGoal: GetDeliverySuccessGetDeliveryGoal;
+};
+
+export type GetDeliverySuccessCreativeDailyDelivery = {
+    impressions?: number;
+    spend?: number;
+    clicks?: number;
+    ctr?: number;
+    conversions?: number;
+    conversion_value?: number;
+    views?: number;
+    completed_views?: number;
+    reach?: number;
+    reach_unit?: 'individuals' | 'households' | 'devices' | 'accounts' | 'cookies' | 'custom';
+    reach_window?: {
+        kind: 'cumulative' | 'period' | 'rolling';
+        period?: {
+            interval: number;
+            unit: 'seconds' | 'minutes' | 'hours' | 'days' | 'campaign';
+            [key: string]: unknown;
+        };
+        [key: string]: unknown;
+    };
+    frequency?: number;
+    by_event_type?: Array<{
+        event_type: 'page_view' | 'view_content' | 'select_content' | 'select_item' | 'search' | 'share' | 'add_to_cart' | 'remove_from_cart' | 'viewed_cart' | 'add_to_wishlist' | 'initiate_checkout' | 'add_payment_info' | 'purchase' | 'refund' | 'lead' | 'qualify_lead' | 'close_convert_lead' | 'disqualify_lead' | 'complete_registration' | 'subscribe' | 'follow' | 'content_view' | 'watch_milestone' | 'start_trial' | 'app_install' | 'app_launch' | 'contact' | 'schedule' | 'donate' | 'submit_application' | 'custom';
+        event_source_id?: string;
+        count: number;
+        value?: number;
+        [key: string]: unknown;
+    }>;
+    date: string;
+    [key: string]: unknown;
 };
 
 export type GetDeliverySuccessCurrencyConversions = Array<GetDeliverySuccessDeliveryCurrencyConversion>;
@@ -8212,6 +8374,10 @@ export type GetDeliverySuccessQuery = {
          * Filter to one product.
          */
         productId?: string;
+        /**
+         * campaign_creative_delivery: filter to one creative.
+         */
+        creativeId?: string;
     };
 };
 
@@ -19021,33 +19187,37 @@ export type SaveAdvertiserResponses = {
             creativeResync?: SaveAdvertiserSuccessCreativeResync;
             currencyDefaulted?: SaveAdvertiserSuccessCurrencyDefaulted;
             timezoneDefaulted?: SaveAdvertiserSuccessTimezoneDefaulted;
+            brandUnverified?: SaveAdvertiserSuccessBrandUnverified;
             receipt?: SaveAdvertiserSuccessReceipt;
             action: 'created';
-            [key: string]: SaveAdvertiserSuccessValue | SaveAdvertiserSuccessAdvertiser | SaveAdvertiserSuccessCreativeResync | SaveAdvertiserSuccessCurrencyDefaulted | SaveAdvertiserSuccessTimezoneDefaulted | SaveAdvertiserSuccessReceipt | 'created' | undefined;
+            [key: string]: SaveAdvertiserSuccessValue | SaveAdvertiserSuccessAdvertiser | SaveAdvertiserSuccessCreativeResync | SaveAdvertiserSuccessCurrencyDefaulted | SaveAdvertiserSuccessTimezoneDefaulted | SaveAdvertiserSuccessBrandUnverified | SaveAdvertiserSuccessReceipt | 'created' | undefined;
         } | {
             advertiser: SaveAdvertiserSuccessAdvertiser;
             creativeResync?: SaveAdvertiserSuccessCreativeResync;
             currencyDefaulted?: SaveAdvertiserSuccessCurrencyDefaulted;
             timezoneDefaulted?: SaveAdvertiserSuccessTimezoneDefaulted;
+            brandUnverified?: SaveAdvertiserSuccessBrandUnverified;
             receipt?: SaveAdvertiserSuccessReceipt;
             action: 'updated';
-            [key: string]: SaveAdvertiserSuccessValue | SaveAdvertiserSuccessAdvertiser | SaveAdvertiserSuccessCreativeResync | SaveAdvertiserSuccessCurrencyDefaulted | SaveAdvertiserSuccessTimezoneDefaulted | SaveAdvertiserSuccessReceipt | 'updated' | undefined;
+            [key: string]: SaveAdvertiserSuccessValue | SaveAdvertiserSuccessAdvertiser | SaveAdvertiserSuccessCreativeResync | SaveAdvertiserSuccessCurrencyDefaulted | SaveAdvertiserSuccessTimezoneDefaulted | SaveAdvertiserSuccessBrandUnverified | SaveAdvertiserSuccessReceipt | 'updated' | undefined;
         } | {
             advertiser: SaveAdvertiserSuccessAdvertiser;
             creativeResync?: SaveAdvertiserSuccessCreativeResync;
             currencyDefaulted?: SaveAdvertiserSuccessCurrencyDefaulted;
             timezoneDefaulted?: SaveAdvertiserSuccessTimezoneDefaulted;
+            brandUnverified?: SaveAdvertiserSuccessBrandUnverified;
             receipt?: SaveAdvertiserSuccessReceipt;
             action: 'unchanged';
-            [key: string]: SaveAdvertiserSuccessValue | SaveAdvertiserSuccessAdvertiser | SaveAdvertiserSuccessCreativeResync | SaveAdvertiserSuccessCurrencyDefaulted | SaveAdvertiserSuccessTimezoneDefaulted | SaveAdvertiserSuccessReceipt | 'unchanged' | undefined;
+            [key: string]: SaveAdvertiserSuccessValue | SaveAdvertiserSuccessAdvertiser | SaveAdvertiserSuccessCreativeResync | SaveAdvertiserSuccessCurrencyDefaulted | SaveAdvertiserSuccessTimezoneDefaulted | SaveAdvertiserSuccessBrandUnverified | SaveAdvertiserSuccessReceipt | 'unchanged' | undefined;
         } | {
             advertiser: SaveAdvertiserSuccessAdvertiser;
             creativeResync?: SaveAdvertiserSuccessCreativeResync;
             currencyDefaulted?: SaveAdvertiserSuccessCurrencyDefaulted;
             timezoneDefaulted?: SaveAdvertiserSuccessTimezoneDefaulted;
+            brandUnverified?: SaveAdvertiserSuccessBrandUnverified;
             receipt?: SaveAdvertiserSuccessReceipt;
             action: 'restored';
-            [key: string]: SaveAdvertiserSuccessValue | SaveAdvertiserSuccessAdvertiser | SaveAdvertiserSuccessCreativeResync | SaveAdvertiserSuccessCurrencyDefaulted | SaveAdvertiserSuccessTimezoneDefaulted | SaveAdvertiserSuccessReceipt | 'restored' | undefined;
+            [key: string]: SaveAdvertiserSuccessValue | SaveAdvertiserSuccessAdvertiser | SaveAdvertiserSuccessCreativeResync | SaveAdvertiserSuccessCurrencyDefaulted | SaveAdvertiserSuccessTimezoneDefaulted | SaveAdvertiserSuccessBrandUnverified | SaveAdvertiserSuccessReceipt | 'restored' | undefined;
         } | {
             advertiserIds: SaveAdvertiserSuccessAdvertiserIds;
             results: SaveAdvertiserSuccessResults;
@@ -19078,7 +19248,14 @@ export type SaveAdvertiserResponses = {
             brand: {
                 domain: string;
                 resolved: boolean;
+                pending?: boolean;
+                verified: boolean;
                 [key: string]: unknown;
+            };
+            footprintProposal: {
+                brandCountries: Array<'AD' | 'AE' | 'AF' | 'AG' | 'AI' | 'AL' | 'AM' | 'AO' | 'AQ' | 'AR' | 'AS' | 'AT' | 'AU' | 'AW' | 'AX' | 'AZ' | 'BA' | 'BB' | 'BD' | 'BE' | 'BF' | 'BG' | 'BH' | 'BI' | 'BJ' | 'BL' | 'BM' | 'BN' | 'BO' | 'BQ' | 'BR' | 'BS' | 'BT' | 'BV' | 'BW' | 'BY' | 'BZ' | 'CA' | 'CC' | 'CD' | 'CF' | 'CG' | 'CH' | 'CI' | 'CK' | 'CL' | 'CM' | 'CN' | 'CO' | 'CR' | 'CU' | 'CV' | 'CW' | 'CX' | 'CY' | 'CZ' | 'DE' | 'DJ' | 'DK' | 'DM' | 'DO' | 'DZ' | 'EC' | 'EE' | 'EG' | 'EH' | 'ER' | 'ES' | 'ET' | 'FI' | 'FJ' | 'FK' | 'FM' | 'FO' | 'FR' | 'GA' | 'GB' | 'GD' | 'GE' | 'GF' | 'GG' | 'GH' | 'GI' | 'GL' | 'GM' | 'GN' | 'GP' | 'GQ' | 'GR' | 'GS' | 'GT' | 'GU' | 'GW' | 'GY' | 'HK' | 'HM' | 'HN' | 'HR' | 'HT' | 'HU' | 'ID' | 'IE' | 'IL' | 'IM' | 'IN' | 'IO' | 'IQ' | 'IR' | 'IS' | 'IT' | 'JE' | 'JM' | 'JO' | 'JP' | 'KE' | 'KG' | 'KH' | 'KI' | 'KM' | 'KN' | 'KP' | 'KR' | 'KW' | 'KY' | 'KZ' | 'LA' | 'LB' | 'LC' | 'LI' | 'LK' | 'LR' | 'LS' | 'LT' | 'LU' | 'LV' | 'LY' | 'MA' | 'MC' | 'MD' | 'ME' | 'MF' | 'MG' | 'MH' | 'MK' | 'ML' | 'MM' | 'MN' | 'MO' | 'MP' | 'MQ' | 'MR' | 'MS' | 'MT' | 'MU' | 'MV' | 'MW' | 'MX' | 'MY' | 'MZ' | 'NA' | 'NC' | 'NE' | 'NF' | 'NG' | 'NI' | 'NL' | 'NO' | 'NP' | 'NR' | 'NU' | 'NZ' | 'OM' | 'PA' | 'PE' | 'PF' | 'PG' | 'PH' | 'PK' | 'PL' | 'PM' | 'PN' | 'PR' | 'PS' | 'PT' | 'PW' | 'PY' | 'QA' | 'RE' | 'RO' | 'RS' | 'RU' | 'RW' | 'SA' | 'SB' | 'SC' | 'SD' | 'SE' | 'SG' | 'SH' | 'SI' | 'SJ' | 'SK' | 'SL' | 'SM' | 'SN' | 'SO' | 'SR' | 'SS' | 'ST' | 'SV' | 'SX' | 'SY' | 'SZ' | 'TC' | 'TD' | 'TF' | 'TG' | 'TH' | 'TJ' | 'TK' | 'TL' | 'TM' | 'TN' | 'TO' | 'TR' | 'TT' | 'TV' | 'TW' | 'TZ' | 'UA' | 'UG' | 'UM' | 'US' | 'UY' | 'UZ' | 'VA' | 'VC' | 'VE' | 'VG' | 'VI' | 'VN' | 'VU' | 'WF' | 'WS' | 'YE' | 'YT' | 'ZA' | 'ZM' | 'ZW'>;
+                channels: Array<'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence'>;
+                basis: string;
             };
             [key: string]: unknown;
         } | {
@@ -19162,6 +19339,8 @@ export type SaveAdvertiserSuccessAdvertiser = {
 };
 
 export type SaveAdvertiserSuccessAdvertiserIds = Array<string>;
+
+export type SaveAdvertiserSuccessBrandUnverified = boolean;
 
 export type SaveAdvertiserSuccessCreativeResync = {
     creativeCount: number;
