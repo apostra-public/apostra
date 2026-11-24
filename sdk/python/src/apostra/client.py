@@ -501,11 +501,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveCreativeCollectionResult], self._request_with_response("save_creative_collection", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_creative_session(self, input: models.SaveCreativeSessionInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveCreativeSessionResult:
-        "Save a Creative Session for image, video, or voice/audio (including radio spots) from a brief: its draft, selected output, approval, or finalisation. It never generates; generate_variants does. Save to the Library with destination library, or a composer draft with finalizeToLibrary."
+        "Save a Creative Session for image, video, or voice/audio (including radio spots) from a brief: its draft, composer slots (updateDraft), selected output, approval, or finalisation. It never generates; generate_variants does. Library: destination library, or a composer draft with finalizeToLibrary."
         return cast("models.SaveCreativeSessionResult", self._request("save_creative_session", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_creative_session_with_response(self, input: models.SaveCreativeSessionInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveCreativeSessionResult]:
-        "Save a Creative Session for image, video, or voice/audio (including radio spots) from a brief: its draft, selected output, approval, or finalisation. It never generates; generate_variants does. Save to the Library with destination library, or a composer draft with finalizeToLibrary. Returns the data together with response headers and request ID."
+        "Save a Creative Session for image, video, or voice/audio (including radio spots) from a brief: its draft, composer slots (updateDraft), selected output, approval, or finalisation. It never generates; generate_variants does. Library: destination library, or a composer draft with finalizeToLibrary. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveCreativeSessionResult], self._request_with_response("save_creative_session", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_dimension(self, input: models.SaveDimensionInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveDimensionResult:
@@ -1198,11 +1198,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveCreativeCollectionResult], await self._request_with_response("save_creative_collection", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_creative_session(self, input: models.SaveCreativeSessionInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveCreativeSessionResult:
-        "Save a Creative Session for image, video, or voice/audio (including radio spots) from a brief: its draft, selected output, approval, or finalisation. It never generates; generate_variants does. Save to the Library with destination library, or a composer draft with finalizeToLibrary."
+        "Save a Creative Session for image, video, or voice/audio (including radio spots) from a brief: its draft, composer slots (updateDraft), selected output, approval, or finalisation. It never generates; generate_variants does. Library: destination library, or a composer draft with finalizeToLibrary."
         return cast("models.SaveCreativeSessionResult", await self._request("save_creative_session", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_creative_session_with_response(self, input: models.SaveCreativeSessionInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveCreativeSessionResult]:
-        "Save a Creative Session for image, video, or voice/audio (including radio spots) from a brief: its draft, selected output, approval, or finalisation. It never generates; generate_variants does. Save to the Library with destination library, or a composer draft with finalizeToLibrary. Returns the data together with response headers and request ID."
+        "Save a Creative Session for image, video, or voice/audio (including radio spots) from a brief: its draft, composer slots (updateDraft), selected output, approval, or finalisation. It never generates; generate_variants does. Library: destination library, or a composer draft with finalizeToLibrary. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveCreativeSessionResult], await self._request_with_response("save_creative_session", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_dimension(self, input: models.SaveDimensionInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveDimensionResult:

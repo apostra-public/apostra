@@ -2859,6 +2859,8 @@
       "SaveCreativeSessionInputDraftRenditionsItemRights": "object",
       "SaveCreativeSessionInputEngine": "object",
       "SaveCreativeSessionInputFinalization": "object",
+      "SaveCreativeSessionInputUpdateDraft": "object",
+      "SaveCreativeSessionInputUpdateDraftSlotsItem": "object",
       "SaveCreativeSessionInputWithAdvertiserId": "object",
       "SaveCreativeSessionInputWithCampaignId": "object",
       "SaveCreativeSessionRequestDraftAssetsItem": "object",
