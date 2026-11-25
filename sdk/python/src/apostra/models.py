@@ -13017,7 +13017,7 @@ SaveBillingRequestSaveBillingPlanPlanId: TypeAlias = str
 
 class SaveBillingRequestSaveBillingPrimeSpendingCap(TypedDict):
     monthlyIus: int | None
-    '\n    IUs per billing cycle; 0 = none, not yet enforced; null resets.\n    '
+    '\n    IUs per billing cycle; 0 = none; null resets.\n    '
 
 class SaveBillingRequestSaveBillingRenewal(TypedDict):
     renewalVersion: str
