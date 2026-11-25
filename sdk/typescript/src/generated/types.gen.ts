@@ -20959,6 +20959,10 @@ export type SaveBillingData = {
              * Terms version shown in Plan & Billing.
              */
             acceptedVersion: string;
+            /**
+             * The offer from the billing read's next action. Required while Standard applies.
+             */
+            standardPlanElection?: string;
         };
         /**
          * Terms to ask sellers for: net_15, net_30, net_45, net_60, or net_90. Recommend net_60, which sellers accept without review, and confirm with the buyer. Returns approval_required. Send alone.
@@ -21351,6 +21355,15 @@ export type SaveBillingResponses = {
                 accepted: true;
                 acceptedVersion: string;
             };
+            plan: {
+                bindingId: string;
+                planId: string;
+                planName: string;
+                paymentOptionKey: string | null;
+                takesEffect: 'now' | 'at_term_end';
+                termStart: string;
+                termEnd: string;
+            } | null;
         } | {
             action: 'terms_not_required';
             terms: {

@@ -2352,6 +2352,7 @@
       "SaveBillingResultActionRenewalChanged": "object",
       "SaveBillingResultActionRenewalChangedRenewal": "object",
       "SaveBillingResultActionTermsAccepted": "object",
+      "SaveBillingResultActionTermsAcceptedPlanValue": "object",
       "SaveBillingResultActionTermsAcceptedTerms": "object",
       "SaveBillingResultActionTermsNotRequired": "object",
       "SaveBillingResultActionTermsNotRequiredTerms": "object",

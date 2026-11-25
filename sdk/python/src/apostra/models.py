@@ -12699,6 +12699,8 @@ class SaveBillingInputTerms(TypedDict):
     '\n    Explicitly accept the named Terms version.\n    '
     acceptedVersion: str
     '\n    Terms version shown in Plan & Billing.\n    '
+    standardPlanElection: NotRequired[str]
+    '\n    The offer from the billing read\'s next action. Required while Standard applies.\n    '
 
 class SaveBillingRequestSaveBillingMediaBilling(TypedDict):
     entity: NotRequired[SaveBillingRequestSaveBillingMediaBillingEntity]
@@ -13038,6 +13040,16 @@ class SaveBillingResultActionRenewalChangedRenewal(TypedDict):
 class SaveBillingResultActionTermsAccepted(TypedDict):
     action: Literal["terms_accepted"]
     terms: SaveBillingResultActionTermsAcceptedTerms
+    plan: SaveBillingResultActionTermsAcceptedPlanValue | None
+
+class SaveBillingResultActionTermsAcceptedPlanValue(TypedDict):
+    bindingId: str
+    planId: str
+    planName: str
+    paymentOptionKey: str | None
+    takesEffect: Literal["now", "at_term_end"]
+    termStart: str
+    termEnd: str
 
 class SaveBillingResultActionTermsAcceptedTerms(TypedDict):
     accepted: Literal[True]
