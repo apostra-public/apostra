@@ -2234,6 +2234,7 @@ paths:
                           - entitlements
                           - teaching
                           - analytics
+                          - demoEvaluation
                           - prebid
                           - commitmentRecord
                           - scores
@@ -3263,6 +3264,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: demoEvaluation
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: prebid
                         required:
                           - include
@@ -3667,6 +3681,7 @@ paths:
                           - entitlements
                           - teaching
                           - analytics
+                          - demoEvaluation
                           - prebid
                           - commitmentRecord
                           - scores
@@ -4697,6 +4712,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: demoEvaluation
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: prebid
                         required:
                           - include
@@ -5076,6 +5104,7 @@ paths:
                           - entitlements
                           - teaching
                           - analytics
+                          - demoEvaluation
                           - prebid
                           - commitmentRecord
                           - scores
@@ -6092,6 +6121,19 @@ paths:
                           include:
                             contains:
                               const: analytics
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: demoEvaluation
                         required:
                           - include
                       then:
@@ -6470,6 +6512,7 @@ paths:
                           - entitlements
                           - teaching
                           - analytics
+                          - demoEvaluation
                           - prebid
                           - commitmentRecord
                           - scores
@@ -7487,6 +7530,19 @@ paths:
                           include:
                             contains:
                               const: analytics
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: demoEvaluation
                         required:
                           - include
                       then:
@@ -7865,6 +7921,7 @@ paths:
                           - entitlements
                           - teaching
                           - analytics
+                          - demoEvaluation
                           - prebid
                           - commitmentRecord
                           - scores
@@ -8882,6 +8939,19 @@ paths:
                           include:
                             contains:
                               const: analytics
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: demoEvaluation
                         required:
                           - include
                       then:
@@ -9267,6 +9337,7 @@ paths:
                           - entitlements
                           - teaching
                           - analytics
+                          - demoEvaluation
                           - prebid
                           - commitmentRecord
                           - scores
@@ -10285,6 +10356,19 @@ paths:
                           include:
                             contains:
                               const: analytics
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: demoEvaluation
                         required:
                           - include
                       then:
@@ -11585,6 +11669,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: demoEvaluation
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: prebid
                         required:
                           - include
@@ -11952,6 +12049,7 @@ paths:
                           - entitlements
                           - teaching
                           - analytics
+                          - demoEvaluation
                           - prebid
                           - commitmentRecord
                           - scores
@@ -12982,6 +13080,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: demoEvaluation
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: prebid
                         required:
                           - include
@@ -13349,6 +13460,7 @@ paths:
                           - entitlements
                           - teaching
                           - analytics
+                          - demoEvaluation
                           - prebid
                           - commitmentRecord
                           - scores
@@ -14367,6 +14479,19 @@ paths:
                           include:
                             contains:
                               const: analytics
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: demoEvaluation
                         required:
                           - include
                       then:
@@ -15672,6 +15797,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: demoEvaluation
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: prebid
                         required:
                           - include
@@ -16965,6 +17103,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: demoEvaluation
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: prebid
                         required:
                           - include
@@ -17330,6 +17481,7 @@ paths:
                           - entitlements
                           - teaching
                           - analytics
+                          - demoEvaluation
                           - prebid
                           - commitmentRecord
                           - scores
@@ -18360,6 +18512,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: demoEvaluation
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: prebid
                         required:
                           - include
@@ -18725,6 +18890,7 @@ paths:
                           - entitlements
                           - teaching
                           - analytics
+                          - demoEvaluation
                           - prebid
                           - commitmentRecord
                           - scores
@@ -19755,6 +19921,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: demoEvaluation
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: prebid
                         required:
                           - include
@@ -20126,6 +20305,7 @@ paths:
                           - entitlements
                           - teaching
                           - analytics
+                          - demoEvaluation
                           - prebid
                           - commitmentRecord
                           - scores
@@ -21143,6 +21323,19 @@ paths:
                           include:
                             contains:
                               const: analytics
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: demoEvaluation
                         required:
                           - include
                       then:
@@ -21526,6 +21719,7 @@ paths:
                           - entitlements
                           - teaching
                           - analytics
+                          - demoEvaluation
                           - prebid
                           - commitmentRecord
                           - scores
@@ -22543,6 +22737,19 @@ paths:
                           include:
                             contains:
                               const: analytics
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: demoEvaluation
                         required:
                           - include
                       then:
@@ -22926,6 +23133,7 @@ paths:
                           - entitlements
                           - teaching
                           - analytics
+                          - demoEvaluation
                           - prebid
                           - commitmentRecord
                           - scores
@@ -23943,6 +24151,19 @@ paths:
                           include:
                             contains:
                               const: analytics
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: demoEvaluation
                         required:
                           - include
                       then:
@@ -24326,6 +24547,7 @@ paths:
                           - entitlements
                           - teaching
                           - analytics
+                          - demoEvaluation
                           - prebid
                           - commitmentRecord
                           - scores
@@ -25355,6 +25577,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: demoEvaluation
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: prebid
                         required:
                           - include
@@ -25726,6 +25961,7 @@ paths:
                           - entitlements
                           - teaching
                           - analytics
+                          - demoEvaluation
                           - prebid
                           - commitmentRecord
                           - scores
@@ -26744,6 +26980,19 @@ paths:
                           include:
                             contains:
                               const: analytics
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: demoEvaluation
                         required:
                           - include
                       then:
@@ -28049,6 +28298,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: demoEvaluation
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: prebid
                         required:
                           - include
@@ -29342,6 +29604,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: demoEvaluation
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: prebid
                         required:
                           - include
@@ -29713,6 +29988,7 @@ paths:
                           - entitlements
                           - teaching
                           - analytics
+                          - demoEvaluation
                           - prebid
                           - commitmentRecord
                           - scores
@@ -30730,6 +31006,19 @@ paths:
                           include:
                             contains:
                               const: analytics
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: demoEvaluation
                         required:
                           - include
                       then:
@@ -70406,10 +70695,46 @@ paths:
                         buyer's terms never change.
                 demo:
                   description: >-
-                    Demo expiry and sample sources, as desired state. Send alone. Create, reset and delete are on the
-                    demo Page.
+                    Demo expiry and sample sources, a rehearsal step, or a confirmed reset or delete. Send alone, one
+                    kind per call. Create is on the demo Page.
                   type: object
                   properties:
+                    rehearsal:
+                      description: 'Demo rehearsal step. State: get(seller, include: ["demoEvaluation"]).'
+                      type: object
+                      properties:
+                        action:
+                          type: string
+                          enum:
+                            - prepare
+                            - start
+                          description: >-
+                            prepare loads the teaching sources. start opens the held-out evaluation once rehearsal.state
+                            is ready.
+                        clientRequestId:
+                          description: Required for start. The same key returns the same run.
+                          type: string
+                          minLength: 1
+                          maxLength: 120
+                      required:
+                        - action
+                      additionalProperties: false
+                    lease:
+                      description: 'Reset or delete the demo, with confirm: true.'
+                      type: object
+                      properties:
+                        action:
+                          type: string
+                          enum:
+                            - reset
+                            - delete
+                          description: reset rebuilds the sample data; delete removes the demo and its data.
+                        confirm:
+                          description: Send true after the person confirms; without it nothing changes.
+                          type: boolean
+                      required:
+                        - action
+                      additionalProperties: false
                     expiresAt:
                       description: 'New expiry: after the current one, at most 7 days past it.'
                       type: string
@@ -71092,6 +71417,7 @@ paths:
                       - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessApprovalRequired'
                       - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessProposalAgent'
                       - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessPreview'
+                      - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessDemoDeleted'
                       - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessUpdated'
                       - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessUnchanged'
                       - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessReadbackUnavailable'
@@ -138782,6 +139108,34 @@ components:
         - before
         - after
         - docs
+      additionalProperties: {}
+    save_seller_success_SaveSellerSuccessDemoDeleted:
+      type: object
+      properties:
+        outcome:
+          type: string
+          const: demo_deleted
+        action:
+          type: string
+          const: demo_deleted
+        deleted:
+          type: boolean
+          const: true
+        demoAccount:
+          anyOf:
+            - type: object
+              properties:
+                outcome:
+                  type: string
+              required:
+                - outcome
+              additionalProperties: {}
+            - type: 'null'
+      required:
+        - outcome
+        - action
+        - deleted
+        - demoAccount
       additionalProperties: {}
     save_seller_success_SaveSellerSuccessUpdated:
       type: object
