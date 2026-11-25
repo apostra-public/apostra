@@ -22,6 +22,25 @@ export const operations = {
     ],
     "summary": "Issue the hosted card-capture link for the token an approved request_payment_authority returned. Give the link to the cardholder; cards stay off MCP."
   },
+  "decline_proposals": {
+    "path": "/tools/decline_proposals",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": true,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:write"
+        ]
+      }
+    ],
+    "summary": "Decline proposals and tell eligible sellers. Returns each local decision and seller answer. Give an AdCP reason and optional detail; never name a competitor or disclose confidential terms. Use unrecognized_terms when signed terms cannot be fully interpreted. Does not close the opportunity."
+  },
   "downloadV3PublicDocumentRevision": {
     "path": "/documents/{documentId}/revisions/{revisionId}/download",
     "method": "GET",
