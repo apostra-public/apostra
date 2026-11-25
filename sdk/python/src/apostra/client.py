@@ -404,6 +404,14 @@ class Apostra(SyncTransport):
         "Accept Terms, set seller payment terms, accept a plan, answer its offer, change its renewal or payer details, manage media billing entities, remove a card, or pay a failed payment now. Plan, payment terms, renewal, card removal and pay now need administrator approval on our site. Cards stay off MCP. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveBillingResult], self._request_with_response("save_billing", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
+    def save_brand(self, input: models.SaveBrandInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBrandResult:
+        "Change a brand's own record, one change per call. authority turns on or off Apostra's hosting of the brand's AdCP brand.json and brand agent, or checks what the brand's domain says."
+        return cast("models.SaveBrandResult", self._request("save_brand", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
+    def save_brand_with_response(self, input: models.SaveBrandInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveBrandResult]:
+        "Change a brand's own record, one change per call. authority turns on or off Apostra's hosting of the brand's AdCP brand.json and brand agent, or checks what the brand's domain says. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.SaveBrandResult], self._request_with_response("save_brand", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
     def save_brand_source(self, input: models.SaveBrandSourceInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBrandSourceResult:
         "Add or change one brand Library source. A person confirms its permitted uses before it is read."
         return cast("models.SaveBrandSourceResult", self._request("save_brand_source", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
@@ -1100,6 +1108,14 @@ class AsyncApostra(AsyncTransport):
     async def save_billing_with_response(self, input: models.SaveBillingInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveBillingResult]:
         "Accept Terms, set seller payment terms, accept a plan, answer its offer, change its renewal or payer details, manage media billing entities, remove a card, or pay a failed payment now. Plan, payment terms, renewal, card removal and pay now need administrator approval on our site. Cards stay off MCP. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveBillingResult], await self._request_with_response("save_billing", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
+    async def save_brand(self, input: models.SaveBrandInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBrandResult:
+        "Change a brand's own record, one change per call. authority turns on or off Apostra's hosting of the brand's AdCP brand.json and brand agent, or checks what the brand's domain says."
+        return cast("models.SaveBrandResult", await self._request("save_brand", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
+    async def save_brand_with_response(self, input: models.SaveBrandInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveBrandResult]:
+        "Change a brand's own record, one change per call. authority turns on or off Apostra's hosting of the brand's AdCP brand.json and brand agent, or checks what the brand's domain says. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.SaveBrandResult], await self._request_with_response("save_brand", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_brand_source(self, input: models.SaveBrandSourceInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBrandSourceResult:
         "Add or change one brand Library source. A person confirms its permitted uses before it is read."
