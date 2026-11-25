@@ -43594,6 +43594,10 @@ export type SearchData = {
              */
             releaseView?: 'for_you' | 'explore' | 'all' | 'board';
             /**
+             * For release_update updates: only these tiers. feature and improvement are what changes a customer’s work; fix is a bug fix. Omit for every tier.
+             */
+            tier?: Array<'fix' | 'improvement' | 'feature' | 'headline'>;
+            /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
             accountId?: number;
@@ -44212,6 +44216,10 @@ export type SearchData = {
              * For release_update: for_you (default), explore, all, or board (features by stage).
              */
             releaseView?: 'for_you' | 'explore' | 'all' | 'board';
+            /**
+             * For release_update updates: only these tiers. feature and improvement are what changes a customer’s work; fix is a bug fix. Omit for every tier.
+             */
+            tier?: Array<'fix' | 'improvement' | 'feature' | 'headline'>;
             /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
@@ -44900,6 +44908,10 @@ export type SearchData = {
              */
             releaseView?: 'for_you' | 'explore' | 'all' | 'board';
             /**
+             * For release_update updates: only these tiers. feature and improvement are what changes a customer’s work; fix is a bug fix. Omit for every tier.
+             */
+            tier?: Array<'fix' | 'improvement' | 'feature' | 'headline'>;
+            /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
             accountId?: number;
@@ -45515,6 +45527,10 @@ export type SearchData = {
              */
             releaseView?: 'for_you' | 'explore' | 'all' | 'board';
             /**
+             * For release_update updates: only these tiers. feature and improvement are what changes a customer’s work; fix is a bug fix. Omit for every tier.
+             */
+            tier?: Array<'fix' | 'improvement' | 'feature' | 'headline'>;
+            /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
             accountId?: number;
@@ -46126,6 +46142,10 @@ export type SearchData = {
              * For release_update: for_you (default), explore, all, or board (features by stage).
              */
             releaseView?: 'for_you' | 'explore' | 'all' | 'board';
+            /**
+             * For release_update updates: only these tiers. feature and improvement are what changes a customer’s work; fix is a bug fix. Omit for every tier.
+             */
+            tier?: Array<'fix' | 'improvement' | 'feature' | 'headline'>;
             /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
@@ -46741,6 +46761,10 @@ export type SearchData = {
              * For release_update: for_you (default), explore, all, or board (features by stage).
              */
             releaseView?: 'for_you' | 'explore' | 'all' | 'board';
+            /**
+             * For release_update updates: only these tiers. feature and improvement are what changes a customer’s work; fix is a bug fix. Omit for every tier.
+             */
+            tier?: Array<'fix' | 'improvement' | 'feature' | 'headline'>;
             /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
@@ -47356,6 +47380,10 @@ export type SearchData = {
              * For release_update: for_you (default), explore, all, or board (features by stage).
              */
             releaseView?: 'for_you' | 'explore' | 'all' | 'board';
+            /**
+             * For release_update updates: only these tiers. feature and improvement are what changes a customer’s work; fix is a bug fix. Omit for every tier.
+             */
+            tier?: Array<'fix' | 'improvement' | 'feature' | 'headline'>;
             /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
@@ -48101,6 +48129,10 @@ export type SearchData = {
              * For release_update: for_you (default), explore, all, or board (features by stage).
              */
             releaseView?: 'for_you' | 'explore' | 'all' | 'board';
+            /**
+             * For release_update updates: only these tiers. feature and improvement are what changes a customer’s work; fix is a bug fix. Omit for every tier.
+             */
+            tier?: Array<'fix' | 'improvement' | 'feature' | 'headline'>;
             /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
@@ -48861,6 +48893,10 @@ export type SearchData = {
              */
             releaseView?: 'for_you' | 'explore' | 'all' | 'board';
             /**
+             * For release_update updates: only these tiers. feature and improvement are what changes a customer’s work; fix is a bug fix. Omit for every tier.
+             */
+            tier?: Array<'fix' | 'improvement' | 'feature' | 'headline'>;
+            /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
             accountId?: number;
@@ -49552,6 +49588,10 @@ export type SearchData = {
              */
             releaseView?: 'for_you' | 'explore' | 'all' | 'board';
             /**
+             * For release_update updates: only these tiers. feature and improvement are what changes a customer’s work; fix is a bug fix. Omit for every tier.
+             */
+            tier?: Array<'fix' | 'improvement' | 'feature' | 'headline'>;
+            /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
             accountId?: number;
@@ -50169,6 +50209,10 @@ export type SearchData = {
              * For release_update: for_you (default), explore, all, or board (features by stage).
              */
             releaseView?: 'for_you' | 'explore' | 'all' | 'board';
+            /**
+             * For release_update updates: only these tiers. feature and improvement are what changes a customer’s work; fix is a bug fix. Omit for every tier.
+             */
+            tier?: Array<'fix' | 'improvement' | 'feature' | 'headline'>;
             /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
@@ -50788,6 +50832,10 @@ export type SearchData = {
              * For release_update: for_you (default), explore, all, or board (features by stage).
              */
             releaseView?: 'for_you' | 'explore' | 'all' | 'board';
+            /**
+             * For release_update updates: only these tiers. feature and improvement are what changes a customer’s work; fix is a bug fix. Omit for every tier.
+             */
+            tier?: Array<'fix' | 'improvement' | 'feature' | 'headline'>;
             /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
@@ -51408,6 +51456,10 @@ export type SearchData = {
              */
             releaseView?: 'for_you' | 'explore' | 'all' | 'board';
             /**
+             * For release_update updates: only these tiers. feature and improvement are what changes a customer’s work; fix is a bug fix. Omit for every tier.
+             */
+            tier?: Array<'fix' | 'improvement' | 'feature' | 'headline'>;
+            /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
             accountId?: number;
@@ -52026,6 +52078,10 @@ export type SearchData = {
              * For release_update: for_you (default), explore, all, or board (features by stage).
              */
             releaseView?: 'for_you' | 'explore' | 'all' | 'board';
+            /**
+             * For release_update updates: only these tiers. feature and improvement are what changes a customer’s work; fix is a bug fix. Omit for every tier.
+             */
+            tier?: Array<'fix' | 'improvement' | 'feature' | 'headline'>;
             /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */

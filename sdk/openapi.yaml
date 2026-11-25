@@ -73651,6 +73651,20 @@ paths:
                             - explore
                             - all
                             - board
+                        tier:
+                          description: >-
+                            For release_update updates: only these tiers. feature and improvement are what changes a
+                            customer’s work; fix is a bug fix. Omit for every tier.
+                          minItems: 1
+                          maxItems: 4
+                          type: array
+                          items:
+                            type: string
+                            enum:
+                              - fix
+                              - improvement
+                              - feature
+                              - headline
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -75650,6 +75664,20 @@ paths:
                             - explore
                             - all
                             - board
+                        tier:
+                          description: >-
+                            For release_update updates: only these tiers. feature and improvement are what changes a
+                            customer’s work; fix is a bug fix. Omit for every tier.
+                          minItems: 1
+                          maxItems: 4
+                          type: array
+                          items:
+                            type: string
+                            enum:
+                              - fix
+                              - improvement
+                              - feature
+                              - headline
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -78474,6 +78502,20 @@ paths:
                             - explore
                             - all
                             - board
+                        tier:
+                          description: >-
+                            For release_update updates: only these tiers. feature and improvement are what changes a
+                            customer’s work; fix is a bug fix. Omit for every tier.
+                          minItems: 1
+                          maxItems: 4
+                          type: array
+                          items:
+                            type: string
+                            enum:
+                              - fix
+                              - improvement
+                              - feature
+                              - headline
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -80465,6 +80507,20 @@ paths:
                             - explore
                             - all
                             - board
+                        tier:
+                          description: >-
+                            For release_update updates: only these tiers. feature and improvement are what changes a
+                            customer’s work; fix is a bug fix. Omit for every tier.
+                          minItems: 1
+                          maxItems: 4
+                          type: array
+                          items:
+                            type: string
+                            enum:
+                              - fix
+                              - improvement
+                              - feature
+                              - headline
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -82453,6 +82509,20 @@ paths:
                             - explore
                             - all
                             - board
+                        tier:
+                          description: >-
+                            For release_update updates: only these tiers. feature and improvement are what changes a
+                            customer’s work; fix is a bug fix. Omit for every tier.
+                          minItems: 1
+                          maxItems: 4
+                          type: array
+                          items:
+                            type: string
+                            enum:
+                              - fix
+                              - improvement
+                              - feature
+                              - headline
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -84441,6 +84511,20 @@ paths:
                             - explore
                             - all
                             - board
+                        tier:
+                          description: >-
+                            For release_update updates: only these tiers. feature and improvement are what changes a
+                            customer’s work; fix is a bug fix. Omit for every tier.
+                          minItems: 1
+                          maxItems: 4
+                          type: array
+                          items:
+                            type: string
+                            enum:
+                              - fix
+                              - improvement
+                              - feature
+                              - headline
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -86436,6 +86520,20 @@ paths:
                             - explore
                             - all
                             - board
+                        tier:
+                          description: >-
+                            For release_update updates: only these tiers. feature and improvement are what changes a
+                            customer’s work; fix is a bug fix. Omit for every tier.
+                          minItems: 1
+                          maxItems: 4
+                          type: array
+                          items:
+                            type: string
+                            enum:
+                              - fix
+                              - improvement
+                              - feature
+                              - headline
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -90128,6 +90226,20 @@ paths:
                             - explore
                             - all
                             - board
+                        tier:
+                          description: >-
+                            For release_update updates: only these tiers. feature and improvement are what changes a
+                            customer’s work; fix is a bug fix. Omit for every tier.
+                          minItems: 1
+                          maxItems: 4
+                          type: array
+                          items:
+                            type: string
+                            enum:
+                              - fix
+                              - improvement
+                              - feature
+                              - headline
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -93777,6 +93889,20 @@ paths:
                             - explore
                             - all
                             - board
+                        tier:
+                          description: >-
+                            For release_update updates: only these tiers. feature and improvement are what changes a
+                            customer’s work; fix is a bug fix. Omit for every tier.
+                          minItems: 1
+                          maxItems: 4
+                          type: array
+                          items:
+                            type: string
+                            enum:
+                              - fix
+                              - improvement
+                              - feature
+                              - headline
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -96613,6 +96739,20 @@ paths:
                             - explore
                             - all
                             - board
+                        tier:
+                          description: >-
+                            For release_update updates: only these tiers. feature and improvement are what changes a
+                            customer’s work; fix is a bug fix. Omit for every tier.
+                          minItems: 1
+                          maxItems: 4
+                          type: array
+                          items:
+                            type: string
+                            enum:
+                              - fix
+                              - improvement
+                              - feature
+                              - headline
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -98611,6 +98751,20 @@ paths:
                             - explore
                             - all
                             - board
+                        tier:
+                          description: >-
+                            For release_update updates: only these tiers. feature and improvement are what changes a
+                            customer’s work; fix is a bug fix. Omit for every tier.
+                          minItems: 1
+                          maxItems: 4
+                          type: array
+                          items:
+                            type: string
+                            enum:
+                              - fix
+                              - improvement
+                              - feature
+                              - headline
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -100606,6 +100760,20 @@ paths:
                             - explore
                             - all
                             - board
+                        tier:
+                          description: >-
+                            For release_update updates: only these tiers. feature and improvement are what changes a
+                            customer’s work; fix is a bug fix. Omit for every tier.
+                          minItems: 1
+                          maxItems: 4
+                          type: array
+                          items:
+                            type: string
+                            enum:
+                              - fix
+                              - improvement
+                              - feature
+                              - headline
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -102601,6 +102769,20 @@ paths:
                             - explore
                             - all
                             - board
+                        tier:
+                          description: >-
+                            For release_update updates: only these tiers. feature and improvement are what changes a
+                            customer’s work; fix is a bug fix. Omit for every tier.
+                          minItems: 1
+                          maxItems: 4
+                          type: array
+                          items:
+                            type: string
+                            enum:
+                              - fix
+                              - improvement
+                              - feature
+                              - headline
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -104597,6 +104779,20 @@ paths:
                             - explore
                             - all
                             - board
+                        tier:
+                          description: >-
+                            For release_update updates: only these tiers. feature and improvement are what changes a
+                            customer’s work; fix is a bug fix. Omit for every tier.
+                          minItems: 1
+                          maxItems: 4
+                          type: array
+                          items:
+                            type: string
+                            enum:
+                              - fix
+                              - improvement
+                              - feature
+                              - headline
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may

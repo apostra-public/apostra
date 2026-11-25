@@ -25681,6 +25681,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     '\n    For kind notification: only the notifications you have not read.\n    '
     releaseView: NotRequired[Literal["for_you", "explore", "all", "board"]]
     '\n    For release_update: for_you (default), explore, all, or board (features by stage).\n    '
+    tier: NotRequired[list[Literal["fix", "improvement", "feature", "headline"]]]
+    '\n    For release_update updates: only these tiers. feature and improvement are what changes a customer’s work; fix is a bug fix. Omit for every tier.\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -26029,6 +26031,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     '\n    For kind notification: only the notifications you have not read.\n    '
     releaseView: NotRequired[Literal["for_you", "explore", "all", "board"]]
     '\n    For release_update: for_you (default), explore, all, or board (features by stage).\n    '
+    tier: NotRequired[list[Literal["fix", "improvement", "feature", "headline"]]]
+    '\n    For release_update updates: only these tiers. feature and improvement are what changes a customer’s work; fix is a bug fix. Omit for every tier.\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -26311,6 +26315,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(Type
     '\n    For kind notification: only the notifications you have not read.\n    '
     releaseView: NotRequired[Literal["for_you", "explore", "all", "board"]]
     '\n    For release_update: for_you (default), explore, all, or board (features by stage).\n    '
+    tier: NotRequired[list[Literal["fix", "improvement", "feature", "headline"]]]
+    '\n    For release_update updates: only these tiers. feature and improvement are what changes a customer’s work; fix is a bug fix. Omit for every tier.\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -26620,6 +26626,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDi
     '\n    For kind notification: only the notifications you have not read.\n    '
     releaseView: NotRequired[Literal["for_you", "explore", "all", "board"]]
     '\n    For release_update: for_you (default), explore, all, or board (features by stage).\n    '
+    tier: NotRequired[list[Literal["fix", "improvement", "feature", "headline"]]]
+    '\n    For release_update updates: only these tiers. feature and improvement are what changes a customer’s work; fix is a bug fix. Omit for every tier.\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -26968,6 +26976,8 @@ class SearchInputKindAdServerTargetingFilter(TypedDict):
     '\n    For kind notification: only the notifications you have not read.\n    '
     releaseView: NotRequired[Literal["for_you", "explore", "all", "board"]]
     '\n    For release_update: for_you (default), explore, all, or board (features by stage).\n    '
+    tier: NotRequired[list[Literal["fix", "improvement", "feature", "headline"]]]
+    '\n    For release_update updates: only these tiers. feature and improvement are what changes a customer’s work; fix is a bug fix. Omit for every tier.\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -27286,6 +27296,8 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     '\n    For kind notification: only the notifications you have not read.\n    '
     releaseView: NotRequired[Literal["for_you", "explore", "all", "board"]]
     '\n    For release_update: for_you (default), explore, all, or board (features by stage).\n    '
+    tier: NotRequired[list[Literal["fix", "improvement", "feature", "headline"]]]
+    '\n    For release_update updates: only these tiers. feature and improvement are what changes a customer’s work; fix is a bug fix. Omit for every tier.\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -27616,6 +27628,8 @@ class SearchInputKindBuyerRfpFilter(TypedDict):
     '\n    For kind notification: only the notifications you have not read.\n    '
     releaseView: NotRequired[Literal["for_you", "explore", "all", "board"]]
     '\n    For release_update: for_you (default), explore, all, or board (features by stage).\n    '
+    tier: NotRequired[list[Literal["fix", "improvement", "feature", "headline"]]]
+    '\n    For release_update updates: only these tiers. feature and improvement are what changes a customer’s work; fix is a bug fix. Omit for every tier.\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -27966,6 +27980,8 @@ class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     '\n    For kind notification: only the notifications you have not read.\n    '
     releaseView: NotRequired[Literal["for_you", "explore", "all", "board"]]
     '\n    For release_update: for_you (default), explore, all, or board (features by stage).\n    '
+    tier: NotRequired[list[Literal["fix", "improvement", "feature", "headline"]]]
+    '\n    For release_update updates: only these tiers. feature and improvement are what changes a customer’s work; fix is a bug fix. Omit for every tier.\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -28280,6 +28296,8 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     '\n    For kind notification: only the notifications you have not read.\n    '
     releaseView: NotRequired[Literal["for_you", "explore", "all", "board"]]
     '\n    For release_update: for_you (default), explore, all, or board (features by stage).\n    '
+    tier: NotRequired[list[Literal["fix", "improvement", "feature", "headline"]]]
+    '\n    For release_update updates: only these tiers. feature and improvement are what changes a customer’s work; fix is a bug fix. Omit for every tier.\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -28594,6 +28612,8 @@ class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     '\n    For kind notification: only the notifications you have not read.\n    '
     releaseView: NotRequired[Literal["for_you", "explore", "all", "board"]]
     '\n    For release_update: for_you (default), explore, all, or board (features by stage).\n    '
+    tier: NotRequired[list[Literal["fix", "improvement", "feature", "headline"]]]
+    '\n    For release_update updates: only these tiers. feature and improvement are what changes a customer’s work; fix is a bug fix. Omit for every tier.\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -28874,6 +28894,8 @@ class SearchInputKindCreativeFilter(TypedDict):
     '\n    For kind notification: only the notifications you have not read.\n    '
     releaseView: NotRequired[Literal["for_you", "explore", "all", "board"]]
     '\n    For release_update: for_you (default), explore, all, or board (features by stage).\n    '
+    tier: NotRequired[list[Literal["fix", "improvement", "feature", "headline"]]]
+    '\n    For release_update updates: only these tiers. feature and improvement are what changes a customer’s work; fix is a bug fix. Omit for every tier.\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -29258,6 +29280,8 @@ class SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter(TypedDict):
     '\n    For kind notification: only the notifications you have not read.\n    '
     releaseView: NotRequired[Literal["for_you", "explore", "all", "board"]]
     '\n    For release_update: for_you (default), explore, all, or board (features by stage).\n    '
+    tier: NotRequired[list[Literal["fix", "improvement", "feature", "headline"]]]
+    '\n    For release_update updates: only these tiers. feature and improvement are what changes a customer’s work; fix is a bug fix. Omit for every tier.\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -29660,6 +29684,8 @@ class SearchInputKindProposalFilter(TypedDict):
     '\n    For kind notification: only the notifications you have not read.\n    '
     releaseView: NotRequired[Literal["for_you", "explore", "all", "board"]]
     '\n    For release_update: for_you (default), explore, all, or board (features by stage).\n    '
+    tier: NotRequired[list[Literal["fix", "improvement", "feature", "headline"]]]
+    '\n    For release_update updates: only these tiers. feature and improvement are what changes a customer’s work; fix is a bug fix. Omit for every tier.\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -29976,6 +30002,8 @@ class SearchInputKindSourceAccountFilter(TypedDict):
     '\n    For kind notification: only the notifications you have not read.\n    '
     releaseView: NotRequired[Literal["for_you", "explore", "all", "board"]]
     '\n    For release_update: for_you (default), explore, all, or board (features by stage).\n    '
+    tier: NotRequired[list[Literal["fix", "improvement", "feature", "headline"]]]
+    '\n    For release_update updates: only these tiers. feature and improvement are what changes a customer’s work; fix is a bug fix. Omit for every tier.\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
