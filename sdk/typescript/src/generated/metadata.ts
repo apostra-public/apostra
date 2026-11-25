@@ -433,6 +433,25 @@ export const operations = {
     ],
     "summary": "Open the Approvals Page for reviews, assignments, routing, evidence, decisions, and forward recovery. Focus by exact media-buy identity or reviewRef; creativeId works only for one loaded version."
   },
+  "open_brand_studio": {
+    "path": "/tools/open_brand_studio",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": false,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:read"
+        ]
+      }
+    ],
+    "summary": "Open an advertiser's Brand Studio: who the brand is, its profile, its Library sources, and how to prove the brand is yours, then where it's live and how it's doing. Use it when setting up or reviewing an advertiser's brand. To answer one question, read get with kind: \"brand\" instead."
+  },
   "open_buyer_agents_page": {
     "path": "/tools/open_buyer_agents_page",
     "method": "POST",

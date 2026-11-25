@@ -156,6 +156,14 @@ class Apostra(SyncTransport):
         "Open the Approvals Page for reviews, assignments, routing, evidence, decisions, and forward recovery. Focus by exact media-buy identity or reviewRef; creativeId works only for one loaded version. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.OpenApprovalsResult], self._request_with_response("open_approvals", input, account_id=account_id, timeout=timeout))
 
+    def open_brand_studio(self, input: models.OpenBrandStudioInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenBrandStudioResult:
+        "Open an advertiser's Brand Studio: who the brand is, its profile, its Library sources, and how to prove the brand is yours, then where it's live and how it's doing. Use it when setting up or reviewing an advertiser's brand. To answer one question, read get with kind: \"brand\" instead."
+        return cast("models.OpenBrandStudioResult", self._request("open_brand_studio", input, account_id=account_id, timeout=timeout))
+
+    def open_brand_studio_with_response(self, input: models.OpenBrandStudioInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenBrandStudioResult]:
+        "Open an advertiser's Brand Studio: who the brand is, its profile, its Library sources, and how to prove the brand is yours, then where it's live and how it's doing. Use it when setting up or reviewing an advertiser's brand. To answer one question, read get with kind: \"brand\" instead. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.OpenBrandStudioResult], self._request_with_response("open_brand_studio", input, account_id=account_id, timeout=timeout))
+
     def open_buyer_agents_page(self, input: models.OpenBuyerAgentsPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenBuyerAgentsPageResult:
         "Open the Buyer agents Page: the agents a person claimed into this account, each with its client, claim date and active or revoked state, and Revoke for an administrator. The Page loads itself, so do not repeat the list. search(kind: \"buyer_agent\") reads the same list; save_buyer_agent revokes."
         return cast("models.OpenBuyerAgentsPageResult", self._request("open_buyer_agents_page", input, account_id=account_id, timeout=timeout))
@@ -876,6 +884,14 @@ class AsyncApostra(AsyncTransport):
     async def open_approvals_with_response(self, input: models.OpenApprovalsInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenApprovalsResult]:
         "Open the Approvals Page for reviews, assignments, routing, evidence, decisions, and forward recovery. Focus by exact media-buy identity or reviewRef; creativeId works only for one loaded version. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.OpenApprovalsResult], await self._request_with_response("open_approvals", input, account_id=account_id, timeout=timeout))
+
+    async def open_brand_studio(self, input: models.OpenBrandStudioInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenBrandStudioResult:
+        "Open an advertiser's Brand Studio: who the brand is, its profile, its Library sources, and how to prove the brand is yours, then where it's live and how it's doing. Use it when setting up or reviewing an advertiser's brand. To answer one question, read get with kind: \"brand\" instead."
+        return cast("models.OpenBrandStudioResult", await self._request("open_brand_studio", input, account_id=account_id, timeout=timeout))
+
+    async def open_brand_studio_with_response(self, input: models.OpenBrandStudioInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenBrandStudioResult]:
+        "Open an advertiser's Brand Studio: who the brand is, its profile, its Library sources, and how to prove the brand is yours, then where it's live and how it's doing. Use it when setting up or reviewing an advertiser's brand. To answer one question, read get with kind: \"brand\" instead. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.OpenBrandStudioResult], await self._request_with_response("open_brand_studio", input, account_id=account_id, timeout=timeout))
 
     async def open_buyer_agents_page(self, input: models.OpenBuyerAgentsPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenBuyerAgentsPageResult:
         "Open the Buyer agents Page: the agents a person claimed into this account, each with its client, claim date and active or revoked state, and Revoke for an administrator. The Page loads itself, so do not repeat the list. search(kind: \"buyer_agent\") reads the same list; save_buyer_agent revokes."

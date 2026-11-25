@@ -6756,6 +6756,10 @@ export type GetDeliveryData = {
              */
             channelGroupId?: string;
             /**
+             * Campaign delivery: filter to the campaigns and media buys attached to one Project (get kind 'project').
+             */
+            projectId?: string;
+            /**
              * Margin: filter to one buyer Account id.
              */
             buyerAccountId?: number;
@@ -6776,6 +6780,10 @@ export type GetDeliveryData = {
              */
             creativeId?: string;
         };
+        /**
+         * campaign_delivery only, bounded range: also return the change against the previous period of the same length, as comparison.
+         */
+        compare?: 'previous_period';
         /**
          * campaign_delivery only: ISO-4217 currency to convert money into at each day's rate.
          */
@@ -6907,6 +6915,7 @@ export type GetDeliveryResponses = {
              */
             conversion?: GetDeliverySuccessDeliveryConversion;
             siteOutcomes?: GetDeliverySuccessSiteOutcomes;
+            comparison?: GetDeliverySuccessGetDeliveryComparison;
             /**
              * Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.
              */
@@ -6957,6 +6966,7 @@ export type GetDeliveryResponses = {
              */
             conversion?: GetDeliverySuccessDeliveryConversion;
             siteOutcomes?: GetDeliverySuccessSiteOutcomes;
+            comparison?: GetDeliverySuccessGetDeliveryComparison;
             /**
              * Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.
              */
@@ -7007,6 +7017,7 @@ export type GetDeliveryResponses = {
              */
             conversion?: GetDeliverySuccessDeliveryConversion;
             siteOutcomes?: GetDeliverySuccessSiteOutcomes;
+            comparison?: GetDeliverySuccessGetDeliveryComparison;
             /**
              * Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.
              */
@@ -7268,6 +7279,7 @@ export type GetDeliveryResponses = {
             currencyConversionsOmitted?: never;
             conversion?: never;
             siteOutcomes?: never;
+            comparison?: never;
             synthetic?: never;
             propertyDelivery?: never;
             currency?: never;
@@ -7302,6 +7314,7 @@ export type GetDeliveryResponses = {
             currencyConversionsOmitted?: never;
             conversion?: never;
             siteOutcomes?: never;
+            comparison?: never;
             synthetic?: never;
             campaignId?: never;
             delivery?: never;
@@ -7359,6 +7372,7 @@ export type GetDeliveryResponses = {
             currencyConversionsOmitted?: never;
             conversion?: never;
             siteOutcomes?: never;
+            comparison?: never;
             synthetic?: never;
             delivery?: never;
             deliverySummary?: never;
@@ -7435,6 +7449,7 @@ export type GetDeliveryResponses = {
             currencyConversionsOmitted?: never;
             conversion?: never;
             siteOutcomes?: never;
+            comparison?: never;
             synthetic?: never;
             campaignId?: never;
             delivery?: never;
@@ -8264,6 +8279,89 @@ export type GetDeliverySuccessDeliveryUnconvertedDay = {
     date: string;
 };
 
+/**
+ * Present when compare is previous_period: the previous period of the same length, its totals, and per metric the previous and current value, the change and the percent change (null when the previous value is zero or a figure is unavailable).
+ */
+export type GetDeliverySuccessGetDeliveryComparison = {
+    range: {
+        startDate: string;
+        endDate: string;
+    };
+    totals: {
+        rowsIncluded: GetDeliverySuccessGetDeliveryComparisonTotalsRowsIncluded;
+        currency: GetDeliverySuccessGetDeliveryComparisonTotalsCurrency;
+        metrics: GetDeliverySuccessGetDeliveryComparisonTotalsMetrics;
+        denomination: GetDeliverySuccessGetDeliveryComparisonTotalsDenomination;
+        dataThrough: GetDeliverySuccessGetDeliveryComparisonTotalsDataThrough;
+        finality: {
+            status: 'available';
+            class: 'SNAPSHOT' | 'OFFICIAL';
+            revision: GetDeliverySuccessDeliveryRevision;
+            supportedClasses?: never;
+            reason?: never;
+        } | {
+            status: 'unavailable';
+            class: 'SNAPSHOT' | 'OFFICIAL' | null;
+            supportedClasses: [
+                'SNAPSHOT' | 'OFFICIAL',
+                'SNAPSHOT' | 'OFFICIAL'
+            ];
+            revision: null;
+            reason: 'revision_evidence_unavailable' | 'revision_evidence_mixed' | 'revision_unreadable';
+        } | {
+            status: 'not_applicable';
+            class: null;
+            revision: null;
+            reason: 'cumulative_margin_ledger' | 'closed_period_statement';
+            supportedClasses?: never;
+        };
+        billingEligibility: GetDeliverySuccessGetDeliveryComparisonTotalsBillingEligibility;
+    };
+    changes: {
+        [key: string]: {
+            previous: number | null;
+            current: number | null;
+            change: number | null;
+            changePercent: number | null;
+        };
+    };
+};
+
+export type GetDeliverySuccessGetDeliveryComparisonTotalsBillingEligibility = 'not_evaluated';
+
+export type GetDeliverySuccessGetDeliveryComparisonTotalsCurrency = string | null;
+
+export type GetDeliverySuccessGetDeliveryComparisonTotalsDataThrough = string | null;
+
+export type GetDeliverySuccessGetDeliveryComparisonTotalsDenomination = 'net' | 'gross_buyer';
+
+export type GetDeliverySuccessGetDeliveryComparisonTotalsMetrics = {
+    [key: string]: GetDeliverySuccessGetDeliveryComparisonTotalsMetricsValue;
+};
+
+export type GetDeliverySuccessGetDeliveryComparisonTotalsMetricsValue = {
+    value: number | boolean | null;
+    status: 'available' | 'unavailable';
+    reason?: 'projected_zero' | 'missing' | 'currency_unavailable' | 'incomplete' | 'revision_unreadable' | 'finality_mixed' | 'fx_rate_unavailable' | 'not_additive';
+    /**
+     * grps only: the AdCP measurement_window the points belong to and is_final. A field is absent when it is not known for every day behind the value. Points that are not final can still change, for example when C7 ratings replace C3.
+     */
+    basis?: {
+        measurement_window?: string;
+        is_final?: boolean;
+    };
+    /**
+     * reach and frequency only: AdCP reach_unit, what the seller counted. Absent when the seller named none.
+     */
+    reach_unit?: GetDeliverySuccessMetricDatumReachUnit;
+    /**
+     * reach and frequency only: AdCP reach_window, the period the value covers. Absent when the seller declared none, which leaves the window unspecified.
+     */
+    reach_window?: GetDeliverySuccessMetricDatumReachWindow;
+};
+
+export type GetDeliverySuccessGetDeliveryComparisonTotalsRowsIncluded = number;
+
 export type GetDeliverySuccessGetDeliveryGoal = {
     constraint: {
         kind: 'spend' | 'impressions' | 'grps';
@@ -8887,6 +8985,10 @@ export type GetDeliverySuccessQuery = {
          * Campaign delivery: filter to one channel group.
          */
         channelGroupId?: string;
+        /**
+         * Campaign delivery: filter to the campaigns and media buys attached to one Project (get kind 'project').
+         */
+        projectId?: string;
         /**
          * Margin: filter to one buyer Account id.
          */
@@ -14653,6 +14755,107 @@ export type OpenApprovalsResponses = {
     };
 };
 
+export type OpenBrandStudioData = {
+    body: {
+        /**
+         * The advertiser whose brand to open; resolve a name with search(kind: "advertiser") first.
+         */
+        advertiserId: string;
+        /**
+         * The tab to open on: brand (default), presence, results, places or creators.
+         */
+        tab?: 'brand' | 'presence' | 'results' | 'places' | 'creators';
+        /**
+         * Apostra accountId this call runs in, from get_status.
+         */
+        accountId?: number | string;
+    };
+    headers?: {
+        /**
+         * Deprecated: send accountId in the request body instead. Retires on the announced removal date. If both are sent they must name the same account.
+         *
+         * @deprecated
+         */
+        'X-SCOPE3-CUSTOMER-ID'?: string;
+    };
+    path?: never;
+    query?: never;
+    url: '/tools/open_brand_studio';
+};
+
+export type OpenBrandStudioError = OpenBrandStudioErrors[keyof OpenBrandStudioErrors];
+
+export type OpenBrandStudioErrors = {
+    /**
+     * Invalid operation input
+     */
+    400: V3ToolErrorResponse;
+    /**
+     * Missing or invalid API credential
+     */
+    401: V3ToolErrorResponse;
+    /**
+     * Account credit limit exceeded
+     */
+    402: V3ToolErrorResponse;
+    /**
+     * The credential or account cannot perform this operation
+     */
+    403: V3ToolErrorResponse;
+    /**
+     * Requested resource not found
+     */
+    404: V3ToolErrorResponse;
+    /**
+     * Operation conflicts with current resource state
+     */
+    409: V3ToolErrorResponse;
+    /**
+     * Request body exceeds the accepted size
+     */
+    413: V3ToolErrorResponse;
+    /**
+     * Request body encoding or character set is unsupported
+     */
+    415: V3ToolErrorResponse;
+    /**
+     * Operation cannot process the supplied input
+     */
+    422: V3ToolErrorResponse;
+    /**
+     * Request rate limit exceeded
+     */
+    429: V3ToolErrorResponse;
+    /**
+     * Unexpected operation failure
+     */
+    500: V3ToolErrorResponse;
+    /**
+     * Recognised operation behaviour is not implemented
+     */
+    501: V3ToolErrorResponse;
+    /**
+     * A required service is unavailable
+     */
+    503: V3ToolErrorResponse;
+};
+
+export type OpenBrandStudioResponse = OpenBrandStudioResponses[keyof OpenBrandStudioResponses];
+
+export type OpenBrandStudioResponses = {
+    /**
+     * Typed operation result
+     */
+    200: {
+        data: {
+            advertiserId: string;
+            brand: string | null;
+            tab: 'brand' | 'presence' | 'results' | 'places' | 'creators';
+        };
+        error: null;
+    };
+};
+
 export type OpenBuyerAgentsPageData = {
     body: {
         /**
@@ -15182,7 +15385,7 @@ export type OpenCampaignsPageSuccessPageHumanHandoffRequired = {
         instruction: 'Show the account and action. Open only at the user’s request; otherwise return the URL. Do not log or post this link publicly.';
     };
     page: {
-        resourceUri: 'ui://agentic-api/conversation-history/mcp-app.html' | 'ui://agentic-api/agent-v2/mcp-app.html' | 'ui://agentic-api/developer-home/mcp-app.html' | 'ui://agentic-api/create-agent/mcp-app.html' | 'ui://agentic-api/claim-agent/mcp-app.html' | 'ui://agentic-api/buyer-account-admission/mcp-app.html' | 'ui://agentic-api/tars-org-supply-asks/mcp-app.html' | 'ui://agentic-api/tars-library-figure-review/mcp-app.html' | 'ui://agentic-api/tars-initiative-status/mcp-app.html' | 'ui://agentic-api/tars-run-rate/mcp-app.html' | 'ui://agentic-api/tars-connections/mcp-app.html' | 'ui://agentic-api/tars-internal-library/mcp-app.html' | 'ui://agentic-api/tars-marketing-email-library/mcp-app.html' | 'ui://agentic-api/tars-approved-deck-modules/mcp-app.html' | 'ui://agentic-api/tars-marketing-email-operations/mcp-app.html' | 'ui://agentic-api/business-rules/mcp-app.html' | 'ui://agentic-api/demo-storefront/mcp-app.html' | 'ui://agentic-api/agent-source-credentials/mcp-app.html' | 'ui://agentic-api/property-roster/mcp-app.html' | 'ui://agentic-api/seller-account-feed/mcp-app.html' | 'ui://agentic-api/esa-signals/mcp-app.html' | 'ui://agentic-api/media-buy-retry/mcp-app.html' | 'ui://agentic-api/inventory-selector/mcp-app.html' | 'ui://agentic-api/modular-inventory-source/mcp-app.html' | 'ui://agentic-api/modular-connect/mcp-app.html' | 'ui://agentic-api/source-discovery-preview/mcp-app.html' | 'ui://agentic-api/partner-connection/mcp-app.html' | 'ui://agentic-api/agent-sources/mcp-app.html' | 'ui://agentic-api/agent-overview/mcp-app.html' | 'ui://agentic-api/agent-webhooks/mcp-app.html' | 'ui://agentic-api/agent-activity/mcp-app.html' | 'ui://agentic-api/organization-domains/mcp-app.html' | 'ui://agentic-api/modular-avails-commit/mcp-app.html' | 'ui://agentic-api/plan-billing/mcp-app.html' | 'ui://agentic-api/connections/mcp-app.html' | 'ui://agentic-api/creative-engines/mcp-app.html' | 'ui://agentic-api/all-advertisers-home/mcp-app.html' | 'ui://agentic-api/add-advertiser/mcp-app.html' | 'ui://agentic-api/buyer-setup/mcp-app.html' | 'ui://agentic-api/campaigns/mcp-app.html' | 'ui://agentic-api/creative-library-v3-assets-v1/mcp-app.html' | 'ui://agentic-api/creative-library-v3/mcp-app.html' | 'ui://agentic-api/upload-creative-asset/mcp-app.html' | 'ui://agentic-api/creative-composer-task/mcp-app.html' | 'ui://agentic-api/catalog-file-picker/mcp-app.html' | 'ui://agentic-api/buyer-catalogs/mcp-app.html' | 'ui://agentic-api/pending-approvals/mcp-app.html' | 'ui://agentic-api/buyer-agents/mcp-app.html' | 'ui://agentic-api/variant-gallery/mcp-app.html' | 'ui://agentic-api/seller-setup/mcp-app.html' | 'ui://agentic-api/approvals/mcp-app.html' | 'ui://agentic-api/notifications/mcp-app.html' | 'ui://agentic-api/buyer-notifications/mcp-app.html' | 'ui://agentic-api/buyer-webhooks/mcp-app.html' | 'ui://agentic-api/proposal-pass-v3/mcp-app.html' | 'ui://agentic-api/sessions/mcp-app.html' | 'ui://agentic-api/seller-dashboard/mcp-app.html' | 'ui://agentic-api/seller-dashboard-v3/mcp-app.html' | 'ui://agentic-api/product-marketing-v3/mcp-app.html' | 'ui://agentic-api/library/mcp-app.html' | 'ui://agentic-api/integrations/mcp-app.html' | 'ui://agentic-api/release-notes/mcp-app.html' | 'ui://agentic-api/playbook/mcp-app.html' | 'ui://agentic-api/media-kit/mcp-app.html' | 'ui://agentic-api/business-profile/mcp-app.html' | 'ui://agentic-api/buyer-discounts/mcp-app.html' | 'ui://agentic-api/esa-sync-diagnostics/mcp-app.html' | 'ui://agentic-api/esa-inventory-source/mcp-app.html' | 'ui://agentic-api/source-diagnostics/mcp-app.html' | 'ui://agentic-api/sponsored-buyers/mcp-app.html' | 'ui://agentic-api/pending-operations/mcp-app.html' | 'ui://agentic-api/storefront-briefs/mcp-app.html' | 'ui://agentic-api/activity-log/mcp-app.html' | 'ui://agentic-api/merchandising-simulator/mcp-app.html' | 'ui://agentic-api/media-buys/mcp-app.html' | 'ui://agentic-api/media-buy-timeline/mcp-app.html' | 'ui://agentic-api/components/mcp-app.html' | 'ui://agentic-api/seller-accounts/mcp-app.html';
+        resourceUri: 'ui://agentic-api/conversation-history/mcp-app.html' | 'ui://agentic-api/agent-v2/mcp-app.html' | 'ui://agentic-api/developer-home/mcp-app.html' | 'ui://agentic-api/create-agent/mcp-app.html' | 'ui://agentic-api/claim-agent/mcp-app.html' | 'ui://agentic-api/buyer-account-admission/mcp-app.html' | 'ui://agentic-api/tars-org-supply-asks/mcp-app.html' | 'ui://agentic-api/tars-library-figure-review/mcp-app.html' | 'ui://agentic-api/tars-initiative-status/mcp-app.html' | 'ui://agentic-api/tars-run-rate/mcp-app.html' | 'ui://agentic-api/tars-connections/mcp-app.html' | 'ui://agentic-api/tars-internal-library/mcp-app.html' | 'ui://agentic-api/tars-marketing-email-library/mcp-app.html' | 'ui://agentic-api/tars-approved-deck-modules/mcp-app.html' | 'ui://agentic-api/tars-marketing-email-operations/mcp-app.html' | 'ui://agentic-api/business-rules/mcp-app.html' | 'ui://agentic-api/demo-storefront/mcp-app.html' | 'ui://agentic-api/agent-source-credentials/mcp-app.html' | 'ui://agentic-api/property-roster/mcp-app.html' | 'ui://agentic-api/seller-account-feed/mcp-app.html' | 'ui://agentic-api/esa-signals/mcp-app.html' | 'ui://agentic-api/media-buy-retry/mcp-app.html' | 'ui://agentic-api/inventory-selector/mcp-app.html' | 'ui://agentic-api/modular-inventory-source/mcp-app.html' | 'ui://agentic-api/modular-connect/mcp-app.html' | 'ui://agentic-api/source-discovery-preview/mcp-app.html' | 'ui://agentic-api/partner-connection/mcp-app.html' | 'ui://agentic-api/agent-sources/mcp-app.html' | 'ui://agentic-api/agent-overview/mcp-app.html' | 'ui://agentic-api/agent-webhooks/mcp-app.html' | 'ui://agentic-api/agent-activity/mcp-app.html' | 'ui://agentic-api/organization-domains/mcp-app.html' | 'ui://agentic-api/modular-avails-commit/mcp-app.html' | 'ui://agentic-api/plan-billing/mcp-app.html' | 'ui://agentic-api/connections/mcp-app.html' | 'ui://agentic-api/creative-engines/mcp-app.html' | 'ui://agentic-api/all-advertisers-home/mcp-app.html' | 'ui://agentic-api/add-advertiser/mcp-app.html' | 'ui://agentic-api/buyer-setup/mcp-app.html' | 'ui://agentic-api/campaigns/mcp-app.html' | 'ui://agentic-api/creative-library-v3-assets-v1/mcp-app.html' | 'ui://agentic-api/creative-library-v3/mcp-app.html' | 'ui://agentic-api/upload-creative-asset/mcp-app.html' | 'ui://agentic-api/creative-composer-task/mcp-app.html' | 'ui://agentic-api/catalog-file-picker/mcp-app.html' | 'ui://agentic-api/buyer-catalogs/mcp-app.html' | 'ui://agentic-api/pending-approvals/mcp-app.html' | 'ui://agentic-api/buyer-agents/mcp-app.html' | 'ui://agentic-api/brand-studio/mcp-app.html' | 'ui://agentic-api/variant-gallery/mcp-app.html' | 'ui://agentic-api/seller-setup/mcp-app.html' | 'ui://agentic-api/approvals/mcp-app.html' | 'ui://agentic-api/notifications/mcp-app.html' | 'ui://agentic-api/buyer-notifications/mcp-app.html' | 'ui://agentic-api/buyer-webhooks/mcp-app.html' | 'ui://agentic-api/proposal-pass-v3/mcp-app.html' | 'ui://agentic-api/sessions/mcp-app.html' | 'ui://agentic-api/seller-dashboard/mcp-app.html' | 'ui://agentic-api/seller-dashboard-v3/mcp-app.html' | 'ui://agentic-api/product-marketing-v3/mcp-app.html' | 'ui://agentic-api/library/mcp-app.html' | 'ui://agentic-api/integrations/mcp-app.html' | 'ui://agentic-api/release-notes/mcp-app.html' | 'ui://agentic-api/playbook/mcp-app.html' | 'ui://agentic-api/media-kit/mcp-app.html' | 'ui://agentic-api/business-profile/mcp-app.html' | 'ui://agentic-api/buyer-discounts/mcp-app.html' | 'ui://agentic-api/esa-sync-diagnostics/mcp-app.html' | 'ui://agentic-api/esa-inventory-source/mcp-app.html' | 'ui://agentic-api/source-diagnostics/mcp-app.html' | 'ui://agentic-api/sponsored-buyers/mcp-app.html' | 'ui://agentic-api/pending-operations/mcp-app.html' | 'ui://agentic-api/storefront-briefs/mcp-app.html' | 'ui://agentic-api/activity-log/mcp-app.html' | 'ui://agentic-api/merchandising-simulator/mcp-app.html' | 'ui://agentic-api/media-buys/mcp-app.html' | 'ui://agentic-api/media-buy-timeline/mcp-app.html' | 'ui://agentic-api/components/mcp-app.html' | 'ui://agentic-api/seller-accounts/mcp-app.html';
         advertiserId?: string;
         campaignId?: string;
         capability: 'reauthenticate_in_browser' | 'manage_webhooks';

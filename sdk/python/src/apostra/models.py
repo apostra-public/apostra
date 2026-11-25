@@ -430,6 +430,8 @@ class GetDeliveryInput(TypedDict):
     '\n    Dates (max 90 days) or lifetime for delivery. Margin: one closed calendar month, a publisher statement.\n    '
     filters: NotRequired[GetDeliveryInputFilters]
     '\n    Optional report filters; invalid combinations are rejected.\n    '
+    compare: NotRequired[Literal["previous_period"]]
+    '\n    campaign_delivery only, bounded range: also return the change against the previous period of the same length, as comparison.\n    '
     currency: NotRequired[str]
     '\n    campaign_delivery only: ISO-4217 currency to convert money into at each day\'s rate.\n    '
     limit: NotRequired[int]
@@ -448,6 +450,8 @@ class GetDeliveryInputFilters(TypedDict):
     '\n    Campaign delivery: filter to one campaign.\n    '
     channelGroupId: NotRequired[str]
     '\n    Campaign delivery: filter to one channel group.\n    '
+    projectId: NotRequired[str]
+    '\n    Campaign delivery: filter to the campaigns and media buys attached to one Project (get kind \'project\').\n    '
     buyerAccountId: NotRequired[int]
     '\n    Margin: filter to one buyer Account id.\n    '
     mediaBuyId: NotRequired[str]
@@ -558,6 +562,7 @@ class GetDeliveryResultReportCampaignDelivery(TypedDict):
     conversion: NotRequired[GetDeliverySuccessDeliveryConversion]
     '\n    Present when currency was sent: how money on rows and totals was converted, over every matched row.\n    '
     siteOutcomes: NotRequired[GetDeliverySuccessSiteOutcomes]
+    comparison: NotRequired[GetDeliverySuccessGetDeliveryComparison]
     synthetic: NotRequired[GetDeliverySuccessSynthetic]
     '\n    Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.\n    '
 
@@ -606,6 +611,7 @@ class GetDeliveryResultReportDelivery(TypedDict):
     conversion: NotRequired[GetDeliverySuccessDeliveryConversion]
     '\n    Present when currency was sent: how money on rows and totals was converted, over every matched row.\n    '
     siteOutcomes: NotRequired[GetDeliverySuccessSiteOutcomes]
+    comparison: NotRequired[GetDeliverySuccessGetDeliveryComparison]
     synthetic: NotRequired[GetDeliverySuccessSynthetic]
     '\n    Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.\n    '
 
@@ -915,6 +921,7 @@ class GetDeliveryResultReportMargin(TypedDict):
     conversion: NotRequired[GetDeliverySuccessDeliveryConversion]
     '\n    Present when currency was sent: how money on rows and totals was converted, over every matched row.\n    '
     siteOutcomes: NotRequired[GetDeliverySuccessSiteOutcomes]
+    comparison: NotRequired[GetDeliverySuccessGetDeliveryComparison]
     synthetic: NotRequired[GetDeliverySuccessSynthetic]
     '\n    Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.\n    '
 
@@ -1618,6 +1625,90 @@ class GetDeliverySuccessDeliveryUnconvertedDay(TypedDict):
     currency: str
     date: str
 
+class GetDeliverySuccessGetDeliveryComparison(TypedDict):
+    range: GetDeliverySuccessGetDeliveryComparisonRange
+    totals: GetDeliverySuccessGetDeliveryComparisonTotals
+    changes: dict[str, GetDeliverySuccessGetDeliveryComparisonChangesValue]
+
+class GetDeliverySuccessGetDeliveryComparisonChangesValue(TypedDict):
+    previous: float | None
+    current: float | None
+    change: float | None
+    changePercent: float | None
+
+class GetDeliverySuccessGetDeliveryComparisonRange(TypedDict):
+    startDate: str
+    endDate: str
+
+class GetDeliverySuccessGetDeliveryComparisonTotals(TypedDict):
+    rowsIncluded: GetDeliverySuccessGetDeliveryComparisonTotalsRowsIncluded
+    currency: GetDeliverySuccessGetDeliveryComparisonTotalsCurrency
+    metrics: GetDeliverySuccessGetDeliveryComparisonTotalsMetrics
+    denomination: GetDeliverySuccessGetDeliveryComparisonTotalsDenomination
+    dataThrough: GetDeliverySuccessGetDeliveryComparisonTotalsDataThrough
+    finality: GetDeliverySuccessGetDeliveryComparisonTotalsFinalityStatusAvailable | GetDeliverySuccessGetDeliveryComparisonTotalsFinalityStatusUnavailable | GetDeliverySuccessGetDeliveryComparisonTotalsFinalityStatusNotApplicable
+    billingEligibility: GetDeliverySuccessGetDeliveryComparisonTotalsBillingEligibility
+
+GetDeliverySuccessGetDeliveryComparisonTotalsBillingEligibility: TypeAlias = Literal["not_evaluated"]
+
+GetDeliverySuccessGetDeliveryComparisonTotalsCurrency: TypeAlias = str | None
+
+GetDeliverySuccessGetDeliveryComparisonTotalsDataThrough: TypeAlias = str | None
+
+GetDeliverySuccessGetDeliveryComparisonTotalsDenomination: TypeAlias = Literal["net", "gross_buyer"]
+
+GetDeliverySuccessGetDeliveryComparisonTotalsFinalityStatusAvailable = TypedDict(
+    "GetDeliverySuccessGetDeliveryComparisonTotalsFinalityStatusAvailable",
+    {
+        "status": Required["Literal[\"available\"]"],
+        "class": Required["Literal[\"SNAPSHOT\", \"OFFICIAL\"]"],
+        "revision": Required["GetDeliverySuccessDeliveryRevision"],
+    },
+    total=False,
+)
+
+GetDeliverySuccessGetDeliveryComparisonTotalsFinalityStatusNotApplicable = TypedDict(
+    "GetDeliverySuccessGetDeliveryComparisonTotalsFinalityStatusNotApplicable",
+    {
+        "status": Required["Literal[\"not_applicable\"]"],
+        "class": Required["None"],
+        "revision": Required["None"],
+        "reason": Required["Literal[\"cumulative_margin_ledger\", \"closed_period_statement\"]"],
+    },
+    total=False,
+)
+
+GetDeliverySuccessGetDeliveryComparisonTotalsFinalityStatusUnavailable = TypedDict(
+    "GetDeliverySuccessGetDeliveryComparisonTotalsFinalityStatusUnavailable",
+    {
+        "status": Required["Literal[\"unavailable\"]"],
+        "class": Required["Literal[\"SNAPSHOT\", \"OFFICIAL\"] | None"],
+        "supportedClasses": Required["list[Literal[\"SNAPSHOT\", \"OFFICIAL\"]]"],
+        "revision": Required["None"],
+        "reason": Required["Literal[\"revision_evidence_unavailable\", \"revision_evidence_mixed\", \"revision_unreadable\"]"],
+    },
+    total=False,
+)
+
+class GetDeliverySuccessGetDeliveryComparisonTotalsMetricsValue(TypedDict):
+    value: float | bool | None
+    status: Literal["available", "unavailable"]
+    reason: NotRequired[Literal["projected_zero", "missing", "currency_unavailable", "incomplete", "revision_unreadable", "finality_mixed", "fx_rate_unavailable", "not_additive"]]
+    basis: NotRequired[GetDeliverySuccessGetDeliveryComparisonTotalsMetricsValueBasis]
+    '\n    grps only: the AdCP measurement_window the points belong to and is_final. A field is absent when it is not known for every day behind the value. Points that are not final can still change, for example when C7 ratings replace C3.\n    '
+    reach_unit: NotRequired[GetDeliverySuccessMetricDatumReachUnit]
+    '\n    reach and frequency only: AdCP reach_unit, what the seller counted. Absent when the seller named none.\n    '
+    reach_window: NotRequired[GetDeliverySuccessMetricDatumReachWindow]
+    '\n    reach and frequency only: AdCP reach_window, the period the value covers. Absent when the seller declared none, which leaves the window unspecified.\n    '
+
+GetDeliverySuccessGetDeliveryComparisonTotalsMetrics: TypeAlias = "dict[str, GetDeliverySuccessGetDeliveryComparisonTotalsMetricsValue]"
+
+class GetDeliverySuccessGetDeliveryComparisonTotalsMetricsValueBasis(TypedDict):
+    measurement_window: NotRequired[str]
+    is_final: NotRequired[bool]
+
+GetDeliverySuccessGetDeliveryComparisonTotalsRowsIncluded: TypeAlias = int
+
 class GetDeliverySuccessGetDeliveryGoal(TypedDict):
     constraint: GetDeliverySuccessGetDeliveryGoalConstraintValue | None
     expected: float | None
@@ -2127,6 +2218,8 @@ class GetDeliverySuccessQueryFilters(TypedDict):
     '\n    Campaign delivery: filter to one campaign.\n    '
     channelGroupId: NotRequired[str]
     '\n    Campaign delivery: filter to one channel group.\n    '
+    projectId: NotRequired[str]
+    '\n    Campaign delivery: filter to the campaigns and media buys attached to one Project (get kind \'project\').\n    '
     buyerAccountId: NotRequired[int]
     '\n    Margin: filter to one buyer Account id.\n    '
     mediaBuyId: NotRequired[str]
@@ -9978,6 +10071,19 @@ class OpenApprovalsResultParams(TypedDict):
     reviewRef: NotRequired[str]
     '\n    Exact reviewRef from the approval queue; focuses one creative review version.\n    '
 
+class OpenBrandStudioInput(TypedDict):
+    advertiserId: str
+    '\n    The advertiser whose brand to open; resolve a name with search(kind: "advertiser") first.\n    '
+    tab: NotRequired[Literal["brand", "presence", "results", "places", "creators"]]
+    '\n    The tab to open on: brand (default), presence, results, places or creators.\n    '
+    accountId: NotRequired[int | str]
+    '\n    Apostra accountId this call runs in, from get_status.\n    '
+
+class OpenBrandStudioResult(TypedDict):
+    advertiserId: str
+    brand: str | None
+    tab: Literal["brand", "presence", "results", "places", "creators"]
+
 class OpenBuyerAgentsPageInput(TypedDict):
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
@@ -10147,7 +10253,7 @@ class OpenCampaignsPageSuccessPageHumanHandoffRequiredAccount(TypedDict):
     name: str
 
 class OpenCampaignsPageSuccessPageHumanHandoffRequiredPage(TypedDict):
-    resourceUri: Literal["ui://agentic-api/conversation-history/mcp-app.html", "ui://agentic-api/agent-v2/mcp-app.html", "ui://agentic-api/developer-home/mcp-app.html", "ui://agentic-api/create-agent/mcp-app.html", "ui://agentic-api/claim-agent/mcp-app.html", "ui://agentic-api/buyer-account-admission/mcp-app.html", "ui://agentic-api/tars-org-supply-asks/mcp-app.html", "ui://agentic-api/tars-library-figure-review/mcp-app.html", "ui://agentic-api/tars-initiative-status/mcp-app.html", "ui://agentic-api/tars-run-rate/mcp-app.html", "ui://agentic-api/tars-connections/mcp-app.html", "ui://agentic-api/tars-internal-library/mcp-app.html", "ui://agentic-api/tars-marketing-email-library/mcp-app.html", "ui://agentic-api/tars-approved-deck-modules/mcp-app.html", "ui://agentic-api/tars-marketing-email-operations/mcp-app.html", "ui://agentic-api/business-rules/mcp-app.html", "ui://agentic-api/demo-storefront/mcp-app.html", "ui://agentic-api/agent-source-credentials/mcp-app.html", "ui://agentic-api/property-roster/mcp-app.html", "ui://agentic-api/seller-account-feed/mcp-app.html", "ui://agentic-api/esa-signals/mcp-app.html", "ui://agentic-api/media-buy-retry/mcp-app.html", "ui://agentic-api/inventory-selector/mcp-app.html", "ui://agentic-api/modular-inventory-source/mcp-app.html", "ui://agentic-api/modular-connect/mcp-app.html", "ui://agentic-api/source-discovery-preview/mcp-app.html", "ui://agentic-api/partner-connection/mcp-app.html", "ui://agentic-api/agent-sources/mcp-app.html", "ui://agentic-api/agent-overview/mcp-app.html", "ui://agentic-api/agent-webhooks/mcp-app.html", "ui://agentic-api/agent-activity/mcp-app.html", "ui://agentic-api/organization-domains/mcp-app.html", "ui://agentic-api/modular-avails-commit/mcp-app.html", "ui://agentic-api/plan-billing/mcp-app.html", "ui://agentic-api/connections/mcp-app.html", "ui://agentic-api/creative-engines/mcp-app.html", "ui://agentic-api/all-advertisers-home/mcp-app.html", "ui://agentic-api/add-advertiser/mcp-app.html", "ui://agentic-api/buyer-setup/mcp-app.html", "ui://agentic-api/campaigns/mcp-app.html", "ui://agentic-api/creative-library-v3-assets-v1/mcp-app.html", "ui://agentic-api/creative-library-v3/mcp-app.html", "ui://agentic-api/upload-creative-asset/mcp-app.html", "ui://agentic-api/creative-composer-task/mcp-app.html", "ui://agentic-api/catalog-file-picker/mcp-app.html", "ui://agentic-api/buyer-catalogs/mcp-app.html", "ui://agentic-api/pending-approvals/mcp-app.html", "ui://agentic-api/buyer-agents/mcp-app.html", "ui://agentic-api/variant-gallery/mcp-app.html", "ui://agentic-api/seller-setup/mcp-app.html", "ui://agentic-api/approvals/mcp-app.html", "ui://agentic-api/notifications/mcp-app.html", "ui://agentic-api/buyer-notifications/mcp-app.html", "ui://agentic-api/buyer-webhooks/mcp-app.html", "ui://agentic-api/proposal-pass-v3/mcp-app.html", "ui://agentic-api/sessions/mcp-app.html", "ui://agentic-api/seller-dashboard/mcp-app.html", "ui://agentic-api/seller-dashboard-v3/mcp-app.html", "ui://agentic-api/product-marketing-v3/mcp-app.html", "ui://agentic-api/library/mcp-app.html", "ui://agentic-api/integrations/mcp-app.html", "ui://agentic-api/release-notes/mcp-app.html", "ui://agentic-api/playbook/mcp-app.html", "ui://agentic-api/media-kit/mcp-app.html", "ui://agentic-api/business-profile/mcp-app.html", "ui://agentic-api/buyer-discounts/mcp-app.html", "ui://agentic-api/esa-sync-diagnostics/mcp-app.html", "ui://agentic-api/esa-inventory-source/mcp-app.html", "ui://agentic-api/source-diagnostics/mcp-app.html", "ui://agentic-api/sponsored-buyers/mcp-app.html", "ui://agentic-api/pending-operations/mcp-app.html", "ui://agentic-api/storefront-briefs/mcp-app.html", "ui://agentic-api/activity-log/mcp-app.html", "ui://agentic-api/merchandising-simulator/mcp-app.html", "ui://agentic-api/media-buys/mcp-app.html", "ui://agentic-api/media-buy-timeline/mcp-app.html", "ui://agentic-api/components/mcp-app.html", "ui://agentic-api/seller-accounts/mcp-app.html"]
+    resourceUri: Literal["ui://agentic-api/conversation-history/mcp-app.html", "ui://agentic-api/agent-v2/mcp-app.html", "ui://agentic-api/developer-home/mcp-app.html", "ui://agentic-api/create-agent/mcp-app.html", "ui://agentic-api/claim-agent/mcp-app.html", "ui://agentic-api/buyer-account-admission/mcp-app.html", "ui://agentic-api/tars-org-supply-asks/mcp-app.html", "ui://agentic-api/tars-library-figure-review/mcp-app.html", "ui://agentic-api/tars-initiative-status/mcp-app.html", "ui://agentic-api/tars-run-rate/mcp-app.html", "ui://agentic-api/tars-connections/mcp-app.html", "ui://agentic-api/tars-internal-library/mcp-app.html", "ui://agentic-api/tars-marketing-email-library/mcp-app.html", "ui://agentic-api/tars-approved-deck-modules/mcp-app.html", "ui://agentic-api/tars-marketing-email-operations/mcp-app.html", "ui://agentic-api/business-rules/mcp-app.html", "ui://agentic-api/demo-storefront/mcp-app.html", "ui://agentic-api/agent-source-credentials/mcp-app.html", "ui://agentic-api/property-roster/mcp-app.html", "ui://agentic-api/seller-account-feed/mcp-app.html", "ui://agentic-api/esa-signals/mcp-app.html", "ui://agentic-api/media-buy-retry/mcp-app.html", "ui://agentic-api/inventory-selector/mcp-app.html", "ui://agentic-api/modular-inventory-source/mcp-app.html", "ui://agentic-api/modular-connect/mcp-app.html", "ui://agentic-api/source-discovery-preview/mcp-app.html", "ui://agentic-api/partner-connection/mcp-app.html", "ui://agentic-api/agent-sources/mcp-app.html", "ui://agentic-api/agent-overview/mcp-app.html", "ui://agentic-api/agent-webhooks/mcp-app.html", "ui://agentic-api/agent-activity/mcp-app.html", "ui://agentic-api/organization-domains/mcp-app.html", "ui://agentic-api/modular-avails-commit/mcp-app.html", "ui://agentic-api/plan-billing/mcp-app.html", "ui://agentic-api/connections/mcp-app.html", "ui://agentic-api/creative-engines/mcp-app.html", "ui://agentic-api/all-advertisers-home/mcp-app.html", "ui://agentic-api/add-advertiser/mcp-app.html", "ui://agentic-api/buyer-setup/mcp-app.html", "ui://agentic-api/campaigns/mcp-app.html", "ui://agentic-api/creative-library-v3-assets-v1/mcp-app.html", "ui://agentic-api/creative-library-v3/mcp-app.html", "ui://agentic-api/upload-creative-asset/mcp-app.html", "ui://agentic-api/creative-composer-task/mcp-app.html", "ui://agentic-api/catalog-file-picker/mcp-app.html", "ui://agentic-api/buyer-catalogs/mcp-app.html", "ui://agentic-api/pending-approvals/mcp-app.html", "ui://agentic-api/buyer-agents/mcp-app.html", "ui://agentic-api/brand-studio/mcp-app.html", "ui://agentic-api/variant-gallery/mcp-app.html", "ui://agentic-api/seller-setup/mcp-app.html", "ui://agentic-api/approvals/mcp-app.html", "ui://agentic-api/notifications/mcp-app.html", "ui://agentic-api/buyer-notifications/mcp-app.html", "ui://agentic-api/buyer-webhooks/mcp-app.html", "ui://agentic-api/proposal-pass-v3/mcp-app.html", "ui://agentic-api/sessions/mcp-app.html", "ui://agentic-api/seller-dashboard/mcp-app.html", "ui://agentic-api/seller-dashboard-v3/mcp-app.html", "ui://agentic-api/product-marketing-v3/mcp-app.html", "ui://agentic-api/library/mcp-app.html", "ui://agentic-api/integrations/mcp-app.html", "ui://agentic-api/release-notes/mcp-app.html", "ui://agentic-api/playbook/mcp-app.html", "ui://agentic-api/media-kit/mcp-app.html", "ui://agentic-api/business-profile/mcp-app.html", "ui://agentic-api/buyer-discounts/mcp-app.html", "ui://agentic-api/esa-sync-diagnostics/mcp-app.html", "ui://agentic-api/esa-inventory-source/mcp-app.html", "ui://agentic-api/source-diagnostics/mcp-app.html", "ui://agentic-api/sponsored-buyers/mcp-app.html", "ui://agentic-api/pending-operations/mcp-app.html", "ui://agentic-api/storefront-briefs/mcp-app.html", "ui://agentic-api/activity-log/mcp-app.html", "ui://agentic-api/merchandising-simulator/mcp-app.html", "ui://agentic-api/media-buys/mcp-app.html", "ui://agentic-api/media-buy-timeline/mcp-app.html", "ui://agentic-api/components/mcp-app.html", "ui://agentic-api/seller-accounts/mcp-app.html"]
     advertiserId: NotRequired[str]
     campaignId: NotRequired[str]
     capability: Literal["reauthenticate_in_browser", "manage_webhooks"]
@@ -34238,6 +34344,8 @@ OpenAgentWebhooksPageError: TypeAlias = "V3ToolErrorResponse"
 OpenAgentsPageError: TypeAlias = "V3ToolErrorResponse"
 
 OpenApprovalsError: TypeAlias = "V3ToolErrorResponse"
+
+OpenBrandStudioError: TypeAlias = "V3ToolErrorResponse"
 
 OpenBuyerAgentsPageError: TypeAlias = "V3ToolErrorResponse"
 
