@@ -114187,6 +114187,47 @@ components:
           type:
             - string
             - 'null'
+        neededPerDay:
+          anyOf:
+            - type: number
+            - type: 'null'
+          description: >-
+            What is left to deliver divided by the days left in the flight, counting today, in the unit of
+            constraint.kind. Null once the flight has ended or when the goal cannot be judged.
+        lastSevenDayRate:
+          anyOf:
+            - type: number
+            - type: 'null'
+          description: Average delivered per day over the last seven reporting days, in the unit of constraint.kind.
+        shortfall:
+          anyOf:
+            - type: number
+            - type: 'null'
+          description: >-
+            How far short the buy finishes at lastSevenDayRate, in the unit of constraint.kind. Null when it finishes on
+            or over target.
+        flightStart:
+          anyOf:
+            - type: string
+            - type: 'null'
+          description: Flight start the pace is worked against, a UTC date.
+        flightEnd:
+          anyOf:
+            - type: string
+            - type: 'null'
+          description: Flight end the pace is worked against, a UTC date.
+        paceVerdict:
+          anyOf:
+            - type: string
+              enum:
+                - far_behind
+                - behind
+                - on_pace
+                - ahead
+            - type: 'null'
+          description: >-
+            How the buy is pacing over the dates asked for: pacingIndex against the pacing bands (85, 95 and 110
+            percent). Separate from verdict, which is the projected end state.
       required:
         - constraint
         - expected
@@ -114198,6 +114239,12 @@ components:
         - verdict
         - verdictWithheld
         - dataThrough
+        - neededPerDay
+        - lastSevenDayRate
+        - shortfall
+        - flightStart
+        - flightEnd
+        - paceVerdict
       additionalProperties: false
     get_delivery_success_DeliveryGoalProgressProjectionRange:
       type: object

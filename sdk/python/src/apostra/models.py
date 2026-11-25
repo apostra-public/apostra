@@ -1720,6 +1720,18 @@ class GetDeliverySuccessGetDeliveryGoal(TypedDict):
     verdict: GetDeliverySuccessGetDeliveryGoalVerdict | None
     verdictWithheld: str | None
     dataThrough: str | None
+    neededPerDay: float | None
+    '\n    What is left to deliver divided by the days left in the flight, counting today, in the unit of constraint.kind. Null once the flight has ended or when the goal cannot be judged.\n    '
+    lastSevenDayRate: float | None
+    '\n    Average delivered per day over the last seven reporting days, in the unit of constraint.kind.\n    '
+    shortfall: float | None
+    '\n    How far short the buy finishes at lastSevenDayRate, in the unit of constraint.kind. Null when it finishes on or over target.\n    '
+    flightStart: str | None
+    '\n    Flight start the pace is worked against, a UTC date.\n    '
+    flightEnd: str | None
+    '\n    Flight end the pace is worked against, a UTC date.\n    '
+    paceVerdict: Literal["far_behind", "behind", "on_pace", "ahead"] | None
+    '\n    How the buy is pacing over the dates asked for: pacingIndex against the pacing bands (85, 95 and 110 percent). Separate from verdict, which is the projected end state.\n    '
 
 class GetDeliverySuccessGetDeliveryGoalConstraintValue(TypedDict):
     kind: Literal["spend", "impressions", "grps"]
