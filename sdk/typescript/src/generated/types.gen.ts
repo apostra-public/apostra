@@ -7246,6 +7246,7 @@ export type GetDeliveryResponses = {
             media_buy_deliveries: Array<GetDeliverySuccessCampaignCreativeMediaBuy>;
             coverage: {
                 mediaBuysInScope: number;
+                fromDate?: string;
                 throughDate?: string;
                 unread: {
                     count: number;
@@ -7254,9 +7255,23 @@ export type GetDeliveryResponses = {
                         campaignId: string;
                         campaignName: string;
                         management: 'managed' | 'tracked';
-                        reason: 'no_creative_rows';
+                        /**
+                         * no_creative_rows: nothing stored for the range carries a creative list. history_pending: the ad account history backfill is still reading and has not reached the start of the range.
+                         */
+                        reason: 'no_creative_rows' | 'history_pending';
+                        nextAction?: {
+                            tool: 'get';
+                            arguments: {
+                                kind: 'connection';
+                                id: string;
+                            };
+                        };
                     }>;
                 };
+                /**
+                 * Each connected ad account in scope whose daily ad history is backfilled: what was asked for and the run of days covered so far. Absent when no account has one.
+                 */
+                history?: Array<GetDeliverySuccessCreativeHistoryCoverage>;
             };
             page: {
                 limit: number;
@@ -7564,6 +7579,26 @@ export type GetDeliverySuccessCreativeDailyDelivery = {
     }>;
     date: string;
     [key: string]: unknown;
+};
+
+export type GetDeliverySuccessCreativeHistoryCoverage = {
+    connectionId: string;
+    /**
+     * The connection account, accounts[].id on the connection read.
+     */
+    accountId: string;
+    advertiserId: string;
+    state: 'queued' | 'running' | 'waiting' | 'complete' | 'failed';
+    requestedFrom: string;
+    coveredFrom: string | null;
+    coveredThrough: string | null;
+    campaignsRead: number;
+    campaignsTotal: number | null;
+    retryAt?: string;
+    failure?: {
+        reason: string;
+        message: string;
+    };
 };
 
 export type GetDeliverySuccessCurrencyConversions = Array<GetDeliverySuccessDeliveryCurrencyConversion>;
