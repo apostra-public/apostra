@@ -34548,6 +34548,8 @@ paths:
                             properties:
                               mediaBuysInScope:
                                 type: number
+                              fromDate:
+                                type: string
                               throughDate:
                                 type: string
                               unread:
@@ -34573,7 +34575,35 @@ paths:
                                             - tracked
                                         reason:
                                           type: string
-                                          const: no_creative_rows
+                                          enum:
+                                            - no_creative_rows
+                                            - history_pending
+                                          description: >-
+                                            no_creative_rows: nothing stored for the range carries a creative list.
+                                            history_pending: the ad account history backfill is still reading and has
+                                            not reached the start of the range.
+                                        nextAction:
+                                          type: object
+                                          properties:
+                                            tool:
+                                              type: string
+                                              const: get
+                                            arguments:
+                                              type: object
+                                              properties:
+                                                kind:
+                                                  type: string
+                                                  const: connection
+                                                id:
+                                                  type: string
+                                              required:
+                                                - kind
+                                                - id
+                                              additionalProperties: false
+                                          required:
+                                            - tool
+                                            - arguments
+                                          additionalProperties: false
                                       required:
                                         - campaignId
                                         - campaignName
@@ -34585,6 +34615,13 @@ paths:
                                   - truncated
                                   - campaigns
                                 additionalProperties: false
+                              history:
+                                description: >-
+                                  Each connected ad account in scope whose daily ad history is backfilled: what was
+                                  asked for and the run of days covered so far. Absent when no account has one.
+                                type: array
+                                items:
+                                  $ref: '#/components/schemas/get_delivery_success_CreativeHistoryCoverage'
                             required:
                               - mediaBuysInScope
                               - unread
@@ -113186,6 +113223,64 @@ components:
       required:
         - date
       additionalProperties: {}
+    get_delivery_success_CreativeHistoryCoverage:
+      type: object
+      properties:
+        connectionId:
+          type: string
+        accountId:
+          type: string
+          description: The connection account, accounts[].id on the connection read.
+        advertiserId:
+          type: string
+        state:
+          type: string
+          enum:
+            - queued
+            - running
+            - waiting
+            - complete
+            - failed
+        requestedFrom:
+          type: string
+        coveredFrom:
+          type:
+            - string
+            - 'null'
+        coveredThrough:
+          type:
+            - string
+            - 'null'
+        campaignsRead:
+          type: number
+        campaignsTotal:
+          type:
+            - number
+            - 'null'
+        retryAt:
+          type: string
+        failure:
+          type: object
+          properties:
+            reason:
+              type: string
+            message:
+              type: string
+          required:
+            - reason
+            - message
+          additionalProperties: false
+      required:
+        - connectionId
+        - accountId
+        - advertiserId
+        - state
+        - requestedFrom
+        - coveredFrom
+        - coveredThrough
+        - campaignsRead
+        - campaignsTotal
+      additionalProperties: false
     get_delivery_success_Query:
       type: object
       properties:

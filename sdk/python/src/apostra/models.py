@@ -451,8 +451,11 @@ class GetDeliveryResultReportCampaignCreativeDelivery(TypedDict):
 
 class GetDeliveryResultReportCampaignCreativeDeliveryCoverage(TypedDict):
     mediaBuysInScope: float
+    fromDate: NotRequired[str]
     throughDate: NotRequired[str]
     unread: GetDeliveryResultReportCampaignCreativeDeliveryCoverageUnread
+    history: NotRequired[list[GetDeliverySuccessCreativeHistoryCoverage]]
+    '\n    Each connected ad account in scope whose daily ad history is backfilled: what was asked for and the run of days covered so far. Absent when no account has one.\n    '
 
 class GetDeliveryResultReportCampaignCreativeDeliveryCoverageUnread(TypedDict):
     count: float
@@ -463,7 +466,17 @@ class GetDeliveryResultReportCampaignCreativeDeliveryCoverageUnreadCampaignsItem
     campaignId: str
     campaignName: str
     management: Literal["managed", "tracked"]
-    reason: Literal["no_creative_rows"]
+    reason: Literal["no_creative_rows", "history_pending"]
+    '\n    no_creative_rows: nothing stored for the range carries a creative list. history_pending: the ad account history backfill is still reading and has not reached the start of the range.\n    '
+    nextAction: NotRequired[GetDeliveryResultReportCampaignCreativeDeliveryCoverageUnreadCampaignsItemNextAction]
+
+class GetDeliveryResultReportCampaignCreativeDeliveryCoverageUnreadCampaignsItemNextAction(TypedDict):
+    tool: Literal["get"]
+    arguments: GetDeliveryResultReportCampaignCreativeDeliveryCoverageUnreadCampaignsItemNextActionArguments
+
+class GetDeliveryResultReportCampaignCreativeDeliveryCoverageUnreadCampaignsItemNextActionArguments(TypedDict):
+    kind: Literal["connection"]
+    id: str
 
 class GetDeliveryResultReportCampaignCreativeDeliveryPage(TypedDict):
     limit: float
@@ -1109,6 +1122,24 @@ class GetDeliverySuccessCreativeDailyDeliveryReachWindow(TypedDict):
 class GetDeliverySuccessCreativeDailyDeliveryReachWindowPeriod(TypedDict):
     interval: int
     unit: Literal["seconds", "minutes", "hours", "days", "campaign"]
+
+class GetDeliverySuccessCreativeHistoryCoverage(TypedDict):
+    connectionId: str
+    accountId: str
+    '\n    The connection account, accounts[].id on the connection read.\n    '
+    advertiserId: str
+    state: Literal["queued", "running", "waiting", "complete", "failed"]
+    requestedFrom: str
+    coveredFrom: str | None
+    coveredThrough: str | None
+    campaignsRead: float
+    campaignsTotal: float | None
+    retryAt: NotRequired[str]
+    failure: NotRequired[GetDeliverySuccessCreativeHistoryCoverageFailure]
+
+class GetDeliverySuccessCreativeHistoryCoverageFailure(TypedDict):
+    reason: str
+    message: str
 
 GetDeliverySuccessCurrencyConversionsOmitted: TypeAlias = int
 
