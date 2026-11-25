@@ -72042,6 +72042,169 @@ paths:
           content:
             application/json:
               schema: *ref_89
+  /tools/save_workspace_file:
+    post:
+      operationId: save_workspace_file
+      summary: >-
+        Restore, archive or unarchive a file the account’s agent keeps in a workspace (search or get with kind
+        workspace_file reads them): id and expectedRevision with restoreRevision, or with isArchived. It never takes
+        content.
+      description: >-
+        Restore, archive or unarchive a file the account’s agent keeps in a workspace (search or get with kind
+        workspace_file reads them): id and expectedRevision with restoreRevision, or with isArchived. It never takes
+        content.
+      security:
+        - apiKeyAuth: []
+        - m2mOAuth:
+            - interchange:write
+      parameters:
+        - name: X-SCOPE3-CUSTOMER-ID
+          in: header
+          required: false
+          deprecated: true
+          description: >-
+            Deprecated: send accountId in the request body instead. Retires on the announced removal date. If both are
+            sent they must name the same account.
+          schema:
+            type: string
+            pattern: ^[1-9][0-9]*$
+        - *ref_8
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  pattern: ^wsf_[0-9a-f]{24}$
+                  description: The workspace file, from search or get.
+                expectedRevision:
+                  type: integer
+                  minimum: 1
+                  maximum: 9007199254740991
+                  description: revision from the last read; a stale one is refused.
+                restoreRevision:
+                  description: 'An earlier revision to restore: its bytes become a new revision. Send without isArchived.'
+                  type: integer
+                  minimum: 1
+                  maximum: 9007199254740991
+                isArchived:
+                  description: >-
+                    true archives the file, keeping every revision and freeing its path; false unarchives it. Send
+                    without restoreRevision.
+                  type: boolean
+                expectedAccountId:
+                  description: Apostra accountId you are working in (from get_status). The write fails if the account has changed.
+                  anyOf:
+                    - type: integer
+                      minimum: 1
+                    - type: string
+                      pattern: ^[1-9][0-9]*$
+                accountId:
+                  description: Apostra accountId this call runs in, from get_status.
+                  anyOf:
+                    - type: integer
+                      minimum: 1
+                    - type: string
+                      pattern: ^[1-9][0-9]*$
+              required:
+                - id
+                - expectedRevision
+              additionalProperties: false
+      responses:
+        '200':
+          description: Typed operation result
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      action:
+                        $ref: '#/components/schemas/save_workspace_file_success_SaveWorkspaceFileAction'
+                      workspaceFile:
+                        $ref: '#/components/schemas/save_workspace_file_success_WorkspaceFile'
+                    required:
+                      - action
+                      - workspaceFile
+                    additionalProperties: false
+                  error:
+                    type: 'null'
+                required:
+                  - data
+                  - error
+        '202': *ref_9
+        '400':
+          description: Invalid operation input
+          content:
+            application/json:
+              schema: &ref_90
+                $ref: '#/components/schemas/V3ToolErrorResponse'
+        '401':
+          description: Missing or invalid API credential
+          content:
+            application/json:
+              schema: *ref_90
+        '402':
+          description: Account credit limit exceeded
+          content:
+            application/json:
+              schema: *ref_90
+        '403':
+          description: The credential or account cannot perform this operation
+          content:
+            application/json:
+              schema: *ref_90
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema: *ref_90
+        '409':
+          description: Operation conflicts with current resource state
+          content:
+            application/json:
+              schema: *ref_90
+        '413':
+          description: Request body exceeds the accepted size
+          content:
+            application/json:
+              schema: *ref_90
+        '415':
+          description: Request body encoding or character set is unsupported
+          content:
+            application/json:
+              schema: *ref_90
+        '422':
+          description: Operation cannot process the supplied input
+          content:
+            application/json:
+              schema: *ref_90
+        '429':
+          description: Request rate limit exceeded
+          content:
+            application/json:
+              schema: *ref_90
+        '500':
+          description: Unexpected operation failure
+          content:
+            application/json:
+              schema: *ref_90
+        '501':
+          description: Recognised operation behaviour is not implemented
+          content:
+            application/json:
+              schema: *ref_90
+        '503':
+          description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
+          content:
+            application/json:
+              schema: *ref_90
   /tools/search:
     post:
       operationId: search
@@ -104366,68 +104529,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_90
+              schema: &ref_91
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_90
+              schema: *ref_91
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_90
+              schema: *ref_91
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_90
+              schema: *ref_91
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_90
+              schema: *ref_91
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_90
+              schema: *ref_91
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_90
+              schema: *ref_91
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_90
+              schema: *ref_91
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_90
+              schema: *ref_91
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_90
+              schema: *ref_91
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_90
+              schema: *ref_91
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_90
+              schema: *ref_91
         '503':
           description: A required service is unavailable
           content:
             application/json:
-              schema: *ref_90
+              schema: *ref_91
   /tools/start_certification_run:
     post:
       operationId: start_certification_run
@@ -104537,68 +104700,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_91
+              schema: &ref_92
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_91
+              schema: *ref_92
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_91
+              schema: *ref_92
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_91
+              schema: *ref_92
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_91
+              schema: *ref_92
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_91
+              schema: *ref_92
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_91
+              schema: *ref_92
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_91
+              schema: *ref_92
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_91
+              schema: *ref_92
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_91
+              schema: *ref_92
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_91
+              schema: *ref_92
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_91
+              schema: *ref_92
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_91
+              schema: *ref_92
   /tools/test_creative_macros:
     post:
       operationId: test_creative_macros
@@ -105166,68 +105329,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_92
+              schema: &ref_93
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_92
+              schema: *ref_93
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_92
+              schema: *ref_93
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_92
+              schema: *ref_93
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_92
+              schema: *ref_93
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_92
+              schema: *ref_93
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_92
+              schema: *ref_93
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_92
+              schema: *ref_93
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_92
+              schema: *ref_93
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_92
+              schema: *ref_93
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_92
+              schema: *ref_93
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_92
+              schema: *ref_93
         '503':
           description: A required service is unavailable
           content:
             application/json:
-              schema: *ref_92
+              schema: *ref_93
   /tools/upload_creative_asset:
     post:
       operationId: upload_creative_asset
@@ -105417,68 +105580,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_93
+              schema: &ref_94
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_93
+              schema: *ref_94
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_93
+              schema: *ref_94
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_93
+              schema: *ref_94
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_93
+              schema: *ref_94
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_93
+              schema: *ref_94
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_93
+              schema: *ref_94
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_93
+              schema: *ref_94
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_93
+              schema: *ref_94
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_93
+              schema: *ref_94
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_93
+              schema: *ref_94
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_93
+              schema: *ref_94
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_93
+              schema: *ref_94
 components:
   securitySchemes:
     apiKeyAuth:
@@ -137617,6 +137780,91 @@ components:
       additionalProperties: {}
     save_work_item_success_SaveWorkItemSuccessUnchangedResumeDue:
       type: boolean
+    save_workspace_file_success_SaveWorkspaceFileAction:
+      type: string
+      enum:
+        - restored
+        - archived
+        - unarchived
+        - unchanged
+    save_workspace_file_success_WorkspaceFile:
+      type: object
+      properties:
+        id:
+          type: string
+        projectId:
+          type:
+            - string
+            - 'null'
+        path:
+          type: string
+          description: >-
+            The file's path, fenced as untrusted text an agent wrote. Strip the fence before passing it back as
+            pathPrefix.
+        advertiserIds:
+          type: array
+          items:
+            type: string
+        mediaType:
+          type: string
+        sizeBytes:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        contentSha256:
+          type: string
+        revision:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        isArchived:
+          type: boolean
+        lastWrittenBy:
+          $ref: '#/components/schemas/save_workspace_file_success_WorkspaceFileAuthor'
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+      required:
+        - id
+        - projectId
+        - path
+        - advertiserIds
+        - mediaType
+        - sizeBytes
+        - contentSha256
+        - revision
+        - isArchived
+        - lastWrittenBy
+        - createdAt
+        - updatedAt
+      additionalProperties: false
+    save_workspace_file_success_WorkspaceFileAuthor:
+      type: object
+      properties:
+        kind:
+          type: string
+          enum:
+            - agent
+            - person
+        agentId:
+          type:
+            - string
+            - 'null'
+        userId:
+          type:
+            - string
+            - 'null'
+        turnId:
+          type:
+            - string
+            - 'null'
+      required:
+        - kind
+        - agentId
+        - userId
+        - turnId
+      additionalProperties: false
     search_request_AdcpCreativeStatus:
       type: string
       enum:

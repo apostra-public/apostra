@@ -42745,6 +42745,165 @@ export type SaveWorkItemSuccessSaveWorkItemSuccessUnchangedObject = {
 
 export type SaveWorkItemSuccessSaveWorkItemSuccessUnchangedResumeDue = boolean;
 
+export type SaveWorkspaceFileData = {
+    body: {
+        /**
+         * The workspace file, from search or get.
+         */
+        id: string;
+        /**
+         * revision from the last read; a stale one is refused.
+         */
+        expectedRevision: number;
+        /**
+         * An earlier revision to restore: its bytes become a new revision. Send without isArchived.
+         */
+        restoreRevision?: number;
+        /**
+         * true archives the file, keeping every revision and freeing its path; false unarchives it. Send without restoreRevision.
+         */
+        isArchived?: boolean;
+        /**
+         * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
+         */
+        expectedAccountId?: number | string;
+        /**
+         * Apostra accountId this call runs in, from get_status.
+         */
+        accountId?: number | string;
+    };
+    headers: {
+        /**
+         * Deprecated: send accountId in the request body instead. Retires on the announced removal date. If both are sent they must name the same account.
+         *
+         * @deprecated
+         */
+        'X-SCOPE3-CUSTOMER-ID'?: string;
+        /**
+         * Required for every write. Reuse the same key and validated body to replay the durable result for seven days. If this operation also accepts idempotencyKey in its JSON body, the values must match.
+         */
+        'Idempotency-Key': string;
+    };
+    path?: never;
+    query?: never;
+    url: '/tools/save_workspace_file';
+};
+
+export type SaveWorkspaceFileError = SaveWorkspaceFileErrors[keyof SaveWorkspaceFileErrors];
+
+export type SaveWorkspaceFileErrors = {
+    /**
+     * Invalid operation input
+     */
+    400: V3ToolErrorResponse;
+    /**
+     * Missing or invalid API credential
+     */
+    401: V3ToolErrorResponse;
+    /**
+     * Account credit limit exceeded
+     */
+    402: V3ToolErrorResponse;
+    /**
+     * The credential or account cannot perform this operation
+     */
+    403: V3ToolErrorResponse;
+    /**
+     * Requested resource not found
+     */
+    404: V3ToolErrorResponse;
+    /**
+     * Operation conflicts with current resource state
+     */
+    409: V3ToolErrorResponse;
+    /**
+     * Request body exceeds the accepted size
+     */
+    413: V3ToolErrorResponse;
+    /**
+     * Request body encoding or character set is unsupported
+     */
+    415: V3ToolErrorResponse;
+    /**
+     * Operation cannot process the supplied input
+     */
+    422: V3ToolErrorResponse;
+    /**
+     * Request rate limit exceeded
+     */
+    429: V3ToolErrorResponse;
+    /**
+     * Unexpected operation failure
+     */
+    500: V3ToolErrorResponse;
+    /**
+     * Recognised operation behaviour is not implemented
+     */
+    501: V3ToolErrorResponse;
+    /**
+     * The write could not be durably claimed before dispatch, so it is safe to retry with the same key
+     */
+    503: V3ToolErrorResponse;
+};
+
+export type SaveWorkspaceFileResponse = SaveWorkspaceFileResponses[keyof SaveWorkspaceFileResponses];
+
+export type SaveWorkspaceFileResponses = {
+    /**
+     * Typed operation result
+     */
+    200: {
+        data: {
+            action: SaveWorkspaceFileSuccessSaveWorkspaceFileAction;
+            workspaceFile: SaveWorkspaceFileSuccessWorkspaceFile;
+        };
+        error: null;
+    };
+    /**
+     * The write is still running or needs recovery. Retry this operation with the same Idempotency-Key and body; do not mint a new key.
+     */
+    202: {
+        data: {
+            receipt: {
+                id: string;
+                operation: string;
+                state: 'claimed' | 'running' | 'uncertain';
+                stateVersion: number;
+                stateChangedAt: string;
+                pendingReason: string;
+            };
+        };
+        error: null;
+    };
+};
+
+export type SaveWorkspaceFileSuccessSaveWorkspaceFileAction = 'restored' | 'archived' | 'unarchived' | 'unchanged';
+
+export type SaveWorkspaceFileSuccessWorkspaceFile = {
+    id: string;
+    projectId: string | null;
+    /**
+     * The file's path, fenced as untrusted text an agent wrote. Strip the fence before passing it back as pathPrefix.
+     */
+    path: string;
+    advertiserIds: Array<string>;
+    mediaType: string;
+    sizeBytes: number;
+    contentSha256: string;
+    revision: number;
+    isArchived: boolean;
+    lastWrittenBy: SaveWorkspaceFileSuccessWorkspaceFileAuthor;
+    createdAt: string;
+    updatedAt: string;
+};
+
+export type SaveWorkspaceFileSuccessWorkspaceFileAuthor = {
+    kind: 'agent' | 'person';
+    agentId: string | null;
+    userId: string | null;
+    turnId: string | null;
+};
+
 export type SearchData = {
     body: ((unknown & {
         /**

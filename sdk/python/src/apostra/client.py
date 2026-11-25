@@ -676,6 +676,14 @@ class Apostra(SyncTransport):
         "Decide a creative or media-buy approval, overrule a spend conflict, complete a modular-source follow-up, or resolve a failed GAM order. Repeats preserve evidence; retry, evaluation, and reassignment stay on the approvals Page. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveWorkItemResult], self._request_with_response("save_work_item", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
+    def save_workspace_file(self, input: models.SaveWorkspaceFileInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveWorkspaceFileResult:
+        "Restore, archive or unarchive a file the account’s agent keeps in a workspace (search or get with kind workspace_file reads them): id and expectedRevision with restoreRevision, or with isArchived. It never takes content."
+        return cast("models.SaveWorkspaceFileResult", self._request("save_workspace_file", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
+    def save_workspace_file_with_response(self, input: models.SaveWorkspaceFileInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveWorkspaceFileResult]:
+        "Restore, archive or unarchive a file the account’s agent keeps in a workspace (search or get with kind workspace_file reads them): id and expectedRevision with restoreRevision, or with isArchived. It never takes content. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.SaveWorkspaceFileResult], self._request_with_response("save_workspace_file", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
     def search(self, input: models.SearchInput, *, account_id: str | None = None, timeout: float | None = None) -> models.SearchResult:
         "Find objects in this account, or answer questions from the docs. Pass kind to list one object type, query to match text, or both. Before a multi-step task, search kind skill for a workflow. Reread a docs hit with its document (and revision, for agreements) before you cite it."
         return cast("models.SearchResult", self._request("search", input, account_id=account_id, timeout=timeout))
@@ -1380,6 +1388,14 @@ class AsyncApostra(AsyncTransport):
     async def save_work_item_with_response(self, input: models.SaveWorkItemInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveWorkItemResult]:
         "Decide a creative or media-buy approval, overrule a spend conflict, complete a modular-source follow-up, or resolve a failed GAM order. Repeats preserve evidence; retry, evaluation, and reassignment stay on the approvals Page. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveWorkItemResult], await self._request_with_response("save_work_item", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
+    async def save_workspace_file(self, input: models.SaveWorkspaceFileInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveWorkspaceFileResult:
+        "Restore, archive or unarchive a file the account’s agent keeps in a workspace (search or get with kind workspace_file reads them): id and expectedRevision with restoreRevision, or with isArchived. It never takes content."
+        return cast("models.SaveWorkspaceFileResult", await self._request("save_workspace_file", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
+    async def save_workspace_file_with_response(self, input: models.SaveWorkspaceFileInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveWorkspaceFileResult]:
+        "Restore, archive or unarchive a file the account’s agent keeps in a workspace (search or get with kind workspace_file reads them): id and expectedRevision with restoreRevision, or with isArchived. It never takes content. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.SaveWorkspaceFileResult], await self._request_with_response("save_workspace_file", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def search(self, input: models.SearchInput, *, account_id: str | None = None, timeout: float | None = None) -> models.SearchResult:
         "Find objects in this account, or answer questions from the docs. Pass kind to list one object type, query to match text, or both. Before a multi-step task, search kind skill for a workflow. Reread a docs hit with its document (and revision, for agreements) before you cite it."
