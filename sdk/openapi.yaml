@@ -43213,6 +43213,16 @@ paths:
                                     kind:
                                       type: string
                                       const: no_matching_products
+                                    reason:
+                                      type: string
+                                      minLength: 1
+                                      maxLength: 2000
+                                    suggestions:
+                                      minItems: 1
+                                      maxItems: 20
+                                      type: array
+                                      items:
+                                        type: string
                                   required:
                                     - kind
                                   additionalProperties: false

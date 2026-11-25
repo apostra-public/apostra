@@ -17787,12 +17787,16 @@ export type RequestProposalsResponses = {
                 outcome?: {
                     kind: 'returned_products';
                     productCount: number;
+                    reason?: never;
+                    suggestions?: never;
                     reasonCode?: never;
                     code?: never;
                     message?: never;
                     suggestion?: never;
                 } | {
                     kind: 'no_matching_products';
+                    reason?: string;
+                    suggestions?: Array<string>;
                     productCount?: never;
                     reasonCode?: never;
                     code?: never;
@@ -17801,6 +17805,8 @@ export type RequestProposalsResponses = {
                 } | {
                     kind: 'no_inventory_for_request';
                     productCount?: never;
+                    reason?: never;
+                    suggestions?: never;
                     reasonCode?: never;
                     code?: never;
                     message?: never;
@@ -17809,6 +17815,8 @@ export type RequestProposalsResponses = {
                     kind: 'skipped';
                     reasonCode: 'coverage' | 'auth' | 'eligibility' | 'advertiser_activation' | 'account_pending' | 'account_needs_attention' | 'round_predates_account_rule';
                     productCount?: never;
+                    reason?: never;
+                    suggestions?: never;
                     code?: never;
                     message?: never;
                     suggestion?: never;
@@ -17816,6 +17824,8 @@ export type RequestProposalsResponses = {
                     kind: 'failed';
                     reasonCode: 'timeout' | 'transport' | 'protocol';
                     productCount?: never;
+                    reason?: never;
+                    suggestions?: never;
                     code?: never;
                     message?: never;
                     suggestion?: never;
@@ -17825,6 +17835,8 @@ export type RequestProposalsResponses = {
                     message: string;
                     suggestion?: string;
                     productCount?: never;
+                    reason?: never;
+                    suggestions?: never;
                     reasonCode?: never;
                 };
                 propertyCoverage?: Array<{
