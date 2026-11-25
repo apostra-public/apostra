@@ -12,6 +12,14 @@ class Apostra(SyncTransport):
         "Issue the hosted card-capture link for the token an approved request_payment_authority returned. Give the link to the cardholder; cards stay off MCP. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.ConfirmPaymentAuthorityResult], self._request_with_response("confirm_payment_authority", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
+    def decline_proposals(self, input: models.DeclineProposalsInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.DeclineProposalsResult:
+        "Decline proposals and tell eligible sellers. Returns each local decision and seller answer. Give an AdCP reason and optional detail; never name a competitor or disclose confidential terms. Use unrecognized_terms when signed terms cannot be fully interpreted. Does not close the opportunity."
+        return cast("models.DeclineProposalsResult", self._request("decline_proposals", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
+    def decline_proposals_with_response(self, input: models.DeclineProposalsInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.DeclineProposalsResult]:
+        "Decline proposals and tell eligible sellers. Returns each local decision and seller answer. Give an AdCP reason and optional detail; never name a competitor or disclose confidential terms. Use unrecognized_terms when signed terms cannot be fully interpreted. Does not close the opportunity. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.DeclineProposalsResult], self._request_with_response("decline_proposals", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
     def download_v3_public_document_revision(self, input: models.DownloadV3PublicDocumentRevisionInput, *, account_id: str | None = None, timeout: float | None = None) -> bytes:
         "Download a public immutable document revision"
         return cast("bytes", self._request("downloadV3PublicDocumentRevision", input, account_id=account_id, timeout=timeout))
@@ -724,6 +732,14 @@ class AsyncApostra(AsyncTransport):
     async def confirm_payment_authority_with_response(self, input: models.ConfirmPaymentAuthorityInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.ConfirmPaymentAuthorityResult]:
         "Issue the hosted card-capture link for the token an approved request_payment_authority returned. Give the link to the cardholder; cards stay off MCP. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.ConfirmPaymentAuthorityResult], await self._request_with_response("confirm_payment_authority", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
+    async def decline_proposals(self, input: models.DeclineProposalsInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.DeclineProposalsResult:
+        "Decline proposals and tell eligible sellers. Returns each local decision and seller answer. Give an AdCP reason and optional detail; never name a competitor or disclose confidential terms. Use unrecognized_terms when signed terms cannot be fully interpreted. Does not close the opportunity."
+        return cast("models.DeclineProposalsResult", await self._request("decline_proposals", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
+    async def decline_proposals_with_response(self, input: models.DeclineProposalsInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.DeclineProposalsResult]:
+        "Decline proposals and tell eligible sellers. Returns each local decision and seller answer. Give an AdCP reason and optional detail; never name a competitor or disclose confidential terms. Use unrecognized_terms when signed terms cannot be fully interpreted. Does not close the opportunity. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.DeclineProposalsResult], await self._request_with_response("decline_proposals", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def download_v3_public_document_revision(self, input: models.DownloadV3PublicDocumentRevisionInput, *, account_id: str | None = None, timeout: float | None = None) -> bytes:
         "Download a public immutable document revision"

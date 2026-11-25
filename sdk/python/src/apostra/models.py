@@ -33,6 +33,32 @@ class ConfirmPaymentAuthoritySuccessCaptureLinkIssuedResult(TypedDict):
     '\n    `pending`: issued, not yet opened. `opened`: the hosted page exchanged the token at least once. `verified`: the card-rail webhook confirmed a payment method for this link. `expired`: the TTL elapsed before verification — terminal, never re-armed.\n    '
     expiresAt: str
 
+class DeclineProposalsInput(TypedDict):
+    proposalIds: list[str]
+    '\n    Public proposal IDs to decline. At most 25 per call.\n    '
+    reason: Literal["price", "inventory_fit", "audience_fit", "creative_unsupported", "measurement_unsupported", "policy", "timing", "budget_changed", "selected_alternative", "unrecognized_terms", "other"]
+    '\n    AdCP reason. Use unrecognized_terms when the buyer cannot interpret every part of the signed commercial terms.\n    '
+    detail: NotRequired[str]
+    '\n    Short, non-identifying explanation, required when reason is other. Do not name a competitor or disclose confidential terms.\n    '
+    expectedAccountId: NotRequired[int | str]
+    '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
+    accountId: NotRequired[int | str]
+    '\n    Apostra accountId this call runs in, from get_status.\n    '
+
+class DeclineProposalsResult(TypedDict):
+    outcomes: list[DeclineProposalsResultOutcomesItem]
+    updated: int
+    disposition: Literal["declined"]
+
+class DeclineProposalsResultOutcomesItem(TypedDict):
+    proposalId: str
+    result: Literal["updated", "skipped", "not-found"]
+    seller: DeclineProposalsResultOutcomesItemSeller
+
+class DeclineProposalsResultOutcomesItemSeller(TypedDict):
+    status: Literal["declined", "unable", "not_told", "unconfirmed"]
+    reason: NotRequired[str]
+
 class DownloadV3PublicDocumentRevisionErrorError(TypedDict):
     code: Literal["DOCUMENT_REFERENCE_INVALID", "DOCUMENT_NOT_FOUND", "DOCUMENT_CURSOR_STALE", "DOCUMENT_DEPENDENCY_UNAVAILABLE", "DOCUMENT_INTERNAL_ERROR"]
     message: str
@@ -34021,6 +34047,8 @@ class V3ToolErrorResponse(TypedDict):
     error: AdcpError
 
 ConfirmPaymentAuthorityError: TypeAlias = "V3ToolErrorResponse"
+
+DeclineProposalsError: TypeAlias = "V3ToolErrorResponse"
 
 DownloadV3PublicDocumentRevisionError: TypeAlias = "DownloadV3PublicDocumentRevisionErrorWithDataError | V3ToolErrorResponse"
 

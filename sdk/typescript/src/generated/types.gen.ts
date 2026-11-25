@@ -155,6 +155,142 @@ export type ConfirmPaymentAuthoritySuccessCaptureLinkIssuedResult = {
     expiresAt: string;
 };
 
+export type DeclineProposalsData = {
+    body: unknown & {
+        /**
+         * Public proposal IDs to decline. At most 25 per call.
+         */
+        proposalIds: Array<string>;
+        /**
+         * AdCP reason. Use unrecognized_terms when the buyer cannot interpret every part of the signed commercial terms.
+         */
+        reason: 'price' | 'inventory_fit' | 'audience_fit' | 'creative_unsupported' | 'measurement_unsupported' | 'policy' | 'timing' | 'budget_changed' | 'selected_alternative' | 'unrecognized_terms' | 'other';
+        /**
+         * Short, non-identifying explanation, required when reason is other. Do not name a competitor or disclose confidential terms.
+         */
+        detail?: string;
+        /**
+         * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
+         */
+        expectedAccountId?: number | string;
+        /**
+         * Apostra accountId this call runs in, from get_status.
+         */
+        accountId?: number | string;
+    };
+    headers: {
+        /**
+         * Deprecated: send accountId in the request body instead. Retires on the announced removal date. If both are sent they must name the same account.
+         *
+         * @deprecated
+         */
+        'X-SCOPE3-CUSTOMER-ID'?: string;
+        /**
+         * Required for every write. Reuse the same key and validated body to replay the durable result for seven days. If this operation also accepts idempotencyKey in its JSON body, the values must match.
+         */
+        'Idempotency-Key': string;
+    };
+    path?: never;
+    query?: never;
+    url: '/tools/decline_proposals';
+};
+
+export type DeclineProposalsError = DeclineProposalsErrors[keyof DeclineProposalsErrors];
+
+export type DeclineProposalsErrors = {
+    /**
+     * Invalid operation input
+     */
+    400: V3ToolErrorResponse;
+    /**
+     * Missing or invalid API credential
+     */
+    401: V3ToolErrorResponse;
+    /**
+     * Account credit limit exceeded
+     */
+    402: V3ToolErrorResponse;
+    /**
+     * The credential or account cannot perform this operation
+     */
+    403: V3ToolErrorResponse;
+    /**
+     * Requested resource not found
+     */
+    404: V3ToolErrorResponse;
+    /**
+     * Operation conflicts with current resource state
+     */
+    409: V3ToolErrorResponse;
+    /**
+     * Request body exceeds the accepted size
+     */
+    413: V3ToolErrorResponse;
+    /**
+     * Request body encoding or character set is unsupported
+     */
+    415: V3ToolErrorResponse;
+    /**
+     * Operation cannot process the supplied input
+     */
+    422: V3ToolErrorResponse;
+    /**
+     * Request rate limit exceeded
+     */
+    429: V3ToolErrorResponse;
+    /**
+     * Unexpected operation failure
+     */
+    500: V3ToolErrorResponse;
+    /**
+     * Recognised operation behaviour is not implemented
+     */
+    501: V3ToolErrorResponse;
+    /**
+     * The write could not be durably claimed before dispatch, so it is safe to retry with the same key
+     */
+    503: V3ToolErrorResponse;
+};
+
+export type DeclineProposalsResponse = DeclineProposalsResponses[keyof DeclineProposalsResponses];
+
+export type DeclineProposalsResponses = {
+    /**
+     * Typed operation result
+     */
+    200: {
+        data: {
+            outcomes: Array<{
+                proposalId: string;
+                result: 'updated' | 'skipped' | 'not-found';
+                seller: {
+                    status: 'declined' | 'unable' | 'not_told' | 'unconfirmed';
+                    reason?: string;
+                };
+            }>;
+            updated: number;
+            disposition: 'declined';
+        };
+        error: null;
+    };
+    /**
+     * The write is still running or needs recovery. Retry this operation with the same Idempotency-Key and body; do not mint a new key.
+     */
+    202: {
+        data: {
+            receipt: {
+                id: string;
+                operation: string;
+                state: 'claimed' | 'running' | 'uncertain';
+                stateVersion: number;
+                stateChangedAt: string;
+                pendingReason: string;
+            };
+        };
+        error: null;
+    };
+};
+
 export type DownloadV3PublicDocumentRevisionData = {
     body?: never;
     path: {
