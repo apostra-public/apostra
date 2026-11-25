@@ -26705,6 +26705,14 @@ export type SaveCreativeAssetData = {
             };
         }>;
         /**
+         * true asks a person to confirm the rights on Apostra’s approval page and returns approval_required with its link. Needs idempotencyKey. Only that confirmation makes the rights count.
+         */
+        confirm?: boolean;
+        /**
+         * With confirm: a stable key; repeat the call with it to read the approval’s outcome.
+         */
+        idempotencyKey?: string;
+        /**
          * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
          */
         expectedAccountId?: number | string;
@@ -26810,18 +26818,7 @@ export type SaveCreativeAssetResponses = {
      * Typed operation result
      */
     200: {
-        data: {
-            action: 'recorded';
-            items: Array<{
-                assetId: string;
-                rightsState: 'pending_confirmation' | 'confirmed' | 'rejected' | 'paused' | 'revoked';
-                rights: Array<{
-                    rights_id: string;
-                    approval_status?: 'pending' | 'approved' | 'rejected';
-                    [key: string]: unknown;
-                }>;
-            }>;
-        };
+        data: SaveCreativeAssetSuccessSaveCreativeAssetRecorded | SaveCreativeAssetSuccessAgentApprovalRequired;
         error: null;
     };
     /**
@@ -26840,6 +26837,77 @@ export type SaveCreativeAssetResponses = {
         };
         error: null;
     };
+};
+
+export type SaveCreativeAssetSuccessAgentApproval = {
+    /**
+     * Approval id.
+     */
+    id: string;
+    /**
+     * Kind of sensitive action, for example `buyer_child_account.create`.
+     */
+    kind: string;
+    /**
+     * `pending` waits for a person; `executing` was approved and is running; `succeeded`, `failed`, `rejected` and `expired` are final.
+     */
+    state: 'pending' | 'executing' | 'succeeded' | 'failed' | 'rejected' | 'expired';
+    /**
+     * Account the action applies to.
+     */
+    targetCustomerId: string;
+    /**
+     * Role the approver must hold on the account.
+     */
+    requiredRole: 'ADMIN' | 'SUPER_ADMIN' | null;
+    /**
+     * What will happen, in one line. Null once the approval is final.
+     */
+    summary: string | null;
+    /**
+     * Page on our site where a signed-in person approves or rejects the request.
+     */
+    url: string;
+    createdAt: string;
+    expiresAt: string;
+    decidedAt: string | null;
+    completedAt: string | null;
+    /**
+     * Reference to the result once succeeded.
+     */
+    resultReference: {
+        [key: string]: string | number | boolean;
+    } | null;
+    /**
+     * Reason code when the action failed.
+     */
+    failureCode: string | null;
+};
+
+export type SaveCreativeAssetSuccessAgentApprovalRequired = {
+    action: 'approval_required';
+    message: string;
+    approval: SaveCreativeAssetSuccessAgentApproval;
+    /**
+     * The account's direct administrators who can approve, when the caller cannot (Scope3 staff, or an agent or service token acting with no person present). email is null when no person is behind the call. Absent when the caller can approve; never empty.
+     */
+    approvers?: Array<{
+        name: string | null;
+        email: string | null;
+    }>;
+};
+
+export type SaveCreativeAssetSuccessSaveCreativeAssetRecorded = {
+    action: 'recorded';
+    items: Array<{
+        assetId: string;
+        rightsState: 'pending_confirmation' | 'confirmed' | 'rejected' | 'paused' | 'revoked';
+        rights: Array<{
+            rights_id: string;
+            approval_status?: 'pending' | 'approved' | 'rejected';
+            [key: string]: unknown;
+        }>;
+    }>;
 };
 
 export type SaveCreativeCollectionData = {

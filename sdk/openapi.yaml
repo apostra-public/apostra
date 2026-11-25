@@ -55952,13 +55952,13 @@ paths:
     post:
       operationId: save_creative_asset
       summary: >-
-        Record the rights a person states for Library assets: who holds them and where, how long and in which channels
-        and countries an ad may use them, as AdCP rights entries. A save replaces the asset’s rights and only proposes
-        them; recording does not make an asset usable.
+        Record the rights a person states for Library assets as AdCP rights entries: who holds them, and where and how
+        long ads may use them. A save replaces an asset’s rights and only proposes them. confirm: true asks a person to
+        confirm on Apostra’s approval page.
       description: >-
-        Record the rights a person states for Library assets: who holds them and where, how long and in which channels
-        and countries an ad may use them, as AdCP rights entries. A save replaces the asset’s rights and only proposes
-        them; recording does not make an asset usable.
+        Record the rights a person states for Library assets as AdCP rights entries: who holds them, and where and how
+        long ads may use them. A save replaces an asset’s rights and only proposes them. confirm: true asks a person to
+        confirm on Apostra’s approval page.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -56412,6 +56412,16 @@ paths:
                       - rights
                     additionalProperties: false
                   description: One entry per asset, at most 50; all are saved or none. Each replaces that asset's rights.
+                confirm:
+                  description: >-
+                    true asks a person to confirm the rights on Apostra’s approval page and returns approval_required
+                    with its link. Needs idempotencyKey. Only that confirmation makes the rights count.
+                  type: boolean
+                idempotencyKey:
+                  description: 'With confirm: a stable key; repeat the call with it to read the approval’s outcome.'
+                  type: string
+                  minLength: 1
+                  maxLength: 200
                 expectedAccountId:
                   description: Apostra accountId you are working in (from get_status). The write fails if the account has changed.
                   anyOf:
@@ -56440,54 +56450,9 @@ paths:
                 additionalProperties: false
                 properties:
                   data:
-                    type: object
-                    properties:
-                      action:
-                        type: string
-                        const: recorded
-                      items:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            assetId:
-                              type: string
-                              format: uuid
-                              pattern: >-
-                                ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
-                            rightsState:
-                              type: string
-                              enum:
-                                - pending_confirmation
-                                - confirmed
-                                - rejected
-                                - paused
-                                - revoked
-                            rights:
-                              type: array
-                              items:
-                                type: object
-                                properties:
-                                  rights_id:
-                                    type: string
-                                  approval_status:
-                                    type: string
-                                    enum:
-                                      - pending
-                                      - approved
-                                      - rejected
-                                required:
-                                  - rights_id
-                                additionalProperties: {}
-                          required:
-                            - assetId
-                            - rightsState
-                            - rights
-                          additionalProperties: false
-                    required:
-                      - action
-                      - items
-                    additionalProperties: false
+                    anyOf:
+                      - $ref: '#/components/schemas/save_creative_asset_success_SaveCreativeAssetRecorded'
+                      - $ref: '#/components/schemas/save_creative_asset_success_AgentApprovalRequired'
                   error:
                     type: 'null'
                 required:
@@ -124051,6 +124016,192 @@ components:
       propertyNames:
         type: string
       additionalProperties: {}
+    save_creative_asset_success_SaveCreativeAssetRecorded:
+      type: object
+      properties:
+        action:
+          type: string
+          const: recorded
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              assetId:
+                type: string
+                format: uuid
+                pattern: >-
+                  ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+              rightsState:
+                type: string
+                enum:
+                  - pending_confirmation
+                  - confirmed
+                  - rejected
+                  - paused
+                  - revoked
+              rights:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    rights_id:
+                      type: string
+                    approval_status:
+                      type: string
+                      enum:
+                        - pending
+                        - approved
+                        - rejected
+                  required:
+                    - rights_id
+                  additionalProperties: {}
+            required:
+              - assetId
+              - rightsState
+              - rights
+            additionalProperties: false
+      required:
+        - action
+        - items
+      additionalProperties: false
+    save_creative_asset_success_AgentApprovalRequired:
+      type: object
+      properties:
+        action:
+          type: string
+          const: approval_required
+        message:
+          type: string
+        approval:
+          $ref: '#/components/schemas/save_creative_asset_success_AgentApproval'
+        approvers:
+          description: >-
+            The account's direct administrators who can approve, when the caller cannot (Scope3 staff, or an agent or
+            service token acting with no person present). email is null when no person is behind the call. Absent when
+            the caller can approve; never empty.
+          minItems: 1
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type:
+                  - string
+                  - 'null'
+              email:
+                type:
+                  - string
+                  - 'null'
+            required:
+              - name
+              - email
+            additionalProperties: false
+      required:
+        - action
+        - message
+        - approval
+      additionalProperties: false
+    save_creative_asset_success_AgentApproval:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          pattern: >-
+            ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+          description: Approval id.
+        kind:
+          type: string
+          description: Kind of sensitive action, for example `buyer_child_account.create`.
+        state:
+          type: string
+          enum:
+            - pending
+            - executing
+            - succeeded
+            - failed
+            - rejected
+            - expired
+          description: >-
+            `pending` waits for a person; `executing` was approved and is running; `succeeded`, `failed`, `rejected` and
+            `expired` are final.
+        targetCustomerId:
+          type: string
+          description: Account the action applies to.
+        requiredRole:
+          anyOf:
+            - type: string
+              enum:
+                - ADMIN
+                - SUPER_ADMIN
+            - type: 'null'
+          description: Role the approver must hold on the account.
+        summary:
+          anyOf:
+            - type: string
+            - type: 'null'
+          description: What will happen, in one line. Null once the approval is final.
+        url:
+          type: string
+          format: uri
+          description: Page on our site where a signed-in person approves or rejects the request.
+        createdAt:
+          type: string
+          format: date-time
+          pattern: >-
+            ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+        expiresAt:
+          type: string
+          format: date-time
+          pattern: >-
+            ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+        decidedAt:
+          anyOf:
+            - type: string
+              format: date-time
+              pattern: >-
+                ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+            - type: 'null'
+        completedAt:
+          anyOf:
+            - type: string
+              format: date-time
+              pattern: >-
+                ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+            - type: 'null'
+        resultReference:
+          anyOf:
+            - type: object
+              propertyNames:
+                type: string
+              additionalProperties:
+                type:
+                  - string
+                  - number
+                  - boolean
+            - type: 'null'
+          description: Reference to the result once succeeded.
+        failureCode:
+          anyOf:
+            - type: string
+            - type: 'null'
+          description: Reason code when the action failed.
+      required:
+        - id
+        - kind
+        - state
+        - targetCustomerId
+        - requiredRole
+        - summary
+        - url
+        - createdAt
+        - expiresAt
+        - decidedAt
+        - completedAt
+        - resultReference
+        - failureCode
+      additionalProperties: false
     save_creative_collection_success_Collection:
       type: object
       properties:
