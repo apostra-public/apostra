@@ -2202,6 +2202,7 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - connectionContract
                           - capabilities
                           - creativeFormats
                           - publisherProperties
@@ -3308,6 +3309,12 @@ paths:
                           - properties:
                               include:
                                 contains:
+                                  const: connectionContract
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
                                   const: capabilities
                             required:
                               - include
@@ -3628,6 +3635,7 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - connectionContract
                           - capabilities
                           - creativeFormats
                           - publisherProperties
@@ -4735,6 +4743,12 @@ paths:
                           - properties:
                               include:
                                 contains:
+                                  const: connectionContract
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
                                   const: capabilities
                             required:
                               - include
@@ -5030,6 +5044,7 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - connectionContract
                           - capabilities
                           - creativeFormats
                           - publisherProperties
@@ -6130,6 +6145,12 @@ paths:
                               include:
                                 contains:
                                   const: testRuns
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: connectionContract
                             required:
                               - include
                           - properties:
@@ -6417,6 +6438,7 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - connectionContract
                           - capabilities
                           - creativeFormats
                           - publisherProperties
@@ -7518,6 +7540,12 @@ paths:
                               include:
                                 contains:
                                   const: testRuns
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: connectionContract
                             required:
                               - include
                           - properties:
@@ -7805,6 +7833,7 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - connectionContract
                           - capabilities
                           - creativeFormats
                           - publisherProperties
@@ -8906,6 +8935,12 @@ paths:
                               include:
                                 contains:
                                   const: testRuns
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: connectionContract
                             required:
                               - include
                           - properties:
@@ -9200,6 +9235,7 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - connectionContract
                           - capabilities
                           - creativeFormats
                           - publisherProperties
@@ -10302,6 +10338,12 @@ paths:
                               include:
                                 contains:
                                   const: testRuns
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: connectionContract
                             required:
                               - include
                           - properties:
@@ -11589,6 +11631,12 @@ paths:
                           - properties:
                               include:
                                 contains:
+                                  const: connectionContract
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
                                   const: capabilities
                             required:
                               - include
@@ -11872,6 +11920,7 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - connectionContract
                           - capabilities
                           - creativeFormats
                           - publisherProperties
@@ -12979,6 +13028,12 @@ paths:
                           - properties:
                               include:
                                 contains:
+                                  const: connectionContract
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
                                   const: capabilities
                             required:
                               - include
@@ -13262,6 +13317,7 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - connectionContract
                           - capabilities
                           - creativeFormats
                           - publisherProperties
@@ -14364,6 +14420,12 @@ paths:
                               include:
                                 contains:
                                   const: testRuns
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: connectionContract
                             required:
                               - include
                           - properties:
@@ -15656,6 +15718,12 @@ paths:
                           - properties:
                               include:
                                 contains:
+                                  const: connectionContract
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
                                   const: capabilities
                             required:
                               - include
@@ -16943,6 +17011,12 @@ paths:
                           - properties:
                               include:
                                 contains:
+                                  const: connectionContract
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
                                   const: capabilities
                             required:
                               - include
@@ -17224,6 +17298,7 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - connectionContract
                           - capabilities
                           - creativeFormats
                           - publisherProperties
@@ -18331,6 +18406,12 @@ paths:
                           - properties:
                               include:
                                 contains:
+                                  const: connectionContract
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
                                   const: capabilities
                             required:
                               - include
@@ -18612,6 +18693,7 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - connectionContract
                           - capabilities
                           - creativeFormats
                           - publisherProperties
@@ -19719,6 +19801,12 @@ paths:
                           - properties:
                               include:
                                 contains:
+                                  const: connectionContract
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
                                   const: capabilities
                             required:
                               - include
@@ -20006,6 +20094,7 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - connectionContract
                           - capabilities
                           - creativeFormats
                           - publisherProperties
@@ -21107,6 +21196,12 @@ paths:
                               include:
                                 contains:
                                   const: testRuns
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: connectionContract
                             required:
                               - include
                           - properties:
@@ -21399,6 +21494,7 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - connectionContract
                           - capabilities
                           - creativeFormats
                           - publisherProperties
@@ -22500,6 +22596,12 @@ paths:
                               include:
                                 contains:
                                   const: testRuns
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: connectionContract
                             required:
                               - include
                           - properties:
@@ -22792,6 +22894,7 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - connectionContract
                           - capabilities
                           - creativeFormats
                           - publisherProperties
@@ -23893,6 +23996,12 @@ paths:
                               include:
                                 contains:
                                   const: testRuns
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: connectionContract
                             required:
                               - include
                           - properties:
@@ -24185,6 +24294,7 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - connectionContract
                           - capabilities
                           - creativeFormats
                           - publisherProperties
@@ -25291,6 +25401,12 @@ paths:
                           - properties:
                               include:
                                 contains:
+                                  const: connectionContract
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
                                   const: capabilities
                             required:
                               - include
@@ -25578,6 +25694,7 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - connectionContract
                           - capabilities
                           - creativeFormats
                           - publisherProperties
@@ -26680,6 +26797,12 @@ paths:
                               include:
                                 contains:
                                   const: testRuns
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: connectionContract
                             required:
                               - include
                           - properties:
@@ -27972,6 +28095,12 @@ paths:
                           - properties:
                               include:
                                 contains:
+                                  const: connectionContract
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
                                   const: capabilities
                             required:
                               - include
@@ -29259,6 +29388,12 @@ paths:
                           - properties:
                               include:
                                 contains:
+                                  const: connectionContract
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
                                   const: capabilities
                             required:
                               - include
@@ -29546,6 +29681,7 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - connectionContract
                           - capabilities
                           - creativeFormats
                           - publisherProperties
@@ -30647,6 +30783,12 @@ paths:
                               include:
                                 contains:
                                   const: testRuns
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: connectionContract
                             required:
                               - include
                           - properties:
@@ -58940,13 +59082,13 @@ paths:
     post:
       operationId: save_inventory_source
       summary: >-
-        Create or update where a seller's inventory comes from. Pass `id` to change a source or omit it to add one. Add
-        a sales agent with only `agentId`, never its address, or an ad server with only `adServer`; each opens a form.
-        Credentials are never passed here; a source that needs one returns its form.
+        Create or update a seller's inventory source (`id` changes, none adds). Add a sales agent with only `agentId`,
+        never its address, or an ad server with only `adServer`; each opens a form. `id` with `agentId` binds an owned
+        agent; `name` with `feedSource` creates a modular source. No credentials.
       description: >-
-        Create or update where a seller's inventory comes from. Pass `id` to change a source or omit it to add one. Add
-        a sales agent with only `agentId`, never its address, or an ad server with only `adServer`; each opens a form.
-        Credentials are never passed here; a source that needs one returns its form.
+        Create or update a seller's inventory source (`id` changes, none adds). Add a sales agent with only `agentId`,
+        never its address, or an ad server with only `adServer`; each opens a form. `id` with `agentId` binds an owned
+        agent; `name` with `feedSource` creates a modular source. No credentials.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -59011,8 +59153,9 @@ paths:
                 agentId:
                   description: >-
                     An agent from search kind agent. Send it alone to open the form that connects it; an agent already
-                    connected answers with its source. From an Agents account it connects that account's agent so it can
-                    be tested and certified.
+                    connected answers with its source. Send it with id to bind a sales agent your organization owns to
+                    that existing source. From an Agents account it connects that account's agent so it can be tested
+                    and certified.
                   type: string
                   format: uuid
                   pattern: >-
@@ -59101,6 +59244,129 @@ paths:
                       type:
                         - string
                         - 'null'
+                  additionalProperties: false
+                feedSource:
+                  description: >-
+                    Create a feed-backed modular source named name, with the built-in booking ledger and manual
+                    execution unless you choose otherwise. Send with name, and with id to choose its source id. Sending
+                    the same call again returns the source it made. Add availability afterwards from an avails sheet.
+                  type: object
+                  properties:
+                    includeBookingLedger:
+                      default: true
+                      description: Whether to include the built-in reservation ledger.
+                      type: boolean
+                    availsSource:
+                      description: Availability-feed setup metadata.
+                      type: object
+                      properties:
+                        type:
+                          description: How inventory availability reaches Apostra.
+                          type: string
+                          enum:
+                            - upload
+                            - spreadsheet
+                            - api
+                            - manual
+                            - unknown
+                        cadence:
+                          description: Expected availability refresh cadence.
+                          $ref: '#/components/schemas/save_inventory_source_request_FeedSourceAvailsSourceCadence'
+                        description:
+                          description: Additional availability-source details.
+                          $ref: '#/components/schemas/save_inventory_source_request_FeedSourceAvailsSourceDescription'
+                      additionalProperties: false
+                    booking:
+                      description: Booking and reservation setup metadata.
+                      type: object
+                      properties:
+                        mode:
+                          description: System that owns inventory reservations.
+                          type: string
+                          enum:
+                            - booking_ledger
+                            - manual
+                            - upstream_oms
+                        systemName:
+                          description: Seller name for the booking system.
+                          type: string
+                          minLength: 1
+                          maxLength: 255
+                        notes:
+                          description: Additional booking setup details.
+                          $ref: '#/components/schemas/save_inventory_source_request_FeedSourceBookingNotes'
+                      additionalProperties: false
+                    execution:
+                      default:
+                        mode: manual
+                      description: Booking execution setup. Omission defaults to the provider-neutral manual execution workflow.
+                      type: object
+                      properties:
+                        mode:
+                          default: manual
+                          description: How confirmed bookings are trafficked. Defaults to the provider-neutral manual workflow.
+                          type: string
+                          enum:
+                            - manual
+                            - upstream_system
+                            - none
+                        systemName:
+                          description: Seller name for the execution system.
+                          type: string
+                          minLength: 1
+                          maxLength: 255
+                        notes:
+                          description: Additional execution setup details.
+                          $ref: '#/components/schemas/save_inventory_source_request_FeedSourceExecutionNotes'
+                      additionalProperties: false
+                    reporting:
+                      description: Delivery reporting setup metadata.
+                      type: object
+                      properties:
+                        mode:
+                          description: How delivery reporting reaches Apostra.
+                          type: string
+                          enum:
+                            - upload
+                            - manual
+                            - upstream_export
+                            - api
+                            - none
+                        systemName:
+                          description: Seller name for the reporting system.
+                          type: string
+                          minLength: 1
+                          maxLength: 255
+                        sampleAvailable:
+                          description: Whether the seller has a sample report available.
+                          type: boolean
+                        notes:
+                          description: Additional reporting setup details.
+                          $ref: '#/components/schemas/save_inventory_source_request_FeedSourceReportingNotes'
+                      additionalProperties: false
+                    creative:
+                      description: Creative synchronization setup metadata.
+                      type: object
+                      properties:
+                        mode:
+                          description: How creative assets are synchronized.
+                          type: string
+                          enum:
+                            - manual
+                            - upstream_system
+                            - none
+                        systemName:
+                          description: Seller name for the creative system.
+                          type: string
+                          minLength: 1
+                          maxLength: 255
+                        notes:
+                          description: Additional creative setup details.
+                          $ref: '#/components/schemas/save_inventory_source_request_FeedSourceCreativeNotes'
+                      additionalProperties: false
+                    notes:
+                      description: Additional modular-source setup notes.
+                      $ref: '#/components/schemas/save_inventory_source_request_FeedSourceNotes'
                   additionalProperties: false
                 adServerSettings:
                   description: A managed ad-server source's settings. Send with id only, one setting per call.
@@ -129193,6 +129459,34 @@ components:
         - key
         - value
       additionalProperties: false
+    save_inventory_source_request_FeedSourceAvailsSourceCadence:
+      type: string
+      minLength: 1
+      maxLength: 2000
+    save_inventory_source_request_FeedSourceAvailsSourceDescription:
+      type: string
+      minLength: 1
+      maxLength: 2000
+    save_inventory_source_request_FeedSourceBookingNotes:
+      type: string
+      minLength: 1
+      maxLength: 2000
+    save_inventory_source_request_FeedSourceExecutionNotes:
+      type: string
+      minLength: 1
+      maxLength: 2000
+    save_inventory_source_request_FeedSourceReportingNotes:
+      type: string
+      minLength: 1
+      maxLength: 2000
+    save_inventory_source_request_FeedSourceCreativeNotes:
+      type: string
+      minLength: 1
+      maxLength: 2000
+    save_inventory_source_request_FeedSourceNotes:
+      type: string
+      minLength: 1
+      maxLength: 2000
     save_inventory_source_success_SaveInventorySourceSuccessCreated:
       type: object
       properties:
@@ -129236,6 +129530,8 @@ components:
           $ref: '#/components/schemas/save_inventory_source_success_SaveInventorySourceSuccessUpdatedObject'
         warning:
           type: string
+        poweredByAgent:
+          $ref: '#/components/schemas/save_inventory_source_success_SaveInventorySourceSuccessUpdatedPoweredByAgent'
         retiredProducts:
           type: object
           properties:
@@ -129511,6 +129807,11 @@ components:
         type: string
       additionalProperties: {}
     save_inventory_source_success_SaveInventorySourceSuccessUpdatedObject:
+      type: object
+      propertyNames:
+        type: string
+      additionalProperties: {}
+    save_inventory_source_success_SaveInventorySourceSuccessUpdatedPoweredByAgent:
       type: object
       propertyNames:
         type: string

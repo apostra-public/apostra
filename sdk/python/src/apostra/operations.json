@@ -1403,7 +1403,7 @@
         ]
       }
     ],
-    "summary": "Create or update where a seller's inventory comes from. Pass `id` to change a source or omit it to add one. Add a sales agent with only `agentId`, never its address, or an ad server with only `adServer`; each opens a form. Credentials are never passed here; a source that needs one returns its form."
+    "summary": "Create or update a seller's inventory source (`id` changes, none adds). Add a sales agent with only `agentId`, never its address, or an ad server with only `adServer`; each opens a form. `id` with `agentId` binds an owned agent; `name` with `feedSource` creates a modular source. No credentials."
   },
   "save_lesson": {
     "path": "/tools/save_lesson",

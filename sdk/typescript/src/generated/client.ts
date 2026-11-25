@@ -1059,14 +1059,14 @@ export class Apostra extends Transport {
   /** Create, change, archive, or restore up to 50 advertiser conversion event sources (pixels, server feeds). Each entry is keyed by eventSourceId and succeeds or fails alone. Setup is not proof events flow: check health with get, then use eventSourceId in an optimization goal. Returns the data together with response headers and request ID. */
   saveEventSourceWithResponse(input: SaveEventSourceInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveEventSourceResult>> { return this.requestDetailed("save_event_source", input, options) }
   /**
-   * Create or update where a seller's inventory comes from. Pass `id` to change a source or omit it to add one. Add a sales agent with only `agentId`, never its address, or an ad server with only `adServer`; each opens a form. Credentials are never passed here; a source that needs one returns its form.
+   * Create or update a seller's inventory source (`id` changes, none adds). Add a sales agent with only `agentId`, never its address, or an ad server with only `adServer`; each opens a form. `id` with `agentId` binds an owned agent; `name` with `feedSource` creates a modular source. No credentials.
    *
    * @example
    * await client.saveInventorySource(input, { idempotencyKey: 'stable-key' })
    */
   saveInventorySource(input: SaveInventorySourceInput, options: WriteRequestOptions): Promise<SaveInventorySourceResult> { return this.request("save_inventory_source", input, options) }
 
-  /** Create or update where a seller's inventory comes from. Pass `id` to change a source or omit it to add one. Add a sales agent with only `agentId`, never its address, or an ad server with only `adServer`; each opens a form. Credentials are never passed here; a source that needs one returns its form. Returns the data together with response headers and request ID. */
+  /** Create or update a seller's inventory source (`id` changes, none adds). Add a sales agent with only `agentId`, never its address, or an ad server with only `adServer`; each opens a form. `id` with `agentId` binds an owned agent; `name` with `feedSource` creates a modular source. No credentials. Returns the data together with response headers and request ID. */
   saveInventorySourceWithResponse(input: SaveInventorySourceInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveInventorySourceResult>> { return this.requestDetailed("save_inventory_source", input, options) }
   /**
    * Manage seller lessons in a seller account; send the accountId of that account. propose requires lesson; approve and retire require lessonId; preview requires lessonId and brief. Preserve seller words from a private Session note and ask if kind or scope is unclear.
