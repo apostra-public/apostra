@@ -72083,6 +72083,7 @@ paths:
                           - pulse
                           - deliverySummary
                           - attention
+                          - sources
                           - progress
                           - outcome
                           - delivery
@@ -73432,6 +73433,19 @@ paths:
                         properties:
                           kind:
                             const: media_buy
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: sources
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: account_relationship
                         required:
                           - kind
                     - if:
@@ -74059,6 +74073,7 @@ paths:
                           - pulse
                           - deliverySummary
                           - attention
+                          - sources
                           - progress
                           - outcome
                           - delivery
@@ -75411,6 +75426,19 @@ paths:
                         properties:
                           kind:
                             const: media_buy
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: sources
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: account_relationship
                         required:
                           - kind
                     - if:
@@ -76036,6 +76064,7 @@ paths:
                           - pulse
                           - deliverySummary
                           - attention
+                          - sources
                           - progress
                           - outcome
                           - delivery
@@ -76212,6 +76241,19 @@ paths:
                         properties:
                           kind:
                             const: media_buy
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: sources
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: account_relationship
                         required:
                           - kind
                     - if:
@@ -76837,6 +76879,7 @@ paths:
                           - pulse
                           - deliverySummary
                           - attention
+                          - sources
                           - progress
                           - outcome
                           - delivery
@@ -78195,6 +78238,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: sources
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: account_relationship
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: executionResources
                         required:
                           - include
@@ -78814,6 +78870,7 @@ paths:
                           - pulse
                           - deliverySummary
                           - attention
+                          - sources
                           - progress
                           - outcome
                           - delivery
@@ -80156,6 +80213,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: sources
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: account_relationship
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: executionResources
                         required:
                           - include
@@ -80775,6 +80845,7 @@ paths:
                           - pulse
                           - deliverySummary
                           - attention
+                          - sources
                           - progress
                           - outcome
                           - delivery
@@ -82125,6 +82196,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: sources
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: account_relationship
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: executionResources
                         required:
                           - include
@@ -82744,6 +82828,7 @@ paths:
                           - pulse
                           - deliverySummary
                           - attention
+                          - sources
                           - progress
                           - outcome
                           - delivery
@@ -84093,6 +84178,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: sources
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: account_relationship
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: executionResources
                         required:
                           - include
@@ -84712,6 +84810,7 @@ paths:
                           - pulse
                           - deliverySummary
                           - attention
+                          - sources
                           - progress
                           - outcome
                           - delivery
@@ -86065,6 +86164,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: sources
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: account_relationship
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: executionResources
                         required:
                           - include
@@ -86679,6 +86791,7 @@ paths:
                           - pulse
                           - deliverySummary
                           - attention
+                          - sources
                           - progress
                           - outcome
                           - delivery
@@ -86886,6 +86999,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: sources
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: account_relationship
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: executionResources
                         required:
                           - include
@@ -87500,6 +87626,7 @@ paths:
                           - pulse
                           - deliverySummary
                           - attention
+                          - sources
                           - progress
                           - outcome
                           - delivery
@@ -87705,6 +87832,19 @@ paths:
                         properties:
                           kind:
                             const: media_buy
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: sources
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: account_relationship
                         required:
                           - kind
                     - if:
@@ -88330,6 +88470,7 @@ paths:
                           - pulse
                           - deliverySummary
                           - attention
+                          - sources
                           - progress
                           - outcome
                           - delivery
@@ -89680,6 +89821,19 @@ paths:
                         properties:
                           kind:
                             const: media_buy
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: sources
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: account_relationship
                         required:
                           - kind
                     - if:
@@ -90305,6 +90459,7 @@ paths:
                           - pulse
                           - deliverySummary
                           - attention
+                          - sources
                           - progress
                           - outcome
                           - delivery
@@ -90497,6 +90652,19 @@ paths:
                         properties:
                           kind:
                             const: media_buy
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: sources
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: account_relationship
                         required:
                           - kind
                     - if:
@@ -91122,6 +91290,7 @@ paths:
                           - pulse
                           - deliverySummary
                           - attention
+                          - sources
                           - progress
                           - outcome
                           - delivery
@@ -92478,6 +92647,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: sources
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: account_relationship
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: executionResources
                         required:
                           - include
@@ -93097,6 +93279,7 @@ paths:
                           - pulse
                           - deliverySummary
                           - attention
+                          - sources
                           - progress
                           - outcome
                           - delivery
@@ -93287,6 +93470,19 @@ paths:
                         properties:
                           kind:
                             const: media_buy
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: sources
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: account_relationship
                         required:
                           - kind
                     - if:
@@ -93912,6 +94108,7 @@ paths:
                           - pulse
                           - deliverySummary
                           - attention
+                          - sources
                           - progress
                           - outcome
                           - delivery
@@ -95270,6 +95467,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: sources
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: account_relationship
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: executionResources
                         required:
                           - include
@@ -95887,6 +96097,7 @@ paths:
                           - pulse
                           - deliverySummary
                           - attention
+                          - sources
                           - progress
                           - outcome
                           - delivery
@@ -97242,6 +97453,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: sources
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: account_relationship
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: executionResources
                         required:
                           - include
@@ -97859,6 +98083,7 @@ paths:
                           - pulse
                           - deliverySummary
                           - attention
+                          - sources
                           - progress
                           - outcome
                           - delivery
@@ -99214,6 +99439,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: sources
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: account_relationship
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: executionResources
                         required:
                           - include
@@ -99831,6 +100069,7 @@ paths:
                           - pulse
                           - deliverySummary
                           - attention
+                          - sources
                           - progress
                           - outcome
                           - delivery
@@ -101187,6 +101426,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: sources
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: account_relationship
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: executionResources
                         required:
                           - include
@@ -101804,6 +102056,7 @@ paths:
                           - pulse
                           - deliverySummary
                           - attention
+                          - sources
                           - progress
                           - outcome
                           - delivery
@@ -103151,6 +103404,19 @@ paths:
                         properties:
                           kind:
                             const: media_buy
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: sources
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: account_relationship
                         required:
                           - kind
                     - if:
