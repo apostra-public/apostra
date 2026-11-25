@@ -9357,6 +9357,16 @@ export type GetResponses = {
                      */
                     activityIus: number | null;
                 };
+                /**
+                 * Most IUs the Prime may cause to be charged per billing cycle (`monthlyIus`; `isDefault` when unset), and `usedIus` this cycle. Change with save_billing primeSpendingCap.
+                 */
+                primeSpendingCap: {
+                    monthlyIus: number;
+                    isDefault: boolean;
+                    usedIus: number;
+                    cycleStart: string;
+                    cycleEnd: string;
+                };
                 payout: {
                     /**
                      * Whether this Seller is paid out through Interchange and must provide payout details. It carries no destination detail.
@@ -20979,6 +20989,10 @@ export type SaveBillingData = {
          */
         mediaBilling?: SaveBillingRequestSaveBillingMediaBilling;
         /**
+         * Set the Prime's spending cap; saves now. Send alone.
+         */
+        primeSpendingCap?: SaveBillingRequestSaveBillingPrimeSpendingCap;
+        /**
          * Remove a saved card; returns approval_required. Needs idempotencyKey. Send alone.
          */
         paymentMethod?: SaveBillingRequestSaveBillingPaymentMethod;
@@ -21292,6 +21306,13 @@ export type SaveBillingRequestSaveBillingPlanOfferVersion = string;
 
 export type SaveBillingRequestSaveBillingPlanPlanId = string;
 
+export type SaveBillingRequestSaveBillingPrimeSpendingCap = {
+    /**
+     * IUs per billing cycle; 0 = none, not yet enforced; null resets.
+     */
+    monthlyIus: number | null;
+};
+
 export type SaveBillingRequestSaveBillingRenewal = {
     /**
      * Renewal version the person was shown.
@@ -21507,6 +21528,15 @@ export type SaveBillingResponses = {
                 include: string;
                 reason: string;
             }>;
+        } | {
+            action: 'prime_spending_cap_saved';
+            primeSpendingCap: {
+                monthlyIus: number;
+                isDefault: boolean;
+                usedIus: number;
+                cycleStart: string;
+                cycleEnd: string;
+            };
         } | {
             action: 'payment_method_removed';
             paymentMethod: {
