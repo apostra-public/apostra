@@ -1020,6 +1020,25 @@
     ],
     "summary": "Accept Terms, set seller payment terms, accept a plan, answer its offer, change its renewal or payer details, manage media billing entities, remove a card, or pay a failed payment now. Plan, payment terms, renewal, card removal and pay now need administrator approval on our site. Cards stay off MCP."
   },
+  "save_brand": {
+    "path": "/tools/save_brand",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": true,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:write"
+        ]
+      }
+    ],
+    "summary": "Change a brand's own record, one change per call. authority turns on or off Apostra's hosting of the brand's AdCP brand.json and brand agent, or checks what the brand's domain says."
+  },
   "save_brand_source": {
     "path": "/tools/save_brand_source",
     "method": "POST",
