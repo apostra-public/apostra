@@ -38716,7 +38716,78 @@ export type SaveProjectSuccessObject = {
     pausedReason: 'stopped_by_person' | 'stopped_by_agent' | 'account_stopped' | 'approver_lost_authority' | 'write_outcome_unknown' | 'flight_ended' | 'unarchived' | null;
     archivedAt: string | null;
     archivedByUserId: string | null;
-    progress: null;
+    progress: {
+        goal: {
+            /**
+             * The delivery goal's unit: money, or a count of impressions.
+             */
+            unit: 'spend' | 'impressions';
+            /**
+             * The currency of a spend goal; null for impressions.
+             */
+            currency: string | null;
+            /**
+             * What the counted buys were ordered to deliver, in `unit`.
+             */
+            target: number;
+            /**
+             * Delivered over the flight so far, in `unit`.
+             */
+            delivered: number;
+            /**
+             * What the plan says should be delivered by today, in `unit`.
+             */
+            expectedByNow: number;
+            /**
+             * Delivered divided by expectedByNow; null when it cannot be judged.
+             */
+            pacingIndex: number | null;
+            /**
+             * How the Project is pacing now, from the pacing index and the account's pacing bands.
+             */
+            paceVerdict: 'far_behind' | 'behind' | 'on_pace' | 'ahead' | null;
+            /**
+             * What is left divided by the days left, today included, in `unit`. Null once the flight has ended.
+             */
+            neededPerDay: number | null;
+            /**
+             * The plain average per day over the last seven reporting days.
+             */
+            lastSevenDayRate: number | null;
+            /**
+             * How far short it finishes at lastSevenDayRate; null when it finishes on or over target.
+             */
+            shortfall: number | null;
+            /**
+             * The earliest start among the counted buys, as an ISO date.
+             */
+            flightStart: string;
+            /**
+             * The latest end among the counted buys, as an ISO date.
+             */
+            flightEnd: string;
+            /**
+             * Whole days from today to flightEnd, today included; 0 once it has ended.
+             */
+            daysLeft: number;
+            /**
+             * Counted media buys: the same set `spend` counts.
+             */
+            mediaBuysIncluded: number;
+            /**
+             * Media buys left out because you cannot read them.
+             */
+            mediaBuysOmitted: number;
+        } | null;
+        /**
+         * Why goal is null: no buy has a delivery goal (no_delivery_goal), the buys use different units (mixed_units), a buy has no goal that can be judged (buy_not_judgeable), a daily rate is missing (fx_rate_unavailable), a currency is missing (currency_unavailable) or delivery could not be read (unavailable). Null when goal is set.
+         */
+        goalWithheld: 'no_delivery_goal' | 'mixed_units' | 'buy_not_judgeable' | 'fx_rate_unavailable' | 'currency_unavailable' | 'unavailable' | null;
+        /**
+         * The Project judge's verdict on the objective and each wave. Not built yet.
+         */
+        judge: null;
+    };
     spend: {
         /**
          * Delivered gross spend over the counted buys, in `currency`. Null when withheld (see reason), never a partial sum.
@@ -38912,7 +38983,78 @@ export type SaveProjectSuccessProject = {
     pausedReason: 'stopped_by_person' | 'stopped_by_agent' | 'account_stopped' | 'approver_lost_authority' | 'write_outcome_unknown' | 'flight_ended' | 'unarchived' | null;
     archivedAt: string | null;
     archivedByUserId: string | null;
-    progress: null;
+    progress: {
+        goal: {
+            /**
+             * The delivery goal's unit: money, or a count of impressions.
+             */
+            unit: 'spend' | 'impressions';
+            /**
+             * The currency of a spend goal; null for impressions.
+             */
+            currency: string | null;
+            /**
+             * What the counted buys were ordered to deliver, in `unit`.
+             */
+            target: number;
+            /**
+             * Delivered over the flight so far, in `unit`.
+             */
+            delivered: number;
+            /**
+             * What the plan says should be delivered by today, in `unit`.
+             */
+            expectedByNow: number;
+            /**
+             * Delivered divided by expectedByNow; null when it cannot be judged.
+             */
+            pacingIndex: number | null;
+            /**
+             * How the Project is pacing now, from the pacing index and the account's pacing bands.
+             */
+            paceVerdict: 'far_behind' | 'behind' | 'on_pace' | 'ahead' | null;
+            /**
+             * What is left divided by the days left, today included, in `unit`. Null once the flight has ended.
+             */
+            neededPerDay: number | null;
+            /**
+             * The plain average per day over the last seven reporting days.
+             */
+            lastSevenDayRate: number | null;
+            /**
+             * How far short it finishes at lastSevenDayRate; null when it finishes on or over target.
+             */
+            shortfall: number | null;
+            /**
+             * The earliest start among the counted buys, as an ISO date.
+             */
+            flightStart: string;
+            /**
+             * The latest end among the counted buys, as an ISO date.
+             */
+            flightEnd: string;
+            /**
+             * Whole days from today to flightEnd, today included; 0 once it has ended.
+             */
+            daysLeft: number;
+            /**
+             * Counted media buys: the same set `spend` counts.
+             */
+            mediaBuysIncluded: number;
+            /**
+             * Media buys left out because you cannot read them.
+             */
+            mediaBuysOmitted: number;
+        } | null;
+        /**
+         * Why goal is null: no buy has a delivery goal (no_delivery_goal), the buys use different units (mixed_units), a buy has no goal that can be judged (buy_not_judgeable), a daily rate is missing (fx_rate_unavailable), a currency is missing (currency_unavailable) or delivery could not be read (unavailable). Null when goal is set.
+         */
+        goalWithheld: 'no_delivery_goal' | 'mixed_units' | 'buy_not_judgeable' | 'fx_rate_unavailable' | 'currency_unavailable' | 'unavailable' | null;
+        /**
+         * The Project judge's verdict on the objective and each wave. Not built yet.
+         */
+        judge: null;
+    };
     spend: {
         /**
          * Delivered gross spend over the counted buys, in `currency`. Null when withheld (see reason), never a partial sum.

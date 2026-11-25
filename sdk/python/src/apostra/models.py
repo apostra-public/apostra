@@ -22753,7 +22753,7 @@ class SaveProjectSuccessObject(TypedDict):
     pausedReason: Literal["stopped_by_person", "stopped_by_agent", "account_stopped", "approver_lost_authority", "write_outcome_unknown", "flight_ended", "unarchived"] | None
     archivedAt: str | None
     archivedByUserId: str | None
-    progress: None
+    progress: SaveProjectSuccessObjectProgress
     spend: SaveProjectSuccessObjectSpendValue | None
     autonomy: SaveProjectSuccessObjectAutonomy
     attention: list[SaveProjectSuccessObjectAttentionItem]
@@ -22874,6 +22874,45 @@ class SaveProjectSuccessObjectLeadKindAssistant(TypedDict):
 
 SaveProjectSuccessObjectLeadPrincipalId: TypeAlias = str
 
+class SaveProjectSuccessObjectProgress(TypedDict):
+    goal: SaveProjectSuccessObjectProgressGoalValue | None
+    goalWithheld: Literal["no_delivery_goal", "mixed_units", "buy_not_judgeable", "fx_rate_unavailable", "currency_unavailable", "unavailable"] | None
+    '\n    Why goal is null: no buy has a delivery goal (no_delivery_goal), the buys use different units (mixed_units), a buy has no goal that can be judged (buy_not_judgeable), a daily rate is missing (fx_rate_unavailable), a currency is missing (currency_unavailable) or delivery could not be read (unavailable). Null when goal is set.\n    '
+    judge: None
+    '\n    The Project judge\'s verdict on the objective and each wave. Not built yet.\n    '
+
+class SaveProjectSuccessObjectProgressGoalValue(TypedDict):
+    unit: Literal["spend", "impressions"]
+    '\n    The delivery goal\'s unit: money, or a count of impressions.\n    '
+    currency: str | None
+    '\n    The currency of a spend goal; null for impressions.\n    '
+    target: float
+    '\n    What the counted buys were ordered to deliver, in `unit`.\n    '
+    delivered: float
+    '\n    Delivered over the flight so far, in `unit`.\n    '
+    expectedByNow: float
+    '\n    What the plan says should be delivered by today, in `unit`.\n    '
+    pacingIndex: float | None
+    '\n    Delivered divided by expectedByNow; null when it cannot be judged.\n    '
+    paceVerdict: Literal["far_behind", "behind", "on_pace", "ahead"] | None
+    '\n    How the Project is pacing now, from the pacing index and the account\'s pacing bands.\n    '
+    neededPerDay: float | None
+    '\n    What is left divided by the days left, today included, in `unit`. Null once the flight has ended.\n    '
+    lastSevenDayRate: float | None
+    '\n    The plain average per day over the last seven reporting days.\n    '
+    shortfall: float | None
+    '\n    How far short it finishes at lastSevenDayRate; null when it finishes on or over target.\n    '
+    flightStart: str
+    '\n    The earliest start among the counted buys, as an ISO date.\n    '
+    flightEnd: str
+    '\n    The latest end among the counted buys, as an ISO date.\n    '
+    daysLeft: int
+    '\n    Whole days from today to flightEnd, today included; 0 once it has ended.\n    '
+    mediaBuysIncluded: int
+    '\n    Counted media buys: the same set `spend` counts.\n    '
+    mediaBuysOmitted: int
+    '\n    Media buys left out because you cannot read them.\n    '
+
 class SaveProjectSuccessObjectSpendDataThrough(TypedDict):
     earliest: str | None
     latest: str | None
@@ -22907,7 +22946,7 @@ class SaveProjectSuccessProject(TypedDict):
     pausedReason: Literal["stopped_by_person", "stopped_by_agent", "account_stopped", "approver_lost_authority", "write_outcome_unknown", "flight_ended", "unarchived"] | None
     archivedAt: str | None
     archivedByUserId: str | None
-    progress: None
+    progress: SaveProjectSuccessProjectProgress
     spend: SaveProjectSuccessProjectSpendValue | None
     autonomy: SaveProjectSuccessProjectAutonomy
     attention: list[SaveProjectSuccessProjectAttentionItem]
@@ -23027,6 +23066,45 @@ class SaveProjectSuccessProjectLeadKindAssistant(TypedDict):
     '\n    The Apostra Assistant.\n    '
 
 SaveProjectSuccessProjectLeadPrincipalId: TypeAlias = str
+
+class SaveProjectSuccessProjectProgress(TypedDict):
+    goal: SaveProjectSuccessProjectProgressGoalValue | None
+    goalWithheld: Literal["no_delivery_goal", "mixed_units", "buy_not_judgeable", "fx_rate_unavailable", "currency_unavailable", "unavailable"] | None
+    '\n    Why goal is null: no buy has a delivery goal (no_delivery_goal), the buys use different units (mixed_units), a buy has no goal that can be judged (buy_not_judgeable), a daily rate is missing (fx_rate_unavailable), a currency is missing (currency_unavailable) or delivery could not be read (unavailable). Null when goal is set.\n    '
+    judge: None
+    '\n    The Project judge\'s verdict on the objective and each wave. Not built yet.\n    '
+
+class SaveProjectSuccessProjectProgressGoalValue(TypedDict):
+    unit: Literal["spend", "impressions"]
+    '\n    The delivery goal\'s unit: money, or a count of impressions.\n    '
+    currency: str | None
+    '\n    The currency of a spend goal; null for impressions.\n    '
+    target: float
+    '\n    What the counted buys were ordered to deliver, in `unit`.\n    '
+    delivered: float
+    '\n    Delivered over the flight so far, in `unit`.\n    '
+    expectedByNow: float
+    '\n    What the plan says should be delivered by today, in `unit`.\n    '
+    pacingIndex: float | None
+    '\n    Delivered divided by expectedByNow; null when it cannot be judged.\n    '
+    paceVerdict: Literal["far_behind", "behind", "on_pace", "ahead"] | None
+    '\n    How the Project is pacing now, from the pacing index and the account\'s pacing bands.\n    '
+    neededPerDay: float | None
+    '\n    What is left divided by the days left, today included, in `unit`. Null once the flight has ended.\n    '
+    lastSevenDayRate: float | None
+    '\n    The plain average per day over the last seven reporting days.\n    '
+    shortfall: float | None
+    '\n    How far short it finishes at lastSevenDayRate; null when it finishes on or over target.\n    '
+    flightStart: str
+    '\n    The earliest start among the counted buys, as an ISO date.\n    '
+    flightEnd: str
+    '\n    The latest end among the counted buys, as an ISO date.\n    '
+    daysLeft: int
+    '\n    Whole days from today to flightEnd, today included; 0 once it has ended.\n    '
+    mediaBuysIncluded: int
+    '\n    Counted media buys: the same set `spend` counts.\n    '
+    mediaBuysOmitted: int
+    '\n    Media buys left out because you cannot read them.\n    '
 
 class SaveProjectSuccessProjectSpendDataThrough(TypedDict):
     earliest: str | None
