@@ -1678,6 +1678,25 @@ export const operations = {
     ],
     "summary": "Decide a creative or media-buy approval, overrule a spend conflict, complete a modular-source follow-up, or resolve a failed GAM order. Repeats preserve evidence; retry, evaluation, and reassignment stay on the approvals Page."
   },
+  "save_workspace_file": {
+    "path": "/tools/save_workspace_file",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": true,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:write"
+        ]
+      }
+    ],
+    "summary": "Restore, archive or unarchive a file the account’s agent keeps in a workspace (search or get with kind workspace_file reads them): id and expectedRevision with restoreRevision, or with isArchived. It never takes content."
+  },
   "search": {
     "path": "/tools/search",
     "method": "POST",

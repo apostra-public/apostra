@@ -25313,6 +25313,47 @@ SaveWorkItemSuccessSaveWorkItemSuccessUnchangedObject: TypeAlias = dict[str, Jso
 
 SaveWorkItemSuccessSaveWorkItemSuccessUnchangedResumeDue: TypeAlias = bool
 
+class SaveWorkspaceFileInput(TypedDict):
+    id: str
+    '\n    The workspace file, from search or get.\n    '
+    expectedRevision: int
+    '\n    revision from the last read; a stale one is refused.\n    '
+    restoreRevision: NotRequired[int]
+    '\n    An earlier revision to restore: its bytes become a new revision. Send without isArchived.\n    '
+    isArchived: NotRequired[bool]
+    '\n    true archives the file, keeping every revision and freeing its path; false unarchives it. Send without restoreRevision.\n    '
+    expectedAccountId: NotRequired[int | str]
+    '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
+    accountId: NotRequired[int | str]
+    '\n    Apostra accountId this call runs in, from get_status.\n    '
+
+class SaveWorkspaceFileResult(TypedDict):
+    action: SaveWorkspaceFileSuccessSaveWorkspaceFileAction
+    workspaceFile: SaveWorkspaceFileSuccessWorkspaceFile
+
+SaveWorkspaceFileSuccessSaveWorkspaceFileAction: TypeAlias = Literal["restored", "archived", "unarchived", "unchanged"]
+
+class SaveWorkspaceFileSuccessWorkspaceFile(TypedDict):
+    id: str
+    projectId: str | None
+    path: str
+    '\n    The file\'s path, fenced as untrusted text an agent wrote. Strip the fence before passing it back as pathPrefix.\n    '
+    advertiserIds: list[str]
+    mediaType: str
+    sizeBytes: int
+    contentSha256: str
+    revision: int
+    isArchived: bool
+    lastWrittenBy: SaveWorkspaceFileSuccessWorkspaceFileAuthor
+    createdAt: str
+    updatedAt: str
+
+class SaveWorkspaceFileSuccessWorkspaceFileAuthor(TypedDict):
+    kind: Literal["agent", "person"]
+    agentId: str | None
+    userId: str | None
+    turnId: str | None
+
 class SearchInputDocsScopeCallerRelevantAndPublicResearch(TypedDict):
     accountId: NotRequired[int | str]
     query: NotRequired[str]
@@ -34122,6 +34163,8 @@ SaveSignalError: TypeAlias = "V3ToolErrorResponse"
 SaveWholesaleProductError: TypeAlias = "V3ToolErrorResponse"
 
 SaveWorkItemError: TypeAlias = "V3ToolErrorResponse"
+
+SaveWorkspaceFileError: TypeAlias = "V3ToolErrorResponse"
 
 SearchError: TypeAlias = "V3ToolErrorResponse"
 
