@@ -15924,6 +15924,10 @@ class SaveCreativeAssetInput(TypedDict):
     '\n    The advertiser whose Library holds the assets.\n    '
     items: list[SaveCreativeAssetInputItemsItem]
     '\n    One entry per asset, at most 50; all are saved or none. Each replaces that asset\'s rights.\n    '
+    confirm: NotRequired[bool]
+    '\n    true asks a person to confirm the rights on Apostra’s approval page and returns approval_required with its link. Needs idempotencyKey. Only that confirmation makes the rights count.\n    '
+    idempotencyKey: NotRequired[str]
+    '\n    With confirm: a stable key; repeat the call with it to read the approval’s outcome.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
@@ -16063,16 +16067,53 @@ SaveCreativeAssetRequestItemsItemRightsItemExcludedChannelsItem: TypeAlias = Lit
 
 SaveCreativeAssetRequestItemsItemRightsItemExcludedCountriesItem: TypeAlias = str
 
-class SaveCreativeAssetResult(TypedDict):
-    action: Literal["recorded"]
-    items: list[SaveCreativeAssetResultItemsItem]
+class SaveCreativeAssetSuccessAgentApproval(TypedDict):
+    id: str
+    '\n    Approval id.\n    '
+    kind: str
+    '\n    Kind of sensitive action, for example `buyer_child_account.create`.\n    '
+    state: Literal["pending", "executing", "succeeded", "failed", "rejected", "expired"]
+    '\n    `pending` waits for a person; `executing` was approved and is running; `succeeded`, `failed`, `rejected` and `expired` are final.\n    '
+    targetCustomerId: str
+    '\n    Account the action applies to.\n    '
+    requiredRole: Literal["ADMIN", "SUPER_ADMIN"] | None
+    '\n    Role the approver must hold on the account.\n    '
+    summary: str | None
+    '\n    What will happen, in one line. Null once the approval is final.\n    '
+    url: str
+    '\n    Page on our site where a signed-in person approves or rejects the request.\n    '
+    createdAt: str
+    expiresAt: str
+    decidedAt: str | None
+    completedAt: str | None
+    resultReference: dict[str, str | float | bool] | None
+    '\n    Reference to the result once succeeded.\n    '
+    failureCode: str | None
+    '\n    Reason code when the action failed.\n    '
 
-class SaveCreativeAssetResultItemsItem(TypedDict):
+class SaveCreativeAssetSuccessAgentApprovalRequired(TypedDict):
+    action: Literal["approval_required"]
+    message: str
+    approval: SaveCreativeAssetSuccessAgentApproval
+    approvers: NotRequired[list[SaveCreativeAssetSuccessAgentApprovalRequiredApproversItem]]
+    '\n    The account\'s direct administrators who can approve, when the caller cannot (Scope3 staff, or an agent or service token acting with no person present). email is null when no person is behind the call. Absent when the caller can approve; never empty.\n    '
+
+class SaveCreativeAssetSuccessAgentApprovalRequiredApproversItem(TypedDict):
+    name: str | None
+    email: str | None
+
+class SaveCreativeAssetSuccessSaveCreativeAssetRecorded(TypedDict):
+    action: Literal["recorded"]
+    items: list[SaveCreativeAssetSuccessSaveCreativeAssetRecordedItemsItem]
+
+SaveCreativeAssetResult: TypeAlias = "SaveCreativeAssetSuccessSaveCreativeAssetRecorded | SaveCreativeAssetSuccessAgentApprovalRequired"
+
+class SaveCreativeAssetSuccessSaveCreativeAssetRecordedItemsItem(TypedDict):
     assetId: str
     rightsState: Literal["pending_confirmation", "confirmed", "rejected", "paused", "revoked"]
-    rights: list[SaveCreativeAssetResultItemsItemRightsItem]
+    rights: list[SaveCreativeAssetSuccessSaveCreativeAssetRecordedItemsItemRightsItem]
 
-class SaveCreativeAssetResultItemsItemRightsItem(TypedDict):
+class SaveCreativeAssetSuccessSaveCreativeAssetRecordedItemsItemRightsItem(TypedDict):
     rights_id: str
     approval_status: NotRequired[Literal["pending", "approved", "rejected"]]
 

@@ -1253,7 +1253,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Record the rights a person states for Library assets: who holds them and where, how long and in which channels and countries an ad may use them, as AdCP rights entries. A save replaces the asset’s rights and only proposes them; recording does not make an asset usable."
+    "summary": "Record the rights a person states for Library assets as AdCP rights entries: who holds them, and where and how long ads may use them. A save replaces an asset’s rights and only proposes them. confirm: true asks a person to confirm on Apostra’s approval page."
   },
   "save_creative_collection": {
     "path": "/tools/save_creative_collection",
