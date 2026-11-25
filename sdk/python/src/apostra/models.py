@@ -11036,6 +11036,8 @@ class RequestProposalsResultPerSellerItemOutcomeKindNoInventoryForRequest(TypedD
 
 class RequestProposalsResultPerSellerItemOutcomeKindNoMatchingProducts(TypedDict):
     kind: Literal["no_matching_products"]
+    reason: NotRequired[str]
+    suggestions: NotRequired[list[str]]
 
 class RequestProposalsResultPerSellerItemOutcomeKindReturnedProducts(TypedDict):
     kind: Literal["returned_products"]
