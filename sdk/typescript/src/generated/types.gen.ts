@@ -8376,6 +8376,30 @@ export type GetDeliverySuccessGetDeliveryGoal = {
     verdict: GetDeliverySuccessGetDeliveryGoalVerdict | null;
     verdictWithheld: string | null;
     dataThrough: string | null;
+    /**
+     * What is left to deliver divided by the days left in the flight, counting today, in the unit of constraint.kind. Null once the flight has ended or when the goal cannot be judged.
+     */
+    neededPerDay: number | null;
+    /**
+     * Average delivered per day over the last seven reporting days, in the unit of constraint.kind.
+     */
+    lastSevenDayRate: number | null;
+    /**
+     * How far short the buy finishes at lastSevenDayRate, in the unit of constraint.kind. Null when it finishes on or over target.
+     */
+    shortfall: number | null;
+    /**
+     * Flight start the pace is worked against, a UTC date.
+     */
+    flightStart: string | null;
+    /**
+     * Flight end the pace is worked against, a UTC date.
+     */
+    flightEnd: string | null;
+    /**
+     * How the buy is pacing over the dates asked for: pacingIndex against the pacing bands (85, 95 and 110 percent). Separate from verdict, which is the projected end state.
+     */
+    paceVerdict: 'far_behind' | 'behind' | 'on_pace' | 'ahead' | null;
 };
 
 export type GetDeliverySuccessGetDeliveryGoalDeliveryProjection = JsonValue;
