@@ -21688,13 +21688,21 @@ export type SaveBrandData = {
          */
         authority?: {
             /**
-             * true hosts the brand's AdCP brand.json and brand agent (owner only). false stops, once the brand's domain no longer points to Apostra.
+             * true hosts the brand's AdCP brand.json and brand agent: the owner's record, or else your drafted file naming your organization as operator. false stops, once the brand's domain no longer points to it.
              */
             hosting?: boolean;
             /**
-             * Check what the brand's domain says now.
+             * Check what the brand's domain says now, and whether the brand Library is open.
              */
             checkRequested?: true;
+            /**
+             * Not the owner: draft a brand.json from the brand profile naming your organization's verified domain as operator. Show it to the person before hosting.
+             */
+            draft?: true;
+            /**
+             * With draft: whose brand profile to draft from, when several advertisers name the brand.
+             */
+            advertiserId?: string;
         };
         /**
          * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
@@ -21787,8 +21795,9 @@ export type SaveBrandResponses = {
      */
     200: {
         data: {
-            action: 'hosting_on' | 'hosting_off' | 'authority_checked';
+            action: 'hosting_on' | 'hosting_off' | 'authority_checked' | 'drafted';
             brand: string;
+            access: 'owner' | 'operator' | 'public';
             authority: {
                 state: 'apostra_document' | 'apostra_agent' | 'apostra_listed' | 'own_record' | 'no_brand_json' | 'unreachable' | null;
                 authoritative: boolean;
@@ -21804,7 +21813,25 @@ export type SaveBrandResponses = {
                         brandAgent: string;
                     };
                 } | null;
+                operatorFile: {
+                    state: 'draft' | 'published';
+                    documentUrl: string;
+                    operatorDomain: string;
+                    draft: {
+                        [key: string]: unknown;
+                    };
+                    publish: {
+                        authoritativeLocation: string;
+                    };
+                    check: {
+                        state: 'apostra_document' | 'apostra_agent' | 'apostra_listed' | 'own_record' | 'no_brand_json' | 'unreachable' | null;
+                        pointsHere: boolean;
+                        checkedAt: string | null;
+                        detail: string | null;
+                    };
+                } | null;
             };
+            nextStep: string;
         };
         error: null;
     };

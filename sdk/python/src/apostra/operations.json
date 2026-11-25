@@ -1037,7 +1037,7 @@
         ]
       }
     ],
-    "summary": "Change a brand's own record, one change per call. authority turns on or off Apostra's hosting of the brand's AdCP brand.json and brand agent, or checks what the brand's domain says."
+    "summary": "Change a brand's own record, one change per call. authority hosts the brand's AdCP brand.json and agent, or checks its domain. Not the owner: draft and host a brand.json naming your organization as operator, so the brand can point at it and open its Library."
   },
   "save_brand_source": {
     "path": "/tools/save_brand_source",

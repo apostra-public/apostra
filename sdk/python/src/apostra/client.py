@@ -405,11 +405,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveBillingResult], self._request_with_response("save_billing", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_brand(self, input: models.SaveBrandInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBrandResult:
-        "Change a brand's own record, one change per call. authority turns on or off Apostra's hosting of the brand's AdCP brand.json and brand agent, or checks what the brand's domain says."
+        "Change a brand's own record, one change per call. authority hosts the brand's AdCP brand.json and agent, or checks its domain. Not the owner: draft and host a brand.json naming your organization as operator, so the brand can point at it and open its Library."
         return cast("models.SaveBrandResult", self._request("save_brand", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_brand_with_response(self, input: models.SaveBrandInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveBrandResult]:
-        "Change a brand's own record, one change per call. authority turns on or off Apostra's hosting of the brand's AdCP brand.json and brand agent, or checks what the brand's domain says. Returns the data together with response headers and request ID."
+        "Change a brand's own record, one change per call. authority hosts the brand's AdCP brand.json and agent, or checks its domain. Not the owner: draft and host a brand.json naming your organization as operator, so the brand can point at it and open its Library. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveBrandResult], self._request_with_response("save_brand", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_brand_source(self, input: models.SaveBrandSourceInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBrandSourceResult:
@@ -1118,11 +1118,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveBillingResult], await self._request_with_response("save_billing", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_brand(self, input: models.SaveBrandInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBrandResult:
-        "Change a brand's own record, one change per call. authority turns on or off Apostra's hosting of the brand's AdCP brand.json and brand agent, or checks what the brand's domain says."
+        "Change a brand's own record, one change per call. authority hosts the brand's AdCP brand.json and agent, or checks its domain. Not the owner: draft and host a brand.json naming your organization as operator, so the brand can point at it and open its Library."
         return cast("models.SaveBrandResult", await self._request("save_brand", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_brand_with_response(self, input: models.SaveBrandInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveBrandResult]:
-        "Change a brand's own record, one change per call. authority turns on or off Apostra's hosting of the brand's AdCP brand.json and brand agent, or checks what the brand's domain says. Returns the data together with response headers and request ID."
+        "Change a brand's own record, one change per call. authority hosts the brand's AdCP brand.json and agent, or checks its domain. Not the owner: draft and host a brand.json naming your organization as operator, so the brand can point at it and open its Library. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveBrandResult], await self._request_with_response("save_brand", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_brand_source(self, input: models.SaveBrandSourceInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBrandSourceResult:

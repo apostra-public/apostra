@@ -48752,11 +48752,13 @@ paths:
     post:
       operationId: save_brand
       summary: >-
-        Change a brand's own record, one change per call. authority turns on or off Apostra's hosting of the brand's
-        AdCP brand.json and brand agent, or checks what the brand's domain says.
+        Change a brand's own record, one change per call. authority hosts the brand's AdCP brand.json and agent, or
+        checks its domain. Not the owner: draft and host a brand.json naming your organization as operator, so the brand
+        can point at it and open its Library.
       description: >-
-        Change a brand's own record, one change per call. authority turns on or off Apostra's hosting of the brand's
-        AdCP brand.json and brand agent, or checks what the brand's domain says.
+        Change a brand's own record, one change per call. authority hosts the brand's AdCP brand.json and agent, or
+        checks its domain. Not the owner: draft and host a brand.json naming your organization as operator, so the brand
+        can point at it and open its Library.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -48792,13 +48794,24 @@ paths:
                   properties:
                     hosting:
                       description: >-
-                        true hosts the brand's AdCP brand.json and brand agent (owner only). false stops, once the
-                        brand's domain no longer points to Apostra.
+                        true hosts the brand's AdCP brand.json and brand agent: the owner's record, or else your drafted
+                        file naming your organization as operator. false stops, once the brand's domain no longer points
+                        to it.
                       type: boolean
                     checkRequested:
-                      description: Check what the brand's domain says now.
+                      description: Check what the brand's domain says now, and whether the brand Library is open.
                       type: boolean
                       const: true
+                    draft:
+                      description: >-
+                        Not the owner: draft a brand.json from the brand profile naming your organization's verified
+                        domain as operator. Show it to the person before hosting.
+                      type: boolean
+                      const: true
+                    advertiserId:
+                      description: 'With draft: whose brand profile to draft from, when several advertisers name the brand.'
+                      type: string
+                      pattern: ^[1-9][0-9]{0,18}$
                   additionalProperties: false
                 expectedAccountId:
                   description: Apostra accountId you are working in (from get_status). The write fails if the account has changed.
@@ -48835,8 +48848,15 @@ paths:
                           - hosting_on
                           - hosting_off
                           - authority_checked
+                          - drafted
                       brand:
                         type: string
+                      access:
+                        type: string
+                        enum:
+                          - owner
+                          - operator
+                          - public
                       authority:
                         type: object
                         properties:
@@ -48894,6 +48914,71 @@ paths:
                                   - publish
                                 additionalProperties: false
                               - type: 'null'
+                          operatorFile:
+                            anyOf:
+                              - type: object
+                                properties:
+                                  state:
+                                    type: string
+                                    enum:
+                                      - draft
+                                      - published
+                                  documentUrl:
+                                    type: string
+                                  operatorDomain:
+                                    type: string
+                                  draft:
+                                    type: object
+                                    propertyNames:
+                                      type: string
+                                    additionalProperties: {}
+                                  publish:
+                                    type: object
+                                    properties:
+                                      authoritativeLocation:
+                                        type: string
+                                    required:
+                                      - authoritativeLocation
+                                    additionalProperties: false
+                                  check:
+                                    type: object
+                                    properties:
+                                      state:
+                                        anyOf:
+                                          - type: string
+                                            enum:
+                                              - apostra_document
+                                              - apostra_agent
+                                              - apostra_listed
+                                              - own_record
+                                              - no_brand_json
+                                              - unreachable
+                                          - type: 'null'
+                                      pointsHere:
+                                        type: boolean
+                                      checkedAt:
+                                        type:
+                                          - string
+                                          - 'null'
+                                      detail:
+                                        type:
+                                          - string
+                                          - 'null'
+                                    required:
+                                      - state
+                                      - pointsHere
+                                      - checkedAt
+                                      - detail
+                                    additionalProperties: false
+                                required:
+                                  - state
+                                  - documentUrl
+                                  - operatorDomain
+                                  - draft
+                                  - publish
+                                  - check
+                                additionalProperties: false
+                              - type: 'null'
                         required:
                           - state
                           - authoritative
@@ -48901,11 +48986,16 @@ paths:
                           - checkedAt
                           - checkDetail
                           - hosting
+                          - operatorFile
                         additionalProperties: false
+                      nextStep:
+                        type: string
                     required:
                       - action
                       - brand
+                      - access
                       - authority
+                      - nextStep
                     additionalProperties: false
                   error:
                     type: 'null'
