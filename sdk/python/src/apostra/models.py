@@ -19836,6 +19836,8 @@ class SaveMediaBuyInputKindCreateProductsItem(TypedDict):
     '\n    Create only. True: never starts before every creative is approved; the buy waits. Else books with approved creatives; the rest attach later.\n    '
     impressions: NotRequired[float]
     '\n    Create only: AdCP impression goal for this line item. A goal, not a billing guarantee unless the seller commits to it.\n    '
+    creativeAssignments: NotRequired[list[SaveMediaBuyInputKindCreateProductsItemCreativeAssignmentsItem]]
+    '\n    Create only. AdCP creative_assignments: the only campaign creatives this line item runs. placement_refs route one to the product\'s placements.\n    '
     daily_budget_cap: NotRequired[float]
     '\n    Create only: this line item\'s hard daily spend ceiling, at most its budget.\n    '
     flight: NotRequired[SaveMediaBuyInputKindCreateProductsItemFlight]
@@ -19847,6 +19849,19 @@ class SaveMediaBuyInputKindCreateProductsItem(TypedDict):
     lineItemRef: NotRequired[str]
     '\n    Update only: products[].lineItemRef from get(kind: "media_buy", include: ["products"]), not the product id. Needed for a repeated product.\n    '
     targetingOverlay: NotRequired[SaveMediaBuyInputKindCreateProductsItemTargetingOverlay]
+
+class SaveMediaBuyInputKindCreateProductsItemCreativeAssignmentsItem(TypedDict):
+    creative_id: str
+    weight: NotRequired[float]
+    rotation_mode: NotRequired[Literal["weighted", "even", "sequential", "random"]]
+    group_id: NotRequired[str]
+    sequence_position: NotRequired[int]
+    placement_refs: NotRequired[list[SaveMediaBuyInputKindCreateProductsItemCreativeAssignmentsItemPlacementRefsItem]]
+    placement_ids: NotRequired[list[str]]
+
+class SaveMediaBuyInputKindCreateProductsItemCreativeAssignmentsItemPlacementRefsItem(TypedDict):
+    publisher_domain: NotRequired[str]
+    placement_id: str
 
 class SaveMediaBuyInputKindCreateProductsItemFlight(TypedDict):
     startAt: NotRequired[str]
@@ -20502,6 +20517,8 @@ class SaveMediaBuyInputKindUpdateProductsItem(TypedDict):
     '\n    Create only. True: never starts before every creative is approved; the buy waits. Else books with approved creatives; the rest attach later.\n    '
     impressions: NotRequired[float]
     '\n    Create only: AdCP impression goal for this line item. A goal, not a billing guarantee unless the seller commits to it.\n    '
+    creativeAssignments: NotRequired[list[SaveMediaBuyInputKindUpdateProductsItemCreativeAssignmentsItem]]
+    '\n    Create only. AdCP creative_assignments: the only campaign creatives this line item runs. placement_refs route one to the product\'s placements.\n    '
     daily_budget_cap: NotRequired[float]
     '\n    Create only: this line item\'s hard daily spend ceiling, at most its budget.\n    '
     flight: NotRequired[SaveMediaBuyInputKindUpdateProductsItemFlight]
@@ -20513,6 +20530,19 @@ class SaveMediaBuyInputKindUpdateProductsItem(TypedDict):
     lineItemRef: NotRequired[str]
     '\n    Update only: products[].lineItemRef from get(kind: "media_buy", include: ["products"]), not the product id. Needed for a repeated product.\n    '
     targetingOverlay: NotRequired[SaveMediaBuyInputKindUpdateProductsItemTargetingOverlay]
+
+class SaveMediaBuyInputKindUpdateProductsItemCreativeAssignmentsItem(TypedDict):
+    creative_id: str
+    weight: NotRequired[float]
+    rotation_mode: NotRequired[Literal["weighted", "even", "sequential", "random"]]
+    group_id: NotRequired[str]
+    sequence_position: NotRequired[int]
+    placement_refs: NotRequired[list[SaveMediaBuyInputKindUpdateProductsItemCreativeAssignmentsItemPlacementRefsItem]]
+    placement_ids: NotRequired[list[str]]
+
+class SaveMediaBuyInputKindUpdateProductsItemCreativeAssignmentsItemPlacementRefsItem(TypedDict):
+    publisher_domain: NotRequired[str]
+    placement_id: str
 
 class SaveMediaBuyInputKindUpdateProductsItemFlight(TypedDict):
     startAt: NotRequired[str]

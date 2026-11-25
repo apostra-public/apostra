@@ -60644,6 +60644,59 @@ paths:
                               unless the seller commits to it.
                             type: number
                             minimum: 0
+                          creativeAssignments:
+                            description: >-
+                              Create only. AdCP creative_assignments: the only campaign creatives this line item runs.
+                              placement_refs route one to the product's placements.
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                creative_id:
+                                  type: string
+                                weight:
+                                  type: number
+                                  minimum: 0
+                                  maximum: 100
+                                rotation_mode:
+                                  anyOf:
+                                    - type: string
+                                      const: weighted
+                                    - type: string
+                                      const: even
+                                    - type: string
+                                      const: sequential
+                                    - type: string
+                                      const: random
+                                group_id:
+                                  type: string
+                                  minLength: 1
+                                sequence_position:
+                                  type: integer
+                                  minimum: 1
+                                  maximum: 9007199254740991
+                                placement_refs:
+                                  minItems: 1
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      publisher_domain:
+                                        type: string
+                                        pattern: ^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$
+                                      placement_id:
+                                        type: string
+                                    required:
+                                      - placement_id
+                                    additionalProperties: false
+                                placement_ids:
+                                  minItems: 1
+                                  type: array
+                                  items:
+                                    type: string
+                              required:
+                                - creative_id
+                              additionalProperties: false
                           daily_budget_cap:
                             description: 'Create only: this line item''s hard daily spend ceiling, at most its budget.'
                             type: number
@@ -62578,6 +62631,59 @@ paths:
                               unless the seller commits to it.
                             type: number
                             minimum: 0
+                          creativeAssignments:
+                            description: >-
+                              Create only. AdCP creative_assignments: the only campaign creatives this line item runs.
+                              placement_refs route one to the product's placements.
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                creative_id:
+                                  type: string
+                                weight:
+                                  type: number
+                                  minimum: 0
+                                  maximum: 100
+                                rotation_mode:
+                                  anyOf:
+                                    - type: string
+                                      const: weighted
+                                    - type: string
+                                      const: even
+                                    - type: string
+                                      const: sequential
+                                    - type: string
+                                      const: random
+                                group_id:
+                                  type: string
+                                  minLength: 1
+                                sequence_position:
+                                  type: integer
+                                  minimum: 1
+                                  maximum: 9007199254740991
+                                placement_refs:
+                                  minItems: 1
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      publisher_domain:
+                                        type: string
+                                        pattern: ^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$
+                                      placement_id:
+                                        type: string
+                                    required:
+                                      - placement_id
+                                    additionalProperties: false
+                                placement_ids:
+                                  minItems: 1
+                                  type: array
+                                  items:
+                                    type: string
+                              required:
+                                - creative_id
+                              additionalProperties: false
                           daily_budget_cap:
                             description: 'Create only: this line item''s hard daily spend ceiling, at most its budget.'
                             type: number

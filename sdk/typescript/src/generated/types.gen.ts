@@ -33481,6 +33481,21 @@ export type SaveMediaBuyData = {
              */
             impressions?: number;
             /**
+             * Create only. AdCP creative_assignments: the only campaign creatives this line item runs. placement_refs route one to the product's placements.
+             */
+            creativeAssignments?: Array<{
+                creative_id: string;
+                weight?: number;
+                rotation_mode?: 'weighted' | 'even' | 'sequential' | 'random';
+                group_id?: string;
+                sequence_position?: number;
+                placement_refs?: Array<{
+                    publisher_domain?: string;
+                    placement_id: string;
+                }>;
+                placement_ids?: Array<string>;
+            }>;
+            /**
              * Create only: this line item's hard daily spend ceiling, at most its budget.
              */
             daily_budget_cap?: number;
@@ -34414,6 +34429,21 @@ export type SaveMediaBuyData = {
              * Create only: AdCP impression goal for this line item. A goal, not a billing guarantee unless the seller commits to it.
              */
             impressions?: number;
+            /**
+             * Create only. AdCP creative_assignments: the only campaign creatives this line item runs. placement_refs route one to the product's placements.
+             */
+            creativeAssignments?: Array<{
+                creative_id: string;
+                weight?: number;
+                rotation_mode?: 'weighted' | 'even' | 'sequential' | 'random';
+                group_id?: string;
+                sequence_position?: number;
+                placement_refs?: Array<{
+                    publisher_domain?: string;
+                    placement_id: string;
+                }>;
+                placement_ids?: Array<string>;
+            }>;
             /**
              * Create only: this line item's hard daily spend ceiling, at most its budget.
              */
