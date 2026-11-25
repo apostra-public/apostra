@@ -57844,13 +57844,6 @@ paths:
                 unsubscribe:
                   description: true = stop sync and retire local mirrors.
                   type: boolean
-                creativeHistoryMonths:
-                  description: >-
-                    Months of per-creative daily history to backfill (Meta: 1-37, default 14). Needs creative history on
-                    the account.
-                  type: integer
-                  minimum: 1
-                  maximum: 37
                 expectedAccountId:
                   description: Apostra accountId you are working in (from get_status). The write fails if the account has changed.
                   anyOf:
