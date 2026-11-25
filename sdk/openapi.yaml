@@ -58838,7 +58838,9 @@ paths:
                   type: string
                   maxLength: 2000
                 status:
-                  description: Desired state. ACTIVE sells, DISABLED stops, PENDING is set up but idle.
+                  description: >-
+                    Desired state. ACTIVE sells, DISABLED stops, PENDING is set up but idle. DISABLED on a managed
+                    ad-server source waits for approval.
                   type: string
                   enum:
                     - PENDING
@@ -58912,6 +58914,25 @@ paths:
                         - string
                         - 'null'
                   additionalProperties: false
+                adServerSettings:
+                  description: A managed ad-server source's settings. Send with id only, one setting per call.
+                  type: object
+                  properties:
+                    defaultAdvertiser:
+                      description: An advertiser id from search kind ad_server_advertiser. Not SpringServe.
+                      type: string
+                      minLength: 1
+                      maxLength: 64
+                    ensureAdvertiser:
+                      description: 'Google Ad Manager only: an advertiser name to create or find. Not made the default.'
+                      type: string
+                      minLength: 1
+                      maxLength: 255
+                    executionCurrency:
+                      description: 'FreeWheel and SpringServe: the ISO 4217 booking currency.'
+                      type: string
+                      pattern: ^[A-Z]{3}$
+                  additionalProperties: false
                 dryRun:
                   description: 'Preview namingTemplates: sample names and macros, nothing saved.'
                   type: boolean
@@ -58973,6 +58994,9 @@ paths:
                           #/components/schemas/save_inventory_source_success_SaveInventorySourceSuccessNamingTemplatesPreviewed
                       - $ref: >-
                           #/components/schemas/save_inventory_source_success_SaveInventorySourceSuccessNamingTemplatesSaved
+                      - $ref: >-
+                          #/components/schemas/save_inventory_source_success_SaveInventorySourceSuccessAdServerSettingsSaved
+                      - $ref: '#/components/schemas/save_inventory_source_success_SaveInventorySourceSuccessApprovalRequired'
                       - $ref: '#/components/schemas/save_inventory_source_success_SaveInventorySourceSuccessLegacyCreated'
                   error:
                     type: 'null'
@@ -72694,9 +72718,9 @@ paths:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
                         material browse, this is a connected Library source id. Required for ad_server_targeting,
-                        inventory_source_item and source_account (the accounts one source holds, for a source decision).
-                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
-                        when it is omitted.
+                        inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds,
+                        for a source decision). Optional for seller wholesale_product, signal, and seller media_buy,
+                        which list every source when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -74405,6 +74429,15 @@ paths:
                         properties:
                           kind:
                             const: inventory_source_item
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
+                            const: ad_server_advertiser
                         required:
                           - kind
                       then:
@@ -74684,9 +74717,9 @@ paths:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
                         material browse, this is a connected Library source id. Required for ad_server_targeting,
-                        inventory_source_item and source_account (the accounts one source holds, for a source decision).
-                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
-                        when it is omitted.
+                        inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds,
+                        for a source decision). Optional for seller wholesale_product, signal, and seller media_buy,
+                        which list every source when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -76398,6 +76431,15 @@ paths:
                         properties:
                           kind:
                             const: inventory_source_item
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
+                            const: ad_server_advertiser
                         required:
                           - kind
                       then:
@@ -76675,9 +76717,9 @@ paths:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
                         material browse, this is a connected Library source id. Required for ad_server_targeting,
-                        inventory_source_item and source_account (the accounts one source holds, for a source decision).
-                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
-                        when it is omitted.
+                        inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds,
+                        for a source decision). Optional for seller wholesale_product, signal, and seller media_buy,
+                        which list every source when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -77213,6 +77255,15 @@ paths:
                         properties:
                           kind:
                             const: inventory_source_item
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
+                            const: ad_server_advertiser
                         required:
                           - kind
                       then:
@@ -77490,9 +77541,9 @@ paths:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
                         material browse, this is a connected Library source id. Required for ad_server_targeting,
-                        inventory_source_item and source_account (the accounts one source holds, for a source decision).
-                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
-                        when it is omitted.
+                        inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds,
+                        for a source decision). Optional for seller wholesale_product, signal, and seller media_buy,
+                        which list every source when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -79212,6 +79263,15 @@ paths:
                     - if:
                         properties:
                           kind:
+                            const: ad_server_advertiser
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
                             const: inventory_source_item
                         required:
                           - kind
@@ -79481,9 +79541,9 @@ paths:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
                         material browse, this is a connected Library source id. Required for ad_server_targeting,
-                        inventory_source_item and source_account (the accounts one source holds, for a source decision).
-                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
-                        when it is omitted.
+                        inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds,
+                        for a source decision). Optional for seller wholesale_product, signal, and seller media_buy,
+                        which list every source when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -81187,6 +81247,15 @@ paths:
                     - if:
                         properties:
                           kind:
+                            const: ad_server_advertiser
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
                             const: inventory_source_item
                         required:
                           - kind
@@ -81456,9 +81525,9 @@ paths:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
                         material browse, this is a connected Library source id. Required for ad_server_targeting,
-                        inventory_source_item and source_account (the accounts one source holds, for a source decision).
-                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
-                        when it is omitted.
+                        inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds,
+                        for a source decision). Optional for seller wholesale_product, signal, and seller media_buy,
+                        which list every source when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -83170,6 +83239,15 @@ paths:
                     - if:
                         properties:
                           kind:
+                            const: ad_server_advertiser
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
                             const: inventory_source_item
                         required:
                           - kind
@@ -83439,9 +83517,9 @@ paths:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
                         material browse, this is a connected Library source id. Required for ad_server_targeting,
-                        inventory_source_item and source_account (the accounts one source holds, for a source decision).
-                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
-                        when it is omitted.
+                        inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds,
+                        for a source decision). Optional for seller wholesale_product, signal, and seller media_buy,
+                        which list every source when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -85152,6 +85230,15 @@ paths:
                     - if:
                         properties:
                           kind:
+                            const: ad_server_advertiser
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
                             const: inventory_source_item
                         required:
                           - kind
@@ -85421,9 +85508,9 @@ paths:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
                         material browse, this is a connected Library source id. Required for ad_server_targeting,
-                        inventory_source_item and source_account (the accounts one source holds, for a source decision).
-                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
-                        when it is omitted.
+                        inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds,
+                        for a source decision). Optional for seller wholesale_product, signal, and seller media_buy,
+                        which list every source when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -87138,6 +87225,15 @@ paths:
                     - if:
                         properties:
                           kind:
+                            const: ad_server_advertiser
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
                             const: inventory_source_item
                         required:
                           - kind
@@ -87965,6 +88061,15 @@ paths:
                         properties:
                           kind:
                             const: inventory_source_item
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
+                            const: ad_server_advertiser
                         required:
                           - kind
                       then:
@@ -88804,6 +88909,15 @@ paths:
                         properties:
                           kind:
                             const: inventory_source_item
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
+                            const: ad_server_advertiser
                         required:
                           - kind
                       then:
@@ -89081,9 +89195,9 @@ paths:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
                         material browse, this is a connected Library source id. Required for ad_server_targeting,
-                        inventory_source_item and source_account (the accounts one source holds, for a source decision).
-                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
-                        when it is omitted.
+                        inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds,
+                        for a source decision). Optional for seller wholesale_product, signal, and seller media_buy,
+                        which list every source when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -90801,6 +90915,15 @@ paths:
                     - if:
                         properties:
                           kind:
+                            const: ad_server_advertiser
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
                             const: inventory_source_item
                         required:
                           - kind
@@ -91070,9 +91193,9 @@ paths:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
                         material browse, this is a connected Library source id. Required for ad_server_targeting,
-                        inventory_source_item and source_account (the accounts one source holds, for a source decision).
-                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
-                        when it is omitted.
+                        inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds,
+                        for a source decision). Optional for seller wholesale_product, signal, and seller media_buy,
+                        which list every source when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -91632,6 +91755,826 @@ paths:
                     - if:
                         properties:
                           kind:
+                            const: ad_server_advertiser
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          filter:
+                            required:
+                              - selectorType
+                        required:
+                          - filter
+                    - if:
+                        properties:
+                          kind:
+                            const: source_account
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
+                            const: targeting_value
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          filter:
+                            required:
+                              - system
+                        required:
+                          - filter
+                    - if:
+                        properties:
+                          kind:
+                            const: proposal
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          filter:
+                            required:
+                              - campaignId
+                        required:
+                          - filter
+                    - if:
+                        properties:
+                          kind:
+                            const: creative_collection
+                        required:
+                          - kind
+                      then:
+                        oneOf:
+                          - allOf:
+                              - properties:
+                                  filter:
+                                    required:
+                                      - campaignId
+                                required:
+                                  - filter
+                              - not:
+                                  properties:
+                                    filter:
+                                      required:
+                                        - advertiserId
+                                  required:
+                                    - filter
+                          - allOf:
+                              - not:
+                                  properties:
+                                    filter:
+                                      required:
+                                        - campaignId
+                                  required:
+                                    - filter
+                              - properties:
+                                  filter:
+                                    required:
+                                      - advertiserId
+                                required:
+                                  - filter
+                    - if:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: event_source
+                            required:
+                              - kind
+                          - required:
+                              - filter
+                      then:
+                        properties:
+                          filter:
+                            type: object
+                            properties:
+                              advertiserId: {}
+                            additionalProperties: false
+                    - if:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: creative
+                            required:
+                              - kind
+                          - not:
+                              required:
+                                - groupBy
+                      then:
+                        oneOf:
+                          - allOf:
+                              - properties:
+                                  filter:
+                                    required:
+                                      - advertiserId
+                                required:
+                                  - filter
+                              - not:
+                                  properties:
+                                    filter:
+                                      required:
+                                        - campaignId
+                                  required:
+                                    - filter
+                          - allOf:
+                              - not:
+                                  properties:
+                                    filter:
+                                      required:
+                                        - advertiserId
+                                  required:
+                                    - filter
+                              - properties:
+                                  filter:
+                                    required:
+                                      - campaignId
+                                required:
+                                  - filter
+                    - if:
+                        properties:
+                          kind:
+                            const: creative_session
+                        required:
+                          - kind
+                      then:
+                        allOf:
+                          - properties:
+                              filter:
+                                required:
+                                  - campaignId
+                            required:
+                              - filter
+                          - allOf:
+                              - not:
+                                  required:
+                                    - query
+                              - not:
+                                  required:
+                                    - sourceId
+                          - properties:
+                              filter:
+                                type: object
+                                properties:
+                                  campaignId: {}
+                                  status: {}
+                                additionalProperties: false
+                            required:
+                              - filter
+                - type: object
+                  properties:
+                    query:
+                      description: >-
+                        Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement
+                        by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by
+                        their latest brief, up to 512; property_list, rfp_turn and creative_session take no query.
+                      type: string
+                      minLength: 1
+                    document:
+                      description: >-
+                        The document of an earlier docs hit, to read it in full; send the same query to rank its
+                        sections. Docs only: no kind, filter, or objects source.
+                      type: string
+                      minLength: 1
+                    revision:
+                      description: The exact revision of an agreement docs hit, read together with its document. Docs only.
+                      type: string
+                      minLength: 1
+                    section:
+                      description: One section of an agreement revision. Needs both document and revision.
+                      type: string
+                      minLength: 1
+                    asOf:
+                      description: >-
+                        The time to evaluate docs at; defaults to now. When continuing an agreement read with cursor,
+                        send the same asOf again.
+                      type: string
+                      format: date-time
+                      pattern: >-
+                        ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z|([+-](?:[01]\d|2[0-3]):[0-5]\d)))$
+                    sources:
+                      description: >-
+                        What to search: objects, docs, or specs. When omitted, a call with query searches all three and
+                        a call without query lists objects. docs and specs need a query, except an agreement read by
+                        document and revision.
+                      minItems: 1
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - objects
+                          - docs
+                          - specs
+                    docsScope:
+                      description: >-
+                        Which docs to rank. caller_relevant (the default) skips docs written for other account types;
+                        public_research searches every public doc.
+                      type: string
+                      enum:
+                        - caller_relevant
+                        - public_research
+                    kind:
+                      const: ad_server_advertiser
+                    sponsoredBuyerCustomerId:
+                      description: >-
+                        For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id
+                        issued by the Campaigns Page launch. Never invent one.
+                      type: string
+                      maxLength: 19
+                      pattern: ^[1-9]\d*$
+                    scope:
+                      description: >-
+                        For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets
+                        instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.
+                      type: string
+                      const: unit
+                    include:
+                      description: >-
+                        One projection. material: evidence_matches (page-text matches for query; use no filters) or
+                        browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
+                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy:
+                        progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product:
+                        executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit
+                        (filter.assetId): does each product fit that Library asset. Seller wholesale_product:
+                        price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value;
+                        mapping kinds). inventory_source_item: adServerMetadata (app only).
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - evidence_matches
+                          - browse
+                          - commitmentRecord
+                          - executionReadiness
+                          - executionResources
+                          - creativeFit
+                          - price_paid
+                          - authoring
+                          - adServerMetadata
+                          - pulse
+                          - deliverySummary
+                          - attention
+                          - sources
+                          - progress
+                          - outcome
+                          - delivery
+                          - assets
+                    sourceId:
+                      description: >-
+                        One source to read from, sent here at the top level and not as filter.sourceId. For a Library
+                        material browse, this is a connected Library source id. Required for ad_server_targeting,
+                        inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds,
+                        for a source decision). Optional for seller wholesale_product, signal, and seller media_buy,
+                        which list every source when it is omitted.
+                      type: string
+                      minLength: 1
+                    filter:
+                      not: {}
+                    cursor:
+                      description: >-
+                        A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds
+                        account and member.
+                      type: string
+                    limit:
+                      description: Results per page, default 50. A value above a kind page maximum is capped to it.
+                      type: integer
+                      minimum: 1
+                      maximum: 200
+                    groupBy:
+                      description: >-
+                        Count the kind by one field instead of listing it: each value with its count, no rows. Needs
+                        kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType.
+                        creative, event_source, project: advertiserId, account-wide without filter.advertiserId.
+                        inventory_source: status. seller: selected, partnerKind, channel, region (channel and region
+                        counts overlap).
+                      type: string
+                      minLength: 1
+                    accountId:
+                      anyOf:
+                        - type: integer
+                          minimum: 1
+                        - type: string
+                          pattern: ^[1-9][0-9]*$
+                  additionalProperties: false
+                  required:
+                    - kind
+                    - sourceId
+                  allOf:
+                    - anyOf:
+                        - required:
+                            - query
+                        - required:
+                            - kind
+                        - required:
+                            - document
+                        - required:
+                            - revision
+                        - required:
+                            - section
+                    - if:
+                        required:
+                          - revision
+                      then:
+                        required:
+                          - document
+                    - if:
+                        required:
+                          - section
+                      then:
+                        allOf:
+                          - required:
+                              - document
+                          - required:
+                              - revision
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: evidence_matches
+                        required:
+                          - include
+                      then:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: material
+                            required:
+                              - kind
+                          - required:
+                              - query
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: browse
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: material
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: executionReadiness
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: wholesale_product
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: executionResources
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: wholesale_product
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: authoring
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: ad_server_targeting
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: adServerMetadata
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: deliverySummary
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: media_buy
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: sources
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: account_relationship
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: executionResources
+                        required:
+                          - include
+                      then:
+                        allOf:
+                          - properties:
+                              filter:
+                                required:
+                                  - productId
+                            required:
+                              - filter
+                          - properties:
+                              filter:
+                                required:
+                                  - resourceKind
+                            required:
+                              - filter
+                    - if:
+                        properties:
+                          filter:
+                            required:
+                              - resourceKind
+                        required:
+                          - filter
+                      then:
+                        properties:
+                          include:
+                            contains:
+                              const: executionResources
+                        required:
+                          - include
+                    - if:
+                        required:
+                          - scope
+                      then:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: material
+                            required:
+                              - kind
+                          - properties:
+                              include:
+                                const:
+                                  - browse
+                            required:
+                              - include
+                    - if:
+                        properties:
+                          scope:
+                            const: unit
+                        required:
+                          - scope
+                      then:
+                        allOf:
+                          - not:
+                              required:
+                                - query
+                          - not:
+                              required:
+                                - filter
+                    - not:
+                        allOf:
+                          - properties:
+                              include:
+                                contains:
+                                  const: browse
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: evidence_matches
+                            required:
+                              - include
+                    - if:
+                        required:
+                          - include
+                      then:
+                        properties:
+                          include:
+                            maxItems: 1
+                            uniqueItems: true
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: browse
+                        required:
+                          - include
+                      then:
+                        properties:
+                          limit:
+                            maximum: 48
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: evidence_matches
+                        required:
+                          - include
+                      then:
+                        properties:
+                          query:
+                            maxLength: 512
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: outcome
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: rfp
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          kind:
+                            const: rfp
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          query:
+                            maxLength: 512
+                    - if:
+                        required:
+                          - groupBy
+                      then:
+                        allOf:
+                          - required:
+                              - kind
+                          - allOf:
+                              - not:
+                                  required:
+                                    - cursor
+                    - if:
+                        required:
+                          - groupBy
+                      then:
+                        properties:
+                          limit:
+                            maximum: 50
+                          sources:
+                            items:
+                              const: objects
+                    - if:
+                        properties:
+                          kind:
+                            const: creative_asset
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          filter:
+                            required:
+                              - advertiserId
+                        required:
+                          - filter
+                    - if:
+                        properties:
+                          kind:
+                            const: catalog
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          filter:
+                            required:
+                              - advertiserId
+                        required:
+                          - filter
+                    - if:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: event_source
+                            required:
+                              - kind
+                          - not:
+                              required:
+                                - groupBy
+                      then:
+                        properties:
+                          filter:
+                            required:
+                              - advertiserId
+                        required:
+                          - filter
+                    - if:
+                        allOf:
+                          - required:
+                              - sources
+                          - properties:
+                              sources:
+                                contains:
+                                  not:
+                                    const: objects
+                      then:
+                        anyOf:
+                          - required:
+                              - query
+                          - required:
+                              - revision
+                          - required:
+                              - section
+                    - if:
+                        properties:
+                          filter:
+                            allOf:
+                              - required:
+                                  - sellerType
+                              - required:
+                                  - classification
+                        required:
+                          - filter
+                      then:
+                        properties:
+                          filter:
+                            anyOf:
+                              - allOf:
+                                  - properties:
+                                      sellerType:
+                                        const: global_market_maker
+                                    required:
+                                      - sellerType
+                                  - properties:
+                                      classification:
+                                        const: global_market_maker
+                                    required:
+                                      - classification
+                              - allOf:
+                                  - properties:
+                                      sellerType:
+                                        const: regional_market_maker
+                                    required:
+                                      - sellerType
+                                  - properties:
+                                      classification:
+                                        const: regional_market_maker
+                                    required:
+                                      - classification
+                              - allOf:
+                                  - properties:
+                                      sellerType:
+                                        const: apostra_seller
+                                    required:
+                                      - sellerType
+                                  - properties:
+                                      classification:
+                                        const: marketplace_seller
+                                    required:
+                                      - classification
+                              - allOf:
+                                  - properties:
+                                      sellerType:
+                                        const: apostra_seller
+                                    required:
+                                      - sellerType
+                                  - properties:
+                                      classification:
+                                        const: apostra_seller
+                                    required:
+                                      - classification
+                        required:
+                          - filter
+                    - if:
+                        properties:
+                          filter:
+                            properties:
+                              marketplace:
+                                const: true
+                            required:
+                              - marketplace
+                        required:
+                          - filter
+                      then:
+                        properties:
+                          filter:
+                            allOf:
+                              - not:
+                                  required:
+                                    - sellerType
+                              - not:
+                                  required:
+                                    - classification
+                              - not:
+                                  required:
+                                    - transactable
+                              - not:
+                                  required:
+                                    - marketplaceReady
+                              - not:
+                                  required:
+                                    - partnerStatus
+                        required:
+                          - filter
+                    - if:
+                        properties:
+                          filter:
+                            allOf:
+                              - required:
+                                  - transactable
+                              - required:
+                                  - marketplaceReady
+                        required:
+                          - filter
+                      then:
+                        properties:
+                          filter:
+                            anyOf:
+                              - allOf:
+                                  - properties:
+                                      transactable:
+                                        const: true
+                                    required:
+                                      - transactable
+                                  - properties:
+                                      marketplaceReady:
+                                        const: true
+                                    required:
+                                      - marketplaceReady
+                              - allOf:
+                                  - properties:
+                                      transactable:
+                                        const: false
+                                    required:
+                                      - transactable
+                                  - properties:
+                                      marketplaceReady:
+                                        const: false
+                                    required:
+                                      - marketplaceReady
+                        required:
+                          - filter
+                    - if:
+                        properties:
+                          kind:
+                            const: ad_server_targeting
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
+                            const: ad_server_advertiser
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
                             const: inventory_source_item
                         required:
                           - kind
@@ -91901,9 +92844,9 @@ paths:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
                         material browse, this is a connected Library source id. Required for ad_server_targeting,
-                        inventory_source_item and source_account (the accounts one source holds, for a source decision).
-                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
-                        when it is omitted.
+                        inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds,
+                        for a source decision). Optional for seller wholesale_product, signal, and seller media_buy,
+                        which list every source when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -93621,6 +94564,15 @@ paths:
                     - if:
                         properties:
                           kind:
+                            const: ad_server_advertiser
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
                             const: inventory_source_item
                         required:
                           - kind
@@ -93890,9 +94842,9 @@ paths:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
                         material browse, this is a connected Library source id. Required for ad_server_targeting,
-                        inventory_source_item and source_account (the accounts one source holds, for a source decision).
-                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
-                        when it is omitted.
+                        inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds,
+                        for a source decision). Optional for seller wholesale_product, signal, and seller media_buy,
+                        which list every source when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -94450,6 +95402,15 @@ paths:
                     - if:
                         properties:
                           kind:
+                            const: ad_server_advertiser
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
                             const: inventory_source_item
                         required:
                           - kind
@@ -94719,9 +95680,9 @@ paths:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
                         material browse, this is a connected Library source id. Required for ad_server_targeting,
-                        inventory_source_item and source_account (the accounts one source holds, for a source decision).
-                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
-                        when it is omitted.
+                        inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds,
+                        for a source decision). Optional for seller wholesale_product, signal, and seller media_buy,
+                        which list every source when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -96441,6 +97402,15 @@ paths:
                     - if:
                         properties:
                           kind:
+                            const: ad_server_advertiser
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
                             const: inventory_source_item
                         required:
                           - kind
@@ -96708,9 +97678,9 @@ paths:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
                         material browse, this is a connected Library source id. Required for ad_server_targeting,
-                        inventory_source_item and source_account (the accounts one source holds, for a source decision).
-                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
-                        when it is omitted.
+                        inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds,
+                        for a source decision). Optional for seller wholesale_product, signal, and seller media_buy,
+                        which list every source when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -98427,6 +99397,15 @@ paths:
                     - if:
                         properties:
                           kind:
+                            const: ad_server_advertiser
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
                             const: inventory_source_item
                         required:
                           - kind
@@ -98694,9 +99673,9 @@ paths:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
                         material browse, this is a connected Library source id. Required for ad_server_targeting,
-                        inventory_source_item and source_account (the accounts one source holds, for a source decision).
-                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
-                        when it is omitted.
+                        inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds,
+                        for a source decision). Optional for seller wholesale_product, signal, and seller media_buy,
+                        which list every source when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -100413,6 +101392,15 @@ paths:
                     - if:
                         properties:
                           kind:
+                            const: ad_server_advertiser
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
                             const: inventory_source_item
                         required:
                           - kind
@@ -100680,9 +101668,9 @@ paths:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
                         material browse, this is a connected Library source id. Required for ad_server_targeting,
-                        inventory_source_item and source_account (the accounts one source holds, for a source decision).
-                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
-                        when it is omitted.
+                        inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds,
+                        for a source decision). Optional for seller wholesale_product, signal, and seller media_buy,
+                        which list every source when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -102400,6 +103388,15 @@ paths:
                     - if:
                         properties:
                           kind:
+                            const: ad_server_advertiser
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
                             const: inventory_source_item
                         required:
                           - kind
@@ -102667,9 +103664,9 @@ paths:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
                         material browse, this is a connected Library source id. Required for ad_server_targeting,
-                        inventory_source_item and source_account (the accounts one source holds, for a source decision).
-                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
-                        when it is omitted.
+                        inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds,
+                        for a source decision). Optional for seller wholesale_product, signal, and seller media_buy,
+                        which list every source when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -104384,6 +105381,15 @@ paths:
                     - if:
                         properties:
                           kind:
+                            const: ad_server_advertiser
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
                             const: inventory_source_item
                         required:
                           - kind
@@ -104605,6 +105611,7 @@ paths:
                               - $ref: '#/components/schemas/search_success_SearchSignalPageOutput'
                               - $ref: '#/components/schemas/search_success_SearchAdServerTargetingPageOutput'
                               - $ref: '#/components/schemas/search_success_SearchInventorySourceItemPageOutput'
+                              - $ref: '#/components/schemas/search_success_SearchAdServerAdvertiserPageOutput'
                               - $ref: '#/components/schemas/search_success_SearchWorkItemPageOutput'
                               - $ref: '#/components/schemas/search_success_SearchCampaignPageOutput'
                               - $ref: '#/components/schemas/search_success_SearchCatalogPageOutput'
@@ -104736,6 +105743,7 @@ paths:
                                     - $ref: '#/components/schemas/search_success_SearchSignalPageOutput'
                                     - $ref: '#/components/schemas/search_success_SearchAdServerTargetingPageOutput'
                                     - $ref: '#/components/schemas/search_success_SearchInventorySourceItemPageOutput'
+                                    - $ref: '#/components/schemas/search_success_SearchAdServerAdvertiserPageOutput'
                                     - $ref: '#/components/schemas/search_success_SearchWorkItemPageOutput'
                                     - $ref: '#/components/schemas/search_success_SearchCampaignPageOutput'
                                     - $ref: '#/components/schemas/search_success_SearchCatalogPageOutput'
@@ -104789,6 +105797,7 @@ paths:
                                     - $ref: '#/components/schemas/search_success_SearchSignalUnavailableOutput'
                                     - $ref: '#/components/schemas/search_success_SearchAdServerTargetingUnavailableOutput'
                                     - $ref: '#/components/schemas/search_success_SearchInventorySourceItemUnavailableOutput'
+                                    - $ref: '#/components/schemas/search_success_SearchAdServerAdvertiserUnavailableOutput'
                                     - $ref: '#/components/schemas/search_success_SearchWorkItemUnavailableOutput'
                                     - $ref: '#/components/schemas/search_success_SearchCampaignUnavailableOutput'
                                     - $ref: '#/components/schemas/search_success_SearchCatalogUnavailableOutput'
@@ -127771,6 +128780,48 @@ components:
         - namingTemplates
         - preview
       additionalProperties: {}
+    save_inventory_source_success_SaveInventorySourceSuccessAdServerSettingsSaved:
+      type: object
+      properties:
+        outcome:
+          type: string
+          const: ad_server_settings_saved
+        action:
+          type: string
+          const: ad_server_settings_saved
+        sourceId:
+          type: string
+        adServerSettings:
+          $ref: >-
+            #/components/schemas/save_inventory_source_success_SaveInventorySourceSuccessAdServerSettingsSavedAdServerSettings
+      required:
+        - outcome
+        - action
+        - sourceId
+        - adServerSettings
+      additionalProperties: {}
+    save_inventory_source_success_SaveInventorySourceSuccessApprovalRequired:
+      type: object
+      properties:
+        outcome:
+          type: string
+          const: approval_required
+        action:
+          type: string
+          const: approval_required
+        message:
+          type: string
+        approval:
+          $ref: '#/components/schemas/save_inventory_source_success_SaveInventorySourceSuccessApprovalRequiredApproval'
+        idempotencyKey:
+          type: string
+      required:
+        - outcome
+        - action
+        - message
+        - approval
+        - idempotencyKey
+      additionalProperties: {}
     save_inventory_source_success_SaveInventorySourceSuccessLegacyCreated:
       type: object
       properties:
@@ -127924,6 +128975,16 @@ components:
         - order
         - lineItem
         - sample
+      additionalProperties: {}
+    save_inventory_source_success_SaveInventorySourceSuccessAdServerSettingsSavedAdServerSettings:
+      type: object
+      propertyNames:
+        type: string
+      additionalProperties: {}
+    save_inventory_source_success_SaveInventorySourceSuccessApprovalRequiredApproval:
+      type: object
+      propertyNames:
+        type: string
       additionalProperties: {}
     save_inventory_source_success_SaveInventorySourceSuccessLegacyCreatedData:
       type: object
@@ -140147,6 +141208,35 @@ components:
         - kind
       additionalProperties:
         $ref: '#/components/schemas/search_success_SearchInventorySourceItemPageOutputValue'
+    search_success_SearchAdServerAdvertiserPageOutput:
+      type: object
+      properties:
+        total:
+          $ref: '#/components/schemas/search_success_SearchAdServerAdvertiserPageOutputTotal'
+        totalLowerBound:
+          $ref: '#/components/schemas/search_success_SearchAdServerAdvertiserPageOutputTotalLowerBound'
+        returned:
+          $ref: '#/components/schemas/search_success_SearchAdServerAdvertiserPageOutputReturned'
+        hasMore:
+          $ref: '#/components/schemas/search_success_SearchAdServerAdvertiserPageOutputHasMore'
+        truncated:
+          $ref: '#/components/schemas/search_success_SearchAdServerAdvertiserPageOutputTruncated'
+        nextCursor:
+          $ref: '#/components/schemas/search_success_SearchAdServerAdvertiserPageOutputNextCursor'
+        results:
+          $ref: '#/components/schemas/search_success_SearchAdServerAdvertiserPageOutputResults'
+        outcome:
+          type: string
+          const: page_ad_server_advertiser
+        kind:
+          type: string
+          const: ad_server_advertiser
+      required:
+        - results
+        - outcome
+        - kind
+      additionalProperties:
+        $ref: '#/components/schemas/search_success_SearchAdServerAdvertiserPageOutputValue'
     search_success_SearchWorkItemPageOutput:
       type: object
       properties:
@@ -141556,6 +142646,25 @@ components:
         kind:
           type: string
           const: inventory_source_item
+        unavailable:
+          type: string
+        message:
+          type: string
+      required:
+        - outcome
+        - kind
+        - unavailable
+        - message
+      additionalProperties: {}
+    search_success_SearchAdServerAdvertiserUnavailableOutput:
+      type: object
+      properties:
+        outcome:
+          type: string
+          const: unavailable_ad_server_advertiser
+        kind:
+          type: string
+          const: ad_server_advertiser
         unavailable:
           type: string
         message:
@@ -144629,6 +145738,113 @@ components:
             additionalProperties: false
         additionalProperties: {}
     search_success_SearchInventorySourceItemPageOutputValue: {}
+    search_success_SearchAdServerAdvertiserPageOutputTotal:
+      type: number
+    search_success_SearchAdServerAdvertiserPageOutputTotalLowerBound:
+      type: number
+    search_success_SearchAdServerAdvertiserPageOutputReturned:
+      type: number
+    search_success_SearchAdServerAdvertiserPageOutputHasMore:
+      type: boolean
+    search_success_SearchAdServerAdvertiserPageOutputTruncated:
+      type: boolean
+    search_success_SearchAdServerAdvertiserPageOutputNextCursor:
+      type: string
+    search_success_SearchAdServerAdvertiserPageOutputResults:
+      type: array
+      items:
+        type: object
+        properties:
+          advertiserId:
+            type: string
+          name:
+            type:
+              - string
+              - 'null'
+          sandbox:
+            type: boolean
+          sourceType:
+            anyOf:
+              - type: string
+                enum:
+                  - inline
+                  - url
+                  - file
+              - type: 'null'
+            description: 'Where the items come from: url when url is set, file when file is set.'
+          lastChangeSummary:
+            anyOf:
+              - type: object
+                properties:
+                  added:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  updated:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  unchanged:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  removed:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                required:
+                  - added
+                  - updated
+                  - unchanged
+                  - removed
+                additionalProperties: false
+              - type: 'null'
+            description: Items in the latest version against the one before it.
+          transform:
+            anyOf:
+              - type: object
+                properties:
+                  name:
+                    type: string
+                  updatedAt:
+                    type: string
+                required:
+                  - name
+                  - updatedAt
+                additionalProperties: false
+              - type: 'null'
+            description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
+        additionalProperties: {}
+    search_success_SearchAdServerAdvertiserPageOutputValue: {}
     search_success_SearchWorkItemPageOutputTotal:
       type: number
     search_success_SearchWorkItemPageOutputTotalLowerBound:

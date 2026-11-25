@@ -18229,13 +18229,15 @@ class SaveInventorySourceInput(TypedDict):
     description: NotRequired[str]
     '\n    Free-text description.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED"]]
-    '\n    Desired state. ACTIVE sells, DISABLED stops, PENDING is set up but idle.\n    '
+    '\n    Desired state. ACTIVE sells, DISABLED stops, PENDING is set up but idle. DISABLED on a managed ad-server source waits for approval.\n    '
     moduleConfig: NotRequired[SaveInventorySourceInputModuleConfig]
     '\n    Update one module on an existing modular source. Credentials are never accepted here.\n    '
     adServer: NotRequired[SaveInventorySourceInputAdServer]
     '\n    Send alone to open the form that connects an ad server. For google_ad_manager the result names the service account to add to the network.\n    '
     namingTemplates: NotRequired[SaveInventorySourceInputNamingTemplates]
     '\n    A managed Google Ad Manager source\'s naming templates. Send with id only; an omitted key is unchanged.\n    '
+    adServerSettings: NotRequired[SaveInventorySourceInputAdServerSettings]
+    '\n    A managed ad-server source\'s settings. Send with id only, one setting per call.\n    '
     dryRun: NotRequired[bool]
     '\n    Preview namingTemplates: sample names and macros, nothing saved.\n    '
     sellerId: NotRequired[int]
@@ -18250,6 +18252,14 @@ class SaveInventorySourceInput(TypedDict):
 class SaveInventorySourceInputAdServer(TypedDict):
     type: Literal["google_ad_manager", "freewheel", "springserve", "adswizz", "broadsign", "citrusad"]
     '\n    citrusad is Epsilon Retail Media.\n    '
+
+class SaveInventorySourceInputAdServerSettings(TypedDict):
+    defaultAdvertiser: NotRequired[str]
+    '\n    An advertiser id from search kind ad_server_advertiser. Not SpringServe.\n    '
+    ensureAdvertiser: NotRequired[str]
+    '\n    Google Ad Manager only: an advertiser name to create or find. Not made the default.\n    '
+    executionCurrency: NotRequired[str]
+    '\n    FreeWheel and SpringServe: the ISO 4217 booking currency.\n    '
 
 class SaveInventorySourceInputDealTermsValue(TypedDict):
     curatorMarginPercent: float
@@ -18282,6 +18292,23 @@ class SaveInventorySourceSuccessSaveInventorySourceSuccessAdServerForm(TypedDict
     action: Literal["ad_server_form"]
     adServerType: str
     serviceAccountEmail: NotRequired[str | None]
+
+class SaveInventorySourceSuccessSaveInventorySourceSuccessAdServerSettingsSaved(TypedDict):
+    outcome: Literal["ad_server_settings_saved"]
+    action: Literal["ad_server_settings_saved"]
+    sourceId: str
+    adServerSettings: SaveInventorySourceSuccessSaveInventorySourceSuccessAdServerSettingsSavedAdServerSettings
+
+SaveInventorySourceSuccessSaveInventorySourceSuccessAdServerSettingsSavedAdServerSettings: TypeAlias = dict[str, JsonValue]
+
+class SaveInventorySourceSuccessSaveInventorySourceSuccessApprovalRequired(TypedDict):
+    outcome: Literal["approval_required"]
+    action: Literal["approval_required"]
+    message: str
+    approval: SaveInventorySourceSuccessSaveInventorySourceSuccessApprovalRequiredApproval
+    idempotencyKey: str
+
+SaveInventorySourceSuccessSaveInventorySourceSuccessApprovalRequiredApproval: TypeAlias = dict[str, JsonValue]
 
 class SaveInventorySourceSuccessSaveInventorySourceSuccessConnectionForm(TypedDict):
     outcome: Literal["connection_form"]
@@ -18452,7 +18479,7 @@ class SaveInventorySourceSuccessSaveInventorySourceSuccessUpdated(TypedDict):
     retiredProducts: NotRequired[SaveInventorySourceSuccessSaveInventorySourceSuccessUpdatedRetiredProducts]
     moduleConfig: NotRequired[SaveInventorySourceSuccessSaveInventorySourceSuccessUpdatedModuleConfig]
 
-SaveInventorySourceResult: TypeAlias = "SaveInventorySourceSuccessSaveInventorySourceSuccessCreated | SaveInventorySourceSuccessSaveInventorySourceSuccessUpdated | SaveInventorySourceSuccessSaveInventorySourceSuccessUnchanged | SaveInventorySourceSuccessSaveInventorySourceSuccessConnectionForm | SaveInventorySourceSuccessSaveInventorySourceSuccessOwnAgentConnectionForm | SaveInventorySourceSuccessSaveInventorySourceSuccessAdServerForm | SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesPreviewed | SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesSaved | SaveInventorySourceSuccessSaveInventorySourceSuccessLegacyCreated"
+SaveInventorySourceResult: TypeAlias = "SaveInventorySourceSuccessSaveInventorySourceSuccessCreated | SaveInventorySourceSuccessSaveInventorySourceSuccessUpdated | SaveInventorySourceSuccessSaveInventorySourceSuccessUnchanged | SaveInventorySourceSuccessSaveInventorySourceSuccessConnectionForm | SaveInventorySourceSuccessSaveInventorySourceSuccessOwnAgentConnectionForm | SaveInventorySourceSuccessSaveInventorySourceSuccessAdServerForm | SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesPreviewed | SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesSaved | SaveInventorySourceSuccessSaveInventorySourceSuccessAdServerSettingsSaved | SaveInventorySourceSuccessSaveInventorySourceSuccessApprovalRequired | SaveInventorySourceSuccessSaveInventorySourceSuccessLegacyCreated"
 
 class SaveInventorySourceSuccessSaveInventorySourceSuccessUpdatedModuleConfig(TypedDict):
     moduleInstanceId: str
@@ -25427,7 +25454,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearch(TypedDict):
     include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "attention", "sources", "progress", "outcome", "delivery", "assets"]]]
     '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: NotRequired[str]
-    '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
+    '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputDocsScopeCallerRelevantAndPublicResearchFilter]
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
@@ -25742,7 +25769,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocument(TypedDict)
     include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "attention", "sources", "progress", "outcome", "delivery", "assets"]]]
     '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: NotRequired[str]
-    '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
+    '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter]
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
@@ -25775,7 +25802,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "attention", "sources", "progress", "outcome", "delivery", "assets"]]]
     '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: NotRequired[str]
-    '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
+    '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevisionFilter]
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
@@ -26366,7 +26393,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQuery(TypedDict):
     include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "attention", "sources", "progress", "outcome", "delivery", "assets"]]]
     '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: NotRequired[str]
-    '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
+    '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter]
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
@@ -26658,6 +26685,38 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilterProperty
     type: Literal["domain", "subdomain", "network_id", "ios_bundle", "android_package", "apple_app_store_id", "google_play_id", "roku_store_id", "fire_tv_asin", "samsung_app_id", "apple_tv_bundle", "bundle_id", "venue_id", "screen_id", "openooh_venue_type", "rss_url", "apple_podcast_id", "spotify_collection_id", "podcast_guid", "station_id", "facility_id"]
     value: str
 
+class SearchInputKindAdServerAdvertiser(TypedDict):
+    accountId: NotRequired[int | str]
+    query: NotRequired[str]
+    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn and creative_session take no query.\n    '
+    document: NotRequired[str]
+    '\n    The document of an earlier docs hit, to read it in full; send the same query to rank its sections. Docs only: no kind, filter, or objects source.\n    '
+    revision: NotRequired[str]
+    '\n    The exact revision of an agreement docs hit, read together with its document. Docs only.\n    '
+    section: NotRequired[str]
+    '\n    One section of an agreement revision. Needs both document and revision.\n    '
+    asOf: NotRequired[str]
+    '\n    The time to evaluate docs at; defaults to now. When continuing an agreement read with cursor, send the same asOf again.\n    '
+    sources: NotRequired[list[Literal["objects", "docs", "specs"]]]
+    '\n    What to search: objects, docs, or specs. When omitted, a call with query searches all three and a call without query lists objects. docs and specs need a query, except an agreement read by document and revision.\n    '
+    docsScope: NotRequired[Literal["caller_relevant", "public_research"]]
+    '\n    Which docs to rank. caller_relevant (the default) skips docs written for other account types; public_research searches every public doc.\n    '
+    kind: Literal["ad_server_advertiser"]
+    sponsoredBuyerCustomerId: NotRequired[str]
+    '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
+    scope: NotRequired[Literal["unit"]]
+    '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "attention", "sources", "progress", "outcome", "delivery", "assets"]]]
+    '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
+    sourceId: str
+    '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
+    cursor: NotRequired[str]
+    '\n    A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds account and member.\n    '
+    limit: NotRequired[int]
+    '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
+    groupBy: NotRequired[str]
+    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).\n    '
+
 class SearchInputKindAdServerTargeting(TypedDict):
     accountId: NotRequired[int | str]
     query: NotRequired[str]
@@ -26682,7 +26741,7 @@ class SearchInputKindAdServerTargeting(TypedDict):
     include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "attention", "sources", "progress", "outcome", "delivery", "assets"]]]
     '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: str
-    '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
+    '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputKindAdServerTargetingFilter]
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
@@ -26998,7 +27057,7 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "attention", "sources", "progress", "outcome", "delivery", "assets"]]]
     '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: NotRequired[str]
-    '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
+    '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndIntelligenceRunAndLibraryRequestAndAskAndNotificationAndReleaseUpdateAndConversationAndBuyerAgentAndProjectAndDimensionAndSessionFilter]
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
@@ -27330,7 +27389,7 @@ class SearchInputKindBuyerRfp(TypedDict):
     include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "attention", "sources", "progress", "outcome", "delivery", "assets"]]]
     '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: NotRequired[str]
-    '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
+    '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: SearchInputKindBuyerRfpFilter
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
@@ -27646,7 +27705,7 @@ class SearchInputKindCreative(TypedDict):
     include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "attention", "sources", "progress", "outcome", "delivery", "assets"]]]
     '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: NotRequired[str]
-    '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
+    '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputKindCreativeFilter]
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
@@ -27680,7 +27739,7 @@ class SearchInputKindCreativeAssetAndCatalog(TypedDict):
     include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "attention", "sources", "progress", "outcome", "delivery", "assets"]]]
     '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: NotRequired[str]
-    '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
+    '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: SearchInputKindCreativeAssetAndCatalogFilter
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
@@ -27996,7 +28055,7 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserId(TypedDict):
     include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "attention", "sources", "progress", "outcome", "delivery", "assets"]]]
     '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: NotRequired[str]
-    '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
+    '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
@@ -28310,7 +28369,7 @@ class SearchInputKindCreativeCollectionWithFilterCampaignId(TypedDict):
     include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "attention", "sources", "progress", "outcome", "delivery", "assets"]]]
     '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: NotRequired[str]
-    '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
+    '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: SearchInputKindCreativeCollectionWithFilterCampaignIdFilter
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
@@ -28976,7 +29035,7 @@ class SearchInputKindCreativeWithFilterAndFilterCampaignId(TypedDict):
     include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "attention", "sources", "progress", "outcome", "delivery", "assets"]]]
     '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: NotRequired[str]
-    '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
+    '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
@@ -29292,7 +29351,7 @@ class SearchInputKindEventSource(TypedDict):
     include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "attention", "sources", "progress", "outcome", "delivery", "assets"]]]
     '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: NotRequired[str]
-    '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
+    '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputKindEventSourceFilter]
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
@@ -29330,7 +29389,7 @@ class SearchInputKindInventorySourceItem(TypedDict):
     include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "attention", "sources", "progress", "outcome", "delivery", "assets"]]]
     '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: str
-    '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
+    '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: SearchInputKindInventorySourceItemFilter
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
@@ -29374,7 +29433,7 @@ class SearchInputKindProposal(TypedDict):
     include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "attention", "sources", "progress", "outcome", "delivery", "assets"]]]
     '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: NotRequired[str]
-    '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
+    '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: SearchInputKindProposalFilter
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
@@ -29690,7 +29749,7 @@ class SearchInputKindSourceAccount(TypedDict):
     include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "attention", "sources", "progress", "outcome", "delivery", "assets"]]]
     '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: str
-    '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
+    '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputKindSourceAccountFilter]
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
@@ -30006,7 +30065,7 @@ class SearchInputKindTargetingValue(TypedDict):
     include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "attention", "sources", "progress", "outcome", "delivery", "assets"]]]
     '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: NotRequired[str]
-    '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
+    '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: SearchInputKindTargetingValueFilter
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
@@ -30016,7 +30075,7 @@ class SearchInputKindTargetingValue(TypedDict):
     groupBy: NotRequired[str]
     '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).\n    '
 
-SearchInput: TypeAlias = "SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndIntelligenceRunAndLibraryRequestAndAskAndNotificationAndReleaseUpdateAndConversationAndBuyerAgentAndProjectAndDimensionAndSession | SearchInputKindCreativeAssetAndCatalog | SearchInputKindEventSource | SearchInputKindProposal | SearchInputKindCreativeWithFilterAndFilterCampaignId | SearchInputKindCreative | SearchInputKindCreativeCollectionWithFilterCampaignId | SearchInputKindCreativeCollectionWithFilterAdvertiserId | SearchInputKindCreativeSessionWithFilterCampaignId | SearchInputKindCreativeSessionWithFilterAdvertiserId | SearchInputKindAdServerTargeting | SearchInputKindInventorySourceItem | SearchInputKindSourceAccount | SearchInputKindTargetingValue | SearchInputKindBuyerRfp | SearchInputDocsScopeCallerRelevantAndPublicResearchWithQuery | SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocument | SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision | SearchInputDocsScopeCallerRelevantAndPublicResearch"
+SearchInput: TypeAlias = "SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndIntelligenceRunAndLibraryRequestAndAskAndNotificationAndReleaseUpdateAndConversationAndBuyerAgentAndProjectAndDimensionAndSession | SearchInputKindCreativeAssetAndCatalog | SearchInputKindEventSource | SearchInputKindProposal | SearchInputKindCreativeWithFilterAndFilterCampaignId | SearchInputKindCreative | SearchInputKindCreativeCollectionWithFilterCampaignId | SearchInputKindCreativeCollectionWithFilterAdvertiserId | SearchInputKindCreativeSessionWithFilterCampaignId | SearchInputKindCreativeSessionWithFilterAdvertiserId | SearchInputKindAdServerTargeting | SearchInputKindInventorySourceItem | SearchInputKindAdServerAdvertiser | SearchInputKindSourceAccount | SearchInputKindTargetingValue | SearchInputKindBuyerRfp | SearchInputDocsScopeCallerRelevantAndPublicResearchWithQuery | SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocument | SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision | SearchInputDocsScopeCallerRelevantAndPublicResearch"
 
 class SearchInputKindTargetingValueFilter(TypedDict):
     system: Literal["nielsen_dma", "iso_3166_1", "iso_3166_2"]
@@ -30038,7 +30097,7 @@ class SearchRequestLabelFilterEntry(TypedDict):
 
 class SearchResult(TypedDict):
     sources: list[Literal["objects", "docs", "specs"]]
-    objects: NotRequired[SearchSuccessV3CampaignListResponse | SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchBrandPageOutput | SearchSuccessSearchBrandSourcePageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchInventorySourceItemPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchIntelligenceRunPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchDecisionPageOutput | SearchSuccessSearchApprovalPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchNotificationPageOutput | SearchSuccessSearchReleaseUpdatePageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchBuyerRfpPageOutput | SearchSuccessSearchAgentRecordPageOutput | SearchSuccessSearchWorkspaceFilePageOutput | SearchSuccessSearchTargetingValuePageOutput | SearchSuccessSearchProjectPageOutput | SearchSuccessSearchSessionPageOutput | SearchResultObjectsWithGroupByAndGroupsAndTotal | SearchResultObjectsKindMaterial | SearchResultObjectsKindMixed]
+    objects: NotRequired[SearchSuccessV3CampaignListResponse | SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchBrandPageOutput | SearchSuccessSearchBrandSourcePageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchInventorySourceItemPageOutput | SearchSuccessSearchAdServerAdvertiserPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchIntelligenceRunPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchDecisionPageOutput | SearchSuccessSearchApprovalPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchNotificationPageOutput | SearchSuccessSearchReleaseUpdatePageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchBuyerRfpPageOutput | SearchSuccessSearchAgentRecordPageOutput | SearchSuccessSearchWorkspaceFilePageOutput | SearchSuccessSearchTargetingValuePageOutput | SearchSuccessSearchProjectPageOutput | SearchSuccessSearchSessionPageOutput | SearchResultObjectsWithGroupByAndGroupsAndTotal | SearchResultObjectsKindMaterial | SearchResultObjectsKindMixed]
     objectsUnavailable: NotRequired[str]
     knowledge: NotRequired[list[JsonValue]]
     knowledgeRelevance: NotRequired[JsonValue]
@@ -30059,7 +30118,7 @@ class SearchResultObjectsKindMaterial(TypedDict):
 class SearchResultObjectsKindMixed(TypedDict):
     outcome: Literal["mixed"]
     kind: Literal["mixed"]
-    sections: list[SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchBrandPageOutput | SearchSuccessSearchBrandSourcePageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchInventorySourceItemPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchIntelligenceRunPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchDecisionPageOutput | SearchSuccessSearchApprovalPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchNotificationPageOutput | SearchSuccessSearchReleaseUpdatePageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchBuyerRfpPageOutput | SearchSuccessSearchAgentRecordPageOutput | SearchSuccessSearchWorkspaceFilePageOutput | SearchSuccessSearchTargetingValuePageOutput | SearchSuccessSearchProjectPageOutput | SearchSuccessSearchSessionPageOutput | SearchSuccessSearchAccountUnavailableOutput | SearchSuccessSearchMemberUnavailableOutput | SearchSuccessSearchAgentUnavailableOutput | SearchSuccessSearchSkillUnavailableOutput | SearchSuccessSearchInventorySourceUnavailableOutput | SearchSuccessSearchMaterialUnavailableOutput | SearchSuccessSearchCoverageUnavailableOutput | SearchSuccessSearchWholesaleProductUnavailableOutput | SearchSuccessSearchPlaybookVersionUnavailableOutput | SearchSuccessSearchBusinessRulesVersionUnavailableOutput | SearchSuccessSearchHouseDiscountUnavailableOutput | SearchSuccessSearchConnectionUnavailableOutput | SearchSuccessSearchAccountRelationshipUnavailableOutput | SearchSuccessSearchSourceAccountUnavailableOutput | SearchSuccessSearchSellerUnavailableOutput | SearchSuccessSearchAdvertiserUnavailableOutput | SearchSuccessSearchAdvertiserGrantUnavailableOutput | SearchSuccessSearchBrandUnavailableOutput | SearchSuccessSearchBrandSourceUnavailableOutput | SearchSuccessSearchSignalUnavailableOutput | SearchSuccessSearchAdServerTargetingUnavailableOutput | SearchSuccessSearchInventorySourceItemUnavailableOutput | SearchSuccessSearchWorkItemUnavailableOutput | SearchSuccessSearchCampaignUnavailableOutput | SearchSuccessSearchCatalogUnavailableOutput | SearchSuccessSearchEventSourceUnavailableOutput | SearchSuccessSearchPropertyListUnavailableOutput | SearchSuccessSearchCreativeUnavailableOutput | SearchSuccessSearchCreativeFormatUnavailableOutput | SearchSuccessSearchCreativeAssetUnavailableOutput | SearchSuccessSearchCreativeEngineUnavailableOutput | SearchSuccessSearchCreativeSessionUnavailableOutput | SearchSuccessSearchCreativeCollectionUnavailableOutput | SearchSuccessSearchMediaBuyUnavailableOutput | SearchSuccessSearchProposalUnavailableOutput | SearchSuccessSearchRfpUnavailableOutput | SearchSuccessSearchRfpTurnUnavailableOutput | SearchSuccessSearchIntelligenceRunUnavailableOutput | SearchSuccessSearchLibraryRequestUnavailableOutput | SearchSuccessSearchDecisionUnavailableOutput | SearchSuccessSearchApprovalUnavailableOutput | SearchSuccessSearchAskUnavailableOutput | SearchSuccessSearchNotificationUnavailableOutput | SearchSuccessSearchReleaseUpdateUnavailableOutput | SearchSuccessSearchConversationUnavailableOutput | SearchSuccessSearchBuyerAgentUnavailableOutput | SearchSuccessSearchDimensionUnavailableOutput | SearchSuccessSearchBuyerRfpUnavailableOutput | SearchSuccessSearchAgentRecordUnavailableOutput | SearchSuccessSearchWorkspaceFileUnavailableOutput | SearchSuccessSearchTargetingValueUnavailableOutput | SearchSuccessSearchProjectUnavailableOutput | SearchSuccessSearchSessionUnavailableOutput]
+    sections: list[SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchBrandPageOutput | SearchSuccessSearchBrandSourcePageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchInventorySourceItemPageOutput | SearchSuccessSearchAdServerAdvertiserPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchIntelligenceRunPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchDecisionPageOutput | SearchSuccessSearchApprovalPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchNotificationPageOutput | SearchSuccessSearchReleaseUpdatePageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchBuyerRfpPageOutput | SearchSuccessSearchAgentRecordPageOutput | SearchSuccessSearchWorkspaceFilePageOutput | SearchSuccessSearchTargetingValuePageOutput | SearchSuccessSearchProjectPageOutput | SearchSuccessSearchSessionPageOutput | SearchSuccessSearchAccountUnavailableOutput | SearchSuccessSearchMemberUnavailableOutput | SearchSuccessSearchAgentUnavailableOutput | SearchSuccessSearchSkillUnavailableOutput | SearchSuccessSearchInventorySourceUnavailableOutput | SearchSuccessSearchMaterialUnavailableOutput | SearchSuccessSearchCoverageUnavailableOutput | SearchSuccessSearchWholesaleProductUnavailableOutput | SearchSuccessSearchPlaybookVersionUnavailableOutput | SearchSuccessSearchBusinessRulesVersionUnavailableOutput | SearchSuccessSearchHouseDiscountUnavailableOutput | SearchSuccessSearchConnectionUnavailableOutput | SearchSuccessSearchAccountRelationshipUnavailableOutput | SearchSuccessSearchSourceAccountUnavailableOutput | SearchSuccessSearchSellerUnavailableOutput | SearchSuccessSearchAdvertiserUnavailableOutput | SearchSuccessSearchAdvertiserGrantUnavailableOutput | SearchSuccessSearchBrandUnavailableOutput | SearchSuccessSearchBrandSourceUnavailableOutput | SearchSuccessSearchSignalUnavailableOutput | SearchSuccessSearchAdServerTargetingUnavailableOutput | SearchSuccessSearchInventorySourceItemUnavailableOutput | SearchSuccessSearchAdServerAdvertiserUnavailableOutput | SearchSuccessSearchWorkItemUnavailableOutput | SearchSuccessSearchCampaignUnavailableOutput | SearchSuccessSearchCatalogUnavailableOutput | SearchSuccessSearchEventSourceUnavailableOutput | SearchSuccessSearchPropertyListUnavailableOutput | SearchSuccessSearchCreativeUnavailableOutput | SearchSuccessSearchCreativeFormatUnavailableOutput | SearchSuccessSearchCreativeAssetUnavailableOutput | SearchSuccessSearchCreativeEngineUnavailableOutput | SearchSuccessSearchCreativeSessionUnavailableOutput | SearchSuccessSearchCreativeCollectionUnavailableOutput | SearchSuccessSearchMediaBuyUnavailableOutput | SearchSuccessSearchProposalUnavailableOutput | SearchSuccessSearchRfpUnavailableOutput | SearchSuccessSearchRfpTurnUnavailableOutput | SearchSuccessSearchIntelligenceRunUnavailableOutput | SearchSuccessSearchLibraryRequestUnavailableOutput | SearchSuccessSearchDecisionUnavailableOutput | SearchSuccessSearchApprovalUnavailableOutput | SearchSuccessSearchAskUnavailableOutput | SearchSuccessSearchNotificationUnavailableOutput | SearchSuccessSearchReleaseUpdateUnavailableOutput | SearchSuccessSearchConversationUnavailableOutput | SearchSuccessSearchBuyerAgentUnavailableOutput | SearchSuccessSearchDimensionUnavailableOutput | SearchSuccessSearchBuyerRfpUnavailableOutput | SearchSuccessSearchAgentRecordUnavailableOutput | SearchSuccessSearchWorkspaceFileUnavailableOutput | SearchSuccessSearchTargetingValueUnavailableOutput | SearchSuccessSearchProjectUnavailableOutput | SearchSuccessSearchSessionUnavailableOutput]
 
 class SearchResultObjectsWithGroupByAndGroupsAndTotal(TypedDict):
     kind: str
@@ -30239,6 +30298,70 @@ class SearchSuccessSearchAccountRelationshipUnavailableOutput(TypedDict):
 class SearchSuccessSearchAccountUnavailableOutput(TypedDict):
     outcome: Literal["unavailable_account"]
     kind: Literal["account"]
+    unavailable: str
+    message: str
+
+class SearchSuccessSearchAdServerAdvertiserPageOutput(TypedDict):
+    total: NotRequired[SearchSuccessSearchAdServerAdvertiserPageOutputTotal]
+    totalLowerBound: NotRequired[SearchSuccessSearchAdServerAdvertiserPageOutputTotalLowerBound]
+    returned: NotRequired[SearchSuccessSearchAdServerAdvertiserPageOutputReturned]
+    hasMore: NotRequired[SearchSuccessSearchAdServerAdvertiserPageOutputHasMore]
+    truncated: NotRequired[SearchSuccessSearchAdServerAdvertiserPageOutputTruncated]
+    nextCursor: NotRequired[SearchSuccessSearchAdServerAdvertiserPageOutputNextCursor]
+    results: SearchSuccessSearchAdServerAdvertiserPageOutputResults
+    outcome: Literal["page_ad_server_advertiser"]
+    kind: Literal["ad_server_advertiser"]
+
+SearchSuccessSearchAdServerAdvertiserPageOutputHasMore: TypeAlias = bool
+
+SearchSuccessSearchAdServerAdvertiserPageOutputNextCursor: TypeAlias = str
+
+class SearchSuccessSearchAdServerAdvertiserPageOutputResultsItem(TypedDict):
+    advertiserId: NotRequired[str]
+    name: NotRequired[str | None]
+    sandbox: NotRequired[bool]
+    sourceType: NotRequired[Literal["inline", "url", "file"] | None]
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
+    lastChangeSummary: NotRequired[SearchSuccessSearchAdServerAdvertiserPageOutputResultsItemLastChangeSummaryValue | None]
+    '\n    Items in the latest version against the one before it.\n    '
+    transform: NotRequired[SearchSuccessSearchAdServerAdvertiserPageOutputResultsItemTransformValue | None]
+    '\n    The active transform, if any.\n    '
+    refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchAdServerAdvertiserPageOutputResultsItemCreativeFit]
+
+SearchSuccessSearchAdServerAdvertiserPageOutputResults: TypeAlias = "list[SearchSuccessSearchAdServerAdvertiserPageOutputResultsItem]"
+
+class SearchSuccessSearchAdServerAdvertiserPageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
+
+class SearchSuccessSearchAdServerAdvertiserPageOutputResultsItemLastChangeSummaryValue(TypedDict):
+    added: int
+    updated: int
+    unchanged: int
+    removed: int
+
+class SearchSuccessSearchAdServerAdvertiserPageOutputResultsItemTransformValue(TypedDict):
+    name: str
+    updatedAt: str
+
+SearchSuccessSearchAdServerAdvertiserPageOutputReturned: TypeAlias = float
+
+SearchSuccessSearchAdServerAdvertiserPageOutputTotal: TypeAlias = float
+
+SearchSuccessSearchAdServerAdvertiserPageOutputTotalLowerBound: TypeAlias = float
+
+SearchSuccessSearchAdServerAdvertiserPageOutputTruncated: TypeAlias = bool
+
+SearchSuccessSearchAdServerAdvertiserPageOutputValue: TypeAlias = JsonValue
+
+class SearchSuccessSearchAdServerAdvertiserUnavailableOutput(TypedDict):
+    outcome: Literal["unavailable_ad_server_advertiser"]
+    kind: Literal["ad_server_advertiser"]
     unavailable: str
     message: str
 
