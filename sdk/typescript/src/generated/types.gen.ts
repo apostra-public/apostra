@@ -43833,6 +43833,10 @@ export type SearchData = {
              */
             assetState?: 'active' | 'draft';
             /**
+             * creative_asset: assets with this rights state, or none for assets with no rights record.
+             */
+            rightsState?: 'none' | 'pending_confirmation' | 'confirmed' | 'rejected' | 'paused' | 'revoked';
+            /**
              * For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.
              */
             catalogState?: 'active' | 'draft';
@@ -44455,6 +44459,10 @@ export type SearchData = {
              * creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.
              */
             assetState?: 'active' | 'draft';
+            /**
+             * creative_asset: assets with this rights state, or none for assets with no rights record.
+             */
+            rightsState?: 'none' | 'pending_confirmation' | 'confirmed' | 'rejected' | 'paused' | 'revoked';
             /**
              * For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.
              */
@@ -45147,6 +45155,10 @@ export type SearchData = {
              */
             assetState?: 'active' | 'draft';
             /**
+             * creative_asset: assets with this rights state, or none for assets with no rights record.
+             */
+            rightsState?: 'none' | 'pending_confirmation' | 'confirmed' | 'rejected' | 'paused' | 'revoked';
+            /**
              * For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.
              */
             catalogState?: 'active' | 'draft';
@@ -45766,6 +45778,10 @@ export type SearchData = {
              */
             assetState?: 'active' | 'draft';
             /**
+             * creative_asset: assets with this rights state, or none for assets with no rights record.
+             */
+            rightsState?: 'none' | 'pending_confirmation' | 'confirmed' | 'rejected' | 'paused' | 'revoked';
+            /**
              * For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.
              */
             catalogState?: 'active' | 'draft';
@@ -46381,6 +46397,10 @@ export type SearchData = {
              * creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.
              */
             assetState?: 'active' | 'draft';
+            /**
+             * creative_asset: assets with this rights state, or none for assets with no rights record.
+             */
+            rightsState?: 'none' | 'pending_confirmation' | 'confirmed' | 'rejected' | 'paused' | 'revoked';
             /**
              * For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.
              */
@@ -47000,6 +47020,10 @@ export type SearchData = {
              * creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.
              */
             assetState?: 'active' | 'draft';
+            /**
+             * creative_asset: assets with this rights state, or none for assets with no rights record.
+             */
+            rightsState?: 'none' | 'pending_confirmation' | 'confirmed' | 'rejected' | 'paused' | 'revoked';
             /**
              * For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.
              */
@@ -47619,6 +47643,10 @@ export type SearchData = {
              * creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.
              */
             assetState?: 'active' | 'draft';
+            /**
+             * creative_asset: assets with this rights state, or none for assets with no rights record.
+             */
+            rightsState?: 'none' | 'pending_confirmation' | 'confirmed' | 'rejected' | 'paused' | 'revoked';
             /**
              * For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.
              */
@@ -48368,6 +48396,10 @@ export type SearchData = {
              * creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.
              */
             assetState?: 'active' | 'draft';
+            /**
+             * creative_asset: assets with this rights state, or none for assets with no rights record.
+             */
+            rightsState?: 'none' | 'pending_confirmation' | 'confirmed' | 'rejected' | 'paused' | 'revoked';
             /**
              * For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.
              */
@@ -49132,6 +49164,10 @@ export type SearchData = {
              */
             assetState?: 'active' | 'draft';
             /**
+             * creative_asset: assets with this rights state, or none for assets with no rights record.
+             */
+            rightsState?: 'none' | 'pending_confirmation' | 'confirmed' | 'rejected' | 'paused' | 'revoked';
+            /**
              * For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.
              */
             catalogState?: 'active' | 'draft';
@@ -49827,6 +49863,10 @@ export type SearchData = {
              */
             assetState?: 'active' | 'draft';
             /**
+             * creative_asset: assets with this rights state, or none for assets with no rights record.
+             */
+            rightsState?: 'none' | 'pending_confirmation' | 'confirmed' | 'rejected' | 'paused' | 'revoked';
+            /**
              * For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.
              */
             catalogState?: 'active' | 'draft';
@@ -50448,6 +50488,10 @@ export type SearchData = {
              * creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.
              */
             assetState?: 'active' | 'draft';
+            /**
+             * creative_asset: assets with this rights state, or none for assets with no rights record.
+             */
+            rightsState?: 'none' | 'pending_confirmation' | 'confirmed' | 'rejected' | 'paused' | 'revoked';
             /**
              * For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.
              */
@@ -51071,6 +51115,10 @@ export type SearchData = {
              * creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.
              */
             assetState?: 'active' | 'draft';
+            /**
+             * creative_asset: assets with this rights state, or none for assets with no rights record.
+             */
+            rightsState?: 'none' | 'pending_confirmation' | 'confirmed' | 'rejected' | 'paused' | 'revoked';
             /**
              * For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.
              */
@@ -51695,6 +51743,10 @@ export type SearchData = {
              */
             assetState?: 'active' | 'draft';
             /**
+             * creative_asset: assets with this rights state, or none for assets with no rights record.
+             */
+            rightsState?: 'none' | 'pending_confirmation' | 'confirmed' | 'rejected' | 'paused' | 'revoked';
+            /**
              * For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.
              */
             catalogState?: 'active' | 'draft';
@@ -52317,6 +52369,10 @@ export type SearchData = {
              * creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.
              */
             assetState?: 'active' | 'draft';
+            /**
+             * creative_asset: assets with this rights state, or none for assets with no rights record.
+             */
+            rightsState?: 'none' | 'pending_confirmation' | 'confirmed' | 'rejected' | 'paused' | 'revoked';
             /**
              * For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.
              */

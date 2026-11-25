@@ -74012,6 +74012,16 @@ paths:
                           enum:
                             - active
                             - draft
+                        rightsState:
+                          description: 'creative_asset: assets with this rights state, or none for assets with no rights record.'
+                          type: string
+                          enum:
+                            - none
+                            - pending_confirmation
+                            - confirmed
+                            - rejected
+                            - paused
+                            - revoked
                         catalogState:
                           description: >-
                             For kind catalog only. Omit for active catalogs; use draft explicitly to list
@@ -76025,6 +76035,16 @@ paths:
                           enum:
                             - active
                             - draft
+                        rightsState:
+                          description: 'creative_asset: assets with this rights state, or none for assets with no rights record.'
+                          type: string
+                          enum:
+                            - none
+                            - pending_confirmation
+                            - confirmed
+                            - rejected
+                            - paused
+                            - revoked
                         catalogState:
                           description: >-
                             For kind catalog only. Omit for active catalogs; use draft explicitly to list
@@ -78863,6 +78883,16 @@ paths:
                           enum:
                             - active
                             - draft
+                        rightsState:
+                          description: 'creative_asset: assets with this rights state, or none for assets with no rights record.'
+                          type: string
+                          enum:
+                            - none
+                            - pending_confirmation
+                            - confirmed
+                            - rejected
+                            - paused
+                            - revoked
                         catalogState:
                           description: >-
                             For kind catalog only. Omit for active catalogs; use draft explicitly to list
@@ -80868,6 +80898,16 @@ paths:
                           enum:
                             - active
                             - draft
+                        rightsState:
+                          description: 'creative_asset: assets with this rights state, or none for assets with no rights record.'
+                          type: string
+                          enum:
+                            - none
+                            - pending_confirmation
+                            - confirmed
+                            - rejected
+                            - paused
+                            - revoked
                         catalogState:
                           description: >-
                             For kind catalog only. Omit for active catalogs; use draft explicitly to list
@@ -82870,6 +82910,16 @@ paths:
                           enum:
                             - active
                             - draft
+                        rightsState:
+                          description: 'creative_asset: assets with this rights state, or none for assets with no rights record.'
+                          type: string
+                          enum:
+                            - none
+                            - pending_confirmation
+                            - confirmed
+                            - rejected
+                            - paused
+                            - revoked
                         catalogState:
                           description: >-
                             For kind catalog only. Omit for active catalogs; use draft explicitly to list
@@ -84872,6 +84922,16 @@ paths:
                           enum:
                             - active
                             - draft
+                        rightsState:
+                          description: 'creative_asset: assets with this rights state, or none for assets with no rights record.'
+                          type: string
+                          enum:
+                            - none
+                            - pending_confirmation
+                            - confirmed
+                            - rejected
+                            - paused
+                            - revoked
                         catalogState:
                           description: >-
                             For kind catalog only. Omit for active catalogs; use draft explicitly to list
@@ -86881,6 +86941,16 @@ paths:
                           enum:
                             - active
                             - draft
+                        rightsState:
+                          description: 'creative_asset: assets with this rights state, or none for assets with no rights record.'
+                          type: string
+                          enum:
+                            - none
+                            - pending_confirmation
+                            - confirmed
+                            - rejected
+                            - paused
+                            - revoked
                         catalogState:
                           description: >-
                             For kind catalog only. Omit for active catalogs; use draft explicitly to list
@@ -90587,6 +90657,16 @@ paths:
                           enum:
                             - active
                             - draft
+                        rightsState:
+                          description: 'creative_asset: assets with this rights state, or none for assets with no rights record.'
+                          type: string
+                          enum:
+                            - none
+                            - pending_confirmation
+                            - confirmed
+                            - rejected
+                            - paused
+                            - revoked
                         catalogState:
                           description: >-
                             For kind catalog only. Omit for active catalogs; use draft explicitly to list
@@ -94250,6 +94330,16 @@ paths:
                           enum:
                             - active
                             - draft
+                        rightsState:
+                          description: 'creative_asset: assets with this rights state, or none for assets with no rights record.'
+                          type: string
+                          enum:
+                            - none
+                            - pending_confirmation
+                            - confirmed
+                            - rejected
+                            - paused
+                            - revoked
                         catalogState:
                           description: >-
                             For kind catalog only. Omit for active catalogs; use draft explicitly to list
@@ -97100,6 +97190,16 @@ paths:
                           enum:
                             - active
                             - draft
+                        rightsState:
+                          description: 'creative_asset: assets with this rights state, or none for assets with no rights record.'
+                          type: string
+                          enum:
+                            - none
+                            - pending_confirmation
+                            - confirmed
+                            - rejected
+                            - paused
+                            - revoked
                         catalogState:
                           description: >-
                             For kind catalog only. Omit for active catalogs; use draft explicitly to list
@@ -99112,6 +99212,16 @@ paths:
                           enum:
                             - active
                             - draft
+                        rightsState:
+                          description: 'creative_asset: assets with this rights state, or none for assets with no rights record.'
+                          type: string
+                          enum:
+                            - none
+                            - pending_confirmation
+                            - confirmed
+                            - rejected
+                            - paused
+                            - revoked
                         catalogState:
                           description: >-
                             For kind catalog only. Omit for active catalogs; use draft explicitly to list
@@ -101121,6 +101231,16 @@ paths:
                           enum:
                             - active
                             - draft
+                        rightsState:
+                          description: 'creative_asset: assets with this rights state, or none for assets with no rights record.'
+                          type: string
+                          enum:
+                            - none
+                            - pending_confirmation
+                            - confirmed
+                            - rejected
+                            - paused
+                            - revoked
                         catalogState:
                           description: >-
                             For kind catalog only. Omit for active catalogs; use draft explicitly to list
@@ -103130,6 +103250,16 @@ paths:
                           enum:
                             - active
                             - draft
+                        rightsState:
+                          description: 'creative_asset: assets with this rights state, or none for assets with no rights record.'
+                          type: string
+                          enum:
+                            - none
+                            - pending_confirmation
+                            - confirmed
+                            - rejected
+                            - paused
+                            - revoked
                         catalogState:
                           description: >-
                             For kind catalog only. Omit for active catalogs; use draft explicitly to list
@@ -105140,6 +105270,16 @@ paths:
                           enum:
                             - active
                             - draft
+                        rightsState:
+                          description: 'creative_asset: assets with this rights state, or none for assets with no rights record.'
+                          type: string
+                          enum:
+                            - none
+                            - pending_confirmation
+                            - confirmed
+                            - rejected
+                            - paused
+                            - revoked
                         catalogState:
                           description: >-
                             For kind catalog only. Omit for active catalogs; use draft explicitly to list

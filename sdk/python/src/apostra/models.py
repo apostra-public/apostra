@@ -25830,6 +25830,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     '\n    creative and creative_asset: items in these advertiser collections.\n    '
     assetState: NotRequired[Literal["active", "draft"]]
     '\n    creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.\n    '
+    rightsState: NotRequired[Literal["none", "pending_confirmation", "confirmed", "rejected", "paused", "revoked"]]
+    '\n    creative_asset: assets with this rights state, or none for assets with no rights record.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
     labels: NotRequired[list[SearchRequestLabelFilterEntry]]
@@ -26180,6 +26182,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     '\n    creative and creative_asset: items in these advertiser collections.\n    '
     assetState: NotRequired[Literal["active", "draft"]]
     '\n    creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.\n    '
+    rightsState: NotRequired[Literal["none", "pending_confirmation", "confirmed", "rejected", "paused", "revoked"]]
+    '\n    creative_asset: assets with this rights state, or none for assets with no rights record.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
     labels: NotRequired[list[SearchRequestLabelFilterEntry]]
@@ -26464,6 +26468,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(Type
     '\n    creative and creative_asset: items in these advertiser collections.\n    '
     assetState: NotRequired[Literal["active", "draft"]]
     '\n    creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.\n    '
+    rightsState: NotRequired[Literal["none", "pending_confirmation", "confirmed", "rejected", "paused", "revoked"]]
+    '\n    creative_asset: assets with this rights state, or none for assets with no rights record.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
     labels: NotRequired[list[SearchRequestLabelFilterEntry]]
@@ -26775,6 +26781,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDi
     '\n    creative and creative_asset: items in these advertiser collections.\n    '
     assetState: NotRequired[Literal["active", "draft"]]
     '\n    creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.\n    '
+    rightsState: NotRequired[Literal["none", "pending_confirmation", "confirmed", "rejected", "paused", "revoked"]]
+    '\n    creative_asset: assets with this rights state, or none for assets with no rights record.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
     labels: NotRequired[list[SearchRequestLabelFilterEntry]]
@@ -27125,6 +27133,8 @@ class SearchInputKindAdServerTargetingFilter(TypedDict):
     '\n    creative and creative_asset: items in these advertiser collections.\n    '
     assetState: NotRequired[Literal["active", "draft"]]
     '\n    creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.\n    '
+    rightsState: NotRequired[Literal["none", "pending_confirmation", "confirmed", "rejected", "paused", "revoked"]]
+    '\n    creative_asset: assets with this rights state, or none for assets with no rights record.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
     labels: NotRequired[list[SearchRequestLabelFilterEntry]]
@@ -27445,6 +27455,8 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     '\n    creative and creative_asset: items in these advertiser collections.\n    '
     assetState: NotRequired[Literal["active", "draft"]]
     '\n    creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.\n    '
+    rightsState: NotRequired[Literal["none", "pending_confirmation", "confirmed", "rejected", "paused", "revoked"]]
+    '\n    creative_asset: assets with this rights state, or none for assets with no rights record.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
     labels: NotRequired[list[SearchRequestLabelFilterEntry]]
@@ -27777,6 +27789,8 @@ class SearchInputKindBuyerRfpFilter(TypedDict):
     '\n    creative and creative_asset: items in these advertiser collections.\n    '
     assetState: NotRequired[Literal["active", "draft"]]
     '\n    creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.\n    '
+    rightsState: NotRequired[Literal["none", "pending_confirmation", "confirmed", "rejected", "paused", "revoked"]]
+    '\n    creative_asset: assets with this rights state, or none for assets with no rights record.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
     labels: NotRequired[list[SearchRequestLabelFilterEntry]]
@@ -28129,6 +28143,8 @@ class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     '\n    creative and creative_asset: items in these advertiser collections.\n    '
     assetState: NotRequired[Literal["active", "draft"]]
     '\n    creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.\n    '
+    rightsState: NotRequired[Literal["none", "pending_confirmation", "confirmed", "rejected", "paused", "revoked"]]
+    '\n    creative_asset: assets with this rights state, or none for assets with no rights record.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
     labels: NotRequired[list[SearchRequestLabelFilterEntry]]
@@ -28445,6 +28461,8 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     '\n    creative and creative_asset: items in these advertiser collections.\n    '
     assetState: NotRequired[Literal["active", "draft"]]
     '\n    creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.\n    '
+    rightsState: NotRequired[Literal["none", "pending_confirmation", "confirmed", "rejected", "paused", "revoked"]]
+    '\n    creative_asset: assets with this rights state, or none for assets with no rights record.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
     labels: NotRequired[list[SearchRequestLabelFilterEntry]]
@@ -28761,6 +28779,8 @@ class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     '\n    creative and creative_asset: items in these advertiser collections.\n    '
     assetState: NotRequired[Literal["active", "draft"]]
     '\n    creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.\n    '
+    rightsState: NotRequired[Literal["none", "pending_confirmation", "confirmed", "rejected", "paused", "revoked"]]
+    '\n    creative_asset: assets with this rights state, or none for assets with no rights record.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
     labels: NotRequired[list[SearchRequestLabelFilterEntry]]
@@ -29043,6 +29063,8 @@ class SearchInputKindCreativeFilter(TypedDict):
     '\n    creative and creative_asset: items in these advertiser collections.\n    '
     assetState: NotRequired[Literal["active", "draft"]]
     '\n    creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.\n    '
+    rightsState: NotRequired[Literal["none", "pending_confirmation", "confirmed", "rejected", "paused", "revoked"]]
+    '\n    creative_asset: assets with this rights state, or none for assets with no rights record.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
     labels: NotRequired[list[SearchRequestLabelFilterEntry]]
@@ -29429,6 +29451,8 @@ class SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter(TypedDict):
     '\n    creative and creative_asset: items in these advertiser collections.\n    '
     assetState: NotRequired[Literal["active", "draft"]]
     '\n    creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.\n    '
+    rightsState: NotRequired[Literal["none", "pending_confirmation", "confirmed", "rejected", "paused", "revoked"]]
+    '\n    creative_asset: assets with this rights state, or none for assets with no rights record.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
     labels: NotRequired[list[SearchRequestLabelFilterEntry]]
@@ -29833,6 +29857,8 @@ class SearchInputKindProposalFilter(TypedDict):
     '\n    creative and creative_asset: items in these advertiser collections.\n    '
     assetState: NotRequired[Literal["active", "draft"]]
     '\n    creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.\n    '
+    rightsState: NotRequired[Literal["none", "pending_confirmation", "confirmed", "rejected", "paused", "revoked"]]
+    '\n    creative_asset: assets with this rights state, or none for assets with no rights record.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
     labels: NotRequired[list[SearchRequestLabelFilterEntry]]
@@ -30151,6 +30177,8 @@ class SearchInputKindSourceAccountFilter(TypedDict):
     '\n    creative and creative_asset: items in these advertiser collections.\n    '
     assetState: NotRequired[Literal["active", "draft"]]
     '\n    creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.\n    '
+    rightsState: NotRequired[Literal["none", "pending_confirmation", "confirmed", "rejected", "paused", "revoked"]]
+    '\n    creative_asset: assets with this rights state, or none for assets with no rights record.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
     labels: NotRequired[list[SearchRequestLabelFilterEntry]]
