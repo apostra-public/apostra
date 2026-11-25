@@ -47902,6 +47902,11 @@ paths:
                       type: string
                       pattern: ^v\d+-\d+(?:-\d+)?$
                       description: Terms version shown in Plan & Billing.
+                    standardPlanElection:
+                      description: The offer from the billing read's next action. Required while Standard applies.
+                      type: string
+                      minLength: 1
+                      maxLength: 200
                   required:
                     - accepted
                     - acceptedVersion
@@ -48055,9 +48060,43 @@ paths:
                               - accepted
                               - acceptedVersion
                             additionalProperties: false
+                          plan:
+                            anyOf:
+                              - type: object
+                                properties:
+                                  bindingId:
+                                    type: string
+                                  planId:
+                                    type: string
+                                  planName:
+                                    type: string
+                                  paymentOptionKey:
+                                    type:
+                                      - string
+                                      - 'null'
+                                  takesEffect:
+                                    type: string
+                                    enum:
+                                      - now
+                                      - at_term_end
+                                  termStart:
+                                    type: string
+                                  termEnd:
+                                    type: string
+                                required:
+                                  - bindingId
+                                  - planId
+                                  - planName
+                                  - paymentOptionKey
+                                  - takesEffect
+                                  - termStart
+                                  - termEnd
+                                additionalProperties: false
+                              - type: 'null'
                         required:
                           - action
                           - terms
+                          - plan
                         additionalProperties: false
                       - type: object
                         properties:
