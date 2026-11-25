@@ -861,14 +861,14 @@ export class Apostra extends Transport {
   /** Accept Terms, set seller payment terms, accept a plan, answer its offer, change its renewal or payer details, manage media billing entities, remove a card, or pay a failed payment now. Plan, payment terms, renewal, card removal and pay now need administrator approval on our site. Cards stay off MCP. Returns the data together with response headers and request ID. */
   saveBillingWithResponse(input: SaveBillingInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveBillingResult>> { return this.requestDetailed("save_billing", input, options) }
   /**
-   * Change a brand's own record, one change per call. authority turns on or off Apostra's hosting of the brand's AdCP brand.json and brand agent, or checks what the brand's domain says.
+   * Change a brand's own record, one change per call. authority hosts the brand's AdCP brand.json and agent, or checks its domain. Not the owner: draft and host a brand.json naming your organization as operator, so the brand can point at it and open its Library.
    *
    * @example
    * await client.saveBrand(input, { idempotencyKey: 'stable-key' })
    */
   saveBrand(input: SaveBrandInput, options: WriteRequestOptions): Promise<SaveBrandResult> { return this.request("save_brand", input, options) }
 
-  /** Change a brand's own record, one change per call. authority turns on or off Apostra's hosting of the brand's AdCP brand.json and brand agent, or checks what the brand's domain says. Returns the data together with response headers and request ID. */
+  /** Change a brand's own record, one change per call. authority hosts the brand's AdCP brand.json and agent, or checks its domain. Not the owner: draft and host a brand.json naming your organization as operator, so the brand can point at it and open its Library. Returns the data together with response headers and request ID. */
   saveBrandWithResponse(input: SaveBrandInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveBrandResult>> { return this.requestDetailed("save_brand", input, options) }
   /**
    * Add or change one brand Library source. A person confirms its permitted uses before it is read.

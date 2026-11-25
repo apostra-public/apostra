@@ -13135,14 +13135,20 @@ class SaveBrandInput(TypedDict):
 
 class SaveBrandInputAuthority(TypedDict):
     hosting: NotRequired[bool]
-    '\n    true hosts the brand\'s AdCP brand.json and brand agent (owner only). false stops, once the brand\'s domain no longer points to Apostra.\n    '
+    '\n    true hosts the brand\'s AdCP brand.json and brand agent: the owner\'s record, or else your drafted file naming your organization as operator. false stops, once the brand\'s domain no longer points to it.\n    '
     checkRequested: NotRequired[Literal[True]]
-    '\n    Check what the brand\'s domain says now.\n    '
+    '\n    Check what the brand\'s domain says now, and whether the brand Library is open.\n    '
+    draft: NotRequired[Literal[True]]
+    '\n    Not the owner: draft a brand.json from the brand profile naming your organization\'s verified domain as operator. Show it to the person before hosting.\n    '
+    advertiserId: NotRequired[str]
+    '\n    With draft: whose brand profile to draft from, when several advertisers name the brand.\n    '
 
 class SaveBrandResult(TypedDict):
-    action: Literal["hosting_on", "hosting_off", "authority_checked"]
+    action: Literal["hosting_on", "hosting_off", "authority_checked", "drafted"]
     brand: str
+    access: Literal["owner", "operator", "public"]
     authority: SaveBrandResultAuthority
+    nextStep: str
 
 class SaveBrandResultAuthority(TypedDict):
     state: Literal["apostra_document", "apostra_agent", "apostra_listed", "own_record", "no_brand_json", "unreachable"] | None
@@ -13151,6 +13157,7 @@ class SaveBrandResultAuthority(TypedDict):
     checkedAt: str | None
     checkDetail: str | None
     hosting: SaveBrandResultAuthorityHostingValue | None
+    operatorFile: SaveBrandResultAuthorityOperatorFileValue | None
 
 class SaveBrandResultAuthorityHostingPublish(TypedDict):
     authoritativeLocation: str
@@ -13161,6 +13168,23 @@ class SaveBrandResultAuthorityHostingValue(TypedDict):
     documentUrl: str
     agentUrl: str
     publish: SaveBrandResultAuthorityHostingPublish
+
+class SaveBrandResultAuthorityOperatorFileStateDraftAndPublishedCheck(TypedDict):
+    state: Literal["apostra_document", "apostra_agent", "apostra_listed", "own_record", "no_brand_json", "unreachable"] | None
+    pointsHere: bool
+    checkedAt: str | None
+    detail: str | None
+
+class SaveBrandResultAuthorityOperatorFileStateDraftAndPublishedPublish(TypedDict):
+    authoritativeLocation: str
+
+class SaveBrandResultAuthorityOperatorFileValue(TypedDict):
+    state: Literal["draft", "published"]
+    documentUrl: str
+    operatorDomain: str
+    draft: dict[str, JsonValue]
+    publish: SaveBrandResultAuthorityOperatorFileStateDraftAndPublishedPublish
+    check: SaveBrandResultAuthorityOperatorFileStateDraftAndPublishedCheck
 
 class SaveBrandSourceInput(TypedDict):
     idempotencyKey: NotRequired[str]
