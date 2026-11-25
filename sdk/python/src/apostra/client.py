@@ -557,11 +557,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveEventSourceResult], self._request_with_response("save_event_source", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_inventory_source(self, input: models.SaveInventorySourceInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveInventorySourceResult:
-        "Create or update where a seller's inventory comes from. Pass `id` to change a source or omit it to add one. Add a sales agent with only `agentId`, never its address, or an ad server with only `adServer`; each opens a form. Credentials are never passed here; a source that needs one returns its form."
+        "Create or update a seller's inventory source (`id` changes, none adds). Add a sales agent with only `agentId`, never its address, or an ad server with only `adServer`; each opens a form. `id` with `agentId` binds an owned agent; `name` with `feedSource` creates a modular source. No credentials."
         return cast("models.SaveInventorySourceResult", self._request("save_inventory_source", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_inventory_source_with_response(self, input: models.SaveInventorySourceInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveInventorySourceResult]:
-        "Create or update where a seller's inventory comes from. Pass `id` to change a source or omit it to add one. Add a sales agent with only `agentId`, never its address, or an ad server with only `adServer`; each opens a form. Credentials are never passed here; a source that needs one returns its form. Returns the data together with response headers and request ID."
+        "Create or update a seller's inventory source (`id` changes, none adds). Add a sales agent with only `agentId`, never its address, or an ad server with only `adServer`; each opens a form. `id` with `agentId` binds an owned agent; `name` with `feedSource` creates a modular source. No credentials. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveInventorySourceResult], self._request_with_response("save_inventory_source", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_lesson(self, input: models.SaveLessonInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveLessonResult:
@@ -1286,11 +1286,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveEventSourceResult], await self._request_with_response("save_event_source", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_inventory_source(self, input: models.SaveInventorySourceInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveInventorySourceResult:
-        "Create or update where a seller's inventory comes from. Pass `id` to change a source or omit it to add one. Add a sales agent with only `agentId`, never its address, or an ad server with only `adServer`; each opens a form. Credentials are never passed here; a source that needs one returns its form."
+        "Create or update a seller's inventory source (`id` changes, none adds). Add a sales agent with only `agentId`, never its address, or an ad server with only `adServer`; each opens a form. `id` with `agentId` binds an owned agent; `name` with `feedSource` creates a modular source. No credentials."
         return cast("models.SaveInventorySourceResult", await self._request("save_inventory_source", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_inventory_source_with_response(self, input: models.SaveInventorySourceInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveInventorySourceResult]:
-        "Create or update where a seller's inventory comes from. Pass `id` to change a source or omit it to add one. Add a sales agent with only `agentId`, never its address, or an ad server with only `adServer`; each opens a form. Credentials are never passed here; a source that needs one returns its form. Returns the data together with response headers and request ID."
+        "Create or update a seller's inventory source (`id` changes, none adds). Add a sales agent with only `agentId`, never its address, or an ad server with only `adServer`; each opens a form. `id` with `agentId` binds an owned agent; `name` with `feedSource` creates a modular source. No credentials. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveInventorySourceResult], await self._request_with_response("save_inventory_source", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_lesson(self, input: models.SaveLessonInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveLessonResult:
