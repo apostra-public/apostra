@@ -30927,6 +30927,39 @@ paths:
                                   - usedIus
                                   - activityIus
                                 additionalProperties: false
+                              primeSpendingCap:
+                                type: object
+                                properties:
+                                  monthlyIus:
+                                    type: integer
+                                    minimum: 0
+                                    maximum: 9007199254740991
+                                  isDefault:
+                                    type: boolean
+                                  usedIus:
+                                    type: number
+                                    minimum: 0
+                                  cycleStart:
+                                    type: string
+                                    format: date-time
+                                    pattern: >-
+                                      ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+                                  cycleEnd:
+                                    type: string
+                                    format: date-time
+                                    pattern: >-
+                                      ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+                                required:
+                                  - monthlyIus
+                                  - isDefault
+                                  - usedIus
+                                  - cycleStart
+                                  - cycleEnd
+                                additionalProperties: false
+                                description: >-
+                                  Most IUs the Prime may cause to be charged per billing cycle (`monthlyIus`;
+                                  `isDefault` when unset), and `usedIus` this cycle. Change with save_billing
+                                  primeSpendingCap.
                               payout:
                                 type: object
                                 properties:
@@ -31782,6 +31815,7 @@ paths:
                               - standing
                               - balance
                               - usage
+                              - primeSpendingCap
                               - payout
                               - permissions
                               - plan
@@ -47919,6 +47953,11 @@ paths:
                   $ref: '#/components/schemas/save_billing_request_SaveBillingMediaBilling'
                   type: object
                   additionalProperties: false
+                primeSpendingCap:
+                  description: Set the Prime's spending cap; saves now. Send alone.
+                  $ref: '#/components/schemas/save_billing_request_SaveBillingPrimeSpendingCap'
+                  type: object
+                  additionalProperties: false
                 paymentMethod:
                   description: Remove a saved card; returns approval_required. Needs idempotencyKey. Send alone.
                   $ref: '#/components/schemas/save_billing_request_SaveBillingPaymentMethod'
@@ -48520,6 +48559,44 @@ paths:
                         required:
                           - action
                           - saved
+                        additionalProperties: false
+                      - type: object
+                        properties:
+                          action:
+                            type: string
+                            const: prime_spending_cap_saved
+                          primeSpendingCap:
+                            type: object
+                            properties:
+                              monthlyIus:
+                                type: integer
+                                minimum: 0
+                                maximum: 9007199254740991
+                              isDefault:
+                                type: boolean
+                              usedIus:
+                                type: number
+                                minimum: 0
+                              cycleStart:
+                                type: string
+                                format: date-time
+                                pattern: >-
+                                  ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+                              cycleEnd:
+                                type: string
+                                format: date-time
+                                pattern: >-
+                                  ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+                            required:
+                              - monthlyIus
+                              - isDefault
+                              - usedIus
+                              - cycleStart
+                              - cycleEnd
+                            additionalProperties: false
+                        required:
+                          - action
+                          - primeSpendingCap
                         additionalProperties: false
                       - type: object
                         properties:
@@ -119647,6 +119724,19 @@ components:
           required:
             - attachmentId
           additionalProperties: false
+      additionalProperties: false
+    save_billing_request_SaveBillingPrimeSpendingCap:
+      type: object
+      properties:
+        monthlyIus:
+          anyOf:
+            - type: integer
+              minimum: 0
+              maximum: 1000000
+            - type: 'null'
+          description: IUs per billing cycle; 0 = none, not yet enforced; null resets.
+      required:
+        - monthlyIus
       additionalProperties: false
     save_billing_request_SaveBillingPaymentMethod:
       type: object
