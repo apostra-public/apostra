@@ -21745,7 +21745,7 @@ export type SaveBillingRequestSaveBillingPlanPlanId = string;
 
 export type SaveBillingRequestSaveBillingPrimeSpendingCap = {
     /**
-     * IUs per billing cycle; 0 = none, not yet enforced; null resets.
+     * IUs per billing cycle; 0 = none; null resets.
      */
     monthlyIus: number | null;
 };
