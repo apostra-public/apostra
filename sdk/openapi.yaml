@@ -134512,6 +134512,10 @@ components:
                   - resume_needed
                   - account_stop_on
                   - write_unsettled
+                  - canvas_draft_waiting
+              blocking:
+                default: true
+                type: boolean
               reason:
                 type: string
               url:
@@ -134520,6 +134524,7 @@ components:
                   - 'null'
             required:
               - kind
+              - blocking
               - reason
               - url
             additionalProperties: false
@@ -134983,6 +134988,10 @@ components:
                   - resume_needed
                   - account_stop_on
                   - write_unsettled
+                  - canvas_draft_waiting
+              blocking:
+                default: true
+                type: boolean
               reason:
                 type: string
               url:
@@ -134991,6 +135000,7 @@ components:
                   - 'null'
             required:
               - kind
+              - blocking
               - reason
               - url
             additionalProperties: false

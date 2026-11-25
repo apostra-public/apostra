@@ -38339,7 +38339,8 @@ export type SaveProjectSuccessObject = {
         reason: string | null;
     };
     attention: Array<{
-        kind: 'bounds_approval_pending' | 'new_bounds_needed' | 'reapproval_needed' | 'resume_needed' | 'account_stop_on' | 'write_unsettled';
+        kind: 'bounds_approval_pending' | 'new_bounds_needed' | 'reapproval_needed' | 'resume_needed' | 'account_stop_on' | 'write_unsettled' | 'canvas_draft_waiting';
+        blocking: boolean;
         reason: string;
         url: string | null;
     }>;
@@ -38534,7 +38535,8 @@ export type SaveProjectSuccessProject = {
         reason: string | null;
     };
     attention: Array<{
-        kind: 'bounds_approval_pending' | 'new_bounds_needed' | 'reapproval_needed' | 'resume_needed' | 'account_stop_on' | 'write_unsettled';
+        kind: 'bounds_approval_pending' | 'new_bounds_needed' | 'reapproval_needed' | 'resume_needed' | 'account_stop_on' | 'write_unsettled' | 'canvas_draft_waiting';
+        blocking: boolean;
         reason: string;
         url: string | null;
     }>;

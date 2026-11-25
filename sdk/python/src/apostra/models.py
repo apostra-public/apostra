@@ -22546,7 +22546,8 @@ class SaveProjectSuccessObjectAttachmentsItem(TypedDict):
 SaveProjectSuccessObjectAttachmentsItemId: TypeAlias = str
 
 class SaveProjectSuccessObjectAttentionItem(TypedDict):
-    kind: Literal["bounds_approval_pending", "new_bounds_needed", "reapproval_needed", "resume_needed", "account_stop_on", "write_unsettled"]
+    kind: Literal["bounds_approval_pending", "new_bounds_needed", "reapproval_needed", "resume_needed", "account_stop_on", "write_unsettled", "canvas_draft_waiting"]
+    blocking: bool
     reason: str
     url: str | None
 
@@ -22699,7 +22700,8 @@ class SaveProjectSuccessProjectAttachmentsItem(TypedDict):
 SaveProjectSuccessProjectAttachmentsItemId: TypeAlias = str
 
 class SaveProjectSuccessProjectAttentionItem(TypedDict):
-    kind: Literal["bounds_approval_pending", "new_bounds_needed", "reapproval_needed", "resume_needed", "account_stop_on", "write_unsettled"]
+    kind: Literal["bounds_approval_pending", "new_bounds_needed", "reapproval_needed", "resume_needed", "account_stop_on", "write_unsettled", "canvas_draft_waiting"]
+    blocking: bool
     reason: str
     url: str | None
 
