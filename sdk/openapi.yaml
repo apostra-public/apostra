@@ -39393,12 +39393,12 @@ paths:
       operationId: open_advertisers_page
       summary: >-
         Open the Advertisers Page: every advertiser with its campaign and draft counts and one next action each. Use it
-        for "show my advertisers" or "where do I start"; the Page self-fetches. To add or set up an advertiser, pass
-        intent: "add". For a text answer use search(kind: "advertiser").
+        for "show my advertisers" or "where do I start". intent: "add" sets one up; advertiserId opens one advertiser's
+        page. For text use search(kind: "advertiser").
       description: >-
         Open the Advertisers Page: every advertiser with its campaign and draft counts and one next action each. Use it
-        for "show my advertisers" or "where do I start"; the Page self-fetches. To add or set up an advertiser, pass
-        intent: "add". For a text answer use search(kind: "advertiser").
+        for "show my advertisers" or "where do I start". intent: "add" sets one up; advertiserId opens one advertiser's
+        page. For text use search(kind: "advertiser").
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -39426,6 +39426,11 @@ paths:
                   type: string
                   enum:
                     - add
+                advertiserId:
+                  description: One advertiser's page. Not with intent.
+                  type: string
+                  maxLength: 19
+                  pattern: ^[1-9]\d*$
                 accountId:
                   description: Apostra accountId this call runs in, from get_status.
                   anyOf:
@@ -39450,6 +39455,9 @@ paths:
                         type: string
                         enum:
                           - add
+                      advertiserId:
+                        type: string
+                        pattern: ^[1-9][0-9]*$
                     additionalProperties: false
                   error:
                     type: 'null'

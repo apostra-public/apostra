@@ -10173,11 +10173,14 @@ class LogEventSuccessLogEventIngestionPartialFailuresItem(TypedDict):
 class OpenAdvertisersPageInput(TypedDict):
     intent: NotRequired[Literal["add"]]
     '\n    Use "add" to open the Add advertiser form.\n    '
+    advertiserId: NotRequired[str]
+    '\n    One advertiser\'s page. Not with intent.\n    '
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
 
 class OpenAdvertisersPageResult(TypedDict):
     intent: NotRequired[Literal["add"]]
+    advertiserId: NotRequired[str]
 
 class OpenAgentActivityPageInput(TypedDict):
     agentId: str

@@ -317,7 +317,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Open the Advertisers Page: every advertiser with its campaign and draft counts and one next action each. Use it for \"show my advertisers\" or \"where do I start\"; the Page self-fetches. To add or set up an advertiser, pass intent: \"add\". For a text answer use search(kind: \"advertiser\")."
+    "summary": "Open the Advertisers Page: every advertiser with its campaign and draft counts and one next action each. Use it for \"show my advertisers\" or \"where do I start\". intent: \"add\" sets one up; advertiserId opens one advertiser's page. For text use search(kind: \"advertiser\")."
   },
   "open_agent_activity_page": {
     "path": "/tools/open_agent_activity_page",

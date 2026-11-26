@@ -14354,6 +14354,10 @@ export type OpenAdvertisersPageData = {
          */
         intent?: 'add';
         /**
+         * One advertiser's page. Not with intent.
+         */
+        advertiserId?: string;
+        /**
          * Apostra accountId this call runs in, from get_status.
          */
         accountId?: number | string;
@@ -14437,6 +14441,7 @@ export type OpenAdvertisersPageResponses = {
     200: {
         data: {
             intent?: 'add';
+            advertiserId?: string;
         };
         error: null;
     };
