@@ -27531,13 +27531,17 @@ export type SaveCreativeAssetData = {
          */
         advertiserId: string;
         /**
-         * One entry per asset, at most 50; all are saved or none. Each replaces that asset's rights.
+         * One entry per asset or declared set, at most 50 entries and 100 assets in all; all are saved or none. Each replaces the rights of every asset it names.
          */
         items: Array<{
             /**
-             * Library asset id, from search or get on creative_asset.
+             * Library asset id, from search or get on creative_asset. Send this or assetIds.
              */
-            assetId: string;
+            assetId?: string;
+            /**
+             * A set the person declares shares these rights: one statement for up to 100 assets. Send this or assetId. A set shows no identifiable person: no likeness entry, and peoplePictured 0 on every entry.
+             */
+            assetIds?: Array<string>;
             /**
              * AdCP rights entries, one for each party the rights come from: the copyright holder, and each person pictured. Replaces the asset’s rights.
              */

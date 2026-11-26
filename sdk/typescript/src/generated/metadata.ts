@@ -1291,7 +1291,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Record the rights a person states for Library assets as AdCP rights entries: who holds them, and where and how long ads may use them. A save replaces an asset’s rights and only proposes them. confirm: true asks a person to confirm on Apostra’s approval page."
+    "summary": "Record the rights a person states for Library assets as AdCP rights entries. One statement can cover a declared set (assetIds); anyone pictured is their own asset. A save replaces an asset’s rights and only proposes them. confirm: true asks a person to confirm on Apostra’s approval page."
   },
   "save_creative_collection": {
     "path": "/tools/save_creative_collection",

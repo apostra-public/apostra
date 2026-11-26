@@ -16536,7 +16536,7 @@ class SaveCreativeAssetInput(TypedDict):
     advertiserId: str
     '\n    The advertiser whose Library holds the assets.\n    '
     items: list[SaveCreativeAssetInputItemsItem]
-    '\n    One entry per asset, at most 50; all are saved or none. Each replaces that asset\'s rights.\n    '
+    '\n    One entry per asset or declared set, at most 50 entries and 100 assets in all; all are saved or none. Each replaces the rights of every asset it names.\n    '
     confirm: NotRequired[bool]
     '\n    true asks a person to confirm the rights on Apostra’s approval page and returns approval_required with its link. Needs idempotencyKey. Only that confirmation makes the rights count.\n    '
     idempotencyKey: NotRequired[str]
@@ -16547,8 +16547,10 @@ class SaveCreativeAssetInput(TypedDict):
     '\n    Apostra accountId this call runs in, from get_status.\n    '
 
 class SaveCreativeAssetInputItemsItem(TypedDict):
-    assetId: str
-    '\n    Library asset id, from search or get on creative_asset.\n    '
+    assetId: NotRequired[str]
+    '\n    Library asset id, from search or get on creative_asset. Send this or assetIds.\n    '
+    assetIds: NotRequired[list[str]]
+    '\n    A set the person declares shares these rights: one statement for up to 100 assets. Send this or assetId. A set shows no identifiable person: no likeness entry, and peoplePictured 0 on every entry.\n    '
     rights: list[SaveCreativeAssetInputItemsItemRightsItem]
     '\n    AdCP rights entries, one for each party the rights come from: the copyright holder, and each person pictured. Replaces the asset’s rights.\n    '
     provenance: NotRequired[SaveCreativeAssetInputItemsItemProvenance]
