@@ -71735,10 +71735,12 @@ paths:
                           description: >-
                             dedicated (the default) maps sourceExternalAccountId. shared_default binds the source
                             default account instead and takes no account id; see the source interchangeDefault.
+                            operator_shared maps it as the operator's shared account.
                           type: string
                           enum:
                             - dedicated
                             - shared_default
+                            - operator_shared
                         sourceExternalAccountId:
                           description: Source account to map, usually a candidate. Required unless bindingMode is shared_default.
                           type: string
@@ -142373,6 +142375,7 @@ components:
           enum:
             - dedicated
             - shared_default
+            - operator_shared
         sourceExternalAccountId:
           type:
             - string
