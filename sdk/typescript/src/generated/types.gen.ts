@@ -39044,21 +39044,88 @@ export type SaveProjectSuccessObject = {
     };
     attachments: Array<{
         /**
-         * What is attached: a campaign, media_buy, rfp (a buyer RFP), material, connection or a seller exchange.
+         * The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.
          */
-        kind: 'campaign' | 'media_buy' | 'rfp' | 'material' | 'connection' | 'exchange';
+        id: SaveProjectSuccessObjectAttachmentsItemId;
+        name: SaveProjectSuccessObjectAttachmentsItemName;
+        relation: SaveProjectSuccessObjectAttachmentsItemRelation;
+        kind: 'campaign';
+        status: 'DRAFT' | 'ACTIVE' | 'PAUSED' | 'ENDING' | 'COMPLETED' | 'CANCELED' | 'ARCHIVED' | null;
+        partners: SaveProjectSuccessObjectAttachmentsItemPartners;
+        flight: SaveProjectSuccessObjectAttachmentsItemFlight;
+        paceVerdict: SaveProjectSuccessObjectAttachmentsItemPaceVerdict;
+        phase?: never;
+        isPaused?: never;
+    } | {
         /**
          * The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.
          */
         id: SaveProjectSuccessObjectAttachmentsItemId;
+        name: SaveProjectSuccessObjectAttachmentsItemName;
+        relation: SaveProjectSuccessObjectAttachmentsItemRelation;
+        kind: 'media_buy';
+        phase: 'draft' | 'pendingApproval' | 'inputRequired' | 'active' | 'completed' | 'canceled' | 'failed' | 'rejected' | null;
+        isPaused: boolean | null;
+        partners: SaveProjectSuccessObjectAttachmentsItemPartners;
+        flight: SaveProjectSuccessObjectAttachmentsItemFlight;
+        paceVerdict: SaveProjectSuccessObjectAttachmentsItemPaceVerdict;
+        status?: never;
+    } | {
         /**
-         * The attached record's own name, read-only. Null when you cannot read the record or it is gone; never the id.
+         * The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.
          */
-        name: string | null;
+        id: SaveProjectSuccessObjectAttachmentsItemId;
+        name: SaveProjectSuccessObjectAttachmentsItemName;
+        relation: SaveProjectSuccessObjectAttachmentsItemRelation;
+        kind: 'rfp';
+        status: 'draft' | 'open' | 'closed' | null;
+        partners: SaveProjectSuccessObjectAttachmentsItemPartners;
+        flight?: never;
+        paceVerdict?: never;
+        phase?: never;
+        isPaused?: never;
+    } | {
         /**
-         * How the Project relates to it: subject, request, response, evidence or outcome.
+         * The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.
          */
-        relation: 'subject' | 'request' | 'response' | 'evidence' | 'outcome';
+        id: SaveProjectSuccessObjectAttachmentsItemId;
+        name: SaveProjectSuccessObjectAttachmentsItemName;
+        relation: SaveProjectSuccessObjectAttachmentsItemRelation;
+        kind: 'material';
+        status?: never;
+        partners?: never;
+        flight?: never;
+        paceVerdict?: never;
+        phase?: never;
+        isPaused?: never;
+    } | {
+        /**
+         * The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.
+         */
+        id: SaveProjectSuccessObjectAttachmentsItemId;
+        name: SaveProjectSuccessObjectAttachmentsItemName;
+        relation: SaveProjectSuccessObjectAttachmentsItemRelation;
+        kind: 'connection';
+        status?: never;
+        partners?: never;
+        flight?: never;
+        paceVerdict?: never;
+        phase?: never;
+        isPaused?: never;
+    } | {
+        /**
+         * The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.
+         */
+        id: SaveProjectSuccessObjectAttachmentsItemId;
+        name: SaveProjectSuccessObjectAttachmentsItemName;
+        relation: SaveProjectSuccessObjectAttachmentsItemRelation;
+        kind: 'exchange';
+        status?: never;
+        partners?: never;
+        flight?: never;
+        paceVerdict?: never;
+        phase?: never;
+        isPaused?: never;
     }>;
     bounds: {
         flight: {
@@ -39266,7 +39333,44 @@ export type SaveProjectSuccessObject = {
     url: string;
 };
 
+/**
+ * The record's own start and end; null when it has none or you cannot read it.
+ */
+export type SaveProjectSuccessObjectAttachmentsItemFlight = {
+    start: string;
+    end: string;
+} | null;
+
 export type SaveProjectSuccessObjectAttachmentsItemId = string;
+
+/**
+ * The attached record's own name, read-only. Null when you cannot read the record or it is gone; never the id.
+ */
+export type SaveProjectSuccessObjectAttachmentsItemName = string | null;
+
+/**
+ * How it is pacing now, the same verdict `get_delivery` returns on its delivery goal. Null when it cannot be judged.
+ */
+export type SaveProjectSuccessObjectAttachmentsItemPaceVerdict = 'far_behind' | 'behind' | 'on_pace' | 'ahead' | null;
+
+/**
+ * The sellers involved. Empty when none is known, never missing.
+ */
+export type SaveProjectSuccessObjectAttachmentsItemPartners = Array<{
+    /**
+     * The seller's id, as a media buy's own read gives it.
+     */
+    id: string;
+    /**
+     * The seller name; null when it cannot be resolved.
+     */
+    name: string | null;
+}>;
+
+/**
+ * How the Project relates to it: subject, request, response, evidence or outcome.
+ */
+export type SaveProjectSuccessObjectAttachmentsItemRelation = 'subject' | 'request' | 'response' | 'evidence' | 'outcome';
 
 export type SaveProjectSuccessObjectBoundsChannelsAllowedItem = 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
 
@@ -39312,21 +39416,88 @@ export type SaveProjectSuccessProject = {
     };
     attachments: Array<{
         /**
-         * What is attached: a campaign, media_buy, rfp (a buyer RFP), material, connection or a seller exchange.
+         * The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.
          */
-        kind: 'campaign' | 'media_buy' | 'rfp' | 'material' | 'connection' | 'exchange';
+        id: SaveProjectSuccessProjectAttachmentsItemId;
+        name: SaveProjectSuccessProjectAttachmentsItemName;
+        relation: SaveProjectSuccessProjectAttachmentsItemRelation;
+        kind: 'campaign';
+        status: 'DRAFT' | 'ACTIVE' | 'PAUSED' | 'ENDING' | 'COMPLETED' | 'CANCELED' | 'ARCHIVED' | null;
+        partners: SaveProjectSuccessProjectAttachmentsItemPartners;
+        flight: SaveProjectSuccessProjectAttachmentsItemFlight;
+        paceVerdict: SaveProjectSuccessProjectAttachmentsItemPaceVerdict;
+        phase?: never;
+        isPaused?: never;
+    } | {
         /**
          * The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.
          */
         id: SaveProjectSuccessProjectAttachmentsItemId;
+        name: SaveProjectSuccessProjectAttachmentsItemName;
+        relation: SaveProjectSuccessProjectAttachmentsItemRelation;
+        kind: 'media_buy';
+        phase: 'draft' | 'pendingApproval' | 'inputRequired' | 'active' | 'completed' | 'canceled' | 'failed' | 'rejected' | null;
+        isPaused: boolean | null;
+        partners: SaveProjectSuccessProjectAttachmentsItemPartners;
+        flight: SaveProjectSuccessProjectAttachmentsItemFlight;
+        paceVerdict: SaveProjectSuccessProjectAttachmentsItemPaceVerdict;
+        status?: never;
+    } | {
         /**
-         * The attached record's own name, read-only. Null when you cannot read the record or it is gone; never the id.
+         * The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.
          */
-        name: string | null;
+        id: SaveProjectSuccessProjectAttachmentsItemId;
+        name: SaveProjectSuccessProjectAttachmentsItemName;
+        relation: SaveProjectSuccessProjectAttachmentsItemRelation;
+        kind: 'rfp';
+        status: 'draft' | 'open' | 'closed' | null;
+        partners: SaveProjectSuccessProjectAttachmentsItemPartners;
+        flight?: never;
+        paceVerdict?: never;
+        phase?: never;
+        isPaused?: never;
+    } | {
         /**
-         * How the Project relates to it: subject, request, response, evidence or outcome.
+         * The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.
          */
-        relation: 'subject' | 'request' | 'response' | 'evidence' | 'outcome';
+        id: SaveProjectSuccessProjectAttachmentsItemId;
+        name: SaveProjectSuccessProjectAttachmentsItemName;
+        relation: SaveProjectSuccessProjectAttachmentsItemRelation;
+        kind: 'material';
+        status?: never;
+        partners?: never;
+        flight?: never;
+        paceVerdict?: never;
+        phase?: never;
+        isPaused?: never;
+    } | {
+        /**
+         * The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.
+         */
+        id: SaveProjectSuccessProjectAttachmentsItemId;
+        name: SaveProjectSuccessProjectAttachmentsItemName;
+        relation: SaveProjectSuccessProjectAttachmentsItemRelation;
+        kind: 'connection';
+        status?: never;
+        partners?: never;
+        flight?: never;
+        paceVerdict?: never;
+        phase?: never;
+        isPaused?: never;
+    } | {
+        /**
+         * The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.
+         */
+        id: SaveProjectSuccessProjectAttachmentsItemId;
+        name: SaveProjectSuccessProjectAttachmentsItemName;
+        relation: SaveProjectSuccessProjectAttachmentsItemRelation;
+        kind: 'exchange';
+        status?: never;
+        partners?: never;
+        flight?: never;
+        paceVerdict?: never;
+        phase?: never;
+        isPaused?: never;
     }>;
     bounds: {
         flight: {
@@ -39534,7 +39705,44 @@ export type SaveProjectSuccessProject = {
     url: string;
 };
 
+/**
+ * The record's own start and end; null when it has none or you cannot read it.
+ */
+export type SaveProjectSuccessProjectAttachmentsItemFlight = {
+    start: string;
+    end: string;
+} | null;
+
 export type SaveProjectSuccessProjectAttachmentsItemId = string;
+
+/**
+ * The attached record's own name, read-only. Null when you cannot read the record or it is gone; never the id.
+ */
+export type SaveProjectSuccessProjectAttachmentsItemName = string | null;
+
+/**
+ * How it is pacing now, the same verdict `get_delivery` returns on its delivery goal. Null when it cannot be judged.
+ */
+export type SaveProjectSuccessProjectAttachmentsItemPaceVerdict = 'far_behind' | 'behind' | 'on_pace' | 'ahead' | null;
+
+/**
+ * The sellers involved. Empty when none is known, never missing.
+ */
+export type SaveProjectSuccessProjectAttachmentsItemPartners = Array<{
+    /**
+     * The seller's id, as a media buy's own read gives it.
+     */
+    id: string;
+    /**
+     * The seller name; null when it cannot be resolved.
+     */
+    name: string | null;
+}>;
+
+/**
+ * How the Project relates to it: subject, request, response, evidence or outcome.
+ */
+export type SaveProjectSuccessProjectAttachmentsItemRelation = 'subject' | 'request' | 'response' | 'evidence' | 'outcome';
 
 export type SaveProjectSuccessProjectBoundsChannelsAllowedItem = 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
 

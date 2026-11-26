@@ -137807,43 +137807,177 @@ components:
           maxItems: 100
           type: array
           items:
-            type: object
-            properties:
-              kind:
-                type: string
-                enum:
-                  - campaign
-                  - media_buy
-                  - rfp
-                  - material
-                  - connection
-                  - exchange
-                description: 'What is attached: a campaign, media_buy, rfp (a buyer RFP), material, connection or a seller exchange.'
-              id:
-                description: 'The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.'
-                $ref: '#/components/schemas/save_project_success_ObjectAttachmentsItemId'
-              name:
-                anyOf:
-                  - type: string
-                  - type: 'null'
-                description: >-
-                  The attached record's own name, read-only. Null when you cannot read the record or it is gone; never
-                  the id.
-              relation:
-                type: string
-                enum:
-                  - subject
-                  - request
-                  - response
-                  - evidence
-                  - outcome
-                description: 'How the Project relates to it: subject, request, response, evidence or outcome.'
-            required:
-              - kind
-              - id
-              - name
-              - relation
-            additionalProperties: false
+            oneOf:
+              - type: object
+                properties:
+                  id:
+                    description: 'The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.'
+                    $ref: '#/components/schemas/save_project_success_ObjectAttachmentsItemId'
+                  name:
+                    $ref: '#/components/schemas/save_project_success_ObjectAttachmentsItemName'
+                  relation:
+                    $ref: '#/components/schemas/save_project_success_ObjectAttachmentsItemRelation'
+                  kind:
+                    type: string
+                    const: campaign
+                  status:
+                    anyOf:
+                      - type: string
+                        enum:
+                          - DRAFT
+                          - ACTIVE
+                          - PAUSED
+                          - ENDING
+                          - COMPLETED
+                          - CANCELED
+                          - ARCHIVED
+                      - type: 'null'
+                  partners:
+                    $ref: '#/components/schemas/save_project_success_ObjectAttachmentsItemPartners'
+                  flight:
+                    $ref: '#/components/schemas/save_project_success_ObjectAttachmentsItemFlight'
+                  paceVerdict:
+                    $ref: '#/components/schemas/save_project_success_ObjectAttachmentsItemPaceVerdict'
+                required:
+                  - id
+                  - name
+                  - relation
+                  - kind
+                  - status
+                  - partners
+                  - flight
+                  - paceVerdict
+                additionalProperties: false
+              - type: object
+                properties:
+                  id:
+                    description: 'The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.'
+                    $ref: '#/components/schemas/save_project_success_ObjectAttachmentsItemId'
+                  name:
+                    $ref: '#/components/schemas/save_project_success_ObjectAttachmentsItemName'
+                  relation:
+                    $ref: '#/components/schemas/save_project_success_ObjectAttachmentsItemRelation'
+                  kind:
+                    type: string
+                    const: media_buy
+                  phase:
+                    anyOf:
+                      - type: string
+                        enum:
+                          - draft
+                          - pendingApproval
+                          - inputRequired
+                          - active
+                          - completed
+                          - canceled
+                          - failed
+                          - rejected
+                      - type: 'null'
+                  isPaused:
+                    type:
+                      - boolean
+                      - 'null'
+                  partners:
+                    $ref: '#/components/schemas/save_project_success_ObjectAttachmentsItemPartners'
+                  flight:
+                    $ref: '#/components/schemas/save_project_success_ObjectAttachmentsItemFlight'
+                  paceVerdict:
+                    $ref: '#/components/schemas/save_project_success_ObjectAttachmentsItemPaceVerdict'
+                required:
+                  - id
+                  - name
+                  - relation
+                  - kind
+                  - phase
+                  - isPaused
+                  - partners
+                  - flight
+                  - paceVerdict
+                additionalProperties: false
+              - type: object
+                properties:
+                  id:
+                    description: 'The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.'
+                    $ref: '#/components/schemas/save_project_success_ObjectAttachmentsItemId'
+                  name:
+                    $ref: '#/components/schemas/save_project_success_ObjectAttachmentsItemName'
+                  relation:
+                    $ref: '#/components/schemas/save_project_success_ObjectAttachmentsItemRelation'
+                  kind:
+                    type: string
+                    const: rfp
+                  status:
+                    anyOf:
+                      - type: string
+                        enum:
+                          - draft
+                          - open
+                          - closed
+                      - type: 'null'
+                  partners:
+                    $ref: '#/components/schemas/save_project_success_ObjectAttachmentsItemPartners'
+                required:
+                  - id
+                  - name
+                  - relation
+                  - kind
+                  - status
+                  - partners
+                additionalProperties: false
+              - type: object
+                properties:
+                  id:
+                    description: 'The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.'
+                    $ref: '#/components/schemas/save_project_success_ObjectAttachmentsItemId'
+                  name:
+                    $ref: '#/components/schemas/save_project_success_ObjectAttachmentsItemName'
+                  relation:
+                    $ref: '#/components/schemas/save_project_success_ObjectAttachmentsItemRelation'
+                  kind:
+                    type: string
+                    const: material
+                required:
+                  - id
+                  - name
+                  - relation
+                  - kind
+                additionalProperties: false
+              - type: object
+                properties:
+                  id:
+                    description: 'The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.'
+                    $ref: '#/components/schemas/save_project_success_ObjectAttachmentsItemId'
+                  name:
+                    $ref: '#/components/schemas/save_project_success_ObjectAttachmentsItemName'
+                  relation:
+                    $ref: '#/components/schemas/save_project_success_ObjectAttachmentsItemRelation'
+                  kind:
+                    type: string
+                    const: connection
+                required:
+                  - id
+                  - name
+                  - relation
+                  - kind
+                additionalProperties: false
+              - type: object
+                properties:
+                  id:
+                    description: 'The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.'
+                    $ref: '#/components/schemas/save_project_success_ObjectAttachmentsItemId'
+                  name:
+                    $ref: '#/components/schemas/save_project_success_ObjectAttachmentsItemName'
+                  relation:
+                    $ref: '#/components/schemas/save_project_success_ObjectAttachmentsItemRelation'
+                  kind:
+                    type: string
+                    const: exchange
+                required:
+                  - id
+                  - name
+                  - relation
+                  - kind
+                additionalProperties: false
         bounds:
           anyOf:
             - type: object
@@ -138408,43 +138542,177 @@ components:
           maxItems: 100
           type: array
           items:
-            type: object
-            properties:
-              kind:
-                type: string
-                enum:
-                  - campaign
-                  - media_buy
-                  - rfp
-                  - material
-                  - connection
-                  - exchange
-                description: 'What is attached: a campaign, media_buy, rfp (a buyer RFP), material, connection or a seller exchange.'
-              id:
-                description: 'The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.'
-                $ref: '#/components/schemas/save_project_success_ProjectAttachmentsItemId'
-              name:
-                anyOf:
-                  - type: string
-                  - type: 'null'
-                description: >-
-                  The attached record's own name, read-only. Null when you cannot read the record or it is gone; never
-                  the id.
-              relation:
-                type: string
-                enum:
-                  - subject
-                  - request
-                  - response
-                  - evidence
-                  - outcome
-                description: 'How the Project relates to it: subject, request, response, evidence or outcome.'
-            required:
-              - kind
-              - id
-              - name
-              - relation
-            additionalProperties: false
+            oneOf:
+              - type: object
+                properties:
+                  id:
+                    description: 'The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.'
+                    $ref: '#/components/schemas/save_project_success_ProjectAttachmentsItemId'
+                  name:
+                    $ref: '#/components/schemas/save_project_success_ProjectAttachmentsItemName'
+                  relation:
+                    $ref: '#/components/schemas/save_project_success_ProjectAttachmentsItemRelation'
+                  kind:
+                    type: string
+                    const: campaign
+                  status:
+                    anyOf:
+                      - type: string
+                        enum:
+                          - DRAFT
+                          - ACTIVE
+                          - PAUSED
+                          - ENDING
+                          - COMPLETED
+                          - CANCELED
+                          - ARCHIVED
+                      - type: 'null'
+                  partners:
+                    $ref: '#/components/schemas/save_project_success_ProjectAttachmentsItemPartners'
+                  flight:
+                    $ref: '#/components/schemas/save_project_success_ProjectAttachmentsItemFlight'
+                  paceVerdict:
+                    $ref: '#/components/schemas/save_project_success_ProjectAttachmentsItemPaceVerdict'
+                required:
+                  - id
+                  - name
+                  - relation
+                  - kind
+                  - status
+                  - partners
+                  - flight
+                  - paceVerdict
+                additionalProperties: false
+              - type: object
+                properties:
+                  id:
+                    description: 'The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.'
+                    $ref: '#/components/schemas/save_project_success_ProjectAttachmentsItemId'
+                  name:
+                    $ref: '#/components/schemas/save_project_success_ProjectAttachmentsItemName'
+                  relation:
+                    $ref: '#/components/schemas/save_project_success_ProjectAttachmentsItemRelation'
+                  kind:
+                    type: string
+                    const: media_buy
+                  phase:
+                    anyOf:
+                      - type: string
+                        enum:
+                          - draft
+                          - pendingApproval
+                          - inputRequired
+                          - active
+                          - completed
+                          - canceled
+                          - failed
+                          - rejected
+                      - type: 'null'
+                  isPaused:
+                    type:
+                      - boolean
+                      - 'null'
+                  partners:
+                    $ref: '#/components/schemas/save_project_success_ProjectAttachmentsItemPartners'
+                  flight:
+                    $ref: '#/components/schemas/save_project_success_ProjectAttachmentsItemFlight'
+                  paceVerdict:
+                    $ref: '#/components/schemas/save_project_success_ProjectAttachmentsItemPaceVerdict'
+                required:
+                  - id
+                  - name
+                  - relation
+                  - kind
+                  - phase
+                  - isPaused
+                  - partners
+                  - flight
+                  - paceVerdict
+                additionalProperties: false
+              - type: object
+                properties:
+                  id:
+                    description: 'The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.'
+                    $ref: '#/components/schemas/save_project_success_ProjectAttachmentsItemId'
+                  name:
+                    $ref: '#/components/schemas/save_project_success_ProjectAttachmentsItemName'
+                  relation:
+                    $ref: '#/components/schemas/save_project_success_ProjectAttachmentsItemRelation'
+                  kind:
+                    type: string
+                    const: rfp
+                  status:
+                    anyOf:
+                      - type: string
+                        enum:
+                          - draft
+                          - open
+                          - closed
+                      - type: 'null'
+                  partners:
+                    $ref: '#/components/schemas/save_project_success_ProjectAttachmentsItemPartners'
+                required:
+                  - id
+                  - name
+                  - relation
+                  - kind
+                  - status
+                  - partners
+                additionalProperties: false
+              - type: object
+                properties:
+                  id:
+                    description: 'The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.'
+                    $ref: '#/components/schemas/save_project_success_ProjectAttachmentsItemId'
+                  name:
+                    $ref: '#/components/schemas/save_project_success_ProjectAttachmentsItemName'
+                  relation:
+                    $ref: '#/components/schemas/save_project_success_ProjectAttachmentsItemRelation'
+                  kind:
+                    type: string
+                    const: material
+                required:
+                  - id
+                  - name
+                  - relation
+                  - kind
+                additionalProperties: false
+              - type: object
+                properties:
+                  id:
+                    description: 'The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.'
+                    $ref: '#/components/schemas/save_project_success_ProjectAttachmentsItemId'
+                  name:
+                    $ref: '#/components/schemas/save_project_success_ProjectAttachmentsItemName'
+                  relation:
+                    $ref: '#/components/schemas/save_project_success_ProjectAttachmentsItemRelation'
+                  kind:
+                    type: string
+                    const: connection
+                required:
+                  - id
+                  - name
+                  - relation
+                  - kind
+                additionalProperties: false
+              - type: object
+                properties:
+                  id:
+                    description: 'The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.'
+                    $ref: '#/components/schemas/save_project_success_ProjectAttachmentsItemId'
+                  name:
+                    $ref: '#/components/schemas/save_project_success_ProjectAttachmentsItemName'
+                  relation:
+                    $ref: '#/components/schemas/save_project_success_ProjectAttachmentsItemRelation'
+                  kind:
+                    type: string
+                    const: exchange
+                required:
+                  - id
+                  - name
+                  - relation
+                  - kind
+                additionalProperties: false
         bounds:
           anyOf:
             - type: object
@@ -138947,6 +139215,64 @@ components:
       type: string
       minLength: 1
       maxLength: 512
+    save_project_success_ObjectAttachmentsItemName:
+      anyOf:
+        - type: string
+        - type: 'null'
+      description: The attached record's own name, read-only. Null when you cannot read the record or it is gone; never the id.
+    save_project_success_ObjectAttachmentsItemRelation:
+      type: string
+      enum:
+        - subject
+        - request
+        - response
+        - evidence
+        - outcome
+      description: 'How the Project relates to it: subject, request, response, evidence or outcome.'
+    save_project_success_ObjectAttachmentsItemPartners:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+            description: The seller's id, as a media buy's own read gives it.
+          name:
+            anyOf:
+              - type: string
+              - type: 'null'
+            description: The seller name; null when it cannot be resolved.
+        required:
+          - id
+          - name
+        additionalProperties: false
+      description: The sellers involved. Empty when none is known, never missing.
+    save_project_success_ObjectAttachmentsItemFlight:
+      anyOf:
+        - type: object
+          properties:
+            start:
+              type: string
+            end:
+              type: string
+          required:
+            - start
+            - end
+          additionalProperties: false
+        - type: 'null'
+      description: The record's own start and end; null when it has none or you cannot read it.
+    save_project_success_ObjectAttachmentsItemPaceVerdict:
+      anyOf:
+        - type: string
+          enum:
+            - far_behind
+            - behind
+            - on_pace
+            - ahead
+        - type: 'null'
+      description: >-
+        How it is pacing now, the same verdict `get_delivery` returns on its delivery goal. Null when it cannot be
+        judged.
     save_project_success_ObjectBoundsChannelsRequiredItem:
       anyOf:
         - type: string
@@ -139043,6 +139369,64 @@ components:
       type: string
       minLength: 1
       maxLength: 512
+    save_project_success_ProjectAttachmentsItemName:
+      anyOf:
+        - type: string
+        - type: 'null'
+      description: The attached record's own name, read-only. Null when you cannot read the record or it is gone; never the id.
+    save_project_success_ProjectAttachmentsItemRelation:
+      type: string
+      enum:
+        - subject
+        - request
+        - response
+        - evidence
+        - outcome
+      description: 'How the Project relates to it: subject, request, response, evidence or outcome.'
+    save_project_success_ProjectAttachmentsItemPartners:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+            description: The seller's id, as a media buy's own read gives it.
+          name:
+            anyOf:
+              - type: string
+              - type: 'null'
+            description: The seller name; null when it cannot be resolved.
+        required:
+          - id
+          - name
+        additionalProperties: false
+      description: The sellers involved. Empty when none is known, never missing.
+    save_project_success_ProjectAttachmentsItemFlight:
+      anyOf:
+        - type: object
+          properties:
+            start:
+              type: string
+            end:
+              type: string
+          required:
+            - start
+            - end
+          additionalProperties: false
+        - type: 'null'
+      description: The record's own start and end; null when it has none or you cannot read it.
+    save_project_success_ProjectAttachmentsItemPaceVerdict:
+      anyOf:
+        - type: string
+          enum:
+            - far_behind
+            - behind
+            - on_pace
+            - ahead
+        - type: 'null'
+      description: >-
+        How it is pacing now, the same verdict `get_delivery` returns on its delivery goal. Null when it cannot be
+        judged.
     save_project_success_ProjectBoundsChannelsRequiredItem:
       anyOf:
         - type: string
