@@ -138027,6 +138027,23 @@ components:
           type:
             - string
             - 'null'
+        createdBy:
+          anyOf:
+            - type: object
+              properties:
+                id:
+                  type: string
+                  description: The person's user id; equals the Project's createdByUserId.
+                name:
+                  anyOf:
+                    - type: string
+                    - type: 'null'
+                  description: The person's name, read-only. Null when no name is recorded for them.
+              required:
+                - id
+                - name
+              additionalProperties: false
+            - type: 'null'
         advertiserId:
           type:
             - string
@@ -138520,6 +138537,7 @@ components:
         - id
         - name
         - createdByUserId
+        - createdBy
         - advertiserId
         - advertiser
         - sessionId
@@ -138551,6 +138569,23 @@ components:
           type:
             - string
             - 'null'
+        createdBy:
+          anyOf:
+            - type: object
+              properties:
+                id:
+                  type: string
+                  description: The person's user id; equals the Project's createdByUserId.
+                name:
+                  anyOf:
+                    - type: string
+                    - type: 'null'
+                  description: The person's name, read-only. Null when no name is recorded for them.
+              required:
+                - id
+                - name
+              additionalProperties: false
+            - type: 'null'
         advertiserId:
           type:
             - string
@@ -139044,6 +139079,7 @@ components:
         - id
         - name
         - createdByUserId
+        - createdBy
         - advertiserId
         - advertiser
         - sessionId
