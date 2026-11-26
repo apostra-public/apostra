@@ -23013,7 +23013,7 @@ class SaveProjectSuccessObject(TypedDict):
     sourceSessionId: str | None
     objectives: str
     lead: SaveProjectSuccessObjectLeadKindAgent | SaveProjectSuccessObjectLeadKindAssistant
-    attachments: list[SaveProjectSuccessObjectAttachmentsItem]
+    attachments: list[SaveProjectSuccessObjectAttachmentsItemKindCampaign | SaveProjectSuccessObjectAttachmentsItemKindMediaBuy | SaveProjectSuccessObjectAttachmentsItemKindRfp | SaveProjectSuccessObjectAttachmentsItemKindMaterial | SaveProjectSuccessObjectAttachmentsItemKindConnection | SaveProjectSuccessObjectAttachmentsItemKindExchange]
     bounds: SaveProjectSuccessObjectBoundsValue | None
     state: Literal["draft", "active", "paused", "archived"]
     pausedReason: Literal["stopped_by_person", "stopped_by_agent", "account_stopped", "approver_lost_authority", "write_outcome_unknown", "flight_ended", "unarchived"] | None
@@ -23031,17 +23031,80 @@ class SaveProjectSuccessObjectAdvertiserValue(TypedDict):
     name: str | None
     '\n    The advertiser\'s name, read-only. Null when you cannot read the advertiser.\n    '
 
-class SaveProjectSuccessObjectAttachmentsItem(TypedDict):
-    kind: Literal["campaign", "media_buy", "rfp", "material", "connection", "exchange"]
-    '\n    What is attached: a campaign, media_buy, rfp (a buyer RFP), material, connection or a seller exchange.\n    '
-    id: SaveProjectSuccessObjectAttachmentsItemId
-    '\n    The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.\n    '
-    name: str | None
-    '\n    The attached record\'s own name, read-only. Null when you cannot read the record or it is gone; never the id.\n    '
-    relation: Literal["subject", "request", "response", "evidence", "outcome"]
-    '\n    How the Project relates to it: subject, request, response, evidence or outcome.\n    '
+class SaveProjectSuccessObjectAttachmentsItemFlightValue(TypedDict):
+    start: str
+    end: str
+
+SaveProjectSuccessObjectAttachmentsItemFlight: TypeAlias = "SaveProjectSuccessObjectAttachmentsItemFlightValue | None"
 
 SaveProjectSuccessObjectAttachmentsItemId: TypeAlias = str
+
+class SaveProjectSuccessObjectAttachmentsItemKindCampaign(TypedDict):
+    id: SaveProjectSuccessObjectAttachmentsItemId
+    '\n    The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.\n    '
+    name: SaveProjectSuccessObjectAttachmentsItemName
+    relation: SaveProjectSuccessObjectAttachmentsItemRelation
+    kind: Literal["campaign"]
+    status: Literal["DRAFT", "ACTIVE", "PAUSED", "ENDING", "COMPLETED", "CANCELED", "ARCHIVED"] | None
+    partners: SaveProjectSuccessObjectAttachmentsItemPartners
+    flight: SaveProjectSuccessObjectAttachmentsItemFlight
+    paceVerdict: SaveProjectSuccessObjectAttachmentsItemPaceVerdict
+
+class SaveProjectSuccessObjectAttachmentsItemKindConnection(TypedDict):
+    id: SaveProjectSuccessObjectAttachmentsItemId
+    '\n    The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.\n    '
+    name: SaveProjectSuccessObjectAttachmentsItemName
+    relation: SaveProjectSuccessObjectAttachmentsItemRelation
+    kind: Literal["connection"]
+
+class SaveProjectSuccessObjectAttachmentsItemKindExchange(TypedDict):
+    id: SaveProjectSuccessObjectAttachmentsItemId
+    '\n    The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.\n    '
+    name: SaveProjectSuccessObjectAttachmentsItemName
+    relation: SaveProjectSuccessObjectAttachmentsItemRelation
+    kind: Literal["exchange"]
+
+class SaveProjectSuccessObjectAttachmentsItemKindMaterial(TypedDict):
+    id: SaveProjectSuccessObjectAttachmentsItemId
+    '\n    The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.\n    '
+    name: SaveProjectSuccessObjectAttachmentsItemName
+    relation: SaveProjectSuccessObjectAttachmentsItemRelation
+    kind: Literal["material"]
+
+class SaveProjectSuccessObjectAttachmentsItemKindMediaBuy(TypedDict):
+    id: SaveProjectSuccessObjectAttachmentsItemId
+    '\n    The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.\n    '
+    name: SaveProjectSuccessObjectAttachmentsItemName
+    relation: SaveProjectSuccessObjectAttachmentsItemRelation
+    kind: Literal["media_buy"]
+    phase: Literal["draft", "pendingApproval", "inputRequired", "active", "completed", "canceled", "failed", "rejected"] | None
+    isPaused: bool | None
+    partners: SaveProjectSuccessObjectAttachmentsItemPartners
+    flight: SaveProjectSuccessObjectAttachmentsItemFlight
+    paceVerdict: SaveProjectSuccessObjectAttachmentsItemPaceVerdict
+
+class SaveProjectSuccessObjectAttachmentsItemKindRfp(TypedDict):
+    id: SaveProjectSuccessObjectAttachmentsItemId
+    '\n    The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.\n    '
+    name: SaveProjectSuccessObjectAttachmentsItemName
+    relation: SaveProjectSuccessObjectAttachmentsItemRelation
+    kind: Literal["rfp"]
+    status: Literal["draft", "open", "closed"] | None
+    partners: SaveProjectSuccessObjectAttachmentsItemPartners
+
+SaveProjectSuccessObjectAttachmentsItemName: TypeAlias = str | None
+
+SaveProjectSuccessObjectAttachmentsItemPaceVerdict: TypeAlias = Literal["far_behind", "behind", "on_pace", "ahead"] | None
+
+class SaveProjectSuccessObjectAttachmentsItemPartnersItem(TypedDict):
+    id: str
+    '\n    The seller\'s id, as a media buy\'s own read gives it.\n    '
+    name: str | None
+    '\n    The seller name; null when it cannot be resolved.\n    '
+
+SaveProjectSuccessObjectAttachmentsItemPartners: TypeAlias = "list[SaveProjectSuccessObjectAttachmentsItemPartnersItem]"
+
+SaveProjectSuccessObjectAttachmentsItemRelation: TypeAlias = Literal["subject", "request", "response", "evidence", "outcome"]
 
 class SaveProjectSuccessObjectAttentionItem(TypedDict):
     kind: Literal["bounds_approval_pending", "new_bounds_needed", "reapproval_needed", "resume_needed", "account_stop_on", "write_unsettled", "canvas_draft_waiting"]
@@ -23207,7 +23270,7 @@ class SaveProjectSuccessProject(TypedDict):
     sourceSessionId: str | None
     objectives: str
     lead: SaveProjectSuccessProjectLeadKindAgent | SaveProjectSuccessProjectLeadKindAssistant
-    attachments: list[SaveProjectSuccessProjectAttachmentsItem]
+    attachments: list[SaveProjectSuccessProjectAttachmentsItemKindCampaign | SaveProjectSuccessProjectAttachmentsItemKindMediaBuy | SaveProjectSuccessProjectAttachmentsItemKindRfp | SaveProjectSuccessProjectAttachmentsItemKindMaterial | SaveProjectSuccessProjectAttachmentsItemKindConnection | SaveProjectSuccessProjectAttachmentsItemKindExchange]
     bounds: SaveProjectSuccessProjectBoundsValue | None
     state: Literal["draft", "active", "paused", "archived"]
     pausedReason: Literal["stopped_by_person", "stopped_by_agent", "account_stopped", "approver_lost_authority", "write_outcome_unknown", "flight_ended", "unarchived"] | None
@@ -23225,17 +23288,80 @@ class SaveProjectSuccessProjectAdvertiserValue(TypedDict):
     name: str | None
     '\n    The advertiser\'s name, read-only. Null when you cannot read the advertiser.\n    '
 
-class SaveProjectSuccessProjectAttachmentsItem(TypedDict):
-    kind: Literal["campaign", "media_buy", "rfp", "material", "connection", "exchange"]
-    '\n    What is attached: a campaign, media_buy, rfp (a buyer RFP), material, connection or a seller exchange.\n    '
-    id: SaveProjectSuccessProjectAttachmentsItemId
-    '\n    The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.\n    '
-    name: str | None
-    '\n    The attached record\'s own name, read-only. Null when you cannot read the record or it is gone; never the id.\n    '
-    relation: Literal["subject", "request", "response", "evidence", "outcome"]
-    '\n    How the Project relates to it: subject, request, response, evidence or outcome.\n    '
+class SaveProjectSuccessProjectAttachmentsItemFlightValue(TypedDict):
+    start: str
+    end: str
+
+SaveProjectSuccessProjectAttachmentsItemFlight: TypeAlias = "SaveProjectSuccessProjectAttachmentsItemFlightValue | None"
 
 SaveProjectSuccessProjectAttachmentsItemId: TypeAlias = str
+
+class SaveProjectSuccessProjectAttachmentsItemKindCampaign(TypedDict):
+    id: SaveProjectSuccessProjectAttachmentsItemId
+    '\n    The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.\n    '
+    name: SaveProjectSuccessProjectAttachmentsItemName
+    relation: SaveProjectSuccessProjectAttachmentsItemRelation
+    kind: Literal["campaign"]
+    status: Literal["DRAFT", "ACTIVE", "PAUSED", "ENDING", "COMPLETED", "CANCELED", "ARCHIVED"] | None
+    partners: SaveProjectSuccessProjectAttachmentsItemPartners
+    flight: SaveProjectSuccessProjectAttachmentsItemFlight
+    paceVerdict: SaveProjectSuccessProjectAttachmentsItemPaceVerdict
+
+class SaveProjectSuccessProjectAttachmentsItemKindConnection(TypedDict):
+    id: SaveProjectSuccessProjectAttachmentsItemId
+    '\n    The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.\n    '
+    name: SaveProjectSuccessProjectAttachmentsItemName
+    relation: SaveProjectSuccessProjectAttachmentsItemRelation
+    kind: Literal["connection"]
+
+class SaveProjectSuccessProjectAttachmentsItemKindExchange(TypedDict):
+    id: SaveProjectSuccessProjectAttachmentsItemId
+    '\n    The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.\n    '
+    name: SaveProjectSuccessProjectAttachmentsItemName
+    relation: SaveProjectSuccessProjectAttachmentsItemRelation
+    kind: Literal["exchange"]
+
+class SaveProjectSuccessProjectAttachmentsItemKindMaterial(TypedDict):
+    id: SaveProjectSuccessProjectAttachmentsItemId
+    '\n    The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.\n    '
+    name: SaveProjectSuccessProjectAttachmentsItemName
+    relation: SaveProjectSuccessProjectAttachmentsItemRelation
+    kind: Literal["material"]
+
+class SaveProjectSuccessProjectAttachmentsItemKindMediaBuy(TypedDict):
+    id: SaveProjectSuccessProjectAttachmentsItemId
+    '\n    The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.\n    '
+    name: SaveProjectSuccessProjectAttachmentsItemName
+    relation: SaveProjectSuccessProjectAttachmentsItemRelation
+    kind: Literal["media_buy"]
+    phase: Literal["draft", "pendingApproval", "inputRequired", "active", "completed", "canceled", "failed", "rejected"] | None
+    isPaused: bool | None
+    partners: SaveProjectSuccessProjectAttachmentsItemPartners
+    flight: SaveProjectSuccessProjectAttachmentsItemFlight
+    paceVerdict: SaveProjectSuccessProjectAttachmentsItemPaceVerdict
+
+class SaveProjectSuccessProjectAttachmentsItemKindRfp(TypedDict):
+    id: SaveProjectSuccessProjectAttachmentsItemId
+    '\n    The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.\n    '
+    name: SaveProjectSuccessProjectAttachmentsItemName
+    relation: SaveProjectSuccessProjectAttachmentsItemRelation
+    kind: Literal["rfp"]
+    status: Literal["draft", "open", "closed"] | None
+    partners: SaveProjectSuccessProjectAttachmentsItemPartners
+
+SaveProjectSuccessProjectAttachmentsItemName: TypeAlias = str | None
+
+SaveProjectSuccessProjectAttachmentsItemPaceVerdict: TypeAlias = Literal["far_behind", "behind", "on_pace", "ahead"] | None
+
+class SaveProjectSuccessProjectAttachmentsItemPartnersItem(TypedDict):
+    id: str
+    '\n    The seller\'s id, as a media buy\'s own read gives it.\n    '
+    name: str | None
+    '\n    The seller name; null when it cannot be resolved.\n    '
+
+SaveProjectSuccessProjectAttachmentsItemPartners: TypeAlias = "list[SaveProjectSuccessProjectAttachmentsItemPartnersItem]"
+
+SaveProjectSuccessProjectAttachmentsItemRelation: TypeAlias = Literal["subject", "request", "response", "evidence", "outcome"]
 
 class SaveProjectSuccessProjectAttentionItem(TypedDict):
     kind: Literal["bounds_approval_pending", "new_bounds_needed", "reapproval_needed", "resume_needed", "account_stop_on", "write_unsettled", "canvas_draft_waiting"]
