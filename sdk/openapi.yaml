@@ -49252,20 +49252,26 @@ paths:
                       type: object
                       properties:
                         state:
+                          description: Your answer. Send this, priority, or both.
                           type: string
                           enum:
                             - confirmed_resolved
                             - accepted
                             - still_blocked
                             - withdrawn
-                          description: Your answer.
+                        priority:
+                          description: How urgent this ask is for you.
+                          type: string
+                          enum:
+                            - low
+                            - medium
+                            - high
+                            - urgent
                         note:
                           description: Optional update context.
                           type: string
                           minLength: 1
                           maxLength: 4000
-                      required:
-                        - state
                       additionalProperties: false
                       description: Requester track for an existing ask.
                     expectedAccountId:
@@ -49458,13 +49464,19 @@ paths:
                                   - accepted
                                   - still_blocked
                                   - withdrawn
+                              requesterPriority:
+                                type: string
+                                enum:
+                                  - low
+                                  - medium
+                                  - high
+                                  - urgent
                             required:
                               - askId
                               - outcome
                               - type
                               - filed
                               - updated
-                              - requesterState
                             additionalProperties: {}
                       - type: object
                         properties:

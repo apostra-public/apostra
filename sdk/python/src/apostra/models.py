@@ -12896,8 +12896,10 @@ class SaveAskInputKindUpdate(TypedDict):
 SaveAskInput: TypeAlias = "SaveAskInputKindCreate | SaveAskInputKindUpdate"
 
 class SaveAskInputKindUpdateRequester(TypedDict):
-    state: Literal["confirmed_resolved", "accepted", "still_blocked", "withdrawn"]
-    '\n    Your answer.\n    '
+    state: NotRequired[Literal["confirmed_resolved", "accepted", "still_blocked", "withdrawn"]]
+    '\n    Your answer. Send this, priority, or both.\n    '
+    priority: NotRequired[Literal["low", "medium", "high", "urgent"]]
+    '\n    How urgent this ask is for you.\n    '
     note: NotRequired[str]
     '\n    Optional update context.\n    '
 
@@ -12961,7 +12963,8 @@ class SaveAskResultTypeSupportAndProductAndSupplyAndIntegrationAndCommercial(Typ
     type: Literal["support", "product", "supply", "integration", "commercial"]
     filed: Literal[False]
     updated: Literal[True]
-    requesterState: Literal["confirmed_resolved", "accepted", "still_blocked", "withdrawn"]
+    requesterState: NotRequired[Literal["confirmed_resolved", "accepted", "still_blocked", "withdrawn"]]
+    requesterPriority: NotRequired[Literal["low", "medium", "high", "urgent"]]
 
 class SaveAskResultValue(TypedDict):
     outcome: Literal["filing_refused"]

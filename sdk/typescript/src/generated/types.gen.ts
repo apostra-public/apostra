@@ -21297,9 +21297,13 @@ export type SaveAskData = {
          */
         requester: {
             /**
-             * Your answer.
+             * Your answer. Send this, priority, or both.
              */
-            state: 'confirmed_resolved' | 'accepted' | 'still_blocked' | 'withdrawn';
+            state?: 'confirmed_resolved' | 'accepted' | 'still_blocked' | 'withdrawn';
+            /**
+             * How urgent this ask is for you.
+             */
+            priority?: 'low' | 'medium' | 'high' | 'urgent';
             /**
              * Optional update context.
              */
@@ -21451,7 +21455,8 @@ export type SaveAskResponses = {
             type: 'support' | 'product' | 'supply' | 'integration' | 'commercial';
             filed: false;
             updated: true;
-            requesterState: 'confirmed_resolved' | 'accepted' | 'still_blocked' | 'withdrawn';
+            requesterState?: 'confirmed_resolved' | 'accepted' | 'still_blocked' | 'withdrawn';
+            requesterPriority?: 'low' | 'medium' | 'high' | 'urgent';
             [key: string]: unknown;
         } | {
             outcome: 'filing_refused';
