@@ -2524,6 +2524,8 @@ class GetInputKindAdvertiserAccess(TypedDict):
     '\n    The Apostra accountId this call runs in, from get_status. On a member read without memberAccountId: deprecated, read as memberAccountId.\n    '
     advertiserId: str
     '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.\n    '
+    destination: NotRequired[GetInputKindAdvertiserAccessDestination]
+    '\n    creative_asset: where it would run. Each row then carries permission.\n    '
     reportId: NotRequired[str]
     '\n    For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.\n    '
     identifierOffset: NotRequired[int]
@@ -2590,6 +2592,12 @@ class GetInputKindAdvertiserAccessConnectionTarget(TypedDict):
     '\n    For kind seller: the seller\'s Account id. Not the seller object\'s id, which is a different number.\n    '
     engineAccountId: NotRequired[int]
     '\n    For kind creative_engine: the engine\'s Account id. Not the engine object\'s id, which is a different number.\n    '
+
+class GetInputKindAdvertiserAccessDestination(TypedDict):
+    channel: Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+    '\n    AdCP channel the asset would run on.\n    '
+    countries: NotRequired[list[str]]
+    '\n    ISO country codes. Omit for worldwide.\n    '
 
 class GetInputKindAdvertiserAccessItems(TypedDict):
     filter: NotRequired[GetInputKindAdvertiserAccessItemsFilter]
@@ -2669,6 +2677,8 @@ class GetInputKindAgentAndBuyerAgentAndProjectAndSkillAndInventorySourceAndAdver
     '\n    The Apostra accountId this call runs in, from get_status. On a member read without memberAccountId: deprecated, read as memberAccountId.\n    '
     advertiserId: NotRequired[str]
     '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.\n    '
+    destination: NotRequired[GetInputKindAgentAndBuyerAgentAndProjectAndSkillAndInventorySourceAndAdvertiserAndAdvertiserGrantAndSignalAndAskAndConversationAndCampaignAndDimensionAndCreativeAssetAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAccountRelationshipDestination]
+    '\n    creative_asset: where it would run. Each row then carries permission.\n    '
     reportId: NotRequired[str]
     '\n    For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.\n    '
     identifierOffset: NotRequired[int]
@@ -2735,6 +2745,12 @@ class GetInputKindAgentAndBuyerAgentAndProjectAndSkillAndInventorySourceAndAdver
     '\n    For kind seller: the seller\'s Account id. Not the seller object\'s id, which is a different number.\n    '
     engineAccountId: NotRequired[int]
     '\n    For kind creative_engine: the engine\'s Account id. Not the engine object\'s id, which is a different number.\n    '
+
+class GetInputKindAgentAndBuyerAgentAndProjectAndSkillAndInventorySourceAndAdvertiserAndAdvertiserGrantAndSignalAndAskAndConversationAndCampaignAndDimensionAndCreativeAssetAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAccountRelationshipDestination(TypedDict):
+    channel: Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+    '\n    AdCP channel the asset would run on.\n    '
+    countries: NotRequired[list[str]]
+    '\n    ISO country codes. Omit for worldwide.\n    '
 
 class GetInputKindAgentAndBuyerAgentAndProjectAndSkillAndInventorySourceAndAdvertiserAndAdvertiserGrantAndSignalAndAskAndConversationAndCampaignAndDimensionAndCreativeAssetAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAccountRelationshipItems(TypedDict):
     filter: NotRequired[GetInputKindAgentAndBuyerAgentAndProjectAndSkillAndInventorySourceAndAdvertiserAndAdvertiserGrantAndSignalAndAskAndConversationAndCampaignAndDimensionAndCreativeAssetAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAccountRelationshipItemsFilter]
@@ -2828,6 +2844,8 @@ class GetInputKindAgentRecord(TypedDict):
     '\n    The Apostra accountId this call runs in, from get_status. On a member read without memberAccountId: deprecated, read as memberAccountId.\n    '
     advertiserId: NotRequired[str]
     '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.\n    '
+    destination: NotRequired[GetInputKindAgentRecordDestination]
+    '\n    creative_asset: where it would run. Each row then carries permission.\n    '
     reportId: NotRequired[str]
     '\n    For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.\n    '
     identifierOffset: NotRequired[int]
@@ -2892,6 +2910,12 @@ class GetInputKindAgentRecordConnectionTarget(TypedDict):
     '\n    For kind seller: the seller\'s Account id. Not the seller object\'s id, which is a different number.\n    '
     engineAccountId: NotRequired[int]
     '\n    For kind creative_engine: the engine\'s Account id. Not the engine object\'s id, which is a different number.\n    '
+
+class GetInputKindAgentRecordDestination(TypedDict):
+    channel: Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+    '\n    AdCP channel the asset would run on.\n    '
+    countries: NotRequired[list[str]]
+    '\n    ISO country codes. Omit for worldwide.\n    '
 
 class GetInputKindAgentRecordItems(TypedDict):
     filter: NotRequired[GetInputKindAgentRecordItemsFilter]
@@ -2969,6 +2993,8 @@ class GetInputKindAudience(TypedDict):
     '\n    The Apostra accountId this call runs in, from get_status. On a member read without memberAccountId: deprecated, read as memberAccountId.\n    '
     advertiserId: str
     '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.\n    '
+    destination: NotRequired[GetInputKindAudienceDestination]
+    '\n    creative_asset: where it would run. Each row then carries permission.\n    '
     reportId: NotRequired[str]
     '\n    For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.\n    '
     identifierOffset: NotRequired[int]
@@ -3035,6 +3061,12 @@ class GetInputKindAudienceConnectionTarget(TypedDict):
     '\n    For kind seller: the seller\'s Account id. Not the seller object\'s id, which is a different number.\n    '
     engineAccountId: NotRequired[int]
     '\n    For kind creative_engine: the engine\'s Account id. Not the engine object\'s id, which is a different number.\n    '
+
+class GetInputKindAudienceDestination(TypedDict):
+    channel: Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+    '\n    AdCP channel the asset would run on.\n    '
+    countries: NotRequired[list[str]]
+    '\n    ISO country codes. Omit for worldwide.\n    '
 
 class GetInputKindAudienceItems(TypedDict):
     filter: NotRequired[GetInputKindAudienceItemsFilter]
@@ -3114,6 +3146,8 @@ class GetInputKindBuyerRfp(TypedDict):
     '\n    The Apostra accountId this call runs in, from get_status. On a member read without memberAccountId: deprecated, read as memberAccountId.\n    '
     advertiserId: NotRequired[str]
     '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.\n    '
+    destination: NotRequired[GetInputKindBuyerRfpDestination]
+    '\n    creative_asset: where it would run. Each row then carries permission.\n    '
     reportId: NotRequired[str]
     '\n    For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.\n    '
     identifierOffset: NotRequired[int]
@@ -3178,6 +3212,12 @@ class GetInputKindBuyerRfpConnectionTarget(TypedDict):
     '\n    For kind seller: the seller\'s Account id. Not the seller object\'s id, which is a different number.\n    '
     engineAccountId: NotRequired[int]
     '\n    For kind creative_engine: the engine\'s Account id. Not the engine object\'s id, which is a different number.\n    '
+
+class GetInputKindBuyerRfpDestination(TypedDict):
+    channel: Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+    '\n    AdCP channel the asset would run on.\n    '
+    countries: NotRequired[list[str]]
+    '\n    ISO country codes. Omit for worldwide.\n    '
 
 class GetInputKindBuyerRfpItems(TypedDict):
     filter: NotRequired[GetInputKindBuyerRfpItemsFilter]
@@ -3257,6 +3297,8 @@ class GetInputKindCatalogAndEventSource(TypedDict):
     '\n    The Apostra accountId this call runs in, from get_status. On a member read without memberAccountId: deprecated, read as memberAccountId.\n    '
     advertiserId: str
     '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.\n    '
+    destination: NotRequired[GetInputKindCatalogAndEventSourceDestination]
+    '\n    creative_asset: where it would run. Each row then carries permission.\n    '
     reportId: NotRequired[str]
     '\n    For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.\n    '
     identifierOffset: NotRequired[int]
@@ -3323,6 +3365,12 @@ class GetInputKindCatalogAndEventSourceConnectionTarget(TypedDict):
     '\n    For kind seller: the seller\'s Account id. Not the seller object\'s id, which is a different number.\n    '
     engineAccountId: NotRequired[int]
     '\n    For kind creative_engine: the engine\'s Account id. Not the engine object\'s id, which is a different number.\n    '
+
+class GetInputKindCatalogAndEventSourceDestination(TypedDict):
+    channel: Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+    '\n    AdCP channel the asset would run on.\n    '
+    countries: NotRequired[list[str]]
+    '\n    ISO country codes. Omit for worldwide.\n    '
 
 class GetInputKindCatalogAndEventSourceItems(TypedDict):
     filter: NotRequired[GetInputKindCatalogAndEventSourceItemsFilter]
@@ -3402,6 +3450,8 @@ class GetInputKindConnection(TypedDict):
     '\n    The Apostra accountId this call runs in, from get_status. On a member read without memberAccountId: deprecated, read as memberAccountId.\n    '
     advertiserId: NotRequired[str]
     '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.\n    '
+    destination: NotRequired[GetInputKindConnectionDestination]
+    '\n    creative_asset: where it would run. Each row then carries permission.\n    '
     reportId: NotRequired[str]
     '\n    For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.\n    '
     identifierOffset: NotRequired[int]
@@ -3468,6 +3518,12 @@ class GetInputKindConnectionConnectionTarget(TypedDict):
     '\n    For kind seller: the seller\'s Account id. Not the seller object\'s id, which is a different number.\n    '
     engineAccountId: NotRequired[int]
     '\n    For kind creative_engine: the engine\'s Account id. Not the engine object\'s id, which is a different number.\n    '
+
+class GetInputKindConnectionDestination(TypedDict):
+    channel: Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+    '\n    AdCP channel the asset would run on.\n    '
+    countries: NotRequired[list[str]]
+    '\n    ISO country codes. Omit for worldwide.\n    '
 
 class GetInputKindConnectionItems(TypedDict):
     filter: NotRequired[GetInputKindConnectionItemsFilter]
@@ -3547,6 +3603,8 @@ class GetInputKindCreativeAndCreativeCollectionWithAdvertiserId(TypedDict):
     '\n    The Apostra accountId this call runs in, from get_status. On a member read without memberAccountId: deprecated, read as memberAccountId.\n    '
     advertiserId: str
     '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.\n    '
+    destination: NotRequired[GetInputKindCreativeAndCreativeCollectionWithAdvertiserIdDestination]
+    '\n    creative_asset: where it would run. Each row then carries permission.\n    '
     reportId: NotRequired[str]
     '\n    For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.\n    '
     identifierOffset: NotRequired[int]
@@ -3613,6 +3671,12 @@ class GetInputKindCreativeAndCreativeCollectionWithAdvertiserIdConnectionTarget(
     '\n    For kind seller: the seller\'s Account id. Not the seller object\'s id, which is a different number.\n    '
     engineAccountId: NotRequired[int]
     '\n    For kind creative_engine: the engine\'s Account id. Not the engine object\'s id, which is a different number.\n    '
+
+class GetInputKindCreativeAndCreativeCollectionWithAdvertiserIdDestination(TypedDict):
+    channel: Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+    '\n    AdCP channel the asset would run on.\n    '
+    countries: NotRequired[list[str]]
+    '\n    ISO country codes. Omit for worldwide.\n    '
 
 class GetInputKindCreativeAndCreativeCollectionWithAdvertiserIdItems(TypedDict):
     filter: NotRequired[GetInputKindCreativeAndCreativeCollectionWithAdvertiserIdItemsFilter]
@@ -3690,6 +3754,8 @@ class GetInputKindCreativeAndCreativeCollectionWithSourceId(TypedDict):
     '\n    Required for kind member: the account the member belongs to, this account or a direct child.\n    '
     accountId: NotRequired[int]
     '\n    The Apostra accountId this call runs in, from get_status. On a member read without memberAccountId: deprecated, read as memberAccountId.\n    '
+    destination: NotRequired[GetInputKindCreativeAndCreativeCollectionWithSourceIdDestination]
+    '\n    creative_asset: where it would run. Each row then carries permission.\n    '
     reportId: NotRequired[str]
     '\n    For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.\n    '
     identifierOffset: NotRequired[int]
@@ -3756,6 +3822,12 @@ class GetInputKindCreativeAndCreativeCollectionWithSourceIdConnectionTarget(Type
     '\n    For kind seller: the seller\'s Account id. Not the seller object\'s id, which is a different number.\n    '
     engineAccountId: NotRequired[int]
     '\n    For kind creative_engine: the engine\'s Account id. Not the engine object\'s id, which is a different number.\n    '
+
+class GetInputKindCreativeAndCreativeCollectionWithSourceIdDestination(TypedDict):
+    channel: Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+    '\n    AdCP channel the asset would run on.\n    '
+    countries: NotRequired[list[str]]
+    '\n    ISO country codes. Omit for worldwide.\n    '
 
 class GetInputKindCreativeAndCreativeCollectionWithSourceIdItems(TypedDict):
     filter: NotRequired[GetInputKindCreativeAndCreativeCollectionWithSourceIdItemsFilter]
@@ -3835,6 +3907,8 @@ class GetInputKindCreativeEngine(TypedDict):
     '\n    The Apostra accountId this call runs in, from get_status. On a member read without memberAccountId: deprecated, read as memberAccountId.\n    '
     advertiserId: NotRequired[str]
     '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.\n    '
+    destination: NotRequired[GetInputKindCreativeEngineDestination]
+    '\n    creative_asset: where it would run. Each row then carries permission.\n    '
     reportId: NotRequired[str]
     '\n    For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.\n    '
     identifierOffset: NotRequired[int]
@@ -3899,6 +3973,12 @@ class GetInputKindCreativeEngineConnectionTarget(TypedDict):
     '\n    For kind seller: the seller\'s Account id. Not the seller object\'s id, which is a different number.\n    '
     engineAccountId: NotRequired[int]
     '\n    For kind creative_engine: the engine\'s Account id. Not the engine object\'s id, which is a different number.\n    '
+
+class GetInputKindCreativeEngineDestination(TypedDict):
+    channel: Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+    '\n    AdCP channel the asset would run on.\n    '
+    countries: NotRequired[list[str]]
+    '\n    ISO country codes. Omit for worldwide.\n    '
 
 class GetInputKindCreativeEngineItems(TypedDict):
     filter: NotRequired[GetInputKindCreativeEngineItemsFilter]
@@ -3978,6 +4058,8 @@ class GetInputKindCreativeFormat(TypedDict):
     '\n    The Apostra accountId this call runs in, from get_status. On a member read without memberAccountId: deprecated, read as memberAccountId.\n    '
     advertiserId: str
     '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.\n    '
+    destination: NotRequired[GetInputKindCreativeFormatDestination]
+    '\n    creative_asset: where it would run. Each row then carries permission.\n    '
     reportId: NotRequired[str]
     '\n    For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.\n    '
     identifierOffset: NotRequired[int]
@@ -4042,6 +4124,12 @@ class GetInputKindCreativeFormatConnectionTarget(TypedDict):
     '\n    For kind seller: the seller\'s Account id. Not the seller object\'s id, which is a different number.\n    '
     engineAccountId: NotRequired[int]
     '\n    For kind creative_engine: the engine\'s Account id. Not the engine object\'s id, which is a different number.\n    '
+
+class GetInputKindCreativeFormatDestination(TypedDict):
+    channel: Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+    '\n    AdCP channel the asset would run on.\n    '
+    countries: NotRequired[list[str]]
+    '\n    ISO country codes. Omit for worldwide.\n    '
 
 class GetInputKindCreativeFormatItems(TypedDict):
     filter: NotRequired[GetInputKindCreativeFormatItemsFilter]
@@ -4121,6 +4209,8 @@ class GetInputKindCreativeSession(TypedDict):
     '\n    The Apostra accountId this call runs in, from get_status. On a member read without memberAccountId: deprecated, read as memberAccountId.\n    '
     advertiserId: NotRequired[str]
     '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.\n    '
+    destination: NotRequired[GetInputKindCreativeSessionDestination]
+    '\n    creative_asset: where it would run. Each row then carries permission.\n    '
     reportId: NotRequired[str]
     '\n    For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.\n    '
     identifierOffset: NotRequired[int]
@@ -4185,6 +4275,12 @@ class GetInputKindCreativeSessionConnectionTarget(TypedDict):
     '\n    For kind seller: the seller\'s Account id. Not the seller object\'s id, which is a different number.\n    '
     engineAccountId: NotRequired[int]
     '\n    For kind creative_engine: the engine\'s Account id. Not the engine object\'s id, which is a different number.\n    '
+
+class GetInputKindCreativeSessionDestination(TypedDict):
+    channel: Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+    '\n    AdCP channel the asset would run on.\n    '
+    countries: NotRequired[list[str]]
+    '\n    ISO country codes. Omit for worldwide.\n    '
 
 class GetInputKindCreativeSessionItems(TypedDict):
     filter: NotRequired[GetInputKindCreativeSessionItemsFilter]
@@ -4264,6 +4360,8 @@ class GetInputKindMaterial(TypedDict):
     '\n    The Apostra accountId this call runs in, from get_status. On a member read without memberAccountId: deprecated, read as memberAccountId.\n    '
     advertiserId: NotRequired[str]
     '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.\n    '
+    destination: NotRequired[GetInputKindMaterialDestination]
+    '\n    creative_asset: where it would run. Each row then carries permission.\n    '
     reportId: NotRequired[str]
     '\n    For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.\n    '
     identifierOffset: NotRequired[int]
@@ -4330,6 +4428,12 @@ class GetInputKindMaterialConnectionTarget(TypedDict):
     '\n    For kind seller: the seller\'s Account id. Not the seller object\'s id, which is a different number.\n    '
     engineAccountId: NotRequired[int]
     '\n    For kind creative_engine: the engine\'s Account id. Not the engine object\'s id, which is a different number.\n    '
+
+class GetInputKindMaterialDestination(TypedDict):
+    channel: Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+    '\n    AdCP channel the asset would run on.\n    '
+    countries: NotRequired[list[str]]
+    '\n    ISO country codes. Omit for worldwide.\n    '
 
 class GetInputKindMaterialItems(TypedDict):
     filter: NotRequired[GetInputKindMaterialItemsFilter]
@@ -4409,6 +4513,8 @@ class GetInputKindProposal(TypedDict):
     '\n    The Apostra accountId this call runs in, from get_status. On a member read without memberAccountId: deprecated, read as memberAccountId.\n    '
     advertiserId: NotRequired[str]
     '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.\n    '
+    destination: NotRequired[GetInputKindProposalDestination]
+    '\n    creative_asset: where it would run. Each row then carries permission.\n    '
     reportId: NotRequired[str]
     '\n    For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.\n    '
     identifierOffset: NotRequired[int]
@@ -4475,6 +4581,12 @@ class GetInputKindProposalConnectionTarget(TypedDict):
     '\n    For kind seller: the seller\'s Account id. Not the seller object\'s id, which is a different number.\n    '
     engineAccountId: NotRequired[int]
     '\n    For kind creative_engine: the engine\'s Account id. Not the engine object\'s id, which is a different number.\n    '
+
+class GetInputKindProposalDestination(TypedDict):
+    channel: Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+    '\n    AdCP channel the asset would run on.\n    '
+    countries: NotRequired[list[str]]
+    '\n    ISO country codes. Omit for worldwide.\n    '
 
 class GetInputKindProposalItems(TypedDict):
     filter: NotRequired[GetInputKindProposalItemsFilter]
@@ -4554,6 +4666,8 @@ class GetInputKindSeller(TypedDict):
     '\n    The Apostra accountId this call runs in, from get_status. On a member read without memberAccountId: deprecated, read as memberAccountId.\n    '
     advertiserId: NotRequired[str]
     '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.\n    '
+    destination: NotRequired[GetInputKindSellerDestination]
+    '\n    creative_asset: where it would run. Each row then carries permission.\n    '
     reportId: NotRequired[str]
     '\n    For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.\n    '
     identifierOffset: NotRequired[int]
@@ -4620,6 +4734,12 @@ class GetInputKindSellerConnectionTarget(TypedDict):
     '\n    For kind seller: the seller\'s Account id. Not the seller object\'s id, which is a different number.\n    '
     engineAccountId: NotRequired[int]
     '\n    For kind creative_engine: the engine\'s Account id. Not the engine object\'s id, which is a different number.\n    '
+
+class GetInputKindSellerDestination(TypedDict):
+    channel: Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+    '\n    AdCP channel the asset would run on.\n    '
+    countries: NotRequired[list[str]]
+    '\n    ISO country codes. Omit for worldwide.\n    '
 
 class GetInputKindSellerItems(TypedDict):
     filter: NotRequired[GetInputKindSellerItemsFilter]
@@ -4699,6 +4819,8 @@ class GetInputKindSession(TypedDict):
     '\n    The Apostra accountId this call runs in, from get_status. On a member read without memberAccountId: deprecated, read as memberAccountId.\n    '
     advertiserId: NotRequired[str]
     '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.\n    '
+    destination: NotRequired[GetInputKindSessionDestination]
+    '\n    creative_asset: where it would run. Each row then carries permission.\n    '
     reportId: NotRequired[str]
     '\n    For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.\n    '
     identifierOffset: NotRequired[int]
@@ -4765,6 +4887,12 @@ class GetInputKindSessionConnectionTarget(TypedDict):
     '\n    For kind seller: the seller\'s Account id. Not the seller object\'s id, which is a different number.\n    '
     engineAccountId: NotRequired[int]
     '\n    For kind creative_engine: the engine\'s Account id. Not the engine object\'s id, which is a different number.\n    '
+
+class GetInputKindSessionDestination(TypedDict):
+    channel: Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+    '\n    AdCP channel the asset would run on.\n    '
+    countries: NotRequired[list[str]]
+    '\n    ISO country codes. Omit for worldwide.\n    '
 
 class GetInputKindSessionItems(TypedDict):
     filter: NotRequired[GetInputKindSessionItemsFilter]
@@ -4844,6 +4972,8 @@ class GetInputKindSourceOptionsAndListingAndMediaKitAndPlaybookAndBusinessRulesA
     '\n    The Apostra accountId this call runs in, from get_status. On a member read without memberAccountId: deprecated, read as memberAccountId.\n    '
     advertiserId: NotRequired[str]
     '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.\n    '
+    destination: NotRequired[GetInputKindSourceOptionsAndListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndNotificationConfigDestination]
+    '\n    creative_asset: where it would run. Each row then carries permission.\n    '
     reportId: NotRequired[str]
     '\n    For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.\n    '
     identifierOffset: NotRequired[int]
@@ -4914,6 +5044,12 @@ class GetInputKindSourceOptionsAndListingAndMediaKitAndPlaybookAndBusinessRulesA
     '\n    For kind creative_engine: the engine\'s Account id. Not the engine object\'s id, which is a different number.\n    '
 
 GetInputKindListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndNotificationConfigConnectionTarget: TypeAlias = GetInputKindSourceOptionsAndListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndNotificationConfigConnectionTarget
+
+class GetInputKindSourceOptionsAndListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndNotificationConfigDestination(TypedDict):
+    channel: Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+    '\n    AdCP channel the asset would run on.\n    '
+    countries: NotRequired[list[str]]
+    '\n    ISO country codes. Omit for worldwide.\n    '
 
 class GetInputKindSourceOptionsAndListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndNotificationConfigItems(TypedDict):
     filter: NotRequired[GetInputKindSourceOptionsAndListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndNotificationConfigItemsFilter]
@@ -5003,6 +5139,8 @@ class GetInputKindWholesaleProductWithAdvertiserId(TypedDict):
     '\n    The Apostra accountId this call runs in, from get_status. On a member read without memberAccountId: deprecated, read as memberAccountId.\n    '
     advertiserId: str
     '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.\n    '
+    destination: NotRequired[GetInputKindWholesaleProductWithAdvertiserIdDestination]
+    '\n    creative_asset: where it would run. Each row then carries permission.\n    '
     reportId: NotRequired[str]
     '\n    For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.\n    '
     identifierOffset: NotRequired[int]
@@ -5069,6 +5207,12 @@ class GetInputKindWholesaleProductWithAdvertiserIdConnectionTarget(TypedDict):
     '\n    For kind seller: the seller\'s Account id. Not the seller object\'s id, which is a different number.\n    '
     engineAccountId: NotRequired[int]
     '\n    For kind creative_engine: the engine\'s Account id. Not the engine object\'s id, which is a different number.\n    '
+
+class GetInputKindWholesaleProductWithAdvertiserIdDestination(TypedDict):
+    channel: Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+    '\n    AdCP channel the asset would run on.\n    '
+    countries: NotRequired[list[str]]
+    '\n    ISO country codes. Omit for worldwide.\n    '
 
 class GetInputKindWholesaleProductWithAdvertiserIdItems(TypedDict):
     filter: NotRequired[GetInputKindWholesaleProductWithAdvertiserIdItemsFilter]
@@ -5146,6 +5290,8 @@ class GetInputKindWholesaleProductWithSourceId(TypedDict):
     '\n    Required for kind member: the account the member belongs to, this account or a direct child.\n    '
     accountId: NotRequired[int]
     '\n    The Apostra accountId this call runs in, from get_status. On a member read without memberAccountId: deprecated, read as memberAccountId.\n    '
+    destination: NotRequired[GetInputKindWholesaleProductWithSourceIdDestination]
+    '\n    creative_asset: where it would run. Each row then carries permission.\n    '
     reportId: NotRequired[str]
     '\n    For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.\n    '
     identifierOffset: NotRequired[int]
@@ -5216,6 +5362,12 @@ class GetInputKindWholesaleProductWithSourceIdConnectionTarget(TypedDict):
     '\n    For kind creative_engine: the engine\'s Account id. Not the engine object\'s id, which is a different number.\n    '
 
 GetInputKindWholesaleProductConnectionTarget: TypeAlias = GetInputKindWholesaleProductWithSourceIdConnectionTarget
+
+class GetInputKindWholesaleProductWithSourceIdDestination(TypedDict):
+    channel: Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+    '\n    AdCP channel the asset would run on.\n    '
+    countries: NotRequired[list[str]]
+    '\n    ISO country codes. Omit for worldwide.\n    '
 
 class GetInputKindWholesaleProductWithSourceIdItems(TypedDict):
     filter: NotRequired[GetInputKindWholesaleProductWithSourceIdItemsFilter]
@@ -5305,6 +5457,8 @@ class GetInputKindWorkItem(TypedDict):
     '\n    The Apostra accountId this call runs in, from get_status. On a member read without memberAccountId: deprecated, read as memberAccountId.\n    '
     advertiserId: NotRequired[str]
     '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.\n    '
+    destination: NotRequired[GetInputKindWorkItemDestination]
+    '\n    creative_asset: where it would run. Each row then carries permission.\n    '
     reportId: NotRequired[str]
     '\n    For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.\n    '
     identifierOffset: NotRequired[int]
@@ -5371,6 +5525,12 @@ class GetInputKindWorkItemConnectionTarget(TypedDict):
     '\n    For kind seller: the seller\'s Account id. Not the seller object\'s id, which is a different number.\n    '
     engineAccountId: NotRequired[int]
     '\n    For kind creative_engine: the engine\'s Account id. Not the engine object\'s id, which is a different number.\n    '
+
+class GetInputKindWorkItemDestination(TypedDict):
+    channel: Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+    '\n    AdCP channel the asset would run on.\n    '
+    countries: NotRequired[list[str]]
+    '\n    ISO country codes. Omit for worldwide.\n    '
 
 class GetInputKindWorkItemItems(TypedDict):
     filter: NotRequired[GetInputKindWorkItemItemsFilter]
@@ -5450,6 +5610,8 @@ class GetInputKindWorkspaceFile(TypedDict):
     '\n    The Apostra accountId this call runs in, from get_status. On a member read without memberAccountId: deprecated, read as memberAccountId.\n    '
     advertiserId: NotRequired[str]
     '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.\n    '
+    destination: NotRequired[GetInputKindWorkspaceFileDestination]
+    '\n    creative_asset: where it would run. Each row then carries permission.\n    '
     reportId: NotRequired[str]
     '\n    For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.\n    '
     identifierOffset: NotRequired[int]
@@ -5518,6 +5680,12 @@ class GetInputKindWorkspaceFileConnectionTarget(TypedDict):
     '\n    For kind seller: the seller\'s Account id. Not the seller object\'s id, which is a different number.\n    '
     engineAccountId: NotRequired[int]
     '\n    For kind creative_engine: the engine\'s Account id. Not the engine object\'s id, which is a different number.\n    '
+
+class GetInputKindWorkspaceFileDestination(TypedDict):
+    channel: Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+    '\n    AdCP channel the asset would run on.\n    '
+    countries: NotRequired[list[str]]
+    '\n    ISO country codes. Omit for worldwide.\n    '
 
 class GetInputKindWorkspaceFileItems(TypedDict):
     filter: NotRequired[GetInputKindWorkspaceFileItemsFilter]
@@ -25792,6 +25960,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearch(TypedDict):
     '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
+    destination: NotRequired[SearchInputDocsScopeCallerRelevantAndPublicResearchDestination]
+    '\n    creative_asset: where it would run. Each row then carries permission.\n    '
     filter: NotRequired[SearchInputDocsScopeCallerRelevantAndPublicResearchFilter]
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
@@ -25800,6 +25970,12 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearch(TypedDict):
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
     '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).\n    '
+
+class SearchInputDocsScopeCallerRelevantAndPublicResearchDestination(TypedDict):
+    channel: Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+    '\n    AdCP channel the asset would run on.\n    '
+    countries: NotRequired[list[str]]
+    '\n    ISO country codes. Omit for worldwide.\n    '
 
 class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
@@ -25910,6 +26086,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     '\n    creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.\n    '
     rightsState: NotRequired[Literal["none", "pending_confirmation", "confirmed", "rejected", "paused", "revoked"]]
     '\n    creative_asset: assets with this rights state, or none for assets with no rights record.\n    '
+    permission: NotRequired[Literal["usable"]]
+    '\n    creative_asset: only assets usable for destination.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
     labels: NotRequired[list[SearchRequestLabelFilterEntry]]
@@ -26111,6 +26289,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocument(TypedDict)
     '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
+    destination: NotRequired[SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentDestination]
+    '\n    creative_asset: where it would run. Each row then carries permission.\n    '
     filter: NotRequired[SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter]
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
@@ -26144,6 +26324,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
+    destination: NotRequired[SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevisionDestination]
+    '\n    creative_asset: where it would run. Each row then carries permission.\n    '
     filter: NotRequired[SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevisionFilter]
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
@@ -26152,6 +26334,12 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
     '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).\n    '
+
+class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevisionDestination(TypedDict):
+    channel: Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+    '\n    AdCP channel the asset would run on.\n    '
+    countries: NotRequired[list[str]]
+    '\n    ISO country codes. Omit for worldwide.\n    '
 
 class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevisionFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
@@ -26262,6 +26450,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     '\n    creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.\n    '
     rightsState: NotRequired[Literal["none", "pending_confirmation", "confirmed", "rejected", "paused", "revoked"]]
     '\n    creative_asset: assets with this rights state, or none for assets with no rights record.\n    '
+    permission: NotRequired[Literal["usable"]]
+    '\n    creative_asset: only assets usable for destination.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
     labels: NotRequired[list[SearchRequestLabelFilterEntry]]
@@ -26439,6 +26629,12 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     type: Literal["domain", "subdomain", "network_id", "ios_bundle", "android_package", "apple_app_store_id", "google_play_id", "roku_store_id", "fire_tv_asin", "samsung_app_id", "apple_tv_bundle", "bundle_id", "venue_id", "screen_id", "openooh_venue_type", "rss_url", "apple_podcast_id", "spotify_collection_id", "podcast_guid", "station_id", "facility_id"]
     value: str
 
+class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentDestination(TypedDict):
+    channel: Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+    '\n    AdCP channel the asset would run on.\n    '
+    countries: NotRequired[list[str]]
+    '\n    ISO country codes. Omit for worldwide.\n    '
+
 class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
@@ -26548,6 +26744,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(Type
     '\n    creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.\n    '
     rightsState: NotRequired[Literal["none", "pending_confirmation", "confirmed", "rejected", "paused", "revoked"]]
     '\n    creative_asset: assets with this rights state, or none for assets with no rights record.\n    '
+    permission: NotRequired[Literal["usable"]]
+    '\n    creative_asset: only assets usable for destination.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
     labels: NotRequired[list[SearchRequestLabelFilterEntry]]
@@ -26743,6 +26941,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQuery(TypedDict):
     '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
+    destination: NotRequired[SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryDestination]
+    '\n    creative_asset: where it would run. Each row then carries permission.\n    '
     filter: NotRequired[SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter]
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
@@ -26751,6 +26951,12 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQuery(TypedDict):
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
     '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).\n    '
+
+class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryDestination(TypedDict):
+    channel: Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+    '\n    AdCP channel the asset would run on.\n    '
+    countries: NotRequired[list[str]]
+    '\n    ISO country codes. Omit for worldwide.\n    '
 
 class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
@@ -26861,6 +27067,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDi
     '\n    creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.\n    '
     rightsState: NotRequired[Literal["none", "pending_confirmation", "confirmed", "rejected", "paused", "revoked"]]
     '\n    creative_asset: assets with this rights state, or none for assets with no rights record.\n    '
+    permission: NotRequired[Literal["usable"]]
+    '\n    creative_asset: only assets usable for destination.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
     labels: NotRequired[list[SearchRequestLabelFilterEntry]]
@@ -27063,12 +27271,20 @@ class SearchInputKindAdServerAdvertiser(TypedDict):
     '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: str
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
+    destination: NotRequired[SearchInputKindAdServerAdvertiserDestination]
+    '\n    creative_asset: where it would run. Each row then carries permission.\n    '
     cursor: NotRequired[str]
     '\n    A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds account and member.\n    '
     limit: NotRequired[int]
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
     '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).\n    '
+
+class SearchInputKindAdServerAdvertiserDestination(TypedDict):
+    channel: Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+    '\n    AdCP channel the asset would run on.\n    '
+    countries: NotRequired[list[str]]
+    '\n    ISO country codes. Omit for worldwide.\n    '
 
 class SearchInputKindAdServerTargeting(TypedDict):
     accountId: NotRequired[int | str]
@@ -27095,6 +27311,8 @@ class SearchInputKindAdServerTargeting(TypedDict):
     '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: str
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
+    destination: NotRequired[SearchInputKindAdServerTargetingDestination]
+    '\n    creative_asset: where it would run. Each row then carries permission.\n    '
     filter: NotRequired[SearchInputKindAdServerTargetingFilter]
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
@@ -27103,6 +27321,12 @@ class SearchInputKindAdServerTargeting(TypedDict):
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
     '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).\n    '
+
+class SearchInputKindAdServerTargetingDestination(TypedDict):
+    channel: Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+    '\n    AdCP channel the asset would run on.\n    '
+    countries: NotRequired[list[str]]
+    '\n    ISO country codes. Omit for worldwide.\n    '
 
 class SearchInputKindAdServerTargetingFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
@@ -27213,6 +27437,8 @@ class SearchInputKindAdServerTargetingFilter(TypedDict):
     '\n    creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.\n    '
     rightsState: NotRequired[Literal["none", "pending_confirmation", "confirmed", "rejected", "paused", "revoked"]]
     '\n    creative_asset: assets with this rights state, or none for assets with no rights record.\n    '
+    permission: NotRequired[Literal["usable"]]
+    '\n    creative_asset: only assets usable for destination.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
     labels: NotRequired[list[SearchRequestLabelFilterEntry]]
@@ -27415,6 +27641,8 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
+    destination: NotRequired[SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndIntelligenceRunAndLibraryRequestAndAskAndNotificationAndReleaseUpdateAndConversationAndBuyerAgentAndProjectAndDimensionAndSessionDestination]
+    '\n    creative_asset: where it would run. Each row then carries permission.\n    '
     filter: NotRequired[SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndIntelligenceRunAndLibraryRequestAndAskAndNotificationAndReleaseUpdateAndConversationAndBuyerAgentAndProjectAndDimensionAndSessionFilter]
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
@@ -27425,6 +27653,12 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).\n    '
 
 SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndIntelligenceRunAndLibraryRequestAndAskAndConversationAndBuyerAgentAndProjectAndDimensionAndSession: TypeAlias = SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndIntelligenceRunAndLibraryRequestAndAskAndNotificationAndReleaseUpdateAndConversationAndBuyerAgentAndProjectAndDimensionAndSession
+
+class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndIntelligenceRunAndLibraryRequestAndAskAndNotificationAndReleaseUpdateAndConversationAndBuyerAgentAndProjectAndDimensionAndSessionDestination(TypedDict):
+    channel: Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+    '\n    AdCP channel the asset would run on.\n    '
+    countries: NotRequired[list[str]]
+    '\n    ISO country codes. Omit for worldwide.\n    '
 
 class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndIntelligenceRunAndLibraryRequestAndAskAndNotificationAndReleaseUpdateAndConversationAndBuyerAgentAndProjectAndDimensionAndSessionFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
@@ -27535,6 +27769,8 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     '\n    creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.\n    '
     rightsState: NotRequired[Literal["none", "pending_confirmation", "confirmed", "rejected", "paused", "revoked"]]
     '\n    creative_asset: assets with this rights state, or none for assets with no rights record.\n    '
+    permission: NotRequired[Literal["usable"]]
+    '\n    creative_asset: only assets usable for destination.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
     labels: NotRequired[list[SearchRequestLabelFilterEntry]]
@@ -27751,6 +27987,8 @@ class SearchInputKindBuyerRfp(TypedDict):
     '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
+    destination: NotRequired[SearchInputKindBuyerRfpDestination]
+    '\n    creative_asset: where it would run. Each row then carries permission.\n    '
     filter: SearchInputKindBuyerRfpFilter
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
@@ -27759,6 +27997,12 @@ class SearchInputKindBuyerRfp(TypedDict):
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
     '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).\n    '
+
+class SearchInputKindBuyerRfpDestination(TypedDict):
+    channel: Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+    '\n    AdCP channel the asset would run on.\n    '
+    countries: NotRequired[list[str]]
+    '\n    ISO country codes. Omit for worldwide.\n    '
 
 class SearchInputKindBuyerRfpFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
@@ -27869,6 +28113,8 @@ class SearchInputKindBuyerRfpFilter(TypedDict):
     '\n    creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.\n    '
     rightsState: NotRequired[Literal["none", "pending_confirmation", "confirmed", "rejected", "paused", "revoked"]]
     '\n    creative_asset: assets with this rights state, or none for assets with no rights record.\n    '
+    permission: NotRequired[Literal["usable"]]
+    '\n    creative_asset: only assets usable for destination.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
     labels: NotRequired[list[SearchRequestLabelFilterEntry]]
@@ -28071,6 +28317,8 @@ class SearchInputKindCreative(TypedDict):
     '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
+    destination: NotRequired[SearchInputKindCreativeDestination]
+    '\n    creative_asset: where it would run. Each row then carries permission.\n    '
     filter: NotRequired[SearchInputKindCreativeFilter]
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
@@ -28105,6 +28353,8 @@ class SearchInputKindCreativeAssetAndCatalog(TypedDict):
     '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
+    destination: NotRequired[SearchInputKindCreativeAssetAndCatalogDestination]
+    '\n    creative_asset: where it would run. Each row then carries permission.\n    '
     filter: SearchInputKindCreativeAssetAndCatalogFilter
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
@@ -28113,6 +28363,12 @@ class SearchInputKindCreativeAssetAndCatalog(TypedDict):
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
     '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).\n    '
+
+class SearchInputKindCreativeAssetAndCatalogDestination(TypedDict):
+    channel: Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+    '\n    AdCP channel the asset would run on.\n    '
+    countries: NotRequired[list[str]]
+    '\n    ISO country codes. Omit for worldwide.\n    '
 
 class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
@@ -28223,6 +28479,8 @@ class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     '\n    creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.\n    '
     rightsState: NotRequired[Literal["none", "pending_confirmation", "confirmed", "rejected", "paused", "revoked"]]
     '\n    creative_asset: assets with this rights state, or none for assets with no rights record.\n    '
+    permission: NotRequired[Literal["usable"]]
+    '\n    creative_asset: only assets usable for destination.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
     labels: NotRequired[list[SearchRequestLabelFilterEntry]]
@@ -28425,6 +28683,8 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserId(TypedDict):
     '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
+    destination: NotRequired[SearchInputKindCreativeCollectionWithFilterAdvertiserIdDestination]
+    '\n    creative_asset: where it would run. Each row then carries permission.\n    '
     filter: SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
@@ -28433,6 +28693,12 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserId(TypedDict):
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
     '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).\n    '
+
+class SearchInputKindCreativeCollectionWithFilterAdvertiserIdDestination(TypedDict):
+    channel: Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+    '\n    AdCP channel the asset would run on.\n    '
+    countries: NotRequired[list[str]]
+    '\n    ISO country codes. Omit for worldwide.\n    '
 
 class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
@@ -28541,6 +28807,8 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     '\n    creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.\n    '
     rightsState: NotRequired[Literal["none", "pending_confirmation", "confirmed", "rejected", "paused", "revoked"]]
     '\n    creative_asset: assets with this rights state, or none for assets with no rights record.\n    '
+    permission: NotRequired[Literal["usable"]]
+    '\n    creative_asset: only assets usable for destination.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
     labels: NotRequired[list[SearchRequestLabelFilterEntry]]
@@ -28743,6 +29011,8 @@ class SearchInputKindCreativeCollectionWithFilterCampaignId(TypedDict):
     '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
+    destination: NotRequired[SearchInputKindCreativeCollectionWithFilterCampaignIdDestination]
+    '\n    creative_asset: where it would run. Each row then carries permission.\n    '
     filter: SearchInputKindCreativeCollectionWithFilterCampaignIdFilter
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
@@ -28751,6 +29021,12 @@ class SearchInputKindCreativeCollectionWithFilterCampaignId(TypedDict):
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
     '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).\n    '
+
+class SearchInputKindCreativeCollectionWithFilterCampaignIdDestination(TypedDict):
+    channel: Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+    '\n    AdCP channel the asset would run on.\n    '
+    countries: NotRequired[list[str]]
+    '\n    ISO country codes. Omit for worldwide.\n    '
 
 class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
@@ -28859,6 +29135,8 @@ class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     '\n    creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.\n    '
     rightsState: NotRequired[Literal["none", "pending_confirmation", "confirmed", "rejected", "paused", "revoked"]]
     '\n    creative_asset: assets with this rights state, or none for assets with no rights record.\n    '
+    permission: NotRequired[Literal["usable"]]
+    '\n    creative_asset: only assets usable for destination.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
     labels: NotRequired[list[SearchRequestLabelFilterEntry]]
@@ -29036,6 +29314,12 @@ class SearchInputKindCreativeCollectionWithFilterCampaignIdFilterProperty(TypedD
     type: Literal["domain", "subdomain", "network_id", "ios_bundle", "android_package", "apple_app_store_id", "google_play_id", "roku_store_id", "fire_tv_asin", "samsung_app_id", "apple_tv_bundle", "bundle_id", "venue_id", "screen_id", "openooh_venue_type", "rss_url", "apple_podcast_id", "spotify_collection_id", "podcast_guid", "station_id", "facility_id"]
     value: str
 
+class SearchInputKindCreativeDestination(TypedDict):
+    channel: Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+    '\n    AdCP channel the asset would run on.\n    '
+    countries: NotRequired[list[str]]
+    '\n    ISO country codes. Omit for worldwide.\n    '
+
 class SearchInputKindCreativeFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
@@ -29143,6 +29427,8 @@ class SearchInputKindCreativeFilter(TypedDict):
     '\n    creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.\n    '
     rightsState: NotRequired[Literal["none", "pending_confirmation", "confirmed", "rejected", "paused", "revoked"]]
     '\n    creative_asset: assets with this rights state, or none for assets with no rights record.\n    '
+    permission: NotRequired[Literal["usable"]]
+    '\n    creative_asset: only assets usable for destination.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
     labels: NotRequired[list[SearchRequestLabelFilterEntry]]
@@ -29339,6 +29625,8 @@ class SearchInputKindCreativeSessionWithFilterAdvertiserId(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
+    destination: NotRequired[SearchInputKindCreativeSessionWithFilterAdvertiserIdDestination]
+    '\n    creative_asset: where it would run. Each row then carries permission.\n    '
     filter: SearchInputKindCreativeSessionWithFilterAdvertiserIdFilter
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
@@ -29347,6 +29635,12 @@ class SearchInputKindCreativeSessionWithFilterAdvertiserId(TypedDict):
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
     '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).\n    '
+
+class SearchInputKindCreativeSessionWithFilterAdvertiserIdDestination(TypedDict):
+    channel: Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+    '\n    AdCP channel the asset would run on.\n    '
+    countries: NotRequired[list[str]]
+    '\n    ISO country codes. Omit for worldwide.\n    '
 
 class SearchInputKindCreativeSessionWithFilterAdvertiserIdFilter(TypedDict):
     advertiserId: str
@@ -29373,6 +29667,8 @@ class SearchInputKindCreativeSessionWithFilterCampaignId(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
+    destination: NotRequired[SearchInputKindCreativeSessionWithFilterCampaignIdDestination]
+    '\n    creative_asset: where it would run. Each row then carries permission.\n    '
     filter: SearchInputKindCreativeSessionWithFilterCampaignIdFilter
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
@@ -29381,6 +29677,12 @@ class SearchInputKindCreativeSessionWithFilterCampaignId(TypedDict):
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
     '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).\n    '
+
+class SearchInputKindCreativeSessionWithFilterCampaignIdDestination(TypedDict):
+    channel: Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+    '\n    AdCP channel the asset would run on.\n    '
+    countries: NotRequired[list[str]]
+    '\n    ISO country codes. Omit for worldwide.\n    '
 
 class SearchInputKindCreativeSessionWithFilterCampaignIdFilter(TypedDict):
     campaignId: str
@@ -29417,12 +29719,20 @@ class SearchInputKindCreativeWithFilterAndFilterCampaignId(TypedDict):
     '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
+    destination: NotRequired[SearchInputKindCreativeWithFilterAndFilterCampaignIdDestination]
+    '\n    creative_asset: where it would run. Each row then carries permission.\n    '
     filter: SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
     '\n    A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds account and member.\n    '
     limit: NotRequired[int]
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
+
+class SearchInputKindCreativeWithFilterAndFilterCampaignIdDestination(TypedDict):
+    channel: Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+    '\n    AdCP channel the asset would run on.\n    '
+    countries: NotRequired[list[str]]
+    '\n    ISO country codes. Omit for worldwide.\n    '
 
 class SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
@@ -29531,6 +29841,8 @@ class SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter(TypedDict):
     '\n    creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.\n    '
     rightsState: NotRequired[Literal["none", "pending_confirmation", "confirmed", "rejected", "paused", "revoked"]]
     '\n    creative_asset: assets with this rights state, or none for assets with no rights record.\n    '
+    permission: NotRequired[Literal["usable"]]
+    '\n    creative_asset: only assets usable for destination.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
     labels: NotRequired[list[SearchRequestLabelFilterEntry]]
@@ -29737,6 +30049,8 @@ class SearchInputKindEventSource(TypedDict):
     '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
+    destination: NotRequired[SearchInputKindEventSourceDestination]
+    '\n    creative_asset: where it would run. Each row then carries permission.\n    '
     filter: NotRequired[SearchInputKindEventSourceFilter]
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
@@ -29745,6 +30059,12 @@ class SearchInputKindEventSource(TypedDict):
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
     '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).\n    '
+
+class SearchInputKindEventSourceDestination(TypedDict):
+    channel: Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+    '\n    AdCP channel the asset would run on.\n    '
+    countries: NotRequired[list[str]]
+    '\n    ISO country codes. Omit for worldwide.\n    '
 
 class SearchInputKindEventSourceFilter(TypedDict):
     advertiserId: NotRequired[str]
@@ -29775,6 +30095,8 @@ class SearchInputKindInventorySourceItem(TypedDict):
     '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: str
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
+    destination: NotRequired[SearchInputKindInventorySourceItemDestination]
+    '\n    creative_asset: where it would run. Each row then carries permission.\n    '
     filter: SearchInputKindInventorySourceItemFilter
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
@@ -29783,6 +30105,12 @@ class SearchInputKindInventorySourceItem(TypedDict):
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
     '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).\n    '
+
+class SearchInputKindInventorySourceItemDestination(TypedDict):
+    channel: Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+    '\n    AdCP channel the asset would run on.\n    '
+    countries: NotRequired[list[str]]
+    '\n    ISO country codes. Omit for worldwide.\n    '
 
 class SearchInputKindInventorySourceItemFilter(TypedDict):
     selectorType: str
@@ -29819,6 +30147,8 @@ class SearchInputKindProposal(TypedDict):
     '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
+    destination: NotRequired[SearchInputKindProposalDestination]
+    '\n    creative_asset: where it would run. Each row then carries permission.\n    '
     filter: SearchInputKindProposalFilter
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
@@ -29827,6 +30157,12 @@ class SearchInputKindProposal(TypedDict):
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
     '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).\n    '
+
+class SearchInputKindProposalDestination(TypedDict):
+    channel: Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+    '\n    AdCP channel the asset would run on.\n    '
+    countries: NotRequired[list[str]]
+    '\n    ISO country codes. Omit for worldwide.\n    '
 
 class SearchInputKindProposalFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
@@ -29937,6 +30273,8 @@ class SearchInputKindProposalFilter(TypedDict):
     '\n    creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.\n    '
     rightsState: NotRequired[Literal["none", "pending_confirmation", "confirmed", "rejected", "paused", "revoked"]]
     '\n    creative_asset: assets with this rights state, or none for assets with no rights record.\n    '
+    permission: NotRequired[Literal["usable"]]
+    '\n    creative_asset: only assets usable for destination.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
     labels: NotRequired[list[SearchRequestLabelFilterEntry]]
@@ -30139,6 +30477,8 @@ class SearchInputKindSourceAccount(TypedDict):
     '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: str
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
+    destination: NotRequired[SearchInputKindSourceAccountDestination]
+    '\n    creative_asset: where it would run. Each row then carries permission.\n    '
     filter: NotRequired[SearchInputKindSourceAccountFilter]
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
@@ -30147,6 +30487,12 @@ class SearchInputKindSourceAccount(TypedDict):
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
     '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).\n    '
+
+class SearchInputKindSourceAccountDestination(TypedDict):
+    channel: Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+    '\n    AdCP channel the asset would run on.\n    '
+    countries: NotRequired[list[str]]
+    '\n    ISO country codes. Omit for worldwide.\n    '
 
 class SearchInputKindSourceAccountFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
@@ -30257,6 +30603,8 @@ class SearchInputKindSourceAccountFilter(TypedDict):
     '\n    creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.\n    '
     rightsState: NotRequired[Literal["none", "pending_confirmation", "confirmed", "rejected", "paused", "revoked"]]
     '\n    creative_asset: assets with this rights state, or none for assets with no rights record.\n    '
+    permission: NotRequired[Literal["usable"]]
+    '\n    creative_asset: only assets usable for destination.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
     labels: NotRequired[list[SearchRequestLabelFilterEntry]]
@@ -30459,6 +30807,8 @@ class SearchInputKindTargetingValue(TypedDict):
     '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
+    destination: NotRequired[SearchInputKindTargetingValueDestination]
+    '\n    creative_asset: where it would run. Each row then carries permission.\n    '
     filter: SearchInputKindTargetingValueFilter
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
@@ -30469,6 +30819,12 @@ class SearchInputKindTargetingValue(TypedDict):
     '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).\n    '
 
 SearchInput: TypeAlias = "SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndIntelligenceRunAndLibraryRequestAndAskAndNotificationAndReleaseUpdateAndConversationAndBuyerAgentAndProjectAndDimensionAndSession | SearchInputKindCreativeAssetAndCatalog | SearchInputKindEventSource | SearchInputKindProposal | SearchInputKindCreativeWithFilterAndFilterCampaignId | SearchInputKindCreative | SearchInputKindCreativeCollectionWithFilterCampaignId | SearchInputKindCreativeCollectionWithFilterAdvertiserId | SearchInputKindCreativeSessionWithFilterCampaignId | SearchInputKindCreativeSessionWithFilterAdvertiserId | SearchInputKindAdServerTargeting | SearchInputKindInventorySourceItem | SearchInputKindAdServerAdvertiser | SearchInputKindSourceAccount | SearchInputKindTargetingValue | SearchInputKindBuyerRfp | SearchInputDocsScopeCallerRelevantAndPublicResearchWithQuery | SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocument | SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision | SearchInputDocsScopeCallerRelevantAndPublicResearch"
+
+class SearchInputKindTargetingValueDestination(TypedDict):
+    channel: Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+    '\n    AdCP channel the asset would run on.\n    '
+    countries: NotRequired[list[str]]
+    '\n    ISO country codes. Omit for worldwide.\n    '
 
 class SearchInputKindTargetingValueFilter(TypedDict):
     system: Literal["nielsen_dma", "iso_3166_1", "iso_3166_2"]

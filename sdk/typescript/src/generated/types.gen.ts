@@ -1050,6 +1050,19 @@ export type GetData = {
          */
         advertiserId?: string;
         /**
+         * creative_asset: where it would run. Each row then carries permission.
+         */
+        destination?: {
+            /**
+             * AdCP channel the asset would run on.
+             */
+            channel: 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+            /**
+             * ISO country codes. Omit for worldwide.
+             */
+            countries?: Array<string>;
+        };
+        /**
          * For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.
          */
         reportId?: string;
@@ -1321,6 +1334,19 @@ export type GetData = {
          * The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.
          */
         advertiserId?: string;
+        /**
+         * creative_asset: where it would run. Each row then carries permission.
+         */
+        destination?: {
+            /**
+             * AdCP channel the asset would run on.
+             */
+            channel: 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+            /**
+             * ISO country codes. Omit for worldwide.
+             */
+            countries?: Array<string>;
+        };
         /**
          * For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.
          */
@@ -1594,6 +1620,19 @@ export type GetData = {
          */
         advertiserId?: string;
         /**
+         * creative_asset: where it would run. Each row then carries permission.
+         */
+        destination?: {
+            /**
+             * AdCP channel the asset would run on.
+             */
+            channel: 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+            /**
+             * ISO country codes. Omit for worldwide.
+             */
+            countries?: Array<string>;
+        };
+        /**
          * For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.
          */
         reportId?: string;
@@ -1861,6 +1900,19 @@ export type GetData = {
          * The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.
          */
         advertiserId: string;
+        /**
+         * creative_asset: where it would run. Each row then carries permission.
+         */
+        destination?: {
+            /**
+             * AdCP channel the asset would run on.
+             */
+            channel: 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+            /**
+             * ISO country codes. Omit for worldwide.
+             */
+            countries?: Array<string>;
+        };
         /**
          * For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.
          */
@@ -2130,6 +2182,19 @@ export type GetData = {
          * The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.
          */
         advertiserId: string;
+        /**
+         * creative_asset: where it would run. Each row then carries permission.
+         */
+        destination?: {
+            /**
+             * AdCP channel the asset would run on.
+             */
+            channel: 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+            /**
+             * ISO country codes. Omit for worldwide.
+             */
+            countries?: Array<string>;
+        };
         /**
          * For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.
          */
@@ -2404,6 +2469,19 @@ export type GetData = {
          */
         advertiserId: string;
         /**
+         * creative_asset: where it would run. Each row then carries permission.
+         */
+        destination?: {
+            /**
+             * AdCP channel the asset would run on.
+             */
+            channel: 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+            /**
+             * ISO country codes. Omit for worldwide.
+             */
+            countries?: Array<string>;
+        };
+        /**
          * For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.
          */
         reportId?: string;
@@ -2676,6 +2754,19 @@ export type GetData = {
          */
         advertiserId: string;
         /**
+         * creative_asset: where it would run. Each row then carries permission.
+         */
+        destination?: {
+            /**
+             * AdCP channel the asset would run on.
+             */
+            channel: 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+            /**
+             * ISO country codes. Omit for worldwide.
+             */
+            countries?: Array<string>;
+        };
+        /**
          * For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.
          */
         reportId?: string;
@@ -2937,6 +3028,19 @@ export type GetData = {
          * The Apostra accountId this call runs in, from get_status. On a member read without memberAccountId: deprecated, read as memberAccountId.
          */
         accountId?: number;
+        /**
+         * creative_asset: where it would run. Each row then carries permission.
+         */
+        destination?: {
+            /**
+             * AdCP channel the asset would run on.
+             */
+            channel: 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+            /**
+             * ISO country codes. Omit for worldwide.
+             */
+            countries?: Array<string>;
+        };
         /**
          * For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.
          */
@@ -3210,6 +3314,19 @@ export type GetData = {
          * The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.
          */
         advertiserId: string;
+        /**
+         * creative_asset: where it would run. Each row then carries permission.
+         */
+        destination?: {
+            /**
+             * AdCP channel the asset would run on.
+             */
+            channel: 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+            /**
+             * ISO country codes. Omit for worldwide.
+             */
+            countries?: Array<string>;
+        };
         /**
          * For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.
          */
@@ -3480,6 +3597,19 @@ export type GetData = {
          */
         advertiserId?: string;
         /**
+         * creative_asset: where it would run. Each row then carries permission.
+         */
+        destination?: {
+            /**
+             * AdCP channel the asset would run on.
+             */
+            channel: 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+            /**
+             * ISO country codes. Omit for worldwide.
+             */
+            countries?: Array<string>;
+        };
+        /**
          * For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.
          */
         reportId?: string;
@@ -3749,6 +3879,19 @@ export type GetData = {
          */
         advertiserId?: string;
         /**
+         * creative_asset: where it would run. Each row then carries permission.
+         */
+        destination?: {
+            /**
+             * AdCP channel the asset would run on.
+             */
+            channel: 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+            /**
+             * ISO country codes. Omit for worldwide.
+             */
+            countries?: Array<string>;
+        };
+        /**
          * For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.
          */
         reportId?: string;
@@ -4013,6 +4156,19 @@ export type GetData = {
          * The Apostra accountId this call runs in, from get_status. On a member read without memberAccountId: deprecated, read as memberAccountId.
          */
         accountId?: number;
+        /**
+         * creative_asset: where it would run. Each row then carries permission.
+         */
+        destination?: {
+            /**
+             * AdCP channel the asset would run on.
+             */
+            channel: 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+            /**
+             * ISO country codes. Omit for worldwide.
+             */
+            countries?: Array<string>;
+        };
         /**
          * For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.
          */
@@ -4287,6 +4443,19 @@ export type GetData = {
          */
         advertiserId: string;
         /**
+         * creative_asset: where it would run. Each row then carries permission.
+         */
+        destination?: {
+            /**
+             * AdCP channel the asset would run on.
+             */
+            channel: 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+            /**
+             * ISO country codes. Omit for worldwide.
+             */
+            countries?: Array<string>;
+        };
+        /**
          * For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.
          */
         reportId?: string;
@@ -4555,6 +4724,19 @@ export type GetData = {
          * The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.
          */
         advertiserId?: string;
+        /**
+         * creative_asset: where it would run. Each row then carries permission.
+         */
+        destination?: {
+            /**
+             * AdCP channel the asset would run on.
+             */
+            channel: 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+            /**
+             * ISO country codes. Omit for worldwide.
+             */
+            countries?: Array<string>;
+        };
         /**
          * For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.
          */
@@ -4828,6 +5010,19 @@ export type GetData = {
          */
         advertiserId?: string;
         /**
+         * creative_asset: where it would run. Each row then carries permission.
+         */
+        destination?: {
+            /**
+             * AdCP channel the asset would run on.
+             */
+            channel: 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+            /**
+             * ISO country codes. Omit for worldwide.
+             */
+            countries?: Array<string>;
+        };
+        /**
          * For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.
          */
         reportId?: string;
@@ -5099,6 +5294,19 @@ export type GetData = {
          * The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.
          */
         advertiserId?: string;
+        /**
+         * creative_asset: where it would run. Each row then carries permission.
+         */
+        destination?: {
+            /**
+             * AdCP channel the asset would run on.
+             */
+            channel: 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+            /**
+             * ISO country codes. Omit for worldwide.
+             */
+            countries?: Array<string>;
+        };
         /**
          * For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.
          */
@@ -5372,6 +5580,19 @@ export type GetData = {
          */
         advertiserId?: string;
         /**
+         * creative_asset: where it would run. Each row then carries permission.
+         */
+        destination?: {
+            /**
+             * AdCP channel the asset would run on.
+             */
+            channel: 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+            /**
+             * ISO country codes. Omit for worldwide.
+             */
+            countries?: Array<string>;
+        };
+        /**
          * For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.
          */
         reportId?: string;
@@ -5643,6 +5864,19 @@ export type GetData = {
          * The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.
          */
         advertiserId?: string;
+        /**
+         * creative_asset: where it would run. Each row then carries permission.
+         */
+        destination?: {
+            /**
+             * AdCP channel the asset would run on.
+             */
+            channel: 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+            /**
+             * ISO country codes. Omit for worldwide.
+             */
+            countries?: Array<string>;
+        };
         /**
          * For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.
          */
@@ -5916,6 +6150,19 @@ export type GetData = {
          */
         advertiserId?: string;
         /**
+         * creative_asset: where it would run. Each row then carries permission.
+         */
+        destination?: {
+            /**
+             * AdCP channel the asset would run on.
+             */
+            channel: 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+            /**
+             * ISO country codes. Omit for worldwide.
+             */
+            countries?: Array<string>;
+        };
+        /**
          * For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.
          */
         reportId?: string;
@@ -6185,6 +6432,19 @@ export type GetData = {
          */
         advertiserId?: string;
         /**
+         * creative_asset: where it would run. Each row then carries permission.
+         */
+        destination?: {
+            /**
+             * AdCP channel the asset would run on.
+             */
+            channel: 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+            /**
+             * ISO country codes. Omit for worldwide.
+             */
+            countries?: Array<string>;
+        };
+        /**
          * For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.
          */
         reportId?: string;
@@ -6453,6 +6713,19 @@ export type GetData = {
          * The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.
          */
         advertiserId?: string;
+        /**
+         * creative_asset: where it would run. Each row then carries permission.
+         */
+        destination?: {
+            /**
+             * AdCP channel the asset would run on.
+             */
+            channel: 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+            /**
+             * ISO country codes. Omit for worldwide.
+             */
+            countries?: Array<string>;
+        };
         /**
          * For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.
          */
@@ -43756,6 +44029,19 @@ export type SearchData = {
          */
         sourceId?: string;
         /**
+         * creative_asset: where it would run. Each row then carries permission.
+         */
+        destination?: {
+            /**
+             * AdCP channel the asset would run on.
+             */
+            channel: 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+            /**
+             * ISO country codes. Omit for worldwide.
+             */
+            countries?: Array<string>;
+        };
+        /**
          * Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.
          */
         filter?: {
@@ -43978,6 +44264,10 @@ export type SearchData = {
              * creative_asset: assets with this rights state, or none for assets with no rights record.
              */
             rightsState?: 'none' | 'pending_confirmation' | 'confirmed' | 'rejected' | 'paused' | 'revoked';
+            /**
+             * creative_asset: only assets usable for destination.
+             */
+            permission?: 'usable';
             /**
              * For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.
              */
@@ -44383,6 +44673,19 @@ export type SearchData = {
          */
         sourceId?: string;
         /**
+         * creative_asset: where it would run. Each row then carries permission.
+         */
+        destination?: {
+            /**
+             * AdCP channel the asset would run on.
+             */
+            channel: 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+            /**
+             * ISO country codes. Omit for worldwide.
+             */
+            countries?: Array<string>;
+        };
+        /**
          * Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.
          */
         filter: {
@@ -44605,6 +44908,10 @@ export type SearchData = {
              * creative_asset: assets with this rights state, or none for assets with no rights record.
              */
             rightsState?: 'none' | 'pending_confirmation' | 'confirmed' | 'rejected' | 'paused' | 'revoked';
+            /**
+             * creative_asset: only assets usable for destination.
+             */
+            permission?: 'usable';
             /**
              * For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.
              */
@@ -45010,6 +45317,19 @@ export type SearchData = {
          */
         sourceId?: string;
         /**
+         * creative_asset: where it would run. Each row then carries permission.
+         */
+        destination?: {
+            /**
+             * AdCP channel the asset would run on.
+             */
+            channel: 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+            /**
+             * ISO country codes. Omit for worldwide.
+             */
+            countries?: Array<string>;
+        };
+        /**
          * Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.
          */
         filter?: {
@@ -45077,6 +45397,19 @@ export type SearchData = {
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
         sourceId?: string;
+        /**
+         * creative_asset: where it would run. Each row then carries permission.
+         */
+        destination?: {
+            /**
+             * AdCP channel the asset would run on.
+             */
+            channel: 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+            /**
+             * ISO country codes. Omit for worldwide.
+             */
+            countries?: Array<string>;
+        };
         /**
          * Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.
          */
@@ -45300,6 +45633,10 @@ export type SearchData = {
              * creative_asset: assets with this rights state, or none for assets with no rights record.
              */
             rightsState?: 'none' | 'pending_confirmation' | 'confirmed' | 'rejected' | 'paused' | 'revoked';
+            /**
+             * creative_asset: only assets usable for destination.
+             */
+            permission?: 'usable';
             /**
              * For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.
              */
@@ -45705,6 +46042,19 @@ export type SearchData = {
          */
         sourceId?: string;
         /**
+         * creative_asset: where it would run. Each row then carries permission.
+         */
+        destination?: {
+            /**
+             * AdCP channel the asset would run on.
+             */
+            channel: 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+            /**
+             * ISO country codes. Omit for worldwide.
+             */
+            countries?: Array<string>;
+        };
+        /**
          * Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.
          */
         filter: {
@@ -45923,6 +46273,10 @@ export type SearchData = {
              * creative_asset: assets with this rights state, or none for assets with no rights record.
              */
             rightsState?: 'none' | 'pending_confirmation' | 'confirmed' | 'rejected' | 'paused' | 'revoked';
+            /**
+             * creative_asset: only assets usable for destination.
+             */
+            permission?: 'usable';
             /**
              * For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.
              */
@@ -46325,6 +46679,19 @@ export type SearchData = {
          */
         sourceId?: string;
         /**
+         * creative_asset: where it would run. Each row then carries permission.
+         */
+        destination?: {
+            /**
+             * AdCP channel the asset would run on.
+             */
+            channel: 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+            /**
+             * ISO country codes. Omit for worldwide.
+             */
+            countries?: Array<string>;
+        };
+        /**
          * Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.
          */
         filter?: {
@@ -46544,6 +46911,10 @@ export type SearchData = {
              */
             rightsState?: 'none' | 'pending_confirmation' | 'confirmed' | 'rejected' | 'paused' | 'revoked';
             /**
+             * creative_asset: only assets usable for destination.
+             */
+            permission?: 'usable';
+            /**
              * For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.
              */
             catalogState?: 'active' | 'draft';
@@ -46947,6 +47318,19 @@ export type SearchData = {
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
         sourceId?: string;
+        /**
+         * creative_asset: where it would run. Each row then carries permission.
+         */
+        destination?: {
+            /**
+             * AdCP channel the asset would run on.
+             */
+            channel: 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+            /**
+             * ISO country codes. Omit for worldwide.
+             */
+            countries?: Array<string>;
+        };
         /**
          * Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.
          */
@@ -47167,6 +47551,10 @@ export type SearchData = {
              */
             rightsState?: 'none' | 'pending_confirmation' | 'confirmed' | 'rejected' | 'paused' | 'revoked';
             /**
+             * creative_asset: only assets usable for destination.
+             */
+            permission?: 'usable';
+            /**
              * For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.
              */
             catalogState?: 'active' | 'draft';
@@ -47570,6 +47958,19 @@ export type SearchData = {
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
         sourceId?: string;
+        /**
+         * creative_asset: where it would run. Each row then carries permission.
+         */
+        destination?: {
+            /**
+             * AdCP channel the asset would run on.
+             */
+            channel: 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+            /**
+             * ISO country codes. Omit for worldwide.
+             */
+            countries?: Array<string>;
+        };
         /**
          * Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.
          */
@@ -47790,6 +48191,10 @@ export type SearchData = {
              */
             rightsState?: 'none' | 'pending_confirmation' | 'confirmed' | 'rejected' | 'paused' | 'revoked';
             /**
+             * creative_asset: only assets usable for destination.
+             */
+            permission?: 'usable';
+            /**
              * For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.
              */
             catalogState?: 'active' | 'draft';
@@ -48182,6 +48587,19 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
+         * creative_asset: where it would run. Each row then carries permission.
+         */
+        destination?: {
+            /**
+             * AdCP channel the asset would run on.
+             */
+            channel: 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+            /**
+             * ISO country codes. Omit for worldwide.
+             */
+            countries?: Array<string>;
+        };
+        /**
          * Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.
          */
         filter: {
@@ -48244,6 +48662,19 @@ export type SearchData = {
          * For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.
          */
         scope?: 'unit';
+        /**
+         * creative_asset: where it would run. Each row then carries permission.
+         */
+        destination?: {
+            /**
+             * AdCP channel the asset would run on.
+             */
+            channel: 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+            /**
+             * ISO country codes. Omit for worldwide.
+             */
+            countries?: Array<string>;
+        };
         /**
          * Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.
          */
@@ -48319,6 +48750,19 @@ export type SearchData = {
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
         sourceId: string;
+        /**
+         * creative_asset: where it would run. Each row then carries permission.
+         */
+        destination?: {
+            /**
+             * AdCP channel the asset would run on.
+             */
+            channel: 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+            /**
+             * ISO country codes. Omit for worldwide.
+             */
+            countries?: Array<string>;
+        };
         /**
          * Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.
          */
@@ -48542,6 +48986,10 @@ export type SearchData = {
              * creative_asset: assets with this rights state, or none for assets with no rights record.
              */
             rightsState?: 'none' | 'pending_confirmation' | 'confirmed' | 'rejected' | 'paused' | 'revoked';
+            /**
+             * creative_asset: only assets usable for destination.
+             */
+            permission?: 'usable';
             /**
              * For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.
              */
@@ -48947,6 +49395,19 @@ export type SearchData = {
          */
         sourceId: string;
         /**
+         * creative_asset: where it would run. Each row then carries permission.
+         */
+        destination?: {
+            /**
+             * AdCP channel the asset would run on.
+             */
+            channel: 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+            /**
+             * ISO country codes. Omit for worldwide.
+             */
+            countries?: Array<string>;
+        };
+        /**
          * Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.
          */
         filter: {
@@ -49027,6 +49488,19 @@ export type SearchData = {
          */
         sourceId: string;
         /**
+         * creative_asset: where it would run. Each row then carries permission.
+         */
+        destination?: {
+            /**
+             * AdCP channel the asset would run on.
+             */
+            channel: 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+            /**
+             * ISO country codes. Omit for worldwide.
+             */
+            countries?: Array<string>;
+        };
+        /**
          * A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds account and member.
          */
         cursor?: string;
@@ -49086,6 +49560,19 @@ export type SearchData = {
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
         sourceId: string;
+        /**
+         * creative_asset: where it would run. Each row then carries permission.
+         */
+        destination?: {
+            /**
+             * AdCP channel the asset would run on.
+             */
+            channel: 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+            /**
+             * ISO country codes. Omit for worldwide.
+             */
+            countries?: Array<string>;
+        };
         /**
          * Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.
          */
@@ -49309,6 +49796,10 @@ export type SearchData = {
              * creative_asset: assets with this rights state, or none for assets with no rights record.
              */
             rightsState?: 'none' | 'pending_confirmation' | 'confirmed' | 'rejected' | 'paused' | 'revoked';
+            /**
+             * creative_asset: only assets usable for destination.
+             */
+            permission?: 'usable';
             /**
              * For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.
              */
@@ -49714,6 +50205,19 @@ export type SearchData = {
          */
         sourceId?: string;
         /**
+         * creative_asset: where it would run. Each row then carries permission.
+         */
+        destination?: {
+            /**
+             * AdCP channel the asset would run on.
+             */
+            channel: 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+            /**
+             * ISO country codes. Omit for worldwide.
+             */
+            countries?: Array<string>;
+        };
+        /**
          * Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.
          */
         filter: {
@@ -49785,6 +50289,19 @@ export type SearchData = {
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item, ad_server_advertiser and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
         sourceId?: string;
+        /**
+         * creative_asset: where it would run. Each row then carries permission.
+         */
+        destination?: {
+            /**
+             * AdCP channel the asset would run on.
+             */
+            channel: 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+            /**
+             * ISO country codes. Omit for worldwide.
+             */
+            countries?: Array<string>;
+        };
         /**
          * Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.
          */
@@ -50008,6 +50525,10 @@ export type SearchData = {
              * creative_asset: assets with this rights state, or none for assets with no rights record.
              */
             rightsState?: 'none' | 'pending_confirmation' | 'confirmed' | 'rejected' | 'paused' | 'revoked';
+            /**
+             * creative_asset: only assets usable for destination.
+             */
+            permission?: 'usable';
             /**
              * For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.
              */
@@ -50412,6 +50933,19 @@ export type SearchData = {
          */
         sourceId?: string;
         /**
+         * creative_asset: where it would run. Each row then carries permission.
+         */
+        destination?: {
+            /**
+             * AdCP channel the asset would run on.
+             */
+            channel: 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+            /**
+             * ISO country codes. Omit for worldwide.
+             */
+            countries?: Array<string>;
+        };
+        /**
          * Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.
          */
         filter?: {
@@ -50634,6 +51168,10 @@ export type SearchData = {
              * creative_asset: assets with this rights state, or none for assets with no rights record.
              */
             rightsState?: 'none' | 'pending_confirmation' | 'confirmed' | 'rejected' | 'paused' | 'revoked';
+            /**
+             * creative_asset: only assets usable for destination.
+             */
+            permission?: 'usable';
             /**
              * For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.
              */
@@ -51039,6 +51577,19 @@ export type SearchData = {
          */
         sourceId?: string;
         /**
+         * creative_asset: where it would run. Each row then carries permission.
+         */
+        destination?: {
+            /**
+             * AdCP channel the asset would run on.
+             */
+            channel: 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+            /**
+             * ISO country codes. Omit for worldwide.
+             */
+            countries?: Array<string>;
+        };
+        /**
          * Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.
          */
         filter?: {
@@ -51261,6 +51812,10 @@ export type SearchData = {
              * creative_asset: assets with this rights state, or none for assets with no rights record.
              */
             rightsState?: 'none' | 'pending_confirmation' | 'confirmed' | 'rejected' | 'paused' | 'revoked';
+            /**
+             * creative_asset: only assets usable for destination.
+             */
+            permission?: 'usable';
             /**
              * For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.
              */
@@ -51666,6 +52221,19 @@ export type SearchData = {
          */
         sourceId?: string;
         /**
+         * creative_asset: where it would run. Each row then carries permission.
+         */
+        destination?: {
+            /**
+             * AdCP channel the asset would run on.
+             */
+            channel: 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+            /**
+             * ISO country codes. Omit for worldwide.
+             */
+            countries?: Array<string>;
+        };
+        /**
          * Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.
          */
         filter?: {
@@ -51888,6 +52456,10 @@ export type SearchData = {
              * creative_asset: assets with this rights state, or none for assets with no rights record.
              */
             rightsState?: 'none' | 'pending_confirmation' | 'confirmed' | 'rejected' | 'paused' | 'revoked';
+            /**
+             * creative_asset: only assets usable for destination.
+             */
+            permission?: 'usable';
             /**
              * For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.
              */
@@ -52293,6 +52865,19 @@ export type SearchData = {
          */
         sourceId?: string;
         /**
+         * creative_asset: where it would run. Each row then carries permission.
+         */
+        destination?: {
+            /**
+             * AdCP channel the asset would run on.
+             */
+            channel: 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+            /**
+             * ISO country codes. Omit for worldwide.
+             */
+            countries?: Array<string>;
+        };
+        /**
          * Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.
          */
         filter?: {
@@ -52515,6 +53100,10 @@ export type SearchData = {
              * creative_asset: assets with this rights state, or none for assets with no rights record.
              */
             rightsState?: 'none' | 'pending_confirmation' | 'confirmed' | 'rejected' | 'paused' | 'revoked';
+            /**
+             * creative_asset: only assets usable for destination.
+             */
+            permission?: 'usable';
             /**
              * For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.
              */
