@@ -509,11 +509,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveCreativeResult], self._request_with_response("save_creative", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_creative_asset(self, input: models.SaveCreativeAssetInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveCreativeAssetResult:
-        "Record the rights a person states for Library assets as AdCP rights entries: who holds them, and where and how long ads may use them. A save replaces an asset’s rights and only proposes them. confirm: true asks a person to confirm on Apostra’s approval page."
+        "Record the rights a person states for Library assets as AdCP rights entries. One statement can cover a declared set (assetIds); anyone pictured is their own asset. A save replaces an asset’s rights and only proposes them. confirm: true asks a person to confirm on Apostra’s approval page."
         return cast("models.SaveCreativeAssetResult", self._request("save_creative_asset", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_creative_asset_with_response(self, input: models.SaveCreativeAssetInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveCreativeAssetResult]:
-        "Record the rights a person states for Library assets as AdCP rights entries: who holds them, and where and how long ads may use them. A save replaces an asset’s rights and only proposes them. confirm: true asks a person to confirm on Apostra’s approval page. Returns the data together with response headers and request ID."
+        "Record the rights a person states for Library assets as AdCP rights entries. One statement can cover a declared set (assetIds); anyone pictured is their own asset. A save replaces an asset’s rights and only proposes them. confirm: true asks a person to confirm on Apostra’s approval page. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveCreativeAssetResult], self._request_with_response("save_creative_asset", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_creative_collection(self, input: models.SaveCreativeCollectionInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveCreativeCollectionResult:
@@ -1238,11 +1238,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveCreativeResult], await self._request_with_response("save_creative", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_creative_asset(self, input: models.SaveCreativeAssetInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveCreativeAssetResult:
-        "Record the rights a person states for Library assets as AdCP rights entries: who holds them, and where and how long ads may use them. A save replaces an asset’s rights and only proposes them. confirm: true asks a person to confirm on Apostra’s approval page."
+        "Record the rights a person states for Library assets as AdCP rights entries. One statement can cover a declared set (assetIds); anyone pictured is their own asset. A save replaces an asset’s rights and only proposes them. confirm: true asks a person to confirm on Apostra’s approval page."
         return cast("models.SaveCreativeAssetResult", await self._request("save_creative_asset", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_creative_asset_with_response(self, input: models.SaveCreativeAssetInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveCreativeAssetResult]:
-        "Record the rights a person states for Library assets as AdCP rights entries: who holds them, and where and how long ads may use them. A save replaces an asset’s rights and only proposes them. confirm: true asks a person to confirm on Apostra’s approval page. Returns the data together with response headers and request ID."
+        "Record the rights a person states for Library assets as AdCP rights entries. One statement can cover a declared set (assetIds); anyone pictured is their own asset. A save replaces an asset’s rights and only proposes them. confirm: true asks a person to confirm on Apostra’s approval page. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveCreativeAssetResult], await self._request_with_response("save_creative_asset", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_creative_collection(self, input: models.SaveCreativeCollectionInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveCreativeCollectionResult:

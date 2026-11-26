@@ -999,14 +999,14 @@ export class Apostra extends Transport {
   /** Save content you supply: advertiserId/campaignId, name, message, assets (landing_page_url, social, sourceAssetRef/sourceAssets). New media like radio spots: use save_creative_session. One format selector: formatKind+formatParams or creativeFormatId+formatOptionRef. libraryRole: Buyer Account only. Returns the data together with response headers and request ID. */
   saveCreativeWithResponse(input: SaveCreativeInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveCreativeResult>> { return this.requestDetailed("save_creative", input, options) }
   /**
-   * Record the rights a person states for Library assets as AdCP rights entries: who holds them, and where and how long ads may use them. A save replaces an asset’s rights and only proposes them. confirm: true asks a person to confirm on Apostra’s approval page.
+   * Record the rights a person states for Library assets as AdCP rights entries. One statement can cover a declared set (assetIds); anyone pictured is their own asset. A save replaces an asset’s rights and only proposes them. confirm: true asks a person to confirm on Apostra’s approval page.
    *
    * @example
    * await client.saveCreativeAsset(input, { idempotencyKey: 'stable-key' })
    */
   saveCreativeAsset(input: SaveCreativeAssetInput, options: WriteRequestOptions): Promise<SaveCreativeAssetResult> { return this.request("save_creative_asset", input, options) }
 
-  /** Record the rights a person states for Library assets as AdCP rights entries: who holds them, and where and how long ads may use them. A save replaces an asset’s rights and only proposes them. confirm: true asks a person to confirm on Apostra’s approval page. Returns the data together with response headers and request ID. */
+  /** Record the rights a person states for Library assets as AdCP rights entries. One statement can cover a declared set (assetIds); anyone pictured is their own asset. A save replaces an asset’s rights and only proposes them. confirm: true asks a person to confirm on Apostra’s approval page. Returns the data together with response headers and request ID. */
   saveCreativeAssetWithResponse(input: SaveCreativeAssetInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveCreativeAssetResult>> { return this.requestDetailed("save_creative_asset", input, options) }
   /**
    * Manage collections. Create with one owner and name: campaignId or advertiserId. Only advertiser mutations of an existing collection need expectedUpdatedAt; campaign writes and creates do not. isArchived archives or restores advertiser collections.

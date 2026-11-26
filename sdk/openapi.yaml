@@ -58147,13 +58147,13 @@ paths:
     post:
       operationId: save_creative_asset
       summary: >-
-        Record the rights a person states for Library assets as AdCP rights entries: who holds them, and where and how
-        long ads may use them. A save replaces an asset’s rights and only proposes them. confirm: true asks a person to
-        confirm on Apostra’s approval page.
+        Record the rights a person states for Library assets as AdCP rights entries. One statement can cover a declared
+        set (assetIds); anyone pictured is their own asset. A save replaces an asset’s rights and only proposes them.
+        confirm: true asks a person to confirm on Apostra’s approval page.
       description: >-
-        Record the rights a person states for Library assets as AdCP rights entries: who holds them, and where and how
-        long ads may use them. A save replaces an asset’s rights and only proposes them. confirm: true asks a person to
-        confirm on Apostra’s approval page.
+        Record the rights a person states for Library assets as AdCP rights entries. One statement can cover a declared
+        set (assetIds); anyone pictured is their own asset. A save replaces an asset’s rights and only proposes them.
+        confirm: true asks a person to confirm on Apostra’s approval page.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -58188,11 +58188,24 @@ paths:
                     type: object
                     properties:
                       assetId:
+                        description: Library asset id, from search or get on creative_asset. Send this or assetIds.
                         type: string
                         format: uuid
                         pattern: >-
                           ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
-                        description: Library asset id, from search or get on creative_asset.
+                      assetIds:
+                        description: >-
+                          A set the person declares shares these rights: one statement for up to 100 assets. Send this
+                          or assetId. A set shows no identifiable person: no likeness entry, and peoplePictured 0 on
+                          every entry.
+                        minItems: 1
+                        maxItems: 100
+                        type: array
+                        items:
+                          type: string
+                          format: uuid
+                          pattern: >-
+                            ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
                       rights:
                         minItems: 1
                         maxItems: 50
@@ -58603,10 +58616,11 @@ paths:
                             $ref: '#/components/schemas/save_creative_asset_request_ItemsItemProvenanceExt'
                         additionalProperties: {}
                     required:
-                      - assetId
                       - rights
                     additionalProperties: false
-                  description: One entry per asset, at most 50; all are saved or none. Each replaces that asset's rights.
+                  description: >-
+                    One entry per asset or declared set, at most 50 entries and 100 assets in all; all are saved or
+                    none. Each replaces the rights of every asset it names.
                 confirm:
                   description: >-
                     true asks a person to confirm the rights on Apostra’s approval page and returns approval_required
