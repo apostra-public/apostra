@@ -20427,7 +20427,7 @@ class SaveMediaBuyInputKindCreate(TypedDict):
     '\n    The seller\'s Account id. Not the seller object\'s id, which is a different number. Required for explicit creation.\n    '
     products: list[SaveMediaBuyInputKindCreateProductsItem]
     budget: NotRequired[SaveMediaBuyInputKindCreateBudget]
-    '\n    Single total; seller_optimized: shared pool (default campaign total). One-allocation proposal allowed; multi: products[].budget; else retain allocation.\n    '
+    '\n    Single total; seller_optimized: shared pool (default campaign total). Proposal: the amount to book, within the seller\'s guidance; omit for its figure.\n    '
     budgetAllocation: NotRequired[SaveMediaBuyInputKindCreateBudgetAllocationModeFixed | SaveMediaBuyInputKindCreateBudgetAllocationModeSellerOptimized]
     '\n    Meta: fixed = ad-set budgets; seller_optimized = shared budget. Ask if unclear; required when both modes are supported.\n    '
     daily_budget_cap: NotRequired[float]
@@ -21032,7 +21032,7 @@ class SaveMediaBuyInputKindProposal(TypedDict):
     products: NotRequired[list[SaveMediaBuyInputKindProposalProductsItem]]
     '\n    Bids for the proposal\'s auction products. Omit when none needs one.\n    '
     budget: NotRequired[SaveMediaBuyInputKindProposalBudget]
-    '\n    Single total; seller_optimized: shared pool (default campaign total). One-allocation proposal allowed; multi: products[].budget; else retain allocation.\n    '
+    '\n    Single total; seller_optimized: shared pool (default campaign total). Proposal: the amount to book, within the seller\'s guidance; omit for its figure.\n    '
     daily_budget_cap: NotRequired[float]
     '\n    Create only: hard daily spend ceiling in the buy\'s currency, at most its total budget. A seller that cannot apply it refuses the buy.\n    '
     budget_cap_timezone: NotRequired[str]
@@ -21106,7 +21106,7 @@ class SaveMediaBuyInputKindUpdate(TypedDict):
     '\n    channelGroupId for a new buy. Required when campaign has channelGroups; invalid on updates.\n    '
     products: NotRequired[list[SaveMediaBuyInputKindUpdateProductsItem]]
     budget: NotRequired[SaveMediaBuyInputKindUpdateBudget]
-    '\n    Single total; seller_optimized: shared pool (default campaign total). One-allocation proposal allowed; multi: products[].budget; else retain allocation.\n    '
+    '\n    Single total; seller_optimized: shared pool (default campaign total). Proposal: the amount to book, within the seller\'s guidance; omit for its figure.\n    '
     budgetAllocation: NotRequired[SaveMediaBuyInputKindUpdateBudgetAllocationModeFixed | SaveMediaBuyInputKindUpdateBudgetAllocationModeSellerOptimized]
     '\n    Meta: fixed = ad-set budgets; seller_optimized = shared budget. Ask if unclear; required when both modes are supported.\n    '
     daily_budget_cap: NotRequired[float]

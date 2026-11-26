@@ -35206,7 +35206,7 @@ export type SaveMediaBuyData = {
             };
         }>;
         /**
-         * Single total; seller_optimized: shared pool (default campaign total). One-allocation proposal allowed; multi: products[].budget; else retain allocation.
+         * Single total; seller_optimized: shared pool (default campaign total). Proposal: the amount to book, within the seller's guidance; omit for its figure.
          */
         budget?: {
             /**
@@ -36141,7 +36141,7 @@ export type SaveMediaBuyData = {
             };
         }>;
         /**
-         * Single total; seller_optimized: shared pool (default campaign total). One-allocation proposal allowed; multi: products[].budget; else retain allocation.
+         * Single total; seller_optimized: shared pool (default campaign total). Proposal: the amount to book, within the seller's guidance; omit for its figure.
          */
         budget?: {
             /**
@@ -36454,7 +36454,7 @@ export type SaveMediaBuyData = {
             bidPrice: number;
         }>;
         /**
-         * Single total; seller_optimized: shared pool (default campaign total). One-allocation proposal allowed; multi: products[].budget; else retain allocation.
+         * Single total; seller_optimized: shared pool (default campaign total). Proposal: the amount to book, within the seller's guidance; omit for its figure.
          */
         budget?: {
             /**

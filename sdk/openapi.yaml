@@ -64381,8 +64381,8 @@ paths:
                         additionalProperties: false
                     budget:
                       description: >-
-                        Single total; seller_optimized: shared pool (default campaign total). One-allocation proposal
-                        allowed; multi: products[].budget; else retain allocation.
+                        Single total; seller_optimized: shared pool (default campaign total). Proposal: the amount to
+                        book, within the seller's guidance; omit for its figure.
                       type: object
                       properties:
                         total:
@@ -66473,8 +66473,8 @@ paths:
                         additionalProperties: false
                     budget:
                       description: >-
-                        Single total; seller_optimized: shared pool (default campaign total). One-allocation proposal
-                        allowed; multi: products[].budget; else retain allocation.
+                        Single total; seller_optimized: shared pool (default campaign total). Proposal: the amount to
+                        book, within the seller's guidance; omit for its figure.
                       type: object
                       properties:
                         total:
@@ -66945,8 +66945,8 @@ paths:
                             description: Bid in campaign currency.
                     budget:
                       description: >-
-                        Single total; seller_optimized: shared pool (default campaign total). One-allocation proposal
-                        allowed; multi: products[].budget; else retain allocation.
+                        Single total; seller_optimized: shared pool (default campaign total). Proposal: the amount to
+                        book, within the seller's guidance; omit for its figure.
                       type: object
                       properties:
                         total:
