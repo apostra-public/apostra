@@ -2099,6 +2099,44 @@ paths:
                         to price include products for and read partnerStatus for, instead of the account.
                       type: string
                       pattern: ^[1-9]\d*$
+                    destination:
+                      type: object
+                      properties:
+                        channel:
+                          type: string
+                          enum:
+                            - display
+                            - olv
+                            - social
+                            - search
+                            - ctv
+                            - linear_tv
+                            - radio
+                            - streaming_audio
+                            - podcast
+                            - dooh
+                            - ooh
+                            - print
+                            - cinema
+                            - email
+                            - gaming
+                            - retail_media
+                            - influencer
+                            - affiliate
+                            - product_placement
+                            - sponsored_intelligence
+                          description: AdCP channel the asset would run on.
+                        countries:
+                          description: ISO country codes. Omit for worldwide.
+                          maxItems: 250
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
+                      required:
+                        - channel
+                      additionalProperties: false
+                      description: 'creative_asset: where it would run. Each row then carries permission.'
                     reportId:
                       description: >-
                         For kind property_list with include report: the report id returned by a save_property_list
@@ -3546,6 +3584,44 @@ paths:
                         to price include products for and read partnerStatus for, instead of the account.
                       type: string
                       pattern: ^[1-9]\d*$
+                    destination:
+                      type: object
+                      properties:
+                        channel:
+                          type: string
+                          enum:
+                            - display
+                            - olv
+                            - social
+                            - search
+                            - ctv
+                            - linear_tv
+                            - radio
+                            - streaming_audio
+                            - podcast
+                            - dooh
+                            - ooh
+                            - print
+                            - cinema
+                            - email
+                            - gaming
+                            - retail_media
+                            - influencer
+                            - affiliate
+                            - product_placement
+                            - sponsored_intelligence
+                          description: AdCP channel the asset would run on.
+                        countries:
+                          description: ISO country codes. Omit for worldwide.
+                          maxItems: 250
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
+                      required:
+                        - channel
+                      additionalProperties: false
+                      description: 'creative_asset: where it would run. Each row then carries permission.'
                     reportId:
                       description: >-
                         For kind property_list with include report: the report id returned by a save_property_list
@@ -4969,6 +5045,44 @@ paths:
                         to price include products for and read partnerStatus for, instead of the account.
                       type: string
                       pattern: ^[1-9]\d*$
+                    destination:
+                      type: object
+                      properties:
+                        channel:
+                          type: string
+                          enum:
+                            - display
+                            - olv
+                            - social
+                            - search
+                            - ctv
+                            - linear_tv
+                            - radio
+                            - streaming_audio
+                            - podcast
+                            - dooh
+                            - ooh
+                            - print
+                            - cinema
+                            - email
+                            - gaming
+                            - retail_media
+                            - influencer
+                            - affiliate
+                            - product_placement
+                            - sponsored_intelligence
+                          description: AdCP channel the asset would run on.
+                        countries:
+                          description: ISO country codes. Omit for worldwide.
+                          maxItems: 250
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
+                      required:
+                        - channel
+                      additionalProperties: false
+                      description: 'creative_asset: where it would run. Each row then carries permission.'
                     reportId:
                       description: >-
                         For kind property_list with include report: the report id returned by a save_property_list
@@ -6377,6 +6491,44 @@ paths:
                         to price include products for and read partnerStatus for, instead of the account.
                       type: string
                       pattern: ^[1-9]\d*$
+                    destination:
+                      type: object
+                      properties:
+                        channel:
+                          type: string
+                          enum:
+                            - display
+                            - olv
+                            - social
+                            - search
+                            - ctv
+                            - linear_tv
+                            - radio
+                            - streaming_audio
+                            - podcast
+                            - dooh
+                            - ooh
+                            - print
+                            - cinema
+                            - email
+                            - gaming
+                            - retail_media
+                            - influencer
+                            - affiliate
+                            - product_placement
+                            - sponsored_intelligence
+                          description: AdCP channel the asset would run on.
+                        countries:
+                          description: ISO country codes. Omit for worldwide.
+                          maxItems: 250
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
+                      required:
+                        - channel
+                      additionalProperties: false
+                      description: 'creative_asset: where it would run. Each row then carries permission.'
                     reportId:
                       description: >-
                         For kind property_list with include report: the report id returned by a save_property_list
@@ -7786,6 +7938,44 @@ paths:
                         to price include products for and read partnerStatus for, instead of the account.
                       type: string
                       pattern: ^[1-9]\d*$
+                    destination:
+                      type: object
+                      properties:
+                        channel:
+                          type: string
+                          enum:
+                            - display
+                            - olv
+                            - social
+                            - search
+                            - ctv
+                            - linear_tv
+                            - radio
+                            - streaming_audio
+                            - podcast
+                            - dooh
+                            - ooh
+                            - print
+                            - cinema
+                            - email
+                            - gaming
+                            - retail_media
+                            - influencer
+                            - affiliate
+                            - product_placement
+                            - sponsored_intelligence
+                          description: AdCP channel the asset would run on.
+                        countries:
+                          description: ISO country codes. Omit for worldwide.
+                          maxItems: 250
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
+                      required:
+                        - channel
+                      additionalProperties: false
+                      description: 'creative_asset: where it would run. Each row then carries permission.'
                     reportId:
                       description: >-
                         For kind property_list with include report: the report id returned by a save_property_list
@@ -9202,6 +9392,44 @@ paths:
                         to price include products for and read partnerStatus for, instead of the account.
                       type: string
                       pattern: ^[1-9]\d*$
+                    destination:
+                      type: object
+                      properties:
+                        channel:
+                          type: string
+                          enum:
+                            - display
+                            - olv
+                            - social
+                            - search
+                            - ctv
+                            - linear_tv
+                            - radio
+                            - streaming_audio
+                            - podcast
+                            - dooh
+                            - ooh
+                            - print
+                            - cinema
+                            - email
+                            - gaming
+                            - retail_media
+                            - influencer
+                            - affiliate
+                            - product_placement
+                            - sponsored_intelligence
+                          description: AdCP channel the asset would run on.
+                        countries:
+                          description: ISO country codes. Omit for worldwide.
+                          maxItems: 250
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
+                      required:
+                        - channel
+                      additionalProperties: false
+                      description: 'creative_asset: where it would run. Each row then carries permission.'
                     reportId:
                       description: >-
                         For kind property_list with include report: the report id returned by a save_property_list
@@ -10617,6 +10845,44 @@ paths:
                         to price include products for and read partnerStatus for, instead of the account.
                       type: string
                       pattern: ^[1-9]\d*$
+                    destination:
+                      type: object
+                      properties:
+                        channel:
+                          type: string
+                          enum:
+                            - display
+                            - olv
+                            - social
+                            - search
+                            - ctv
+                            - linear_tv
+                            - radio
+                            - streaming_audio
+                            - podcast
+                            - dooh
+                            - ooh
+                            - print
+                            - cinema
+                            - email
+                            - gaming
+                            - retail_media
+                            - influencer
+                            - affiliate
+                            - product_placement
+                            - sponsored_intelligence
+                          description: AdCP channel the asset would run on.
+                        countries:
+                          description: ISO country codes. Omit for worldwide.
+                          maxItems: 250
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
+                      required:
+                        - channel
+                      additionalProperties: false
+                      description: 'creative_asset: where it would run. Each row then carries permission.'
                     reportId:
                       description: >-
                         For kind property_list with include report: the report id returned by a save_property_list
@@ -11914,6 +12180,44 @@ paths:
                       maximum: 9007199254740991
                     advertiserId:
                       not: {}
+                    destination:
+                      type: object
+                      properties:
+                        channel:
+                          type: string
+                          enum:
+                            - display
+                            - olv
+                            - social
+                            - search
+                            - ctv
+                            - linear_tv
+                            - radio
+                            - streaming_audio
+                            - podcast
+                            - dooh
+                            - ooh
+                            - print
+                            - cinema
+                            - email
+                            - gaming
+                            - retail_media
+                            - influencer
+                            - affiliate
+                            - product_placement
+                            - sponsored_intelligence
+                          description: AdCP channel the asset would run on.
+                        countries:
+                          description: ISO country codes. Omit for worldwide.
+                          maxItems: 250
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
+                      required:
+                        - channel
+                      additionalProperties: false
+                      description: 'creative_asset: where it would run. Each row then carries permission.'
                     reportId:
                       description: >-
                         For kind property_list with include report: the report id returned by a save_property_list
@@ -13331,6 +13635,44 @@ paths:
                         to price include products for and read partnerStatus for, instead of the account.
                       type: string
                       pattern: ^[1-9]\d*$
+                    destination:
+                      type: object
+                      properties:
+                        channel:
+                          type: string
+                          enum:
+                            - display
+                            - olv
+                            - social
+                            - search
+                            - ctv
+                            - linear_tv
+                            - radio
+                            - streaming_audio
+                            - podcast
+                            - dooh
+                            - ooh
+                            - print
+                            - cinema
+                            - email
+                            - gaming
+                            - retail_media
+                            - influencer
+                            - affiliate
+                            - product_placement
+                            - sponsored_intelligence
+                          description: AdCP channel the asset would run on.
+                        countries:
+                          description: ISO country codes. Omit for worldwide.
+                          maxItems: 250
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
+                      required:
+                        - channel
+                      additionalProperties: false
+                      description: 'creative_asset: where it would run. Each row then carries permission.'
                     reportId:
                       description: >-
                         For kind property_list with include report: the report id returned by a save_property_list
@@ -14740,6 +15082,44 @@ paths:
                         to price include products for and read partnerStatus for, instead of the account.
                       type: string
                       pattern: ^[1-9]\d*$
+                    destination:
+                      type: object
+                      properties:
+                        channel:
+                          type: string
+                          enum:
+                            - display
+                            - olv
+                            - social
+                            - search
+                            - ctv
+                            - linear_tv
+                            - radio
+                            - streaming_audio
+                            - podcast
+                            - dooh
+                            - ooh
+                            - print
+                            - cinema
+                            - email
+                            - gaming
+                            - retail_media
+                            - influencer
+                            - affiliate
+                            - product_placement
+                            - sponsored_intelligence
+                          description: AdCP channel the asset would run on.
+                        countries:
+                          description: ISO country codes. Omit for worldwide.
+                          maxItems: 250
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
+                      required:
+                        - channel
+                      additionalProperties: false
+                      description: 'creative_asset: where it would run. Each row then carries permission.'
                     reportId:
                       description: >-
                         For kind property_list with include report: the report id returned by a save_property_list
@@ -16046,6 +16426,44 @@ paths:
                         to price include products for and read partnerStatus for, instead of the account.
                       type: string
                       pattern: ^[1-9]\d*$
+                    destination:
+                      type: object
+                      properties:
+                        channel:
+                          type: string
+                          enum:
+                            - display
+                            - olv
+                            - social
+                            - search
+                            - ctv
+                            - linear_tv
+                            - radio
+                            - streaming_audio
+                            - podcast
+                            - dooh
+                            - ooh
+                            - print
+                            - cinema
+                            - email
+                            - gaming
+                            - retail_media
+                            - influencer
+                            - affiliate
+                            - product_placement
+                            - sponsored_intelligence
+                          description: AdCP channel the asset would run on.
+                        countries:
+                          description: ISO country codes. Omit for worldwide.
+                          maxItems: 250
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
+                      required:
+                        - channel
+                      additionalProperties: false
+                      description: 'creative_asset: where it would run. Each row then carries permission.'
                     reportId:
                       description: >-
                         For kind property_list with include report: the report id returned by a save_property_list
@@ -17346,6 +17764,44 @@ paths:
                       maximum: 9007199254740991
                     advertiserId:
                       not: {}
+                    destination:
+                      type: object
+                      properties:
+                        channel:
+                          type: string
+                          enum:
+                            - display
+                            - olv
+                            - social
+                            - search
+                            - ctv
+                            - linear_tv
+                            - radio
+                            - streaming_audio
+                            - podcast
+                            - dooh
+                            - ooh
+                            - print
+                            - cinema
+                            - email
+                            - gaming
+                            - retail_media
+                            - influencer
+                            - affiliate
+                            - product_placement
+                            - sponsored_intelligence
+                          description: AdCP channel the asset would run on.
+                        countries:
+                          description: ISO country codes. Omit for worldwide.
+                          maxItems: 250
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
+                      required:
+                        - channel
+                      additionalProperties: false
+                      description: 'creative_asset: where it would run. Each row then carries permission.'
                     reportId:
                       description: >-
                         For kind property_list with include report: the report id returned by a save_property_list
@@ -18761,6 +19217,44 @@ paths:
                         to price include products for and read partnerStatus for, instead of the account.
                       type: string
                       pattern: ^[1-9]\d*$
+                    destination:
+                      type: object
+                      properties:
+                        channel:
+                          type: string
+                          enum:
+                            - display
+                            - olv
+                            - social
+                            - search
+                            - ctv
+                            - linear_tv
+                            - radio
+                            - streaming_audio
+                            - podcast
+                            - dooh
+                            - ooh
+                            - print
+                            - cinema
+                            - email
+                            - gaming
+                            - retail_media
+                            - influencer
+                            - affiliate
+                            - product_placement
+                            - sponsored_intelligence
+                          description: AdCP channel the asset would run on.
+                        countries:
+                          description: ISO country codes. Omit for worldwide.
+                          maxItems: 250
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
+                      required:
+                        - channel
+                      additionalProperties: false
+                      description: 'creative_asset: where it would run. Each row then carries permission.'
                     reportId:
                       description: >-
                         For kind property_list with include report: the report id returned by a save_property_list
@@ -20170,6 +20664,44 @@ paths:
                         to price include products for and read partnerStatus for, instead of the account.
                       type: string
                       pattern: ^[1-9]\d*$
+                    destination:
+                      type: object
+                      properties:
+                        channel:
+                          type: string
+                          enum:
+                            - display
+                            - olv
+                            - social
+                            - search
+                            - ctv
+                            - linear_tv
+                            - radio
+                            - streaming_audio
+                            - podcast
+                            - dooh
+                            - ooh
+                            - print
+                            - cinema
+                            - email
+                            - gaming
+                            - retail_media
+                            - influencer
+                            - affiliate
+                            - product_placement
+                            - sponsored_intelligence
+                          description: AdCP channel the asset would run on.
+                        countries:
+                          description: ISO country codes. Omit for worldwide.
+                          maxItems: 250
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
+                      required:
+                        - channel
+                      additionalProperties: false
+                      description: 'creative_asset: where it would run. Each row then carries permission.'
                     reportId:
                       description: >-
                         For kind property_list with include report: the report id returned by a save_property_list
@@ -21584,6 +22116,44 @@ paths:
                         to price include products for and read partnerStatus for, instead of the account.
                       type: string
                       pattern: ^[1-9]\d*$
+                    destination:
+                      type: object
+                      properties:
+                        channel:
+                          type: string
+                          enum:
+                            - display
+                            - olv
+                            - social
+                            - search
+                            - ctv
+                            - linear_tv
+                            - radio
+                            - streaming_audio
+                            - podcast
+                            - dooh
+                            - ooh
+                            - print
+                            - cinema
+                            - email
+                            - gaming
+                            - retail_media
+                            - influencer
+                            - affiliate
+                            - product_placement
+                            - sponsored_intelligence
+                          description: AdCP channel the asset would run on.
+                        countries:
+                          description: ISO country codes. Omit for worldwide.
+                          maxItems: 250
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
+                      required:
+                        - channel
+                      additionalProperties: false
+                      description: 'creative_asset: where it would run. Each row then carries permission.'
                     reportId:
                       description: >-
                         For kind property_list with include report: the report id returned by a save_property_list
@@ -22998,6 +23568,44 @@ paths:
                         to price include products for and read partnerStatus for, instead of the account.
                       type: string
                       pattern: ^[1-9]\d*$
+                    destination:
+                      type: object
+                      properties:
+                        channel:
+                          type: string
+                          enum:
+                            - display
+                            - olv
+                            - social
+                            - search
+                            - ctv
+                            - linear_tv
+                            - radio
+                            - streaming_audio
+                            - podcast
+                            - dooh
+                            - ooh
+                            - print
+                            - cinema
+                            - email
+                            - gaming
+                            - retail_media
+                            - influencer
+                            - affiliate
+                            - product_placement
+                            - sponsored_intelligence
+                          description: AdCP channel the asset would run on.
+                        countries:
+                          description: ISO country codes. Omit for worldwide.
+                          maxItems: 250
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
+                      required:
+                        - channel
+                      additionalProperties: false
+                      description: 'creative_asset: where it would run. Each row then carries permission.'
                     reportId:
                       description: >-
                         For kind property_list with include report: the report id returned by a save_property_list
@@ -24412,6 +25020,44 @@ paths:
                         to price include products for and read partnerStatus for, instead of the account.
                       type: string
                       pattern: ^[1-9]\d*$
+                    destination:
+                      type: object
+                      properties:
+                        channel:
+                          type: string
+                          enum:
+                            - display
+                            - olv
+                            - social
+                            - search
+                            - ctv
+                            - linear_tv
+                            - radio
+                            - streaming_audio
+                            - podcast
+                            - dooh
+                            - ooh
+                            - print
+                            - cinema
+                            - email
+                            - gaming
+                            - retail_media
+                            - influencer
+                            - affiliate
+                            - product_placement
+                            - sponsored_intelligence
+                          description: AdCP channel the asset would run on.
+                        countries:
+                          description: ISO country codes. Omit for worldwide.
+                          maxItems: 250
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
+                      required:
+                        - channel
+                      additionalProperties: false
+                      description: 'creative_asset: where it would run. Each row then carries permission.'
                     reportId:
                       description: >-
                         For kind property_list with include report: the report id returned by a save_property_list
@@ -25826,6 +26472,44 @@ paths:
                         to price include products for and read partnerStatus for, instead of the account.
                       type: string
                       pattern: ^[1-9]\d*$
+                    destination:
+                      type: object
+                      properties:
+                        channel:
+                          type: string
+                          enum:
+                            - display
+                            - olv
+                            - social
+                            - search
+                            - ctv
+                            - linear_tv
+                            - radio
+                            - streaming_audio
+                            - podcast
+                            - dooh
+                            - ooh
+                            - print
+                            - cinema
+                            - email
+                            - gaming
+                            - retail_media
+                            - influencer
+                            - affiliate
+                            - product_placement
+                            - sponsored_intelligence
+                          description: AdCP channel the asset would run on.
+                        countries:
+                          description: ISO country codes. Omit for worldwide.
+                          maxItems: 250
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
+                      required:
+                        - channel
+                      additionalProperties: false
+                      description: 'creative_asset: where it would run. Each row then carries permission.'
                     reportId:
                       description: >-
                         For kind property_list with include report: the report id returned by a save_property_list
@@ -27241,6 +27925,44 @@ paths:
                         to price include products for and read partnerStatus for, instead of the account.
                       type: string
                       pattern: ^[1-9]\d*$
+                    destination:
+                      type: object
+                      properties:
+                        channel:
+                          type: string
+                          enum:
+                            - display
+                            - olv
+                            - social
+                            - search
+                            - ctv
+                            - linear_tv
+                            - radio
+                            - streaming_audio
+                            - podcast
+                            - dooh
+                            - ooh
+                            - print
+                            - cinema
+                            - email
+                            - gaming
+                            - retail_media
+                            - influencer
+                            - affiliate
+                            - product_placement
+                            - sponsored_intelligence
+                          description: AdCP channel the asset would run on.
+                        countries:
+                          description: ISO country codes. Omit for worldwide.
+                          maxItems: 250
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
+                      required:
+                        - channel
+                      additionalProperties: false
+                      description: 'creative_asset: where it would run. Each row then carries permission.'
                     reportId:
                       description: >-
                         For kind property_list with include report: the report id returned by a save_property_list
@@ -28547,6 +29269,44 @@ paths:
                         to price include products for and read partnerStatus for, instead of the account.
                       type: string
                       pattern: ^[1-9]\d*$
+                    destination:
+                      type: object
+                      properties:
+                        channel:
+                          type: string
+                          enum:
+                            - display
+                            - olv
+                            - social
+                            - search
+                            - ctv
+                            - linear_tv
+                            - radio
+                            - streaming_audio
+                            - podcast
+                            - dooh
+                            - ooh
+                            - print
+                            - cinema
+                            - email
+                            - gaming
+                            - retail_media
+                            - influencer
+                            - affiliate
+                            - product_placement
+                            - sponsored_intelligence
+                          description: AdCP channel the asset would run on.
+                        countries:
+                          description: ISO country codes. Omit for worldwide.
+                          maxItems: 250
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
+                      required:
+                        - channel
+                      additionalProperties: false
+                      description: 'creative_asset: where it would run. Each row then carries permission.'
                     reportId:
                       description: >-
                         For kind property_list with include report: the report id returned by a save_property_list
@@ -29853,6 +30613,44 @@ paths:
                         to price include products for and read partnerStatus for, instead of the account.
                       type: string
                       pattern: ^[1-9]\d*$
+                    destination:
+                      type: object
+                      properties:
+                        channel:
+                          type: string
+                          enum:
+                            - display
+                            - olv
+                            - social
+                            - search
+                            - ctv
+                            - linear_tv
+                            - radio
+                            - streaming_audio
+                            - podcast
+                            - dooh
+                            - ooh
+                            - print
+                            - cinema
+                            - email
+                            - gaming
+                            - retail_media
+                            - influencer
+                            - affiliate
+                            - product_placement
+                            - sponsored_intelligence
+                          description: AdCP channel the asset would run on.
+                        countries:
+                          description: ISO country codes. Omit for worldwide.
+                          maxItems: 250
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
+                      required:
+                        - channel
+                      additionalProperties: false
+                      description: 'creative_asset: where it would run. Each row then carries permission.'
                     reportId:
                       description: >-
                         For kind property_list with include report: the report id returned by a save_property_list
@@ -73504,6 +74302,44 @@ paths:
                         which list every source when it is omitted.
                       type: string
                       minLength: 1
+                    destination:
+                      type: object
+                      properties:
+                        channel:
+                          type: string
+                          enum:
+                            - display
+                            - olv
+                            - social
+                            - search
+                            - ctv
+                            - linear_tv
+                            - radio
+                            - streaming_audio
+                            - podcast
+                            - dooh
+                            - ooh
+                            - print
+                            - cinema
+                            - email
+                            - gaming
+                            - retail_media
+                            - influencer
+                            - affiliate
+                            - product_placement
+                            - sponsored_intelligence
+                          description: AdCP channel the asset would run on.
+                        countries:
+                          description: ISO country codes. Omit for worldwide.
+                          maxItems: 250
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
+                      required:
+                        - channel
+                      additionalProperties: false
+                      description: 'creative_asset: where it would run. Each row then carries permission.'
                     filter:
                       description: >-
                         Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with
@@ -74022,6 +74858,10 @@ paths:
                             - rejected
                             - paused
                             - revoked
+                        permission:
+                          description: 'creative_asset: only assets usable for destination.'
+                          type: string
+                          const: usable
                         catalogState:
                           description: >-
                             For kind catalog only. Omit for active catalogs; use draft explicitly to list
@@ -75527,6 +76367,44 @@ paths:
                         which list every source when it is omitted.
                       type: string
                       minLength: 1
+                    destination:
+                      type: object
+                      properties:
+                        channel:
+                          type: string
+                          enum:
+                            - display
+                            - olv
+                            - social
+                            - search
+                            - ctv
+                            - linear_tv
+                            - radio
+                            - streaming_audio
+                            - podcast
+                            - dooh
+                            - ooh
+                            - print
+                            - cinema
+                            - email
+                            - gaming
+                            - retail_media
+                            - influencer
+                            - affiliate
+                            - product_placement
+                            - sponsored_intelligence
+                          description: AdCP channel the asset would run on.
+                        countries:
+                          description: ISO country codes. Omit for worldwide.
+                          maxItems: 250
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
+                      required:
+                        - channel
+                      additionalProperties: false
+                      description: 'creative_asset: where it would run. Each row then carries permission.'
                     filter:
                       description: >-
                         Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with
@@ -76045,6 +76923,10 @@ paths:
                             - rejected
                             - paused
                             - revoked
+                        permission:
+                          description: 'creative_asset: only assets usable for destination.'
+                          type: string
+                          const: usable
                         catalogState:
                           description: >-
                             For kind catalog only. Omit for active catalogs; use draft explicitly to list
@@ -77551,6 +78433,44 @@ paths:
                         which list every source when it is omitted.
                       type: string
                       minLength: 1
+                    destination:
+                      type: object
+                      properties:
+                        channel:
+                          type: string
+                          enum:
+                            - display
+                            - olv
+                            - social
+                            - search
+                            - ctv
+                            - linear_tv
+                            - radio
+                            - streaming_audio
+                            - podcast
+                            - dooh
+                            - ooh
+                            - print
+                            - cinema
+                            - email
+                            - gaming
+                            - retail_media
+                            - influencer
+                            - affiliate
+                            - product_placement
+                            - sponsored_intelligence
+                          description: AdCP channel the asset would run on.
+                        countries:
+                          description: ISO country codes. Omit for worldwide.
+                          maxItems: 250
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
+                      required:
+                        - channel
+                      additionalProperties: false
+                      description: 'creative_asset: where it would run. Each row then carries permission.'
                     filter:
                       description: >-
                         Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with
@@ -78375,6 +79295,44 @@ paths:
                         which list every source when it is omitted.
                       type: string
                       minLength: 1
+                    destination:
+                      type: object
+                      properties:
+                        channel:
+                          type: string
+                          enum:
+                            - display
+                            - olv
+                            - social
+                            - search
+                            - ctv
+                            - linear_tv
+                            - radio
+                            - streaming_audio
+                            - podcast
+                            - dooh
+                            - ooh
+                            - print
+                            - cinema
+                            - email
+                            - gaming
+                            - retail_media
+                            - influencer
+                            - affiliate
+                            - product_placement
+                            - sponsored_intelligence
+                          description: AdCP channel the asset would run on.
+                        countries:
+                          description: ISO country codes. Omit for worldwide.
+                          maxItems: 250
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
+                      required:
+                        - channel
+                      additionalProperties: false
+                      description: 'creative_asset: where it would run. Each row then carries permission.'
                     filter:
                       description: >-
                         Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with
@@ -78893,6 +79851,10 @@ paths:
                             - rejected
                             - paused
                             - revoked
+                        permission:
+                          description: 'creative_asset: only assets usable for destination.'
+                          type: string
+                          const: usable
                         catalogState:
                           description: >-
                             For kind catalog only. Omit for active catalogs; use draft explicitly to list
@@ -80399,6 +81361,44 @@ paths:
                         which list every source when it is omitted.
                       type: string
                       minLength: 1
+                    destination:
+                      type: object
+                      properties:
+                        channel:
+                          type: string
+                          enum:
+                            - display
+                            - olv
+                            - social
+                            - search
+                            - ctv
+                            - linear_tv
+                            - radio
+                            - streaming_audio
+                            - podcast
+                            - dooh
+                            - ooh
+                            - print
+                            - cinema
+                            - email
+                            - gaming
+                            - retail_media
+                            - influencer
+                            - affiliate
+                            - product_placement
+                            - sponsored_intelligence
+                          description: AdCP channel the asset would run on.
+                        countries:
+                          description: ISO country codes. Omit for worldwide.
+                          maxItems: 250
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
+                      required:
+                        - channel
+                      additionalProperties: false
+                      description: 'creative_asset: where it would run. Each row then carries permission.'
                     filter:
                       description: >-
                         Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with
@@ -80908,6 +81908,10 @@ paths:
                             - rejected
                             - paused
                             - revoked
+                        permission:
+                          description: 'creative_asset: only assets usable for destination.'
+                          type: string
+                          const: usable
                         catalogState:
                           description: >-
                             For kind catalog only. Omit for active catalogs; use draft explicitly to list
@@ -82407,6 +83411,44 @@ paths:
                         which list every source when it is omitted.
                       type: string
                       minLength: 1
+                    destination:
+                      type: object
+                      properties:
+                        channel:
+                          type: string
+                          enum:
+                            - display
+                            - olv
+                            - social
+                            - search
+                            - ctv
+                            - linear_tv
+                            - radio
+                            - streaming_audio
+                            - podcast
+                            - dooh
+                            - ooh
+                            - print
+                            - cinema
+                            - email
+                            - gaming
+                            - retail_media
+                            - influencer
+                            - affiliate
+                            - product_placement
+                            - sponsored_intelligence
+                          description: AdCP channel the asset would run on.
+                        countries:
+                          description: ISO country codes. Omit for worldwide.
+                          maxItems: 250
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
+                      required:
+                        - channel
+                      additionalProperties: false
+                      description: 'creative_asset: where it would run. Each row then carries permission.'
                     filter:
                       description: >-
                         Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with
@@ -82920,6 +83962,10 @@ paths:
                             - rejected
                             - paused
                             - revoked
+                        permission:
+                          description: 'creative_asset: only assets usable for destination.'
+                          type: string
+                          const: usable
                         catalogState:
                           description: >-
                             For kind catalog only. Omit for active catalogs; use draft explicitly to list
@@ -84423,6 +85469,44 @@ paths:
                         which list every source when it is omitted.
                       type: string
                       minLength: 1
+                    destination:
+                      type: object
+                      properties:
+                        channel:
+                          type: string
+                          enum:
+                            - display
+                            - olv
+                            - social
+                            - search
+                            - ctv
+                            - linear_tv
+                            - radio
+                            - streaming_audio
+                            - podcast
+                            - dooh
+                            - ooh
+                            - print
+                            - cinema
+                            - email
+                            - gaming
+                            - retail_media
+                            - influencer
+                            - affiliate
+                            - product_placement
+                            - sponsored_intelligence
+                          description: AdCP channel the asset would run on.
+                        countries:
+                          description: ISO country codes. Omit for worldwide.
+                          maxItems: 250
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
+                      required:
+                        - channel
+                      additionalProperties: false
+                      description: 'creative_asset: where it would run. Each row then carries permission.'
                     filter:
                       description: >-
                         Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with
@@ -84932,6 +86016,10 @@ paths:
                             - rejected
                             - paused
                             - revoked
+                        permission:
+                          description: 'creative_asset: only assets usable for destination.'
+                          type: string
+                          const: usable
                         catalogState:
                           description: >-
                             For kind catalog only. Omit for active catalogs; use draft explicitly to list
@@ -86438,6 +87526,44 @@ paths:
                         which list every source when it is omitted.
                       type: string
                       minLength: 1
+                    destination:
+                      type: object
+                      properties:
+                        channel:
+                          type: string
+                          enum:
+                            - display
+                            - olv
+                            - social
+                            - search
+                            - ctv
+                            - linear_tv
+                            - radio
+                            - streaming_audio
+                            - podcast
+                            - dooh
+                            - ooh
+                            - print
+                            - cinema
+                            - email
+                            - gaming
+                            - retail_media
+                            - influencer
+                            - affiliate
+                            - product_placement
+                            - sponsored_intelligence
+                          description: AdCP channel the asset would run on.
+                        countries:
+                          description: ISO country codes. Omit for worldwide.
+                          maxItems: 250
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
+                      required:
+                        - channel
+                      additionalProperties: false
+                      description: 'creative_asset: where it would run. Each row then carries permission.'
                     filter:
                       description: >-
                         Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with
@@ -86951,6 +88077,10 @@ paths:
                             - rejected
                             - paused
                             - revoked
+                        permission:
+                          description: 'creative_asset: only assets usable for destination.'
+                          type: string
+                          const: usable
                         catalogState:
                           description: >-
                             For kind catalog only. Omit for active catalogs; use draft explicitly to list
@@ -88445,6 +89575,44 @@ paths:
                           - assets
                     sourceId:
                       not: {}
+                    destination:
+                      type: object
+                      properties:
+                        channel:
+                          type: string
+                          enum:
+                            - display
+                            - olv
+                            - social
+                            - search
+                            - ctv
+                            - linear_tv
+                            - radio
+                            - streaming_audio
+                            - podcast
+                            - dooh
+                            - ooh
+                            - print
+                            - cinema
+                            - email
+                            - gaming
+                            - retail_media
+                            - influencer
+                            - affiliate
+                            - product_placement
+                            - sponsored_intelligence
+                          description: AdCP channel the asset would run on.
+                        countries:
+                          description: ISO country codes. Omit for worldwide.
+                          maxItems: 250
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
+                      required:
+                        - channel
+                      additionalProperties: false
+                      description: 'creative_asset: where it would run. Each row then carries permission.'
                     filter:
                       description: >-
                         Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with
@@ -89289,6 +90457,44 @@ paths:
                           - assets
                     sourceId:
                       not: {}
+                    destination:
+                      type: object
+                      properties:
+                        channel:
+                          type: string
+                          enum:
+                            - display
+                            - olv
+                            - social
+                            - search
+                            - ctv
+                            - linear_tv
+                            - radio
+                            - streaming_audio
+                            - podcast
+                            - dooh
+                            - ooh
+                            - print
+                            - cinema
+                            - email
+                            - gaming
+                            - retail_media
+                            - influencer
+                            - affiliate
+                            - product_placement
+                            - sponsored_intelligence
+                          description: AdCP channel the asset would run on.
+                        countries:
+                          description: ISO country codes. Omit for worldwide.
+                          maxItems: 250
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
+                      required:
+                        - channel
+                      additionalProperties: false
+                      description: 'creative_asset: where it would run. Each row then carries permission.'
                     filter:
                       description: >-
                         Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with
@@ -90149,6 +91355,44 @@ paths:
                         which list every source when it is omitted.
                       type: string
                       minLength: 1
+                    destination:
+                      type: object
+                      properties:
+                        channel:
+                          type: string
+                          enum:
+                            - display
+                            - olv
+                            - social
+                            - search
+                            - ctv
+                            - linear_tv
+                            - radio
+                            - streaming_audio
+                            - podcast
+                            - dooh
+                            - ooh
+                            - print
+                            - cinema
+                            - email
+                            - gaming
+                            - retail_media
+                            - influencer
+                            - affiliate
+                            - product_placement
+                            - sponsored_intelligence
+                          description: AdCP channel the asset would run on.
+                        countries:
+                          description: ISO country codes. Omit for worldwide.
+                          maxItems: 250
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
+                      required:
+                        - channel
+                      additionalProperties: false
+                      description: 'creative_asset: where it would run. Each row then carries permission.'
                     filter:
                       description: >-
                         Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with
@@ -90667,6 +91911,10 @@ paths:
                             - rejected
                             - paused
                             - revoked
+                        permission:
+                          description: 'creative_asset: only assets usable for destination.'
+                          type: string
+                          const: usable
                         catalogState:
                           description: >-
                             For kind catalog only. Omit for active catalogs; use draft explicitly to list
@@ -92171,6 +93419,44 @@ paths:
                         which list every source when it is omitted.
                       type: string
                       minLength: 1
+                    destination:
+                      type: object
+                      properties:
+                        channel:
+                          type: string
+                          enum:
+                            - display
+                            - olv
+                            - social
+                            - search
+                            - ctv
+                            - linear_tv
+                            - radio
+                            - streaming_audio
+                            - podcast
+                            - dooh
+                            - ooh
+                            - print
+                            - cinema
+                            - email
+                            - gaming
+                            - retail_media
+                            - influencer
+                            - affiliate
+                            - product_placement
+                            - sponsored_intelligence
+                          description: AdCP channel the asset would run on.
+                        countries:
+                          description: ISO country codes. Omit for worldwide.
+                          maxItems: 250
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
+                      required:
+                        - channel
+                      additionalProperties: false
+                      description: 'creative_asset: where it would run. Each row then carries permission.'
                     filter:
                       description: >-
                         Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with
@@ -93011,6 +94297,44 @@ paths:
                         which list every source when it is omitted.
                       type: string
                       minLength: 1
+                    destination:
+                      type: object
+                      properties:
+                        channel:
+                          type: string
+                          enum:
+                            - display
+                            - olv
+                            - social
+                            - search
+                            - ctv
+                            - linear_tv
+                            - radio
+                            - streaming_audio
+                            - podcast
+                            - dooh
+                            - ooh
+                            - print
+                            - cinema
+                            - email
+                            - gaming
+                            - retail_media
+                            - influencer
+                            - affiliate
+                            - product_placement
+                            - sponsored_intelligence
+                          description: AdCP channel the asset would run on.
+                        countries:
+                          description: ISO country codes. Omit for worldwide.
+                          maxItems: 250
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
+                      required:
+                        - channel
+                      additionalProperties: false
+                      description: 'creative_asset: where it would run. Each row then carries permission.'
                     filter:
                       not: {}
                     cursor:
@@ -93822,6 +95146,44 @@ paths:
                         which list every source when it is omitted.
                       type: string
                       minLength: 1
+                    destination:
+                      type: object
+                      properties:
+                        channel:
+                          type: string
+                          enum:
+                            - display
+                            - olv
+                            - social
+                            - search
+                            - ctv
+                            - linear_tv
+                            - radio
+                            - streaming_audio
+                            - podcast
+                            - dooh
+                            - ooh
+                            - print
+                            - cinema
+                            - email
+                            - gaming
+                            - retail_media
+                            - influencer
+                            - affiliate
+                            - product_placement
+                            - sponsored_intelligence
+                          description: AdCP channel the asset would run on.
+                        countries:
+                          description: ISO country codes. Omit for worldwide.
+                          maxItems: 250
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
+                      required:
+                        - channel
+                      additionalProperties: false
+                      description: 'creative_asset: where it would run. Each row then carries permission.'
                     filter:
                       description: >-
                         Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with
@@ -94340,6 +95702,10 @@ paths:
                             - rejected
                             - paused
                             - revoked
+                        permission:
+                          description: 'creative_asset: only assets usable for destination.'
+                          type: string
+                          const: usable
                         catalogState:
                           description: >-
                             For kind catalog only. Omit for active catalogs; use draft explicitly to list
@@ -95844,6 +97210,44 @@ paths:
                         which list every source when it is omitted.
                       type: string
                       minLength: 1
+                    destination:
+                      type: object
+                      properties:
+                        channel:
+                          type: string
+                          enum:
+                            - display
+                            - olv
+                            - social
+                            - search
+                            - ctv
+                            - linear_tv
+                            - radio
+                            - streaming_audio
+                            - podcast
+                            - dooh
+                            - ooh
+                            - print
+                            - cinema
+                            - email
+                            - gaming
+                            - retail_media
+                            - influencer
+                            - affiliate
+                            - product_placement
+                            - sponsored_intelligence
+                          description: AdCP channel the asset would run on.
+                        countries:
+                          description: ISO country codes. Omit for worldwide.
+                          maxItems: 250
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
+                      required:
+                        - channel
+                      additionalProperties: false
+                      description: 'creative_asset: where it would run. Each row then carries permission.'
                     filter:
                       description: >-
                         Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with
@@ -96682,6 +98086,44 @@ paths:
                         which list every source when it is omitted.
                       type: string
                       minLength: 1
+                    destination:
+                      type: object
+                      properties:
+                        channel:
+                          type: string
+                          enum:
+                            - display
+                            - olv
+                            - social
+                            - search
+                            - ctv
+                            - linear_tv
+                            - radio
+                            - streaming_audio
+                            - podcast
+                            - dooh
+                            - ooh
+                            - print
+                            - cinema
+                            - email
+                            - gaming
+                            - retail_media
+                            - influencer
+                            - affiliate
+                            - product_placement
+                            - sponsored_intelligence
+                          description: AdCP channel the asset would run on.
+                        countries:
+                          description: ISO country codes. Omit for worldwide.
+                          maxItems: 250
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
+                      required:
+                        - channel
+                      additionalProperties: false
+                      description: 'creative_asset: where it would run. Each row then carries permission.'
                     filter:
                       description: >-
                         Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with
@@ -97200,6 +98642,10 @@ paths:
                             - rejected
                             - paused
                             - revoked
+                        permission:
+                          description: 'creative_asset: only assets usable for destination.'
+                          type: string
+                          const: usable
                         catalogState:
                           description: >-
                             For kind catalog only. Omit for active catalogs; use draft explicitly to list
@@ -98704,6 +100150,44 @@ paths:
                         which list every source when it is omitted.
                       type: string
                       minLength: 1
+                    destination:
+                      type: object
+                      properties:
+                        channel:
+                          type: string
+                          enum:
+                            - display
+                            - olv
+                            - social
+                            - search
+                            - ctv
+                            - linear_tv
+                            - radio
+                            - streaming_audio
+                            - podcast
+                            - dooh
+                            - ooh
+                            - print
+                            - cinema
+                            - email
+                            - gaming
+                            - retail_media
+                            - influencer
+                            - affiliate
+                            - product_placement
+                            - sponsored_intelligence
+                          description: AdCP channel the asset would run on.
+                        countries:
+                          description: ISO country codes. Omit for worldwide.
+                          maxItems: 250
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
+                      required:
+                        - channel
+                      additionalProperties: false
+                      description: 'creative_asset: where it would run. Each row then carries permission.'
                     filter:
                       description: >-
                         Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with
@@ -99222,6 +100706,10 @@ paths:
                             - rejected
                             - paused
                             - revoked
+                        permission:
+                          description: 'creative_asset: only assets usable for destination.'
+                          type: string
+                          const: usable
                         catalogState:
                           description: >-
                             For kind catalog only. Omit for active catalogs; use draft explicitly to list
@@ -100723,6 +102211,44 @@ paths:
                         which list every source when it is omitted.
                       type: string
                       minLength: 1
+                    destination:
+                      type: object
+                      properties:
+                        channel:
+                          type: string
+                          enum:
+                            - display
+                            - olv
+                            - social
+                            - search
+                            - ctv
+                            - linear_tv
+                            - radio
+                            - streaming_audio
+                            - podcast
+                            - dooh
+                            - ooh
+                            - print
+                            - cinema
+                            - email
+                            - gaming
+                            - retail_media
+                            - influencer
+                            - affiliate
+                            - product_placement
+                            - sponsored_intelligence
+                          description: AdCP channel the asset would run on.
+                        countries:
+                          description: ISO country codes. Omit for worldwide.
+                          maxItems: 250
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
+                      required:
+                        - channel
+                      additionalProperties: false
+                      description: 'creative_asset: where it would run. Each row then carries permission.'
                     filter:
                       description: >-
                         Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with
@@ -101241,6 +102767,10 @@ paths:
                             - rejected
                             - paused
                             - revoked
+                        permission:
+                          description: 'creative_asset: only assets usable for destination.'
+                          type: string
+                          const: usable
                         catalogState:
                           description: >-
                             For kind catalog only. Omit for active catalogs; use draft explicitly to list
@@ -102742,6 +104272,44 @@ paths:
                         which list every source when it is omitted.
                       type: string
                       minLength: 1
+                    destination:
+                      type: object
+                      properties:
+                        channel:
+                          type: string
+                          enum:
+                            - display
+                            - olv
+                            - social
+                            - search
+                            - ctv
+                            - linear_tv
+                            - radio
+                            - streaming_audio
+                            - podcast
+                            - dooh
+                            - ooh
+                            - print
+                            - cinema
+                            - email
+                            - gaming
+                            - retail_media
+                            - influencer
+                            - affiliate
+                            - product_placement
+                            - sponsored_intelligence
+                          description: AdCP channel the asset would run on.
+                        countries:
+                          description: ISO country codes. Omit for worldwide.
+                          maxItems: 250
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
+                      required:
+                        - channel
+                      additionalProperties: false
+                      description: 'creative_asset: where it would run. Each row then carries permission.'
                     filter:
                       description: >-
                         Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with
@@ -103260,6 +104828,10 @@ paths:
                             - rejected
                             - paused
                             - revoked
+                        permission:
+                          description: 'creative_asset: only assets usable for destination.'
+                          type: string
+                          const: usable
                         catalogState:
                           description: >-
                             For kind catalog only. Omit for active catalogs; use draft explicitly to list
@@ -104762,6 +106334,44 @@ paths:
                         which list every source when it is omitted.
                       type: string
                       minLength: 1
+                    destination:
+                      type: object
+                      properties:
+                        channel:
+                          type: string
+                          enum:
+                            - display
+                            - olv
+                            - social
+                            - search
+                            - ctv
+                            - linear_tv
+                            - radio
+                            - streaming_audio
+                            - podcast
+                            - dooh
+                            - ooh
+                            - print
+                            - cinema
+                            - email
+                            - gaming
+                            - retail_media
+                            - influencer
+                            - affiliate
+                            - product_placement
+                            - sponsored_intelligence
+                          description: AdCP channel the asset would run on.
+                        countries:
+                          description: ISO country codes. Omit for worldwide.
+                          maxItems: 250
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
+                      required:
+                        - channel
+                      additionalProperties: false
+                      description: 'creative_asset: where it would run. Each row then carries permission.'
                     filter:
                       description: >-
                         Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with
@@ -105280,6 +106890,10 @@ paths:
                             - rejected
                             - paused
                             - revoked
+                        permission:
+                          description: 'creative_asset: only assets usable for destination.'
+                          type: string
+                          const: usable
                         catalogState:
                           description: >-
                             For kind catalog only. Omit for active catalogs; use draft explicitly to list
