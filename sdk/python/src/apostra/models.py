@@ -13726,6 +13726,8 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalA
     '\n    Required to move any approval to auto, media buys from manual to ai_assisted, to lengthen accountMaxAutoAcceptPaymentTerms under account auto, to accept an operator that accountApproval would review, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
     '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
+    approvalRouting: NotRequired[SaveBusinessRulesRequestSaveBusinessRulesApprovalRouting]
+    '\n    Who reviews one kind of approval. Waits for an administrator to approve on our site. Send alone.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
@@ -13752,6 +13754,8 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalA
     '\n    Required to move any approval to auto, media buys from manual to ai_assisted, to lengthen accountMaxAutoAcceptPaymentTerms under account auto, to accept an operator that accountApproval would review, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
     '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
+    approvalRouting: NotRequired[SaveBusinessRulesRequestSaveBusinessRulesApprovalRouting]
+    '\n    Who reviews one kind of approval. Waits for an administrator to approve on our site. Send alone.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
@@ -13778,6 +13782,8 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalA
     '\n    Required to move any approval to auto, media buys from manual to ai_assisted, to lengthen accountMaxAutoAcceptPaymentTerms under account auto, to accept an operator that accountApproval would review, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: list[Literal["brief_acceptance", "creative_policy"]]
     '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
+    approvalRouting: NotRequired[SaveBusinessRulesRequestSaveBusinessRulesApprovalRouting]
+    '\n    Who reviews one kind of approval. Waits for an administrator to approve on our site. Send alone.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
@@ -13804,6 +13810,8 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalA
     '\n    Required to move any approval to auto, media buys from manual to ai_assisted, to lengthen accountMaxAutoAcceptPaymentTerms under account auto, to accept an operator that accountApproval would review, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
     '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
+    approvalRouting: NotRequired[SaveBusinessRulesRequestSaveBusinessRulesApprovalRouting]
+    '\n    Who reviews one kind of approval. Waits for an administrator to approve on our site. Send alone.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
@@ -13830,6 +13838,8 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalA
     '\n    Required to move any approval to auto, media buys from manual to ai_assisted, to lengthen accountMaxAutoAcceptPaymentTerms under account auto, to accept an operator that accountApproval would review, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
     '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
+    approvalRouting: NotRequired[SaveBusinessRulesRequestSaveBusinessRulesApprovalRouting]
+    '\n    Who reviews one kind of approval. Waits for an administrator to approve on our site. Send alone.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
@@ -13878,6 +13888,8 @@ class SaveBusinessRulesInputWithPolicies(TypedDict):
     '\n    Required to move any approval to auto, media buys from manual to ai_assisted, to lengthen accountMaxAutoAcceptPaymentTerms under account auto, to accept an operator that accountApproval would review, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
     '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
+    approvalRouting: NotRequired[SaveBusinessRulesRequestSaveBusinessRulesApprovalRouting]
+    '\n    Who reviews one kind of approval. Waits for an administrator to approve on our site. Send alone.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
@@ -13904,12 +13916,36 @@ class SaveBusinessRulesInputWithPolicy(TypedDict):
     '\n    Required to move any approval to auto, media buys from manual to ai_assisted, to lengthen accountMaxAutoAcceptPaymentTerms under account auto, to accept an operator that accountApproval would review, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
     '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
+    approvalRouting: NotRequired[SaveBusinessRulesRequestSaveBusinessRulesApprovalRouting]
+    '\n    Who reviews one kind of approval. Waits for an administrator to approve on our site. Send alone.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
 
 SaveBusinessRulesInput: TypeAlias = "SaveBusinessRulesInputWithPolicy | SaveBusinessRulesInputWithPolicies | SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsAdvertisingPolicyDisclosureWithCreativeApproval | SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsAdvertisingPolicyDisclosureWithMediaBuyApproval | SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsAdvertisingPolicyDisclosureWithAccountApproval | SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsAdvertisingPolicyDisclosureWithAccountMaxAutoAcceptPaymentTerms | SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsAdvertisingPolicyDisclosureWithAdvertisingPolicyDisclosure"
+
+class SaveBusinessRulesRequestSaveBusinessRulesApprovalRouting(TypedDict):
+    kind: Literal["MEDIA_BUY", "CREATIVE_REVIEW"]
+    '\n    Which reviews this routes.\n    '
+    primaryUserIds: NotRequired[list[str]]
+    '\n    Users who review first. Ids from the read.\n    '
+    fallbackUserIds: NotRequired[list[str]]
+    '\n    Users it escalates to.\n    '
+    primaryRoleKeys: NotRequired[list[Literal["ADMIN", "PREMIUM", "BASIC"]]]
+    '\n    Roles who review first.\n    '
+    fallbackRoleKeys: NotRequired[list[Literal["ADMIN", "PREMIUM", "BASIC"]]]
+    '\n    Roles it escalates to.\n    '
+    primaryChannels: list[Literal["in_app", "email", "slack"]]
+    '\n    Include in_app.\n    '
+    fallbackChannels: list[Literal["in_app", "email", "slack"]]
+    '\n    Include in_app.\n    '
+    reminderAfterMinutes: int
+    '\n    Minutes before a reminder.\n    '
+    escalateAfterMinutes: int
+    '\n    After reminderAfterMinutes.\n    '
+    expectedVersion: NotRequired[int | None]
+    '\n    The policy version you read; null if none. Refused if it moved on.\n    '
 
 class SaveBusinessRulesRequestSaveBusinessRulesPolicies(TypedDict):
     briefAcceptance: NotRequired[SaveBusinessRulesRequestSaveBusinessRulesPolicyChange]
@@ -13946,6 +13982,20 @@ class SaveBusinessRulesSuccessSaveBusinessRulesPolicyChangeResult(TypedDict):
     version: float | None
     replacedVersion: float | None
 
+class SaveBusinessRulesSuccessSaveBusinessRulesSuccessApprovalRequired(TypedDict):
+    outcome: Literal["approval_required"]
+    action: Literal["approval_required"]
+    message: str
+    approval: SaveBusinessRulesSuccessSaveBusinessRulesSuccessApprovalRequiredApproval
+    idempotencyKey: NotRequired[str]
+
+class SaveBusinessRulesSuccessSaveBusinessRulesSuccessApprovalRequiredApproval(TypedDict):
+    id: str
+    kind: str
+    state: str
+    url: str
+    expiresAt: str
+
 class SaveBusinessRulesSuccessSaveBusinessRulesSuccessSaved(TypedDict):
     outcome: Literal["saved"]
     businessRules: SaveBusinessRulesSuccessSaveBusinessRulesSuccessSavedBusinessRules
@@ -13973,7 +14023,7 @@ class SaveBusinessRulesSuccessSellerSaveReplayed(TypedDict):
     destinationSaveReplayed: Literal[False]
     materialReceipt: SaveBusinessRulesSuccessSellerSaveReplayedMaterialReceipt
 
-SaveBusinessRulesResult: TypeAlias = "SaveBusinessRulesSuccessSaveBusinessRulesSuccessSaved | SaveBusinessRulesSuccessSellerSaveCandidateReplayed | SaveBusinessRulesSuccessSellerSaveReplayed"
+SaveBusinessRulesResult: TypeAlias = "SaveBusinessRulesSuccessSaveBusinessRulesSuccessSaved | SaveBusinessRulesSuccessSaveBusinessRulesSuccessApprovalRequired | SaveBusinessRulesSuccessSellerSaveCandidateReplayed | SaveBusinessRulesSuccessSellerSaveReplayed"
 
 SaveBusinessRulesSuccessSellerSaveReplayedMaterialReceipt: TypeAlias = dict[str, JsonValue]
 
@@ -25830,8 +25880,10 @@ class SaveWorkItemInput(TypedDict):
     '\n    Work-item identifier from search or get.\n    '
     sourceId: NotRequired[str]
     '\n    Required for `modular_source`; copy it from search.\n    '
-    status: Literal["approved", "rejected", "completed"]
-    '\n    Desired terminal state for this kind.\n    '
+    status: NotRequired[Literal["approved", "rejected", "completed"]]
+    '\n    Desired terminal state for this kind. Required unless you send reassign.\n    '
+    reassign: NotRequired[SaveWorkItemInputReassign]
+    '\n    Move an open creative_review or media_buy_approval to another person, with no status. Waits for an administrator to approve on our site.\n    '
     reviewerNotes: NotRequired[str]
     '\n    Note preserved with the decision. Required for `contract_conflict`: your reason for the overrule.\n    '
     expectedContentDigest: NotRequired[str]
@@ -25853,6 +25905,10 @@ class SaveWorkItemInputGamCleanup(TypedDict):
     note: NotRequired[str]
     '\n    Required for manual: what you did in GAM.\n    '
 
+class SaveWorkItemInputReassign(TypedDict):
+    userId: str
+    '\n    The user to hold the review. Ids are in the routing read.\n    '
+
 class SaveWorkItemRequestModularDailyDelivery(TypedDict):
     date: str
     '\n    Calendar day, YYYY-MM-DD.\n    '
@@ -25866,6 +25922,20 @@ class SaveWorkItemRequestWorkItemResultEntry(TypedDict):
     '\n    A key from the work item `requiredResultFields`, for example `upstream.campaignId`.\n    '
     value: str | float | list[str | SaveWorkItemRequestModularDailyDelivery]
     '\n    A string or number, a list of strings, or for `reporting.dailyBreakdown` the daily delivery rows.\n    '
+
+class SaveWorkItemSuccessSaveWorkItemSuccessApprovalRequired(TypedDict):
+    outcome: Literal["approval_required"]
+    action: Literal["approval_required"]
+    message: str
+    approval: SaveWorkItemSuccessSaveWorkItemSuccessApprovalRequiredApproval
+    idempotencyKey: NotRequired[str]
+
+class SaveWorkItemSuccessSaveWorkItemSuccessApprovalRequiredApproval(TypedDict):
+    id: str
+    kind: str
+    state: str
+    url: str
+    expiresAt: str
 
 class SaveWorkItemSuccessSaveWorkItemSuccessCreated(TypedDict):
     outcome: Literal["created"]
@@ -25889,7 +25959,7 @@ class SaveWorkItemSuccessSaveWorkItemSuccessUnchanged(TypedDict):
     actionEvidence: NotRequired[SaveWorkItemSuccessSaveWorkItemSuccessUnchangedActionEvidence]
     resumeDue: NotRequired[SaveWorkItemSuccessSaveWorkItemSuccessUnchangedResumeDue]
 
-SaveWorkItemResult: TypeAlias = "SaveWorkItemSuccessSaveWorkItemSuccessCreated | SaveWorkItemSuccessSaveWorkItemSuccessUnchanged"
+SaveWorkItemResult: TypeAlias = "SaveWorkItemSuccessSaveWorkItemSuccessCreated | SaveWorkItemSuccessSaveWorkItemSuccessUnchanged | SaveWorkItemSuccessSaveWorkItemSuccessApprovalRequired"
 
 class SaveWorkItemSuccessSaveWorkItemSuccessUnchangedActionEvidence(TypedDict):
     basis: Literal["unproven"]

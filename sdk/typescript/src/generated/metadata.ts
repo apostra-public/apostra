@@ -1714,7 +1714,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Decide a creative or media-buy approval, overrule a spend conflict, complete a modular-source follow-up, or resolve a failed GAM order. Repeats preserve evidence; retry, evaluation, and reassignment stay on the approvals Page."
+    "summary": "Decide a creative or media-buy approval, overrule a spend conflict, complete a modular-source follow-up, resolve a failed GAM order, or ask to reassign a review (an administrator approves on our site). Repeats preserve evidence; retry and evaluation stay on the approvals Page."
   },
   "save_workspace_file": {
     "path": "/tools/save_workspace_file",
