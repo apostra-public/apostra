@@ -137292,6 +137292,10 @@ components:
             - type: 'null'
         sessionId:
           type: string
+        sourceSessionId:
+          type:
+            - string
+            - 'null'
         objectives:
           type: string
           maxLength: 2000
@@ -137839,6 +137843,7 @@ components:
         - advertiserId
         - advertiser
         - sessionId
+        - sourceSessionId
         - objectives
         - lead
         - attachments
@@ -137888,6 +137893,10 @@ components:
             - type: 'null'
         sessionId:
           type: string
+        sourceSessionId:
+          type:
+            - string
+            - 'null'
         objectives:
           type: string
           maxLength: 2000
@@ -138435,6 +138444,7 @@ components:
         - advertiserId
         - advertiser
         - sessionId
+        - sourceSessionId
         - objectives
         - lead
         - attachments
