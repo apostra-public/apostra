@@ -75090,7 +75090,7 @@ paths:
                           description: >-
                             Seller (buyer account): name, the default, or followers (refused until creator data exists).
                             No sort: best claim first with property, best match with query. Seller media_buy or Project:
-                            attention (needs a person first, then latest activity). Other kinds: not applied yet.
+                            attention (needs you first, then latest activity). Other kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
@@ -77167,7 +77167,7 @@ paths:
                           description: >-
                             Seller (buyer account): name, the default, or followers (refused until creator data exists).
                             No sort: best claim first with property, best match with query. Seller media_buy or Project:
-                            attention (needs a person first, then latest activity). Other kinds: not applied yet.
+                            attention (needs you first, then latest activity). Other kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
@@ -80109,7 +80109,7 @@ paths:
                           description: >-
                             Seller (buyer account): name, the default, or followers (refused until creator data exists).
                             No sort: best claim first with property, best match with query. Seller media_buy or Project:
-                            attention (needs a person first, then latest activity). Other kinds: not applied yet.
+                            attention (needs you first, then latest activity). Other kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
@@ -82178,7 +82178,7 @@ paths:
                           description: >-
                             Seller (buyer account): name, the default, or followers (refused until creator data exists).
                             No sort: best claim first with property, best match with query. Seller media_buy or Project:
-                            attention (needs a person first, then latest activity). Other kinds: not applied yet.
+                            attention (needs you first, then latest activity). Other kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
@@ -84249,7 +84249,7 @@ paths:
                           description: >-
                             Seller (buyer account): name, the default, or followers (refused until creator data exists).
                             No sort: best claim first with property, best match with query. Seller media_buy or Project:
-                            attention (needs a person first, then latest activity). Other kinds: not applied yet.
+                            attention (needs you first, then latest activity). Other kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
@@ -86310,7 +86310,7 @@ paths:
                           description: >-
                             Seller (buyer account): name, the default, or followers (refused until creator data exists).
                             No sort: best claim first with property, best match with query. Seller media_buy or Project:
-                            attention (needs a person first, then latest activity). Other kinds: not applied yet.
+                            attention (needs you first, then latest activity). Other kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
@@ -88388,7 +88388,7 @@ paths:
                           description: >-
                             Seller (buyer account): name, the default, or followers (refused until creator data exists).
                             No sort: best claim first with property, best match with query. Seller media_buy or Project:
-                            attention (needs a person first, then latest activity). Other kinds: not applied yet.
+                            attention (needs you first, then latest activity). Other kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
@@ -92229,7 +92229,7 @@ paths:
                           description: >-
                             Seller (buyer account): name, the default, or followers (refused until creator data exists).
                             No sort: best claim first with property, best match with query. Seller media_buy or Project:
-                            attention (needs a person first, then latest activity). Other kinds: not applied yet.
+                            attention (needs you first, then latest activity). Other kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
@@ -96036,7 +96036,7 @@ paths:
                           description: >-
                             Seller (buyer account): name, the default, or followers (refused until creator data exists).
                             No sort: best claim first with property, best match with query. Seller media_buy or Project:
-                            attention (needs a person first, then latest activity). Other kinds: not applied yet.
+                            attention (needs you first, then latest activity). Other kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
@@ -98990,7 +98990,7 @@ paths:
                           description: >-
                             Seller (buyer account): name, the default, or followers (refused until creator data exists).
                             No sort: best claim first with property, best match with query. Seller media_buy or Project:
-                            attention (needs a person first, then latest activity). Other kinds: not applied yet.
+                            attention (needs you first, then latest activity). Other kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
@@ -101066,7 +101066,7 @@ paths:
                           description: >-
                             Seller (buyer account): name, the default, or followers (refused until creator data exists).
                             No sort: best claim first with property, best match with query. Seller media_buy or Project:
-                            attention (needs a person first, then latest activity). Other kinds: not applied yet.
+                            attention (needs you first, then latest activity). Other kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
@@ -103139,7 +103139,7 @@ paths:
                           description: >-
                             Seller (buyer account): name, the default, or followers (refused until creator data exists).
                             No sort: best claim first with property, best match with query. Seller media_buy or Project:
-                            attention (needs a person first, then latest activity). Other kinds: not applied yet.
+                            attention (needs you first, then latest activity). Other kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
@@ -105212,7 +105212,7 @@ paths:
                           description: >-
                             Seller (buyer account): name, the default, or followers (refused until creator data exists).
                             No sort: best claim first with property, best match with query. Seller media_buy or Project:
-                            attention (needs a person first, then latest activity). Other kinds: not applied yet.
+                            attention (needs you first, then latest activity). Other kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
@@ -107286,7 +107286,7 @@ paths:
                           description: >-
                             Seller (buyer account): name, the default, or followers (refused until creator data exists).
                             No sort: best claim first with property, best match with query. Seller media_buy or Project:
-                            attention (needs a person first, then latest activity). Other kinds: not applied yet.
+                            attention (needs you first, then latest activity). Other kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
@@ -138531,6 +138531,16 @@ components:
               - reason
               - url
             additionalProperties: false
+        stateMark:
+          default: null
+          anyOf:
+            - type: string
+              enum:
+                - needs_you
+                - awaiting_approval
+                - draft
+                - paused
+            - type: 'null'
         url:
           type: string
       required:
@@ -138555,6 +138565,7 @@ components:
         - spend
         - autonomy
         - attention
+        - stateMark
         - url
       additionalProperties: false
     save_project_success_Project:
@@ -139073,6 +139084,16 @@ components:
               - reason
               - url
             additionalProperties: false
+        stateMark:
+          default: null
+          anyOf:
+            - type: string
+              enum:
+                - needs_you
+                - awaiting_approval
+                - draft
+                - paused
+            - type: 'null'
         url:
           type: string
       required:
@@ -139097,6 +139118,7 @@ components:
         - spend
         - autonomy
         - attention
+        - stateMark
         - url
       additionalProperties: false
     save_project_success_ObjectLeadPrincipalId:
