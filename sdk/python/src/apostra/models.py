@@ -420,7 +420,7 @@ class GenerateVariantsSuccessGalleryVariantsItemPreview(TypedDict):
 class GetDeliveryInput(TypedDict):
     metrics: NotRequired[list[Literal["impressions", "spend", "clicks", "views", "completed_views", "quartile_100", "conversions", "leads", "conversion_value", "viewable_impressions", "measurable_impressions", "cpm", "cost_per_click", "ctr", "completion_rate", "viewable_rate", "cost_per_acquisition", "roas", "grps", "reach", "frequency", "sellBooked", "sellRealized", "buyBooked", "buyRealized", "spreadBooked", "spreadRealized", "marginBookedPct", "marginRealizedPct", "bookedComplete", "realizedComplete"]]]
     '\n    Metrics; omit for report defaults.\n    '
-    dimensions: NotRequired[list[Literal["date", "advertiser", "campaign", "channel_group", "channel", "buyer", "media_buy", "package", "inventory_source", "deal_terms_version", "statement_line", "seller", "sales_agent", "property"] | str]]
+    dimensions: NotRequired[list[Literal["date", "advertiser", "campaign", "channel_group", "channel", "buyer", "media_buy", "package", "inventory_source", "deal_terms_version", "statement_line", "seller", "sales_agent", "property", "creative"] | str]]
     '\n    Group-by dimensions; campaign delivery also accepts labels.<dimension_key>, and property (tracker impressions per site or app, with date). Omit for leaf grain.\n    '
     sponsoredBuyerCustomerId: NotRequired[str]
     '\n    Server-issued self-serve buyer child scope from the Campaigns Page launch.\n    '
@@ -2308,7 +2308,7 @@ class GetDeliverySuccessRowsItemSource(TypedDict):
     inventorySourceIdsTruncated: bool
     revisionEvidence: Literal["available", "unavailable", "not_applicable"]
 
-GetDeliverySuccessRowsItemSourceOperation: TypeAlias = Literal["get_seller_reporting_metrics", "get_buyer_reporting_metrics", "get_seller_margin_reporting"]
+GetDeliverySuccessRowsItemSourceOperation: TypeAlias = Literal["get_seller_reporting_metrics", "get_buyer_reporting_metrics", "get_buyer_creative_delivery_days", "get_seller_margin_reporting"]
 
 class GetDeliverySuccessSemantics(TypedDict):
     sourceOperation: GetDeliverySuccessSemanticsSourceOperation
@@ -2331,7 +2331,7 @@ GetDeliverySuccessSemanticsMeasurement: TypeAlias = Literal["excluded"]
 
 GetDeliverySuccessSemanticsMissingValues: TypeAlias = str
 
-GetDeliverySuccessSemanticsSourceOperation: TypeAlias = Literal["get_seller_reporting_metrics", "get_buyer_reporting_metrics", "get_seller_margin_reporting"]
+GetDeliverySuccessSemanticsSourceOperation: TypeAlias = Literal["get_seller_reporting_metrics", "get_buyer_reporting_metrics", "get_buyer_creative_delivery_days", "get_seller_margin_reporting"]
 
 class GetDeliverySuccessSiteOutcomeVendorMetricValue(TypedDict):
     metric_id: GetDeliverySuccessSiteOutcomeVendorMetricValueMetricId

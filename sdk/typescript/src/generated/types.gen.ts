@@ -6990,7 +6990,7 @@ export type GetDeliveryData = {
         /**
          * Group-by dimensions; campaign delivery also accepts labels.<dimension_key>, and property (tracker impressions per site or app, with date). Omit for leaf grain.
          */
-        dimensions?: Array<'date' | 'advertiser' | 'campaign' | 'channel_group' | 'channel' | 'buyer' | 'media_buy' | 'package' | 'inventory_source' | 'deal_terms_version' | 'statement_line' | 'seller' | 'sales_agent' | 'property' | string>;
+        dimensions?: Array<'date' | 'advertiser' | 'campaign' | 'channel_group' | 'channel' | 'buyer' | 'media_buy' | 'package' | 'inventory_source' | 'deal_terms_version' | 'statement_line' | 'seller' | 'sales_agent' | 'property' | 'creative' | string>;
         /**
          * Dates (max 90 days) or lifetime for delivery. Margin: one closed calendar month, a publisher statement.
          */
@@ -9372,7 +9372,7 @@ export type GetDeliverySuccessRowsItemMetricsValue = {
     reach_window?: GetDeliverySuccessMetricDatumReachWindow;
 };
 
-export type GetDeliverySuccessRowsItemSourceOperation = 'get_seller_reporting_metrics' | 'get_buyer_reporting_metrics' | 'get_seller_margin_reporting';
+export type GetDeliverySuccessRowsItemSourceOperation = 'get_seller_reporting_metrics' | 'get_buyer_reporting_metrics' | 'get_buyer_creative_delivery_days' | 'get_seller_margin_reporting';
 
 export type GetDeliverySuccessSemantics = {
     sourceOperation: GetDeliverySuccessSemanticsSourceOperation;
@@ -9396,7 +9396,7 @@ export type GetDeliverySuccessSemanticsMeasurement = 'excluded';
 
 export type GetDeliverySuccessSemanticsMissingValues = string;
 
-export type GetDeliverySuccessSemanticsSourceOperation = 'get_seller_reporting_metrics' | 'get_buyer_reporting_metrics' | 'get_seller_margin_reporting';
+export type GetDeliverySuccessSemanticsSourceOperation = 'get_seller_reporting_metrics' | 'get_buyer_reporting_metrics' | 'get_buyer_creative_delivery_days' | 'get_seller_margin_reporting';
 
 export type GetDeliverySuccessSiteOutcomeVendorMetricValue = {
     metric_id: GetDeliverySuccessSiteOutcomeVendorMetricValueMetricId;
