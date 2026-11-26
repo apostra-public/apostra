@@ -44452,6 +44452,10 @@ export type SearchData = {
              */
             permission?: 'usable';
             /**
+             * creative: only creatives built from an asset that needs permission. Needs filter.advertiserId. Rows name the assets and the running buys.
+             */
+            usesAssetWithoutPermission?: true;
+            /**
              * For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.
              */
             catalogState?: 'active' | 'draft';
@@ -45095,6 +45099,10 @@ export type SearchData = {
              * creative_asset: only assets usable for destination.
              */
             permission?: 'usable';
+            /**
+             * creative: only creatives built from an asset that needs permission. Needs filter.advertiserId. Rows name the assets and the running buys.
+             */
+            usesAssetWithoutPermission?: true;
             /**
              * For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.
              */
@@ -45821,6 +45829,10 @@ export type SearchData = {
              */
             permission?: 'usable';
             /**
+             * creative: only creatives built from an asset that needs permission. Needs filter.advertiserId. Rows name the assets and the running buys.
+             */
+            usesAssetWithoutPermission?: true;
+            /**
              * For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.
              */
             catalogState?: 'active' | 'draft';
@@ -46461,6 +46473,10 @@ export type SearchData = {
              */
             permission?: 'usable';
             /**
+             * creative: only creatives built from an asset that needs permission. Needs filter.advertiserId. Rows name the assets and the running buys.
+             */
+            usesAssetWithoutPermission?: true;
+            /**
              * For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.
              */
             catalogState?: 'active' | 'draft';
@@ -47097,6 +47113,10 @@ export type SearchData = {
              * creative_asset: only assets usable for destination.
              */
             permission?: 'usable';
+            /**
+             * creative: only creatives built from an asset that needs permission. Needs filter.advertiserId. Rows name the assets and the running buys.
+             */
+            usesAssetWithoutPermission?: true;
             /**
              * For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.
              */
@@ -47737,6 +47757,10 @@ export type SearchData = {
              * creative_asset: only assets usable for destination.
              */
             permission?: 'usable';
+            /**
+             * creative: only creatives built from an asset that needs permission. Needs filter.advertiserId. Rows name the assets and the running buys.
+             */
+            usesAssetWithoutPermission?: true;
             /**
              * For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.
              */
@@ -48377,6 +48401,10 @@ export type SearchData = {
              * creative_asset: only assets usable for destination.
              */
             permission?: 'usable';
+            /**
+             * creative: only creatives built from an asset that needs permission. Needs filter.advertiserId. Rows name the assets and the running buys.
+             */
+            usesAssetWithoutPermission?: true;
             /**
              * For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.
              */
@@ -49173,6 +49201,10 @@ export type SearchData = {
              * creative_asset: only assets usable for destination.
              */
             permission?: 'usable';
+            /**
+             * creative: only creatives built from an asset that needs permission. Needs filter.advertiserId. Rows name the assets and the running buys.
+             */
+            usesAssetWithoutPermission?: true;
             /**
              * For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.
              */
@@ -49984,6 +50016,10 @@ export type SearchData = {
              */
             permission?: 'usable';
             /**
+             * creative: only creatives built from an asset that needs permission. Needs filter.advertiserId. Rows name the assets and the running buys.
+             */
+            usesAssetWithoutPermission?: true;
+            /**
              * For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.
              */
             catalogState?: 'active' | 'draft';
@@ -50713,6 +50749,10 @@ export type SearchData = {
              */
             permission?: 'usable';
             /**
+             * creative: only creatives built from an asset that needs permission. Needs filter.advertiserId. Rows name the assets and the running buys.
+             */
+            usesAssetWithoutPermission?: true;
+            /**
              * For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.
              */
             catalogState?: 'active' | 'draft';
@@ -51355,6 +51395,10 @@ export type SearchData = {
              * creative_asset: only assets usable for destination.
              */
             permission?: 'usable';
+            /**
+             * creative: only creatives built from an asset that needs permission. Needs filter.advertiserId. Rows name the assets and the running buys.
+             */
+            usesAssetWithoutPermission?: true;
             /**
              * For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.
              */
@@ -51999,6 +52043,10 @@ export type SearchData = {
              * creative_asset: only assets usable for destination.
              */
             permission?: 'usable';
+            /**
+             * creative: only creatives built from an asset that needs permission. Needs filter.advertiserId. Rows name the assets and the running buys.
+             */
+            usesAssetWithoutPermission?: true;
             /**
              * For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.
              */
@@ -52644,6 +52692,10 @@ export type SearchData = {
              */
             permission?: 'usable';
             /**
+             * creative: only creatives built from an asset that needs permission. Needs filter.advertiserId. Rows name the assets and the running buys.
+             */
+            usesAssetWithoutPermission?: true;
+            /**
              * For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.
              */
             catalogState?: 'active' | 'draft';
@@ -53287,6 +53339,10 @@ export type SearchData = {
              * creative_asset: only assets usable for destination.
              */
             permission?: 'usable';
+            /**
+             * creative: only creatives built from an asset that needs permission. Needs filter.advertiserId. Rows name the assets and the running buys.
+             */
+            usesAssetWithoutPermission?: true;
             /**
              * For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.
              */

@@ -75128,6 +75128,12 @@ paths:
                           description: 'creative_asset: only assets usable for destination.'
                           type: string
                           const: usable
+                        usesAssetWithoutPermission:
+                          description: >-
+                            creative: only creatives built from an asset that needs permission. Needs
+                            filter.advertiserId. Rows name the assets and the running buys.
+                          type: boolean
+                          const: true
                         catalogState:
                           description: >-
                             For kind catalog only. Omit for active catalogs; use draft explicitly to list
@@ -77193,6 +77199,12 @@ paths:
                           description: 'creative_asset: only assets usable for destination.'
                           type: string
                           const: usable
+                        usesAssetWithoutPermission:
+                          description: >-
+                            creative: only creatives built from an asset that needs permission. Needs
+                            filter.advertiserId. Rows name the assets and the running buys.
+                          type: boolean
+                          const: true
                         catalogState:
                           description: >-
                             For kind catalog only. Omit for active catalogs; use draft explicitly to list
@@ -80121,6 +80133,12 @@ paths:
                           description: 'creative_asset: only assets usable for destination.'
                           type: string
                           const: usable
+                        usesAssetWithoutPermission:
+                          description: >-
+                            creative: only creatives built from an asset that needs permission. Needs
+                            filter.advertiserId. Rows name the assets and the running buys.
+                          type: boolean
+                          const: true
                         catalogState:
                           description: >-
                             For kind catalog only. Omit for active catalogs; use draft explicitly to list
@@ -82178,6 +82196,12 @@ paths:
                           description: 'creative_asset: only assets usable for destination.'
                           type: string
                           const: usable
+                        usesAssetWithoutPermission:
+                          description: >-
+                            creative: only creatives built from an asset that needs permission. Needs
+                            filter.advertiserId. Rows name the assets and the running buys.
+                          type: boolean
+                          const: true
                         catalogState:
                           description: >-
                             For kind catalog only. Omit for active catalogs; use draft explicitly to list
@@ -84232,6 +84256,12 @@ paths:
                           description: 'creative_asset: only assets usable for destination.'
                           type: string
                           const: usable
+                        usesAssetWithoutPermission:
+                          description: >-
+                            creative: only creatives built from an asset that needs permission. Needs
+                            filter.advertiserId. Rows name the assets and the running buys.
+                          type: boolean
+                          const: true
                         catalogState:
                           description: >-
                             For kind catalog only. Omit for active catalogs; use draft explicitly to list
@@ -86286,6 +86316,12 @@ paths:
                           description: 'creative_asset: only assets usable for destination.'
                           type: string
                           const: usable
+                        usesAssetWithoutPermission:
+                          description: >-
+                            creative: only creatives built from an asset that needs permission. Needs
+                            filter.advertiserId. Rows name the assets and the running buys.
+                          type: boolean
+                          const: true
                         catalogState:
                           description: >-
                             For kind catalog only. Omit for active catalogs; use draft explicitly to list
@@ -88347,6 +88383,12 @@ paths:
                           description: 'creative_asset: only assets usable for destination.'
                           type: string
                           const: usable
+                        usesAssetWithoutPermission:
+                          description: >-
+                            creative: only creatives built from an asset that needs permission. Needs
+                            filter.advertiserId. Rows name the assets and the running buys.
+                          type: boolean
+                          const: true
                         catalogState:
                           description: >-
                             For kind catalog only. Omit for active catalogs; use draft explicitly to list
@@ -92181,6 +92223,12 @@ paths:
                           description: 'creative_asset: only assets usable for destination.'
                           type: string
                           const: usable
+                        usesAssetWithoutPermission:
+                          description: >-
+                            creative: only creatives built from an asset that needs permission. Needs
+                            filter.advertiserId. Rows name the assets and the running buys.
+                          type: boolean
+                          const: true
                         catalogState:
                           description: >-
                             For kind catalog only. Omit for active catalogs; use draft explicitly to list
@@ -95972,6 +96020,12 @@ paths:
                           description: 'creative_asset: only assets usable for destination.'
                           type: string
                           const: usable
+                        usesAssetWithoutPermission:
+                          description: >-
+                            creative: only creatives built from an asset that needs permission. Needs
+                            filter.advertiserId. Rows name the assets and the running buys.
+                          type: boolean
+                          const: true
                         catalogState:
                           description: >-
                             For kind catalog only. Omit for active catalogs; use draft explicitly to list
@@ -98912,6 +98966,12 @@ paths:
                           description: 'creative_asset: only assets usable for destination.'
                           type: string
                           const: usable
+                        usesAssetWithoutPermission:
+                          description: >-
+                            creative: only creatives built from an asset that needs permission. Needs
+                            filter.advertiserId. Rows name the assets and the running buys.
+                          type: boolean
+                          const: true
                         catalogState:
                           description: >-
                             For kind catalog only. Omit for active catalogs; use draft explicitly to list
@@ -100976,6 +101036,12 @@ paths:
                           description: 'creative_asset: only assets usable for destination.'
                           type: string
                           const: usable
+                        usesAssetWithoutPermission:
+                          description: >-
+                            creative: only creatives built from an asset that needs permission. Needs
+                            filter.advertiserId. Rows name the assets and the running buys.
+                          type: boolean
+                          const: true
                         catalogState:
                           description: >-
                             For kind catalog only. Omit for active catalogs; use draft explicitly to list
@@ -103037,6 +103103,12 @@ paths:
                           description: 'creative_asset: only assets usable for destination.'
                           type: string
                           const: usable
+                        usesAssetWithoutPermission:
+                          description: >-
+                            creative: only creatives built from an asset that needs permission. Needs
+                            filter.advertiserId. Rows name the assets and the running buys.
+                          type: boolean
+                          const: true
                         catalogState:
                           description: >-
                             For kind catalog only. Omit for active catalogs; use draft explicitly to list
@@ -105098,6 +105170,12 @@ paths:
                           description: 'creative_asset: only assets usable for destination.'
                           type: string
                           const: usable
+                        usesAssetWithoutPermission:
+                          description: >-
+                            creative: only creatives built from an asset that needs permission. Needs
+                            filter.advertiserId. Rows name the assets and the running buys.
+                          type: boolean
+                          const: true
                         catalogState:
                           description: >-
                             For kind catalog only. Omit for active catalogs; use draft explicitly to list
@@ -107160,6 +107238,12 @@ paths:
                           description: 'creative_asset: only assets usable for destination.'
                           type: string
                           const: usable
+                        usesAssetWithoutPermission:
+                          description: >-
+                            creative: only creatives built from an asset that needs permission. Needs
+                            filter.advertiserId. Rows name the assets and the running buys.
+                          type: boolean
+                          const: true
                         catalogState:
                           description: >-
                             For kind catalog only. Omit for active catalogs; use draft explicitly to list

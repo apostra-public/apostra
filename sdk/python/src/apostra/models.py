@@ -26207,6 +26207,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     '\n    creative_asset: assets with this rights state, or none for assets with no rights record.\n    '
     permission: NotRequired[Literal["usable"]]
     '\n    creative_asset: only assets usable for destination.\n    '
+    usesAssetWithoutPermission: NotRequired[Literal[True]]
+    '\n    creative: only creatives built from an asset that needs permission. Needs filter.advertiserId. Rows name the assets and the running buys.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
     labels: NotRequired[list[SearchRequestLabelFilterEntry]]
@@ -26571,6 +26573,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     '\n    creative_asset: assets with this rights state, or none for assets with no rights record.\n    '
     permission: NotRequired[Literal["usable"]]
     '\n    creative_asset: only assets usable for destination.\n    '
+    usesAssetWithoutPermission: NotRequired[Literal[True]]
+    '\n    creative: only creatives built from an asset that needs permission. Needs filter.advertiserId. Rows name the assets and the running buys.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
     labels: NotRequired[list[SearchRequestLabelFilterEntry]]
@@ -26865,6 +26869,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(Type
     '\n    creative_asset: assets with this rights state, or none for assets with no rights record.\n    '
     permission: NotRequired[Literal["usable"]]
     '\n    creative_asset: only assets usable for destination.\n    '
+    usesAssetWithoutPermission: NotRequired[Literal[True]]
+    '\n    creative: only creatives built from an asset that needs permission. Needs filter.advertiserId. Rows name the assets and the running buys.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
     labels: NotRequired[list[SearchRequestLabelFilterEntry]]
@@ -27188,6 +27194,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDi
     '\n    creative_asset: assets with this rights state, or none for assets with no rights record.\n    '
     permission: NotRequired[Literal["usable"]]
     '\n    creative_asset: only assets usable for destination.\n    '
+    usesAssetWithoutPermission: NotRequired[Literal[True]]
+    '\n    creative: only creatives built from an asset that needs permission. Needs filter.advertiserId. Rows name the assets and the running buys.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
     labels: NotRequired[list[SearchRequestLabelFilterEntry]]
@@ -27558,6 +27566,8 @@ class SearchInputKindAdServerTargetingFilter(TypedDict):
     '\n    creative_asset: assets with this rights state, or none for assets with no rights record.\n    '
     permission: NotRequired[Literal["usable"]]
     '\n    creative_asset: only assets usable for destination.\n    '
+    usesAssetWithoutPermission: NotRequired[Literal[True]]
+    '\n    creative: only creatives built from an asset that needs permission. Needs filter.advertiserId. Rows name the assets and the running buys.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
     labels: NotRequired[list[SearchRequestLabelFilterEntry]]
@@ -27890,6 +27900,8 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     '\n    creative_asset: assets with this rights state, or none for assets with no rights record.\n    '
     permission: NotRequired[Literal["usable"]]
     '\n    creative_asset: only assets usable for destination.\n    '
+    usesAssetWithoutPermission: NotRequired[Literal[True]]
+    '\n    creative: only creatives built from an asset that needs permission. Needs filter.advertiserId. Rows name the assets and the running buys.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
     labels: NotRequired[list[SearchRequestLabelFilterEntry]]
@@ -28234,6 +28246,8 @@ class SearchInputKindBuyerRfpFilter(TypedDict):
     '\n    creative_asset: assets with this rights state, or none for assets with no rights record.\n    '
     permission: NotRequired[Literal["usable"]]
     '\n    creative_asset: only assets usable for destination.\n    '
+    usesAssetWithoutPermission: NotRequired[Literal[True]]
+    '\n    creative: only creatives built from an asset that needs permission. Needs filter.advertiserId. Rows name the assets and the running buys.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
     labels: NotRequired[list[SearchRequestLabelFilterEntry]]
@@ -28600,6 +28614,8 @@ class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     '\n    creative_asset: assets with this rights state, or none for assets with no rights record.\n    '
     permission: NotRequired[Literal["usable"]]
     '\n    creative_asset: only assets usable for destination.\n    '
+    usesAssetWithoutPermission: NotRequired[Literal[True]]
+    '\n    creative: only creatives built from an asset that needs permission. Needs filter.advertiserId. Rows name the assets and the running buys.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
     labels: NotRequired[list[SearchRequestLabelFilterEntry]]
@@ -28928,6 +28944,8 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     '\n    creative_asset: assets with this rights state, or none for assets with no rights record.\n    '
     permission: NotRequired[Literal["usable"]]
     '\n    creative_asset: only assets usable for destination.\n    '
+    usesAssetWithoutPermission: NotRequired[Literal[True]]
+    '\n    creative: only creatives built from an asset that needs permission. Needs filter.advertiserId. Rows name the assets and the running buys.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
     labels: NotRequired[list[SearchRequestLabelFilterEntry]]
@@ -29256,6 +29274,8 @@ class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     '\n    creative_asset: assets with this rights state, or none for assets with no rights record.\n    '
     permission: NotRequired[Literal["usable"]]
     '\n    creative_asset: only assets usable for destination.\n    '
+    usesAssetWithoutPermission: NotRequired[Literal[True]]
+    '\n    creative: only creatives built from an asset that needs permission. Needs filter.advertiserId. Rows name the assets and the running buys.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
     labels: NotRequired[list[SearchRequestLabelFilterEntry]]
@@ -29548,6 +29568,8 @@ class SearchInputKindCreativeFilter(TypedDict):
     '\n    creative_asset: assets with this rights state, or none for assets with no rights record.\n    '
     permission: NotRequired[Literal["usable"]]
     '\n    creative_asset: only assets usable for destination.\n    '
+    usesAssetWithoutPermission: NotRequired[Literal[True]]
+    '\n    creative: only creatives built from an asset that needs permission. Needs filter.advertiserId. Rows name the assets and the running buys.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
     labels: NotRequired[list[SearchRequestLabelFilterEntry]]
@@ -29962,6 +29984,8 @@ class SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter(TypedDict):
     '\n    creative_asset: assets with this rights state, or none for assets with no rights record.\n    '
     permission: NotRequired[Literal["usable"]]
     '\n    creative_asset: only assets usable for destination.\n    '
+    usesAssetWithoutPermission: NotRequired[Literal[True]]
+    '\n    creative: only creatives built from an asset that needs permission. Needs filter.advertiserId. Rows name the assets and the running buys.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
     labels: NotRequired[list[SearchRequestLabelFilterEntry]]
@@ -30394,6 +30418,8 @@ class SearchInputKindProposalFilter(TypedDict):
     '\n    creative_asset: assets with this rights state, or none for assets with no rights record.\n    '
     permission: NotRequired[Literal["usable"]]
     '\n    creative_asset: only assets usable for destination.\n    '
+    usesAssetWithoutPermission: NotRequired[Literal[True]]
+    '\n    creative: only creatives built from an asset that needs permission. Needs filter.advertiserId. Rows name the assets and the running buys.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
     labels: NotRequired[list[SearchRequestLabelFilterEntry]]
@@ -30724,6 +30750,8 @@ class SearchInputKindSourceAccountFilter(TypedDict):
     '\n    creative_asset: assets with this rights state, or none for assets with no rights record.\n    '
     permission: NotRequired[Literal["usable"]]
     '\n    creative_asset: only assets usable for destination.\n    '
+    usesAssetWithoutPermission: NotRequired[Literal[True]]
+    '\n    creative: only creatives built from an asset that needs permission. Needs filter.advertiserId. Rows name the assets and the running buys.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
     labels: NotRequired[list[SearchRequestLabelFilterEntry]]
