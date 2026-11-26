@@ -26420,6 +26420,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     '\n    For kind ask: requests routed as this type, such as support or supply.\n    '
     askState: NotRequired[Literal["open", "closed"]]
     '\n    For kind ask: open requests, or closed ones (closed includes requests the requester withdrew).\n    '
+    filedBy: NotRequired[Literal["me"]]
+    '\n    For kind ask: only requests you filed. Needs a signed-in person.\n    '
     candidateType: NotRequired[str]
     '\n    For kind ad_server_targeting: which of the source\'s targeting taxonomies to browse, as named by the source.\n    '
     parentId: NotRequired[str]
@@ -26786,6 +26788,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     '\n    For kind ask: requests routed as this type, such as support or supply.\n    '
     askState: NotRequired[Literal["open", "closed"]]
     '\n    For kind ask: open requests, or closed ones (closed includes requests the requester withdrew).\n    '
+    filedBy: NotRequired[Literal["me"]]
+    '\n    For kind ask: only requests you filed. Needs a signed-in person.\n    '
     candidateType: NotRequired[str]
     '\n    For kind ad_server_targeting: which of the source\'s targeting taxonomies to browse, as named by the source.\n    '
     parentId: NotRequired[str]
@@ -27082,6 +27086,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(Type
     '\n    For kind ask: requests routed as this type, such as support or supply.\n    '
     askState: NotRequired[Literal["open", "closed"]]
     '\n    For kind ask: open requests, or closed ones (closed includes requests the requester withdrew).\n    '
+    filedBy: NotRequired[Literal["me"]]
+    '\n    For kind ask: only requests you filed. Needs a signed-in person.\n    '
     candidateType: NotRequired[str]
     '\n    For kind ad_server_targeting: which of the source\'s targeting taxonomies to browse, as named by the source.\n    '
     parentId: NotRequired[str]
@@ -27407,6 +27413,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDi
     '\n    For kind ask: requests routed as this type, such as support or supply.\n    '
     askState: NotRequired[Literal["open", "closed"]]
     '\n    For kind ask: open requests, or closed ones (closed includes requests the requester withdrew).\n    '
+    filedBy: NotRequired[Literal["me"]]
+    '\n    For kind ask: only requests you filed. Needs a signed-in person.\n    '
     candidateType: NotRequired[str]
     '\n    For kind ad_server_targeting: which of the source\'s targeting taxonomies to browse, as named by the source.\n    '
     parentId: NotRequired[str]
@@ -27779,6 +27787,8 @@ class SearchInputKindAdServerTargetingFilter(TypedDict):
     '\n    For kind ask: requests routed as this type, such as support or supply.\n    '
     askState: NotRequired[Literal["open", "closed"]]
     '\n    For kind ask: open requests, or closed ones (closed includes requests the requester withdrew).\n    '
+    filedBy: NotRequired[Literal["me"]]
+    '\n    For kind ask: only requests you filed. Needs a signed-in person.\n    '
     candidateType: NotRequired[str]
     '\n    For kind ad_server_targeting: which of the source\'s targeting taxonomies to browse, as named by the source.\n    '
     parentId: NotRequired[str]
@@ -28113,6 +28123,8 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     '\n    For kind ask: requests routed as this type, such as support or supply.\n    '
     askState: NotRequired[Literal["open", "closed"]]
     '\n    For kind ask: open requests, or closed ones (closed includes requests the requester withdrew).\n    '
+    filedBy: NotRequired[Literal["me"]]
+    '\n    For kind ask: only requests you filed. Needs a signed-in person.\n    '
     candidateType: NotRequired[str]
     '\n    For kind ad_server_targeting: which of the source\'s targeting taxonomies to browse, as named by the source.\n    '
     parentId: NotRequired[str]
@@ -28459,6 +28471,8 @@ class SearchInputKindBuyerRfpFilter(TypedDict):
     '\n    For kind ask: requests routed as this type, such as support or supply.\n    '
     askState: NotRequired[Literal["open", "closed"]]
     '\n    For kind ask: open requests, or closed ones (closed includes requests the requester withdrew).\n    '
+    filedBy: NotRequired[Literal["me"]]
+    '\n    For kind ask: only requests you filed. Needs a signed-in person.\n    '
     candidateType: NotRequired[str]
     '\n    For kind ad_server_targeting: which of the source\'s targeting taxonomies to browse, as named by the source.\n    '
     parentId: NotRequired[str]
@@ -28827,6 +28841,8 @@ class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     '\n    For kind ask: requests routed as this type, such as support or supply.\n    '
     askState: NotRequired[Literal["open", "closed"]]
     '\n    For kind ask: open requests, or closed ones (closed includes requests the requester withdrew).\n    '
+    filedBy: NotRequired[Literal["me"]]
+    '\n    For kind ask: only requests you filed. Needs a signed-in person.\n    '
     candidateType: NotRequired[str]
     '\n    For kind ad_server_targeting: which of the source\'s targeting taxonomies to browse, as named by the source.\n    '
     parentId: NotRequired[str]
@@ -29159,6 +29175,8 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     '\n    For kind ask: requests routed as this type, such as support or supply.\n    '
     askState: NotRequired[Literal["open", "closed"]]
     '\n    For kind ask: open requests, or closed ones (closed includes requests the requester withdrew).\n    '
+    filedBy: NotRequired[Literal["me"]]
+    '\n    For kind ask: only requests you filed. Needs a signed-in person.\n    '
     candidateType: NotRequired[str]
     '\n    For kind ad_server_targeting: which of the source\'s targeting taxonomies to browse, as named by the source.\n    '
     parentId: NotRequired[str]
@@ -29489,6 +29507,8 @@ class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     '\n    For kind ask: requests routed as this type, such as support or supply.\n    '
     askState: NotRequired[Literal["open", "closed"]]
     '\n    For kind ask: open requests, or closed ones (closed includes requests the requester withdrew).\n    '
+    filedBy: NotRequired[Literal["me"]]
+    '\n    For kind ask: only requests you filed. Needs a signed-in person.\n    '
     candidateType: NotRequired[str]
     '\n    For kind ad_server_targeting: which of the source\'s targeting taxonomies to browse, as named by the source.\n    '
     parentId: NotRequired[str]
@@ -29783,6 +29803,8 @@ class SearchInputKindCreativeFilter(TypedDict):
     '\n    For kind ask: requests routed as this type, such as support or supply.\n    '
     askState: NotRequired[Literal["open", "closed"]]
     '\n    For kind ask: open requests, or closed ones (closed includes requests the requester withdrew).\n    '
+    filedBy: NotRequired[Literal["me"]]
+    '\n    For kind ask: only requests you filed. Needs a signed-in person.\n    '
     candidateType: NotRequired[str]
     '\n    For kind ad_server_targeting: which of the source\'s targeting taxonomies to browse, as named by the source.\n    '
     parentId: NotRequired[str]
@@ -30199,6 +30221,8 @@ class SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter(TypedDict):
     '\n    For kind ask: requests routed as this type, such as support or supply.\n    '
     askState: NotRequired[Literal["open", "closed"]]
     '\n    For kind ask: open requests, or closed ones (closed includes requests the requester withdrew).\n    '
+    filedBy: NotRequired[Literal["me"]]
+    '\n    For kind ask: only requests you filed. Needs a signed-in person.\n    '
     candidateType: NotRequired[str]
     '\n    For kind ad_server_targeting: which of the source\'s targeting taxonomies to browse, as named by the source.\n    '
     parentId: NotRequired[str]
@@ -30631,6 +30655,8 @@ class SearchInputKindProposalFilter(TypedDict):
     '\n    For kind ask: requests routed as this type, such as support or supply.\n    '
     askState: NotRequired[Literal["open", "closed"]]
     '\n    For kind ask: open requests, or closed ones (closed includes requests the requester withdrew).\n    '
+    filedBy: NotRequired[Literal["me"]]
+    '\n    For kind ask: only requests you filed. Needs a signed-in person.\n    '
     candidateType: NotRequired[str]
     '\n    For kind ad_server_targeting: which of the source\'s targeting taxonomies to browse, as named by the source.\n    '
     parentId: NotRequired[str]
@@ -30963,6 +30989,8 @@ class SearchInputKindSourceAccountFilter(TypedDict):
     '\n    For kind ask: requests routed as this type, such as support or supply.\n    '
     askState: NotRequired[Literal["open", "closed"]]
     '\n    For kind ask: open requests, or closed ones (closed includes requests the requester withdrew).\n    '
+    filedBy: NotRequired[Literal["me"]]
+    '\n    For kind ask: only requests you filed. Needs a signed-in person.\n    '
     candidateType: NotRequired[str]
     '\n    For kind ad_server_targeting: which of the source\'s targeting taxonomies to browse, as named by the source.\n    '
     parentId: NotRequired[str]
