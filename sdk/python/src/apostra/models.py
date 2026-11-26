@@ -22856,8 +22856,6 @@ class SaveProjectInput(TypedDict):
     '\n    Edit only: detach one attachment. A detached media buy leaves the bounds in a narrower revision.\n    '
     bounds: NotRequired[SaveProjectInputBounds]
     '\n    The limits the lead may work inside. A revision that is not narrower in every field waits for an administrator to approve it on our site.\n    '
-    lead: NotRequired[SaveProjectInputLeadKindAgent | SaveProjectInputLeadKindAssistant]
-    '\n    The acting agent. Also the conversation\'s lead.\n    '
     autonomyPaused: NotRequired[bool]
     '\n    true stops this Project\'s lead at once. false resumes it, for an administrator signed in as themselves; the administrator who approved the bounds resumes at once, another needs approval. Send it with the id and only reason, idempotencyKey and dryRun.\n    '
     reason: NotRequired[str]
@@ -22939,16 +22937,6 @@ class SaveProjectInputDetach(TypedDict):
     id: SaveProjectRequestDetachId
     '\n    The id the attachment was attached with.\n    '
 
-class SaveProjectInputLeadKindAgent(TypedDict):
-    kind: Literal["agent"]
-    '\n    A buyer agent of the account.\n    '
-    principalId: SaveProjectRequestLeadPrincipalId
-    '\n    The buyer agent id the buyer_agent read returns.\n    '
-
-class SaveProjectInputLeadKindAssistant(TypedDict):
-    kind: Literal["assistant"]
-    '\n    The Apostra Assistant.\n    '
-
 SaveProjectRequestAdvertiserId: TypeAlias = str
 
 class SaveProjectRequestAttach(TypedDict):
@@ -22988,8 +22976,6 @@ SaveProjectRequestDetachId: TypeAlias = str
 SaveProjectRequestDetachKind: TypeAlias = Literal["campaign", "media_buy", "rfp", "material", "connection", "exchange"]
 
 SaveProjectRequestId: TypeAlias = str
-
-SaveProjectRequestLeadPrincipalId: TypeAlias = str
 
 SaveProjectRequestSessionId: TypeAlias = str
 
@@ -23050,7 +23036,7 @@ class SaveProjectSuccessObject(TypedDict):
     sessionId: str
     sourceSessionId: str | None
     objectives: str
-    lead: SaveProjectSuccessObjectLeadKindAgent | SaveProjectSuccessObjectLeadKindAssistant
+    lead: SaveProjectSuccessObjectLead
     attachments: list[SaveProjectSuccessObjectAttachmentsItemKindCampaign | SaveProjectSuccessObjectAttachmentsItemKindMediaBuy | SaveProjectSuccessObjectAttachmentsItemKindRfp | SaveProjectSuccessObjectAttachmentsItemKindMaterial | SaveProjectSuccessObjectAttachmentsItemKindConnection | SaveProjectSuccessObjectAttachmentsItemKindExchange]
     bounds: SaveProjectSuccessObjectBoundsValue | None
     state: Literal["draft", "active", "paused", "archived"]
@@ -23229,15 +23215,11 @@ class SaveProjectSuccessObjectBoundsValueApprovalValue(TypedDict):
     approvedAt: str
     approvedRevision: int
 
-class SaveProjectSuccessObjectLeadKindAgent(TypedDict):
+class SaveProjectSuccessObjectLead(TypedDict):
     kind: Literal["agent"]
-    '\n    A buyer agent of the account.\n    '
+    '\n    The account\'s Prime, its own agent.\n    '
     principalId: SaveProjectSuccessObjectLeadPrincipalId
-    '\n    The buyer agent id the buyer_agent read returns.\n    '
-
-class SaveProjectSuccessObjectLeadKindAssistant(TypedDict):
-    kind: Literal["assistant"]
-    '\n    The Apostra Assistant.\n    '
+    '\n    The account\'s Prime: the agent the buyer_agent read returns as the account agent.\n    '
 
 SaveProjectSuccessObjectLeadPrincipalId: TypeAlias = str
 
@@ -23307,7 +23289,7 @@ class SaveProjectSuccessProject(TypedDict):
     sessionId: str
     sourceSessionId: str | None
     objectives: str
-    lead: SaveProjectSuccessProjectLeadKindAgent | SaveProjectSuccessProjectLeadKindAssistant
+    lead: SaveProjectSuccessProjectLead
     attachments: list[SaveProjectSuccessProjectAttachmentsItemKindCampaign | SaveProjectSuccessProjectAttachmentsItemKindMediaBuy | SaveProjectSuccessProjectAttachmentsItemKindRfp | SaveProjectSuccessProjectAttachmentsItemKindMaterial | SaveProjectSuccessProjectAttachmentsItemKindConnection | SaveProjectSuccessProjectAttachmentsItemKindExchange]
     bounds: SaveProjectSuccessProjectBoundsValue | None
     state: Literal["draft", "active", "paused", "archived"]
@@ -23486,15 +23468,11 @@ class SaveProjectSuccessProjectBoundsValueApprovalValue(TypedDict):
     approvedAt: str
     approvedRevision: int
 
-class SaveProjectSuccessProjectLeadKindAgent(TypedDict):
+class SaveProjectSuccessProjectLead(TypedDict):
     kind: Literal["agent"]
-    '\n    A buyer agent of the account.\n    '
+    '\n    The account\'s Prime, its own agent.\n    '
     principalId: SaveProjectSuccessProjectLeadPrincipalId
-    '\n    The buyer agent id the buyer_agent read returns.\n    '
-
-class SaveProjectSuccessProjectLeadKindAssistant(TypedDict):
-    kind: Literal["assistant"]
-    '\n    The Apostra Assistant.\n    '
+    '\n    The account\'s Prime: the agent the buyer_agent read returns as the account agent.\n    '
 
 SaveProjectSuccessProjectLeadPrincipalId: TypeAlias = str
 
