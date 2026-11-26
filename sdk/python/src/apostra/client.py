@@ -101,11 +101,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.LogEventResult], self._request_with_response("log_event", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def open_advertisers_page(self, input: models.OpenAdvertisersPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenAdvertisersPageResult:
-        "Open the Advertisers Page: every advertiser with its campaign and draft counts and one next action each. Use it for \"show my advertisers\" or \"where do I start\"; the Page self-fetches. To add or set up an advertiser, pass intent: \"add\". For a text answer use search(kind: \"advertiser\")."
+        "Open the Advertisers Page: every advertiser with its campaign and draft counts and one next action each. Use it for \"show my advertisers\" or \"where do I start\". intent: \"add\" sets one up; advertiserId opens one advertiser's page. For text use search(kind: \"advertiser\")."
         return cast("models.OpenAdvertisersPageResult", self._request("open_advertisers_page", input, account_id=account_id, timeout=timeout))
 
     def open_advertisers_page_with_response(self, input: models.OpenAdvertisersPageInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenAdvertisersPageResult]:
-        "Open the Advertisers Page: every advertiser with its campaign and draft counts and one next action each. Use it for \"show my advertisers\" or \"where do I start\"; the Page self-fetches. To add or set up an advertiser, pass intent: \"add\". For a text answer use search(kind: \"advertiser\"). Returns the data together with response headers and request ID."
+        "Open the Advertisers Page: every advertiser with its campaign and draft counts and one next action each. Use it for \"show my advertisers\" or \"where do I start\". intent: \"add\" sets one up; advertiserId opens one advertiser's page. For text use search(kind: \"advertiser\"). Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.OpenAdvertisersPageResult], self._request_with_response("open_advertisers_page", input, account_id=account_id, timeout=timeout))
 
     def open_agent_activity_page(self, input: models.OpenAgentActivityPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenAgentActivityPageResult:
@@ -830,11 +830,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.LogEventResult], await self._request_with_response("log_event", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def open_advertisers_page(self, input: models.OpenAdvertisersPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenAdvertisersPageResult:
-        "Open the Advertisers Page: every advertiser with its campaign and draft counts and one next action each. Use it for \"show my advertisers\" or \"where do I start\"; the Page self-fetches. To add or set up an advertiser, pass intent: \"add\". For a text answer use search(kind: \"advertiser\")."
+        "Open the Advertisers Page: every advertiser with its campaign and draft counts and one next action each. Use it for \"show my advertisers\" or \"where do I start\". intent: \"add\" sets one up; advertiserId opens one advertiser's page. For text use search(kind: \"advertiser\")."
         return cast("models.OpenAdvertisersPageResult", await self._request("open_advertisers_page", input, account_id=account_id, timeout=timeout))
 
     async def open_advertisers_page_with_response(self, input: models.OpenAdvertisersPageInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenAdvertisersPageResult]:
-        "Open the Advertisers Page: every advertiser with its campaign and draft counts and one next action each. Use it for \"show my advertisers\" or \"where do I start\"; the Page self-fetches. To add or set up an advertiser, pass intent: \"add\". For a text answer use search(kind: \"advertiser\"). Returns the data together with response headers and request ID."
+        "Open the Advertisers Page: every advertiser with its campaign and draft counts and one next action each. Use it for \"show my advertisers\" or \"where do I start\". intent: \"add\" sets one up; advertiserId opens one advertiser's page. For text use search(kind: \"advertiser\"). Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.OpenAdvertisersPageResult], await self._request_with_response("open_advertisers_page", input, account_id=account_id, timeout=timeout))
 
     async def open_agent_activity_page(self, input: models.OpenAgentActivityPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenAgentActivityPageResult:
