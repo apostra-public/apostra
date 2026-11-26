@@ -357,11 +357,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveAccountResult], self._request_with_response("save_account", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_advertiser(self, input: models.SaveAdvertiserInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAdvertiserResult:
-        "Save an advertiser or mappings. Buyer privateNotes: owning Buyer Account only; /v3/manage-ads#private-advertiser-notes. Confirm markets/channels (footprintProposal); needs_input=ask; never recreate for currency. Brand: identityContract:confirmed-v1; preview: resolveBrand; read advertiser.brandRef."
+        "Save advertiser/mappings. privateNotes: owning Buyer only. Confirm markets/channels (footprintProposal); needs_input=ask; never recreate for currency. identityContract:confirmed-v1; preview resolveBrand; read advertiser.brandRef. Unknown brand: ask website, brandName; register unverified AAO entry."
         return cast("models.SaveAdvertiserResult", self._request("save_advertiser", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_advertiser_with_response(self, input: models.SaveAdvertiserInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveAdvertiserResult]:
-        "Save an advertiser or mappings. Buyer privateNotes: owning Buyer Account only; /v3/manage-ads#private-advertiser-notes. Confirm markets/channels (footprintProposal); needs_input=ask; never recreate for currency. Brand: identityContract:confirmed-v1; preview: resolveBrand; read advertiser.brandRef. Returns the data together with response headers and request ID."
+        "Save advertiser/mappings. privateNotes: owning Buyer only. Confirm markets/channels (footprintProposal); needs_input=ask; never recreate for currency. identityContract:confirmed-v1; preview resolveBrand; read advertiser.brandRef. Unknown brand: ask website, brandName; register unverified AAO entry. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveAdvertiserResult], self._request_with_response("save_advertiser", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_advertiser_grant(self, input: models.SaveAdvertiserGrantInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAdvertiserGrantResult:
@@ -1086,11 +1086,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveAccountResult], await self._request_with_response("save_account", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_advertiser(self, input: models.SaveAdvertiserInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAdvertiserResult:
-        "Save an advertiser or mappings. Buyer privateNotes: owning Buyer Account only; /v3/manage-ads#private-advertiser-notes. Confirm markets/channels (footprintProposal); needs_input=ask; never recreate for currency. Brand: identityContract:confirmed-v1; preview: resolveBrand; read advertiser.brandRef."
+        "Save advertiser/mappings. privateNotes: owning Buyer only. Confirm markets/channels (footprintProposal); needs_input=ask; never recreate for currency. identityContract:confirmed-v1; preview resolveBrand; read advertiser.brandRef. Unknown brand: ask website, brandName; register unverified AAO entry."
         return cast("models.SaveAdvertiserResult", await self._request("save_advertiser", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_advertiser_with_response(self, input: models.SaveAdvertiserInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveAdvertiserResult]:
-        "Save an advertiser or mappings. Buyer privateNotes: owning Buyer Account only; /v3/manage-ads#private-advertiser-notes. Confirm markets/channels (footprintProposal); needs_input=ask; never recreate for currency. Brand: identityContract:confirmed-v1; preview: resolveBrand; read advertiser.brandRef. Returns the data together with response headers and request ID."
+        "Save advertiser/mappings. privateNotes: owning Buyer only. Confirm markets/channels (footprintProposal); needs_input=ask; never recreate for currency. identityContract:confirmed-v1; preview resolveBrand; read advertiser.brandRef. Unknown brand: ask website, brandName; register unverified AAO entry. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveAdvertiserResult], await self._request_with_response("save_advertiser", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_advertiser_grant(self, input: models.SaveAdvertiserGrantInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAdvertiserGrantResult:

@@ -2,7 +2,7 @@
   "name": "sales-agent-testing",
   "displayName": "Sales Agent Testing",
   "description": "Test a first-party or third-party AdCP sales agent with governed buyer workflows.",
-  "version": "1.0.0+ade5b17be66f",
+  "version": "1.0.0+830a89c9cd89",
   "author": {
     "name": "Scope3 PBC",
     "url": "https://interchange.io"

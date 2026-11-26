@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "skillId": "build-with-apostra",
-  "skillVersion": "1.1.2",
+  "skillVersion": "1.2.0",
   "scenarios": [
     {
       "id": "install-and-discover",
@@ -23,7 +23,7 @@
         "The agent checks the public V3 HTTP catalogue before choosing a route.",
         "For a catalogued operation, it uses POST /api/v3/tools/<operation> and generates types from `https://api.apostra.com/api/v3/openapi-3.1.yaml`.",
         "It uses a supported API key or M2M client-credentials token, keeps explicit account selection equal to the account resolved by authentication, and does not reuse an MCP-audience token.",
-        "For an operation outside the public V3 HTTP catalogue, it uses the documented V2 REST contract instead of inventing a V3 route.",
+        "For an operation outside the public V3 HTTP catalogue, it says the operation is not available yet and uses the documented human handoff instead of inventing a route.",
         "If authorization or account access is missing, it gives the documented human handoff and never asks for a secret in chat."
       ]
     },

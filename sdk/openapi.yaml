@@ -46212,13 +46212,13 @@ paths:
     post:
       operationId: save_advertiser
       summary: >-
-        Save an advertiser or mappings. Buyer privateNotes: owning Buyer Account only;
-        /v3/manage-ads#private-advertiser-notes. Confirm markets/channels (footprintProposal); needs_input=ask; never
-        recreate for currency. Brand: identityContract:confirmed-v1; preview: resolveBrand; read advertiser.brandRef.
+        Save advertiser/mappings. privateNotes: owning Buyer only. Confirm markets/channels (footprintProposal);
+        needs_input=ask; never recreate for currency. identityContract:confirmed-v1; preview resolveBrand; read
+        advertiser.brandRef. Unknown brand: ask website, brandName; register unverified AAO entry.
       description: >-
-        Save an advertiser or mappings. Buyer privateNotes: owning Buyer Account only;
-        /v3/manage-ads#private-advertiser-notes. Confirm markets/channels (footprintProposal); needs_input=ask; never
-        recreate for currency. Brand: identityContract:confirmed-v1; preview: resolveBrand; read advertiser.brandRef.
+        Save advertiser/mappings. privateNotes: owning Buyer only. Confirm markets/channels (footprintProposal);
+        needs_input=ask; never recreate for currency. identityContract:confirmed-v1; preview resolveBrand; read
+        advertiser.brandRef. Unknown brand: ask website, brandName; register unverified AAO entry.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -46265,6 +46265,13 @@ paths:
                 brand:
                   description: Brand domain (e.g. "nike.com") or URL. Required when creating. Resolved via AdCP brand registry.
                   type: string
+                brandName:
+                  description: >-
+                    Create only: the brand name the buyer supplied, for an unknown AAO registry entry. Ask for it when
+                    needed.
+                  type: string
+                  minLength: 1
+                  maxLength: 256
                 brand_id:
                   description: 'Create only: AdCP brand_id of a sub-brand the brand publishes.'
                   type: string
