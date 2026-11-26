@@ -51283,6 +51283,11 @@ paths:
                     enum:
                       - brief_acceptance
                       - creative_policy
+                approvalRouting:
+                  description: Who reviews one kind of approval. Waits for an administrator to approve on our site. Send alone.
+                  $ref: '#/components/schemas/save_business_rules_request_SaveBusinessRulesApprovalRouting'
+                  type: object
+                  additionalProperties: false
                 expectedAccountId:
                   description: Apostra accountId you are working in (from get_status). The write fails if the account has changed.
                   anyOf:
@@ -51561,6 +51566,7 @@ paths:
                   data:
                     anyOf:
                       - $ref: '#/components/schemas/save_business_rules_success_SaveBusinessRulesSuccessSaved'
+                      - $ref: '#/components/schemas/save_business_rules_success_SaveBusinessRulesSuccessApprovalRequired'
                       - anyOf:
                           - $ref: '#/components/schemas/save_business_rules_success_SellerSaveCandidateReplayed'
                           - $ref: '#/components/schemas/save_business_rules_success_SellerSaveReplayed'
@@ -73614,13 +73620,13 @@ paths:
     post:
       operationId: save_work_item
       summary: >-
-        Decide a creative or media-buy approval, overrule a spend conflict, complete a modular-source follow-up, or
-        resolve a failed GAM order. Repeats preserve evidence; retry, evaluation, and reassignment stay on the approvals
-        Page.
+        Decide a creative or media-buy approval, overrule a spend conflict, complete a modular-source follow-up, resolve
+        a failed GAM order, or ask to reassign a review (an administrator approves on our site). Repeats preserve
+        evidence; retry and evaluation stay on the approvals Page.
       description: >-
-        Decide a creative or media-buy approval, overrule a spend conflict, complete a modular-source follow-up, or
-        resolve a failed GAM order. Repeats preserve evidence; retry, evaluation, and reassignment stay on the approvals
-        Page.
+        Decide a creative or media-buy approval, overrule a spend conflict, complete a modular-source follow-up, resolve
+        a failed GAM order, or ask to reassign a review (an administrator approves on our site). Repeats preserve
+        evidence; retry and evaluation stay on the approvals Page.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -73662,12 +73668,25 @@ paths:
                   type: string
                   minLength: 1
                 status:
+                  description: Desired terminal state for this kind. Required unless you send reassign.
                   type: string
                   enum:
                     - approved
                     - rejected
                     - completed
-                  description: Desired terminal state for this kind.
+                reassign:
+                  description: >-
+                    Move an open creative_review or media_buy_approval to another person, with no status. Waits for an
+                    administrator to approve on our site.
+                  type: object
+                  properties:
+                    userId:
+                      type: string
+                      pattern: ^\d+$
+                      description: The user to hold the review. Ids are in the routing read.
+                  required:
+                    - userId
+                  additionalProperties: false
                 reviewerNotes:
                   description: 'Note preserved with the decision. Required for `contract_conflict`: your reason for the overrule.'
                   type: string
@@ -73722,7 +73741,6 @@ paths:
               required:
                 - kind
                 - id
-                - status
               additionalProperties: false
               allOf:
                 - if:
@@ -73903,6 +73921,7 @@ paths:
                     anyOf:
                       - $ref: '#/components/schemas/save_work_item_success_SaveWorkItemSuccessCreated'
                       - $ref: '#/components/schemas/save_work_item_success_SaveWorkItemSuccessUnchanged'
+                      - $ref: '#/components/schemas/save_work_item_success_SaveWorkItemSuccessApprovalRequired'
                   error:
                     type: 'null'
                 required:
@@ -124928,6 +124947,95 @@ components:
           description: true makes no version live. Alone.
           type: boolean
       additionalProperties: false
+    save_business_rules_request_SaveBusinessRulesApprovalRouting:
+      type: object
+      properties:
+        kind:
+          type: string
+          enum:
+            - MEDIA_BUY
+            - CREATIVE_REVIEW
+          description: Which reviews this routes.
+        primaryUserIds:
+          description: Users who review first. Ids from the read.
+          maxItems: 25
+          type: array
+          items:
+            type: string
+            pattern: ^\d+$
+        fallbackUserIds:
+          description: Users it escalates to.
+          maxItems: 25
+          type: array
+          items:
+            type: string
+            pattern: ^\d+$
+        primaryRoleKeys:
+          description: Roles who review first.
+          maxItems: 4
+          type: array
+          items:
+            type: string
+            enum:
+              - ADMIN
+              - PREMIUM
+              - BASIC
+        fallbackRoleKeys:
+          description: Roles it escalates to.
+          maxItems: 4
+          type: array
+          items:
+            type: string
+            enum:
+              - ADMIN
+              - PREMIUM
+              - BASIC
+        primaryChannels:
+          minItems: 1
+          maxItems: 3
+          type: array
+          items:
+            type: string
+            enum:
+              - in_app
+              - email
+              - slack
+          description: Include in_app.
+        fallbackChannels:
+          minItems: 1
+          maxItems: 3
+          type: array
+          items:
+            type: string
+            enum:
+              - in_app
+              - email
+              - slack
+          description: Include in_app.
+        reminderAfterMinutes:
+          type: integer
+          minimum: 5
+          maximum: 43200
+          description: Minutes before a reminder.
+        escalateAfterMinutes:
+          type: integer
+          minimum: 10
+          maximum: 86400
+          description: After reminderAfterMinutes.
+        expectedVersion:
+          description: The policy version you read; null if none. Refused if it moved on.
+          anyOf:
+            - type: integer
+              minimum: 1
+              maximum: 9007199254740991
+            - type: 'null'
+      required:
+        - kind
+        - primaryChannels
+        - fallbackChannels
+        - reminderAfterMinutes
+        - escalateAfterMinutes
+      additionalProperties: false
     save_business_rules_success_SaveBusinessRulesSuccessSaved:
       type: object
       properties:
@@ -124979,6 +125087,45 @@ components:
         - version
         - replacedVersion
       additionalProperties: false
+    save_business_rules_success_SaveBusinessRulesSuccessApprovalRequired:
+      type: object
+      properties:
+        outcome:
+          type: string
+          const: approval_required
+        action:
+          type: string
+          const: approval_required
+        message:
+          type: string
+        approval:
+          type: object
+          properties:
+            id:
+              type: string
+            kind:
+              type: string
+            state:
+              type: string
+            url:
+              type: string
+            expiresAt:
+              type: string
+          required:
+            - id
+            - kind
+            - state
+            - url
+            - expiresAt
+          additionalProperties: {}
+        idempotencyKey:
+          type: string
+      required:
+        - outcome
+        - action
+        - message
+        - approval
+      additionalProperties: {}
     save_business_rules_success_SellerSaveCandidateReplayed:
       type: object
       properties:
@@ -142602,6 +142749,45 @@ components:
         - outcome
         - action
         - object
+      additionalProperties: {}
+    save_work_item_success_SaveWorkItemSuccessApprovalRequired:
+      type: object
+      properties:
+        outcome:
+          type: string
+          const: approval_required
+        action:
+          type: string
+          const: approval_required
+        message:
+          type: string
+        approval:
+          type: object
+          properties:
+            id:
+              type: string
+            kind:
+              type: string
+            state:
+              type: string
+            url:
+              type: string
+            expiresAt:
+              type: string
+          required:
+            - id
+            - kind
+            - state
+            - url
+            - expiresAt
+          additionalProperties: {}
+        idempotencyKey:
+          type: string
+      required:
+        - outcome
+        - action
+        - message
+        - approval
       additionalProperties: {}
     save_work_item_success_SaveWorkItemSuccessCreatedObject:
       type: object

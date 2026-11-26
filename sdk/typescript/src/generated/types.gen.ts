@@ -22957,6 +22957,10 @@ export type SaveBusinessRulesData = {
          */
         advertisingPolicyDisclosure?: Array<'brief_acceptance' | 'creative_policy'>;
         /**
+         * Who reviews one kind of approval. Waits for an administrator to approve on our site. Send alone.
+         */
+        approvalRouting?: SaveBusinessRulesRequestSaveBusinessRulesApprovalRouting;
+        /**
          * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
          */
         expectedAccountId?: number | string;
@@ -23039,6 +23043,49 @@ export type SaveBusinessRulesErrors = {
     503: V3ToolErrorResponse;
 };
 
+export type SaveBusinessRulesRequestSaveBusinessRulesApprovalRouting = {
+    /**
+     * Which reviews this routes.
+     */
+    kind: 'MEDIA_BUY' | 'CREATIVE_REVIEW';
+    /**
+     * Users who review first. Ids from the read.
+     */
+    primaryUserIds?: Array<string>;
+    /**
+     * Users it escalates to.
+     */
+    fallbackUserIds?: Array<string>;
+    /**
+     * Roles who review first.
+     */
+    primaryRoleKeys?: Array<'ADMIN' | 'PREMIUM' | 'BASIC'>;
+    /**
+     * Roles it escalates to.
+     */
+    fallbackRoleKeys?: Array<'ADMIN' | 'PREMIUM' | 'BASIC'>;
+    /**
+     * Include in_app.
+     */
+    primaryChannels: Array<'in_app' | 'email' | 'slack'>;
+    /**
+     * Include in_app.
+     */
+    fallbackChannels: Array<'in_app' | 'email' | 'slack'>;
+    /**
+     * Minutes before a reminder.
+     */
+    reminderAfterMinutes: number;
+    /**
+     * After reminderAfterMinutes.
+     */
+    escalateAfterMinutes: number;
+    /**
+     * The policy version you read; null if none. Refused if it moved on.
+     */
+    expectedVersion?: number | null;
+};
+
 export type SaveBusinessRulesRequestSaveBusinessRulesPolicies = {
     /**
      * Brief rules for discovery and manual-buy screening.
@@ -23103,7 +23150,7 @@ export type SaveBusinessRulesResponses = {
      * Typed operation result
      */
     200: {
-        data: SaveBusinessRulesSuccessSaveBusinessRulesSuccessSaved | SaveBusinessRulesSuccessSellerSaveCandidateReplayed | SaveBusinessRulesSuccessSellerSaveReplayed;
+        data: SaveBusinessRulesSuccessSaveBusinessRulesSuccessSaved | SaveBusinessRulesSuccessSaveBusinessRulesSuccessApprovalRequired | SaveBusinessRulesSuccessSellerSaveCandidateReplayed | SaveBusinessRulesSuccessSellerSaveReplayed;
         error: null;
     };
     /**
@@ -23128,6 +23175,22 @@ export type SaveBusinessRulesSuccessSaveBusinessRulesPolicyChangeResult = {
     action: 'published' | 'draft_saved' | 'draft_published' | 'reactivated' | 'turned_off' | 'unchanged';
     version: number | null;
     replacedVersion: number | null;
+};
+
+export type SaveBusinessRulesSuccessSaveBusinessRulesSuccessApprovalRequired = {
+    outcome: 'approval_required';
+    action: 'approval_required';
+    message: string;
+    approval: {
+        id: string;
+        kind: string;
+        state: string;
+        url: string;
+        expiresAt: string;
+        [key: string]: unknown;
+    };
+    idempotencyKey?: string;
+    [key: string]: unknown;
 };
 
 export type SaveBusinessRulesSuccessSaveBusinessRulesSuccessSaved = {
@@ -43617,9 +43680,18 @@ export type SaveWorkItemData = {
          */
         sourceId?: string;
         /**
-         * Desired terminal state for this kind.
+         * Desired terminal state for this kind. Required unless you send reassign.
          */
-        status: 'approved' | 'rejected' | 'completed';
+        status?: 'approved' | 'rejected' | 'completed';
+        /**
+         * Move an open creative_review or media_buy_approval to another person, with no status. Waits for an administrator to approve on our site.
+         */
+        reassign?: {
+            /**
+             * The user to hold the review. Ids are in the routing read.
+             */
+            userId: string;
+        };
         /**
          * Note preserved with the decision. Required for `contract_conflict`: your reason for the overrule.
          */
@@ -43765,7 +43837,7 @@ export type SaveWorkItemResponses = {
      * Typed operation result
      */
     200: {
-        data: SaveWorkItemSuccessSaveWorkItemSuccessCreated | SaveWorkItemSuccessSaveWorkItemSuccessUnchanged;
+        data: SaveWorkItemSuccessSaveWorkItemSuccessCreated | SaveWorkItemSuccessSaveWorkItemSuccessUnchanged | SaveWorkItemSuccessSaveWorkItemSuccessApprovalRequired;
         error: null;
     };
     /**
@@ -43784,6 +43856,22 @@ export type SaveWorkItemResponses = {
         };
         error: null;
     };
+};
+
+export type SaveWorkItemSuccessSaveWorkItemSuccessApprovalRequired = {
+    outcome: 'approval_required';
+    action: 'approval_required';
+    message: string;
+    approval: {
+        id: string;
+        kind: string;
+        state: string;
+        url: string;
+        expiresAt: string;
+        [key: string]: unknown;
+    };
+    idempotencyKey?: string;
+    [key: string]: unknown;
 };
 
 export type SaveWorkItemSuccessSaveWorkItemSuccessCreated = {

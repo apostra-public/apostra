@@ -1219,14 +1219,14 @@ export class Apostra extends Transport {
   /** Create, change, or delete one wholesale product on an ad-server source — what buyers discover and buy. Omit `id` to create: needs `name` and `inventory`, validated first. Pass `id` to change only the fields you name. `active` = buyable, `archived` = off the market and reversible, `delete` is not. Returns the data together with response headers and request ID. */
   saveWholesaleProductWithResponse(input: SaveWholesaleProductInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveWholesaleProductResult>> { return this.requestDetailed("save_wholesale_product", input, options) }
   /**
-   * Decide a creative or media-buy approval, overrule a spend conflict, complete a modular-source follow-up, or resolve a failed GAM order. Repeats preserve evidence; retry, evaluation, and reassignment stay on the approvals Page.
+   * Decide a creative or media-buy approval, overrule a spend conflict, complete a modular-source follow-up, resolve a failed GAM order, or ask to reassign a review (an administrator approves on our site). Repeats preserve evidence; retry and evaluation stay on the approvals Page.
    *
    * @example
    * await client.saveWorkItem(input, { idempotencyKey: 'stable-key' })
    */
   saveWorkItem(input: SaveWorkItemInput, options: WriteRequestOptions): Promise<SaveWorkItemResult> { return this.request("save_work_item", input, options) }
 
-  /** Decide a creative or media-buy approval, overrule a spend conflict, complete a modular-source follow-up, or resolve a failed GAM order. Repeats preserve evidence; retry, evaluation, and reassignment stay on the approvals Page. Returns the data together with response headers and request ID. */
+  /** Decide a creative or media-buy approval, overrule a spend conflict, complete a modular-source follow-up, resolve a failed GAM order, or ask to reassign a review (an administrator approves on our site). Repeats preserve evidence; retry and evaluation stay on the approvals Page. Returns the data together with response headers and request ID. */
   saveWorkItemWithResponse(input: SaveWorkItemInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveWorkItemResult>> { return this.requestDetailed("save_work_item", input, options) }
   /**
    * Restore, archive or unarchive a file the account’s agent keeps in a workspace (search or get with kind workspace_file reads them): id and expectedRevision with restoreRevision, or with isArchived. It never takes content.
