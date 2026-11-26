@@ -69230,11 +69230,11 @@ paths:
       operationId: save_project
       summary: >-
         Create a Buyer account's Project (omit id), or with id make one change: details, one attach or detach, bounds,
-        lead, or autonomyPaused (stop; an administrator resumes). Wider bounds return approval_required.
+        or autonomyPaused (stop; an administrator resumes). Wider bounds return approval_required.
         reallocation_threshold is a currency amount.
       description: >-
         Create a Buyer account's Project (omit id), or with id make one change: details, one attach or detach, bounds,
-        lead, or autonomyPaused (stop; an administrator resumes). Wider bounds return approval_required.
+        or autonomyPaused (stop; an administrator resumes). Wider bounds return approval_required.
         reallocation_threshold is a currency amount.
       security:
         - apiKeyAuth: []
@@ -69497,31 +69497,6 @@ paths:
                     - limits
                     - targets
                   additionalProperties: false
-                lead:
-                  description: The acting agent. Also the conversation's lead.
-                  oneOf:
-                    - type: object
-                      properties:
-                        kind:
-                          type: string
-                          const: agent
-                          description: A buyer agent of the account.
-                        principalId:
-                          description: The buyer agent id the buyer_agent read returns.
-                          $ref: '#/components/schemas/save_project_request_LeadPrincipalId'
-                      required:
-                        - kind
-                        - principalId
-                      additionalProperties: false
-                    - type: object
-                      properties:
-                        kind:
-                          type: string
-                          const: assistant
-                          description: The Apostra Assistant.
-                      required:
-                        - kind
-                      additionalProperties: false
                 autonomyPaused:
                   description: >-
                     true stops this Project's lead at once. false resumes it, for an administrator signed in as
@@ -137819,10 +137794,6 @@ components:
       type: string
       minLength: 1
       maxLength: 512
-    save_project_request_LeadPrincipalId:
-      type: string
-      minLength: 1
-      maxLength: 512
     save_project_request_AttachmentsItemKind:
       type: string
       enum:
@@ -137992,29 +137963,19 @@ components:
           type: string
           maxLength: 2000
         lead:
-          oneOf:
-            - type: object
-              properties:
-                kind:
-                  type: string
-                  const: agent
-                  description: A buyer agent of the account.
-                principalId:
-                  description: The buyer agent id the buyer_agent read returns.
-                  $ref: '#/components/schemas/save_project_success_ObjectLeadPrincipalId'
-              required:
-                - kind
-                - principalId
-              additionalProperties: false
-            - type: object
-              properties:
-                kind:
-                  type: string
-                  const: assistant
-                  description: The Apostra Assistant.
-              required:
-                - kind
-              additionalProperties: false
+          type: object
+          properties:
+            kind:
+              type: string
+              const: agent
+              description: The account's Prime, its own agent.
+            principalId:
+              description: 'The account''s Prime: the agent the buyer_agent read returns as the account agent.'
+              $ref: '#/components/schemas/save_project_success_ObjectLeadPrincipalId'
+          required:
+            - kind
+            - principalId
+          additionalProperties: false
         attachments:
           maxItems: 100
           type: array
@@ -138727,29 +138688,19 @@ components:
           type: string
           maxLength: 2000
         lead:
-          oneOf:
-            - type: object
-              properties:
-                kind:
-                  type: string
-                  const: agent
-                  description: A buyer agent of the account.
-                principalId:
-                  description: The buyer agent id the buyer_agent read returns.
-                  $ref: '#/components/schemas/save_project_success_ProjectLeadPrincipalId'
-              required:
-                - kind
-                - principalId
-              additionalProperties: false
-            - type: object
-              properties:
-                kind:
-                  type: string
-                  const: assistant
-                  description: The Apostra Assistant.
-              required:
-                - kind
-              additionalProperties: false
+          type: object
+          properties:
+            kind:
+              type: string
+              const: agent
+              description: The account's Prime, its own agent.
+            principalId:
+              description: 'The account''s Prime: the agent the buyer_agent read returns as the account agent.'
+              $ref: '#/components/schemas/save_project_success_ProjectLeadPrincipalId'
+          required:
+            - kind
+            - principalId
+          additionalProperties: false
         attachments:
           maxItems: 100
           type: array

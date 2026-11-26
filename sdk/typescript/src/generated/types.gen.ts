@@ -38776,25 +38776,6 @@ export type SaveProjectData = {
             custom_policies?: Array<unknown>;
         };
         /**
-         * The acting agent. Also the conversation's lead.
-         */
-        lead?: {
-            /**
-             * A buyer agent of the account.
-             */
-            kind: 'agent';
-            /**
-             * The buyer agent id the buyer_agent read returns.
-             */
-            principalId: SaveProjectRequestLeadPrincipalId;
-        } | {
-            /**
-             * The Apostra Assistant.
-             */
-            kind: 'assistant';
-            principalId?: never;
-        };
-        /**
          * true stops this Project's lead at once. false resumes it, for an administrator signed in as themselves; the administrator who approved the bounds resumes at once, another needs approval. Send it with the id and only reason, idempotencyKey and dryRun.
          */
         autonomyPaused?: boolean;
@@ -38947,8 +38928,6 @@ export type SaveProjectRequestDetachKind = 'campaign' | 'media_buy' | 'rfp' | 'm
 
 export type SaveProjectRequestId = string;
 
-export type SaveProjectRequestLeadPrincipalId = string;
-
 export type SaveProjectRequestSessionId = string;
 
 export type SaveProjectResponse = SaveProjectResponses[keyof SaveProjectResponses];
@@ -39080,19 +39059,13 @@ export type SaveProjectSuccessObject = {
     objectives: string;
     lead: {
         /**
-         * A buyer agent of the account.
+         * The account's Prime, its own agent.
          */
         kind: 'agent';
         /**
-         * The buyer agent id the buyer_agent read returns.
+         * The account's Prime: the agent the buyer_agent read returns as the account agent.
          */
         principalId: SaveProjectSuccessObjectLeadPrincipalId;
-    } | {
-        /**
-         * The Apostra Assistant.
-         */
-        kind: 'assistant';
-        principalId?: never;
     };
     attachments: Array<{
         /**
@@ -39452,19 +39425,13 @@ export type SaveProjectSuccessProject = {
     objectives: string;
     lead: {
         /**
-         * A buyer agent of the account.
+         * The account's Prime, its own agent.
          */
         kind: 'agent';
         /**
-         * The buyer agent id the buyer_agent read returns.
+         * The account's Prime: the agent the buyer_agent read returns as the account agent.
          */
         principalId: SaveProjectSuccessProjectLeadPrincipalId;
-    } | {
-        /**
-         * The Apostra Assistant.
-         */
-        kind: 'assistant';
-        principalId?: never;
     };
     attachments: Array<{
         /**
