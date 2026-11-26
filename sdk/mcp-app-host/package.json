@@ -75,6 +75,6 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "typescript": "npm:@typescript/typescript6@^6.0.2",
-    "vitest": "4.1.11"
+    "vitest": "4.1.12"
   }
 }
