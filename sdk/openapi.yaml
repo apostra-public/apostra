@@ -34620,6 +34620,7 @@ paths:
                           - seller
                           - sales_agent
                           - property
+                          - creative
                       - type: string
                         pattern: ^labels\.[a-z][a-z0-9_]{0,63}$
                 range:
@@ -120133,6 +120134,7 @@ components:
       enum:
         - get_seller_reporting_metrics
         - get_buyer_reporting_metrics
+        - get_buyer_creative_delivery_days
         - get_seller_margin_reporting
     get_delivery_success_RowsItemFinality:
       type: object
@@ -120311,6 +120313,7 @@ components:
       enum:
         - get_seller_reporting_metrics
         - get_buyer_reporting_metrics
+        - get_buyer_creative_delivery_days
         - get_seller_margin_reporting
     get_delivery_success_DeliverySummaryAggregatedTotalsMetricAggregatesItemQualifierAttributionWindow:
       type: object
