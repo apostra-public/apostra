@@ -23039,6 +23039,7 @@ class SaveProjectSuccessObject(TypedDict):
     id: str
     name: str
     createdByUserId: str | None
+    createdBy: SaveProjectSuccessObjectCreatedByValue | None
     advertiserId: str | None
     advertiser: SaveProjectSuccessObjectAdvertiserValue | None
     sessionId: str
@@ -23224,6 +23225,12 @@ class SaveProjectSuccessObjectBoundsTargets(TypedDict):
 
 SaveProjectSuccessObjectBoundsTargetsMediaBuyIdsItem: TypeAlias = str
 
+class SaveProjectSuccessObjectCreatedByValue(TypedDict):
+    id: str
+    '\n    The person\'s user id; equals the Project\'s createdByUserId.\n    '
+    name: str | None
+    '\n    The person\'s name, read-only. Null when no name is recorded for them.\n    '
+
 class SaveProjectSuccessObjectLead(TypedDict):
     kind: Literal["agent"]
     '\n    The account\'s Prime, its own agent.\n    '
@@ -23366,6 +23373,7 @@ class SaveProjectSuccessProject(TypedDict):
     id: str
     name: str
     createdByUserId: str | None
+    createdBy: SaveProjectSuccessProjectCreatedByValue | None
     advertiserId: str | None
     advertiser: SaveProjectSuccessProjectAdvertiserValue | None
     sessionId: str
@@ -23550,6 +23558,12 @@ class SaveProjectSuccessProjectBoundsTargets(TypedDict):
     '\n    Attached media buys the lead may change. A buy added later is a wider revision.\n    '
 
 SaveProjectSuccessProjectBoundsTargetsMediaBuyIdsItem: TypeAlias = str
+
+class SaveProjectSuccessProjectCreatedByValue(TypedDict):
+    id: str
+    '\n    The person\'s user id; equals the Project\'s createdByUserId.\n    '
+    name: str | None
+    '\n    The person\'s name, read-only. Null when no name is recorded for them.\n    '
 
 class SaveProjectSuccessProjectLead(TypedDict):
     kind: Literal["agent"]

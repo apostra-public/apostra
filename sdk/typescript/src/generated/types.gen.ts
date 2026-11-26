@@ -39059,6 +39059,16 @@ export type SaveProjectSuccessObject = {
     id: string;
     name: string;
     createdByUserId: string | null;
+    createdBy: {
+        /**
+         * The person's user id; equals the Project's createdByUserId.
+         */
+        id: string;
+        /**
+         * The person's name, read-only. Null when no name is recorded for them.
+         */
+        name: string | null;
+    } | null;
     advertiserId: string | null;
     advertiser: {
         /**
@@ -39517,6 +39527,16 @@ export type SaveProjectSuccessProject = {
     id: string;
     name: string;
     createdByUserId: string | null;
+    createdBy: {
+        /**
+         * The person's user id; equals the Project's createdByUserId.
+         */
+        id: string;
+        /**
+         * The person's name, read-only. Null when no name is recorded for them.
+         */
+        name: string | null;
+    } | null;
     advertiserId: string | null;
     advertiser: {
         /**
