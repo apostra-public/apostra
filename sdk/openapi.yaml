@@ -128382,6 +128382,22 @@ components:
                   - mediaBuyId
                   - dropped
                 additionalProperties: false
+              - type: object
+                properties:
+                  type:
+                    type: string
+                    const: frequency_cap_not_applied
+                  mediaBuyId:
+                    type: string
+                  messages:
+                    type: array
+                    items:
+                      type: string
+                required:
+                  - type
+                  - mediaBuyId
+                  - messages
+                additionalProperties: false
       required:
         - mediaBuysExecuted
         - mediaBuysAttempted
