@@ -22913,6 +22913,7 @@ class SaveProjectSuccessObject(TypedDict):
     advertiserId: str | None
     advertiser: SaveProjectSuccessObjectAdvertiserValue | None
     sessionId: str
+    sourceSessionId: str | None
     objectives: str
     lead: SaveProjectSuccessObjectLeadKindAgent | SaveProjectSuccessObjectLeadKindAssistant
     attachments: list[SaveProjectSuccessObjectAttachmentsItem]
@@ -23106,6 +23107,7 @@ class SaveProjectSuccessProject(TypedDict):
     advertiserId: str | None
     advertiser: SaveProjectSuccessProjectAdvertiserValue | None
     sessionId: str
+    sourceSessionId: str | None
     objectives: str
     lead: SaveProjectSuccessProjectLeadKindAgent | SaveProjectSuccessProjectLeadKindAssistant
     attachments: list[SaveProjectSuccessProjectAttachmentsItem]

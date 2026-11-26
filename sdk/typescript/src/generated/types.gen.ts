@@ -38868,6 +38868,7 @@ export type SaveProjectSuccessObject = {
         name: string | null;
     } | null;
     sessionId: string;
+    sourceSessionId: string | null;
     objectives: string;
     lead: {
         /**
@@ -39135,6 +39136,7 @@ export type SaveProjectSuccessProject = {
         name: string | null;
     } | null;
     sessionId: string;
+    sourceSessionId: string | null;
     objectives: string;
     lead: {
         /**
