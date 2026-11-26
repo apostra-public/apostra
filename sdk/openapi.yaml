@@ -64682,8 +64682,8 @@ paths:
                       type: boolean
                     isPaused:
                       description: >-
-                        true pauses ACTIVE; false activates PAUSED; same state unchanged. Other states refuse. Send
-                        alone.
+                        true pauses ACTIVE and stops every creative on the buy; false activates PAUSED; same state
+                        unchanged. Other states refuse. Send alone.
                       type: boolean
                     isCanceled:
                       description: >-
@@ -66774,8 +66774,8 @@ paths:
                       type: boolean
                     isPaused:
                       description: >-
-                        true pauses ACTIVE; false activates PAUSED; same state unchanged. Other states refuse. Send
-                        alone.
+                        true pauses ACTIVE and stops every creative on the buy; false activates PAUSED; same state
+                        unchanged. Other states refuse. Send alone.
                       type: boolean
                     isCanceled:
                       description: >-
@@ -66967,8 +66967,8 @@ paths:
                       type: boolean
                     isPaused:
                       description: >-
-                        true pauses ACTIVE; false activates PAUSED; same state unchanged. Other states refuse. Send
-                        alone.
+                        true pauses ACTIVE and stops every creative on the buy; false activates PAUSED; same state
+                        unchanged. Other states refuse. Send alone.
                       type: boolean
                     isCanceled:
                       description: >-
