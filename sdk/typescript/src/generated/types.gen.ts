@@ -39401,7 +39401,7 @@ export type SaveProjectSuccessObjectAttachmentsItemId = string;
 export type SaveProjectSuccessObjectAttachmentsItemName = string | null;
 
 /**
- * How it is pacing now, the same verdict `get_delivery` returns on its delivery goal. Null when it cannot be judged.
+ * How it is pacing now, the same verdict `get_delivery` returns on its delivery goal. Null when it cannot be judged, for a paused media buy and for a campaign whose media buys are all paused.
  */
 export type SaveProjectSuccessObjectAttachmentsItemPaceVerdict = 'far_behind' | 'behind' | 'on_pace' | 'ahead' | null;
 
@@ -39773,7 +39773,7 @@ export type SaveProjectSuccessProjectAttachmentsItemId = string;
 export type SaveProjectSuccessProjectAttachmentsItemName = string | null;
 
 /**
- * How it is pacing now, the same verdict `get_delivery` returns on its delivery goal. Null when it cannot be judged.
+ * How it is pacing now, the same verdict `get_delivery` returns on its delivery goal. Null when it cannot be judged, for a paused media buy and for a campaign whose media buys are all paused.
  */
 export type SaveProjectSuccessProjectAttachmentsItemPaceVerdict = 'far_behind' | 'behind' | 'on_pace' | 'ahead' | null;
 

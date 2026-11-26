@@ -139448,7 +139448,7 @@ components:
         - type: 'null'
       description: >-
         How it is pacing now, the same verdict `get_delivery` returns on its delivery goal. Null when it cannot be
-        judged.
+        judged, for a paused media buy and for a campaign whose media buys are all paused.
     save_project_success_ObjectBoundsChannelsRequiredItem:
       anyOf:
         - type: string
@@ -139602,7 +139602,7 @@ components:
         - type: 'null'
       description: >-
         How it is pacing now, the same verdict `get_delivery` returns on its delivery goal. Null when it cannot be
-        judged.
+        judged, for a paused media buy and for a campaign whose media buys are all paused.
     save_project_success_ProjectBoundsChannelsRequiredItem:
       anyOf:
         - type: string
