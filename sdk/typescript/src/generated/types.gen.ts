@@ -44708,6 +44708,10 @@ export type SearchData = {
              */
             askState?: 'open' | 'closed';
             /**
+             * For kind ask: only requests you filed. Needs a signed-in person.
+             */
+            filedBy?: 'me';
+            /**
              * For kind ad_server_targeting: which of the source's targeting taxonomies to browse, as named by the source.
              */
             candidateType?: string;
@@ -45355,6 +45359,10 @@ export type SearchData = {
              * For kind ask: open requests, or closed ones (closed includes requests the requester withdrew).
              */
             askState?: 'open' | 'closed';
+            /**
+             * For kind ask: only requests you filed. Needs a signed-in person.
+             */
+            filedBy?: 'me';
             /**
              * For kind ad_server_targeting: which of the source's targeting taxonomies to browse, as named by the source.
              */
@@ -46085,6 +46093,10 @@ export type SearchData = {
              */
             askState?: 'open' | 'closed';
             /**
+             * For kind ask: only requests you filed. Needs a signed-in person.
+             */
+            filedBy?: 'me';
+            /**
              * For kind ad_server_targeting: which of the source's targeting taxonomies to browse, as named by the source.
              */
             candidateType?: string;
@@ -46732,6 +46744,10 @@ export type SearchData = {
              * For kind ask: open requests, or closed ones (closed includes requests the requester withdrew).
              */
             askState?: 'open' | 'closed';
+            /**
+             * For kind ask: only requests you filed. Needs a signed-in person.
+             */
+            filedBy?: 'me';
             /**
              * For kind ad_server_targeting: which of the source's targeting taxonomies to browse, as named by the source.
              */
@@ -47374,6 +47390,10 @@ export type SearchData = {
              */
             askState?: 'open' | 'closed';
             /**
+             * For kind ask: only requests you filed. Needs a signed-in person.
+             */
+            filedBy?: 'me';
+            /**
              * For kind ad_server_targeting: which of the source's targeting taxonomies to browse, as named by the source.
              */
             candidateType?: string;
@@ -48018,6 +48038,10 @@ export type SearchData = {
              */
             askState?: 'open' | 'closed';
             /**
+             * For kind ask: only requests you filed. Needs a signed-in person.
+             */
+            filedBy?: 'me';
+            /**
              * For kind ad_server_targeting: which of the source's targeting taxonomies to browse, as named by the source.
              */
             candidateType?: string;
@@ -48661,6 +48685,10 @@ export type SearchData = {
              * For kind ask: open requests, or closed ones (closed includes requests the requester withdrew).
              */
             askState?: 'open' | 'closed';
+            /**
+             * For kind ask: only requests you filed. Needs a signed-in person.
+             */
+            filedBy?: 'me';
             /**
              * For kind ad_server_targeting: which of the source's targeting taxonomies to browse, as named by the source.
              */
@@ -49457,6 +49485,10 @@ export type SearchData = {
              * For kind ask: open requests, or closed ones (closed includes requests the requester withdrew).
              */
             askState?: 'open' | 'closed';
+            /**
+             * For kind ask: only requests you filed. Needs a signed-in person.
+             */
+            filedBy?: 'me';
             /**
              * For kind ad_server_targeting: which of the source's targeting taxonomies to browse, as named by the source.
              */
@@ -50272,6 +50304,10 @@ export type SearchData = {
              */
             askState?: 'open' | 'closed';
             /**
+             * For kind ask: only requests you filed. Needs a signed-in person.
+             */
+            filedBy?: 'me';
+            /**
              * For kind ad_server_targeting: which of the source's targeting taxonomies to browse, as named by the source.
              */
             candidateType?: string;
@@ -51005,6 +51041,10 @@ export type SearchData = {
              */
             askState?: 'open' | 'closed';
             /**
+             * For kind ask: only requests you filed. Needs a signed-in person.
+             */
+            filedBy?: 'me';
+            /**
              * For kind ad_server_targeting: which of the source's targeting taxonomies to browse, as named by the source.
              */
             candidateType?: string;
@@ -51651,6 +51691,10 @@ export type SearchData = {
              * For kind ask: open requests, or closed ones (closed includes requests the requester withdrew).
              */
             askState?: 'open' | 'closed';
+            /**
+             * For kind ask: only requests you filed. Needs a signed-in person.
+             */
+            filedBy?: 'me';
             /**
              * For kind ad_server_targeting: which of the source's targeting taxonomies to browse, as named by the source.
              */
@@ -52299,6 +52343,10 @@ export type SearchData = {
              * For kind ask: open requests, or closed ones (closed includes requests the requester withdrew).
              */
             askState?: 'open' | 'closed';
+            /**
+             * For kind ask: only requests you filed. Needs a signed-in person.
+             */
+            filedBy?: 'me';
             /**
              * For kind ad_server_targeting: which of the source's targeting taxonomies to browse, as named by the source.
              */
@@ -52948,6 +52996,10 @@ export type SearchData = {
              */
             askState?: 'open' | 'closed';
             /**
+             * For kind ask: only requests you filed. Needs a signed-in person.
+             */
+            filedBy?: 'me';
+            /**
              * For kind ad_server_targeting: which of the source's targeting taxonomies to browse, as named by the source.
              */
             candidateType?: string;
@@ -53595,6 +53647,10 @@ export type SearchData = {
              * For kind ask: open requests, or closed ones (closed includes requests the requester withdrew).
              */
             askState?: 'open' | 'closed';
+            /**
+             * For kind ask: only requests you filed. Needs a signed-in person.
+             */
+            filedBy?: 'me';
             /**
              * For kind ad_server_targeting: which of the source's targeting taxonomies to browse, as named by the source.
              */

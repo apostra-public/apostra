@@ -74859,6 +74859,10 @@ paths:
                           enum:
                             - open
                             - closed
+                        filedBy:
+                          description: 'For kind ask: only requests you filed. Needs a signed-in person.'
+                          type: string
+                          const: me
                         candidateType:
                           description: >-
                             For kind ad_server_targeting: which of the source's targeting taxonomies to browse, as named
@@ -76932,6 +76936,10 @@ paths:
                           enum:
                             - open
                             - closed
+                        filedBy:
+                          description: 'For kind ask: only requests you filed. Needs a signed-in person.'
+                          type: string
+                          const: me
                         candidateType:
                           description: >-
                             For kind ad_server_targeting: which of the source's targeting taxonomies to browse, as named
@@ -79870,6 +79878,10 @@ paths:
                           enum:
                             - open
                             - closed
+                        filedBy:
+                          description: 'For kind ask: only requests you filed. Needs a signed-in person.'
+                          type: string
+                          const: me
                         candidateType:
                           description: >-
                             For kind ad_server_targeting: which of the source's targeting taxonomies to browse, as named
@@ -81944,6 +81956,10 @@ paths:
                           enum:
                             - open
                             - closed
+                        filedBy:
+                          description: 'For kind ask: only requests you filed. Needs a signed-in person.'
+                          type: string
+                          const: me
                         candidateType:
                           description: >-
                             For kind ad_server_targeting: which of the source's targeting taxonomies to browse, as named
@@ -84002,6 +84018,10 @@ paths:
                           enum:
                             - open
                             - closed
+                        filedBy:
+                          description: 'For kind ask: only requests you filed. Needs a signed-in person.'
+                          type: string
+                          const: me
                         candidateType:
                           description: >-
                             For kind ad_server_targeting: which of the source's targeting taxonomies to browse, as named
@@ -86068,6 +86088,10 @@ paths:
                           enum:
                             - open
                             - closed
+                        filedBy:
+                          description: 'For kind ask: only requests you filed. Needs a signed-in person.'
+                          type: string
+                          const: me
                         candidateType:
                           description: >-
                             For kind ad_server_targeting: which of the source's targeting taxonomies to browse, as named
@@ -88133,6 +88157,10 @@ paths:
                           enum:
                             - open
                             - closed
+                        filedBy:
+                          description: 'For kind ask: only requests you filed. Needs a signed-in person.'
+                          type: string
+                          const: me
                         candidateType:
                           description: >-
                             For kind ad_server_targeting: which of the source's targeting taxonomies to browse, as named
@@ -91970,6 +91998,10 @@ paths:
                           enum:
                             - open
                             - closed
+                        filedBy:
+                          description: 'For kind ask: only requests you filed. Needs a signed-in person.'
+                          type: string
+                          const: me
                         candidateType:
                           description: >-
                             For kind ad_server_targeting: which of the source's targeting taxonomies to browse, as named
@@ -95773,6 +95805,10 @@ paths:
                           enum:
                             - open
                             - closed
+                        filedBy:
+                          description: 'For kind ask: only requests you filed. Needs a signed-in person.'
+                          type: string
+                          const: me
                         candidateType:
                           description: >-
                             For kind ad_server_targeting: which of the source's targeting taxonomies to browse, as named
@@ -98723,6 +98759,10 @@ paths:
                           enum:
                             - open
                             - closed
+                        filedBy:
+                          description: 'For kind ask: only requests you filed. Needs a signed-in person.'
+                          type: string
+                          const: me
                         candidateType:
                           description: >-
                             For kind ad_server_targeting: which of the source's targeting taxonomies to browse, as named
@@ -100795,6 +100835,10 @@ paths:
                           enum:
                             - open
                             - closed
+                        filedBy:
+                          description: 'For kind ask: only requests you filed. Needs a signed-in person.'
+                          type: string
+                          const: me
                         candidateType:
                           description: >-
                             For kind ad_server_targeting: which of the source's targeting taxonomies to browse, as named
@@ -102864,6 +102908,10 @@ paths:
                           enum:
                             - open
                             - closed
+                        filedBy:
+                          description: 'For kind ask: only requests you filed. Needs a signed-in person.'
+                          type: string
+                          const: me
                         candidateType:
                           description: >-
                             For kind ad_server_targeting: which of the source's targeting taxonomies to browse, as named
@@ -104933,6 +104981,10 @@ paths:
                           enum:
                             - open
                             - closed
+                        filedBy:
+                          description: 'For kind ask: only requests you filed. Needs a signed-in person.'
+                          type: string
+                          const: me
                         candidateType:
                           description: >-
                             For kind ad_server_targeting: which of the source's targeting taxonomies to browse, as named
@@ -107003,6 +107055,10 @@ paths:
                           enum:
                             - open
                             - closed
+                        filedBy:
+                          description: 'For kind ask: only requests you filed. Needs a signed-in person.'
+                          type: string
+                          const: me
                         candidateType:
                           description: >-
                             For kind ad_server_targeting: which of the source's targeting taxonomies to browse, as named
