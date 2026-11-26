@@ -2706,6 +2706,7 @@
       "SaveCampaignSuccessExecutionWarningsItemTypeDemographicsNarrowedDroppedItem": "object",
       "SaveCampaignSuccessExecutionWarningsItemTypeDemographicsNotApplied": "object",
       "SaveCampaignSuccessExecutionWarningsItemTypeDemographicsNotAppliedDroppedItem": "object",
+      "SaveCampaignSuccessExecutionWarningsItemTypeFrequencyCapNotApplied": "object",
       "SaveCampaignSuccessExecutionWarningsItemTypeOptimizationGoalsDropped": "object",
       "SaveCampaignSuccessExecutionWarningsItemTypeOptimizationGoalsDroppedDroppedItem": "object",
       "SaveCampaignSuccessExecutionWarningsItemTypePacingNotApplied": "object",

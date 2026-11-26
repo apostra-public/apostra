@@ -25985,6 +25985,7 @@ export type SaveCampaignSuccessExecution = {
         }>;
         mediaBuyIds?: never;
         hint?: never;
+        messages?: never;
     } | {
         type: 'optimization_goals_dropped';
         mediaBuyId: string;
@@ -25999,6 +26000,7 @@ export type SaveCampaignSuccessExecution = {
         }>;
         mediaBuyIds?: never;
         hint?: never;
+        messages?: never;
     } | {
         type: 'pacing_not_applied';
         mediaBuyId: string;
@@ -26011,6 +26013,7 @@ export type SaveCampaignSuccessExecution = {
         }>;
         mediaBuyIds?: never;
         hint?: never;
+        messages?: never;
     } | {
         type: 'demographics_not_applied';
         mediaBuyId: string;
@@ -26021,12 +26024,14 @@ export type SaveCampaignSuccessExecution = {
         }>;
         mediaBuyIds?: never;
         hint?: never;
+        messages?: never;
     } | {
         type: 'stale_draft';
         mediaBuyIds: Array<string>;
         hint: string;
         mediaBuyId?: never;
         dropped?: never;
+        messages?: never;
     } | {
         type: 'demographics_narrowed';
         mediaBuyId: string;
@@ -26037,6 +26042,7 @@ export type SaveCampaignSuccessExecution = {
         }>;
         mediaBuyIds?: never;
         hint?: never;
+        messages?: never;
     } | {
         type: 'packages_undeliverable';
         mediaBuyId: string;
@@ -26047,6 +26053,7 @@ export type SaveCampaignSuccessExecution = {
         }>;
         mediaBuyIds?: never;
         hint?: never;
+        messages?: never;
     } | {
         type: 'trackers_not_sent';
         mediaBuyId: string;
@@ -26055,6 +26062,14 @@ export type SaveCampaignSuccessExecution = {
             trackerName: string;
             reason: string;
         }>;
+        mediaBuyIds?: never;
+        hint?: never;
+        messages?: never;
+    } | {
+        type: 'frequency_cap_not_applied';
+        mediaBuyId: string;
+        messages: Array<string>;
+        dropped?: never;
         mediaBuyIds?: never;
         hint?: never;
     }>;

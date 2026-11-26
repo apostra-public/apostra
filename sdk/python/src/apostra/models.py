@@ -15690,7 +15690,7 @@ class SaveCampaignSuccessExecution(TypedDict):
     mediaBuysFailed: float
     noOp: bool
     errors: NotRequired[list[SaveCampaignSuccessExecutionErrorsItem]]
-    warnings: NotRequired[list[SaveCampaignSuccessExecutionWarningsItemTypeCreativesDropped | SaveCampaignSuccessExecutionWarningsItemTypeOptimizationGoalsDropped | SaveCampaignSuccessExecutionWarningsItemTypePacingNotApplied | SaveCampaignSuccessExecutionWarningsItemTypeDemographicsNotApplied | SaveCampaignSuccessExecutionWarningsItemTypeStaleDraft | SaveCampaignSuccessExecutionWarningsItemTypeDemographicsNarrowed | SaveCampaignSuccessExecutionWarningsItemTypePackagesUndeliverable | SaveCampaignSuccessExecutionWarningsItemTypeTrackersNotSent]]
+    warnings: NotRequired[list[SaveCampaignSuccessExecutionWarningsItemTypeCreativesDropped | SaveCampaignSuccessExecutionWarningsItemTypeOptimizationGoalsDropped | SaveCampaignSuccessExecutionWarningsItemTypePacingNotApplied | SaveCampaignSuccessExecutionWarningsItemTypeDemographicsNotApplied | SaveCampaignSuccessExecutionWarningsItemTypeStaleDraft | SaveCampaignSuccessExecutionWarningsItemTypeDemographicsNarrowed | SaveCampaignSuccessExecutionWarningsItemTypePackagesUndeliverable | SaveCampaignSuccessExecutionWarningsItemTypeTrackersNotSent | SaveCampaignSuccessExecutionWarningsItemTypeFrequencyCapNotApplied]]
 
 class SaveCampaignSuccessExecutionErrorsItem(TypedDict):
     mediaBuyId: str
@@ -15733,6 +15733,11 @@ class SaveCampaignSuccessExecutionWarningsItemTypeDemographicsNotAppliedDroppedI
     productId: str
     buyerRef: str
     reason: str
+
+class SaveCampaignSuccessExecutionWarningsItemTypeFrequencyCapNotApplied(TypedDict):
+    type: Literal["frequency_cap_not_applied"]
+    mediaBuyId: str
+    messages: list[str]
 
 class SaveCampaignSuccessExecutionWarningsItemTypeOptimizationGoalsDropped(TypedDict):
     type: Literal["optimization_goals_dropped"]
