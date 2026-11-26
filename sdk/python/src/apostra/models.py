@@ -20437,7 +20437,7 @@ class SaveMediaBuyInputKindCreate(TypedDict):
     isArchived: NotRequired[bool]
     '\n    Update only: true archives a DRAFT, FAILED, CANCELED, or REJECTED buy (campaign unaffected). Send alone. false unsupported.\n    '
     isPaused: NotRequired[bool]
-    '\n    true pauses ACTIVE; false activates PAUSED; same state unchanged. Other states refuse. Send alone.\n    '
+    '\n    true pauses ACTIVE and stops every creative on the buy; false activates PAUSED; same state unchanged. Other states refuse. Send alone.\n    '
     isCanceled: NotRequired[bool]
     '\n    Update only: true irreversibly requests cancellation of one buy; send as the only change. Seller confirmation may be pending; already canceled returns unchanged. false is unsupported.\n    '
     tracking: NotRequired[SaveMediaBuyInputKindCreateTracking]
@@ -21038,7 +21038,7 @@ class SaveMediaBuyInputKindProposal(TypedDict):
     isArchived: NotRequired[bool]
     '\n    Update only: true archives a DRAFT, FAILED, CANCELED, or REJECTED buy (campaign unaffected). Send alone. false unsupported.\n    '
     isPaused: NotRequired[bool]
-    '\n    true pauses ACTIVE; false activates PAUSED; same state unchanged. Other states refuse. Send alone.\n    '
+    '\n    true pauses ACTIVE and stops every creative on the buy; false activates PAUSED; same state unchanged. Other states refuse. Send alone.\n    '
     isCanceled: NotRequired[bool]
     '\n    Update only: true irreversibly requests cancellation of one buy; send as the only change. Seller confirmation may be pending; already canceled returns unchanged. false is unsupported.\n    '
     tracking: NotRequired[SaveMediaBuyInputKindProposalTracking]
@@ -21116,7 +21116,7 @@ class SaveMediaBuyInputKindUpdate(TypedDict):
     isArchived: NotRequired[bool]
     '\n    Update only: true archives a DRAFT, FAILED, CANCELED, or REJECTED buy (campaign unaffected). Send alone. false unsupported.\n    '
     isPaused: NotRequired[bool]
-    '\n    true pauses ACTIVE; false activates PAUSED; same state unchanged. Other states refuse. Send alone.\n    '
+    '\n    true pauses ACTIVE and stops every creative on the buy; false activates PAUSED; same state unchanged. Other states refuse. Send alone.\n    '
     isCanceled: NotRequired[bool]
     '\n    Update only: true irreversibly requests cancellation of one buy; send as the only change. Seller confirmation may be pending; already canceled returns unchanged. false is unsupported.\n    '
     tracking: NotRequired[SaveMediaBuyInputKindUpdateTracking]

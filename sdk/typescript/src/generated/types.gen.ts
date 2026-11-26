@@ -35414,7 +35414,7 @@ export type SaveMediaBuyData = {
          */
         isArchived?: boolean;
         /**
-         * true pauses ACTIVE; false activates PAUSED; same state unchanged. Other states refuse. Send alone.
+         * true pauses ACTIVE and stops every creative on the buy; false activates PAUSED; same state unchanged. Other states refuse. Send alone.
          */
         isPaused?: boolean;
         /**
@@ -36349,7 +36349,7 @@ export type SaveMediaBuyData = {
          */
         isArchived?: boolean;
         /**
-         * true pauses ACTIVE; false activates PAUSED; same state unchanged. Other states refuse. Send alone.
+         * true pauses ACTIVE and stops every creative on the buy; false activates PAUSED; same state unchanged. Other states refuse. Send alone.
          */
         isPaused?: boolean;
         /**
@@ -36480,7 +36480,7 @@ export type SaveMediaBuyData = {
          */
         isArchived?: boolean;
         /**
-         * true pauses ACTIVE; false activates PAUSED; same state unchanged. Other states refuse. Send alone.
+         * true pauses ACTIVE and stops every creative on the buy; false activates PAUSED; same state unchanged. Other states refuse. Send alone.
          */
         isPaused?: boolean;
         /**
