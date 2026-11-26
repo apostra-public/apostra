@@ -42601,6 +42601,7 @@ export type SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded = {
     bindingMode?: 'dedicated' | 'shared_default' | 'operator_shared';
     sourceExternalAccountId: string | null;
     version: number | null;
+    operatorBrandsBound?: number;
     [key: string]: unknown;
 };
 

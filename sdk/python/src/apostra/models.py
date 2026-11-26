@@ -25421,6 +25421,7 @@ class SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded(TypedDict):
     bindingMode: NotRequired[Literal["dedicated", "shared_default", "operator_shared"]]
     sourceExternalAccountId: str | None
     version: int | None
+    operatorBrandsBound: NotRequired[int]
 
 class SaveSellerSuccessSaveSellerSuccessSourceRequestQueued(TypedDict):
     outcome: Literal["source_request_queued"]
