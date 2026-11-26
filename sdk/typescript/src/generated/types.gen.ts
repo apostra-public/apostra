@@ -41900,9 +41900,9 @@ export type SaveSellerData = {
              */
             decision: 'bound';
             /**
-             * dedicated (the default) maps sourceExternalAccountId. shared_default binds the source default account instead and takes no account id; see the source interchangeDefault.
+             * dedicated (the default) maps sourceExternalAccountId. shared_default binds the source default account instead and takes no account id; see the source interchangeDefault. operator_shared maps it as the operator's shared account.
              */
-            bindingMode?: 'dedicated' | 'shared_default';
+            bindingMode?: 'dedicated' | 'shared_default' | 'operator_shared';
             /**
              * Source account to map, usually a candidate. Required unless bindingMode is shared_default.
              */
@@ -42598,7 +42598,7 @@ export type SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded = {
     relationshipId: string;
     inventorySourceKey: string;
     decision: 'bound' | 'not_required';
-    bindingMode?: 'dedicated' | 'shared_default';
+    bindingMode?: 'dedicated' | 'shared_default' | 'operator_shared';
     sourceExternalAccountId: string | null;
     version: number | null;
     [key: string]: unknown;

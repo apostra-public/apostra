@@ -25143,8 +25143,8 @@ class SaveSellerInputSourceDecisionDecisionBound(TypedDict):
     expectedVersion: SaveSellerRequestSourceDecisionExpectedVersion
     decision: Literal["bound"]
     '\n    Map an account.\n    '
-    bindingMode: NotRequired[Literal["dedicated", "shared_default"]]
-    '\n    dedicated (the default) maps sourceExternalAccountId. shared_default binds the source default account instead and takes no account id; see the source interchangeDefault.\n    '
+    bindingMode: NotRequired[Literal["dedicated", "shared_default", "operator_shared"]]
+    '\n    dedicated (the default) maps sourceExternalAccountId. shared_default binds the source default account instead and takes no account id; see the source interchangeDefault. operator_shared maps it as the operator\'s shared account.\n    '
     sourceExternalAccountId: NotRequired[str]
     '\n    Source account to map, usually a candidate. Required unless bindingMode is shared_default.\n    '
 
@@ -25418,7 +25418,7 @@ class SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded(TypedDict):
     relationshipId: str
     inventorySourceKey: str
     decision: Literal["bound", "not_required"]
-    bindingMode: NotRequired[Literal["dedicated", "shared_default"]]
+    bindingMode: NotRequired[Literal["dedicated", "shared_default", "operator_shared"]]
     sourceExternalAccountId: str | None
     version: int | None
 
