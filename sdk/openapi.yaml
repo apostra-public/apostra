@@ -69497,6 +69497,15 @@ paths:
                     - limits
                     - targets
                   additionalProperties: false
+                expectedRevision:
+                  description: >-
+                    Edit only, with bounds: the newest bounds revision from your last read of the Project,
+                    pendingBounds.revision when one waits, else bounds.revision. If the Project has moved to another
+                    revision since, the save is refused with CONFLICT and nothing changes; read the Project again and
+                    retry. Omit it to save without the check.
+                  type: integer
+                  minimum: 1
+                  maximum: 9007199254740991
                 autonomyPaused:
                   description: >-
                     true stops this Project's lead at once. false resumes it, for an administrator signed in as
@@ -138153,213 +138162,11 @@ components:
                 additionalProperties: false
         bounds:
           anyOf:
-            - type: object
-              properties:
-                flight:
-                  type: object
-                  properties:
-                    start:
-                      type: string
-                    end:
-                      type: string
-                  required:
-                    - start
-                    - end
-                  additionalProperties: {}
-                channels:
-                  type: object
-                  properties:
-                    required:
-                      type: array
-                      items:
-                        $ref: '#/components/schemas/save_project_success_ObjectBoundsChannelsRequiredItem'
-                    allowed:
-                      type: array
-                      items:
-                        $ref: '#/components/schemas/save_project_success_ObjectBoundsChannelsAllowedItem'
-                    mix_targets:
-                      type: object
-                      propertyNames:
-                        type: string
-                      additionalProperties:
-                        type: object
-                        properties:
-                          min_pct:
-                            type: number
-                          max_pct:
-                            type: number
-                        additionalProperties: {}
-                  additionalProperties: {}
-                countries:
-                  type: array
-                  items:
-                    type: string
-                regions:
-                  type: array
-                  items:
-                    type: string
-                policy_ids:
-                  type: array
-                  items:
-                    type: string
-                policy_categories:
-                  type: array
-                  items:
-                    type: string
-                approved_sellers:
-                  anyOf:
-                    - type: array
-                      items:
-                        type: string
-                    - type: 'null'
-                human_review_required:
-                  type: boolean
-                budget:
-                  type: object
-                  properties:
-                    total:
-                      type: number
-                    currency:
-                      type: string
-                    accounting_mode:
-                      anyOf:
-                        - type: string
-                          const: gross_commitment
-                        - type: string
-                          const: verified_net_cost
-                    per_seller_max_pct:
-                      type: number
-                    reallocation_threshold:
-                      type: number
-                      minimum: 0
-                      description: >-
-                        An amount in `budget.currency`, not a percentage. 0 means every reallocation needs approval;
-                        `total` means unlimited.
-                    allocations:
-                      type: object
-                      propertyNames:
-                        type: string
-                      additionalProperties:
-                        type: object
-                        properties:
-                          amount:
-                            type: number
-                            minimum: 0
-                          max_pct:
-                            type: number
-                            minimum: 0
-                            maximum: 100
-                        additionalProperties: {}
-                    periods:
-                      maxItems: 366
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          budget_period_id:
-                            type: string
-                            minLength: 1
-                            maxLength: 64
-                            pattern: ^[A-Za-z0-9_.:-]+$
-                          start:
-                            type: string
-                          end:
-                            type: string
-                          amount:
-                            type: number
-                            minimum: 0
-                        required:
-                          - budget_period_id
-                          - start
-                          - end
-                          - amount
-                        additionalProperties: {}
-                  required:
-                    - total
-                    - currency
-                    - reallocation_threshold
-                  additionalProperties: {}
-                autonomousActions:
-                  maxItems: 4
-                  type: array
-                  items:
-                    type: string
-                    enum:
-                      - move_budget
-                      - change_pacing
-                      - pause_or_resume_media_buy
-                      - assign_approved_creative
-                  description: The actions the lead may take without asking.
-                limits:
-                  type: object
-                  properties:
-                    maxActionsPerDay:
-                      default: 10
-                      description: Autonomous actions allowed per day.
-                      type: integer
-                      minimum: 1
-                      maximum: 50
-                    iuBudget:
-                      default: null
-                      description: The Project's cap in IUs, or null for the account's spending cap alone.
-                      anyOf:
-                        - type: number
-                          exclusiveMinimum: 0
-                        - type: 'null'
-                  required:
-                    - maxActionsPerDay
-                    - iuBudget
-                  additionalProperties: false
-                  description: Daily action count and IU cap.
-                targets:
-                  type: object
-                  properties:
-                    mediaBuyIds:
-                      maxItems: 100
-                      type: array
-                      items:
-                        $ref: '#/components/schemas/save_project_success_ObjectBoundsTargetsMediaBuyIdsItem'
-                      description: Attached media buys the lead may change. A buy added later is a wider revision.
-                  required:
-                    - mediaBuyIds
-                  additionalProperties: false
-                  description: The media buys autonomous actions may change.
-                revision:
-                  type: integer
-                  minimum: 1
-                  maximum: 9007199254740991
-                approval:
-                  anyOf:
-                    - type: object
-                      properties:
-                        approvedBy:
-                          type:
-                            - string
-                            - 'null'
-                        approvedAt:
-                          type: string
-                          format: date-time
-                          pattern: >-
-                            ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z|([+-](?:[01]\d|2[0-3]):[0-5]\d)))$
-                        approvedRevision:
-                          type: integer
-                          minimum: 1
-                          maximum: 9007199254740991
-                      required:
-                        - approvedBy
-                        - approvedAt
-                        - approvedRevision
-                      additionalProperties: false
-                    - type: 'null'
-              required:
-                - flight
-                - budget
-                - autonomousActions
-                - limits
-                - targets
-                - revision
-                - approval
-              additionalProperties: false
+            - $ref: '#/components/schemas/save_project_success_ObjectBounds'
+            - type: 'null'
+        pendingBounds:
+          anyOf:
+            - $ref: '#/components/schemas/save_project_success_ObjectPendingBounds'
             - type: 'null'
         state:
           type: string
@@ -138635,6 +138442,7 @@ components:
         - lead
         - attachments
         - bounds
+        - pendingBounds
         - state
         - pausedReason
         - archivedAt
@@ -138878,213 +138686,11 @@ components:
                 additionalProperties: false
         bounds:
           anyOf:
-            - type: object
-              properties:
-                flight:
-                  type: object
-                  properties:
-                    start:
-                      type: string
-                    end:
-                      type: string
-                  required:
-                    - start
-                    - end
-                  additionalProperties: {}
-                channels:
-                  type: object
-                  properties:
-                    required:
-                      type: array
-                      items:
-                        $ref: '#/components/schemas/save_project_success_ProjectBoundsChannelsRequiredItem'
-                    allowed:
-                      type: array
-                      items:
-                        $ref: '#/components/schemas/save_project_success_ProjectBoundsChannelsAllowedItem'
-                    mix_targets:
-                      type: object
-                      propertyNames:
-                        type: string
-                      additionalProperties:
-                        type: object
-                        properties:
-                          min_pct:
-                            type: number
-                          max_pct:
-                            type: number
-                        additionalProperties: {}
-                  additionalProperties: {}
-                countries:
-                  type: array
-                  items:
-                    type: string
-                regions:
-                  type: array
-                  items:
-                    type: string
-                policy_ids:
-                  type: array
-                  items:
-                    type: string
-                policy_categories:
-                  type: array
-                  items:
-                    type: string
-                approved_sellers:
-                  anyOf:
-                    - type: array
-                      items:
-                        type: string
-                    - type: 'null'
-                human_review_required:
-                  type: boolean
-                budget:
-                  type: object
-                  properties:
-                    total:
-                      type: number
-                    currency:
-                      type: string
-                    accounting_mode:
-                      anyOf:
-                        - type: string
-                          const: gross_commitment
-                        - type: string
-                          const: verified_net_cost
-                    per_seller_max_pct:
-                      type: number
-                    reallocation_threshold:
-                      type: number
-                      minimum: 0
-                      description: >-
-                        An amount in `budget.currency`, not a percentage. 0 means every reallocation needs approval;
-                        `total` means unlimited.
-                    allocations:
-                      type: object
-                      propertyNames:
-                        type: string
-                      additionalProperties:
-                        type: object
-                        properties:
-                          amount:
-                            type: number
-                            minimum: 0
-                          max_pct:
-                            type: number
-                            minimum: 0
-                            maximum: 100
-                        additionalProperties: {}
-                    periods:
-                      maxItems: 366
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          budget_period_id:
-                            type: string
-                            minLength: 1
-                            maxLength: 64
-                            pattern: ^[A-Za-z0-9_.:-]+$
-                          start:
-                            type: string
-                          end:
-                            type: string
-                          amount:
-                            type: number
-                            minimum: 0
-                        required:
-                          - budget_period_id
-                          - start
-                          - end
-                          - amount
-                        additionalProperties: {}
-                  required:
-                    - total
-                    - currency
-                    - reallocation_threshold
-                  additionalProperties: {}
-                autonomousActions:
-                  maxItems: 4
-                  type: array
-                  items:
-                    type: string
-                    enum:
-                      - move_budget
-                      - change_pacing
-                      - pause_or_resume_media_buy
-                      - assign_approved_creative
-                  description: The actions the lead may take without asking.
-                limits:
-                  type: object
-                  properties:
-                    maxActionsPerDay:
-                      default: 10
-                      description: Autonomous actions allowed per day.
-                      type: integer
-                      minimum: 1
-                      maximum: 50
-                    iuBudget:
-                      default: null
-                      description: The Project's cap in IUs, or null for the account's spending cap alone.
-                      anyOf:
-                        - type: number
-                          exclusiveMinimum: 0
-                        - type: 'null'
-                  required:
-                    - maxActionsPerDay
-                    - iuBudget
-                  additionalProperties: false
-                  description: Daily action count and IU cap.
-                targets:
-                  type: object
-                  properties:
-                    mediaBuyIds:
-                      maxItems: 100
-                      type: array
-                      items:
-                        $ref: '#/components/schemas/save_project_success_ProjectBoundsTargetsMediaBuyIdsItem'
-                      description: Attached media buys the lead may change. A buy added later is a wider revision.
-                  required:
-                    - mediaBuyIds
-                  additionalProperties: false
-                  description: The media buys autonomous actions may change.
-                revision:
-                  type: integer
-                  minimum: 1
-                  maximum: 9007199254740991
-                approval:
-                  anyOf:
-                    - type: object
-                      properties:
-                        approvedBy:
-                          type:
-                            - string
-                            - 'null'
-                        approvedAt:
-                          type: string
-                          format: date-time
-                          pattern: >-
-                            ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z|([+-](?:[01]\d|2[0-3]):[0-5]\d)))$
-                        approvedRevision:
-                          type: integer
-                          minimum: 1
-                          maximum: 9007199254740991
-                      required:
-                        - approvedBy
-                        - approvedAt
-                        - approvedRevision
-                      additionalProperties: false
-                    - type: 'null'
-              required:
-                - flight
-                - budget
-                - autonomousActions
-                - limits
-                - targets
-                - revision
-                - approval
-              additionalProperties: false
+            - $ref: '#/components/schemas/save_project_success_ProjectBounds'
+            - type: 'null'
+        pendingBounds:
+          anyOf:
+            - $ref: '#/components/schemas/save_project_success_ProjectPendingBounds'
             - type: 'null'
         state:
           type: string
@@ -139360,6 +138966,7 @@ components:
         - lead
         - attachments
         - bounds
+        - pendingBounds
         - state
         - pausedReason
         - archivedAt
@@ -139436,6 +139043,904 @@ components:
       description: >-
         How it is pacing now, the same verdict `get_delivery` returns on its delivery goal. Null when it cannot be
         judged, for a paused media buy and for a campaign whose media buys are all paused.
+    save_project_success_ObjectBounds:
+      type: object
+      properties:
+        flight:
+          type: object
+          properties:
+            start:
+              type: string
+            end:
+              type: string
+          required:
+            - start
+            - end
+          additionalProperties: {}
+        channels:
+          type: object
+          properties:
+            required:
+              type: array
+              items:
+                $ref: '#/components/schemas/save_project_success_ObjectBoundsChannelsRequiredItem'
+            allowed:
+              type: array
+              items:
+                $ref: '#/components/schemas/save_project_success_ObjectBoundsChannelsAllowedItem'
+            mix_targets:
+              type: object
+              propertyNames:
+                type: string
+              additionalProperties:
+                type: object
+                properties:
+                  min_pct:
+                    type: number
+                  max_pct:
+                    type: number
+                additionalProperties: {}
+          additionalProperties: {}
+        countries:
+          type: array
+          items:
+            type: string
+        regions:
+          type: array
+          items:
+            type: string
+        policy_ids:
+          type: array
+          items:
+            type: string
+        policy_categories:
+          type: array
+          items:
+            type: string
+        approved_sellers:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: 'null'
+        human_review_required:
+          type: boolean
+        budget:
+          type: object
+          properties:
+            total:
+              type: number
+            currency:
+              type: string
+            accounting_mode:
+              anyOf:
+                - type: string
+                  const: gross_commitment
+                - type: string
+                  const: verified_net_cost
+            per_seller_max_pct:
+              type: number
+            reallocation_threshold:
+              type: number
+              minimum: 0
+              description: >-
+                An amount in `budget.currency`, not a percentage. 0 means every reallocation needs approval; `total`
+                means unlimited.
+            allocations:
+              type: object
+              propertyNames:
+                type: string
+              additionalProperties:
+                type: object
+                properties:
+                  amount:
+                    type: number
+                    minimum: 0
+                  max_pct:
+                    type: number
+                    minimum: 0
+                    maximum: 100
+                additionalProperties: {}
+            periods:
+              maxItems: 366
+              type: array
+              items:
+                type: object
+                properties:
+                  budget_period_id:
+                    type: string
+                    minLength: 1
+                    maxLength: 64
+                    pattern: ^[A-Za-z0-9_.:-]+$
+                  start:
+                    type: string
+                  end:
+                    type: string
+                  amount:
+                    type: number
+                    minimum: 0
+                required:
+                  - budget_period_id
+                  - start
+                  - end
+                  - amount
+                additionalProperties: {}
+          required:
+            - total
+            - currency
+            - reallocation_threshold
+          additionalProperties: {}
+        autonomousActions:
+          maxItems: 4
+          type: array
+          items:
+            type: string
+            enum:
+              - move_budget
+              - change_pacing
+              - pause_or_resume_media_buy
+              - assign_approved_creative
+          description: The actions the lead may take without asking.
+        limits:
+          type: object
+          properties:
+            maxActionsPerDay:
+              default: 10
+              description: Autonomous actions allowed per day.
+              type: integer
+              minimum: 1
+              maximum: 50
+            iuBudget:
+              default: null
+              description: The Project's cap in IUs, or null for the account's spending cap alone.
+              anyOf:
+                - type: number
+                  exclusiveMinimum: 0
+                - type: 'null'
+          required:
+            - maxActionsPerDay
+            - iuBudget
+          additionalProperties: false
+          description: Daily action count and IU cap.
+        targets:
+          type: object
+          properties:
+            mediaBuyIds:
+              maxItems: 100
+              type: array
+              items:
+                $ref: '#/components/schemas/save_project_success_ObjectBoundsTargetsMediaBuyIdsItem'
+              description: Attached media buys the lead may change. A buy added later is a wider revision.
+          required:
+            - mediaBuyIds
+          additionalProperties: false
+          description: The media buys autonomous actions may change.
+        revision:
+          type: integer
+          minimum: 1
+          maximum: 9007199254740991
+        approval:
+          anyOf:
+            - type: object
+              properties:
+                approvedBy:
+                  type:
+                    - string
+                    - 'null'
+                approvedAt:
+                  type: string
+                  format: date-time
+                  pattern: >-
+                    ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z|([+-](?:[01]\d|2[0-3]):[0-5]\d)))$
+                approvedRevision:
+                  type: integer
+                  minimum: 1
+                  maximum: 9007199254740991
+              required:
+                - approvedBy
+                - approvedAt
+                - approvedRevision
+              additionalProperties: false
+            - type: 'null'
+      required:
+        - flight
+        - budget
+        - autonomousActions
+        - limits
+        - targets
+        - revision
+        - approval
+      additionalProperties: false
+    save_project_success_ObjectPendingBounds:
+      type: object
+      properties:
+        flight:
+          type: object
+          properties:
+            start:
+              type: string
+            end:
+              type: string
+          required:
+            - start
+            - end
+          additionalProperties: {}
+        channels:
+          type: object
+          properties:
+            required:
+              type: array
+              items:
+                $ref: '#/components/schemas/save_project_success_ObjectPendingBoundsChannelsRequiredItem'
+            allowed:
+              type: array
+              items:
+                $ref: '#/components/schemas/save_project_success_ObjectPendingBoundsChannelsAllowedItem'
+            mix_targets:
+              type: object
+              propertyNames:
+                type: string
+              additionalProperties:
+                type: object
+                properties:
+                  min_pct:
+                    type: number
+                  max_pct:
+                    type: number
+                additionalProperties: {}
+          additionalProperties: {}
+        countries:
+          type: array
+          items:
+            type: string
+        regions:
+          type: array
+          items:
+            type: string
+        policy_ids:
+          type: array
+          items:
+            type: string
+        policy_categories:
+          type: array
+          items:
+            type: string
+        approved_sellers:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: 'null'
+        human_review_required:
+          type: boolean
+        budget:
+          type: object
+          properties:
+            total:
+              type: number
+            currency:
+              type: string
+            accounting_mode:
+              anyOf:
+                - type: string
+                  const: gross_commitment
+                - type: string
+                  const: verified_net_cost
+            per_seller_max_pct:
+              type: number
+            reallocation_threshold:
+              type: number
+              minimum: 0
+              description: >-
+                An amount in `budget.currency`, not a percentage. 0 means every reallocation needs approval; `total`
+                means unlimited.
+            allocations:
+              type: object
+              propertyNames:
+                type: string
+              additionalProperties:
+                type: object
+                properties:
+                  amount:
+                    type: number
+                    minimum: 0
+                  max_pct:
+                    type: number
+                    minimum: 0
+                    maximum: 100
+                additionalProperties: {}
+            periods:
+              maxItems: 366
+              type: array
+              items:
+                type: object
+                properties:
+                  budget_period_id:
+                    type: string
+                    minLength: 1
+                    maxLength: 64
+                    pattern: ^[A-Za-z0-9_.:-]+$
+                  start:
+                    type: string
+                  end:
+                    type: string
+                  amount:
+                    type: number
+                    minimum: 0
+                required:
+                  - budget_period_id
+                  - start
+                  - end
+                  - amount
+                additionalProperties: {}
+          required:
+            - total
+            - currency
+            - reallocation_threshold
+          additionalProperties: {}
+        autonomousActions:
+          maxItems: 4
+          type: array
+          items:
+            type: string
+            enum:
+              - move_budget
+              - change_pacing
+              - pause_or_resume_media_buy
+              - assign_approved_creative
+          description: The actions the lead may take without asking.
+        limits:
+          type: object
+          properties:
+            maxActionsPerDay:
+              default: 10
+              description: Autonomous actions allowed per day.
+              type: integer
+              minimum: 1
+              maximum: 50
+            iuBudget:
+              default: null
+              description: The Project's cap in IUs, or null for the account's spending cap alone.
+              anyOf:
+                - type: number
+                  exclusiveMinimum: 0
+                - type: 'null'
+          required:
+            - maxActionsPerDay
+            - iuBudget
+          additionalProperties: false
+          description: Daily action count and IU cap.
+        targets:
+          type: object
+          properties:
+            mediaBuyIds:
+              maxItems: 100
+              type: array
+              items:
+                $ref: '#/components/schemas/save_project_success_ObjectPendingBoundsTargetsMediaBuyIdsItem'
+              description: Attached media buys the lead may change. A buy added later is a wider revision.
+          required:
+            - mediaBuyIds
+          additionalProperties: false
+          description: The media buys autonomous actions may change.
+        revision:
+          type: integer
+          minimum: 1
+          maximum: 9007199254740991
+        approval:
+          anyOf:
+            - type: object
+              properties:
+                approvedBy:
+                  type:
+                    - string
+                    - 'null'
+                approvedAt:
+                  type: string
+                  format: date-time
+                  pattern: >-
+                    ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z|([+-](?:[01]\d|2[0-3]):[0-5]\d)))$
+                approvedRevision:
+                  type: integer
+                  minimum: 1
+                  maximum: 9007199254740991
+              required:
+                - approvedBy
+                - approvedAt
+                - approvedRevision
+              additionalProperties: false
+            - type: 'null'
+      required:
+        - flight
+        - budget
+        - autonomousActions
+        - limits
+        - targets
+        - revision
+        - approval
+      additionalProperties: false
+    save_project_success_ProjectLeadPrincipalId:
+      type: string
+      minLength: 1
+      maxLength: 512
+    save_project_success_ProjectAttachmentsItemId:
+      type: string
+      minLength: 1
+      maxLength: 512
+    save_project_success_ProjectAttachmentsItemName:
+      anyOf:
+        - type: string
+        - type: 'null'
+      description: The attached record's own name, read-only. Null when you cannot read the record or it is gone; never the id.
+    save_project_success_ProjectAttachmentsItemRelation:
+      type: string
+      enum:
+        - subject
+        - request
+        - response
+        - evidence
+        - outcome
+      description: 'How the Project relates to it: subject, request, response, evidence or outcome.'
+    save_project_success_ProjectAttachmentsItemPartners:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+            description: The seller's id, as a media buy's own read gives it.
+          name:
+            anyOf:
+              - type: string
+              - type: 'null'
+            description: The seller name; null when it cannot be resolved.
+        required:
+          - id
+          - name
+        additionalProperties: false
+      description: The sellers involved. Empty when none is known, never missing.
+    save_project_success_ProjectAttachmentsItemFlight:
+      anyOf:
+        - type: object
+          properties:
+            start:
+              type: string
+            end:
+              type: string
+          required:
+            - start
+            - end
+          additionalProperties: false
+        - type: 'null'
+      description: The record's own start and end; null when it has none or you cannot read it.
+    save_project_success_ProjectAttachmentsItemPaceVerdict:
+      anyOf:
+        - type: string
+          enum:
+            - far_behind
+            - behind
+            - on_pace
+            - ahead
+        - type: 'null'
+      description: >-
+        How it is pacing now, the same verdict `get_delivery` returns on its delivery goal. Null when it cannot be
+        judged, for a paused media buy and for a campaign whose media buys are all paused.
+    save_project_success_ProjectBounds:
+      type: object
+      properties:
+        flight:
+          type: object
+          properties:
+            start:
+              type: string
+            end:
+              type: string
+          required:
+            - start
+            - end
+          additionalProperties: {}
+        channels:
+          type: object
+          properties:
+            required:
+              type: array
+              items:
+                $ref: '#/components/schemas/save_project_success_ProjectBoundsChannelsRequiredItem'
+            allowed:
+              type: array
+              items:
+                $ref: '#/components/schemas/save_project_success_ProjectBoundsChannelsAllowedItem'
+            mix_targets:
+              type: object
+              propertyNames:
+                type: string
+              additionalProperties:
+                type: object
+                properties:
+                  min_pct:
+                    type: number
+                  max_pct:
+                    type: number
+                additionalProperties: {}
+          additionalProperties: {}
+        countries:
+          type: array
+          items:
+            type: string
+        regions:
+          type: array
+          items:
+            type: string
+        policy_ids:
+          type: array
+          items:
+            type: string
+        policy_categories:
+          type: array
+          items:
+            type: string
+        approved_sellers:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: 'null'
+        human_review_required:
+          type: boolean
+        budget:
+          type: object
+          properties:
+            total:
+              type: number
+            currency:
+              type: string
+            accounting_mode:
+              anyOf:
+                - type: string
+                  const: gross_commitment
+                - type: string
+                  const: verified_net_cost
+            per_seller_max_pct:
+              type: number
+            reallocation_threshold:
+              type: number
+              minimum: 0
+              description: >-
+                An amount in `budget.currency`, not a percentage. 0 means every reallocation needs approval; `total`
+                means unlimited.
+            allocations:
+              type: object
+              propertyNames:
+                type: string
+              additionalProperties:
+                type: object
+                properties:
+                  amount:
+                    type: number
+                    minimum: 0
+                  max_pct:
+                    type: number
+                    minimum: 0
+                    maximum: 100
+                additionalProperties: {}
+            periods:
+              maxItems: 366
+              type: array
+              items:
+                type: object
+                properties:
+                  budget_period_id:
+                    type: string
+                    minLength: 1
+                    maxLength: 64
+                    pattern: ^[A-Za-z0-9_.:-]+$
+                  start:
+                    type: string
+                  end:
+                    type: string
+                  amount:
+                    type: number
+                    minimum: 0
+                required:
+                  - budget_period_id
+                  - start
+                  - end
+                  - amount
+                additionalProperties: {}
+          required:
+            - total
+            - currency
+            - reallocation_threshold
+          additionalProperties: {}
+        autonomousActions:
+          maxItems: 4
+          type: array
+          items:
+            type: string
+            enum:
+              - move_budget
+              - change_pacing
+              - pause_or_resume_media_buy
+              - assign_approved_creative
+          description: The actions the lead may take without asking.
+        limits:
+          type: object
+          properties:
+            maxActionsPerDay:
+              default: 10
+              description: Autonomous actions allowed per day.
+              type: integer
+              minimum: 1
+              maximum: 50
+            iuBudget:
+              default: null
+              description: The Project's cap in IUs, or null for the account's spending cap alone.
+              anyOf:
+                - type: number
+                  exclusiveMinimum: 0
+                - type: 'null'
+          required:
+            - maxActionsPerDay
+            - iuBudget
+          additionalProperties: false
+          description: Daily action count and IU cap.
+        targets:
+          type: object
+          properties:
+            mediaBuyIds:
+              maxItems: 100
+              type: array
+              items:
+                $ref: '#/components/schemas/save_project_success_ProjectBoundsTargetsMediaBuyIdsItem'
+              description: Attached media buys the lead may change. A buy added later is a wider revision.
+          required:
+            - mediaBuyIds
+          additionalProperties: false
+          description: The media buys autonomous actions may change.
+        revision:
+          type: integer
+          minimum: 1
+          maximum: 9007199254740991
+        approval:
+          anyOf:
+            - type: object
+              properties:
+                approvedBy:
+                  type:
+                    - string
+                    - 'null'
+                approvedAt:
+                  type: string
+                  format: date-time
+                  pattern: >-
+                    ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z|([+-](?:[01]\d|2[0-3]):[0-5]\d)))$
+                approvedRevision:
+                  type: integer
+                  minimum: 1
+                  maximum: 9007199254740991
+              required:
+                - approvedBy
+                - approvedAt
+                - approvedRevision
+              additionalProperties: false
+            - type: 'null'
+      required:
+        - flight
+        - budget
+        - autonomousActions
+        - limits
+        - targets
+        - revision
+        - approval
+      additionalProperties: false
+    save_project_success_ProjectPendingBounds:
+      type: object
+      properties:
+        flight:
+          type: object
+          properties:
+            start:
+              type: string
+            end:
+              type: string
+          required:
+            - start
+            - end
+          additionalProperties: {}
+        channels:
+          type: object
+          properties:
+            required:
+              type: array
+              items:
+                $ref: '#/components/schemas/save_project_success_ProjectPendingBoundsChannelsRequiredItem'
+            allowed:
+              type: array
+              items:
+                $ref: '#/components/schemas/save_project_success_ProjectPendingBoundsChannelsAllowedItem'
+            mix_targets:
+              type: object
+              propertyNames:
+                type: string
+              additionalProperties:
+                type: object
+                properties:
+                  min_pct:
+                    type: number
+                  max_pct:
+                    type: number
+                additionalProperties: {}
+          additionalProperties: {}
+        countries:
+          type: array
+          items:
+            type: string
+        regions:
+          type: array
+          items:
+            type: string
+        policy_ids:
+          type: array
+          items:
+            type: string
+        policy_categories:
+          type: array
+          items:
+            type: string
+        approved_sellers:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: 'null'
+        human_review_required:
+          type: boolean
+        budget:
+          type: object
+          properties:
+            total:
+              type: number
+            currency:
+              type: string
+            accounting_mode:
+              anyOf:
+                - type: string
+                  const: gross_commitment
+                - type: string
+                  const: verified_net_cost
+            per_seller_max_pct:
+              type: number
+            reallocation_threshold:
+              type: number
+              minimum: 0
+              description: >-
+                An amount in `budget.currency`, not a percentage. 0 means every reallocation needs approval; `total`
+                means unlimited.
+            allocations:
+              type: object
+              propertyNames:
+                type: string
+              additionalProperties:
+                type: object
+                properties:
+                  amount:
+                    type: number
+                    minimum: 0
+                  max_pct:
+                    type: number
+                    minimum: 0
+                    maximum: 100
+                additionalProperties: {}
+            periods:
+              maxItems: 366
+              type: array
+              items:
+                type: object
+                properties:
+                  budget_period_id:
+                    type: string
+                    minLength: 1
+                    maxLength: 64
+                    pattern: ^[A-Za-z0-9_.:-]+$
+                  start:
+                    type: string
+                  end:
+                    type: string
+                  amount:
+                    type: number
+                    minimum: 0
+                required:
+                  - budget_period_id
+                  - start
+                  - end
+                  - amount
+                additionalProperties: {}
+          required:
+            - total
+            - currency
+            - reallocation_threshold
+          additionalProperties: {}
+        autonomousActions:
+          maxItems: 4
+          type: array
+          items:
+            type: string
+            enum:
+              - move_budget
+              - change_pacing
+              - pause_or_resume_media_buy
+              - assign_approved_creative
+          description: The actions the lead may take without asking.
+        limits:
+          type: object
+          properties:
+            maxActionsPerDay:
+              default: 10
+              description: Autonomous actions allowed per day.
+              type: integer
+              minimum: 1
+              maximum: 50
+            iuBudget:
+              default: null
+              description: The Project's cap in IUs, or null for the account's spending cap alone.
+              anyOf:
+                - type: number
+                  exclusiveMinimum: 0
+                - type: 'null'
+          required:
+            - maxActionsPerDay
+            - iuBudget
+          additionalProperties: false
+          description: Daily action count and IU cap.
+        targets:
+          type: object
+          properties:
+            mediaBuyIds:
+              maxItems: 100
+              type: array
+              items:
+                $ref: '#/components/schemas/save_project_success_ProjectPendingBoundsTargetsMediaBuyIdsItem'
+              description: Attached media buys the lead may change. A buy added later is a wider revision.
+          required:
+            - mediaBuyIds
+          additionalProperties: false
+          description: The media buys autonomous actions may change.
+        revision:
+          type: integer
+          minimum: 1
+          maximum: 9007199254740991
+        approval:
+          anyOf:
+            - type: object
+              properties:
+                approvedBy:
+                  type:
+                    - string
+                    - 'null'
+                approvedAt:
+                  type: string
+                  format: date-time
+                  pattern: >-
+                    ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z|([+-](?:[01]\d|2[0-3]):[0-5]\d)))$
+                approvedRevision:
+                  type: integer
+                  minimum: 1
+                  maximum: 9007199254740991
+              required:
+                - approvedBy
+                - approvedAt
+                - approvedRevision
+              additionalProperties: false
+            - type: 'null'
+      required:
+        - flight
+        - budget
+        - autonomousActions
+        - limits
+        - targets
+        - revision
+        - approval
+      additionalProperties: false
     save_project_success_ObjectBoundsChannelsRequiredItem:
       anyOf:
         - type: string
@@ -139524,72 +140029,94 @@ components:
       type: string
       minLength: 1
       maxLength: 512
-    save_project_success_ProjectLeadPrincipalId:
+    save_project_success_ObjectPendingBoundsChannelsRequiredItem:
+      anyOf:
+        - type: string
+          const: display
+        - type: string
+          const: olv
+        - type: string
+          const: social
+        - type: string
+          const: search
+        - type: string
+          const: ctv
+        - type: string
+          const: linear_tv
+        - type: string
+          const: radio
+        - type: string
+          const: streaming_audio
+        - type: string
+          const: podcast
+        - type: string
+          const: dooh
+        - type: string
+          const: ooh
+        - type: string
+          const: print
+        - type: string
+          const: cinema
+        - type: string
+          const: email
+        - type: string
+          const: gaming
+        - type: string
+          const: retail_media
+        - type: string
+          const: influencer
+        - type: string
+          const: affiliate
+        - type: string
+          const: product_placement
+        - type: string
+          const: sponsored_intelligence
+    save_project_success_ObjectPendingBoundsChannelsAllowedItem:
+      anyOf:
+        - type: string
+          const: display
+        - type: string
+          const: olv
+        - type: string
+          const: social
+        - type: string
+          const: search
+        - type: string
+          const: ctv
+        - type: string
+          const: linear_tv
+        - type: string
+          const: radio
+        - type: string
+          const: streaming_audio
+        - type: string
+          const: podcast
+        - type: string
+          const: dooh
+        - type: string
+          const: ooh
+        - type: string
+          const: print
+        - type: string
+          const: cinema
+        - type: string
+          const: email
+        - type: string
+          const: gaming
+        - type: string
+          const: retail_media
+        - type: string
+          const: influencer
+        - type: string
+          const: affiliate
+        - type: string
+          const: product_placement
+        - type: string
+          const: sponsored_intelligence
+    save_project_success_ObjectPendingBoundsTargetsMediaBuyIdsItem:
       type: string
       minLength: 1
       maxLength: 512
-    save_project_success_ProjectAttachmentsItemId:
-      type: string
-      minLength: 1
-      maxLength: 512
-    save_project_success_ProjectAttachmentsItemName:
-      anyOf:
-        - type: string
-        - type: 'null'
-      description: The attached record's own name, read-only. Null when you cannot read the record or it is gone; never the id.
-    save_project_success_ProjectAttachmentsItemRelation:
-      type: string
-      enum:
-        - subject
-        - request
-        - response
-        - evidence
-        - outcome
-      description: 'How the Project relates to it: subject, request, response, evidence or outcome.'
-    save_project_success_ProjectAttachmentsItemPartners:
-      type: array
-      items:
-        type: object
-        properties:
-          id:
-            type: string
-            description: The seller's id, as a media buy's own read gives it.
-          name:
-            anyOf:
-              - type: string
-              - type: 'null'
-            description: The seller name; null when it cannot be resolved.
-        required:
-          - id
-          - name
-        additionalProperties: false
-      description: The sellers involved. Empty when none is known, never missing.
-    save_project_success_ProjectAttachmentsItemFlight:
-      anyOf:
-        - type: object
-          properties:
-            start:
-              type: string
-            end:
-              type: string
-          required:
-            - start
-            - end
-          additionalProperties: false
-        - type: 'null'
-      description: The record's own start and end; null when it has none or you cannot read it.
-    save_project_success_ProjectAttachmentsItemPaceVerdict:
-      anyOf:
-        - type: string
-          enum:
-            - far_behind
-            - behind
-            - on_pace
-            - ahead
-        - type: 'null'
-      description: >-
-        How it is pacing now, the same verdict `get_delivery` returns on its delivery goal. Null when it cannot be
-        judged, for a paused media buy and for a campaign whose media buys are all paused.
     save_project_success_ProjectBoundsChannelsRequiredItem:
       anyOf:
         - type: string
@@ -139675,6 +140202,94 @@ components:
         - type: string
           const: sponsored_intelligence
     save_project_success_ProjectBoundsTargetsMediaBuyIdsItem:
+      type: string
+      minLength: 1
+      maxLength: 512
+    save_project_success_ProjectPendingBoundsChannelsRequiredItem:
+      anyOf:
+        - type: string
+          const: display
+        - type: string
+          const: olv
+        - type: string
+          const: social
+        - type: string
+          const: search
+        - type: string
+          const: ctv
+        - type: string
+          const: linear_tv
+        - type: string
+          const: radio
+        - type: string
+          const: streaming_audio
+        - type: string
+          const: podcast
+        - type: string
+          const: dooh
+        - type: string
+          const: ooh
+        - type: string
+          const: print
+        - type: string
+          const: cinema
+        - type: string
+          const: email
+        - type: string
+          const: gaming
+        - type: string
+          const: retail_media
+        - type: string
+          const: influencer
+        - type: string
+          const: affiliate
+        - type: string
+          const: product_placement
+        - type: string
+          const: sponsored_intelligence
+    save_project_success_ProjectPendingBoundsChannelsAllowedItem:
+      anyOf:
+        - type: string
+          const: display
+        - type: string
+          const: olv
+        - type: string
+          const: social
+        - type: string
+          const: search
+        - type: string
+          const: ctv
+        - type: string
+          const: linear_tv
+        - type: string
+          const: radio
+        - type: string
+          const: streaming_audio
+        - type: string
+          const: podcast
+        - type: string
+          const: dooh
+        - type: string
+          const: ooh
+        - type: string
+          const: print
+        - type: string
+          const: cinema
+        - type: string
+          const: email
+        - type: string
+          const: gaming
+        - type: string
+          const: retail_media
+        - type: string
+          const: influencer
+        - type: string
+          const: affiliate
+        - type: string
+          const: product_placement
+        - type: string
+          const: sponsored_intelligence
+    save_project_success_ProjectPendingBoundsTargetsMediaBuyIdsItem:
       type: string
       minLength: 1
       maxLength: 512

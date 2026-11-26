@@ -22856,6 +22856,8 @@ class SaveProjectInput(TypedDict):
     '\n    Edit only: detach one attachment. A detached media buy leaves the bounds in a narrower revision.\n    '
     bounds: NotRequired[SaveProjectInputBounds]
     '\n    The limits the lead may work inside. A revision that is not narrower in every field waits for an administrator to approve it on our site.\n    '
+    expectedRevision: NotRequired[int]
+    '\n    Edit only, with bounds: the newest bounds revision from your last read of the Project, pendingBounds.revision when one waits, else bounds.revision. If the Project has moved to another revision since, the save is refused with CONFLICT and nothing changes; read the Project again and retry. Omit it to save without the check.\n    '
     autonomyPaused: NotRequired[bool]
     '\n    true stops this Project\'s lead at once. false resumes it, for an administrator signed in as themselves; the administrator who approved the bounds resumes at once, another needs approval. Send it with the id and only reason, idempotencyKey and dryRun.\n    '
     reason: NotRequired[str]
@@ -23038,7 +23040,8 @@ class SaveProjectSuccessObject(TypedDict):
     objectives: str
     lead: SaveProjectSuccessObjectLead
     attachments: list[SaveProjectSuccessObjectAttachmentsItemKindCampaign | SaveProjectSuccessObjectAttachmentsItemKindMediaBuy | SaveProjectSuccessObjectAttachmentsItemKindRfp | SaveProjectSuccessObjectAttachmentsItemKindMaterial | SaveProjectSuccessObjectAttachmentsItemKindConnection | SaveProjectSuccessObjectAttachmentsItemKindExchange]
-    bounds: SaveProjectSuccessObjectBoundsValue | None
+    bounds: SaveProjectSuccessObjectBounds | None
+    pendingBounds: SaveProjectSuccessObjectPendingBounds | None
     state: Literal["draft", "active", "paused", "archived"]
     pausedReason: Literal["stopped_by_person", "stopped_by_agent", "account_stopped", "approver_lost_authority", "write_outcome_unknown", "flight_ended", "unarchived"] | None
     archivedAt: str | None
@@ -23142,6 +23145,30 @@ class SaveProjectSuccessObjectAutonomy(TypedDict):
     reason: str | None
     '\n    Why not, in plain words to pass on. Null when actsOnItsOwn is true.\n    '
 
+class SaveProjectSuccessObjectBounds(TypedDict):
+    flight: SaveProjectSuccessObjectBoundsFlight
+    channels: NotRequired[SaveProjectSuccessObjectBoundsChannels]
+    countries: NotRequired[list[str]]
+    regions: NotRequired[list[str]]
+    policy_ids: NotRequired[list[str]]
+    policy_categories: NotRequired[list[str]]
+    approved_sellers: NotRequired[list[str] | None]
+    human_review_required: NotRequired[bool]
+    budget: SaveProjectSuccessObjectBoundsBudget
+    autonomousActions: list[Literal["move_budget", "change_pacing", "pause_or_resume_media_buy", "assign_approved_creative"]]
+    '\n    The actions the lead may take without asking.\n    '
+    limits: SaveProjectSuccessObjectBoundsLimits
+    '\n    Daily action count and IU cap.\n    '
+    targets: SaveProjectSuccessObjectBoundsTargets
+    '\n    The media buys autonomous actions may change.\n    '
+    revision: int
+    approval: SaveProjectSuccessObjectBoundsApprovalValue | None
+
+class SaveProjectSuccessObjectBoundsApprovalValue(TypedDict):
+    approvedBy: str | None
+    approvedAt: str
+    approvedRevision: int
+
 class SaveProjectSuccessObjectBoundsBudget(TypedDict):
     total: float
     currency: str
@@ -23191,30 +23218,6 @@ class SaveProjectSuccessObjectBoundsTargets(TypedDict):
 
 SaveProjectSuccessObjectBoundsTargetsMediaBuyIdsItem: TypeAlias = str
 
-class SaveProjectSuccessObjectBoundsValue(TypedDict):
-    flight: SaveProjectSuccessObjectBoundsFlight
-    channels: NotRequired[SaveProjectSuccessObjectBoundsChannels]
-    countries: NotRequired[list[str]]
-    regions: NotRequired[list[str]]
-    policy_ids: NotRequired[list[str]]
-    policy_categories: NotRequired[list[str]]
-    approved_sellers: NotRequired[list[str] | None]
-    human_review_required: NotRequired[bool]
-    budget: SaveProjectSuccessObjectBoundsBudget
-    autonomousActions: list[Literal["move_budget", "change_pacing", "pause_or_resume_media_buy", "assign_approved_creative"]]
-    '\n    The actions the lead may take without asking.\n    '
-    limits: SaveProjectSuccessObjectBoundsLimits
-    '\n    Daily action count and IU cap.\n    '
-    targets: SaveProjectSuccessObjectBoundsTargets
-    '\n    The media buys autonomous actions may change.\n    '
-    revision: int
-    approval: SaveProjectSuccessObjectBoundsValueApprovalValue | None
-
-class SaveProjectSuccessObjectBoundsValueApprovalValue(TypedDict):
-    approvedBy: str | None
-    approvedAt: str
-    approvedRevision: int
-
 class SaveProjectSuccessObjectLead(TypedDict):
     kind: Literal["agent"]
     '\n    The account\'s Prime, its own agent.\n    '
@@ -23222,6 +23225,79 @@ class SaveProjectSuccessObjectLead(TypedDict):
     '\n    The account\'s Prime: the agent the buyer_agent read returns as the account agent.\n    '
 
 SaveProjectSuccessObjectLeadPrincipalId: TypeAlias = str
+
+class SaveProjectSuccessObjectPendingBounds(TypedDict):
+    flight: SaveProjectSuccessObjectPendingBoundsFlight
+    channels: NotRequired[SaveProjectSuccessObjectPendingBoundsChannels]
+    countries: NotRequired[list[str]]
+    regions: NotRequired[list[str]]
+    policy_ids: NotRequired[list[str]]
+    policy_categories: NotRequired[list[str]]
+    approved_sellers: NotRequired[list[str] | None]
+    human_review_required: NotRequired[bool]
+    budget: SaveProjectSuccessObjectPendingBoundsBudget
+    autonomousActions: list[Literal["move_budget", "change_pacing", "pause_or_resume_media_buy", "assign_approved_creative"]]
+    '\n    The actions the lead may take without asking.\n    '
+    limits: SaveProjectSuccessObjectPendingBoundsLimits
+    '\n    Daily action count and IU cap.\n    '
+    targets: SaveProjectSuccessObjectPendingBoundsTargets
+    '\n    The media buys autonomous actions may change.\n    '
+    revision: int
+    approval: SaveProjectSuccessObjectPendingBoundsApprovalValue | None
+
+class SaveProjectSuccessObjectPendingBoundsApprovalValue(TypedDict):
+    approvedBy: str | None
+    approvedAt: str
+    approvedRevision: int
+
+class SaveProjectSuccessObjectPendingBoundsBudget(TypedDict):
+    total: float
+    currency: str
+    accounting_mode: NotRequired[Literal["gross_commitment", "verified_net_cost"]]
+    per_seller_max_pct: NotRequired[float]
+    reallocation_threshold: float
+    '\n    An amount in `budget.currency`, not a percentage. 0 means every reallocation needs approval; `total` means unlimited.\n    '
+    allocations: NotRequired[dict[str, SaveProjectSuccessObjectPendingBoundsBudgetAllocationsValue]]
+    periods: NotRequired[list[SaveProjectSuccessObjectPendingBoundsBudgetPeriodsItem]]
+
+class SaveProjectSuccessObjectPendingBoundsBudgetAllocationsValue(TypedDict):
+    amount: NotRequired[float]
+    max_pct: NotRequired[float]
+
+class SaveProjectSuccessObjectPendingBoundsBudgetPeriodsItem(TypedDict):
+    budget_period_id: str
+    start: str
+    end: str
+    amount: float
+
+class SaveProjectSuccessObjectPendingBoundsChannels(TypedDict):
+    required: NotRequired[list[SaveProjectSuccessObjectPendingBoundsChannelsRequiredItem]]
+    allowed: NotRequired[list[SaveProjectSuccessObjectPendingBoundsChannelsAllowedItem]]
+    mix_targets: NotRequired[dict[str, SaveProjectSuccessObjectPendingBoundsChannelsMixTargetsValue]]
+
+SaveProjectSuccessObjectPendingBoundsChannelsAllowedItem: TypeAlias = Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+
+class SaveProjectSuccessObjectPendingBoundsChannelsMixTargetsValue(TypedDict):
+    min_pct: NotRequired[float]
+    max_pct: NotRequired[float]
+
+SaveProjectSuccessObjectPendingBoundsChannelsRequiredItem: TypeAlias = Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+
+class SaveProjectSuccessObjectPendingBoundsFlight(TypedDict):
+    start: str
+    end: str
+
+class SaveProjectSuccessObjectPendingBoundsLimits(TypedDict):
+    maxActionsPerDay: int
+    '\n    Autonomous actions allowed per day.\n    '
+    iuBudget: float | None
+    '\n    The Project\'s cap in IUs, or null for the account\'s spending cap alone.\n    '
+
+class SaveProjectSuccessObjectPendingBoundsTargets(TypedDict):
+    mediaBuyIds: list[SaveProjectSuccessObjectPendingBoundsTargetsMediaBuyIdsItem]
+    '\n    Attached media buys the lead may change. A buy added later is a wider revision.\n    '
+
+SaveProjectSuccessObjectPendingBoundsTargetsMediaBuyIdsItem: TypeAlias = str
 
 class SaveProjectSuccessObjectProgress(TypedDict):
     goal: SaveProjectSuccessObjectProgressGoalValue | None
@@ -23291,7 +23367,8 @@ class SaveProjectSuccessProject(TypedDict):
     objectives: str
     lead: SaveProjectSuccessProjectLead
     attachments: list[SaveProjectSuccessProjectAttachmentsItemKindCampaign | SaveProjectSuccessProjectAttachmentsItemKindMediaBuy | SaveProjectSuccessProjectAttachmentsItemKindRfp | SaveProjectSuccessProjectAttachmentsItemKindMaterial | SaveProjectSuccessProjectAttachmentsItemKindConnection | SaveProjectSuccessProjectAttachmentsItemKindExchange]
-    bounds: SaveProjectSuccessProjectBoundsValue | None
+    bounds: SaveProjectSuccessProjectBounds | None
+    pendingBounds: SaveProjectSuccessProjectPendingBounds | None
     state: Literal["draft", "active", "paused", "archived"]
     pausedReason: Literal["stopped_by_person", "stopped_by_agent", "account_stopped", "approver_lost_authority", "write_outcome_unknown", "flight_ended", "unarchived"] | None
     archivedAt: str | None
@@ -23395,6 +23472,30 @@ class SaveProjectSuccessProjectAutonomy(TypedDict):
     reason: str | None
     '\n    Why not, in plain words to pass on. Null when actsOnItsOwn is true.\n    '
 
+class SaveProjectSuccessProjectBounds(TypedDict):
+    flight: SaveProjectSuccessProjectBoundsFlight
+    channels: NotRequired[SaveProjectSuccessProjectBoundsChannels]
+    countries: NotRequired[list[str]]
+    regions: NotRequired[list[str]]
+    policy_ids: NotRequired[list[str]]
+    policy_categories: NotRequired[list[str]]
+    approved_sellers: NotRequired[list[str] | None]
+    human_review_required: NotRequired[bool]
+    budget: SaveProjectSuccessProjectBoundsBudget
+    autonomousActions: list[Literal["move_budget", "change_pacing", "pause_or_resume_media_buy", "assign_approved_creative"]]
+    '\n    The actions the lead may take without asking.\n    '
+    limits: SaveProjectSuccessProjectBoundsLimits
+    '\n    Daily action count and IU cap.\n    '
+    targets: SaveProjectSuccessProjectBoundsTargets
+    '\n    The media buys autonomous actions may change.\n    '
+    revision: int
+    approval: SaveProjectSuccessProjectBoundsApprovalValue | None
+
+class SaveProjectSuccessProjectBoundsApprovalValue(TypedDict):
+    approvedBy: str | None
+    approvedAt: str
+    approvedRevision: int
+
 class SaveProjectSuccessProjectBoundsBudget(TypedDict):
     total: float
     currency: str
@@ -23444,30 +23545,6 @@ class SaveProjectSuccessProjectBoundsTargets(TypedDict):
 
 SaveProjectSuccessProjectBoundsTargetsMediaBuyIdsItem: TypeAlias = str
 
-class SaveProjectSuccessProjectBoundsValue(TypedDict):
-    flight: SaveProjectSuccessProjectBoundsFlight
-    channels: NotRequired[SaveProjectSuccessProjectBoundsChannels]
-    countries: NotRequired[list[str]]
-    regions: NotRequired[list[str]]
-    policy_ids: NotRequired[list[str]]
-    policy_categories: NotRequired[list[str]]
-    approved_sellers: NotRequired[list[str] | None]
-    human_review_required: NotRequired[bool]
-    budget: SaveProjectSuccessProjectBoundsBudget
-    autonomousActions: list[Literal["move_budget", "change_pacing", "pause_or_resume_media_buy", "assign_approved_creative"]]
-    '\n    The actions the lead may take without asking.\n    '
-    limits: SaveProjectSuccessProjectBoundsLimits
-    '\n    Daily action count and IU cap.\n    '
-    targets: SaveProjectSuccessProjectBoundsTargets
-    '\n    The media buys autonomous actions may change.\n    '
-    revision: int
-    approval: SaveProjectSuccessProjectBoundsValueApprovalValue | None
-
-class SaveProjectSuccessProjectBoundsValueApprovalValue(TypedDict):
-    approvedBy: str | None
-    approvedAt: str
-    approvedRevision: int
-
 class SaveProjectSuccessProjectLead(TypedDict):
     kind: Literal["agent"]
     '\n    The account\'s Prime, its own agent.\n    '
@@ -23475,6 +23552,79 @@ class SaveProjectSuccessProjectLead(TypedDict):
     '\n    The account\'s Prime: the agent the buyer_agent read returns as the account agent.\n    '
 
 SaveProjectSuccessProjectLeadPrincipalId: TypeAlias = str
+
+class SaveProjectSuccessProjectPendingBounds(TypedDict):
+    flight: SaveProjectSuccessProjectPendingBoundsFlight
+    channels: NotRequired[SaveProjectSuccessProjectPendingBoundsChannels]
+    countries: NotRequired[list[str]]
+    regions: NotRequired[list[str]]
+    policy_ids: NotRequired[list[str]]
+    policy_categories: NotRequired[list[str]]
+    approved_sellers: NotRequired[list[str] | None]
+    human_review_required: NotRequired[bool]
+    budget: SaveProjectSuccessProjectPendingBoundsBudget
+    autonomousActions: list[Literal["move_budget", "change_pacing", "pause_or_resume_media_buy", "assign_approved_creative"]]
+    '\n    The actions the lead may take without asking.\n    '
+    limits: SaveProjectSuccessProjectPendingBoundsLimits
+    '\n    Daily action count and IU cap.\n    '
+    targets: SaveProjectSuccessProjectPendingBoundsTargets
+    '\n    The media buys autonomous actions may change.\n    '
+    revision: int
+    approval: SaveProjectSuccessProjectPendingBoundsApprovalValue | None
+
+class SaveProjectSuccessProjectPendingBoundsApprovalValue(TypedDict):
+    approvedBy: str | None
+    approvedAt: str
+    approvedRevision: int
+
+class SaveProjectSuccessProjectPendingBoundsBudget(TypedDict):
+    total: float
+    currency: str
+    accounting_mode: NotRequired[Literal["gross_commitment", "verified_net_cost"]]
+    per_seller_max_pct: NotRequired[float]
+    reallocation_threshold: float
+    '\n    An amount in `budget.currency`, not a percentage. 0 means every reallocation needs approval; `total` means unlimited.\n    '
+    allocations: NotRequired[dict[str, SaveProjectSuccessProjectPendingBoundsBudgetAllocationsValue]]
+    periods: NotRequired[list[SaveProjectSuccessProjectPendingBoundsBudgetPeriodsItem]]
+
+class SaveProjectSuccessProjectPendingBoundsBudgetAllocationsValue(TypedDict):
+    amount: NotRequired[float]
+    max_pct: NotRequired[float]
+
+class SaveProjectSuccessProjectPendingBoundsBudgetPeriodsItem(TypedDict):
+    budget_period_id: str
+    start: str
+    end: str
+    amount: float
+
+class SaveProjectSuccessProjectPendingBoundsChannels(TypedDict):
+    required: NotRequired[list[SaveProjectSuccessProjectPendingBoundsChannelsRequiredItem]]
+    allowed: NotRequired[list[SaveProjectSuccessProjectPendingBoundsChannelsAllowedItem]]
+    mix_targets: NotRequired[dict[str, SaveProjectSuccessProjectPendingBoundsChannelsMixTargetsValue]]
+
+SaveProjectSuccessProjectPendingBoundsChannelsAllowedItem: TypeAlias = Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+
+class SaveProjectSuccessProjectPendingBoundsChannelsMixTargetsValue(TypedDict):
+    min_pct: NotRequired[float]
+    max_pct: NotRequired[float]
+
+SaveProjectSuccessProjectPendingBoundsChannelsRequiredItem: TypeAlias = Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+
+class SaveProjectSuccessProjectPendingBoundsFlight(TypedDict):
+    start: str
+    end: str
+
+class SaveProjectSuccessProjectPendingBoundsLimits(TypedDict):
+    maxActionsPerDay: int
+    '\n    Autonomous actions allowed per day.\n    '
+    iuBudget: float | None
+    '\n    The Project\'s cap in IUs, or null for the account\'s spending cap alone.\n    '
+
+class SaveProjectSuccessProjectPendingBoundsTargets(TypedDict):
+    mediaBuyIds: list[SaveProjectSuccessProjectPendingBoundsTargetsMediaBuyIdsItem]
+    '\n    Attached media buys the lead may change. A buy added later is a wider revision.\n    '
+
+SaveProjectSuccessProjectPendingBoundsTargetsMediaBuyIdsItem: TypeAlias = str
 
 class SaveProjectSuccessProjectProgress(TypedDict):
     goal: SaveProjectSuccessProjectProgressGoalValue | None
