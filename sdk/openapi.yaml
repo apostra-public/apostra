@@ -2232,7 +2232,7 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId).
+                        modularReadiness, feedTemplate. seller: listing, identity, commitmentRecord, scores, products.
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
                         products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief,
@@ -2251,6 +2251,7 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - feedTemplate
                           - connectionContract
                           - capabilities
                           - creativeFormats
@@ -2339,6 +2340,8 @@ paths:
                           - rate_card_preview
                           - avails_sheet_preview
                           - product_sheet_preview
+                          - wholesale_pricing_preview
+                          - seller_account_feed_preview
                     items:
                       description: 'For kind catalog with include items: which items to return and the cursor for the next page.'
                       type: object
@@ -3728,7 +3731,7 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId).
+                        modularReadiness, feedTemplate. seller: listing, identity, commitmentRecord, scores, products.
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
                         products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief,
@@ -3747,6 +3750,7 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - feedTemplate
                           - connectionContract
                           - capabilities
                           - creativeFormats
@@ -3837,6 +3841,8 @@ paths:
                           - rate_card_preview
                           - avails_sheet_preview
                           - product_sheet_preview
+                          - wholesale_pricing_preview
+                          - seller_account_feed_preview
                     items:
                       description: 'For kind catalog with include items: which items to return and the cursor for the next page.'
                       type: object
@@ -5200,7 +5206,7 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId).
+                        modularReadiness, feedTemplate. seller: listing, identity, commitmentRecord, scores, products.
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
                         products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief,
@@ -5219,6 +5225,7 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - feedTemplate
                           - connectionContract
                           - capabilities
                           - creativeFormats
@@ -5307,6 +5314,8 @@ paths:
                           - rate_card_preview
                           - avails_sheet_preview
                           - product_sheet_preview
+                          - wholesale_pricing_preview
+                          - seller_account_feed_preview
                     items:
                       description: 'For kind catalog with include items: which items to return and the cursor for the next page.'
                       type: object
@@ -6657,7 +6666,7 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId).
+                        modularReadiness, feedTemplate. seller: listing, identity, commitmentRecord, scores, products.
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
                         products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief,
@@ -6676,6 +6685,7 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - feedTemplate
                           - connectionContract
                           - capabilities
                           - creativeFormats
@@ -6764,6 +6774,8 @@ paths:
                           - rate_card_preview
                           - avails_sheet_preview
                           - product_sheet_preview
+                          - wholesale_pricing_preview
+                          - seller_account_feed_preview
                     items:
                       description: 'For kind catalog with include items: which items to return and the cursor for the next page.'
                       type: object
@@ -8115,7 +8127,7 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId).
+                        modularReadiness, feedTemplate. seller: listing, identity, commitmentRecord, scores, products.
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
                         products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief,
@@ -8134,6 +8146,7 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - feedTemplate
                           - connectionContract
                           - capabilities
                           - creativeFormats
@@ -8222,6 +8235,8 @@ paths:
                           - rate_card_preview
                           - avails_sheet_preview
                           - product_sheet_preview
+                          - wholesale_pricing_preview
+                          - seller_account_feed_preview
                     items:
                       description: 'For kind catalog with include items: which items to return and the cursor for the next page.'
                       type: object
@@ -9580,7 +9595,7 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId).
+                        modularReadiness, feedTemplate. seller: listing, identity, commitmentRecord, scores, products.
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
                         products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief,
@@ -9599,6 +9614,7 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - feedTemplate
                           - connectionContract
                           - capabilities
                           - creativeFormats
@@ -9687,6 +9703,8 @@ paths:
                           - rate_card_preview
                           - avails_sheet_preview
                           - product_sheet_preview
+                          - wholesale_pricing_preview
+                          - seller_account_feed_preview
                     items:
                       description: 'For kind catalog with include items: which items to return and the cursor for the next page.'
                       type: object
@@ -12390,7 +12408,7 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId).
+                        modularReadiness, feedTemplate. seller: listing, identity, commitmentRecord, scores, products.
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
                         products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief,
@@ -12409,6 +12427,7 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - feedTemplate
                           - connectionContract
                           - capabilities
                           - creativeFormats
@@ -12497,6 +12516,8 @@ paths:
                           - rate_card_preview
                           - avails_sheet_preview
                           - product_sheet_preview
+                          - wholesale_pricing_preview
+                          - seller_account_feed_preview
                     items:
                       description: 'For kind catalog with include items: which items to return and the cursor for the next page.'
                       type: object
@@ -13850,7 +13871,7 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId).
+                        modularReadiness, feedTemplate. seller: listing, identity, commitmentRecord, scores, products.
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
                         products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief,
@@ -13869,6 +13890,7 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - feedTemplate
                           - connectionContract
                           - capabilities
                           - creativeFormats
@@ -13957,6 +13979,8 @@ paths:
                           - rate_card_preview
                           - avails_sheet_preview
                           - product_sheet_preview
+                          - wholesale_pricing_preview
+                          - seller_account_feed_preview
                     items:
                       description: 'For kind catalog with include items: which items to return and the cursor for the next page.'
                       type: object
@@ -18018,7 +18042,7 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId).
+                        modularReadiness, feedTemplate. seller: listing, identity, commitmentRecord, scores, products.
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
                         products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief,
@@ -18037,6 +18061,7 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - feedTemplate
                           - connectionContract
                           - capabilities
                           - creativeFormats
@@ -18125,6 +18150,8 @@ paths:
                           - rate_card_preview
                           - avails_sheet_preview
                           - product_sheet_preview
+                          - wholesale_pricing_preview
+                          - seller_account_feed_preview
                     items:
                       description: 'For kind catalog with include items: which items to return and the cursor for the next page.'
                       type: object
@@ -19476,7 +19503,7 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId).
+                        modularReadiness, feedTemplate. seller: listing, identity, commitmentRecord, scores, products.
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
                         products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief,
@@ -19495,6 +19522,7 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - feedTemplate
                           - connectionContract
                           - capabilities
                           - creativeFormats
@@ -19583,6 +19611,8 @@ paths:
                           - rate_card_preview
                           - avails_sheet_preview
                           - product_sheet_preview
+                          - wholesale_pricing_preview
+                          - seller_account_feed_preview
                     items:
                       description: 'For kind catalog with include items: which items to return and the cursor for the next page.'
                       type: object
@@ -20940,7 +20970,7 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId).
+                        modularReadiness, feedTemplate. seller: listing, identity, commitmentRecord, scores, products.
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
                         products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief,
@@ -20959,6 +20989,7 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - feedTemplate
                           - connectionContract
                           - capabilities
                           - creativeFormats
@@ -21047,6 +21078,8 @@ paths:
                           - rate_card_preview
                           - avails_sheet_preview
                           - product_sheet_preview
+                          - wholesale_pricing_preview
+                          - seller_account_feed_preview
                     items:
                       description: 'For kind catalog with include items: which items to return and the cursor for the next page.'
                       type: object
@@ -22403,7 +22436,7 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId).
+                        modularReadiness, feedTemplate. seller: listing, identity, commitmentRecord, scores, products.
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
                         products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief,
@@ -22422,6 +22455,7 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - feedTemplate
                           - connectionContract
                           - capabilities
                           - creativeFormats
@@ -22510,6 +22544,8 @@ paths:
                           - rate_card_preview
                           - avails_sheet_preview
                           - product_sheet_preview
+                          - wholesale_pricing_preview
+                          - seller_account_feed_preview
                     items:
                       description: 'For kind catalog with include items: which items to return and the cursor for the next page.'
                       type: object
@@ -23866,7 +23902,7 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId).
+                        modularReadiness, feedTemplate. seller: listing, identity, commitmentRecord, scores, products.
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
                         products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief,
@@ -23885,6 +23921,7 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - feedTemplate
                           - connectionContract
                           - capabilities
                           - creativeFormats
@@ -23973,6 +24010,8 @@ paths:
                           - rate_card_preview
                           - avails_sheet_preview
                           - product_sheet_preview
+                          - wholesale_pricing_preview
+                          - seller_account_feed_preview
                     items:
                       description: 'For kind catalog with include items: which items to return and the cursor for the next page.'
                       type: object
@@ -25329,7 +25368,7 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId).
+                        modularReadiness, feedTemplate. seller: listing, identity, commitmentRecord, scores, products.
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
                         products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief,
@@ -25348,6 +25387,7 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - feedTemplate
                           - connectionContract
                           - capabilities
                           - creativeFormats
@@ -25436,6 +25476,8 @@ paths:
                           - rate_card_preview
                           - avails_sheet_preview
                           - product_sheet_preview
+                          - wholesale_pricing_preview
+                          - seller_account_feed_preview
                     items:
                       description: 'For kind catalog with include items: which items to return and the cursor for the next page.'
                       type: object
@@ -26792,7 +26834,7 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId).
+                        modularReadiness, feedTemplate. seller: listing, identity, commitmentRecord, scores, products.
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
                         products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief,
@@ -26811,6 +26853,7 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - feedTemplate
                           - connectionContract
                           - capabilities
                           - creativeFormats
@@ -26899,6 +26942,8 @@ paths:
                           - rate_card_preview
                           - avails_sheet_preview
                           - product_sheet_preview
+                          - wholesale_pricing_preview
+                          - seller_account_feed_preview
                     items:
                       description: 'For kind catalog with include items: which items to return and the cursor for the next page.'
                       type: object
@@ -30966,7 +31011,7 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId).
+                        modularReadiness, feedTemplate. seller: listing, identity, commitmentRecord, scores, products.
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
                         products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief,
@@ -30985,6 +31030,7 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - feedTemplate
                           - connectionContract
                           - capabilities
                           - creativeFormats
@@ -31073,6 +31119,8 @@ paths:
                           - rate_card_preview
                           - avails_sheet_preview
                           - product_sheet_preview
+                          - wholesale_pricing_preview
+                          - seller_account_feed_preview
                     items:
                       description: 'For kind catalog with include items: which items to return and the cursor for the next page.'
                       type: object
@@ -62329,9 +62377,14 @@ paths:
                           description: Typed rate-card Library document.
                         inventorySourceId:
                           description: >-
-                            Seller inventory source fed by an avails-sheet document. Required when documentType is
-                            avails_sheet. A product-sheet document names the source its products are created on.
+                            Seller inventory source fed by an avails-sheet or wholesale_pricing_feed document, which
+                            require it. A product-sheet document names the source its products are created on.
                           $ref: '#/components/schemas/save_material_request_MetadataInventorySourceId'
+                        feedMode:
+                          description: >-
+                            seller_account_feed only: snapshot (default) lists every binding of the sources it names;
+                            delta changes only the rows it lists.
+                          $ref: '#/components/schemas/save_material_request_MetadataFeedMode'
                         buyerScope:
                           oneOf:
                             - type: object
@@ -62436,11 +62489,18 @@ paths:
                             - rate_card
                             - avails_sheet
                             - product_sheet
+                            - wholesale_pricing_feed
+                            - seller_account_feed
                         inventorySourceId:
                           description: >-
-                            Seller inventory source fed by an avails-sheet document. Required when documentType is
-                            avails_sheet. A product-sheet document names the source its products are created on.
+                            Seller inventory source fed by an avails-sheet or wholesale_pricing_feed document, which
+                            require it. A product-sheet document names the source its products are created on.
                           $ref: '#/components/schemas/save_material_request_MetadataInventorySourceId'
+                        feedMode:
+                          description: >-
+                            seller_account_feed only: snapshot (default) lists every binding of the sources it names;
+                            delta changes only the rows it lists.
+                          $ref: '#/components/schemas/save_material_request_MetadataFeedMode'
                         documentPurpose:
                           description: >-
                             Seller-governed Library document purpose. Omitted or null values are treated as
@@ -62626,10 +62686,13 @@ paths:
                       - $ref: '#/components/schemas/save_material_success_SaveMaterialSuccessAvailsPreviewed'
                       - $ref: '#/components/schemas/save_material_success_SaveMaterialSuccessAvailsCommitted'
                       - $ref: '#/components/schemas/save_material_success_SaveMaterialSuccessProductSheetCommitted'
+                      - $ref: '#/components/schemas/save_material_success_SaveMaterialSuccessSellerAccountFeedCommitted'
+                      - $ref: '#/components/schemas/save_material_success_SaveMaterialSuccessWholesalePricingAlreadyLive'
                       - $ref: '#/components/schemas/save_material_success_SaveMaterialSuccessSavedWithRateCard'
                       - $ref: '#/components/schemas/save_material_success_SaveMaterialSuccessReconciled'
                       - $ref: '#/components/schemas/save_material_success_SaveMaterialSuccessCandidatesDecided'
                       - $ref: '#/components/schemas/save_material_success_SaveMaterialSuccessUnitsMarked'
+                      - $ref: '#/components/schemas/save_material_success_SaveMaterialSuccessApprovalRequired'
                   error:
                     type: 'null'
                 required:
@@ -132983,13 +133046,16 @@ components:
           minLength: 1
           maxLength: 4096
           description: >-
-            Signed token from get include rate_card_preview or avails_sheet_preview for this exact sourceRevision. It is
-            bound to that revision, its content, and the state previewed; preview again if any of them changes.
+            Signed token from the get preview include (rate_card_preview, avails_sheet_preview,
+            wholesale_pricing_preview, seller_account_feed_preview) for this exact sourceRevision. It is bound to that
+            revision, its content, and the state previewed; preview again if any of them changes.
       required:
         - sourceRevision
         - previewToken
       additionalProperties: false
-      description: Apply the previewed rate card or avails sheet. The Material's documentType picks which.
+      description: >-
+        Apply the previewed typed document. The Material's documentType picks which. A wholesale_pricing_feed replaces
+        live prices, so it returns approval_required for an administrator to approve.
     save_material_request_SourceOriginalRef:
       type: string
       minLength: 1
@@ -133805,6 +133871,11 @@ components:
       type: string
       minLength: 1
       maxLength: 200
+    save_material_request_MetadataFeedMode:
+      type: string
+      enum:
+        - snapshot
+        - delta
     save_material_request_MetadataBuyerScopeOperatorDomain:
       type: string
       minLength: 1
@@ -134441,6 +134512,79 @@ components:
         - rows
         - pending
       additionalProperties: {}
+    save_material_success_SaveMaterialSuccessSellerAccountFeedCommitted:
+      type: object
+      properties:
+        outcome:
+          type: string
+          const: seller_account_feed_committed
+        action:
+          type: string
+          const: committed_seller_account_feed
+        committed:
+          type: boolean
+          const: true
+        materialId:
+          type: string
+        sourceRevision:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        feedMode:
+          type: string
+          enum:
+            - snapshot
+            - delta
+        feedId:
+          type: string
+        revisionId:
+          type: string
+        idempotentReplay:
+          type: boolean
+        committedAt:
+          type: string
+        impact:
+          $ref: '#/components/schemas/save_material_success_SaveMaterialSuccessSellerAccountFeedCommittedImpact'
+      required:
+        - outcome
+        - action
+        - committed
+        - materialId
+        - sourceRevision
+        - feedMode
+        - feedId
+        - revisionId
+        - idempotentReplay
+        - committedAt
+        - impact
+      additionalProperties: {}
+    save_material_success_SaveMaterialSuccessWholesalePricingAlreadyLive:
+      type: object
+      properties:
+        outcome:
+          type: string
+          const: wholesale_pricing_already_live
+        action:
+          type: string
+          const: wholesale_pricing_already_live
+        materialId:
+          type: string
+        sourceRevision:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        inventorySourceId:
+          type: string
+        importId:
+          type: string
+      required:
+        - outcome
+        - action
+        - materialId
+        - sourceRevision
+        - inventorySourceId
+        - importId
+      additionalProperties: {}
     save_material_success_SaveMaterialSuccessSavedWithRateCard:
       type: object
       properties:
@@ -134616,6 +134760,28 @@ components:
         - materialId
         - units
       additionalProperties: {}
+    save_material_success_SaveMaterialSuccessApprovalRequired:
+      type: object
+      properties:
+        outcome:
+          type: string
+          const: approval_required
+        action:
+          type: string
+          const: approval_required
+        message:
+          type: string
+        approval:
+          $ref: '#/components/schemas/save_material_success_SaveMaterialSuccessApprovalRequiredApproval'
+        idempotencyKey:
+          type: string
+      required:
+        - outcome
+        - action
+        - message
+        - approval
+        - idempotencyKey
+      additionalProperties: {}
     save_material_success_SaveMaterialSuccessRateCardCommittedFactsItem:
       type: object
       propertyNames:
@@ -134738,6 +134904,11 @@ components:
       propertyNames:
         type: string
       additionalProperties: {}
+    save_material_success_SaveMaterialSuccessSellerAccountFeedCommittedImpact:
+      type: object
+      propertyNames:
+        type: string
+      additionalProperties: {}
     save_material_success_SaveMaterialSuccessSavedWithRateCardRateCardMaterialId:
       type: string
     save_material_success_SaveMaterialSuccessSavedWithRateCardRateCardSourceRevision:
@@ -134833,6 +135004,11 @@ components:
       type: boolean
       description: True when additional matching floor warnings were not returned.
     save_material_success_SaveMaterialSuccessReconciledMaterialReceipt:
+      type: object
+      propertyNames:
+        type: string
+      additionalProperties: {}
+    save_material_success_SaveMaterialSuccessApprovalRequiredApproval:
       type: object
       propertyNames:
         type: string
