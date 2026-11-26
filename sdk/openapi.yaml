@@ -62975,6 +62975,13 @@ paths:
                             example: '1827364556677889'
                             type: string
                             minLength: 1
+                          identityId:
+                            description: >-
+                              TikTok ad identity to post this ad as. Required when the account has more than one linked
+                              identity; auto-selected otherwise.
+                            example: 04b18ff0-b942-54ea-9251-784ed81162cc
+                            type: string
+                            minLength: 1
                           optimizationGoals:
                             description: >-
                               Create only. Per-product optimization goals, overriding the product default and the
@@ -64960,6 +64967,13 @@ paths:
                               Provider-native mobile application ID. For TikTok App Promotion, one of the advertiser app
                               IDs.
                             example: '1827364556677889'
+                            type: string
+                            minLength: 1
+                          identityId:
+                            description: >-
+                              TikTok ad identity to post this ad as. Required when the account has more than one linked
+                              identity; auto-selected otherwise.
+                            example: 04b18ff0-b942-54ea-9251-784ed81162cc
                             type: string
                             minLength: 1
                           optimizationGoals:

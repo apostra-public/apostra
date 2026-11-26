@@ -34651,6 +34651,10 @@ export type SaveMediaBuyData = {
              */
             appId?: string;
             /**
+             * TikTok ad identity to post this ad as. Required when the account has more than one linked identity; auto-selected otherwise.
+             */
+            identityId?: string;
+            /**
              * Create only. Per-product optimization goals, overriding the product default and the campaign's own optimizationGoals for this line item — e.g. Snap Sales' conversion event (event_sources[].event_type purchase/add_to_cart/complete_registration) or which pixel/event source to attribute to. Field names INSIDE each goal are ADCP snake_case, not camelCase, the same shape save_campaign's optimizationGoals uses. Cost or return targets go in bidPrice/budget, not a goal.
              */
             optimizationGoals?: Array<SaveMediaBuyRequestCampaignEventGoal | SaveMediaBuyRequestCampaignMetricGoal | SaveMediaBuyRequestCampaignVendorMetricGoal>;
@@ -35599,6 +35603,10 @@ export type SaveMediaBuyData = {
              * Provider-native mobile application ID. For TikTok App Promotion, one of the advertiser app IDs.
              */
             appId?: string;
+            /**
+             * TikTok ad identity to post this ad as. Required when the account has more than one linked identity; auto-selected otherwise.
+             */
+            identityId?: string;
             /**
              * Create only. Per-product optimization goals, overriding the product default and the campaign's own optimizationGoals for this line item — e.g. Snap Sales' conversion event (event_sources[].event_type purchase/add_to_cart/complete_registration) or which pixel/event source to attribute to. Field names INSIDE each goal are ADCP snake_case, not camelCase, the same shape save_campaign's optimizationGoals uses. Cost or return targets go in bidPrice/budget, not a goal.
              */
