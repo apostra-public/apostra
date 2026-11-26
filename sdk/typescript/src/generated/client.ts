@@ -809,14 +809,14 @@ export class Apostra extends Transport {
   /** Create a child Account (omit id), rename one, or archive or restore it (isArchived), each recorded for website approval by an Organization administrator; repeat the idempotencyKey for the outcome. dryRun previews. settings.company saves at once. autonomyPaused stops or clears a buyer account's stop. Returns the data together with response headers and request ID. */
   saveAccountWithResponse(input: SaveAccountInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveAccountResult>> { return this.requestDetailed("save_account", input, options) }
   /**
-   * Save an advertiser or mappings. Buyer privateNotes: owning Buyer Account only; /v3/manage-ads#private-advertiser-notes. Confirm markets/channels (footprintProposal); needs_input=ask; never recreate for currency. Brand: identityContract:confirmed-v1; preview: resolveBrand; read advertiser.brandRef.
+   * Save advertiser/mappings. privateNotes: owning Buyer only. Confirm markets/channels (footprintProposal); needs_input=ask; never recreate for currency. identityContract:confirmed-v1; preview resolveBrand; read advertiser.brandRef. Unknown brand: ask website, brandName; register unverified AAO entry.
    *
    * @example
    * await client.saveAdvertiser(input, { idempotencyKey: 'stable-key' })
    */
   saveAdvertiser(input: SaveAdvertiserInput, options: WriteRequestOptions): Promise<SaveAdvertiserResult> { return this.request("save_advertiser", input, options) }
 
-  /** Save an advertiser or mappings. Buyer privateNotes: owning Buyer Account only; /v3/manage-ads#private-advertiser-notes. Confirm markets/channels (footprintProposal); needs_input=ask; never recreate for currency. Brand: identityContract:confirmed-v1; preview: resolveBrand; read advertiser.brandRef. Returns the data together with response headers and request ID. */
+  /** Save advertiser/mappings. privateNotes: owning Buyer only. Confirm markets/channels (footprintProposal); needs_input=ask; never recreate for currency. identityContract:confirmed-v1; preview resolveBrand; read advertiser.brandRef. Unknown brand: ask website, brandName; register unverified AAO entry. Returns the data together with response headers and request ID. */
   saveAdvertiserWithResponse(input: SaveAdvertiserInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveAdvertiserResult>> { return this.requestDetailed("save_advertiser", input, options) }
   /**
    * Invite another Organization to exact advertisers, accept/reject an invitation, or revoke a grant. Limited beta: eligible Organization, entitlement, server-side exposure, and direct human-admin authority are required.

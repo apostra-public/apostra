@@ -66,9 +66,8 @@ account, and never reuse an MCP-audience token for REST. If authorization or
 account access is missing, use the human handoff in
 [connection.md](references/connection.md) instead of requesting secrets.
 
-When the required operation is outside the public V3 HTTP catalogue, use the
-documented stable V2 REST API. Explain that choice in terms of the requested
-job, not a version-selection exercise.
+If the operation isn't in the V3 catalogue, say it isn't available yet and use
+the human handoff in [connection.md](references/connection.md).
 
 ## Connect and prove access
 

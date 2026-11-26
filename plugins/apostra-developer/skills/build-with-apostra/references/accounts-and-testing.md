@@ -52,6 +52,12 @@ and needs none of this.
 
 ## Test in the sandbox, and know where it stops
 
+Ask for the brand's website when creating an advertiser. For a live advertiser,
+if `save_advertiser` asks for `brandName`, ask for the brand name and supply it.
+Report a refusal's reason and stop; if registration is uncertain, check the
+registry before retrying. A registry entry does not prove ownership. Sandbox
+advertisers and test accounts must use a brand already in the registry.
+
 Create a sandbox advertiser with `save_advertiser` and `sandbox: true`, turn on
 the Apostra synthetic seller for it, save a campaign, call `request_proposals`,
 and stage a media buy. It needs no billing details and spends nothing. Read

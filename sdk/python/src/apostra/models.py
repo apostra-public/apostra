@@ -11810,6 +11810,8 @@ class SaveAdvertiserInput(TypedDict):
     '\n    Advertiser name. Required when creating.\n    '
     brand: NotRequired[str]
     '\n    Brand domain (e.g. "nike.com") or URL. Required when creating. Resolved via AdCP brand registry.\n    '
+    brandName: NotRequired[str]
+    '\n    Create only: the brand name the buyer supplied, for an unknown AAO registry entry. Ask for it when needed.\n    '
     brand_id: NotRequired[str]
     '\n    Create only: AdCP brand_id of a sub-brand the brand publishes.\n    '
     publicBrand: NotRequired[bool]

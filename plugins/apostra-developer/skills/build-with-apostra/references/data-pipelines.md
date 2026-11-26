@@ -19,8 +19,9 @@ the applicable `set-up-an-event-source` skill through the active account's
 3. Build the sender against the documented ingestion contract. Per-event
    records and pre-aggregated measurement outcomes have different endpoints;
    select by data shape, not by which example is shortest. Send per-event
-   records with the V3 `log_event` tool or its `/api/v3/tools/log_event` route,
-   and use V2 REST only for a shape the V3 catalog does not cover.
+   records with the V3 `log_event` tool or its `/api/v3/tools/log_event` route.
+   If the V3 catalogue does not cover the needed shape, say it is not available
+   yet and use the human handoff in [connection.md](connection.md).
 4. Define stable event IDs, time-zone handling, field mapping, bounded
    retries, and deduplication. Test the mapping with synthetic events and
    verify partial failures are surfaced rather than counted as accepted.
@@ -43,7 +44,7 @@ output the developer actually needs:
 | Need | Integration to build |
 | --- | --- |
 | An agent answers a question about one campaign | V3 `get_delivery` with the exact campaign ID and window; Apostra reads the connected provider live |
-| A backend pulls aggregate metrics on a schedule | The documented V2 reporting REST contract and the application's scheduler |
+| A backend pulls campaign delivery on a schedule | V3 `get_delivery` over `/api/v3/tools/get_delivery` and the application's scheduler |
 | A one-off aggregate file | The documented CSV export; fetch its signed URL through the consuming backend |
 | Recurring log-level data in owned cloud storage | Data Delivery credential and Output configuration with an observed destination probe |
 

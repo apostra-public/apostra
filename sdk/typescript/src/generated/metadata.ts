@@ -927,7 +927,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Save an advertiser or mappings. Buyer privateNotes: owning Buyer Account only; /v3/manage-ads#private-advertiser-notes. Confirm markets/channels (footprintProposal); needs_input=ask; never recreate for currency. Brand: identityContract:confirmed-v1; preview: resolveBrand; read advertiser.brandRef."
+    "summary": "Save advertiser/mappings. privateNotes: owning Buyer only. Confirm markets/channels (footprintProposal); needs_input=ask; never recreate for currency. identityContract:confirmed-v1; preview resolveBrand; read advertiser.brandRef. Unknown brand: ask website, brandName; register unverified AAO entry."
   },
   "save_advertiser_grant": {
     "path": "/tools/save_advertiser_grant",

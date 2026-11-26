@@ -19259,6 +19259,10 @@ export type SaveAdvertiserData = {
          */
         brand?: string;
         /**
+         * Create only: the brand name the buyer supplied, for an unknown AAO registry entry. Ask for it when needed.
+         */
+        brandName?: string;
+        /**
          * Create only: AdCP brand_id of a sub-brand the brand publishes.
          */
         brand_id?: string;
