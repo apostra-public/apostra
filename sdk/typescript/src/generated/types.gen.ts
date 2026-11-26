@@ -39301,6 +39301,7 @@ export type SaveProjectSuccessObject = {
         reason: string;
         url: string | null;
     }>;
+    stateMark: 'needs_you' | 'awaiting_approval' | 'draft' | 'paused' | null;
     url: string;
 };
 
@@ -39769,6 +39770,7 @@ export type SaveProjectSuccessProject = {
         reason: string;
         url: string | null;
     }>;
+    stateMark: 'needs_you' | 'awaiting_approval' | 'draft' | 'paused' | null;
     url: string;
 };
 
@@ -44844,7 +44846,7 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs a person first, then latest activity). Other kinds: not applied yet.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs you first, then latest activity). Other kinds: not applied yet.
              */
             sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers' | 'attention';
             /**
@@ -45496,7 +45498,7 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs a person first, then latest activity). Other kinds: not applied yet.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs you first, then latest activity). Other kinds: not applied yet.
              */
             sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers' | 'attention';
             /**
@@ -46229,7 +46231,7 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs a person first, then latest activity). Other kinds: not applied yet.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs you first, then latest activity). Other kinds: not applied yet.
              */
             sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers' | 'attention';
             /**
@@ -46877,7 +46879,7 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs a person first, then latest activity). Other kinds: not applied yet.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs you first, then latest activity). Other kinds: not applied yet.
              */
             sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers' | 'attention';
             /**
@@ -47526,7 +47528,7 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs a person first, then latest activity). Other kinds: not applied yet.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs you first, then latest activity). Other kinds: not applied yet.
              */
             sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers' | 'attention';
             /**
@@ -48170,7 +48172,7 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs a person first, then latest activity). Other kinds: not applied yet.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs you first, then latest activity). Other kinds: not applied yet.
              */
             sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers' | 'attention';
             /**
@@ -48822,7 +48824,7 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs a person first, then latest activity). Other kinds: not applied yet.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs you first, then latest activity). Other kinds: not applied yet.
              */
             sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers' | 'attention';
             /**
@@ -49622,7 +49624,7 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs a person first, then latest activity). Other kinds: not applied yet.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs you first, then latest activity). Other kinds: not applied yet.
              */
             sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers' | 'attention';
             /**
@@ -50440,7 +50442,7 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs a person first, then latest activity). Other kinds: not applied yet.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs you first, then latest activity). Other kinds: not applied yet.
              */
             sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers' | 'attention';
             /**
@@ -51177,7 +51179,7 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs a person first, then latest activity). Other kinds: not applied yet.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs you first, then latest activity). Other kinds: not applied yet.
              */
             sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers' | 'attention';
             /**
@@ -51828,7 +51830,7 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs a person first, then latest activity). Other kinds: not applied yet.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs you first, then latest activity). Other kinds: not applied yet.
              */
             sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers' | 'attention';
             /**
@@ -52480,7 +52482,7 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs a person first, then latest activity). Other kinds: not applied yet.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs you first, then latest activity). Other kinds: not applied yet.
              */
             sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers' | 'attention';
             /**
@@ -53132,7 +53134,7 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs a person first, then latest activity). Other kinds: not applied yet.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs you first, then latest activity). Other kinds: not applied yet.
              */
             sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers' | 'attention';
             /**
@@ -53784,7 +53786,7 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs a person first, then latest activity). Other kinds: not applied yet.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs you first, then latest activity). Other kinds: not applied yet.
              */
             sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers' | 'attention';
             /**

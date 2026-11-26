@@ -23057,6 +23057,7 @@ class SaveProjectSuccessObject(TypedDict):
     spend: SaveProjectSuccessObjectSpendValue | None
     autonomy: SaveProjectSuccessObjectAutonomy
     attention: list[SaveProjectSuccessObjectAttentionItem]
+    stateMark: Literal["needs_you", "awaiting_approval", "draft", "paused"] | None
     url: str
 
 class SaveProjectSuccessObjectAdvertiserValue(TypedDict):
@@ -23391,6 +23392,7 @@ class SaveProjectSuccessProject(TypedDict):
     spend: SaveProjectSuccessProjectSpendValue | None
     autonomy: SaveProjectSuccessProjectAutonomy
     attention: list[SaveProjectSuccessProjectAttentionItem]
+    stateMark: Literal["needs_you", "awaiting_approval", "draft", "paused"] | None
     url: str
 
 class SaveProjectSuccessProjectAdvertiserValue(TypedDict):
@@ -26493,7 +26495,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     isArchived: NotRequired[bool]
     '\n    Campaign, creative, buyer media_buy, agent_record, workspace_file: true archived (forgotten); false active.\n    '
     sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers", "attention"]]
-    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs a person first, then latest activity). Other kinds: not applied yet.\n    '
+    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs you first, then latest activity). Other kinds: not applied yet.\n    '
     campaignId: NotRequired[str]
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     needsSorting: NotRequired[bool]
@@ -26861,7 +26863,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     isArchived: NotRequired[bool]
     '\n    Campaign, creative, buyer media_buy, agent_record, workspace_file: true archived (forgotten); false active.\n    '
     sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers", "attention"]]
-    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs a person first, then latest activity). Other kinds: not applied yet.\n    '
+    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs you first, then latest activity). Other kinds: not applied yet.\n    '
     campaignId: NotRequired[str]
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     needsSorting: NotRequired[bool]
@@ -27159,7 +27161,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(Type
     isArchived: NotRequired[bool]
     '\n    Campaign, creative, buyer media_buy, agent_record, workspace_file: true archived (forgotten); false active.\n    '
     sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers", "attention"]]
-    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs a person first, then latest activity). Other kinds: not applied yet.\n    '
+    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs you first, then latest activity). Other kinds: not applied yet.\n    '
     campaignId: NotRequired[str]
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     needsSorting: NotRequired[bool]
@@ -27486,7 +27488,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDi
     isArchived: NotRequired[bool]
     '\n    Campaign, creative, buyer media_buy, agent_record, workspace_file: true archived (forgotten); false active.\n    '
     sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers", "attention"]]
-    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs a person first, then latest activity). Other kinds: not applied yet.\n    '
+    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs you first, then latest activity). Other kinds: not applied yet.\n    '
     campaignId: NotRequired[str]
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     needsSorting: NotRequired[bool]
@@ -27860,7 +27862,7 @@ class SearchInputKindAdServerTargetingFilter(TypedDict):
     isArchived: NotRequired[bool]
     '\n    Campaign, creative, buyer media_buy, agent_record, workspace_file: true archived (forgotten); false active.\n    '
     sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers", "attention"]]
-    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs a person first, then latest activity). Other kinds: not applied yet.\n    '
+    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs you first, then latest activity). Other kinds: not applied yet.\n    '
     campaignId: NotRequired[str]
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     needsSorting: NotRequired[bool]
@@ -28196,7 +28198,7 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     isArchived: NotRequired[bool]
     '\n    Campaign, creative, buyer media_buy, agent_record, workspace_file: true archived (forgotten); false active.\n    '
     sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers", "attention"]]
-    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs a person first, then latest activity). Other kinds: not applied yet.\n    '
+    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs you first, then latest activity). Other kinds: not applied yet.\n    '
     campaignId: NotRequired[str]
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     needsSorting: NotRequired[bool]
@@ -28544,7 +28546,7 @@ class SearchInputKindBuyerRfpFilter(TypedDict):
     isArchived: NotRequired[bool]
     '\n    Campaign, creative, buyer media_buy, agent_record, workspace_file: true archived (forgotten); false active.\n    '
     sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers", "attention"]]
-    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs a person first, then latest activity). Other kinds: not applied yet.\n    '
+    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs you first, then latest activity). Other kinds: not applied yet.\n    '
     campaignId: NotRequired[str]
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     needsSorting: NotRequired[bool]
@@ -28914,7 +28916,7 @@ class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     isArchived: NotRequired[bool]
     '\n    Campaign, creative, buyer media_buy, agent_record, workspace_file: true archived (forgotten); false active.\n    '
     sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers", "attention"]]
-    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs a person first, then latest activity). Other kinds: not applied yet.\n    '
+    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs you first, then latest activity). Other kinds: not applied yet.\n    '
     campaignId: NotRequired[str]
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     needsSorting: NotRequired[bool]
@@ -29248,7 +29250,7 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     isArchived: NotRequired[bool]
     '\n    Campaign, creative, buyer media_buy, agent_record, workspace_file: true archived (forgotten); false active.\n    '
     sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers", "attention"]]
-    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs a person first, then latest activity). Other kinds: not applied yet.\n    '
+    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs you first, then latest activity). Other kinds: not applied yet.\n    '
     needsSorting: NotRequired[bool]
     '\n    For Buyer material or library_request: whether the assignment needs sorting.\n    '
     createdByBuyerAgentId: NotRequired[str]
@@ -29578,7 +29580,7 @@ class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     isArchived: NotRequired[bool]
     '\n    Campaign, creative, buyer media_buy, agent_record, workspace_file: true archived (forgotten); false active.\n    '
     sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers", "attention"]]
-    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs a person first, then latest activity). Other kinds: not applied yet.\n    '
+    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs you first, then latest activity). Other kinds: not applied yet.\n    '
     campaignId: str
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     needsSorting: NotRequired[bool]
@@ -29876,7 +29878,7 @@ class SearchInputKindCreativeFilter(TypedDict):
     isArchived: NotRequired[bool]
     '\n    Campaign, creative, buyer media_buy, agent_record, workspace_file: true archived (forgotten); false active.\n    '
     sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers", "attention"]]
-    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs a person first, then latest activity). Other kinds: not applied yet.\n    '
+    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs you first, then latest activity). Other kinds: not applied yet.\n    '
     needsSorting: NotRequired[bool]
     '\n    For Buyer material or library_request: whether the assignment needs sorting.\n    '
     createdByBuyerAgentId: NotRequired[str]
@@ -30292,7 +30294,7 @@ class SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter(TypedDict):
     isArchived: NotRequired[bool]
     '\n    Campaign, creative, buyer media_buy, agent_record, workspace_file: true archived (forgotten); false active.\n    '
     sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers", "attention"]]
-    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs a person first, then latest activity). Other kinds: not applied yet.\n    '
+    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs you first, then latest activity). Other kinds: not applied yet.\n    '
     campaignId: str
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     needsSorting: NotRequired[bool]
@@ -30728,7 +30730,7 @@ class SearchInputKindProposalFilter(TypedDict):
     isArchived: NotRequired[bool]
     '\n    Campaign, creative, buyer media_buy, agent_record, workspace_file: true archived (forgotten); false active.\n    '
     sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers", "attention"]]
-    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs a person first, then latest activity). Other kinds: not applied yet.\n    '
+    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs you first, then latest activity). Other kinds: not applied yet.\n    '
     campaignId: str
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     needsSorting: NotRequired[bool]
@@ -31062,7 +31064,7 @@ class SearchInputKindSourceAccountFilter(TypedDict):
     isArchived: NotRequired[bool]
     '\n    Campaign, creative, buyer media_buy, agent_record, workspace_file: true archived (forgotten); false active.\n    '
     sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers", "attention"]]
-    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs a person first, then latest activity). Other kinds: not applied yet.\n    '
+    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs you first, then latest activity). Other kinds: not applied yet.\n    '
     campaignId: NotRequired[str]
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     needsSorting: NotRequired[bool]
