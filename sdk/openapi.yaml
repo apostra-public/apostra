@@ -2068,6 +2068,17 @@ paths:
                           - drafted
                           - fixed
                           - no_action_needed
+                    threadGroups:
+                      description: 'For a Project conversation: keep only thread starts in these groups (a thread shows its group).'
+                      minItems: 1
+                      maxItems: 16
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - needs_you
+                          - working
+                          - done
                     openThreads:
                       description: 'For a Project conversation: keep only open threads.'
                       type: boolean
@@ -3553,6 +3564,17 @@ paths:
                           - drafted
                           - fixed
                           - no_action_needed
+                    threadGroups:
+                      description: 'For a Project conversation: keep only thread starts in these groups (a thread shows its group).'
+                      minItems: 1
+                      maxItems: 16
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - needs_you
+                          - working
+                          - done
                     openThreads:
                       description: 'For a Project conversation: keep only open threads.'
                       type: boolean
@@ -5014,6 +5036,17 @@ paths:
                           - drafted
                           - fixed
                           - no_action_needed
+                    threadGroups:
+                      description: 'For a Project conversation: keep only thread starts in these groups (a thread shows its group).'
+                      minItems: 1
+                      maxItems: 16
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - needs_you
+                          - working
+                          - done
                     openThreads:
                       description: 'For a Project conversation: keep only open threads.'
                       type: boolean
@@ -6460,6 +6493,17 @@ paths:
                           - drafted
                           - fixed
                           - no_action_needed
+                    threadGroups:
+                      description: 'For a Project conversation: keep only thread starts in these groups (a thread shows its group).'
+                      minItems: 1
+                      maxItems: 16
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - needs_you
+                          - working
+                          - done
                     openThreads:
                       description: 'For a Project conversation: keep only open threads.'
                       type: boolean
@@ -7907,6 +7951,17 @@ paths:
                           - drafted
                           - fixed
                           - no_action_needed
+                    threadGroups:
+                      description: 'For a Project conversation: keep only thread starts in these groups (a thread shows its group).'
+                      minItems: 1
+                      maxItems: 16
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - needs_you
+                          - working
+                          - done
                     openThreads:
                       description: 'For a Project conversation: keep only open threads.'
                       type: boolean
@@ -9361,6 +9416,17 @@ paths:
                           - drafted
                           - fixed
                           - no_action_needed
+                    threadGroups:
+                      description: 'For a Project conversation: keep only thread starts in these groups (a thread shows its group).'
+                      minItems: 1
+                      maxItems: 16
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - needs_you
+                          - working
+                          - done
                     openThreads:
                       description: 'For a Project conversation: keep only open threads.'
                       type: boolean
@@ -10814,6 +10880,17 @@ paths:
                           - drafted
                           - fixed
                           - no_action_needed
+                    threadGroups:
+                      description: 'For a Project conversation: keep only thread starts in these groups (a thread shows its group).'
+                      minItems: 1
+                      maxItems: 16
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - needs_you
+                          - working
+                          - done
                     openThreads:
                       description: 'For a Project conversation: keep only open threads.'
                       type: boolean
@@ -12155,6 +12232,17 @@ paths:
                           - drafted
                           - fixed
                           - no_action_needed
+                    threadGroups:
+                      description: 'For a Project conversation: keep only thread starts in these groups (a thread shows its group).'
+                      minItems: 1
+                      maxItems: 16
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - needs_you
+                          - working
+                          - done
                     openThreads:
                       description: 'For a Project conversation: keep only open threads.'
                       type: boolean
@@ -13604,6 +13692,17 @@ paths:
                           - drafted
                           - fixed
                           - no_action_needed
+                    threadGroups:
+                      description: 'For a Project conversation: keep only thread starts in these groups (a thread shows its group).'
+                      minItems: 1
+                      maxItems: 16
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - needs_you
+                          - working
+                          - done
                     openThreads:
                       description: 'For a Project conversation: keep only open threads.'
                       type: boolean
@@ -15051,6 +15150,17 @@ paths:
                           - drafted
                           - fixed
                           - no_action_needed
+                    threadGroups:
+                      description: 'For a Project conversation: keep only thread starts in these groups (a thread shows its group).'
+                      minItems: 1
+                      maxItems: 16
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - needs_you
+                          - working
+                          - done
                     openThreads:
                       description: 'For a Project conversation: keep only open threads.'
                       type: boolean
@@ -16395,6 +16505,17 @@ paths:
                           - drafted
                           - fixed
                           - no_action_needed
+                    threadGroups:
+                      description: 'For a Project conversation: keep only thread starts in these groups (a thread shows its group).'
+                      minItems: 1
+                      maxItems: 16
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - needs_you
+                          - working
+                          - done
                     openThreads:
                       description: 'For a Project conversation: keep only open threads.'
                       type: boolean
@@ -17739,6 +17860,17 @@ paths:
                           - drafted
                           - fixed
                           - no_action_needed
+                    threadGroups:
+                      description: 'For a Project conversation: keep only thread starts in these groups (a thread shows its group).'
+                      minItems: 1
+                      maxItems: 16
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - needs_you
+                          - working
+                          - done
                     openThreads:
                       description: 'For a Project conversation: keep only open threads.'
                       type: boolean
@@ -19186,6 +19318,17 @@ paths:
                           - drafted
                           - fixed
                           - no_action_needed
+                    threadGroups:
+                      description: 'For a Project conversation: keep only thread starts in these groups (a thread shows its group).'
+                      minItems: 1
+                      maxItems: 16
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - needs_you
+                          - working
+                          - done
                     openThreads:
                       description: 'For a Project conversation: keep only open threads.'
                       type: boolean
@@ -20633,6 +20776,17 @@ paths:
                           - drafted
                           - fixed
                           - no_action_needed
+                    threadGroups:
+                      description: 'For a Project conversation: keep only thread starts in these groups (a thread shows its group).'
+                      minItems: 1
+                      maxItems: 16
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - needs_you
+                          - working
+                          - done
                     openThreads:
                       description: 'For a Project conversation: keep only open threads.'
                       type: boolean
@@ -22085,6 +22239,17 @@ paths:
                           - drafted
                           - fixed
                           - no_action_needed
+                    threadGroups:
+                      description: 'For a Project conversation: keep only thread starts in these groups (a thread shows its group).'
+                      minItems: 1
+                      maxItems: 16
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - needs_you
+                          - working
+                          - done
                     openThreads:
                       description: 'For a Project conversation: keep only open threads.'
                       type: boolean
@@ -23537,6 +23702,17 @@ paths:
                           - drafted
                           - fixed
                           - no_action_needed
+                    threadGroups:
+                      description: 'For a Project conversation: keep only thread starts in these groups (a thread shows its group).'
+                      minItems: 1
+                      maxItems: 16
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - needs_you
+                          - working
+                          - done
                     openThreads:
                       description: 'For a Project conversation: keep only open threads.'
                       type: boolean
@@ -24989,6 +25165,17 @@ paths:
                           - drafted
                           - fixed
                           - no_action_needed
+                    threadGroups:
+                      description: 'For a Project conversation: keep only thread starts in these groups (a thread shows its group).'
+                      minItems: 1
+                      maxItems: 16
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - needs_you
+                          - working
+                          - done
                     openThreads:
                       description: 'For a Project conversation: keep only open threads.'
                       type: boolean
@@ -26441,6 +26628,17 @@ paths:
                           - drafted
                           - fixed
                           - no_action_needed
+                    threadGroups:
+                      description: 'For a Project conversation: keep only thread starts in these groups (a thread shows its group).'
+                      minItems: 1
+                      maxItems: 16
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - needs_you
+                          - working
+                          - done
                     openThreads:
                       description: 'For a Project conversation: keep only open threads.'
                       type: boolean
@@ -27894,6 +28092,17 @@ paths:
                           - drafted
                           - fixed
                           - no_action_needed
+                    threadGroups:
+                      description: 'For a Project conversation: keep only thread starts in these groups (a thread shows its group).'
+                      minItems: 1
+                      maxItems: 16
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - needs_you
+                          - working
+                          - done
                     openThreads:
                       description: 'For a Project conversation: keep only open threads.'
                       type: boolean
@@ -29238,6 +29447,17 @@ paths:
                           - drafted
                           - fixed
                           - no_action_needed
+                    threadGroups:
+                      description: 'For a Project conversation: keep only thread starts in these groups (a thread shows its group).'
+                      minItems: 1
+                      maxItems: 16
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - needs_you
+                          - working
+                          - done
                     openThreads:
                       description: 'For a Project conversation: keep only open threads.'
                       type: boolean
@@ -30582,6 +30802,17 @@ paths:
                           - drafted
                           - fixed
                           - no_action_needed
+                    threadGroups:
+                      description: 'For a Project conversation: keep only thread starts in these groups (a thread shows its group).'
+                      minItems: 1
+                      maxItems: 16
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - needs_you
+                          - working
+                          - done
                     openThreads:
                       description: 'For a Project conversation: keep only open threads.'
                       type: boolean

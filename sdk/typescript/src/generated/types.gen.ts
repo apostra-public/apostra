@@ -1030,6 +1030,10 @@ export type GetData = {
          */
         threadStates?: Array<'needs_you' | 'evaluating' | 'new' | 'drafted' | 'fixed' | 'no_action_needed'>;
         /**
+         * For a Project conversation: keep only thread starts in these groups (a thread shows its group).
+         */
+        threadGroups?: Array<'needs_you' | 'working' | 'done'>;
+        /**
          * For a Project conversation: keep only open threads.
          */
         openThreads?: true;
@@ -1314,6 +1318,10 @@ export type GetData = {
          * For a Project conversation: keep only thread starts in these states.
          */
         threadStates?: Array<'needs_you' | 'evaluating' | 'new' | 'drafted' | 'fixed' | 'no_action_needed'>;
+        /**
+         * For a Project conversation: keep only thread starts in these groups (a thread shows its group).
+         */
+        threadGroups?: Array<'needs_you' | 'working' | 'done'>;
         /**
          * For a Project conversation: keep only open threads.
          */
@@ -1600,6 +1608,10 @@ export type GetData = {
          */
         threadStates?: Array<'needs_you' | 'evaluating' | 'new' | 'drafted' | 'fixed' | 'no_action_needed'>;
         /**
+         * For a Project conversation: keep only thread starts in these groups (a thread shows its group).
+         */
+        threadGroups?: Array<'needs_you' | 'working' | 'done'>;
+        /**
          * For a Project conversation: keep only open threads.
          */
         openThreads?: true;
@@ -1880,6 +1892,10 @@ export type GetData = {
          * For a Project conversation: keep only thread starts in these states.
          */
         threadStates?: Array<'needs_you' | 'evaluating' | 'new' | 'drafted' | 'fixed' | 'no_action_needed'>;
+        /**
+         * For a Project conversation: keep only thread starts in these groups (a thread shows its group).
+         */
+        threadGroups?: Array<'needs_you' | 'working' | 'done'>;
         /**
          * For a Project conversation: keep only open threads.
          */
@@ -2162,6 +2178,10 @@ export type GetData = {
          * For a Project conversation: keep only thread starts in these states.
          */
         threadStates?: Array<'needs_you' | 'evaluating' | 'new' | 'drafted' | 'fixed' | 'no_action_needed'>;
+        /**
+         * For a Project conversation: keep only thread starts in these groups (a thread shows its group).
+         */
+        threadGroups?: Array<'needs_you' | 'working' | 'done'>;
         /**
          * For a Project conversation: keep only open threads.
          */
@@ -2449,6 +2469,10 @@ export type GetData = {
          */
         threadStates?: Array<'needs_you' | 'evaluating' | 'new' | 'drafted' | 'fixed' | 'no_action_needed'>;
         /**
+         * For a Project conversation: keep only thread starts in these groups (a thread shows its group).
+         */
+        threadGroups?: Array<'needs_you' | 'working' | 'done'>;
+        /**
          * For a Project conversation: keep only open threads.
          */
         openThreads?: true;
@@ -2734,6 +2758,10 @@ export type GetData = {
          */
         threadStates?: Array<'needs_you' | 'evaluating' | 'new' | 'drafted' | 'fixed' | 'no_action_needed'>;
         /**
+         * For a Project conversation: keep only thread starts in these groups (a thread shows its group).
+         */
+        threadGroups?: Array<'needs_you' | 'working' | 'done'>;
+        /**
          * For a Project conversation: keep only open threads.
          */
         openThreads?: true;
@@ -3012,6 +3040,10 @@ export type GetData = {
          * For a Project conversation: keep only thread starts in these states.
          */
         threadStates?: Array<'needs_you' | 'evaluating' | 'new' | 'drafted' | 'fixed' | 'no_action_needed'>;
+        /**
+         * For a Project conversation: keep only thread starts in these groups (a thread shows its group).
+         */
+        threadGroups?: Array<'needs_you' | 'working' | 'done'>;
         /**
          * For a Project conversation: keep only open threads.
          */
@@ -3294,6 +3326,10 @@ export type GetData = {
          * For a Project conversation: keep only thread starts in these states.
          */
         threadStates?: Array<'needs_you' | 'evaluating' | 'new' | 'drafted' | 'fixed' | 'no_action_needed'>;
+        /**
+         * For a Project conversation: keep only thread starts in these groups (a thread shows its group).
+         */
+        threadGroups?: Array<'needs_you' | 'working' | 'done'>;
         /**
          * For a Project conversation: keep only open threads.
          */
@@ -3577,6 +3613,10 @@ export type GetData = {
          */
         threadStates?: Array<'needs_you' | 'evaluating' | 'new' | 'drafted' | 'fixed' | 'no_action_needed'>;
         /**
+         * For a Project conversation: keep only thread starts in these groups (a thread shows its group).
+         */
+        threadGroups?: Array<'needs_you' | 'working' | 'done'>;
+        /**
          * For a Project conversation: keep only open threads.
          */
         openThreads?: true;
@@ -3859,6 +3899,10 @@ export type GetData = {
          */
         threadStates?: Array<'needs_you' | 'evaluating' | 'new' | 'drafted' | 'fixed' | 'no_action_needed'>;
         /**
+         * For a Project conversation: keep only thread starts in these groups (a thread shows its group).
+         */
+        threadGroups?: Array<'needs_you' | 'working' | 'done'>;
+        /**
          * For a Project conversation: keep only open threads.
          */
         openThreads?: true;
@@ -4140,6 +4184,10 @@ export type GetData = {
          * For a Project conversation: keep only thread starts in these states.
          */
         threadStates?: Array<'needs_you' | 'evaluating' | 'new' | 'drafted' | 'fixed' | 'no_action_needed'>;
+        /**
+         * For a Project conversation: keep only thread starts in these groups (a thread shows its group).
+         */
+        threadGroups?: Array<'needs_you' | 'working' | 'done'>;
         /**
          * For a Project conversation: keep only open threads.
          */
@@ -4423,6 +4471,10 @@ export type GetData = {
          */
         threadStates?: Array<'needs_you' | 'evaluating' | 'new' | 'drafted' | 'fixed' | 'no_action_needed'>;
         /**
+         * For a Project conversation: keep only thread starts in these groups (a thread shows its group).
+         */
+        threadGroups?: Array<'needs_you' | 'working' | 'done'>;
+        /**
          * For a Project conversation: keep only open threads.
          */
         openThreads?: true;
@@ -4704,6 +4756,10 @@ export type GetData = {
          * For a Project conversation: keep only thread starts in these states.
          */
         threadStates?: Array<'needs_you' | 'evaluating' | 'new' | 'drafted' | 'fixed' | 'no_action_needed'>;
+        /**
+         * For a Project conversation: keep only thread starts in these groups (a thread shows its group).
+         */
+        threadGroups?: Array<'needs_you' | 'working' | 'done'>;
         /**
          * For a Project conversation: keep only open threads.
          */
@@ -4990,6 +5046,10 @@ export type GetData = {
          */
         threadStates?: Array<'needs_you' | 'evaluating' | 'new' | 'drafted' | 'fixed' | 'no_action_needed'>;
         /**
+         * For a Project conversation: keep only thread starts in these groups (a thread shows its group).
+         */
+        threadGroups?: Array<'needs_you' | 'working' | 'done'>;
+        /**
          * For a Project conversation: keep only open threads.
          */
         openThreads?: true;
@@ -5274,6 +5334,10 @@ export type GetData = {
          * For a Project conversation: keep only thread starts in these states.
          */
         threadStates?: Array<'needs_you' | 'evaluating' | 'new' | 'drafted' | 'fixed' | 'no_action_needed'>;
+        /**
+         * For a Project conversation: keep only thread starts in these groups (a thread shows its group).
+         */
+        threadGroups?: Array<'needs_you' | 'working' | 'done'>;
         /**
          * For a Project conversation: keep only open threads.
          */
@@ -5560,6 +5624,10 @@ export type GetData = {
          */
         threadStates?: Array<'needs_you' | 'evaluating' | 'new' | 'drafted' | 'fixed' | 'no_action_needed'>;
         /**
+         * For a Project conversation: keep only thread starts in these groups (a thread shows its group).
+         */
+        threadGroups?: Array<'needs_you' | 'working' | 'done'>;
+        /**
          * For a Project conversation: keep only open threads.
          */
         openThreads?: true;
@@ -5844,6 +5912,10 @@ export type GetData = {
          * For a Project conversation: keep only thread starts in these states.
          */
         threadStates?: Array<'needs_you' | 'evaluating' | 'new' | 'drafted' | 'fixed' | 'no_action_needed'>;
+        /**
+         * For a Project conversation: keep only thread starts in these groups (a thread shows its group).
+         */
+        threadGroups?: Array<'needs_you' | 'working' | 'done'>;
         /**
          * For a Project conversation: keep only open threads.
          */
@@ -6130,6 +6202,10 @@ export type GetData = {
          */
         threadStates?: Array<'needs_you' | 'evaluating' | 'new' | 'drafted' | 'fixed' | 'no_action_needed'>;
         /**
+         * For a Project conversation: keep only thread starts in these groups (a thread shows its group).
+         */
+        threadGroups?: Array<'needs_you' | 'working' | 'done'>;
+        /**
          * For a Project conversation: keep only open threads.
          */
         openThreads?: true;
@@ -6412,6 +6488,10 @@ export type GetData = {
          */
         threadStates?: Array<'needs_you' | 'evaluating' | 'new' | 'drafted' | 'fixed' | 'no_action_needed'>;
         /**
+         * For a Project conversation: keep only thread starts in these groups (a thread shows its group).
+         */
+        threadGroups?: Array<'needs_you' | 'working' | 'done'>;
+        /**
          * For a Project conversation: keep only open threads.
          */
         openThreads?: true;
@@ -6693,6 +6773,10 @@ export type GetData = {
          * For a Project conversation: keep only thread starts in these states.
          */
         threadStates?: Array<'needs_you' | 'evaluating' | 'new' | 'drafted' | 'fixed' | 'no_action_needed'>;
+        /**
+         * For a Project conversation: keep only thread starts in these groups (a thread shows its group).
+         */
+        threadGroups?: Array<'needs_you' | 'working' | 'done'>;
         /**
          * For a Project conversation: keep only open threads.
          */

@@ -2514,6 +2514,8 @@ class GetInputKindAdvertiserAccess(TypedDict):
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
     threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
     '\n    For a Project conversation: keep only thread starts in these states.\n    '
+    threadGroups: NotRequired[list[Literal["needs_you", "working", "done"]]]
+    '\n    For a Project conversation: keep only thread starts in these groups (a thread shows its group).\n    '
     openThreads: NotRequired[Literal[True]]
     '\n    For a Project conversation: keep only open threads.\n    '
     buyerAccountId: NotRequired[int]
@@ -2667,6 +2669,8 @@ class GetInputKindAgentAndBuyerAgentAndProjectAndSkillAndInventorySourceAndAdver
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
     threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
     '\n    For a Project conversation: keep only thread starts in these states.\n    '
+    threadGroups: NotRequired[list[Literal["needs_you", "working", "done"]]]
+    '\n    For a Project conversation: keep only thread starts in these groups (a thread shows its group).\n    '
     openThreads: NotRequired[Literal[True]]
     '\n    For a Project conversation: keep only open threads.\n    '
     buyerAccountId: NotRequired[int]
@@ -2834,6 +2838,8 @@ class GetInputKindAgentRecord(TypedDict):
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
     threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
     '\n    For a Project conversation: keep only thread starts in these states.\n    '
+    threadGroups: NotRequired[list[Literal["needs_you", "working", "done"]]]
+    '\n    For a Project conversation: keep only thread starts in these groups (a thread shows its group).\n    '
     openThreads: NotRequired[Literal[True]]
     '\n    For a Project conversation: keep only open threads.\n    '
     buyerAccountId: NotRequired[int]
@@ -2983,6 +2989,8 @@ class GetInputKindAudience(TypedDict):
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
     threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
     '\n    For a Project conversation: keep only thread starts in these states.\n    '
+    threadGroups: NotRequired[list[Literal["needs_you", "working", "done"]]]
+    '\n    For a Project conversation: keep only thread starts in these groups (a thread shows its group).\n    '
     openThreads: NotRequired[Literal[True]]
     '\n    For a Project conversation: keep only open threads.\n    '
     buyerAccountId: NotRequired[int]
@@ -3136,6 +3144,8 @@ class GetInputKindBuyerRfp(TypedDict):
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
     threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
     '\n    For a Project conversation: keep only thread starts in these states.\n    '
+    threadGroups: NotRequired[list[Literal["needs_you", "working", "done"]]]
+    '\n    For a Project conversation: keep only thread starts in these groups (a thread shows its group).\n    '
     openThreads: NotRequired[Literal[True]]
     '\n    For a Project conversation: keep only open threads.\n    '
     buyerAccountId: NotRequired[int]
@@ -3287,6 +3297,8 @@ class GetInputKindCatalogAndEventSource(TypedDict):
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
     threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
     '\n    For a Project conversation: keep only thread starts in these states.\n    '
+    threadGroups: NotRequired[list[Literal["needs_you", "working", "done"]]]
+    '\n    For a Project conversation: keep only thread starts in these groups (a thread shows its group).\n    '
     openThreads: NotRequired[Literal[True]]
     '\n    For a Project conversation: keep only open threads.\n    '
     buyerAccountId: NotRequired[int]
@@ -3440,6 +3452,8 @@ class GetInputKindConnection(TypedDict):
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
     threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
     '\n    For a Project conversation: keep only thread starts in these states.\n    '
+    threadGroups: NotRequired[list[Literal["needs_you", "working", "done"]]]
+    '\n    For a Project conversation: keep only thread starts in these groups (a thread shows its group).\n    '
     openThreads: NotRequired[Literal[True]]
     '\n    For a Project conversation: keep only open threads.\n    '
     buyerAccountId: NotRequired[int]
@@ -3593,6 +3607,8 @@ class GetInputKindCreativeAndCreativeCollectionWithAdvertiserId(TypedDict):
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
     threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
     '\n    For a Project conversation: keep only thread starts in these states.\n    '
+    threadGroups: NotRequired[list[Literal["needs_you", "working", "done"]]]
+    '\n    For a Project conversation: keep only thread starts in these groups (a thread shows its group).\n    '
     openThreads: NotRequired[Literal[True]]
     '\n    For a Project conversation: keep only open threads.\n    '
     buyerAccountId: NotRequired[int]
@@ -3746,6 +3762,8 @@ class GetInputKindCreativeAndCreativeCollectionWithSourceId(TypedDict):
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
     threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
     '\n    For a Project conversation: keep only thread starts in these states.\n    '
+    threadGroups: NotRequired[list[Literal["needs_you", "working", "done"]]]
+    '\n    For a Project conversation: keep only thread starts in these groups (a thread shows its group).\n    '
     openThreads: NotRequired[Literal[True]]
     '\n    For a Project conversation: keep only open threads.\n    '
     buyerAccountId: NotRequired[int]
@@ -3897,6 +3915,8 @@ class GetInputKindCreativeEngine(TypedDict):
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
     threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
     '\n    For a Project conversation: keep only thread starts in these states.\n    '
+    threadGroups: NotRequired[list[Literal["needs_you", "working", "done"]]]
+    '\n    For a Project conversation: keep only thread starts in these groups (a thread shows its group).\n    '
     openThreads: NotRequired[Literal[True]]
     '\n    For a Project conversation: keep only open threads.\n    '
     buyerAccountId: NotRequired[int]
@@ -4048,6 +4068,8 @@ class GetInputKindCreativeFormat(TypedDict):
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
     threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
     '\n    For a Project conversation: keep only thread starts in these states.\n    '
+    threadGroups: NotRequired[list[Literal["needs_you", "working", "done"]]]
+    '\n    For a Project conversation: keep only thread starts in these groups (a thread shows its group).\n    '
     openThreads: NotRequired[Literal[True]]
     '\n    For a Project conversation: keep only open threads.\n    '
     buyerAccountId: NotRequired[int]
@@ -4199,6 +4221,8 @@ class GetInputKindCreativeSession(TypedDict):
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
     threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
     '\n    For a Project conversation: keep only thread starts in these states.\n    '
+    threadGroups: NotRequired[list[Literal["needs_you", "working", "done"]]]
+    '\n    For a Project conversation: keep only thread starts in these groups (a thread shows its group).\n    '
     openThreads: NotRequired[Literal[True]]
     '\n    For a Project conversation: keep only open threads.\n    '
     buyerAccountId: NotRequired[int]
@@ -4350,6 +4374,8 @@ class GetInputKindMaterial(TypedDict):
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
     threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
     '\n    For a Project conversation: keep only thread starts in these states.\n    '
+    threadGroups: NotRequired[list[Literal["needs_you", "working", "done"]]]
+    '\n    For a Project conversation: keep only thread starts in these groups (a thread shows its group).\n    '
     openThreads: NotRequired[Literal[True]]
     '\n    For a Project conversation: keep only open threads.\n    '
     buyerAccountId: NotRequired[int]
@@ -4503,6 +4529,8 @@ class GetInputKindProposal(TypedDict):
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
     threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
     '\n    For a Project conversation: keep only thread starts in these states.\n    '
+    threadGroups: NotRequired[list[Literal["needs_you", "working", "done"]]]
+    '\n    For a Project conversation: keep only thread starts in these groups (a thread shows its group).\n    '
     openThreads: NotRequired[Literal[True]]
     '\n    For a Project conversation: keep only open threads.\n    '
     buyerAccountId: NotRequired[int]
@@ -4656,6 +4684,8 @@ class GetInputKindSeller(TypedDict):
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
     threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
     '\n    For a Project conversation: keep only thread starts in these states.\n    '
+    threadGroups: NotRequired[list[Literal["needs_you", "working", "done"]]]
+    '\n    For a Project conversation: keep only thread starts in these groups (a thread shows its group).\n    '
     openThreads: NotRequired[Literal[True]]
     '\n    For a Project conversation: keep only open threads.\n    '
     buyerAccountId: NotRequired[int]
@@ -4809,6 +4839,8 @@ class GetInputKindSession(TypedDict):
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
     threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
     '\n    For a Project conversation: keep only thread starts in these states.\n    '
+    threadGroups: NotRequired[list[Literal["needs_you", "working", "done"]]]
+    '\n    For a Project conversation: keep only thread starts in these groups (a thread shows its group).\n    '
     openThreads: NotRequired[Literal[True]]
     '\n    For a Project conversation: keep only open threads.\n    '
     buyerAccountId: NotRequired[int]
@@ -4962,6 +4994,8 @@ class GetInputKindSourceOptionsAndListingAndMediaKitAndPlaybookAndBusinessRulesA
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
     threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
     '\n    For a Project conversation: keep only thread starts in these states.\n    '
+    threadGroups: NotRequired[list[Literal["needs_you", "working", "done"]]]
+    '\n    For a Project conversation: keep only thread starts in these groups (a thread shows its group).\n    '
     openThreads: NotRequired[Literal[True]]
     '\n    For a Project conversation: keep only open threads.\n    '
     buyerAccountId: NotRequired[int]
@@ -5129,6 +5163,8 @@ class GetInputKindWholesaleProductWithAdvertiserId(TypedDict):
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
     threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
     '\n    For a Project conversation: keep only thread starts in these states.\n    '
+    threadGroups: NotRequired[list[Literal["needs_you", "working", "done"]]]
+    '\n    For a Project conversation: keep only thread starts in these groups (a thread shows its group).\n    '
     openThreads: NotRequired[Literal[True]]
     '\n    For a Project conversation: keep only open threads.\n    '
     buyerAccountId: NotRequired[int]
@@ -5282,6 +5318,8 @@ class GetInputKindWholesaleProductWithSourceId(TypedDict):
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
     threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
     '\n    For a Project conversation: keep only thread starts in these states.\n    '
+    threadGroups: NotRequired[list[Literal["needs_you", "working", "done"]]]
+    '\n    For a Project conversation: keep only thread starts in these groups (a thread shows its group).\n    '
     openThreads: NotRequired[Literal[True]]
     '\n    For a Project conversation: keep only open threads.\n    '
     buyerAccountId: NotRequired[int]
@@ -5447,6 +5485,8 @@ class GetInputKindWorkItem(TypedDict):
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
     threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
     '\n    For a Project conversation: keep only thread starts in these states.\n    '
+    threadGroups: NotRequired[list[Literal["needs_you", "working", "done"]]]
+    '\n    For a Project conversation: keep only thread starts in these groups (a thread shows its group).\n    '
     openThreads: NotRequired[Literal[True]]
     '\n    For a Project conversation: keep only open threads.\n    '
     buyerAccountId: NotRequired[int]
@@ -5600,6 +5640,8 @@ class GetInputKindWorkspaceFile(TypedDict):
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
     threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
     '\n    For a Project conversation: keep only thread starts in these states.\n    '
+    threadGroups: NotRequired[list[Literal["needs_you", "working", "done"]]]
+    '\n    For a Project conversation: keep only thread starts in these groups (a thread shows its group).\n    '
     openThreads: NotRequired[Literal[True]]
     '\n    For a Project conversation: keep only open threads.\n    '
     buyerAccountId: NotRequired[int]
