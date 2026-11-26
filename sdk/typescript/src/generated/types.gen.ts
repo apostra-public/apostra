@@ -38776,6 +38776,10 @@ export type SaveProjectData = {
             custom_policies?: Array<unknown>;
         };
         /**
+         * Edit only, with bounds: the newest bounds revision from your last read of the Project, pendingBounds.revision when one waits, else bounds.revision. If the Project has moved to another revision since, the save is refused with CONFLICT and nothing changes; read the Project again and retry. Omit it to save without the check.
+         */
+        expectedRevision?: number;
+        /**
          * true stops this Project's lead at once. false resumes it, for an administrator signed in as themselves; the administrator who approved the bounds resumes at once, another needs approval. Send it with the id and only reason, idempotencyKey and dryRun.
          */
         autonomyPaused?: boolean;
@@ -39152,88 +39156,8 @@ export type SaveProjectSuccessObject = {
         phase?: never;
         isPaused?: never;
     }>;
-    bounds: {
-        flight: {
-            start: string;
-            end: string;
-            [key: string]: unknown;
-        };
-        channels?: {
-            required?: Array<SaveProjectSuccessObjectBoundsChannelsRequiredItem>;
-            allowed?: Array<SaveProjectSuccessObjectBoundsChannelsAllowedItem>;
-            mix_targets?: {
-                [key: string]: {
-                    min_pct?: number;
-                    max_pct?: number;
-                    [key: string]: unknown;
-                };
-            };
-            [key: string]: unknown;
-        };
-        countries?: Array<string>;
-        regions?: Array<string>;
-        policy_ids?: Array<string>;
-        policy_categories?: Array<string>;
-        approved_sellers?: Array<string> | null;
-        human_review_required?: boolean;
-        budget: {
-            total: number;
-            currency: string;
-            accounting_mode?: 'gross_commitment' | 'verified_net_cost';
-            per_seller_max_pct?: number;
-            /**
-             * An amount in `budget.currency`, not a percentage. 0 means every reallocation needs approval; `total` means unlimited.
-             */
-            reallocation_threshold: number;
-            allocations?: {
-                [key: string]: {
-                    amount?: number;
-                    max_pct?: number;
-                    [key: string]: unknown;
-                };
-            };
-            periods?: Array<{
-                budget_period_id: string;
-                start: string;
-                end: string;
-                amount: number;
-                [key: string]: unknown;
-            }>;
-            [key: string]: unknown;
-        };
-        /**
-         * The actions the lead may take without asking.
-         */
-        autonomousActions: Array<'move_budget' | 'change_pacing' | 'pause_or_resume_media_buy' | 'assign_approved_creative'>;
-        /**
-         * Daily action count and IU cap.
-         */
-        limits: {
-            /**
-             * Autonomous actions allowed per day.
-             */
-            maxActionsPerDay: number;
-            /**
-             * The Project's cap in IUs, or null for the account's spending cap alone.
-             */
-            iuBudget: number | null;
-        };
-        /**
-         * The media buys autonomous actions may change.
-         */
-        targets: {
-            /**
-             * Attached media buys the lead may change. A buy added later is a wider revision.
-             */
-            mediaBuyIds: Array<SaveProjectSuccessObjectBoundsTargetsMediaBuyIdsItem>;
-        };
-        revision: number;
-        approval: {
-            approvedBy: string | null;
-            approvedAt: string;
-            approvedRevision: number;
-        } | null;
-    } | null;
+    bounds: SaveProjectSuccessObjectBounds | null;
+    pendingBounds: SaveProjectSuccessObjectPendingBounds | null;
     state: 'draft' | 'active' | 'paused' | 'archived';
     pausedReason: 'stopped_by_person' | 'stopped_by_agent' | 'account_stopped' | 'approver_lost_authority' | 'write_outcome_unknown' | 'flight_ended' | 'unarchived' | null;
     archivedAt: string | null;
@@ -39397,6 +39321,89 @@ export type SaveProjectSuccessObjectAttachmentsItemPartners = Array<{
  */
 export type SaveProjectSuccessObjectAttachmentsItemRelation = 'subject' | 'request' | 'response' | 'evidence' | 'outcome';
 
+export type SaveProjectSuccessObjectBounds = {
+    flight: {
+        start: string;
+        end: string;
+        [key: string]: unknown;
+    };
+    channels?: {
+        required?: Array<SaveProjectSuccessObjectBoundsChannelsRequiredItem>;
+        allowed?: Array<SaveProjectSuccessObjectBoundsChannelsAllowedItem>;
+        mix_targets?: {
+            [key: string]: {
+                min_pct?: number;
+                max_pct?: number;
+                [key: string]: unknown;
+            };
+        };
+        [key: string]: unknown;
+    };
+    countries?: Array<string>;
+    regions?: Array<string>;
+    policy_ids?: Array<string>;
+    policy_categories?: Array<string>;
+    approved_sellers?: Array<string> | null;
+    human_review_required?: boolean;
+    budget: {
+        total: number;
+        currency: string;
+        accounting_mode?: 'gross_commitment' | 'verified_net_cost';
+        per_seller_max_pct?: number;
+        /**
+         * An amount in `budget.currency`, not a percentage. 0 means every reallocation needs approval; `total` means unlimited.
+         */
+        reallocation_threshold: number;
+        allocations?: {
+            [key: string]: {
+                amount?: number;
+                max_pct?: number;
+                [key: string]: unknown;
+            };
+        };
+        periods?: Array<{
+            budget_period_id: string;
+            start: string;
+            end: string;
+            amount: number;
+            [key: string]: unknown;
+        }>;
+        [key: string]: unknown;
+    };
+    /**
+     * The actions the lead may take without asking.
+     */
+    autonomousActions: Array<'move_budget' | 'change_pacing' | 'pause_or_resume_media_buy' | 'assign_approved_creative'>;
+    /**
+     * Daily action count and IU cap.
+     */
+    limits: {
+        /**
+         * Autonomous actions allowed per day.
+         */
+        maxActionsPerDay: number;
+        /**
+         * The Project's cap in IUs, or null for the account's spending cap alone.
+         */
+        iuBudget: number | null;
+    };
+    /**
+     * The media buys autonomous actions may change.
+     */
+    targets: {
+        /**
+         * Attached media buys the lead may change. A buy added later is a wider revision.
+         */
+        mediaBuyIds: Array<SaveProjectSuccessObjectBoundsTargetsMediaBuyIdsItem>;
+    };
+    revision: number;
+    approval: {
+        approvedBy: string | null;
+        approvedAt: string;
+        approvedRevision: number;
+    } | null;
+};
+
 export type SaveProjectSuccessObjectBoundsChannelsAllowedItem = 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
 
 export type SaveProjectSuccessObjectBoundsChannelsRequiredItem = 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
@@ -39404,6 +39411,95 @@ export type SaveProjectSuccessObjectBoundsChannelsRequiredItem = 'display' | 'ol
 export type SaveProjectSuccessObjectBoundsTargetsMediaBuyIdsItem = string;
 
 export type SaveProjectSuccessObjectLeadPrincipalId = string;
+
+export type SaveProjectSuccessObjectPendingBounds = {
+    flight: {
+        start: string;
+        end: string;
+        [key: string]: unknown;
+    };
+    channels?: {
+        required?: Array<SaveProjectSuccessObjectPendingBoundsChannelsRequiredItem>;
+        allowed?: Array<SaveProjectSuccessObjectPendingBoundsChannelsAllowedItem>;
+        mix_targets?: {
+            [key: string]: {
+                min_pct?: number;
+                max_pct?: number;
+                [key: string]: unknown;
+            };
+        };
+        [key: string]: unknown;
+    };
+    countries?: Array<string>;
+    regions?: Array<string>;
+    policy_ids?: Array<string>;
+    policy_categories?: Array<string>;
+    approved_sellers?: Array<string> | null;
+    human_review_required?: boolean;
+    budget: {
+        total: number;
+        currency: string;
+        accounting_mode?: 'gross_commitment' | 'verified_net_cost';
+        per_seller_max_pct?: number;
+        /**
+         * An amount in `budget.currency`, not a percentage. 0 means every reallocation needs approval; `total` means unlimited.
+         */
+        reallocation_threshold: number;
+        allocations?: {
+            [key: string]: {
+                amount?: number;
+                max_pct?: number;
+                [key: string]: unknown;
+            };
+        };
+        periods?: Array<{
+            budget_period_id: string;
+            start: string;
+            end: string;
+            amount: number;
+            [key: string]: unknown;
+        }>;
+        [key: string]: unknown;
+    };
+    /**
+     * The actions the lead may take without asking.
+     */
+    autonomousActions: Array<'move_budget' | 'change_pacing' | 'pause_or_resume_media_buy' | 'assign_approved_creative'>;
+    /**
+     * Daily action count and IU cap.
+     */
+    limits: {
+        /**
+         * Autonomous actions allowed per day.
+         */
+        maxActionsPerDay: number;
+        /**
+         * The Project's cap in IUs, or null for the account's spending cap alone.
+         */
+        iuBudget: number | null;
+    };
+    /**
+     * The media buys autonomous actions may change.
+     */
+    targets: {
+        /**
+         * Attached media buys the lead may change. A buy added later is a wider revision.
+         */
+        mediaBuyIds: Array<SaveProjectSuccessObjectPendingBoundsTargetsMediaBuyIdsItem>;
+    };
+    revision: number;
+    approval: {
+        approvedBy: string | null;
+        approvedAt: string;
+        approvedRevision: number;
+    } | null;
+};
+
+export type SaveProjectSuccessObjectPendingBoundsChannelsAllowedItem = 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+
+export type SaveProjectSuccessObjectPendingBoundsChannelsRequiredItem = 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+
+export type SaveProjectSuccessObjectPendingBoundsTargetsMediaBuyIdsItem = string;
 
 export type SaveProjectSuccessProject = {
     id: string;
@@ -39518,88 +39614,8 @@ export type SaveProjectSuccessProject = {
         phase?: never;
         isPaused?: never;
     }>;
-    bounds: {
-        flight: {
-            start: string;
-            end: string;
-            [key: string]: unknown;
-        };
-        channels?: {
-            required?: Array<SaveProjectSuccessProjectBoundsChannelsRequiredItem>;
-            allowed?: Array<SaveProjectSuccessProjectBoundsChannelsAllowedItem>;
-            mix_targets?: {
-                [key: string]: {
-                    min_pct?: number;
-                    max_pct?: number;
-                    [key: string]: unknown;
-                };
-            };
-            [key: string]: unknown;
-        };
-        countries?: Array<string>;
-        regions?: Array<string>;
-        policy_ids?: Array<string>;
-        policy_categories?: Array<string>;
-        approved_sellers?: Array<string> | null;
-        human_review_required?: boolean;
-        budget: {
-            total: number;
-            currency: string;
-            accounting_mode?: 'gross_commitment' | 'verified_net_cost';
-            per_seller_max_pct?: number;
-            /**
-             * An amount in `budget.currency`, not a percentage. 0 means every reallocation needs approval; `total` means unlimited.
-             */
-            reallocation_threshold: number;
-            allocations?: {
-                [key: string]: {
-                    amount?: number;
-                    max_pct?: number;
-                    [key: string]: unknown;
-                };
-            };
-            periods?: Array<{
-                budget_period_id: string;
-                start: string;
-                end: string;
-                amount: number;
-                [key: string]: unknown;
-            }>;
-            [key: string]: unknown;
-        };
-        /**
-         * The actions the lead may take without asking.
-         */
-        autonomousActions: Array<'move_budget' | 'change_pacing' | 'pause_or_resume_media_buy' | 'assign_approved_creative'>;
-        /**
-         * Daily action count and IU cap.
-         */
-        limits: {
-            /**
-             * Autonomous actions allowed per day.
-             */
-            maxActionsPerDay: number;
-            /**
-             * The Project's cap in IUs, or null for the account's spending cap alone.
-             */
-            iuBudget: number | null;
-        };
-        /**
-         * The media buys autonomous actions may change.
-         */
-        targets: {
-            /**
-             * Attached media buys the lead may change. A buy added later is a wider revision.
-             */
-            mediaBuyIds: Array<SaveProjectSuccessProjectBoundsTargetsMediaBuyIdsItem>;
-        };
-        revision: number;
-        approval: {
-            approvedBy: string | null;
-            approvedAt: string;
-            approvedRevision: number;
-        } | null;
-    } | null;
+    bounds: SaveProjectSuccessProjectBounds | null;
+    pendingBounds: SaveProjectSuccessProjectPendingBounds | null;
     state: 'draft' | 'active' | 'paused' | 'archived';
     pausedReason: 'stopped_by_person' | 'stopped_by_agent' | 'account_stopped' | 'approver_lost_authority' | 'write_outcome_unknown' | 'flight_ended' | 'unarchived' | null;
     archivedAt: string | null;
@@ -39763,6 +39779,89 @@ export type SaveProjectSuccessProjectAttachmentsItemPartners = Array<{
  */
 export type SaveProjectSuccessProjectAttachmentsItemRelation = 'subject' | 'request' | 'response' | 'evidence' | 'outcome';
 
+export type SaveProjectSuccessProjectBounds = {
+    flight: {
+        start: string;
+        end: string;
+        [key: string]: unknown;
+    };
+    channels?: {
+        required?: Array<SaveProjectSuccessProjectBoundsChannelsRequiredItem>;
+        allowed?: Array<SaveProjectSuccessProjectBoundsChannelsAllowedItem>;
+        mix_targets?: {
+            [key: string]: {
+                min_pct?: number;
+                max_pct?: number;
+                [key: string]: unknown;
+            };
+        };
+        [key: string]: unknown;
+    };
+    countries?: Array<string>;
+    regions?: Array<string>;
+    policy_ids?: Array<string>;
+    policy_categories?: Array<string>;
+    approved_sellers?: Array<string> | null;
+    human_review_required?: boolean;
+    budget: {
+        total: number;
+        currency: string;
+        accounting_mode?: 'gross_commitment' | 'verified_net_cost';
+        per_seller_max_pct?: number;
+        /**
+         * An amount in `budget.currency`, not a percentage. 0 means every reallocation needs approval; `total` means unlimited.
+         */
+        reallocation_threshold: number;
+        allocations?: {
+            [key: string]: {
+                amount?: number;
+                max_pct?: number;
+                [key: string]: unknown;
+            };
+        };
+        periods?: Array<{
+            budget_period_id: string;
+            start: string;
+            end: string;
+            amount: number;
+            [key: string]: unknown;
+        }>;
+        [key: string]: unknown;
+    };
+    /**
+     * The actions the lead may take without asking.
+     */
+    autonomousActions: Array<'move_budget' | 'change_pacing' | 'pause_or_resume_media_buy' | 'assign_approved_creative'>;
+    /**
+     * Daily action count and IU cap.
+     */
+    limits: {
+        /**
+         * Autonomous actions allowed per day.
+         */
+        maxActionsPerDay: number;
+        /**
+         * The Project's cap in IUs, or null for the account's spending cap alone.
+         */
+        iuBudget: number | null;
+    };
+    /**
+     * The media buys autonomous actions may change.
+     */
+    targets: {
+        /**
+         * Attached media buys the lead may change. A buy added later is a wider revision.
+         */
+        mediaBuyIds: Array<SaveProjectSuccessProjectBoundsTargetsMediaBuyIdsItem>;
+    };
+    revision: number;
+    approval: {
+        approvedBy: string | null;
+        approvedAt: string;
+        approvedRevision: number;
+    } | null;
+};
+
 export type SaveProjectSuccessProjectBoundsChannelsAllowedItem = 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
 
 export type SaveProjectSuccessProjectBoundsChannelsRequiredItem = 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
@@ -39770,6 +39869,95 @@ export type SaveProjectSuccessProjectBoundsChannelsRequiredItem = 'display' | 'o
 export type SaveProjectSuccessProjectBoundsTargetsMediaBuyIdsItem = string;
 
 export type SaveProjectSuccessProjectLeadPrincipalId = string;
+
+export type SaveProjectSuccessProjectPendingBounds = {
+    flight: {
+        start: string;
+        end: string;
+        [key: string]: unknown;
+    };
+    channels?: {
+        required?: Array<SaveProjectSuccessProjectPendingBoundsChannelsRequiredItem>;
+        allowed?: Array<SaveProjectSuccessProjectPendingBoundsChannelsAllowedItem>;
+        mix_targets?: {
+            [key: string]: {
+                min_pct?: number;
+                max_pct?: number;
+                [key: string]: unknown;
+            };
+        };
+        [key: string]: unknown;
+    };
+    countries?: Array<string>;
+    regions?: Array<string>;
+    policy_ids?: Array<string>;
+    policy_categories?: Array<string>;
+    approved_sellers?: Array<string> | null;
+    human_review_required?: boolean;
+    budget: {
+        total: number;
+        currency: string;
+        accounting_mode?: 'gross_commitment' | 'verified_net_cost';
+        per_seller_max_pct?: number;
+        /**
+         * An amount in `budget.currency`, not a percentage. 0 means every reallocation needs approval; `total` means unlimited.
+         */
+        reallocation_threshold: number;
+        allocations?: {
+            [key: string]: {
+                amount?: number;
+                max_pct?: number;
+                [key: string]: unknown;
+            };
+        };
+        periods?: Array<{
+            budget_period_id: string;
+            start: string;
+            end: string;
+            amount: number;
+            [key: string]: unknown;
+        }>;
+        [key: string]: unknown;
+    };
+    /**
+     * The actions the lead may take without asking.
+     */
+    autonomousActions: Array<'move_budget' | 'change_pacing' | 'pause_or_resume_media_buy' | 'assign_approved_creative'>;
+    /**
+     * Daily action count and IU cap.
+     */
+    limits: {
+        /**
+         * Autonomous actions allowed per day.
+         */
+        maxActionsPerDay: number;
+        /**
+         * The Project's cap in IUs, or null for the account's spending cap alone.
+         */
+        iuBudget: number | null;
+    };
+    /**
+     * The media buys autonomous actions may change.
+     */
+    targets: {
+        /**
+         * Attached media buys the lead may change. A buy added later is a wider revision.
+         */
+        mediaBuyIds: Array<SaveProjectSuccessProjectPendingBoundsTargetsMediaBuyIdsItem>;
+    };
+    revision: number;
+    approval: {
+        approvedBy: string | null;
+        approvedAt: string;
+        approvedRevision: number;
+    } | null;
+};
+
+export type SaveProjectSuccessProjectPendingBoundsChannelsAllowedItem = 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+
+export type SaveProjectSuccessProjectPendingBoundsChannelsRequiredItem = 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+
+export type SaveProjectSuccessProjectPendingBoundsTargetsMediaBuyIdsItem = string;
 
 export type SavePropertyListData = {
     body: unknown & {
