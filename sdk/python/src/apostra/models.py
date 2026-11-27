@@ -11814,6 +11814,108 @@ class SaveAccountSuccessSaveAccountObjectSettings(TypedDict):
 
 SaveAccountResultObjectSettings: TypeAlias = SaveAccountSuccessSaveAccountObjectSettings
 
+class SaveAdvertiserAccessInput(TypedDict):
+    advertiserId: str
+    '\n    The advertiser, from search kind advertiser.\n    '
+    invite: NotRequired[SaveAdvertiserAccessInputInvite]
+    '\n    Invite a person. Send exactly one request per call.\n    '
+    accessRequest: NotRequired[SaveAdvertiserAccessInputAccessRequest]
+    '\n    Approve or deny a client access request.\n    '
+    member: NotRequired[SaveAdvertiserAccessInputMember]
+    '\n    Change one client: role, suspend, reactivate or remove.\n    '
+    expectedRevision: NotRequired[str]
+    '\n    The client revision you read. A newer one is refused. Not for invite.\n    '
+    expectedAccountId: NotRequired[int | str]
+    '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
+    accountId: NotRequired[int | str]
+    '\n    Apostra accountId this call runs in, from get_status.\n    '
+
+class SaveAdvertiserAccessInputAccessRequest(TypedDict):
+    id: SaveAdvertiserAccessRequestAccessRequestId
+    decision: Literal["approve", "deny"]
+    '\n    approve gives the client their role; deny declines.\n    '
+
+class SaveAdvertiserAccessInputInvite(TypedDict):
+    email: str
+    '\n    The one person to invite.\n    '
+    role: SaveAdvertiserAccessRequestInviteRole
+    '\n    What the client can do in this advertiser.\n    '
+    operatorDomain: str
+    '\n    The client company domain, for example example.com.\n    '
+    expectedEligibilityRevision: NotRequired[str]
+    '\n    invite.eligibilityRevision from get. A newer one is refused.\n    '
+
+class SaveAdvertiserAccessInputMember(TypedDict):
+    id: SaveAdvertiserAccessRequestMemberId
+    role: NotRequired[SaveAdvertiserAccessRequestMemberRole]
+    '\n    Set the role. Send one of role, suspended or remove.\n    '
+    suspended: NotRequired[bool]
+    '\n    true suspends the client; false reactivates them.\n    '
+    remove: NotRequired[Literal[True]]
+    '\n    true ends the client access.\n    '
+
+SaveAdvertiserAccessRequestAccessRequestId: TypeAlias = str
+
+SaveAdvertiserAccessRequestInviteRole: TypeAlias = Literal["advertiser-viewer", "advertiser-editor", "advertiser-admin"]
+
+SaveAdvertiserAccessRequestMemberId: TypeAlias = str
+
+SaveAdvertiserAccessRequestMemberRole: TypeAlias = Literal["advertiser-viewer", "advertiser-editor", "advertiser-admin"]
+
+class SaveAdvertiserAccessResultActionApprovalRequired(TypedDict):
+    action: Literal["approval_required"]
+    message: str
+    approval: SaveAdvertiserAccessSuccessAgentApproval
+    approvers: NotRequired[list[SaveAdvertiserAccessResultActionApprovalRequiredApproversItem]]
+    '\n    The account\'s direct administrators who can approve, when the caller cannot (Scope3 staff, or an agent or service token acting with no person present). email is null when no person is behind the call. Absent when the caller can approve; never empty.\n    '
+    idempotencyKey: str
+
+class SaveAdvertiserAccessResultActionApprovalRequiredApproversItem(TypedDict):
+    name: str | None
+    email: str | None
+
+class SaveAdvertiserAccessResultActionInviteAndDecideAndChangeRole(TypedDict):
+    action: Literal["invite", "decide", "change_role"]
+    advertiserId: NotRequired[str]
+    admissionId: NotRequired[str]
+    state: NotRequired[str]
+    roleSlug: NotRequired[Literal["advertiser-viewer", "advertiser-editor", "advertiser-admin"]]
+    revision: NotRequired[str]
+    deliveryState: NotRequired[Literal["requested", "sent", "failed", "cancelled"]]
+    replay: NotRequired[bool]
+
+class SaveAdvertiserAccessResultActionUnchanged(TypedDict):
+    action: Literal["unchanged"]
+    advertiserId: str
+    admissionId: str
+    message: str
+
+SaveAdvertiserAccessResult: TypeAlias = "SaveAdvertiserAccessResultActionInviteAndDecideAndChangeRole | SaveAdvertiserAccessResultActionApprovalRequired | SaveAdvertiserAccessResultActionUnchanged"
+
+class SaveAdvertiserAccessSuccessAgentApproval(TypedDict):
+    id: str
+    '\n    Approval id.\n    '
+    kind: str
+    '\n    Kind of sensitive action, for example `buyer_child_account.create`.\n    '
+    state: Literal["pending", "executing", "succeeded", "failed", "rejected", "expired"]
+    '\n    `pending` waits for a person; `executing` was approved and is running; `succeeded`, `failed`, `rejected` and `expired` are final.\n    '
+    targetCustomerId: str
+    '\n    Account the action applies to.\n    '
+    requiredRole: Literal["ADMIN", "SUPER_ADMIN"] | None
+    '\n    Role the approver must hold on the account.\n    '
+    summary: str | None
+    '\n    What will happen, in one line. Null once the approval is final.\n    '
+    url: str
+    '\n    Page on our site where a signed-in person approves or rejects the request.\n    '
+    createdAt: str
+    expiresAt: str
+    decidedAt: str | None
+    completedAt: str | None
+    resultReference: dict[str, str | float | bool] | None
+    '\n    Reference to the result once succeeded.\n    '
+    failureCode: str | None
+    '\n    Reason code when the action failed.\n    '
+
 class SaveAdvertiserGrantInput(TypedDict):
     action: Literal["invite", "accept", "reject", "revoke"]
     '\n    invite creates a reviewed exact scope; invited org accepts/rejects; grantor revokes.\n    '
@@ -35754,6 +35856,8 @@ RequestSellerReportingUpdateError: TypeAlias = "V3ToolErrorResponse"
 ReviewBuyerChildAccountError: TypeAlias = "V3ToolErrorResponse"
 
 SaveAccountError: TypeAlias = "V3ToolErrorResponse"
+
+SaveAdvertiserAccessError: TypeAlias = "V3ToolErrorResponse"
 
 SaveAdvertiserError: TypeAlias = "V3ToolErrorResponse"
 
