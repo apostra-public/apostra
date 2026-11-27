@@ -10514,7 +10514,7 @@ class OpenCampaignsPageSuccessPageHumanHandoffUnavailableAccount(TypedDict):
 
 class OpenCanvasPageInput(TypedDict):
     projectId: str
-    '\n    The Project whose canvas to open.\n    '
+    '\n    The Project.\n    '
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
 

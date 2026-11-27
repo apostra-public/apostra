@@ -15805,7 +15805,7 @@ export type OpenCampaignsPageSuccessPageHumanHandoffUnavailable = {
 export type OpenCanvasPageData = {
     body: {
         /**
-         * The Project whose canvas to open.
+         * The Project.
          */
         projectId: string;
         /**
