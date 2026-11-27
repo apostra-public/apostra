@@ -2507,11 +2507,11 @@ class GetDeliverySuccessVendorLabel(TypedDict):
 class GetInputKindAdvertiserAccess(TypedDict):
     kind: Literal["advertiser_access"]
     after: NotRequired[str]
-    '\n    For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.\n    '
+    '\n    For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the previous read.\n    '
     through: NotRequired[str]
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
-    '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    '\n    For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.\n    '
     threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
     '\n    For a Project conversation: keep only thread starts in these states.\n    '
     threadGroups: NotRequired[list[Literal["needs_you", "working", "done"]]]
@@ -2662,11 +2662,11 @@ class GetInputKindAgentAndBuyerAgentAndProjectAndSkillAndInventorySourceAndAdver
     id: str
     '\n    The id from search or an earlier result; never guess one. For skill, an exact id the user gave also works. A brand\'s id is its domain, or domain/brand_id. Omit it for singleton kinds, audience, and a property_list report read by reportId. A work_item also needs workItemKind.\n    '
     after: NotRequired[str]
-    '\n    For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.\n    '
+    '\n    For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the previous read.\n    '
     through: NotRequired[str]
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
-    '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    '\n    For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.\n    '
     threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
     '\n    For a Project conversation: keep only thread starts in these states.\n    '
     threadGroups: NotRequired[list[Literal["needs_you", "working", "done"]]]
@@ -2831,11 +2831,11 @@ class GetInputKindAgentRecord(TypedDict):
     id: str
     '\n    The id from search or an earlier result; never guess one. For skill, an exact id the user gave also works. A brand\'s id is its domain, or domain/brand_id. Omit it for singleton kinds, audience, and a property_list report read by reportId. A work_item also needs workItemKind.\n    '
     after: NotRequired[str]
-    '\n    For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.\n    '
+    '\n    For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the previous read.\n    '
     through: NotRequired[str]
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
-    '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    '\n    For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.\n    '
     threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
     '\n    For a Project conversation: keep only thread starts in these states.\n    '
     threadGroups: NotRequired[list[Literal["needs_you", "working", "done"]]]
@@ -2982,11 +2982,11 @@ class GetInputKindAgentRecordOptionsSelect(TypedDict):
 class GetInputKindAudience(TypedDict):
     kind: Literal["audience"]
     after: NotRequired[str]
-    '\n    For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.\n    '
+    '\n    For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the previous read.\n    '
     through: NotRequired[str]
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
-    '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    '\n    For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.\n    '
     threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
     '\n    For a Project conversation: keep only thread starts in these states.\n    '
     threadGroups: NotRequired[list[Literal["needs_you", "working", "done"]]]
@@ -3137,11 +3137,11 @@ class GetInputKindBuyerRfp(TypedDict):
     id: str
     '\n    The id from search or an earlier result; never guess one. For skill, an exact id the user gave also works. A brand\'s id is its domain, or domain/brand_id. Omit it for singleton kinds, audience, and a property_list report read by reportId. A work_item also needs workItemKind.\n    '
     after: NotRequired[str]
-    '\n    For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.\n    '
+    '\n    For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the previous read.\n    '
     through: NotRequired[str]
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
-    '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    '\n    For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.\n    '
     threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
     '\n    For a Project conversation: keep only thread starts in these states.\n    '
     threadGroups: NotRequired[list[Literal["needs_you", "working", "done"]]]
@@ -3290,11 +3290,11 @@ class GetInputKindCatalogAndEventSource(TypedDict):
     id: str
     '\n    The id from search or an earlier result; never guess one. For skill, an exact id the user gave also works. A brand\'s id is its domain, or domain/brand_id. Omit it for singleton kinds, audience, and a property_list report read by reportId. A work_item also needs workItemKind.\n    '
     after: NotRequired[str]
-    '\n    For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.\n    '
+    '\n    For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the previous read.\n    '
     through: NotRequired[str]
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
-    '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    '\n    For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.\n    '
     threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
     '\n    For a Project conversation: keep only thread starts in these states.\n    '
     threadGroups: NotRequired[list[Literal["needs_you", "working", "done"]]]
@@ -3445,11 +3445,11 @@ class GetInputKindConnection(TypedDict):
     id: str
     '\n    The id from search or an earlier result; never guess one. For skill, an exact id the user gave also works. A brand\'s id is its domain, or domain/brand_id. Omit it for singleton kinds, audience, and a property_list report read by reportId. A work_item also needs workItemKind.\n    '
     after: NotRequired[str]
-    '\n    For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.\n    '
+    '\n    For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the previous read.\n    '
     through: NotRequired[str]
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
-    '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    '\n    For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.\n    '
     threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
     '\n    For a Project conversation: keep only thread starts in these states.\n    '
     threadGroups: NotRequired[list[Literal["needs_you", "working", "done"]]]
@@ -3600,11 +3600,11 @@ class GetInputKindCreativeAndCreativeCollectionWithAdvertiserId(TypedDict):
     id: str
     '\n    The id from search or an earlier result; never guess one. For skill, an exact id the user gave also works. A brand\'s id is its domain, or domain/brand_id. Omit it for singleton kinds, audience, and a property_list report read by reportId. A work_item also needs workItemKind.\n    '
     after: NotRequired[str]
-    '\n    For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.\n    '
+    '\n    For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the previous read.\n    '
     through: NotRequired[str]
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
-    '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    '\n    For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.\n    '
     threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
     '\n    For a Project conversation: keep only thread starts in these states.\n    '
     threadGroups: NotRequired[list[Literal["needs_you", "working", "done"]]]
@@ -3755,11 +3755,11 @@ class GetInputKindCreativeAndCreativeCollectionWithSourceId(TypedDict):
     id: str
     '\n    The id from search or an earlier result; never guess one. For skill, an exact id the user gave also works. A brand\'s id is its domain, or domain/brand_id. Omit it for singleton kinds, audience, and a property_list report read by reportId. A work_item also needs workItemKind.\n    '
     after: NotRequired[str]
-    '\n    For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.\n    '
+    '\n    For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the previous read.\n    '
     through: NotRequired[str]
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
-    '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    '\n    For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.\n    '
     threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
     '\n    For a Project conversation: keep only thread starts in these states.\n    '
     threadGroups: NotRequired[list[Literal["needs_you", "working", "done"]]]
@@ -3908,11 +3908,11 @@ class GetInputKindCreativeEngine(TypedDict):
     id: str
     '\n    The id from search or an earlier result; never guess one. For skill, an exact id the user gave also works. A brand\'s id is its domain, or domain/brand_id. Omit it for singleton kinds, audience, and a property_list report read by reportId. A work_item also needs workItemKind.\n    '
     after: NotRequired[str]
-    '\n    For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.\n    '
+    '\n    For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the previous read.\n    '
     through: NotRequired[str]
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
-    '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    '\n    For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.\n    '
     threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
     '\n    For a Project conversation: keep only thread starts in these states.\n    '
     threadGroups: NotRequired[list[Literal["needs_you", "working", "done"]]]
@@ -4061,11 +4061,11 @@ class GetInputKindCreativeFormat(TypedDict):
     id: str
     '\n    The id from search or an earlier result; never guess one. For skill, an exact id the user gave also works. A brand\'s id is its domain, or domain/brand_id. Omit it for singleton kinds, audience, and a property_list report read by reportId. A work_item also needs workItemKind.\n    '
     after: NotRequired[str]
-    '\n    For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.\n    '
+    '\n    For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the previous read.\n    '
     through: NotRequired[str]
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
-    '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    '\n    For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.\n    '
     threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
     '\n    For a Project conversation: keep only thread starts in these states.\n    '
     threadGroups: NotRequired[list[Literal["needs_you", "working", "done"]]]
@@ -4214,11 +4214,11 @@ class GetInputKindCreativeSession(TypedDict):
     id: str
     '\n    The id from search or an earlier result; never guess one. For skill, an exact id the user gave also works. A brand\'s id is its domain, or domain/brand_id. Omit it for singleton kinds, audience, and a property_list report read by reportId. A work_item also needs workItemKind.\n    '
     after: NotRequired[str]
-    '\n    For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.\n    '
+    '\n    For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the previous read.\n    '
     through: NotRequired[str]
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
-    '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    '\n    For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.\n    '
     threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
     '\n    For a Project conversation: keep only thread starts in these states.\n    '
     threadGroups: NotRequired[list[Literal["needs_you", "working", "done"]]]
@@ -4367,11 +4367,11 @@ class GetInputKindMaterial(TypedDict):
     id: str
     '\n    The id from search or an earlier result; never guess one. For skill, an exact id the user gave also works. A brand\'s id is its domain, or domain/brand_id. Omit it for singleton kinds, audience, and a property_list report read by reportId. A work_item also needs workItemKind.\n    '
     after: NotRequired[str]
-    '\n    For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.\n    '
+    '\n    For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the previous read.\n    '
     through: NotRequired[str]
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
-    '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    '\n    For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.\n    '
     threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
     '\n    For a Project conversation: keep only thread starts in these states.\n    '
     threadGroups: NotRequired[list[Literal["needs_you", "working", "done"]]]
@@ -4522,11 +4522,11 @@ class GetInputKindProposal(TypedDict):
     id: str
     '\n    The id from search or an earlier result; never guess one. For skill, an exact id the user gave also works. A brand\'s id is its domain, or domain/brand_id. Omit it for singleton kinds, audience, and a property_list report read by reportId. A work_item also needs workItemKind.\n    '
     after: NotRequired[str]
-    '\n    For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.\n    '
+    '\n    For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the previous read.\n    '
     through: NotRequired[str]
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
-    '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    '\n    For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.\n    '
     threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
     '\n    For a Project conversation: keep only thread starts in these states.\n    '
     threadGroups: NotRequired[list[Literal["needs_you", "working", "done"]]]
@@ -4677,11 +4677,11 @@ class GetInputKindSeller(TypedDict):
     id: NotRequired[str]
     '\n    The id from search or an earlier result; never guess one. For skill, an exact id the user gave also works. A brand\'s id is its domain, or domain/brand_id. Omit it for singleton kinds, audience, and a property_list report read by reportId. A work_item also needs workItemKind.\n    '
     after: NotRequired[str]
-    '\n    For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.\n    '
+    '\n    For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the previous read.\n    '
     through: NotRequired[str]
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
-    '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    '\n    For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.\n    '
     threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
     '\n    For a Project conversation: keep only thread starts in these states.\n    '
     threadGroups: NotRequired[list[Literal["needs_you", "working", "done"]]]
@@ -4832,11 +4832,11 @@ class GetInputKindSession(TypedDict):
     id: str
     '\n    The id from search or an earlier result; never guess one. For skill, an exact id the user gave also works. A brand\'s id is its domain, or domain/brand_id. Omit it for singleton kinds, audience, and a property_list report read by reportId. A work_item also needs workItemKind.\n    '
     after: NotRequired[str]
-    '\n    For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.\n    '
+    '\n    For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the previous read.\n    '
     through: NotRequired[str]
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
-    '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    '\n    For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.\n    '
     threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
     '\n    For a Project conversation: keep only thread starts in these states.\n    '
     threadGroups: NotRequired[list[Literal["needs_you", "working", "done"]]]
@@ -4987,11 +4987,11 @@ class GetInputKindSourceOptionsAndListingAndMediaKitAndPlaybookAndBusinessRulesA
     id: NotRequired[str]
     '\n    The id from search or an earlier result; never guess one. For skill, an exact id the user gave also works. A brand\'s id is its domain, or domain/brand_id. Omit it for singleton kinds, audience, and a property_list report read by reportId. A work_item also needs workItemKind.\n    '
     after: NotRequired[str]
-    '\n    For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.\n    '
+    '\n    For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the previous read.\n    '
     through: NotRequired[str]
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
-    '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    '\n    For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.\n    '
     threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
     '\n    For a Project conversation: keep only thread starts in these states.\n    '
     threadGroups: NotRequired[list[Literal["needs_you", "working", "done"]]]
@@ -5156,11 +5156,11 @@ class GetInputKindWholesaleProductWithAdvertiserId(TypedDict):
     id: str
     '\n    The id from search or an earlier result; never guess one. For skill, an exact id the user gave also works. A brand\'s id is its domain, or domain/brand_id. Omit it for singleton kinds, audience, and a property_list report read by reportId. A work_item also needs workItemKind.\n    '
     after: NotRequired[str]
-    '\n    For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.\n    '
+    '\n    For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the previous read.\n    '
     through: NotRequired[str]
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
-    '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    '\n    For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.\n    '
     threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
     '\n    For a Project conversation: keep only thread starts in these states.\n    '
     threadGroups: NotRequired[list[Literal["needs_you", "working", "done"]]]
@@ -5311,11 +5311,11 @@ class GetInputKindWholesaleProductWithSourceId(TypedDict):
     id: str
     '\n    The id from search or an earlier result; never guess one. For skill, an exact id the user gave also works. A brand\'s id is its domain, or domain/brand_id. Omit it for singleton kinds, audience, and a property_list report read by reportId. A work_item also needs workItemKind.\n    '
     after: NotRequired[str]
-    '\n    For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.\n    '
+    '\n    For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the previous read.\n    '
     through: NotRequired[str]
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
-    '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    '\n    For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.\n    '
     threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
     '\n    For a Project conversation: keep only thread starts in these states.\n    '
     threadGroups: NotRequired[list[Literal["needs_you", "working", "done"]]]
@@ -5478,11 +5478,11 @@ class GetInputKindWorkItem(TypedDict):
     id: str
     '\n    The id from search or an earlier result; never guess one. For skill, an exact id the user gave also works. A brand\'s id is its domain, or domain/brand_id. Omit it for singleton kinds, audience, and a property_list report read by reportId. A work_item also needs workItemKind.\n    '
     after: NotRequired[str]
-    '\n    For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.\n    '
+    '\n    For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the previous read.\n    '
     through: NotRequired[str]
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
-    '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    '\n    For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.\n    '
     threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
     '\n    For a Project conversation: keep only thread starts in these states.\n    '
     threadGroups: NotRequired[list[Literal["needs_you", "working", "done"]]]
@@ -5633,11 +5633,11 @@ class GetInputKindWorkspaceFile(TypedDict):
     id: str
     '\n    The id from search or an earlier result; never guess one. For skill, an exact id the user gave also works. A brand\'s id is its domain, or domain/brand_id. Omit it for singleton kinds, audience, and a property_list report read by reportId. A work_item also needs workItemKind.\n    '
     after: NotRequired[str]
-    '\n    For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.\n    '
+    '\n    For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the previous read.\n    '
     through: NotRequired[str]
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
-    '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    '\n    For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.\n    '
     threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
     '\n    For a Project conversation: keep only thread starts in these states.\n    '
     threadGroups: NotRequired[list[Literal["needs_you", "working", "done"]]]
@@ -14470,6 +14470,8 @@ class SaveBuyerRfpSuccessBuyerRfp(TypedDict):
     duplicatedFromRfpId: str | None
     createdAt: str
     updatedAt: str
+    sellers: NotRequired[list[SaveBuyerRfpSuccessBuyerRfpSellersItem]]
+    sellersNextAfter: NotRequired[str]
 
 class SaveBuyerRfpSuccessBuyerRfpBudgetRange(TypedDict):
     min: NotRequired[SaveBuyerRfpSuccessBuyerRfpBudgetRangeMin]
@@ -14495,11 +14497,163 @@ class SaveBuyerRfpSuccessBuyerRfpGeo(TypedDict):
     regions: NotRequired[list[str]]
     '\n    ISO 3166-2 subdivision codes, such as US-CA.\n    '
 
+class SaveBuyerRfpSuccessBuyerRfpSellersItem(TypedDict):
+    sellerAccountId: NotRequired[SaveBuyerRfpSuccessBuyerRfpSellersItemSellerAccountId]
+    '\n    The seller Account id: the Account that owns this seller. Send it as sellerAccountId.\n    '
+    name: str
+    status: Literal["open", "closed"] | None
+    '\n    The seller’s AdCP opportunity status; null when left out.\n    '
+    closeReason: str | None
+    responseDeadline: str | None
+    leftOutReason: Literal["wholesale_only"] | None
+    outcome: SaveBuyerRfpSuccessBuyerRfpSellersItemOutcomeValue | None
+    '\n    The round result; its status describes the seller’s answer, not the opportunity.\n    '
+
+SaveBuyerRfpSuccessBuyerRfpSellersItemOutcomeProductsItemSellerAccountId: TypeAlias = int
+
+SaveBuyerRfpSuccessBuyerRfpSellersItemOutcomeSellerAccountId: TypeAlias = int
+
+class SaveBuyerRfpSuccessBuyerRfpSellersItemOutcomeStatusQuotedAndProductsAndFailedInclusionPropertyList(TypedDict):
+    filterSupported: bool
+    receiptMatchedCount: NotRequired[int]
+    receiptUnmatchedCount: NotRequired[int]
+    sellerReportedNoMatch: NotRequired[bool]
+    incomplete: NotRequired[bool]
+
+class SaveBuyerRfpSuccessBuyerRfpSellersItemOutcomeStatusQuotedAndProductsAndFailedOutcomeKindFailed(TypedDict):
+    kind: Literal["failed"]
+    reasonCode: Literal["timeout", "transport", "protocol"]
+
+class SaveBuyerRfpSuccessBuyerRfpSellersItemOutcomeStatusQuotedAndProductsAndFailedOutcomeKindLocalRefusal(TypedDict):
+    kind: Literal["local_refusal"]
+    code: str
+    message: str
+    suggestion: NotRequired[str]
+
+class SaveBuyerRfpSuccessBuyerRfpSellersItemOutcomeStatusQuotedAndProductsAndFailedOutcomeKindNoInventoryForRequest(TypedDict):
+    kind: Literal["no_inventory_for_request"]
+
+class SaveBuyerRfpSuccessBuyerRfpSellersItemOutcomeStatusQuotedAndProductsAndFailedOutcomeKindNoMatchingProducts(TypedDict):
+    kind: Literal["no_matching_products"]
+    reason: NotRequired[str]
+    suggestions: NotRequired[list[str]]
+
+class SaveBuyerRfpSuccessBuyerRfpSellersItemOutcomeStatusQuotedAndProductsAndFailedOutcomeKindReturnedProducts(TypedDict):
+    kind: Literal["returned_products"]
+    productCount: int
+
+class SaveBuyerRfpSuccessBuyerRfpSellersItemOutcomeStatusQuotedAndProductsAndFailedOutcomeKindSkipped(TypedDict):
+    kind: Literal["skipped"]
+    reasonCode: Literal["coverage", "auth", "eligibility", "advertiser_activation", "account_pending", "account_needs_attention", "round_predates_account_rule"]
+
+class SaveBuyerRfpSuccessBuyerRfpSellersItemOutcomeStatusQuotedAndProductsAndFailedProductsItem(TypedDict):
+    productId: str
+    name: str
+    description: NotRequired[str]
+    sellerAccountId: NotRequired[SaveBuyerRfpSuccessBuyerRfpSellersItemOutcomeProductsItemSellerAccountId]
+    '\n    The seller Account id: the Account that owns this seller. Send it as sellerAccountId.\n    '
+    salesAgentId: str
+    inventorySourceId: NotRequired[str]
+    deliveryType: NotRequired[Literal["guaranteed", "non_guaranteed"]]
+    inventoryType: NotRequired[Literal["premium", "run_of_site", "targeted_package"]]
+    pricingOptions: NotRequired[list[JsonValue]]
+    formatKinds: NotRequired[list[str]]
+    validUntil: NotRequired[str]
+    detailsTruncated: NotRequired[bool]
+    overlaySupportUnavailable: NotRequired[bool]
+    overlaySupportUnavailableReason: NotRequired[str]
+    overlaySupportCursorDescriptorsOmitted: NotRequired[float]
+    overlaySupportCursor: NotRequired[str]
+    capabilityDescriptorCursor: NotRequired[str]
+    capabilityDescriptorCount: NotRequired[float]
+    overlaySupportCursors: NotRequired[list[SaveBuyerRfpSuccessBuyerRfpSellersItemOutcomeStatusQuotedAndProductsAndFailedProductsItemOverlaySupportCursorsItem]]
+    demographicTargetingUnavailable: NotRequired[bool]
+    demographicTargetingUnavailableReason: NotRequired[str]
+    demographicTargetingCursorDescriptorsOmitted: NotRequired[float]
+    demographicTargetingCursor: NotRequired[str]
+    demographicTargetingCursors: NotRequired[list[SaveBuyerRfpSuccessBuyerRfpSellersItemOutcomeStatusQuotedAndProductsAndFailedProductsItemDemographicTargetingCursorsItem]]
+    demographicTargetingExecutable: NotRequired[Literal[False]]
+    demographicTargetingExecutionBlocker: NotRequired[str]
+    overlaySupport: NotRequired[JsonValue]
+    demographicTargeting: NotRequired[JsonValue]
+    resolvedAgeTargeting: NotRequired[SaveBuyerRfpSuccessBuyerRfpSellersItemOutcomeStatusQuotedAndProductsAndFailedProductsItemResolvedAgeTargeting]
+    goalCoverage: NotRequired[SaveBuyerRfpSuccessProposalGoalCoverage]
+
+class SaveBuyerRfpSuccessBuyerRfpSellersItemOutcomeStatusQuotedAndProductsAndFailedProductsItemDemographicTargetingCursorsItem(TypedDict):
+    pagePath: list[str]
+    cursor: str
+    itemsTotal: NotRequired[float]
+
+class SaveBuyerRfpSuccessBuyerRfpSellersItemOutcomeStatusQuotedAndProductsAndFailedProductsItemOverlaySupportCursorsItem(TypedDict):
+    pagePath: list[str]
+    cursor: str
+    itemsTotal: NotRequired[float]
+
+class SaveBuyerRfpSuccessBuyerRfpSellersItemOutcomeStatusQuotedAndProductsAndFailedProductsItemResolvedAgeTargeting(TypedDict):
+    min: NotRequired[int]
+    max: NotRequired[int]
+    include_unknown: bool
+
+class SaveBuyerRfpSuccessBuyerRfpSellersItemOutcomeStatusQuotedAndProductsAndFailedPropertyCoverageItem(TypedDict):
+    domain: str
+    productCount: int
+
+class SaveBuyerRfpSuccessBuyerRfpSellersItemOutcomeValue(TypedDict):
+    sellerAccountId: NotRequired[SaveBuyerRfpSuccessBuyerRfpSellersItemOutcomeSellerAccountId]
+    '\n    The seller Account id: the Account that owns this seller. Send it as sellerAccountId.\n    '
+    sellerName: NotRequired[str]
+    status: Literal["quoted", "products", "failed"]
+    proposalIds: NotRequired[list[str]]
+    productQueryId: NotRequired[str]
+    products: NotRequired[list[SaveBuyerRfpSuccessBuyerRfpSellersItemOutcomeStatusQuotedAndProductsAndFailedProductsItem]]
+    productError: NotRequired[SaveBuyerRfpSuccessProposalRequestSellerError]
+    error: NotRequired[SaveBuyerRfpSuccessProposalRequestSellerError]
+    proposalIdsTruncated: NotRequired[bool]
+    outcome: NotRequired[SaveBuyerRfpSuccessBuyerRfpSellersItemOutcomeStatusQuotedAndProductsAndFailedOutcomeKindReturnedProducts | SaveBuyerRfpSuccessBuyerRfpSellersItemOutcomeStatusQuotedAndProductsAndFailedOutcomeKindNoMatchingProducts | SaveBuyerRfpSuccessBuyerRfpSellersItemOutcomeStatusQuotedAndProductsAndFailedOutcomeKindNoInventoryForRequest | SaveBuyerRfpSuccessBuyerRfpSellersItemOutcomeStatusQuotedAndProductsAndFailedOutcomeKindSkipped | SaveBuyerRfpSuccessBuyerRfpSellersItemOutcomeStatusQuotedAndProductsAndFailedOutcomeKindFailed | SaveBuyerRfpSuccessBuyerRfpSellersItemOutcomeStatusQuotedAndProductsAndFailedOutcomeKindLocalRefusal]
+    propertyCoverage: NotRequired[list[SaveBuyerRfpSuccessBuyerRfpSellersItemOutcomeStatusQuotedAndProductsAndFailedPropertyCoverageItem]]
+    propertyCoverageTotal: NotRequired[int]
+    propertyCoverageTruncated: NotRequired[bool]
+    filterResult: NotRequired[Literal["no_matching_products", "filtered_out", "partial"]]
+    channelExcludedProductCount: NotRequired[int]
+    inclusionPropertyList: NotRequired[SaveBuyerRfpSuccessBuyerRfpSellersItemOutcomeStatusQuotedAndProductsAndFailedInclusionPropertyList]
+
+SaveBuyerRfpSuccessBuyerRfpSellersItemSellerAccountId: TypeAlias = int
+
 class SaveBuyerRfpSuccessBuyerRfpWindow(TypedDict):
     openedAt: str
     responseDeadline: str | None
     closedAt: str | None
     closedBy: Literal["buyer", "window"] | None
+
+SaveBuyerRfpSuccessDroppedOptimizationGoalCode: TypeAlias = Literal["goal_kind_not_declared", "metric_not_declared", "target_kind_not_declared", "reach_unit_not_declared", "view_duration_not_declared", "viewability_standard_not_declared", "vendor_metric_not_declared", "over_max_optimization_goals"]
+
+class SaveBuyerRfpSuccessExpectedGoalPerformance(TypedDict):
+    basis: Literal["viewable_rate", "viewable_per_impression", "completion_rate"]
+    low: float
+    mid: float
+    high: float
+    required: float
+    verdict: Literal["likely", "possible", "unlikely"]
+
+class SaveBuyerRfpSuccessProposalGoalCoverage(TypedDict):
+    coversPrimaryGoal: bool
+    uncovered: list[SaveBuyerRfpSuccessProposalGoalCoverageUncoveredItem]
+    expected: NotRequired[SaveBuyerRfpSuccessExpectedGoalPerformance]
+
+class SaveBuyerRfpSuccessProposalGoalCoverageUncoveredItem(TypedDict):
+    priority: float
+    code: SaveBuyerRfpSuccessDroppedOptimizationGoalCode
+
+class SaveBuyerRfpSuccessProposalRequestSellerError(TypedDict):
+    code: str
+    message: str
+    recovery: NotRequired[Literal["transient", "correctable", "terminal"]]
+    buyer_reason: NotRequired[SaveBuyerRfpSuccessProposalRequestSellerErrorBuyerReason]
+    seller_explanation: NotRequired[str]
+
+class SaveBuyerRfpSuccessProposalRequestSellerErrorBuyerReason(TypedDict):
+    code: str
+    message: str
 
 SaveBuyerRfpSuccessSaveBuyerRfpAction: TypeAlias = Literal["created", "duplicated", "updated"]
 
@@ -26521,7 +26675,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers", "attention"]]
     '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs you first, then latest activity). Other kinds: not applied yet.\n    '
     campaignId: NotRequired[str]
-    '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
+    '\n    Campaign id. Proposal takes this or rfpId. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     needsSorting: NotRequired[bool]
     '\n    For Buyer material or library_request: whether the assignment needs sorting.\n    '
     createdByBuyerAgentId: NotRequired[str]
@@ -26621,7 +26775,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     outcome: NotRequired[list[str]]
     '\n    For kinds rfp and rfp_turn: items with a recorded outcome result matching any of these.\n    '
     rfpId: NotRequired[str]
-    '\n    For kind rfp_turn: only turns of this RFP, by the RFP id from search.\n    '
+    '\n    For kind rfp_turn: turns of this RFP. For kind proposal: proposals of this buyer RFP.\n    '
     responseState: NotRequired[list[Literal["queued", "processing", "ready", "passed", "needs_clarification", "failed"]]]
     '\n    For kind rfp_turn: turns whose response is in any of these states, from queued and processing to a finished state.\n    '
     evaluationState: NotRequired[list[str]]
@@ -26889,7 +27043,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers", "attention"]]
     '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs you first, then latest activity). Other kinds: not applied yet.\n    '
     campaignId: NotRequired[str]
-    '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
+    '\n    Campaign id. Proposal takes this or rfpId. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     needsSorting: NotRequired[bool]
     '\n    For Buyer material or library_request: whether the assignment needs sorting.\n    '
     createdByBuyerAgentId: NotRequired[str]
@@ -26989,7 +27143,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     outcome: NotRequired[list[str]]
     '\n    For kinds rfp and rfp_turn: items with a recorded outcome result matching any of these.\n    '
     rfpId: NotRequired[str]
-    '\n    For kind rfp_turn: only turns of this RFP, by the RFP id from search.\n    '
+    '\n    For kind rfp_turn: turns of this RFP. For kind proposal: proposals of this buyer RFP.\n    '
     responseState: NotRequired[list[Literal["queued", "processing", "ready", "passed", "needs_clarification", "failed"]]]
     '\n    For kind rfp_turn: turns whose response is in any of these states, from queued and processing to a finished state.\n    '
     evaluationState: NotRequired[list[str]]
@@ -27187,7 +27341,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(Type
     sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers", "attention"]]
     '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs you first, then latest activity). Other kinds: not applied yet.\n    '
     campaignId: NotRequired[str]
-    '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
+    '\n    Campaign id. Proposal takes this or rfpId. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     needsSorting: NotRequired[bool]
     '\n    For Buyer material or library_request: whether the assignment needs sorting.\n    '
     createdByBuyerAgentId: NotRequired[str]
@@ -27287,7 +27441,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(Type
     outcome: NotRequired[list[str]]
     '\n    For kinds rfp and rfp_turn: items with a recorded outcome result matching any of these.\n    '
     rfpId: NotRequired[str]
-    '\n    For kind rfp_turn: only turns of this RFP, by the RFP id from search.\n    '
+    '\n    For kind rfp_turn: turns of this RFP. For kind proposal: proposals of this buyer RFP.\n    '
     responseState: NotRequired[list[Literal["queued", "processing", "ready", "passed", "needs_clarification", "failed"]]]
     '\n    For kind rfp_turn: turns whose response is in any of these states, from queued and processing to a finished state.\n    '
     evaluationState: NotRequired[list[str]]
@@ -27514,7 +27668,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDi
     sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers", "attention"]]
     '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs you first, then latest activity). Other kinds: not applied yet.\n    '
     campaignId: NotRequired[str]
-    '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
+    '\n    Campaign id. Proposal takes this or rfpId. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     needsSorting: NotRequired[bool]
     '\n    For Buyer material or library_request: whether the assignment needs sorting.\n    '
     createdByBuyerAgentId: NotRequired[str]
@@ -27614,7 +27768,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDi
     outcome: NotRequired[list[str]]
     '\n    For kinds rfp and rfp_turn: items with a recorded outcome result matching any of these.\n    '
     rfpId: NotRequired[str]
-    '\n    For kind rfp_turn: only turns of this RFP, by the RFP id from search.\n    '
+    '\n    For kind rfp_turn: turns of this RFP. For kind proposal: proposals of this buyer RFP.\n    '
     responseState: NotRequired[list[Literal["queued", "processing", "ready", "passed", "needs_clarification", "failed"]]]
     '\n    For kind rfp_turn: turns whose response is in any of these states, from queued and processing to a finished state.\n    '
     evaluationState: NotRequired[list[str]]
@@ -27888,7 +28042,7 @@ class SearchInputKindAdServerTargetingFilter(TypedDict):
     sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers", "attention"]]
     '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs you first, then latest activity). Other kinds: not applied yet.\n    '
     campaignId: NotRequired[str]
-    '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
+    '\n    Campaign id. Proposal takes this or rfpId. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     needsSorting: NotRequired[bool]
     '\n    For Buyer material or library_request: whether the assignment needs sorting.\n    '
     createdByBuyerAgentId: NotRequired[str]
@@ -27988,7 +28142,7 @@ class SearchInputKindAdServerTargetingFilter(TypedDict):
     outcome: NotRequired[list[str]]
     '\n    For kinds rfp and rfp_turn: items with a recorded outcome result matching any of these.\n    '
     rfpId: NotRequired[str]
-    '\n    For kind rfp_turn: only turns of this RFP, by the RFP id from search.\n    '
+    '\n    For kind rfp_turn: turns of this RFP. For kind proposal: proposals of this buyer RFP.\n    '
     responseState: NotRequired[list[Literal["queued", "processing", "ready", "passed", "needs_clarification", "failed"]]]
     '\n    For kind rfp_turn: turns whose response is in any of these states, from queued and processing to a finished state.\n    '
     evaluationState: NotRequired[list[str]]
@@ -28224,7 +28378,7 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers", "attention"]]
     '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs you first, then latest activity). Other kinds: not applied yet.\n    '
     campaignId: NotRequired[str]
-    '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
+    '\n    Campaign id. Proposal takes this or rfpId. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     needsSorting: NotRequired[bool]
     '\n    For Buyer material or library_request: whether the assignment needs sorting.\n    '
     createdByBuyerAgentId: NotRequired[str]
@@ -28324,7 +28478,7 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     outcome: NotRequired[list[str]]
     '\n    For kinds rfp and rfp_turn: items with a recorded outcome result matching any of these.\n    '
     rfpId: NotRequired[str]
-    '\n    For kind rfp_turn: only turns of this RFP, by the RFP id from search.\n    '
+    '\n    For kind rfp_turn: turns of this RFP. For kind proposal: proposals of this buyer RFP.\n    '
     responseState: NotRequired[list[Literal["queued", "processing", "ready", "passed", "needs_clarification", "failed"]]]
     '\n    For kind rfp_turn: turns whose response is in any of these states, from queued and processing to a finished state.\n    '
     evaluationState: NotRequired[list[str]]
@@ -28572,7 +28726,7 @@ class SearchInputKindBuyerRfpFilter(TypedDict):
     sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers", "attention"]]
     '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs you first, then latest activity). Other kinds: not applied yet.\n    '
     campaignId: NotRequired[str]
-    '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
+    '\n    Campaign id. Proposal takes this or rfpId. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     needsSorting: NotRequired[bool]
     '\n    For Buyer material or library_request: whether the assignment needs sorting.\n    '
     createdByBuyerAgentId: NotRequired[str]
@@ -28672,7 +28826,7 @@ class SearchInputKindBuyerRfpFilter(TypedDict):
     outcome: NotRequired[list[str]]
     '\n    For kinds rfp and rfp_turn: items with a recorded outcome result matching any of these.\n    '
     rfpId: NotRequired[str]
-    '\n    For kind rfp_turn: only turns of this RFP, by the RFP id from search.\n    '
+    '\n    For kind rfp_turn: turns of this RFP. For kind proposal: proposals of this buyer RFP.\n    '
     responseState: NotRequired[list[Literal["queued", "processing", "ready", "passed", "needs_clarification", "failed"]]]
     '\n    For kind rfp_turn: turns whose response is in any of these states, from queued and processing to a finished state.\n    '
     evaluationState: NotRequired[list[str]]
@@ -28942,7 +29096,7 @@ class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers", "attention"]]
     '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs you first, then latest activity). Other kinds: not applied yet.\n    '
     campaignId: NotRequired[str]
-    '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
+    '\n    Campaign id. Proposal takes this or rfpId. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     needsSorting: NotRequired[bool]
     '\n    For Buyer material or library_request: whether the assignment needs sorting.\n    '
     createdByBuyerAgentId: NotRequired[str]
@@ -29042,7 +29196,7 @@ class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     outcome: NotRequired[list[str]]
     '\n    For kinds rfp and rfp_turn: items with a recorded outcome result matching any of these.\n    '
     rfpId: NotRequired[str]
-    '\n    For kind rfp_turn: only turns of this RFP, by the RFP id from search.\n    '
+    '\n    For kind rfp_turn: turns of this RFP. For kind proposal: proposals of this buyer RFP.\n    '
     responseState: NotRequired[list[Literal["queued", "processing", "ready", "passed", "needs_clarification", "failed"]]]
     '\n    For kind rfp_turn: turns whose response is in any of these states, from queued and processing to a finished state.\n    '
     evaluationState: NotRequired[list[str]]
@@ -29374,7 +29528,7 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     outcome: NotRequired[list[str]]
     '\n    For kinds rfp and rfp_turn: items with a recorded outcome result matching any of these.\n    '
     rfpId: NotRequired[str]
-    '\n    For kind rfp_turn: only turns of this RFP, by the RFP id from search.\n    '
+    '\n    For kind rfp_turn: turns of this RFP. For kind proposal: proposals of this buyer RFP.\n    '
     responseState: NotRequired[list[Literal["queued", "processing", "ready", "passed", "needs_clarification", "failed"]]]
     '\n    For kind rfp_turn: turns whose response is in any of these states, from queued and processing to a finished state.\n    '
     evaluationState: NotRequired[list[str]]
@@ -29606,7 +29760,7 @@ class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers", "attention"]]
     '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs you first, then latest activity). Other kinds: not applied yet.\n    '
     campaignId: str
-    '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
+    '\n    Campaign id. Proposal takes this or rfpId. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     needsSorting: NotRequired[bool]
     '\n    For Buyer material or library_request: whether the assignment needs sorting.\n    '
     createdByBuyerAgentId: NotRequired[str]
@@ -29706,7 +29860,7 @@ class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     outcome: NotRequired[list[str]]
     '\n    For kinds rfp and rfp_turn: items with a recorded outcome result matching any of these.\n    '
     rfpId: NotRequired[str]
-    '\n    For kind rfp_turn: only turns of this RFP, by the RFP id from search.\n    '
+    '\n    For kind rfp_turn: turns of this RFP. For kind proposal: proposals of this buyer RFP.\n    '
     responseState: NotRequired[list[Literal["queued", "processing", "ready", "passed", "needs_clarification", "failed"]]]
     '\n    For kind rfp_turn: turns whose response is in any of these states, from queued and processing to a finished state.\n    '
     evaluationState: NotRequired[list[str]]
@@ -30002,7 +30156,7 @@ class SearchInputKindCreativeFilter(TypedDict):
     outcome: NotRequired[list[str]]
     '\n    For kinds rfp and rfp_turn: items with a recorded outcome result matching any of these.\n    '
     rfpId: NotRequired[str]
-    '\n    For kind rfp_turn: only turns of this RFP, by the RFP id from search.\n    '
+    '\n    For kind rfp_turn: turns of this RFP. For kind proposal: proposals of this buyer RFP.\n    '
     responseState: NotRequired[list[Literal["queued", "processing", "ready", "passed", "needs_clarification", "failed"]]]
     '\n    For kind rfp_turn: turns whose response is in any of these states, from queued and processing to a finished state.\n    '
     evaluationState: NotRequired[list[str]]
@@ -30188,7 +30342,7 @@ class SearchInputKindCreativeSessionWithFilterCampaignIdDestination(TypedDict):
 
 class SearchInputKindCreativeSessionWithFilterCampaignIdFilter(TypedDict):
     campaignId: str
-    '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
+    '\n    Campaign id. Proposal takes this or rfpId. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized", "sent", "applied", "waiting_approval", "blocked"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.\n    '
 
@@ -30320,7 +30474,7 @@ class SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter(TypedDict):
     sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers", "attention"]]
     '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs you first, then latest activity). Other kinds: not applied yet.\n    '
     campaignId: str
-    '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
+    '\n    Campaign id. Proposal takes this or rfpId. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     needsSorting: NotRequired[bool]
     '\n    For Buyer material or library_request: whether the assignment needs sorting.\n    '
     createdByBuyerAgentId: NotRequired[str]
@@ -30420,7 +30574,7 @@ class SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter(TypedDict):
     outcome: NotRequired[list[str]]
     '\n    For kinds rfp and rfp_turn: items with a recorded outcome result matching any of these.\n    '
     rfpId: NotRequired[str]
-    '\n    For kind rfp_turn: only turns of this RFP, by the RFP id from search.\n    '
+    '\n    For kind rfp_turn: turns of this RFP. For kind proposal: proposals of this buyer RFP.\n    '
     responseState: NotRequired[list[Literal["queued", "processing", "ready", "passed", "needs_clarification", "failed"]]]
     '\n    For kind rfp_turn: turns whose response is in any of these states, from queued and processing to a finished state.\n    '
     evaluationState: NotRequired[list[str]]
@@ -30756,7 +30910,7 @@ class SearchInputKindProposalFilter(TypedDict):
     sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers", "attention"]]
     '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs you first, then latest activity). Other kinds: not applied yet.\n    '
     campaignId: str
-    '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
+    '\n    Campaign id. Proposal takes this or rfpId. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     needsSorting: NotRequired[bool]
     '\n    For Buyer material or library_request: whether the assignment needs sorting.\n    '
     createdByBuyerAgentId: NotRequired[str]
@@ -30856,7 +31010,7 @@ class SearchInputKindProposalFilter(TypedDict):
     outcome: NotRequired[list[str]]
     '\n    For kinds rfp and rfp_turn: items with a recorded outcome result matching any of these.\n    '
     rfpId: NotRequired[str]
-    '\n    For kind rfp_turn: only turns of this RFP, by the RFP id from search.\n    '
+    '\n    For kind rfp_turn: turns of this RFP. For kind proposal: proposals of this buyer RFP.\n    '
     responseState: NotRequired[list[Literal["queued", "processing", "ready", "passed", "needs_clarification", "failed"]]]
     '\n    For kind rfp_turn: turns whose response is in any of these states, from queued and processing to a finished state.\n    '
     evaluationState: NotRequired[list[str]]
@@ -31090,7 +31244,7 @@ class SearchInputKindSourceAccountFilter(TypedDict):
     sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers", "attention"]]
     '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). No sort: best claim first with property, best match with query. Seller media_buy or Project: attention (needs you first, then latest activity). Other kinds: not applied yet.\n    '
     campaignId: NotRequired[str]
-    '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
+    '\n    Campaign id. Proposal takes this or rfpId. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     needsSorting: NotRequired[bool]
     '\n    For Buyer material or library_request: whether the assignment needs sorting.\n    '
     createdByBuyerAgentId: NotRequired[str]
@@ -31190,7 +31344,7 @@ class SearchInputKindSourceAccountFilter(TypedDict):
     outcome: NotRequired[list[str]]
     '\n    For kinds rfp and rfp_turn: items with a recorded outcome result matching any of these.\n    '
     rfpId: NotRequired[str]
-    '\n    For kind rfp_turn: only turns of this RFP, by the RFP id from search.\n    '
+    '\n    For kind rfp_turn: turns of this RFP. For kind proposal: proposals of this buyer RFP.\n    '
     responseState: NotRequired[list[Literal["queued", "processing", "ready", "passed", "needs_clarification", "failed"]]]
     '\n    For kind rfp_turn: turns whose response is in any of these states, from queued and processing to a finished state.\n    '
     evaluationState: NotRequired[list[str]]
