@@ -24022,7 +24022,7 @@ export type SaveBuyerRfpData = {
          */
         advertiserId?: string;
         /**
-         * RFP to change; only a draft changes. Omit to create or copy.
+         * RFP to change (drafts only), open or close. Omit to create or copy.
          */
         rfpId?: string;
         /**
@@ -24033,6 +24033,23 @@ export type SaveBuyerRfpData = {
          * revision from the last read. Required with rfpId; a stale one is refused.
          */
         expectedRevision?: number;
+        /**
+         * Open this draft and send its brief to eligible sellers.
+         */
+        status?: 'open' | 'closed';
+        /**
+         * Seller Account ids that narrow the accepted, eligible Media Partners asked.
+         */
+        sellerIds?: Array<number>;
+        /**
+         * Response window for the opened RFP.
+         */
+        window?: {
+            /**
+             * When responses are due: one hour to 30 days from opening. Defaults to 48 hours.
+             */
+            responseDeadline?: string;
+        };
         /**
          * Retry key. Required to create or copy, refused on an update.
          */
@@ -24477,7 +24494,7 @@ export type SaveBuyerRfpSuccessProposalRequestSellerError = {
     [key: string]: unknown;
 };
 
-export type SaveBuyerRfpSuccessSaveBuyerRfpAction = 'created' | 'duplicated' | 'updated';
+export type SaveBuyerRfpSuccessSaveBuyerRfpAction = 'created' | 'duplicated' | 'updated' | 'opened' | 'closed';
 
 export type SaveCampaignData = {
     body: unknown & {

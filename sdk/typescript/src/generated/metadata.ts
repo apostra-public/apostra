@@ -1194,7 +1194,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Create a draft RFP (the buyer’s ask: flight, budget range for proposals, channels, geo, all optional), change a draft by rfpId, or copy an RFP into a new draft with duplicateFromRfpId. Each new RFP gets its own plan. Opening an RFP to sellers is not available yet."
+    "summary": "Create a draft RFP (the buyer’s ask: flight, budget range for proposals, channels, geo, all optional), change a draft by rfpId, or copy an RFP into a new draft with duplicateFromRfpId. Each new RFP gets its own plan. Open a draft with status open to ask the selected eligible sellers."
   },
   "save_campaign": {
     "path": "/tools/save_campaign",
