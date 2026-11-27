@@ -121948,7 +121948,6 @@ components:
                 - ui://agentic-api/esa-sync-diagnostics/mcp-app.html
                 - ui://agentic-api/esa-inventory-source/mcp-app.html
                 - ui://agentic-api/source-diagnostics/mcp-app.html
-                - ui://agentic-api/sponsored-buyers/mcp-app.html
                 - ui://agentic-api/pending-operations/mcp-app.html
                 - ui://agentic-api/storefront-briefs/mcp-app.html
                 - ui://agentic-api/activity-log/mcp-app.html
