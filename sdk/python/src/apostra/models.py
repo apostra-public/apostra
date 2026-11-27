@@ -12030,7 +12030,7 @@ class SaveAdvertiserInput(TypedDict):
     sendCreativesToConnectedSellers: NotRequired[bool]
     '\n    Sync the library to connected sellers that take creatives without a buy; false withdraws.\n    '
     brandProfile: NotRequired[SaveAdvertiserInputBrandProfile]
-    '\n    Advertiser-stated brand kit, voice rules, banned terms, disclaimers and pages. Save brandProfile in its own save_advertiser call with advertiserId. Available only in the V3 beta with Creative Engines access. `stated: null` clears stated values; `stated.statedAbsence` records that the advertiser confirmed it has no kit, voice or disclaimers.\n    '
+    '\n    Advertiser-stated brand kit, voice rules, banned terms, disclaimers and pages. Save brandProfile in its own save_advertiser call with advertiserId. Available only to accounts with Brand Studio. `stated: null` clears stated values; `stated.statedAbsence` records that the advertiser confirmed it has no kit, voice or disclaimers.\n    '
     resolveBrand: NotRequired[str]
     '\n    Domain to resolve to a brand card preview. Set this alone — no other fields.\n    '
     assignAccount: NotRequired[SaveAdvertiserInputAssignAccount]

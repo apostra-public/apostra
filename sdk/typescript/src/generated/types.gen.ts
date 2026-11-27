@@ -19914,7 +19914,7 @@ export type SaveAdvertiserData = {
          */
         sendCreativesToConnectedSellers?: boolean;
         /**
-         * Advertiser-stated brand kit, voice rules, banned terms, disclaimers and pages. Save brandProfile in its own save_advertiser call with advertiserId. Available only in the V3 beta with Creative Engines access. `stated: null` clears stated values; `stated.statedAbsence` records that the advertiser confirmed it has no kit, voice or disclaimers.
+         * Advertiser-stated brand kit, voice rules, banned terms, disclaimers and pages. Save brandProfile in its own save_advertiser call with advertiserId. Available only to accounts with Brand Studio. `stated: null` clears stated values; `stated.statedAbsence` records that the advertiser confirmed it has no kit, voice or disclaimers.
          */
         brandProfile?: {
             /**
