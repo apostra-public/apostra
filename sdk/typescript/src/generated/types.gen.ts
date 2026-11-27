@@ -45624,7 +45624,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind; only project takes a cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).
          */
         groupBy?: string;
         accountId?: number | string;
@@ -46280,7 +46280,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind; only project takes a cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).
          */
         groupBy?: string;
         accountId?: number | string;
@@ -46361,7 +46361,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind; only project takes a cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).
          */
         groupBy?: string;
         accountId?: number | string;
@@ -47017,7 +47017,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind; only project takes a cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).
          */
         groupBy?: string;
         accountId?: number | string;
@@ -48318,7 +48318,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind; only project takes a cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).
          */
         groupBy?: string;
         accountId?: number | string;
@@ -48970,7 +48970,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind; only project takes a cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).
          */
         groupBy?: string;
         accountId?: number | string;
@@ -49622,7 +49622,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind; only project takes a cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).
          */
         groupBy?: string;
         accountId?: number | string;
@@ -49695,7 +49695,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind; only project takes a cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).
          */
         groupBy?: string;
         accountId?: number | string;
@@ -49771,7 +49771,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind; only project takes a cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).
          */
         groupBy?: string;
         accountId?: number | string;
@@ -50430,7 +50430,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind; only project takes a cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).
          */
         groupBy?: string;
         accountId?: number | string;
@@ -50523,7 +50523,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind; only project takes a cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).
          */
         groupBy?: string;
         accountId?: number | string;
@@ -50595,7 +50595,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind; only project takes a cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).
          */
         groupBy?: string;
         accountId?: number | string;
@@ -51252,7 +51252,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind; only project takes a cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).
          */
         groupBy?: string;
         accountId?: number | string;
@@ -51337,7 +51337,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind; only project takes a cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).
          */
         groupBy?: string;
         accountId?: number | string;
@@ -51993,7 +51993,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind; only project takes a cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).
          */
         groupBy?: string;
         accountId?: number | string;
@@ -52648,7 +52648,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind; only project takes a cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).
          */
         groupBy?: string;
         accountId?: number | string;
@@ -53304,7 +53304,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind; only project takes a cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).
          */
         groupBy?: string;
         accountId?: number | string;
@@ -53960,7 +53960,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind; only project takes a cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).
          */
         groupBy?: string;
         accountId?: number | string;
@@ -54616,7 +54616,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind; only project takes a cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source, project: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).
          */
         groupBy?: string;
         accountId?: number | string;
@@ -54743,6 +54743,10 @@ export type SearchResponses = {
                 }>;
                 truncated: boolean;
                 otherCount?: number;
+                /**
+                 * Projects only, when more groups remain: send it as cursor with the same search for the next groups.
+                 */
+                nextCursor?: string;
                 /**
                  * Present and true only for a field an object can have several values of (seller channel and region): the counts overlap and add up to more than total.
                  */
