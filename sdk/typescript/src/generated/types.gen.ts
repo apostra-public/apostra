@@ -7040,6 +7040,292 @@ export type GetData = {
          * For include canvas_source: the nextCursor from the previous page of the same canvas.
          */
         canvasSourceCursor?: string;
+    }) | (unknown & {
+        kind: 'prime_function';
+        /**
+         * The id from search or an earlier result; never guess one. For skill, an exact id the user gave also works. A brand's id is its domain, or domain/brand_id. Omit it for singleton kinds, audience, and a property_list report read by reportId. A work_item also needs workItemKind.
+         */
+        id: string;
+        /**
+         * For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the previous read.
+         */
+        after?: string;
+        /**
+         * For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.
+         */
+        through?: string;
+        /**
+         * For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.
+         */
+        limit?: number;
+        /**
+         * For a Project conversation: keep only thread starts in these states.
+         */
+        threadStates?: Array<'needs_you' | 'evaluating' | 'new' | 'drafted' | 'fixed' | 'no_action_needed'>;
+        /**
+         * For a Project conversation: keep only thread starts in these groups (a thread shows its group).
+         */
+        threadGroups?: Array<'needs_you' | 'working' | 'done'>;
+        /**
+         * For a Project conversation: keep only open threads.
+         */
+        openThreads?: true;
+        /**
+         * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
+         */
+        buyerAccountId?: number;
+        /**
+         * Required for kind member: the account the member belongs to, this account or a direct child.
+         */
+        memberAccountId?: number;
+        /**
+         * The Apostra accountId this call runs in, from get_status. On a member read without memberAccountId: deprecated, read as memberAccountId.
+         */
+        accountId?: number;
+        /**
+         * The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.
+         */
+        advertiserId?: string;
+        /**
+         * creative_asset: where it would run. Each row then carries permission.
+         */
+        destination?: {
+            /**
+             * AdCP channel the asset would run on.
+             */
+            channel: 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+            /**
+             * ISO country codes. Omit for worldwide.
+             */
+            countries?: Array<string>;
+        };
+        /**
+         * For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.
+         */
+        reportId?: string;
+        /**
+         * For kind property_list: where to start the next page of identifiers, from the previous read.
+         */
+        identifierOffset?: number;
+        /**
+         * For kind property_list: which identifiers to page through: all (the default), unresolved, or registered.
+         */
+        identifierCategory?: 'all' | 'unresolved' | 'registered';
+        /**
+         * For kind seller with include products and advertiserId: the productQueryId from the previous read, to poll products that were still loading.
+         */
+        productQueryId?: string;
+        /**
+         * For kind seller, with productQueryId: the productRevision from the previous read, so only changes since then come back.
+         */
+        productRevision?: number;
+        /**
+         * For kind agent with include diagnostics: one validation run id taken from validationRuns.
+         */
+        validationRunId?: string;
+        /**
+         * creative_session preview: a variants[].build_variant_id; omit for the saved draft.
+         */
+        variantId?: string;
+        /**
+         * Meta preview placement; the default is facebook_feed. A Creative is offered only the placements its format declares.
+         */
+        placement?: 'facebook_feed' | 'instagram_feed' | 'facebook_stories' | 'instagram_stories' | 'facebook_reels' | 'instagram_reels';
+        /**
+         * creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
+         */
+        pageId?: string;
+        /**
+         * Which scope holds the object. Required for wholesale_product and modular_source work_item: the inventory source id from search. signal: the ad-server source; omit for a seller-catalog signal. creative, creative_collection, creative_session: the campaign id. creative_asset: the advertiser id.
+         */
+        sourceId?: string;
+        /**
+         * Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.
+         */
+        workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict' | 'gam_cleanup';
+        /**
+         * For kind catalog with include items: which items to return and the cursor for the next page.
+         */
+        items?: {
+            /**
+             * Filters for the catalog items page; every filter given must match.
+             */
+            filter?: {
+                /**
+                 * Only catalog items with these exact AdCP item keys (e.g. hotel_id), up to 50.
+                 */
+                ids?: Array<string>;
+                /**
+                 * Only catalog items with these exact product GTINs, up to 50.
+                 */
+                gtins?: Array<string>;
+                /**
+                 * Only catalog items carrying any of these tags.
+                 */
+                tags?: Array<string>;
+                /**
+                 * Only catalog items in exactly this category.
+                 */
+                category?: string;
+                /**
+                 * Only catalog items whose text contains this phrase.
+                 */
+                text?: string;
+            };
+            /**
+             * The cursor from the previous catalog items page.
+             */
+            cursor?: string;
+        };
+        /**
+         * For kind material: which revision to read, paging for each collection, and selectors that narrow them.
+         */
+        options?: {
+            /**
+             * Read this exact past source revision instead of the current one.
+             */
+            sourceRevision?: number;
+            /**
+             * Read this rendition of the source revision; omit for the active rendition.
+             */
+            renditionRevision?: number;
+            /**
+             * Paging for each collection in a material read. A candidates page needs no include; a page for any other collection applies only when you also request its matching include.
+             */
+            pages?: {
+                /**
+                 * Page through the extracted facts proposed for the playbook, rules, products, or seller profile. Default 25 rows; no include needed.
+                 */
+                candidates?: GetRequestOptionsPagesCandidates;
+                /**
+                 * Page through extracted text blocks in reading order. Needs include rendition_blocks; default 50 rows.
+                 */
+                rendition_blocks?: GetRequestOptionsPagesRenditionBlocks;
+                /**
+                 * Page through extracted images. Needs include visual_assets; default 25 rows, at most 50.
+                 */
+                visual_assets?: GetRequestOptionsPagesVisualAssets;
+                /**
+                 * Page through extraction warnings and errors. Needs include extraction_diagnostics; default 50 rows.
+                 */
+                extraction_diagnostics?: GetRequestOptionsPagesExtractionDiagnostics;
+                /**
+                 * Page through records of this material being used in RFP responses. Needs include composition_receipts; default 50 rows.
+                 */
+                composition_receipts?: GetRequestOptionsPagesCompositionReceipts;
+                /**
+                 * Page through where this material was used. Needs include usage; at most 48 rows, sent to the app rather than to you.
+                 */
+                usage?: GetRequestOptionsPagesUsage;
+                /**
+                 * Page through the rows of a product-sheet preview. Needs include product_sheet_preview.
+                 */
+                product_sheet?: GetRequestOptionsPagesProductSheet;
+            };
+            /**
+             * Narrow the text blocks, images, and usage returned. A selector is ignored for collections it does not apply to.
+             */
+            select?: {
+                /**
+                 * Keep only text blocks of these kinds, such as heading, table, or speaker_notes.
+                 */
+                blockKinds?: Array<'heading' | 'paragraph' | 'list' | 'table' | 'caption' | 'speaker_notes' | 'ocr' | 'accessibility_text' | 'other'>;
+                /**
+                 * Limit text blocks, images, and usage to one page, slide, or sheet by its unit ID.
+                 */
+                unitId?: string;
+                /**
+                 * Keep only images of these kinds, such as photo, logo, or chart.
+                 */
+                assetKinds?: Array<'photo' | 'illustration' | 'logo' | 'chart' | 'diagram' | 'screenshot' | 'background' | 'other'>;
+                /**
+                 * Keep only images whose reuse rights are any of these, for example allowed or requires_approval.
+                 */
+                reusePolicies?: Array<'allowed' | 'requires_approval' | 'prohibited' | 'unknown'>;
+                /**
+                 * Keep only images whose extraction finished as ready, degraded, or failed.
+                 */
+                assetStatuses?: Array<'ready' | 'degraded' | 'failed'>;
+            };
+        };
+        /**
+         * For kind playbook: read this past version with its content, for example to save it again as current. For business_rules, with businessRulesPolicy.
+         */
+        version?: number;
+        /**
+         * For kind workspace_file: the revision to read, not the current one.
+         */
+        revision?: number;
+        /**
+         * For kind business_rules with version: the policy that numbers it.
+         */
+        businessRulesPolicy?: 'brief_acceptance' | 'creative_policy';
+        /**
+         * For kind notification_config: where to start the next page of notification and agent event subscriptions, which come newest first.
+         */
+        subscriptionsOffset?: number;
+        /**
+         * For kind connection: where to start the next page of provider accounts found on the connection.
+         */
+        connectionAccountsOffset?: number;
+        /**
+         * For kind connection: where to start the next page of advertiser-to-account mappings.
+         */
+        connectionMappingsOffset?: number;
+        /**
+         * Required for kind connection with include inventory: the accounts[].id whose event sources and audiences to list.
+         */
+        connectionAccountId?: string;
+        /**
+         * For kind connection with include inventory: where to start the next page, 50 per page.
+         */
+        connectionInventoryOffset?: number;
+        /**
+         * For kind connection with include inventory: limit the page to seller audiences or event sources.
+         */
+        connectionInventoryObjectType?: 'audience' | 'event_source';
+        /**
+         * For kind connection: the seller or creative engine you expect this connection to reach. The read fails if it reaches another one.
+         */
+        connectionTarget?: {
+            /**
+             * Whether the target is a seller or a creative engine.
+             */
+            kind: 'seller' | 'creative_engine';
+            /**
+             * For kind seller: the seller's Account id. Not the seller object's id, which is a different number.
+             */
+            sellerAccountId?: number;
+            /**
+             * For kind creative_engine: the engine's Account id. Not the engine object's id, which is a different number.
+             */
+            engineAccountId?: number;
+        };
+        /**
+         * For kind rfp_turn: where to start the next page of feedback, 20 per page.
+         */
+        feedbackOffset?: number;
+        /**
+         * For kind rfp_turn: where to start the next page of representations, 50 per page. Not with representationCursor.
+         */
+        representationOffset?: number;
+        /**
+         * For kind rfp_turn: the representations cursor from the previous read, which keeps pages stable. Not with representationOffset.
+         */
+        representationCursor?: string;
+        /**
+         * For kind audience: where to start the next page of audiences, 50 per page; default 0.
+         */
+        audienceOffset?: number;
+        /**
+         * For kind proposal with include products: the cursor from the previous products page of the same proposal.
+         */
+        proposalProductsCursor?: string;
+        /**
+         * For include canvas_source: the nextCursor from the previous page of the same canvas.
+         */
+        canvasSourceCursor?: string;
+        include?: never;
     });
     headers?: {
         /**
@@ -10371,7 +10657,7 @@ export type GetResponses = {
             [key: string]: unknown;
         } | {
             outcome: 'object';
-            kind: 'account' | 'member' | 'agent' | 'buyer_agent' | 'project' | 'skill' | 'inventory_source' | 'material' | 'wholesale_product' | 'advertiser' | 'advertiser_grant' | 'brand' | 'brand_source' | 'signal' | 'work_item' | 'ask' | 'conversation' | 'session' | 'seller' | 'source_options' | 'listing' | 'media_kit' | 'playbook' | 'business_rules' | 'coverage' | 'distribution' | 'connection' | 'creative_engine' | 'creative_session' | 'campaign' | 'catalog' | 'event_source' | 'dimension' | 'buyer_rfp' | 'agent_record' | 'workspace_file' | 'property_list' | 'creative' | 'creative_format' | 'creative_asset' | 'creative_collection' | 'media_buy' | 'proposal' | 'audience' | 'rfp' | 'rfp_turn' | 'intelligence_run' | 'library_request' | 'decision' | 'approval' | 'account_relationship' | 'advertiser_access' | 'notification_config';
+            kind: 'account' | 'member' | 'agent' | 'buyer_agent' | 'project' | 'skill' | 'inventory_source' | 'material' | 'wholesale_product' | 'advertiser' | 'advertiser_grant' | 'brand' | 'brand_source' | 'signal' | 'work_item' | 'ask' | 'conversation' | 'session' | 'seller' | 'source_options' | 'listing' | 'media_kit' | 'playbook' | 'business_rules' | 'coverage' | 'distribution' | 'connection' | 'creative_engine' | 'creative_session' | 'campaign' | 'catalog' | 'event_source' | 'dimension' | 'buyer_rfp' | 'agent_record' | 'workspace_file' | 'prime_function' | 'property_list' | 'creative' | 'creative_format' | 'creative_asset' | 'creative_collection' | 'media_buy' | 'proposal' | 'audience' | 'rfp' | 'rfp_turn' | 'intelligence_run' | 'library_request' | 'decision' | 'approval' | 'account_relationship' | 'advertiser_access' | 'notification_config';
             object: {
                 advertiserId?: string;
                 options?: Array<{
@@ -39285,6 +39571,401 @@ export type SavePlaybookSuccessSellerSaveReplayedMaterialReceipt = {
     [key: string]: unknown;
 };
 
+export type SavePrimeFunctionData = {
+    body: {
+        /**
+         * The function to change. Omit to propose a new one. With expectedVersion and the propose fields, proposes a new version; with state alone, pauses or resumes it.
+         */
+        id?: string;
+        /**
+         * version from the last read, with id, when proposing a new version. A stale one is refused.
+         */
+        expectedVersion?: number;
+        /**
+         * paused stops it at once. active resumes it: a person’s pause at once, by an administrator; after five failed runs, once an administrator approves it on our site.
+         */
+        state?: 'paused' | 'active';
+        /**
+         * The workspace file (a .py file of at most 256 KB) the function runs: in its Project’s workspace, or the account’s when it has no Project. Required to propose.
+         */
+        workspaceFileId?: string;
+        /**
+         * The file revision it pins. A function never follows a newer revision. Required to propose.
+         */
+        workspaceRevision?: number;
+        /**
+         * What starts a run: {kind:"schedule", schedule} with {kind:"cron", expression, timezone}, {kind:"every", intervalMinutes} (15 or more) or {kind:"at", runAt}; {kind:"event", eventTypes} (1 to 10 exact event names); or {kind:"webhook"}. Required to propose.
+         */
+        trigger?: {
+            /**
+             * Runs on a schedule.
+             */
+            kind: 'schedule';
+            /**
+             * A cron expression, an interval or a single time.
+             */
+            schedule: {
+                /**
+                 * A cron schedule.
+                 */
+                kind: 'cron';
+                /**
+                 * A cron expression, at most every 15 minutes.
+                 */
+                expression: string;
+                /**
+                 * An IANA timezone, such as America/New_York.
+                 */
+                timezone: string;
+                intervalMinutes?: never;
+                runAt?: never;
+            } | {
+                /**
+                 * A fixed interval.
+                 */
+                kind: 'every';
+                /**
+                 * Minutes between runs, 15 or more.
+                 */
+                intervalMinutes: number;
+                expression?: never;
+                timezone?: never;
+                runAt?: never;
+            } | {
+                /**
+                 * One run at a set time.
+                 */
+                kind: 'at';
+                /**
+                 * When to run, an ISO 8601 time with an offset.
+                 */
+                runAt: string;
+                expression?: never;
+                timezone?: never;
+                intervalMinutes?: never;
+            };
+            eventTypes?: never;
+        } | {
+            /**
+             * Runs when a platform event happens.
+             */
+            kind: 'event';
+            /**
+             * One to 10 exact event names. No wildcards, no repeats.
+             */
+            eventTypes: Array<'creative.rejected' | 'creative.changes_requested' | 'media_buy.source_rejected' | 'media_buy.stuck' | 'proposals.received'>;
+            schedule?: never;
+        } | {
+            /**
+             * Runs when a signed webhook arrives.
+             */
+            kind: 'webhook';
+            schedule?: never;
+            eventTypes?: never;
+        };
+        /**
+         * The one advertiser it runs for. Or send advertiserIds.
+         */
+        advertiserId?: string;
+        /**
+         * An account-level function’s advertisers, 1 to 20. Or send advertiserId.
+         */
+        advertiserIds?: Array<string>;
+        /**
+         * The Project it works for: that advertiser’s, or an account-level Project holding every named advertiser.
+         */
+        projectId?: string;
+        /**
+         * The one memory record type a run may save (fact or event), or null for none. Required to propose.
+         */
+        outputs?: {
+            /**
+             * fact, event or null for none.
+             */
+            recordType: 'fact' | 'event' | null;
+        };
+        /**
+         * Why the person asked for this function.
+         */
+        reason?: string;
+        /**
+         * New function only: unique key that makes a retried proposal find the first function and its approval.
+         */
+        idempotencyKey?: string;
+        /**
+         * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
+         */
+        expectedAccountId?: number | string;
+        /**
+         * Apostra accountId this call runs in, from get_status.
+         */
+        accountId?: number | string;
+    };
+    headers: {
+        /**
+         * Deprecated: send accountId in the request body instead. Retires on the announced removal date. If both are sent they must name the same account.
+         *
+         * @deprecated
+         */
+        'X-SCOPE3-CUSTOMER-ID'?: string;
+        /**
+         * Required for every write. Reuse the same key and validated body to replay the durable result for seven days. If this operation also accepts idempotencyKey in its JSON body, the values must match.
+         */
+        'Idempotency-Key': string;
+    };
+    path?: never;
+    query?: never;
+    url: '/tools/save_prime_function';
+};
+
+export type SavePrimeFunctionError = SavePrimeFunctionErrors[keyof SavePrimeFunctionErrors];
+
+export type SavePrimeFunctionErrors = {
+    /**
+     * Invalid operation input
+     */
+    400: V3ToolErrorResponse;
+    /**
+     * Missing or invalid API credential
+     */
+    401: V3ToolErrorResponse;
+    /**
+     * Account credit limit exceeded
+     */
+    402: V3ToolErrorResponse;
+    /**
+     * The credential or account cannot perform this operation
+     */
+    403: V3ToolErrorResponse;
+    /**
+     * Requested resource not found
+     */
+    404: V3ToolErrorResponse;
+    /**
+     * Operation conflicts with current resource state
+     */
+    409: V3ToolErrorResponse;
+    /**
+     * Request body exceeds the accepted size
+     */
+    413: V3ToolErrorResponse;
+    /**
+     * Request body encoding or character set is unsupported
+     */
+    415: V3ToolErrorResponse;
+    /**
+     * Operation cannot process the supplied input
+     */
+    422: V3ToolErrorResponse;
+    /**
+     * Request rate limit exceeded
+     */
+    429: V3ToolErrorResponse;
+    /**
+     * Unexpected operation failure
+     */
+    500: V3ToolErrorResponse;
+    /**
+     * Recognised operation behaviour is not implemented
+     */
+    501: V3ToolErrorResponse;
+    /**
+     * The write could not be durably claimed before dispatch, so it is safe to retry with the same key
+     */
+    503: V3ToolErrorResponse;
+};
+
+export type SavePrimeFunctionResponse = SavePrimeFunctionResponses[keyof SavePrimeFunctionResponses];
+
+export type SavePrimeFunctionResponses = {
+    /**
+     * Typed operation result
+     */
+    200: {
+        data: {
+            kind: 'prime_function';
+            object: SavePrimeFunctionSuccessPrimeFunction;
+            action?: never;
+            message?: never;
+            approval?: never;
+            approvers?: never;
+            primeFunction?: never;
+        } | {
+            action: 'approval_required';
+            message: string;
+            approval: SavePrimeFunctionSuccessAgentApproval;
+            /**
+             * The account's direct administrators who can approve, when the caller cannot (Scope3 staff, or an agent or service token acting with no person present). email is null when no person is behind the call. Absent when the caller can approve; never empty.
+             */
+            approvers?: Array<{
+                name: string | null;
+                email: string | null;
+            }>;
+            primeFunction: SavePrimeFunctionSuccessPrimeFunction;
+            kind?: never;
+            object?: never;
+        };
+        error: null;
+    };
+    /**
+     * The write is still running or needs recovery. Retry this operation with the same Idempotency-Key and body; do not mint a new key.
+     */
+    202: {
+        data: {
+            receipt: {
+                id: string;
+                operation: string;
+                state: 'claimed' | 'running' | 'uncertain';
+                stateVersion: number;
+                stateChangedAt: string;
+                pendingReason: string;
+            };
+        };
+        error: null;
+    };
+};
+
+export type SavePrimeFunctionSuccessAgentApproval = {
+    /**
+     * Approval id.
+     */
+    id: string;
+    /**
+     * Kind of sensitive action, for example `buyer_child_account.create`.
+     */
+    kind: string;
+    /**
+     * `pending` waits for a person; `executing` was approved and is running; `succeeded`, `failed`, `rejected` and `expired` are final.
+     */
+    state: 'pending' | 'executing' | 'succeeded' | 'failed' | 'rejected' | 'expired';
+    /**
+     * Account the action applies to.
+     */
+    targetCustomerId: string;
+    /**
+     * Role the approver must hold on the account.
+     */
+    requiredRole: 'ADMIN' | 'SUPER_ADMIN' | null;
+    /**
+     * What will happen, in one line. Null once the approval is final.
+     */
+    summary: string | null;
+    /**
+     * Page on our site where a signed-in person approves or rejects the request.
+     */
+    url: string;
+    createdAt: string;
+    expiresAt: string;
+    decidedAt: string | null;
+    completedAt: string | null;
+    /**
+     * Reference to the result once succeeded.
+     */
+    resultReference: {
+        [key: string]: string | number | boolean;
+    } | null;
+    /**
+     * Reason code when the action failed.
+     */
+    failureCode: string | null;
+};
+
+export type SavePrimeFunctionSuccessPrimeFunction = {
+    id: string;
+    accountId: string;
+    advertiserId: string | null;
+    advertiserIds: Array<string> | null;
+    projectId: string | null;
+    workspaceFileId: string | null;
+    workspaceRevision: number;
+    contentSha256: string;
+    interpreter: 'python3';
+    trigger: {
+        /**
+         * Runs on a schedule.
+         */
+        kind: 'schedule';
+        /**
+         * A cron expression, an interval or a single time.
+         */
+        schedule: {
+            /**
+             * A cron schedule.
+             */
+            kind: 'cron';
+            /**
+             * A cron expression, at most every 15 minutes.
+             */
+            expression: string;
+            /**
+             * An IANA timezone, such as America/New_York.
+             */
+            timezone: string;
+            intervalMinutes?: never;
+            runAt?: never;
+        } | {
+            /**
+             * A fixed interval.
+             */
+            kind: 'every';
+            /**
+             * Minutes between runs, 15 or more.
+             */
+            intervalMinutes: number;
+            expression?: never;
+            timezone?: never;
+            runAt?: never;
+        } | {
+            /**
+             * One run at a set time.
+             */
+            kind: 'at';
+            /**
+             * When to run, an ISO 8601 time with an offset.
+             */
+            runAt: string;
+            expression?: never;
+            timezone?: never;
+            intervalMinutes?: never;
+        };
+        eventTypes?: never;
+    } | {
+        /**
+         * Runs when a platform event happens.
+         */
+        kind: 'event';
+        /**
+         * One to 10 exact event names. No wildcards, no repeats.
+         */
+        eventTypes: Array<'creative.rejected' | 'creative.changes_requested' | 'media_buy.source_rejected' | 'media_buy.stuck' | 'proposals.received'>;
+        schedule?: never;
+    } | {
+        /**
+         * Runs when a signed webhook arrives.
+         */
+        kind: 'webhook';
+        schedule?: never;
+        eventTypes?: never;
+    };
+    accountableUserId: string | null;
+    outputs: {
+        recordType: 'fact' | 'event' | null;
+    };
+    state: 'pending_approval' | 'active' | 'paused' | 'disabled';
+    pausedReason: 'by_person' | 'accountable_person_left' | null;
+    disabledReason: 'consecutive_failures' | 'script_unavailable' | 'script_changed' | 'declined' | null;
+    consecutiveFailures: number;
+    version: number;
+    approvalId: string | null;
+    webhook: null;
+    lastRun: null;
+    proposedByAgentId: string | null;
+    approvedByUserId: string | null;
+    approvedAt: string | null;
+    createdAt: string;
+    updatedAt: string;
+};
+
 export type SaveProjectData = {
     body: unknown & {
         /**
@@ -45469,7 +46150,7 @@ export type SearchData = {
              */
             recordScope?: 'account' | 'advertiser' | 'project' | 'person';
             /**
-             * For kind agent_record or workspace_file: only this Project’s (a Project id); for workspace_file, null means the account’s.
+             * For kind agent_record, workspace_file or prime_function: only this Project’s (a Project id); for workspace_file, null means the account’s.
              */
             projectId?: string | null;
             /**
@@ -45613,9 +46294,17 @@ export type SearchData = {
              */
             deliveryDays?: number;
             /**
-             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed. project: draft, active, paused, archived; archived implies includeArchived.
+             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed. project: draft, active, paused, archived; archived implies includeArchived. prime_function: one of pending_approval, active, paused, disabled.
              */
-            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed' | 'draft' | 'active' | 'paused' | 'archived'>;
+            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed' | 'draft' | 'active' | 'paused' | 'archived' | 'pending_approval' | 'disabled'>;
+            /**
+             * For kind prime_function: only functions started by a schedule, an event or a webhook.
+             */
+            triggerKind?: 'schedule' | 'event' | 'webhook';
+            /**
+             * For kind prime_function: only functions that pin this workspace file.
+             */
+            workspaceFileId?: string;
             /**
              * For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.
              */
@@ -46125,7 +46814,7 @@ export type SearchData = {
              */
             recordScope?: 'account' | 'advertiser' | 'project' | 'person';
             /**
-             * For kind agent_record or workspace_file: only this Project’s (a Project id); for workspace_file, null means the account’s.
+             * For kind agent_record, workspace_file or prime_function: only this Project’s (a Project id); for workspace_file, null means the account’s.
              */
             projectId?: string | null;
             /**
@@ -46269,9 +46958,17 @@ export type SearchData = {
              */
             deliveryDays?: number;
             /**
-             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed. project: draft, active, paused, archived; archived implies includeArchived.
+             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed. project: draft, active, paused, archived; archived implies includeArchived. prime_function: one of pending_approval, active, paused, disabled.
              */
-            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed' | 'draft' | 'active' | 'paused' | 'archived'>;
+            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed' | 'draft' | 'active' | 'paused' | 'archived' | 'pending_approval' | 'disabled'>;
+            /**
+             * For kind prime_function: only functions started by a schedule, an event or a webhook.
+             */
+            triggerKind?: 'schedule' | 'event' | 'webhook';
+            /**
+             * For kind prime_function: only functions that pin this workspace file.
+             */
+            workspaceFileId?: string;
             /**
              * For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.
              */
@@ -46862,7 +47559,7 @@ export type SearchData = {
              */
             recordScope?: 'account' | 'advertiser' | 'project' | 'person';
             /**
-             * For kind agent_record or workspace_file: only this Project’s (a Project id); for workspace_file, null means the account’s.
+             * For kind agent_record, workspace_file or prime_function: only this Project’s (a Project id); for workspace_file, null means the account’s.
              */
             projectId?: string | null;
             /**
@@ -47006,9 +47703,17 @@ export type SearchData = {
              */
             deliveryDays?: number;
             /**
-             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed. project: draft, active, paused, archived; archived implies includeArchived.
+             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed. project: draft, active, paused, archived; archived implies includeArchived. prime_function: one of pending_approval, active, paused, disabled.
              */
-            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed' | 'draft' | 'active' | 'paused' | 'archived'>;
+            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed' | 'draft' | 'active' | 'paused' | 'archived' | 'pending_approval' | 'disabled'>;
+            /**
+             * For kind prime_function: only functions started by a schedule, an event or a webhook.
+             */
+            triggerKind?: 'schedule' | 'event' | 'webhook';
+            /**
+             * For kind prime_function: only functions that pin this workspace file.
+             */
+            workspaceFileId?: string;
             /**
              * For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.
              */
@@ -47514,7 +48219,7 @@ export type SearchData = {
              */
             recordScope?: 'account' | 'advertiser' | 'project' | 'person';
             /**
-             * For kind agent_record or workspace_file: only this Project’s (a Project id); for workspace_file, null means the account’s.
+             * For kind agent_record, workspace_file or prime_function: only this Project’s (a Project id); for workspace_file, null means the account’s.
              */
             projectId?: string | null;
             /**
@@ -47658,9 +48363,17 @@ export type SearchData = {
              */
             deliveryDays?: number;
             /**
-             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed. project: draft, active, paused, archived; archived implies includeArchived.
+             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed. project: draft, active, paused, archived; archived implies includeArchived. prime_function: one of pending_approval, active, paused, disabled.
              */
-            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed' | 'draft' | 'active' | 'paused' | 'archived'>;
+            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed' | 'draft' | 'active' | 'paused' | 'archived' | 'pending_approval' | 'disabled'>;
+            /**
+             * For kind prime_function: only functions started by a schedule, an event or a webhook.
+             */
+            triggerKind?: 'schedule' | 'event' | 'webhook';
+            /**
+             * For kind prime_function: only functions that pin this workspace file.
+             */
+            workspaceFileId?: string;
             /**
              * For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.
              */
@@ -48167,7 +48880,7 @@ export type SearchData = {
              */
             recordScope?: 'account' | 'advertiser' | 'project' | 'person';
             /**
-             * For kind agent_record or workspace_file: only this Project’s (a Project id); for workspace_file, null means the account’s.
+             * For kind agent_record, workspace_file or prime_function: only this Project’s (a Project id); for workspace_file, null means the account’s.
              */
             projectId?: string | null;
             /**
@@ -48307,9 +49020,17 @@ export type SearchData = {
              */
             deliveryDays?: number;
             /**
-             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed. project: draft, active, paused, archived; archived implies includeArchived.
+             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed. project: draft, active, paused, archived; archived implies includeArchived. prime_function: one of pending_approval, active, paused, disabled.
              */
-            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed' | 'draft' | 'active' | 'paused' | 'archived'>;
+            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed' | 'draft' | 'active' | 'paused' | 'archived' | 'pending_approval' | 'disabled'>;
+            /**
+             * For kind prime_function: only functions started by a schedule, an event or a webhook.
+             */
+            triggerKind?: 'schedule' | 'event' | 'webhook';
+            /**
+             * For kind prime_function: only functions that pin this workspace file.
+             */
+            workspaceFileId?: string;
             /**
              * For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.
              */
@@ -48815,7 +49536,7 @@ export type SearchData = {
              */
             recordScope?: 'account' | 'advertiser' | 'project' | 'person';
             /**
-             * For kind agent_record or workspace_file: only this Project’s (a Project id); for workspace_file, null means the account’s.
+             * For kind agent_record, workspace_file or prime_function: only this Project’s (a Project id); for workspace_file, null means the account’s.
              */
             projectId?: string | null;
             /**
@@ -48959,9 +49680,17 @@ export type SearchData = {
              */
             deliveryDays?: number;
             /**
-             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed. project: draft, active, paused, archived; archived implies includeArchived.
+             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed. project: draft, active, paused, archived; archived implies includeArchived. prime_function: one of pending_approval, active, paused, disabled.
              */
-            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed' | 'draft' | 'active' | 'paused' | 'archived'>;
+            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed' | 'draft' | 'active' | 'paused' | 'archived' | 'pending_approval' | 'disabled'>;
+            /**
+             * For kind prime_function: only functions started by a schedule, an event or a webhook.
+             */
+            triggerKind?: 'schedule' | 'event' | 'webhook';
+            /**
+             * For kind prime_function: only functions that pin this workspace file.
+             */
+            workspaceFileId?: string;
             /**
              * For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.
              */
@@ -49471,7 +50200,7 @@ export type SearchData = {
              */
             recordScope?: 'account' | 'advertiser' | 'project' | 'person';
             /**
-             * For kind agent_record or workspace_file: only this Project’s (a Project id); for workspace_file, null means the account’s.
+             * For kind agent_record, workspace_file or prime_function: only this Project’s (a Project id); for workspace_file, null means the account’s.
              */
             projectId?: string | null;
             /**
@@ -49611,9 +50340,17 @@ export type SearchData = {
              */
             deliveryDays?: number;
             /**
-             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed. project: draft, active, paused, archived; archived implies includeArchived.
+             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed. project: draft, active, paused, archived; archived implies includeArchived. prime_function: one of pending_approval, active, paused, disabled.
              */
-            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed' | 'draft' | 'active' | 'paused' | 'archived'>;
+            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed' | 'draft' | 'active' | 'paused' | 'archived' | 'pending_approval' | 'disabled'>;
+            /**
+             * For kind prime_function: only functions started by a schedule, an event or a webhook.
+             */
+            triggerKind?: 'schedule' | 'event' | 'webhook';
+            /**
+             * For kind prime_function: only functions that pin this workspace file.
+             */
+            workspaceFileId?: string;
             /**
              * For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.
              */
@@ -50275,7 +51012,7 @@ export type SearchData = {
              */
             recordScope?: 'account' | 'advertiser' | 'project' | 'person';
             /**
-             * For kind agent_record or workspace_file: only this Project’s (a Project id); for workspace_file, null means the account’s.
+             * For kind agent_record, workspace_file or prime_function: only this Project’s (a Project id); for workspace_file, null means the account’s.
              */
             projectId?: string | null;
             /**
@@ -50419,9 +51156,17 @@ export type SearchData = {
              */
             deliveryDays?: number;
             /**
-             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed. project: draft, active, paused, archived; archived implies includeArchived.
+             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed. project: draft, active, paused, archived; archived implies includeArchived. prime_function: one of pending_approval, active, paused, disabled.
              */
-            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed' | 'draft' | 'active' | 'paused' | 'archived'>;
+            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed' | 'draft' | 'active' | 'paused' | 'archived' | 'pending_approval' | 'disabled'>;
+            /**
+             * For kind prime_function: only functions started by a schedule, an event or a webhook.
+             */
+            triggerKind?: 'schedule' | 'event' | 'webhook';
+            /**
+             * For kind prime_function: only functions that pin this workspace file.
+             */
+            workspaceFileId?: string;
             /**
              * For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.
              */
@@ -51097,7 +51842,7 @@ export type SearchData = {
              */
             recordScope?: 'account' | 'advertiser' | 'project' | 'person';
             /**
-             * For kind agent_record or workspace_file: only this Project’s (a Project id); for workspace_file, null means the account’s.
+             * For kind agent_record, workspace_file or prime_function: only this Project’s (a Project id); for workspace_file, null means the account’s.
              */
             projectId?: string | null;
             /**
@@ -51241,9 +51986,17 @@ export type SearchData = {
              */
             deliveryDays?: number;
             /**
-             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed. project: draft, active, paused, archived; archived implies includeArchived.
+             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed. project: draft, active, paused, archived; archived implies includeArchived. prime_function: one of pending_approval, active, paused, disabled.
              */
-            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed' | 'draft' | 'active' | 'paused' | 'archived'>;
+            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed' | 'draft' | 'active' | 'paused' | 'archived' | 'pending_approval' | 'disabled'>;
+            /**
+             * For kind prime_function: only functions started by a schedule, an event or a webhook.
+             */
+            triggerKind?: 'schedule' | 'event' | 'webhook';
+            /**
+             * For kind prime_function: only functions that pin this workspace file.
+             */
+            workspaceFileId?: string;
             /**
              * For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.
              */
@@ -51838,7 +52591,7 @@ export type SearchData = {
              */
             recordScope?: 'account' | 'advertiser' | 'project' | 'person';
             /**
-             * For kind agent_record or workspace_file: only this Project’s (a Project id); for workspace_file, null means the account’s.
+             * For kind agent_record, workspace_file or prime_function: only this Project’s (a Project id); for workspace_file, null means the account’s.
              */
             projectId?: string | null;
             /**
@@ -51982,9 +52735,17 @@ export type SearchData = {
              */
             deliveryDays?: number;
             /**
-             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed. project: draft, active, paused, archived; archived implies includeArchived.
+             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed. project: draft, active, paused, archived; archived implies includeArchived. prime_function: one of pending_approval, active, paused, disabled.
              */
-            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed' | 'draft' | 'active' | 'paused' | 'archived'>;
+            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed' | 'draft' | 'active' | 'paused' | 'archived' | 'pending_approval' | 'disabled'>;
+            /**
+             * For kind prime_function: only functions started by a schedule, an event or a webhook.
+             */
+            triggerKind?: 'schedule' | 'event' | 'webhook';
+            /**
+             * For kind prime_function: only functions that pin this workspace file.
+             */
+            workspaceFileId?: string;
             /**
              * For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.
              */
@@ -52493,7 +53254,7 @@ export type SearchData = {
              */
             recordScope?: 'account' | 'advertiser' | 'project' | 'person';
             /**
-             * For kind agent_record or workspace_file: only this Project’s (a Project id); for workspace_file, null means the account’s.
+             * For kind agent_record, workspace_file or prime_function: only this Project’s (a Project id); for workspace_file, null means the account’s.
              */
             projectId?: string | null;
             /**
@@ -52637,9 +53398,17 @@ export type SearchData = {
              */
             deliveryDays?: number;
             /**
-             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed. project: draft, active, paused, archived; archived implies includeArchived.
+             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed. project: draft, active, paused, archived; archived implies includeArchived. prime_function: one of pending_approval, active, paused, disabled.
              */
-            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed' | 'draft' | 'active' | 'paused' | 'archived'>;
+            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed' | 'draft' | 'active' | 'paused' | 'archived' | 'pending_approval' | 'disabled'>;
+            /**
+             * For kind prime_function: only functions started by a schedule, an event or a webhook.
+             */
+            triggerKind?: 'schedule' | 'event' | 'webhook';
+            /**
+             * For kind prime_function: only functions that pin this workspace file.
+             */
+            workspaceFileId?: string;
             /**
              * For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.
              */
@@ -53149,7 +53918,7 @@ export type SearchData = {
              */
             recordScope?: 'account' | 'advertiser' | 'project' | 'person';
             /**
-             * For kind agent_record or workspace_file: only this Project’s (a Project id); for workspace_file, null means the account’s.
+             * For kind agent_record, workspace_file or prime_function: only this Project’s (a Project id); for workspace_file, null means the account’s.
              */
             projectId?: string | null;
             /**
@@ -53293,9 +54062,17 @@ export type SearchData = {
              */
             deliveryDays?: number;
             /**
-             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed. project: draft, active, paused, archived; archived implies includeArchived.
+             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed. project: draft, active, paused, archived; archived implies includeArchived. prime_function: one of pending_approval, active, paused, disabled.
              */
-            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed' | 'draft' | 'active' | 'paused' | 'archived'>;
+            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed' | 'draft' | 'active' | 'paused' | 'archived' | 'pending_approval' | 'disabled'>;
+            /**
+             * For kind prime_function: only functions started by a schedule, an event or a webhook.
+             */
+            triggerKind?: 'schedule' | 'event' | 'webhook';
+            /**
+             * For kind prime_function: only functions that pin this workspace file.
+             */
+            workspaceFileId?: string;
             /**
              * For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.
              */
@@ -53805,7 +54582,7 @@ export type SearchData = {
              */
             recordScope?: 'account' | 'advertiser' | 'project' | 'person';
             /**
-             * For kind agent_record or workspace_file: only this Project’s (a Project id); for workspace_file, null means the account’s.
+             * For kind agent_record, workspace_file or prime_function: only this Project’s (a Project id); for workspace_file, null means the account’s.
              */
             projectId?: string | null;
             /**
@@ -53949,9 +54726,17 @@ export type SearchData = {
              */
             deliveryDays?: number;
             /**
-             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed. project: draft, active, paused, archived; archived implies includeArchived.
+             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed. project: draft, active, paused, archived; archived implies includeArchived. prime_function: one of pending_approval, active, paused, disabled.
              */
-            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed' | 'draft' | 'active' | 'paused' | 'archived'>;
+            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed' | 'draft' | 'active' | 'paused' | 'archived' | 'pending_approval' | 'disabled'>;
+            /**
+             * For kind prime_function: only functions started by a schedule, an event or a webhook.
+             */
+            triggerKind?: 'schedule' | 'event' | 'webhook';
+            /**
+             * For kind prime_function: only functions that pin this workspace file.
+             */
+            workspaceFileId?: string;
             /**
              * For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.
              */
@@ -54461,7 +55246,7 @@ export type SearchData = {
              */
             recordScope?: 'account' | 'advertiser' | 'project' | 'person';
             /**
-             * For kind agent_record or workspace_file: only this Project’s (a Project id); for workspace_file, null means the account’s.
+             * For kind agent_record, workspace_file or prime_function: only this Project’s (a Project id); for workspace_file, null means the account’s.
              */
             projectId?: string | null;
             /**
@@ -54605,9 +55390,17 @@ export type SearchData = {
              */
             deliveryDays?: number;
             /**
-             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed. project: draft, active, paused, archived; archived implies includeArchived.
+             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed. project: draft, active, paused, archived; archived implies includeArchived. prime_function: one of pending_approval, active, paused, disabled.
              */
-            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed' | 'draft' | 'active' | 'paused' | 'archived'>;
+            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed' | 'draft' | 'active' | 'paused' | 'archived' | 'pending_approval' | 'disabled'>;
+            /**
+             * For kind prime_function: only functions started by a schedule, an event or a webhook.
+             */
+            triggerKind?: 'schedule' | 'event' | 'webhook';
+            /**
+             * For kind prime_function: only functions that pin this workspace file.
+             */
+            workspaceFileId?: string;
             /**
              * For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.
              */
@@ -55039,7 +55832,7 @@ export type SearchResponses = {
     200: {
         data: {
             sources: Array<'objects' | 'docs' | 'specs'>;
-            objects?: SearchSuccessV3CampaignListResponse | SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchBrandPageOutput | SearchSuccessSearchBrandSourcePageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchInventorySourceItemPageOutput | SearchSuccessSearchAdServerAdvertiserPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchIntelligenceRunPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchDecisionPageOutput | SearchSuccessSearchApprovalPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchNotificationPageOutput | SearchSuccessSearchReleaseUpdatePageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchBuyerRfpPageOutput | SearchSuccessSearchAgentRecordPageOutput | SearchSuccessSearchWorkspaceFilePageOutput | SearchSuccessSearchTargetingValuePageOutput | SearchSuccessSearchProjectPageOutput | SearchSuccessSearchSessionPageOutput | {
+            objects?: SearchSuccessV3CampaignListResponse | SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchBrandPageOutput | SearchSuccessSearchBrandSourcePageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchInventorySourceItemPageOutput | SearchSuccessSearchAdServerAdvertiserPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchIntelligenceRunPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchDecisionPageOutput | SearchSuccessSearchApprovalPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchNotificationPageOutput | SearchSuccessSearchReleaseUpdatePageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchBuyerRfpPageOutput | SearchSuccessSearchAgentRecordPageOutput | SearchSuccessSearchWorkspaceFilePageOutput | SearchSuccessSearchPrimeFunctionPageOutput | SearchSuccessSearchTargetingValuePageOutput | SearchSuccessSearchProjectPageOutput | SearchSuccessSearchSessionPageOutput | {
                 kind: string;
                 groupBy: string;
                 total: number;
@@ -55075,7 +55868,7 @@ export type SearchResponses = {
             } | {
                 outcome: 'mixed';
                 kind: 'mixed';
-                sections: Array<SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchBrandPageOutput | SearchSuccessSearchBrandSourcePageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchInventorySourceItemPageOutput | SearchSuccessSearchAdServerAdvertiserPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchIntelligenceRunPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchDecisionPageOutput | SearchSuccessSearchApprovalPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchNotificationPageOutput | SearchSuccessSearchReleaseUpdatePageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchBuyerRfpPageOutput | SearchSuccessSearchAgentRecordPageOutput | SearchSuccessSearchWorkspaceFilePageOutput | SearchSuccessSearchTargetingValuePageOutput | SearchSuccessSearchProjectPageOutput | SearchSuccessSearchSessionPageOutput | SearchSuccessSearchAccountUnavailableOutput | SearchSuccessSearchMemberUnavailableOutput | SearchSuccessSearchAgentUnavailableOutput | SearchSuccessSearchSkillUnavailableOutput | SearchSuccessSearchInventorySourceUnavailableOutput | SearchSuccessSearchMaterialUnavailableOutput | SearchSuccessSearchCoverageUnavailableOutput | SearchSuccessSearchWholesaleProductUnavailableOutput | SearchSuccessSearchPlaybookVersionUnavailableOutput | SearchSuccessSearchBusinessRulesVersionUnavailableOutput | SearchSuccessSearchHouseDiscountUnavailableOutput | SearchSuccessSearchConnectionUnavailableOutput | SearchSuccessSearchAccountRelationshipUnavailableOutput | SearchSuccessSearchSourceAccountUnavailableOutput | SearchSuccessSearchSellerUnavailableOutput | SearchSuccessSearchAdvertiserUnavailableOutput | SearchSuccessSearchAdvertiserGrantUnavailableOutput | SearchSuccessSearchBrandUnavailableOutput | SearchSuccessSearchBrandSourceUnavailableOutput | SearchSuccessSearchSignalUnavailableOutput | SearchSuccessSearchAdServerTargetingUnavailableOutput | SearchSuccessSearchInventorySourceItemUnavailableOutput | SearchSuccessSearchAdServerAdvertiserUnavailableOutput | SearchSuccessSearchWorkItemUnavailableOutput | SearchSuccessSearchCampaignUnavailableOutput | SearchSuccessSearchCatalogUnavailableOutput | SearchSuccessSearchEventSourceUnavailableOutput | SearchSuccessSearchPropertyListUnavailableOutput | SearchSuccessSearchCreativeUnavailableOutput | SearchSuccessSearchCreativeFormatUnavailableOutput | SearchSuccessSearchCreativeAssetUnavailableOutput | SearchSuccessSearchCreativeEngineUnavailableOutput | SearchSuccessSearchCreativeSessionUnavailableOutput | SearchSuccessSearchCreativeCollectionUnavailableOutput | SearchSuccessSearchMediaBuyUnavailableOutput | SearchSuccessSearchProposalUnavailableOutput | SearchSuccessSearchRfpUnavailableOutput | SearchSuccessSearchRfpTurnUnavailableOutput | SearchSuccessSearchIntelligenceRunUnavailableOutput | SearchSuccessSearchLibraryRequestUnavailableOutput | SearchSuccessSearchDecisionUnavailableOutput | SearchSuccessSearchApprovalUnavailableOutput | SearchSuccessSearchAskUnavailableOutput | SearchSuccessSearchNotificationUnavailableOutput | SearchSuccessSearchReleaseUpdateUnavailableOutput | SearchSuccessSearchConversationUnavailableOutput | SearchSuccessSearchBuyerAgentUnavailableOutput | SearchSuccessSearchDimensionUnavailableOutput | SearchSuccessSearchBuyerRfpUnavailableOutput | SearchSuccessSearchAgentRecordUnavailableOutput | SearchSuccessSearchWorkspaceFileUnavailableOutput | SearchSuccessSearchTargetingValueUnavailableOutput | SearchSuccessSearchProjectUnavailableOutput | SearchSuccessSearchSessionUnavailableOutput>;
+                sections: Array<SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchBrandPageOutput | SearchSuccessSearchBrandSourcePageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchInventorySourceItemPageOutput | SearchSuccessSearchAdServerAdvertiserPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchIntelligenceRunPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchDecisionPageOutput | SearchSuccessSearchApprovalPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchNotificationPageOutput | SearchSuccessSearchReleaseUpdatePageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchBuyerRfpPageOutput | SearchSuccessSearchAgentRecordPageOutput | SearchSuccessSearchWorkspaceFilePageOutput | SearchSuccessSearchPrimeFunctionPageOutput | SearchSuccessSearchTargetingValuePageOutput | SearchSuccessSearchProjectPageOutput | SearchSuccessSearchSessionPageOutput | SearchSuccessSearchAccountUnavailableOutput | SearchSuccessSearchMemberUnavailableOutput | SearchSuccessSearchAgentUnavailableOutput | SearchSuccessSearchSkillUnavailableOutput | SearchSuccessSearchInventorySourceUnavailableOutput | SearchSuccessSearchMaterialUnavailableOutput | SearchSuccessSearchCoverageUnavailableOutput | SearchSuccessSearchWholesaleProductUnavailableOutput | SearchSuccessSearchPlaybookVersionUnavailableOutput | SearchSuccessSearchBusinessRulesVersionUnavailableOutput | SearchSuccessSearchHouseDiscountUnavailableOutput | SearchSuccessSearchConnectionUnavailableOutput | SearchSuccessSearchAccountRelationshipUnavailableOutput | SearchSuccessSearchSourceAccountUnavailableOutput | SearchSuccessSearchSellerUnavailableOutput | SearchSuccessSearchAdvertiserUnavailableOutput | SearchSuccessSearchAdvertiserGrantUnavailableOutput | SearchSuccessSearchBrandUnavailableOutput | SearchSuccessSearchBrandSourceUnavailableOutput | SearchSuccessSearchSignalUnavailableOutput | SearchSuccessSearchAdServerTargetingUnavailableOutput | SearchSuccessSearchInventorySourceItemUnavailableOutput | SearchSuccessSearchAdServerAdvertiserUnavailableOutput | SearchSuccessSearchWorkItemUnavailableOutput | SearchSuccessSearchCampaignUnavailableOutput | SearchSuccessSearchCatalogUnavailableOutput | SearchSuccessSearchEventSourceUnavailableOutput | SearchSuccessSearchPropertyListUnavailableOutput | SearchSuccessSearchCreativeUnavailableOutput | SearchSuccessSearchCreativeFormatUnavailableOutput | SearchSuccessSearchCreativeAssetUnavailableOutput | SearchSuccessSearchCreativeEngineUnavailableOutput | SearchSuccessSearchCreativeSessionUnavailableOutput | SearchSuccessSearchCreativeCollectionUnavailableOutput | SearchSuccessSearchMediaBuyUnavailableOutput | SearchSuccessSearchProposalUnavailableOutput | SearchSuccessSearchRfpUnavailableOutput | SearchSuccessSearchRfpTurnUnavailableOutput | SearchSuccessSearchIntelligenceRunUnavailableOutput | SearchSuccessSearchLibraryRequestUnavailableOutput | SearchSuccessSearchDecisionUnavailableOutput | SearchSuccessSearchApprovalUnavailableOutput | SearchSuccessSearchAskUnavailableOutput | SearchSuccessSearchNotificationUnavailableOutput | SearchSuccessSearchReleaseUpdateUnavailableOutput | SearchSuccessSearchConversationUnavailableOutput | SearchSuccessSearchBuyerAgentUnavailableOutput | SearchSuccessSearchDimensionUnavailableOutput | SearchSuccessSearchBuyerRfpUnavailableOutput | SearchSuccessSearchAgentRecordUnavailableOutput | SearchSuccessSearchWorkspaceFileUnavailableOutput | SearchSuccessSearchPrimeFunctionUnavailableOutput | SearchSuccessSearchTargetingValueUnavailableOutput | SearchSuccessSearchProjectUnavailableOutput | SearchSuccessSearchSessionUnavailableOutput>;
                 [key: string]: unknown;
             };
             objectsUnavailable?: string;
@@ -58065,6 +58858,79 @@ export type SearchSuccessSearchPlaybookVersionPageOutputValue = unknown;
 export type SearchSuccessSearchPlaybookVersionUnavailableOutput = {
     outcome: 'unavailable_playbook_version';
     kind: 'playbook_version';
+    unavailable: string;
+    message: string;
+    [key: string]: unknown;
+};
+
+export type SearchSuccessSearchPrimeFunctionPageOutput = {
+    total?: SearchSuccessSearchPrimeFunctionPageOutputTotal;
+    totalLowerBound?: SearchSuccessSearchPrimeFunctionPageOutputTotalLowerBound;
+    returned?: SearchSuccessSearchPrimeFunctionPageOutputReturned;
+    hasMore?: SearchSuccessSearchPrimeFunctionPageOutputHasMore;
+    truncated?: SearchSuccessSearchPrimeFunctionPageOutputTruncated;
+    nextCursor?: SearchSuccessSearchPrimeFunctionPageOutputNextCursor;
+    results: SearchSuccessSearchPrimeFunctionPageOutputResults;
+    outcome: 'page_prime_function';
+    kind: 'prime_function';
+    [key: string]: SearchSuccessSearchPrimeFunctionPageOutputValue | SearchSuccessSearchPrimeFunctionPageOutputTotal | SearchSuccessSearchPrimeFunctionPageOutputTotalLowerBound | SearchSuccessSearchPrimeFunctionPageOutputReturned | SearchSuccessSearchPrimeFunctionPageOutputHasMore | SearchSuccessSearchPrimeFunctionPageOutputTruncated | SearchSuccessSearchPrimeFunctionPageOutputNextCursor | SearchSuccessSearchPrimeFunctionPageOutputResults | 'page_prime_function' | 'prime_function' | undefined;
+};
+
+export type SearchSuccessSearchPrimeFunctionPageOutputHasMore = boolean;
+
+export type SearchSuccessSearchPrimeFunctionPageOutputNextCursor = string;
+
+export type SearchSuccessSearchPrimeFunctionPageOutputResults = Array<{
+    advertiserId?: string;
+    name?: string | null;
+    sandbox?: boolean;
+    /**
+     * Where the items come from: url when url is set, file when file is set.
+     */
+    sourceType?: 'inline' | 'url' | 'file' | null;
+    /**
+     * Items in the latest version against the one before it.
+     */
+    lastChangeSummary?: {
+        added: number;
+        updated: number;
+        unchanged: number;
+        removed: number;
+    } | null;
+    /**
+     * The active transform, if any.
+     */
+    transform?: {
+        name: string;
+        updatedAt: string;
+    } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
+    [key: string]: unknown;
+}>;
+
+export type SearchSuccessSearchPrimeFunctionPageOutputReturned = number;
+
+export type SearchSuccessSearchPrimeFunctionPageOutputTotal = number;
+
+export type SearchSuccessSearchPrimeFunctionPageOutputTotalLowerBound = number;
+
+export type SearchSuccessSearchPrimeFunctionPageOutputTruncated = boolean;
+
+export type SearchSuccessSearchPrimeFunctionPageOutputValue = unknown;
+
+export type SearchSuccessSearchPrimeFunctionUnavailableOutput = {
+    outcome: 'unavailable_prime_function';
+    kind: 'prime_function';
     unavailable: string;
     message: string;
     [key: string]: unknown;

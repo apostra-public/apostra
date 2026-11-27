@@ -1581,6 +1581,25 @@ export const operations = {
     ],
     "summary": "Write selling guidance. `active` turns Playbook prose and its optional seller note into proposed Lessons; the active Playbook is unchanged. `pricing` replaces facts. `discounts` sets or removes brand/operator rules. `limits` sets what your brain may offer. Halves never roll back each other."
   },
+  "save_prime_function": {
+    "path": "/tools/save_prime_function",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": true,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:write"
+        ]
+      }
+    ],
+    "summary": "Propose, pause or resume a Prime function: a workspace .py file revision that runs on a schedule, an event or a webhook, read-only. Only the account’s own agent proposes, in a turn a person started; an administrator reads the code and approves it on our site."
+  },
   "save_project": {
     "path": "/tools/save_project",
     "method": "POST",
