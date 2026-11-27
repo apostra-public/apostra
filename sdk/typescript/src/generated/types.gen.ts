@@ -14737,6 +14737,34 @@ export type OpenAdvertisersPageData = {
          */
         advertiserId?: string;
         /**
+         * The advertiser's name, if the person stated one. Omit if not given.
+         */
+        name?: string;
+        /**
+         * The brand domain or website the person gave (e.g. "acme.com"). Omit if not given.
+         */
+        brand?: string;
+        /**
+         * Three-letter ISO 4217 currency code, if the person specified one. Omit if not given.
+         */
+        primaryCurrency?: string;
+        /**
+         * ISO 3166-1 alpha-2 country codes for the advertiser brand scope, such as "NL". Empty means global. Omit if not given.
+         */
+        brandCountries?: Array<string>;
+        /**
+         * Preferred IANA reporting time zone, if the person stated one. A seller may use a different fixed or assigned time zone.
+         */
+        preferredTimezone?: string;
+        /**
+         * true if the person asked for sandbox/test, false if they asked for real spend. Omit if not stated.
+         */
+        sandbox?: boolean;
+        /**
+         * AdCP media-channel preferences the person stated, if any. Omit if not given.
+         */
+        channels?: Array<'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence'>;
+        /**
          * Apostra accountId this call runs in, from get_status.
          */
         accountId?: number | string;
@@ -14820,6 +14848,13 @@ export type OpenAdvertisersPageResponses = {
     200: {
         data: {
             intent?: 'add';
+            name?: string;
+            brand?: string;
+            primaryCurrency?: string;
+            brandCountries?: Array<string>;
+            preferredTimezone?: string;
+            sandbox?: boolean;
+            channels?: Array<string>;
             advertiserId?: string;
         };
         error: null;

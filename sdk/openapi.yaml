@@ -41055,13 +41055,13 @@ paths:
     post:
       operationId: open_advertisers_page
       summary: >-
-        Open the Advertisers Page: every advertiser with its campaign and draft counts and one next action each. Use it
-        for "show my advertisers" or "where do I start". intent: "add" sets one up; advertiserId opens one advertiser's
-        page. For text use search(kind: "advertiser").
+        Open the Advertisers Page: every advertiser with campaign and draft counts and one next action each. Use it for
+        "show my advertisers" or "where do I start". intent: "add" sets one up, prefilled with what was said;
+        advertiserId opens one advertiser's page. For text use search(kind: "advertiser").
       description: >-
-        Open the Advertisers Page: every advertiser with its campaign and draft counts and one next action each. Use it
-        for "show my advertisers" or "where do I start". intent: "add" sets one up; advertiserId opens one advertiser's
-        page. For text use search(kind: "advertiser").
+        Open the Advertisers Page: every advertiser with campaign and draft counts and one next action each. Use it for
+        "show my advertisers" or "where do I start". intent: "add" sets one up, prefilled with what was said;
+        advertiserId opens one advertiser's page. For text use search(kind: "advertiser").
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -41094,6 +41094,85 @@ paths:
                   type: string
                   maxLength: 19
                   pattern: ^[1-9]\d*$
+                name:
+                  description: The advertiser's name, if the person stated one. Omit if not given.
+                  type: string
+                  minLength: 1
+                  maxLength: 255
+                brand:
+                  description: The brand domain or website the person gave (e.g. "acme.com"). Omit if not given.
+                  type: string
+                  minLength: 1
+                  maxLength: 255
+                primaryCurrency:
+                  description: Three-letter ISO 4217 currency code, if the person specified one. Omit if not given.
+                  type: string
+                  pattern: ^[A-Za-z]{3}$
+                brandCountries:
+                  description: >-
+                    ISO 3166-1 alpha-2 country codes for the advertiser brand scope, such as "NL". Empty means global.
+                    Omit if not given.
+                  maxItems: 249
+                  type: array
+                  items:
+                    type: string
+                    pattern: ^[A-Z]{2}$
+                preferredTimezone:
+                  description: >-
+                    Preferred IANA reporting time zone, if the person stated one. A seller may use a different fixed or
+                    assigned time zone.
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+                sandbox:
+                  description: true if the person asked for sandbox/test, false if they asked for real spend. Omit if not stated.
+                  type: boolean
+                channels:
+                  description: AdCP media-channel preferences the person stated, if any. Omit if not given.
+                  maxItems: 25
+                  type: array
+                  items:
+                    anyOf:
+                      - type: string
+                        const: display
+                      - type: string
+                        const: olv
+                      - type: string
+                        const: social
+                      - type: string
+                        const: search
+                      - type: string
+                        const: ctv
+                      - type: string
+                        const: linear_tv
+                      - type: string
+                        const: radio
+                      - type: string
+                        const: streaming_audio
+                      - type: string
+                        const: podcast
+                      - type: string
+                        const: dooh
+                      - type: string
+                        const: ooh
+                      - type: string
+                        const: print
+                      - type: string
+                        const: cinema
+                      - type: string
+                        const: email
+                      - type: string
+                        const: gaming
+                      - type: string
+                        const: retail_media
+                      - type: string
+                        const: influencer
+                      - type: string
+                        const: affiliate
+                      - type: string
+                        const: product_placement
+                      - type: string
+                        const: sponsored_intelligence
                 accountId:
                   description: Apostra accountId this call runs in, from get_status.
                   anyOf:
@@ -41118,6 +41197,24 @@ paths:
                         type: string
                         enum:
                           - add
+                      name:
+                        type: string
+                      brand:
+                        type: string
+                      primaryCurrency:
+                        type: string
+                      brandCountries:
+                        type: array
+                        items:
+                          type: string
+                      preferredTimezone:
+                        type: string
+                      sandbox:
+                        type: boolean
+                      channels:
+                        type: array
+                        items:
+                          type: string
                       advertiserId:
                         type: string
                         pattern: ^[1-9][0-9]*$

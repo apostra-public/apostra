@@ -501,14 +501,14 @@ export class Apostra extends Transport {
   /** Send up to 10,000 AdCP conversion events (log_event) to an event source the advertiser registered with save_event_source. Events must also pass the v2 rules: no raw email or phone in user_match, each event_type + event_id once per call. One invalid event refuses the whole call. Returns the data together with response headers and request ID. */
   logEventWithResponse(input: LogEventInput, options: WriteRequestOptions): Promise<ResponseDetails<LogEventResult>> { return this.requestDetailed("log_event", input, options) }
   /**
-   * Open the Advertisers Page: every advertiser with its campaign and draft counts and one next action each. Use it for "show my advertisers" or "where do I start". intent: "add" sets one up; advertiserId opens one advertiser's page. For text use search(kind: "advertiser").
+   * Open the Advertisers Page: every advertiser with campaign and draft counts and one next action each. Use it for "show my advertisers" or "where do I start". intent: "add" sets one up, prefilled with what was said; advertiserId opens one advertiser's page. For text use search(kind: "advertiser").
    *
    * @example
    * await client.openAdvertisersPage(input)
    */
   openAdvertisersPage(input: OpenAdvertisersPageInput, options?: RequestOptions): Promise<OpenAdvertisersPageResult> { return this.request("open_advertisers_page", input, options) }
 
-  /** Open the Advertisers Page: every advertiser with its campaign and draft counts and one next action each. Use it for "show my advertisers" or "where do I start". intent: "add" sets one up; advertiserId opens one advertiser's page. For text use search(kind: "advertiser"). Returns the data together with response headers and request ID. */
+  /** Open the Advertisers Page: every advertiser with campaign and draft counts and one next action each. Use it for "show my advertisers" or "where do I start". intent: "add" sets one up, prefilled with what was said; advertiserId opens one advertiser's page. For text use search(kind: "advertiser"). Returns the data together with response headers and request ID. */
   openAdvertisersPageWithResponse(input: OpenAdvertisersPageInput, options?: RequestOptions): Promise<ResponseDetails<OpenAdvertisersPageResult>> { return this.requestDetailed("open_advertisers_page", input, options) }
   /**
    * Open one agent’s Activity Page: the calls Apostra made to it, grouped into certification runs, with what was sent, what it returned and the error. Read-only.

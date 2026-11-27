@@ -10379,11 +10379,32 @@ class OpenAdvertisersPageInput(TypedDict):
     '\n    Use "add" to open the Add advertiser form.\n    '
     advertiserId: NotRequired[str]
     '\n    One advertiser\'s page. Not with intent.\n    '
+    name: NotRequired[str]
+    '\n    The advertiser\'s name, if the person stated one. Omit if not given.\n    '
+    brand: NotRequired[str]
+    '\n    The brand domain or website the person gave (e.g. "acme.com"). Omit if not given.\n    '
+    primaryCurrency: NotRequired[str]
+    '\n    Three-letter ISO 4217 currency code, if the person specified one. Omit if not given.\n    '
+    brandCountries: NotRequired[list[str]]
+    '\n    ISO 3166-1 alpha-2 country codes for the advertiser brand scope, such as "NL". Empty means global. Omit if not given.\n    '
+    preferredTimezone: NotRequired[str]
+    '\n    Preferred IANA reporting time zone, if the person stated one. A seller may use a different fixed or assigned time zone.\n    '
+    sandbox: NotRequired[bool]
+    '\n    true if the person asked for sandbox/test, false if they asked for real spend. Omit if not stated.\n    '
+    channels: NotRequired[list[Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]]]
+    '\n    AdCP media-channel preferences the person stated, if any. Omit if not given.\n    '
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
 
 class OpenAdvertisersPageResult(TypedDict):
     intent: NotRequired[Literal["add"]]
+    name: NotRequired[str]
+    brand: NotRequired[str]
+    primaryCurrency: NotRequired[str]
+    brandCountries: NotRequired[list[str]]
+    preferredTimezone: NotRequired[str]
+    sandbox: NotRequired[bool]
+    channels: NotRequired[list[str]]
     advertiserId: NotRequired[str]
 
 class OpenAgentActivityPageInput(TypedDict):
