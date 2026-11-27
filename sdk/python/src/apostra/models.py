@@ -8214,6 +8214,8 @@ class GetStatusResult(TypedDict):
     operatorIdentity: NotRequired[GetStatusResultOperatorIdentity]
     setup: NotRequired[GetStatusResultSetup]
     agent: NotRequired[GetStatusResultAgentValue | None]
+    creativeHistory: NotRequired[GetStatusResultCreativeHistory]
+    '\n    Summary of the account\'s creative history; absent when the switch is off or there is none.\n    '
     phase: NotRequired[str]
     '\n    Use goLive and checks from the seller readiness include. Removed on or after 14 December 2026.\n    '
     libraryRequirements: NotRequired[list[GetStatusResultLibraryRequirementsItem] | None]
@@ -8372,6 +8374,20 @@ class GetStatusResultChangesNoticesItem(TypedDict):
 class GetStatusResultChangesNoticesItemScope(TypedDict):
     scopeKind: Literal["project", "conversation", "run"]
     id: str
+
+class GetStatusResultCreativeHistory(TypedDict):
+    state: Literal["queued", "running", "waiting", "complete", "failed"]
+    '\n    The least advanced state across the account\'s ad accounts: complete only when every one is.\n    '
+    platform: Literal["meta"]
+    '\n    The platform the history is read from; Meta only for now.\n    '
+    coveredFrom: str | None
+    '\n    The first day every ad account has covered (YYYY-MM-DD); null until there are any.\n    '
+    coveredThrough: str | None
+    '\n    The last day every ad account has covered (YYYY-MM-DD); null until there are any.\n    '
+    months: int | None
+    '\n    Whole months from coveredFrom to coveredThrough; null when nothing is covered.\n    '
+    recentReady: bool
+    '\n    The last 30 days are covered, whatever the state.\n    '
 
 class GetStatusResultDestinations(TypedDict):
     total: float

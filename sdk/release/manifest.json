@@ -1465,6 +1465,7 @@
       "GetStatusResultChanges": "object",
       "GetStatusResultChangesNoticesItem": "object",
       "GetStatusResultChangesNoticesItemScope": "object",
+      "GetStatusResultCreativeHistory": "object",
       "GetStatusResultDestinations": "object",
       "GetStatusResultDestinationsReadyDestinationsItem": "object",
       "GetStatusResultLandingPageAgent": "object",

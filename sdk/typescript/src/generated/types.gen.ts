@@ -11851,6 +11851,35 @@ export type GetStatusResponses = {
                 lifecycleState: 'active' | 'suspended' | 'retired';
             } | null;
             /**
+             * Summary of the account's creative history; absent when the switch is off or there is none.
+             */
+            creativeHistory?: {
+                /**
+                 * The least advanced state across the account's ad accounts: complete only when every one is.
+                 */
+                state: 'queued' | 'running' | 'waiting' | 'complete' | 'failed';
+                /**
+                 * The platform the history is read from; Meta only for now.
+                 */
+                platform: 'meta';
+                /**
+                 * The first day every ad account has covered (YYYY-MM-DD); null until there are any.
+                 */
+                coveredFrom: string | null;
+                /**
+                 * The last day every ad account has covered (YYYY-MM-DD); null until there are any.
+                 */
+                coveredThrough: string | null;
+                /**
+                 * Whole months from coveredFrom to coveredThrough; null when nothing is covered.
+                 */
+                months: number | null;
+                /**
+                 * The last 30 days are covered, whatever the state.
+                 */
+                recentReady: boolean;
+            };
+            /**
              * Use goLive and checks from the seller readiness include. Removed on or after 14 December 2026.
              *
              * @deprecated
