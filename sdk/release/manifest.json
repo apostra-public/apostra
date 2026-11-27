@@ -3833,6 +3833,7 @@
       "SavePlaybookResult": "other",
       "SavePlaybookSuccessLessonsProposed": "object",
       "SavePlaybookSuccessLessonsProposedLessonsProposedItem": "object",
+      "SavePlaybookSuccessLessonsProposedLessonsProposedItemScope": "object",
       "SavePlaybookSuccessLessonsProposedPlaybook": "map",
       "SavePlaybookSuccessSavePlaybookSuccessLessonsProposed": "other",
       "SavePlaybookSuccessSavePlaybookSuccessLessonsProposedLessonsProposedItem": "other",

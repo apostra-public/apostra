@@ -38619,6 +38619,11 @@ export type SavePlaybookSuccessLessonsProposed = {
         lessonId: string;
         revision: number;
         status: 'proposed';
+        scope: {
+            kind: 'all_briefs' | 'advertiser' | 'buyer' | 'category' | 'channel' | 'market';
+            [key: string]: unknown;
+        };
+        sellerWords: string;
         [key: string]: unknown;
     }>;
     deprecated: true;
