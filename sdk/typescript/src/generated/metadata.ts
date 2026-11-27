@@ -509,6 +509,25 @@ export const operations = {
     ],
     "summary": "Open the Campaigns Page: campaigns with status, flight, and budget; open one for its media buys and creatives. The Page self-fetches, so do not list campaigns in prose. advertiserId scopes to one advertiser; campaignId focuses one campaign. A draft's go-live review is open_campaign_receipt."
   },
+  "open_canvas_page": {
+    "path": "/tools/open_canvas_page",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": false,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:read"
+        ]
+      }
+    ],
+    "summary": "Open a Project's canvas. The page loads itself, so do not repeat what it shows."
+  },
   "open_catalog_file_picker": {
     "path": "/tools/open_catalog_file_picker",
     "method": "POST",

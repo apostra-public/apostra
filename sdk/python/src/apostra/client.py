@@ -188,6 +188,14 @@ class Apostra(SyncTransport):
         "Open the Campaigns Page: campaigns with status, flight, and budget; open one for its media buys and creatives. The Page self-fetches, so do not list campaigns in prose. advertiserId scopes to one advertiser; campaignId focuses one campaign. A draft's go-live review is open_campaign_receipt. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.OpenCampaignsPageResult], self._request_with_response("open_campaigns_page", input, account_id=account_id, timeout=timeout))
 
+    def open_canvas_page(self, input: models.OpenCanvasPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenCanvasPageResult:
+        "Open a Project's canvas. The page loads itself, so do not repeat what it shows."
+        return cast("models.OpenCanvasPageResult", self._request("open_canvas_page", input, account_id=account_id, timeout=timeout))
+
+    def open_canvas_page_with_response(self, input: models.OpenCanvasPageInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenCanvasPageResult]:
+        "Open a Project's canvas. The page loads itself, so do not repeat what it shows. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.OpenCanvasPageResult], self._request_with_response("open_canvas_page", input, account_id=account_id, timeout=timeout))
+
     def open_catalog_file_picker(self, input: models.OpenCatalogFilePickerInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenCatalogFilePickerResult:
         "Open the catalog file picker: the buyer picks one file in a connected Drive or SharePoint folder and saves it as a catalog's source. They pick in the Task, so do not ask for connection or file ids. catalogId replaces that catalog's source; omit it for a new catalog."
         return cast("models.OpenCatalogFilePickerResult", self._request("open_catalog_file_picker", input, account_id=account_id, timeout=timeout))
@@ -916,6 +924,14 @@ class AsyncApostra(AsyncTransport):
     async def open_campaigns_page_with_response(self, input: models.OpenCampaignsPageInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenCampaignsPageResult]:
         "Open the Campaigns Page: campaigns with status, flight, and budget; open one for its media buys and creatives. The Page self-fetches, so do not list campaigns in prose. advertiserId scopes to one advertiser; campaignId focuses one campaign. A draft's go-live review is open_campaign_receipt. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.OpenCampaignsPageResult], await self._request_with_response("open_campaigns_page", input, account_id=account_id, timeout=timeout))
+
+    async def open_canvas_page(self, input: models.OpenCanvasPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenCanvasPageResult:
+        "Open a Project's canvas. The page loads itself, so do not repeat what it shows."
+        return cast("models.OpenCanvasPageResult", await self._request("open_canvas_page", input, account_id=account_id, timeout=timeout))
+
+    async def open_canvas_page_with_response(self, input: models.OpenCanvasPageInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenCanvasPageResult]:
+        "Open a Project's canvas. The page loads itself, so do not repeat what it shows. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.OpenCanvasPageResult], await self._request_with_response("open_canvas_page", input, account_id=account_id, timeout=timeout))
 
     async def open_catalog_file_picker(self, input: models.OpenCatalogFilePickerInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenCatalogFilePickerResult:
         "Open the catalog file picker: the buyer picks one file in a connected Drive or SharePoint folder and saves it as a catalog's source. They pick in the Task, so do not ask for connection or file ids. catalogId replaces that catalog's source; omit it for a new catalog."
