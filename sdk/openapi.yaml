@@ -139080,6 +139080,25 @@ components:
                 - draft
                 - paused
             - type: 'null'
+        viewerCan:
+          default:
+            approve: false
+            archive: false
+            restore: false
+          type: object
+          properties:
+            approve:
+              type: boolean
+              description: You hold the role the limits approval checks on this account.
+            archive:
+              type: boolean
+            restore:
+              type: boolean
+          required:
+            - approve
+            - archive
+            - restore
+          additionalProperties: false
         url:
           type: string
       required:
@@ -139105,6 +139124,7 @@ components:
         - autonomy
         - attention
         - stateMark
+        - viewerCan
         - url
       additionalProperties: false
     save_project_success_Project:
@@ -139633,6 +139653,25 @@ components:
                 - draft
                 - paused
             - type: 'null'
+        viewerCan:
+          default:
+            approve: false
+            archive: false
+            restore: false
+          type: object
+          properties:
+            approve:
+              type: boolean
+              description: You hold the role the limits approval checks on this account.
+            archive:
+              type: boolean
+            restore:
+              type: boolean
+          required:
+            - approve
+            - archive
+            - restore
+          additionalProperties: false
         url:
           type: string
       required:
@@ -139658,6 +139697,7 @@ components:
         - autonomy
         - attention
         - stateMark
+        - viewerCan
         - url
       additionalProperties: false
     save_project_success_ObjectLeadPrincipalId:

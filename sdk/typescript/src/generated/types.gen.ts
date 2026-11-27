@@ -39534,6 +39534,14 @@ export type SaveProjectSuccessObject = {
         url: string | null;
     }>;
     stateMark: 'needs_you' | 'awaiting_approval' | 'draft' | 'paused' | null;
+    viewerCan: {
+        /**
+         * You hold the role the limits approval checks on this account.
+         */
+        approve: boolean;
+        archive: boolean;
+        restore: boolean;
+    };
     url: string;
 };
 
@@ -40003,6 +40011,14 @@ export type SaveProjectSuccessProject = {
         url: string | null;
     }>;
     stateMark: 'needs_you' | 'awaiting_approval' | 'draft' | 'paused' | null;
+    viewerCan: {
+        /**
+         * You hold the role the limits approval checks on this account.
+         */
+        approve: boolean;
+        archive: boolean;
+        restore: boolean;
+    };
     url: string;
 };
 
