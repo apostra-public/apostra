@@ -69297,12 +69297,12 @@ paths:
       operationId: save_project
       summary: >-
         Create a Buyer account's Project (omit id), or with id make one change: details, one attach or detach, bounds,
-        or autonomyPaused (stop; an administrator resumes). Wider bounds return approval_required.
-        reallocation_threshold is a currency amount.
+        autonomyPaused (stop; an administrator resumes), or isArchived (archive or restore). Wider bounds return
+        approval_required. reallocation_threshold is a currency amount.
       description: >-
         Create a Buyer account's Project (omit id), or with id make one change: details, one attach or detach, bounds,
-        or autonomyPaused (stop; an administrator resumes). Wider bounds return approval_required.
-        reallocation_threshold is a currency amount.
+        autonomyPaused (stop; an administrator resumes), or isArchived (archive or restore). Wider bounds return
+        approval_required. reallocation_threshold is a currency amount.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -69578,6 +69578,12 @@ paths:
                     true stops this Project's lead at once. false resumes it, for an administrator signed in as
                     themselves; the administrator who approved the bounds resumes at once, another needs approval. Send
                     it with the id and only reason, idempotencyKey and dryRun.
+                  type: boolean
+                isArchived:
+                  description: >-
+                    Edit only: true archives the Project, which stops its lead and makes it and its conversation
+                    read-only; false restores it, and it then needs its limits approved again. Send it alone with the
+                    id.
                   type: boolean
                 reason:
                   description: 'Edit only, with autonomyPaused: why, kept with the stop.'
