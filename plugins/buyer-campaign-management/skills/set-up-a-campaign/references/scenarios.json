@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "skillId": "set-up-a-campaign",
-  "skillVersion": "1.23.0",
+  "skillVersion": "1.24.0",
   "scenarios": [
     {
       "id": "conversion-source-before-campaign",
@@ -195,6 +195,17 @@
         "The agent says billing details and payment terms are needed before anything can be bought, and what each one is.",
         "The agent recommends net 60 with one sentence of reason (every storefront accepts up to net 60 automatically, so a buy goes through without negotiating terms) and asks the buyer to confirm or choose another term.",
         "The agent does not apply a payment term the buyer has not confirmed, and does not stage a media buy or launch the campaign while a readiness blocker is open."
+      ]
+    },
+    {
+      "id": "brand-kit-confirmed-before-proof",
+      "title": "Confirm the brand kit, then offer proving the domain",
+      "given": "The buyer has just named the advertiser's brand, and the brand profile Apostra drafted marks its tagline and colours as inferred.",
+      "expect": [
+        "The agent reads the advertiser's brand profile and shows the person what Apostra found.",
+        "The agent points out each value marked inferred and asks the person to confirm or correct it, never presenting it as the brand's own.",
+        "The agent saves only what the person confirmed or corrected, and only when the profile has no revision, leaving out any value the read cut short; otherwise it saves nothing, opens Brand Studio so the person can see what is still inferred, and says a saved profile can't be corrected from the chat yet.",
+        "The agent then offers, without requiring it, to prove the brand is theirs, presenting the two ways the docs give."
       ]
     }
   ]
