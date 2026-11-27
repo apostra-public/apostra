@@ -1452,6 +1452,8 @@
       "GetStatusResultAgentsResultsItemStuckOnNextAction": "object",
       "GetStatusResultAgentsResultsItemStuckOnValue": "object",
       "GetStatusResultBlockersItem": "object",
+      "GetStatusResultCaller": "object",
+      "GetStatusResultCallerAppsItem": "object",
       "GetStatusResultChanges": "object",
       "GetStatusResultChangesNoticesItem": "object",
       "GetStatusResultChangesNoticesItemScope": "object",

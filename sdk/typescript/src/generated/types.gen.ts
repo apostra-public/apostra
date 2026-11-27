@@ -11450,6 +11450,15 @@ export type GetStatusResponses = {
                 [key: string]: unknown;
             };
             listedToolAccountKinds: Array<'buyer' | 'seller' | 'org' | 'developer'>;
+            caller?: {
+                /**
+                 * The caller's own apps.
+                 */
+                apps: Array<{
+                    platform: 'mac' | 'iphone' | 'android';
+                    lastSignedInAt: string;
+                }>;
+            };
             state: string;
             canTransact?: boolean;
             platformReady?: boolean;
