@@ -26750,6 +26750,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     '\n    For kind session: active, closed, or archived. archived reads only Murph chat sessions.\n    '
     includeArchived: NotRequired[bool]
     '\n    For kind project: also list archived Projects. Default false.\n    '
+    accountLevel: NotRequired[bool]
+    '\n    For kind project: true keeps only the account-level Projects (no advertiser), false only those that belong to an advertiser. Not with advertiserId. Lists and grouped counts both take it.\n    '
     live: NotRequired[bool]
     '\n    For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.\n    '
     attention: NotRequired[Literal["approval_needed"]]
@@ -27118,6 +27120,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     '\n    For kind session: active, closed, or archived. archived reads only Murph chat sessions.\n    '
     includeArchived: NotRequired[bool]
     '\n    For kind project: also list archived Projects. Default false.\n    '
+    accountLevel: NotRequired[bool]
+    '\n    For kind project: true keeps only the account-level Projects (no advertiser), false only those that belong to an advertiser. Not with advertiserId. Lists and grouped counts both take it.\n    '
     live: NotRequired[bool]
     '\n    For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.\n    '
     attention: NotRequired[Literal["approval_needed"]]
@@ -27416,6 +27420,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(Type
     '\n    For kind session: active, closed, or archived. archived reads only Murph chat sessions.\n    '
     includeArchived: NotRequired[bool]
     '\n    For kind project: also list archived Projects. Default false.\n    '
+    accountLevel: NotRequired[bool]
+    '\n    For kind project: true keeps only the account-level Projects (no advertiser), false only those that belong to an advertiser. Not with advertiserId. Lists and grouped counts both take it.\n    '
     live: NotRequired[bool]
     '\n    For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.\n    '
     attention: NotRequired[Literal["approval_needed"]]
@@ -27743,6 +27749,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDi
     '\n    For kind session: active, closed, or archived. archived reads only Murph chat sessions.\n    '
     includeArchived: NotRequired[bool]
     '\n    For kind project: also list archived Projects. Default false.\n    '
+    accountLevel: NotRequired[bool]
+    '\n    For kind project: true keeps only the account-level Projects (no advertiser), false only those that belong to an advertiser. Not with advertiserId. Lists and grouped counts both take it.\n    '
     live: NotRequired[bool]
     '\n    For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.\n    '
     attention: NotRequired[Literal["approval_needed"]]
@@ -28117,6 +28125,8 @@ class SearchInputKindAdServerTargetingFilter(TypedDict):
     '\n    For kind session: active, closed, or archived. archived reads only Murph chat sessions.\n    '
     includeArchived: NotRequired[bool]
     '\n    For kind project: also list archived Projects. Default false.\n    '
+    accountLevel: NotRequired[bool]
+    '\n    For kind project: true keeps only the account-level Projects (no advertiser), false only those that belong to an advertiser. Not with advertiserId. Lists and grouped counts both take it.\n    '
     live: NotRequired[bool]
     '\n    For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.\n    '
     attention: NotRequired[Literal["approval_needed"]]
@@ -28453,6 +28463,8 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     '\n    For kind session: active, closed, or archived. archived reads only Murph chat sessions.\n    '
     includeArchived: NotRequired[bool]
     '\n    For kind project: also list archived Projects. Default false.\n    '
+    accountLevel: NotRequired[bool]
+    '\n    For kind project: true keeps only the account-level Projects (no advertiser), false only those that belong to an advertiser. Not with advertiserId. Lists and grouped counts both take it.\n    '
     live: NotRequired[bool]
     '\n    For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.\n    '
     attention: NotRequired[Literal["approval_needed"]]
@@ -28801,6 +28813,8 @@ class SearchInputKindBuyerRfpFilter(TypedDict):
     '\n    For kind session: active, closed, or archived. archived reads only Murph chat sessions.\n    '
     includeArchived: NotRequired[bool]
     '\n    For kind project: also list archived Projects. Default false.\n    '
+    accountLevel: NotRequired[bool]
+    '\n    For kind project: true keeps only the account-level Projects (no advertiser), false only those that belong to an advertiser. Not with advertiserId. Lists and grouped counts both take it.\n    '
     live: NotRequired[bool]
     '\n    For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.\n    '
     attention: NotRequired[Literal["approval_needed"]]
@@ -29171,6 +29185,8 @@ class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     '\n    For kind session: active, closed, or archived. archived reads only Murph chat sessions.\n    '
     includeArchived: NotRequired[bool]
     '\n    For kind project: also list archived Projects. Default false.\n    '
+    accountLevel: NotRequired[bool]
+    '\n    For kind project: true keeps only the account-level Projects (no advertiser), false only those that belong to an advertiser. Not with advertiserId. Lists and grouped counts both take it.\n    '
     live: NotRequired[bool]
     '\n    For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.\n    '
     attention: NotRequired[Literal["approval_needed"]]
@@ -29503,6 +29519,8 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     '\n    For kind session: active, closed, or archived. archived reads only Murph chat sessions.\n    '
     includeArchived: NotRequired[bool]
     '\n    For kind project: also list archived Projects. Default false.\n    '
+    accountLevel: NotRequired[bool]
+    '\n    For kind project: true keeps only the account-level Projects (no advertiser), false only those that belong to an advertiser. Not with advertiserId. Lists and grouped counts both take it.\n    '
     live: NotRequired[bool]
     '\n    For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.\n    '
     attention: NotRequired[Literal["approval_needed"]]
@@ -29835,6 +29853,8 @@ class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     '\n    For kind session: active, closed, or archived. archived reads only Murph chat sessions.\n    '
     includeArchived: NotRequired[bool]
     '\n    For kind project: also list archived Projects. Default false.\n    '
+    accountLevel: NotRequired[bool]
+    '\n    For kind project: true keeps only the account-level Projects (no advertiser), false only those that belong to an advertiser. Not with advertiserId. Lists and grouped counts both take it.\n    '
     live: NotRequired[bool]
     '\n    For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.\n    '
     attention: NotRequired[Literal["approval_needed"]]
@@ -30131,6 +30151,8 @@ class SearchInputKindCreativeFilter(TypedDict):
     '\n    For kind session: active, closed, or archived. archived reads only Murph chat sessions.\n    '
     includeArchived: NotRequired[bool]
     '\n    For kind project: also list archived Projects. Default false.\n    '
+    accountLevel: NotRequired[bool]
+    '\n    For kind project: true keeps only the account-level Projects (no advertiser), false only those that belong to an advertiser. Not with advertiserId. Lists and grouped counts both take it.\n    '
     live: NotRequired[bool]
     '\n    For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.\n    '
     attention: NotRequired[Literal["approval_needed"]]
@@ -30549,6 +30571,8 @@ class SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter(TypedDict):
     '\n    For kind session: active, closed, or archived. archived reads only Murph chat sessions.\n    '
     includeArchived: NotRequired[bool]
     '\n    For kind project: also list archived Projects. Default false.\n    '
+    accountLevel: NotRequired[bool]
+    '\n    For kind project: true keeps only the account-level Projects (no advertiser), false only those that belong to an advertiser. Not with advertiserId. Lists and grouped counts both take it.\n    '
     live: NotRequired[bool]
     '\n    For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.\n    '
     attention: NotRequired[Literal["approval_needed"]]
@@ -30985,6 +31009,8 @@ class SearchInputKindProposalFilter(TypedDict):
     '\n    For kind session: active, closed, or archived. archived reads only Murph chat sessions.\n    '
     includeArchived: NotRequired[bool]
     '\n    For kind project: also list archived Projects. Default false.\n    '
+    accountLevel: NotRequired[bool]
+    '\n    For kind project: true keeps only the account-level Projects (no advertiser), false only those that belong to an advertiser. Not with advertiserId. Lists and grouped counts both take it.\n    '
     live: NotRequired[bool]
     '\n    For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.\n    '
     attention: NotRequired[Literal["approval_needed"]]
@@ -31319,6 +31345,8 @@ class SearchInputKindSourceAccountFilter(TypedDict):
     '\n    For kind session: active, closed, or archived. archived reads only Murph chat sessions.\n    '
     includeArchived: NotRequired[bool]
     '\n    For kind project: also list archived Projects. Default false.\n    '
+    accountLevel: NotRequired[bool]
+    '\n    For kind project: true keeps only the account-level Projects (no advertiser), false only those that belong to an advertiser. Not with advertiserId. Lists and grouped counts both take it.\n    '
     live: NotRequired[bool]
     '\n    For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.\n    '
     attention: NotRequired[Literal["approval_needed"]]

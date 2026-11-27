@@ -45222,6 +45222,10 @@ export type SearchData = {
              */
             includeArchived?: boolean;
             /**
+             * For kind project: true keeps only the account-level Projects (no advertiser), false only those that belong to an advertiser. Not with advertiserId. Lists and grouped counts both take it.
+             */
+            accountLevel?: boolean;
+            /**
              * For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.
              */
             live?: boolean;
@@ -45873,6 +45877,10 @@ export type SearchData = {
              * For kind project: also list archived Projects. Default false.
              */
             includeArchived?: boolean;
+            /**
+             * For kind project: true keeps only the account-level Projects (no advertiser), false only those that belong to an advertiser. Not with advertiserId. Lists and grouped counts both take it.
+             */
+            accountLevel?: boolean;
             /**
              * For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.
              */
@@ -46607,6 +46615,10 @@ export type SearchData = {
              */
             includeArchived?: boolean;
             /**
+             * For kind project: true keeps only the account-level Projects (no advertiser), false only those that belong to an advertiser. Not with advertiserId. Lists and grouped counts both take it.
+             */
+            accountLevel?: boolean;
+            /**
              * For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.
              */
             live?: boolean;
@@ -47255,6 +47267,10 @@ export type SearchData = {
              */
             includeArchived?: boolean;
             /**
+             * For kind project: true keeps only the account-level Projects (no advertiser), false only those that belong to an advertiser. Not with advertiserId. Lists and grouped counts both take it.
+             */
+            accountLevel?: boolean;
+            /**
              * For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.
              */
             live?: boolean;
@@ -47899,6 +47915,10 @@ export type SearchData = {
              * For kind project: also list archived Projects. Default false.
              */
             includeArchived?: boolean;
+            /**
+             * For kind project: true keeps only the account-level Projects (no advertiser), false only those that belong to an advertiser. Not with advertiserId. Lists and grouped counts both take it.
+             */
+            accountLevel?: boolean;
             /**
              * For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.
              */
@@ -48547,6 +48567,10 @@ export type SearchData = {
              * For kind project: also list archived Projects. Default false.
              */
             includeArchived?: boolean;
+            /**
+             * For kind project: true keeps only the account-level Projects (no advertiser), false only those that belong to an advertiser. Not with advertiserId. Lists and grouped counts both take it.
+             */
+            accountLevel?: boolean;
             /**
              * For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.
              */
@@ -49195,6 +49219,10 @@ export type SearchData = {
              * For kind project: also list archived Projects. Default false.
              */
             includeArchived?: boolean;
+            /**
+             * For kind project: true keeps only the account-level Projects (no advertiser), false only those that belong to an advertiser. Not with advertiserId. Lists and grouped counts both take it.
+             */
+            accountLevel?: boolean;
             /**
              * For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.
              */
@@ -49999,6 +50027,10 @@ export type SearchData = {
              * For kind project: also list archived Projects. Default false.
              */
             includeArchived?: boolean;
+            /**
+             * For kind project: true keeps only the account-level Projects (no advertiser), false only those that belong to an advertiser. Not with advertiserId. Lists and grouped counts both take it.
+             */
+            accountLevel?: boolean;
             /**
              * For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.
              */
@@ -50818,6 +50850,10 @@ export type SearchData = {
              */
             includeArchived?: boolean;
             /**
+             * For kind project: true keeps only the account-level Projects (no advertiser), false only those that belong to an advertiser. Not with advertiserId. Lists and grouped counts both take it.
+             */
+            accountLevel?: boolean;
+            /**
              * For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.
              */
             live?: boolean;
@@ -51555,6 +51591,10 @@ export type SearchData = {
              */
             includeArchived?: boolean;
             /**
+             * For kind project: true keeps only the account-level Projects (no advertiser), false only those that belong to an advertiser. Not with advertiserId. Lists and grouped counts both take it.
+             */
+            accountLevel?: boolean;
+            /**
              * For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.
              */
             live?: boolean;
@@ -52205,6 +52245,10 @@ export type SearchData = {
              * For kind project: also list archived Projects. Default false.
              */
             includeArchived?: boolean;
+            /**
+             * For kind project: true keeps only the account-level Projects (no advertiser), false only those that belong to an advertiser. Not with advertiserId. Lists and grouped counts both take it.
+             */
+            accountLevel?: boolean;
             /**
              * For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.
              */
@@ -52857,6 +52901,10 @@ export type SearchData = {
              * For kind project: also list archived Projects. Default false.
              */
             includeArchived?: boolean;
+            /**
+             * For kind project: true keeps only the account-level Projects (no advertiser), false only those that belong to an advertiser. Not with advertiserId. Lists and grouped counts both take it.
+             */
+            accountLevel?: boolean;
             /**
              * For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.
              */
@@ -53510,6 +53558,10 @@ export type SearchData = {
              */
             includeArchived?: boolean;
             /**
+             * For kind project: true keeps only the account-level Projects (no advertiser), false only those that belong to an advertiser. Not with advertiserId. Lists and grouped counts both take it.
+             */
+            accountLevel?: boolean;
+            /**
              * For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.
              */
             live?: boolean;
@@ -54161,6 +54213,10 @@ export type SearchData = {
              * For kind project: also list archived Projects. Default false.
              */
             includeArchived?: boolean;
+            /**
+             * For kind project: true keeps only the account-level Projects (no advertiser), false only those that belong to an advertiser. Not with advertiserId. Lists and grouped counts both take it.
+             */
+            accountLevel?: boolean;
             /**
              * For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.
              */
