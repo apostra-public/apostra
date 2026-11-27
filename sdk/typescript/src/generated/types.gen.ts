@@ -1014,7 +1014,7 @@ export type GetData = {
          */
         id: string;
         /**
-         * For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.
+         * For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the previous read.
          */
         after?: string;
         /**
@@ -1022,7 +1022,7 @@ export type GetData = {
          */
         through?: string;
         /**
-         * For kind session: events per page, default 50. Lower it if a page is too large to return.
+         * For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.
          */
         limit?: number;
         /**
@@ -1303,7 +1303,7 @@ export type GetData = {
          */
         id?: string;
         /**
-         * For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.
+         * For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the previous read.
          */
         after?: string;
         /**
@@ -1311,7 +1311,7 @@ export type GetData = {
          */
         through?: string;
         /**
-         * For kind session: events per page, default 50. Lower it if a page is too large to return.
+         * For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.
          */
         limit?: number;
         /**
@@ -1592,7 +1592,7 @@ export type GetData = {
          */
         id?: string;
         /**
-         * For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.
+         * For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the previous read.
          */
         after?: string;
         /**
@@ -1600,7 +1600,7 @@ export type GetData = {
          */
         through?: string;
         /**
-         * For kind session: events per page, default 50. Lower it if a page is too large to return.
+         * For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.
          */
         limit?: number;
         /**
@@ -1877,7 +1877,7 @@ export type GetData = {
     }) | (unknown & {
         kind: 'audience';
         /**
-         * For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.
+         * For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the previous read.
          */
         after?: string;
         /**
@@ -1885,7 +1885,7 @@ export type GetData = {
          */
         through?: string;
         /**
-         * For kind session: events per page, default 50. Lower it if a page is too large to return.
+         * For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.
          */
         limit?: number;
         /**
@@ -2163,7 +2163,7 @@ export type GetData = {
     }) | (unknown & {
         kind: 'advertiser_access';
         /**
-         * For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.
+         * For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the previous read.
          */
         after?: string;
         /**
@@ -2171,7 +2171,7 @@ export type GetData = {
          */
         through?: string;
         /**
-         * For kind session: events per page, default 50. Lower it if a page is too large to return.
+         * For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.
          */
         limit?: number;
         /**
@@ -2453,7 +2453,7 @@ export type GetData = {
          */
         id: string;
         /**
-         * For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.
+         * For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the previous read.
          */
         after?: string;
         /**
@@ -2461,7 +2461,7 @@ export type GetData = {
          */
         through?: string;
         /**
-         * For kind session: events per page, default 50. Lower it if a page is too large to return.
+         * For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.
          */
         limit?: number;
         /**
@@ -2742,7 +2742,7 @@ export type GetData = {
          */
         id: string;
         /**
-         * For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.
+         * For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the previous read.
          */
         after?: string;
         /**
@@ -2750,7 +2750,7 @@ export type GetData = {
          */
         through?: string;
         /**
-         * For kind session: events per page, default 50. Lower it if a page is too large to return.
+         * For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.
          */
         limit?: number;
         /**
@@ -3025,7 +3025,7 @@ export type GetData = {
          */
         id: string;
         /**
-         * For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.
+         * For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the previous read.
          */
         after?: string;
         /**
@@ -3033,7 +3033,7 @@ export type GetData = {
          */
         through?: string;
         /**
-         * For kind session: events per page, default 50. Lower it if a page is too large to return.
+         * For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.
          */
         limit?: number;
         /**
@@ -3311,7 +3311,7 @@ export type GetData = {
          */
         id: string;
         /**
-         * For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.
+         * For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the previous read.
          */
         after?: string;
         /**
@@ -3319,7 +3319,7 @@ export type GetData = {
          */
         through?: string;
         /**
-         * For kind session: events per page, default 50. Lower it if a page is too large to return.
+         * For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.
          */
         limit?: number;
         /**
@@ -3597,7 +3597,7 @@ export type GetData = {
          */
         id: string;
         /**
-         * For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.
+         * For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the previous read.
          */
         after?: string;
         /**
@@ -3605,7 +3605,7 @@ export type GetData = {
          */
         through?: string;
         /**
-         * For kind session: events per page, default 50. Lower it if a page is too large to return.
+         * For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.
          */
         limit?: number;
         /**
@@ -3883,7 +3883,7 @@ export type GetData = {
          */
         id: string;
         /**
-         * For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.
+         * For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the previous read.
          */
         after?: string;
         /**
@@ -3891,7 +3891,7 @@ export type GetData = {
          */
         through?: string;
         /**
-         * For kind session: events per page, default 50. Lower it if a page is too large to return.
+         * For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.
          */
         limit?: number;
         /**
@@ -4169,7 +4169,7 @@ export type GetData = {
          */
         id: string;
         /**
-         * For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.
+         * For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the previous read.
          */
         after?: string;
         /**
@@ -4177,7 +4177,7 @@ export type GetData = {
          */
         through?: string;
         /**
-         * For kind session: events per page, default 50. Lower it if a page is too large to return.
+         * For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.
          */
         limit?: number;
         /**
@@ -4455,7 +4455,7 @@ export type GetData = {
          */
         id: string;
         /**
-         * For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.
+         * For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the previous read.
          */
         after?: string;
         /**
@@ -4463,7 +4463,7 @@ export type GetData = {
          */
         through?: string;
         /**
-         * For kind session: events per page, default 50. Lower it if a page is too large to return.
+         * For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.
          */
         limit?: number;
         /**
@@ -4741,7 +4741,7 @@ export type GetData = {
          */
         id: string;
         /**
-         * For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.
+         * For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the previous read.
          */
         after?: string;
         /**
@@ -4749,7 +4749,7 @@ export type GetData = {
          */
         through?: string;
         /**
-         * For kind session: events per page, default 50. Lower it if a page is too large to return.
+         * For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.
          */
         limit?: number;
         /**
@@ -5030,7 +5030,7 @@ export type GetData = {
          */
         id: string;
         /**
-         * For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.
+         * For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the previous read.
          */
         after?: string;
         /**
@@ -5038,7 +5038,7 @@ export type GetData = {
          */
         through?: string;
         /**
-         * For kind session: events per page, default 50. Lower it if a page is too large to return.
+         * For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.
          */
         limit?: number;
         /**
@@ -5319,7 +5319,7 @@ export type GetData = {
          */
         id: string;
         /**
-         * For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.
+         * For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the previous read.
          */
         after?: string;
         /**
@@ -5327,7 +5327,7 @@ export type GetData = {
          */
         through?: string;
         /**
-         * For kind session: events per page, default 50. Lower it if a page is too large to return.
+         * For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.
          */
         limit?: number;
         /**
@@ -5608,7 +5608,7 @@ export type GetData = {
          */
         id: string;
         /**
-         * For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.
+         * For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the previous read.
          */
         after?: string;
         /**
@@ -5616,7 +5616,7 @@ export type GetData = {
          */
         through?: string;
         /**
-         * For kind session: events per page, default 50. Lower it if a page is too large to return.
+         * For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.
          */
         limit?: number;
         /**
@@ -5897,7 +5897,7 @@ export type GetData = {
          */
         id: string;
         /**
-         * For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.
+         * For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the previous read.
          */
         after?: string;
         /**
@@ -5905,7 +5905,7 @@ export type GetData = {
          */
         through?: string;
         /**
-         * For kind session: events per page, default 50. Lower it if a page is too large to return.
+         * For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.
          */
         limit?: number;
         /**
@@ -6186,7 +6186,7 @@ export type GetData = {
          */
         id: string;
         /**
-         * For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.
+         * For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the previous read.
          */
         after?: string;
         /**
@@ -6194,7 +6194,7 @@ export type GetData = {
          */
         through?: string;
         /**
-         * For kind session: events per page, default 50. Lower it if a page is too large to return.
+         * For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.
          */
         limit?: number;
         /**
@@ -6472,7 +6472,7 @@ export type GetData = {
          */
         id: string;
         /**
-         * For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.
+         * For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the previous read.
          */
         after?: string;
         /**
@@ -6480,7 +6480,7 @@ export type GetData = {
          */
         through?: string;
         /**
-         * For kind session: events per page, default 50. Lower it if a page is too large to return.
+         * For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.
          */
         limit?: number;
         /**
@@ -6758,7 +6758,7 @@ export type GetData = {
          */
         id: string;
         /**
-         * For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.
+         * For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the previous read.
          */
         after?: string;
         /**
@@ -6766,7 +6766,7 @@ export type GetData = {
          */
         through?: string;
         /**
-         * For kind session: events per page, default 50. Lower it if a page is too large to return.
+         * For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.
          */
         limit?: number;
         /**
@@ -24124,6 +24124,155 @@ export type SaveBuyerRfpSuccessBuyerRfp = {
     duplicatedFromRfpId: string | null;
     createdAt: string;
     updatedAt: string;
+    sellers?: Array<{
+        /**
+         * The seller Account id: the Account that owns this seller. Send it as sellerAccountId.
+         */
+        sellerAccountId?: SaveBuyerRfpSuccessBuyerRfpSellersItemSellerAccountId;
+        name: string;
+        /**
+         * The seller’s AdCP opportunity status; null when left out.
+         */
+        status: 'open' | 'closed' | null;
+        closeReason: string | null;
+        responseDeadline: string | null;
+        leftOutReason: 'wholesale_only' | null;
+        /**
+         * The round result; its status describes the seller’s answer, not the opportunity.
+         */
+        outcome: {
+            /**
+             * The seller Account id: the Account that owns this seller. Send it as sellerAccountId.
+             */
+            sellerAccountId?: SaveBuyerRfpSuccessBuyerRfpSellersItemOutcomeSellerAccountId;
+            sellerName?: string;
+            status: 'quoted' | 'products' | 'failed';
+            proposalIds?: Array<string>;
+            productQueryId?: string;
+            products?: Array<{
+                productId: string;
+                name: string;
+                description?: string;
+                /**
+                 * The seller Account id: the Account that owns this seller. Send it as sellerAccountId.
+                 */
+                sellerAccountId?: SaveBuyerRfpSuccessBuyerRfpSellersItemOutcomeProductsItemSellerAccountId;
+                salesAgentId: string;
+                inventorySourceId?: string;
+                deliveryType?: 'guaranteed' | 'non_guaranteed';
+                inventoryType?: 'premium' | 'run_of_site' | 'targeted_package';
+                pricingOptions?: Array<unknown>;
+                formatKinds?: Array<string>;
+                validUntil?: string;
+                detailsTruncated?: boolean;
+                overlaySupportUnavailable?: boolean;
+                overlaySupportUnavailableReason?: string;
+                overlaySupportCursorDescriptorsOmitted?: number;
+                overlaySupportCursor?: string;
+                capabilityDescriptorCursor?: string;
+                capabilityDescriptorCount?: number;
+                overlaySupportCursors?: Array<{
+                    pagePath: Array<string>;
+                    cursor: string;
+                    itemsTotal?: number;
+                }>;
+                demographicTargetingUnavailable?: boolean;
+                demographicTargetingUnavailableReason?: string;
+                demographicTargetingCursorDescriptorsOmitted?: number;
+                demographicTargetingCursor?: string;
+                demographicTargetingCursors?: Array<{
+                    pagePath: Array<string>;
+                    cursor: string;
+                    itemsTotal?: number;
+                }>;
+                demographicTargetingExecutable?: false;
+                demographicTargetingExecutionBlocker?: string;
+                overlaySupport?: unknown;
+                demographicTargeting?: unknown;
+                resolvedAgeTargeting?: {
+                    min?: number;
+                    max?: number;
+                    include_unknown: boolean;
+                    [key: string]: unknown;
+                };
+                goalCoverage?: SaveBuyerRfpSuccessProposalGoalCoverage;
+            }>;
+            productError?: SaveBuyerRfpSuccessProposalRequestSellerError;
+            error?: SaveBuyerRfpSuccessProposalRequestSellerError;
+            proposalIdsTruncated?: boolean;
+            outcome?: {
+                kind: 'returned_products';
+                productCount: number;
+                reason?: never;
+                suggestions?: never;
+                reasonCode?: never;
+                code?: never;
+                message?: never;
+                suggestion?: never;
+            } | {
+                kind: 'no_matching_products';
+                reason?: string;
+                suggestions?: Array<string>;
+                productCount?: never;
+                reasonCode?: never;
+                code?: never;
+                message?: never;
+                suggestion?: never;
+            } | {
+                kind: 'no_inventory_for_request';
+                productCount?: never;
+                reason?: never;
+                suggestions?: never;
+                reasonCode?: never;
+                code?: never;
+                message?: never;
+                suggestion?: never;
+            } | {
+                kind: 'skipped';
+                reasonCode: 'coverage' | 'auth' | 'eligibility' | 'advertiser_activation' | 'account_pending' | 'account_needs_attention' | 'round_predates_account_rule';
+                productCount?: never;
+                reason?: never;
+                suggestions?: never;
+                code?: never;
+                message?: never;
+                suggestion?: never;
+            } | {
+                kind: 'failed';
+                reasonCode: 'timeout' | 'transport' | 'protocol';
+                productCount?: never;
+                reason?: never;
+                suggestions?: never;
+                code?: never;
+                message?: never;
+                suggestion?: never;
+            } | {
+                kind: 'local_refusal';
+                code: string;
+                message: string;
+                suggestion?: string;
+                productCount?: never;
+                reason?: never;
+                suggestions?: never;
+                reasonCode?: never;
+            };
+            propertyCoverage?: Array<{
+                domain: string;
+                productCount: number;
+            }>;
+            propertyCoverageTotal?: number;
+            propertyCoverageTruncated?: boolean;
+            filterResult?: 'no_matching_products' | 'filtered_out' | 'partial';
+            channelExcludedProductCount?: number;
+            inclusionPropertyList?: {
+                filterSupported: boolean;
+                receiptMatchedCount?: number;
+                receiptUnmatchedCount?: number;
+                sellerReportedNoMatch?: boolean;
+                incomplete?: boolean;
+            };
+        } | null;
+    }>;
+    sellersNextAfter?: string;
 };
 
 export type SaveBuyerRfpSuccessBuyerRfpBudgetRange = {
@@ -24167,11 +24316,56 @@ export type SaveBuyerRfpSuccessBuyerRfpGeo = {
     regions?: Array<string>;
 };
 
+export type SaveBuyerRfpSuccessBuyerRfpSellersItemOutcomeProductsItemSellerAccountId = number;
+
+export type SaveBuyerRfpSuccessBuyerRfpSellersItemOutcomeSellerAccountId = number;
+
+export type SaveBuyerRfpSuccessBuyerRfpSellersItemSellerAccountId = number;
+
 export type SaveBuyerRfpSuccessBuyerRfpWindow = {
     openedAt: string;
     responseDeadline: string | null;
     closedAt: string | null;
     closedBy: 'buyer' | 'window' | null;
+};
+
+/**
+ * Why the goal was not sent: the product's AdCP optimization declaration (metric_optimization, conversion_tracking, vendor_metric_optimization) does not cover the goal's kind, metric, target kind, reach unit, view duration, viewability standard or vendor metric, or the product's max_optimization_goals was reached.
+ */
+export type SaveBuyerRfpSuccessDroppedOptimizationGoalCode = 'goal_kind_not_declared' | 'metric_not_declared' | 'target_kind_not_declared' | 'reach_unit_not_declared' | 'view_duration_not_declared' | 'viewability_standard_not_declared' | 'vendor_metric_not_declared' | 'over_max_optimization_goals';
+
+/**
+ * Matching-standard viewable_rate threshold or completed_views target.
+ */
+export type SaveBuyerRfpSuccessExpectedGoalPerformance = {
+    basis: 'viewable_rate' | 'viewable_per_impression' | 'completion_rate';
+    low: number;
+    mid: number;
+    high: number;
+    required: number;
+    verdict: 'likely' | 'possible' | 'unlikely';
+};
+
+export type SaveBuyerRfpSuccessProposalGoalCoverage = {
+    coversPrimaryGoal: boolean;
+    uncovered: Array<{
+        priority: number;
+        code: SaveBuyerRfpSuccessDroppedOptimizationGoalCode;
+    }>;
+    expected?: SaveBuyerRfpSuccessExpectedGoalPerformance;
+};
+
+export type SaveBuyerRfpSuccessProposalRequestSellerError = {
+    code: string;
+    message: string;
+    recovery?: 'transient' | 'correctable' | 'terminal';
+    buyer_reason?: {
+        code: string;
+        message: string;
+        [key: string]: unknown;
+    };
+    seller_explanation?: string;
+    [key: string]: unknown;
 };
 
 export type SaveBuyerRfpSuccessSaveBuyerRfpAction = 'created' | 'duplicated' | 'updated';
@@ -44888,7 +45082,7 @@ export type SearchData = {
              */
             sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers' | 'attention';
             /**
-             * Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
+             * Campaign id. Proposal takes this or rfpId. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
              */
             campaignId?: string;
             /**
@@ -45088,7 +45282,7 @@ export type SearchData = {
              */
             outcome?: Array<string>;
             /**
-             * For kind rfp_turn: only turns of this RFP, by the RFP id from search.
+             * For kind rfp_turn: turns of this RFP. For kind proposal: proposals of this buyer RFP.
              */
             rfpId?: string;
             /**
@@ -45540,7 +45734,7 @@ export type SearchData = {
              */
             sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers' | 'attention';
             /**
-             * Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
+             * Campaign id. Proposal takes this or rfpId. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
              */
             campaignId?: string;
             /**
@@ -45740,7 +45934,7 @@ export type SearchData = {
              */
             outcome?: Array<string>;
             /**
-             * For kind rfp_turn: only turns of this RFP, by the RFP id from search.
+             * For kind rfp_turn: turns of this RFP. For kind proposal: proposals of this buyer RFP.
              */
             rfpId?: string;
             /**
@@ -46273,7 +46467,7 @@ export type SearchData = {
              */
             sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers' | 'attention';
             /**
-             * Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
+             * Campaign id. Proposal takes this or rfpId. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
              */
             campaignId: string;
             /**
@@ -46473,7 +46667,7 @@ export type SearchData = {
              */
             outcome?: Array<string>;
             /**
-             * For kind rfp_turn: only turns of this RFP, by the RFP id from search.
+             * For kind rfp_turn: turns of this RFP. For kind proposal: proposals of this buyer RFP.
              */
             rfpId?: string;
             /**
@@ -46921,7 +47115,7 @@ export type SearchData = {
              */
             sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers' | 'attention';
             /**
-             * Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
+             * Campaign id. Proposal takes this or rfpId. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
              */
             campaignId: string;
             /**
@@ -47121,7 +47315,7 @@ export type SearchData = {
              */
             outcome?: Array<string>;
             /**
-             * For kind rfp_turn: only turns of this RFP, by the RFP id from search.
+             * For kind rfp_turn: turns of this RFP. For kind proposal: proposals of this buyer RFP.
              */
             rfpId?: string;
             /**
@@ -47766,7 +47960,7 @@ export type SearchData = {
              */
             outcome?: Array<string>;
             /**
-             * For kind rfp_turn: only turns of this RFP, by the RFP id from search.
+             * For kind rfp_turn: turns of this RFP. For kind proposal: proposals of this buyer RFP.
              */
             rfpId?: string;
             /**
@@ -48214,7 +48408,7 @@ export type SearchData = {
              */
             sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers' | 'attention';
             /**
-             * Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
+             * Campaign id. Proposal takes this or rfpId. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
              */
             campaignId: string;
             /**
@@ -48414,7 +48608,7 @@ export type SearchData = {
              */
             outcome?: Array<string>;
             /**
-             * For kind rfp_turn: only turns of this RFP, by the RFP id from search.
+             * For kind rfp_turn: turns of this RFP. For kind proposal: proposals of this buyer RFP.
              */
             rfpId?: string;
             /**
@@ -49062,7 +49256,7 @@ export type SearchData = {
              */
             outcome?: Array<string>;
             /**
-             * For kind rfp_turn: only turns of this RFP, by the RFP id from search.
+             * For kind rfp_turn: turns of this RFP. For kind proposal: proposals of this buyer RFP.
              */
             rfpId?: string;
             /**
@@ -49331,7 +49525,7 @@ export type SearchData = {
          */
         filter: {
             /**
-             * Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
+             * Campaign id. Proposal takes this or rfpId. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
              */
             campaignId: string;
             /**
@@ -49666,7 +49860,7 @@ export type SearchData = {
              */
             sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers' | 'attention';
             /**
-             * Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
+             * Campaign id. Proposal takes this or rfpId. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
              */
             campaignId?: string;
             /**
@@ -49866,7 +50060,7 @@ export type SearchData = {
              */
             outcome?: Array<string>;
             /**
-             * For kind rfp_turn: only turns of this RFP, by the RFP id from search.
+             * For kind rfp_turn: turns of this RFP. For kind proposal: proposals of this buyer RFP.
              */
             rfpId?: string;
             /**
@@ -50484,7 +50678,7 @@ export type SearchData = {
              */
             sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers' | 'attention';
             /**
-             * Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
+             * Campaign id. Proposal takes this or rfpId. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
              */
             campaignId?: string;
             /**
@@ -50684,7 +50878,7 @@ export type SearchData = {
              */
             outcome?: Array<string>;
             /**
-             * For kind rfp_turn: only turns of this RFP, by the RFP id from search.
+             * For kind rfp_turn: turns of this RFP. For kind proposal: proposals of this buyer RFP.
              */
             rfpId?: string;
             /**
@@ -51221,7 +51415,7 @@ export type SearchData = {
              */
             sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers' | 'attention';
             /**
-             * Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
+             * Campaign id. Proposal takes this or rfpId. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
              */
             campaignId?: string;
             /**
@@ -51421,7 +51615,7 @@ export type SearchData = {
              */
             outcome?: Array<string>;
             /**
-             * For kind rfp_turn: only turns of this RFP, by the RFP id from search.
+             * For kind rfp_turn: turns of this RFP. For kind proposal: proposals of this buyer RFP.
              */
             rfpId?: string;
             /**
@@ -51872,7 +52066,7 @@ export type SearchData = {
              */
             sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers' | 'attention';
             /**
-             * Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
+             * Campaign id. Proposal takes this or rfpId. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
              */
             campaignId?: string;
             /**
@@ -52072,7 +52266,7 @@ export type SearchData = {
              */
             outcome?: Array<string>;
             /**
-             * For kind rfp_turn: only turns of this RFP, by the RFP id from search.
+             * For kind rfp_turn: turns of this RFP. For kind proposal: proposals of this buyer RFP.
              */
             rfpId?: string;
             /**
@@ -52524,7 +52718,7 @@ export type SearchData = {
              */
             sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers' | 'attention';
             /**
-             * Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
+             * Campaign id. Proposal takes this or rfpId. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
              */
             campaignId?: string;
             /**
@@ -52724,7 +52918,7 @@ export type SearchData = {
              */
             outcome?: Array<string>;
             /**
-             * For kind rfp_turn: only turns of this RFP, by the RFP id from search.
+             * For kind rfp_turn: turns of this RFP. For kind proposal: proposals of this buyer RFP.
              */
             rfpId?: string;
             /**
@@ -53176,7 +53370,7 @@ export type SearchData = {
              */
             sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers' | 'attention';
             /**
-             * Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
+             * Campaign id. Proposal takes this or rfpId. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
              */
             campaignId?: string;
             /**
@@ -53376,7 +53570,7 @@ export type SearchData = {
              */
             outcome?: Array<string>;
             /**
-             * For kind rfp_turn: only turns of this RFP, by the RFP id from search.
+             * For kind rfp_turn: turns of this RFP. For kind proposal: proposals of this buyer RFP.
              */
             rfpId?: string;
             /**
@@ -53828,7 +54022,7 @@ export type SearchData = {
              */
             sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers' | 'attention';
             /**
-             * Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
+             * Campaign id. Proposal takes this or rfpId. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
              */
             campaignId?: string;
             /**
@@ -54028,7 +54222,7 @@ export type SearchData = {
              */
             outcome?: Array<string>;
             /**
-             * For kind rfp_turn: only turns of this RFP, by the RFP id from search.
+             * For kind rfp_turn: turns of this RFP. For kind proposal: proposals of this buyer RFP.
              */
             rfpId?: string;
             /**

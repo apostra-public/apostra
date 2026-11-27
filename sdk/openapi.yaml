@@ -2037,8 +2037,8 @@ paths:
                       minLength: 1
                     after:
                       description: >-
-                        For kind session: pageNextAfter from the previous read to get the next page of events, or
-                        resumeAfter to catch up later.
+                        For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the
+                        previous read.
                       type: string
                       minLength: 1
                       maxLength: 1024
@@ -2050,7 +2050,7 @@ paths:
                       minLength: 1
                       maxLength: 1024
                     limit:
-                      description: 'For kind session: events per page, default 50. Lower it if a page is too large to return.'
+                      description: 'For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.'
                       type: integer
                       minimum: 1
                       maximum: 100
@@ -3536,8 +3536,8 @@ paths:
                       minLength: 1
                     after:
                       description: >-
-                        For kind session: pageNextAfter from the previous read to get the next page of events, or
-                        resumeAfter to catch up later.
+                        For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the
+                        previous read.
                       type: string
                       minLength: 1
                       maxLength: 1024
@@ -3549,7 +3549,7 @@ paths:
                       minLength: 1
                       maxLength: 1024
                     limit:
-                      description: 'For kind session: events per page, default 50. Lower it if a page is too large to return.'
+                      description: 'For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.'
                       type: integer
                       minimum: 1
                       maximum: 100
@@ -5011,8 +5011,8 @@ paths:
                       minLength: 1
                     after:
                       description: >-
-                        For kind session: pageNextAfter from the previous read to get the next page of events, or
-                        resumeAfter to catch up later.
+                        For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the
+                        previous read.
                       type: string
                       minLength: 1
                       maxLength: 1024
@@ -5024,7 +5024,7 @@ paths:
                       minLength: 1
                       maxLength: 1024
                     limit:
-                      description: 'For kind session: events per page, default 50. Lower it if a page is too large to return.'
+                      description: 'For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.'
                       type: integer
                       minimum: 1
                       maximum: 100
@@ -6471,8 +6471,8 @@ paths:
                       not: {}
                     after:
                       description: >-
-                        For kind session: pageNextAfter from the previous read to get the next page of events, or
-                        resumeAfter to catch up later.
+                        For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the
+                        previous read.
                       type: string
                       minLength: 1
                       maxLength: 1024
@@ -6484,7 +6484,7 @@ paths:
                       minLength: 1
                       maxLength: 1024
                     limit:
-                      description: 'For kind session: events per page, default 50. Lower it if a page is too large to return.'
+                      description: 'For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.'
                       type: integer
                       minimum: 1
                       maximum: 100
@@ -7932,8 +7932,8 @@ paths:
                       not: {}
                     after:
                       description: >-
-                        For kind session: pageNextAfter from the previous read to get the next page of events, or
-                        resumeAfter to catch up later.
+                        For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the
+                        previous read.
                       type: string
                       minLength: 1
                       maxLength: 1024
@@ -7945,7 +7945,7 @@ paths:
                       minLength: 1
                       maxLength: 1024
                     limit:
-                      description: 'For kind session: events per page, default 50. Lower it if a page is too large to return.'
+                      description: 'For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.'
                       type: integer
                       minimum: 1
                       maximum: 100
@@ -9400,8 +9400,8 @@ paths:
                       minLength: 1
                     after:
                       description: >-
-                        For kind session: pageNextAfter from the previous read to get the next page of events, or
-                        resumeAfter to catch up later.
+                        For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the
+                        previous read.
                       type: string
                       minLength: 1
                       maxLength: 1024
@@ -9413,7 +9413,7 @@ paths:
                       minLength: 1
                       maxLength: 1024
                     limit:
-                      description: 'For kind session: events per page, default 50. Lower it if a page is too large to return.'
+                      description: 'For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.'
                       type: integer
                       minimum: 1
                       maximum: 100
@@ -10867,8 +10867,8 @@ paths:
                       minLength: 1
                     after:
                       description: >-
-                        For kind session: pageNextAfter from the previous read to get the next page of events, or
-                        resumeAfter to catch up later.
+                        For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the
+                        previous read.
                       type: string
                       minLength: 1
                       maxLength: 1024
@@ -10880,7 +10880,7 @@ paths:
                       minLength: 1
                       maxLength: 1024
                     limit:
-                      description: 'For kind session: events per page, default 50. Lower it if a page is too large to return.'
+                      description: 'For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.'
                       type: integer
                       minimum: 1
                       maximum: 100
@@ -12219,8 +12219,8 @@ paths:
                       minLength: 1
                     after:
                       description: >-
-                        For kind session: pageNextAfter from the previous read to get the next page of events, or
-                        resumeAfter to catch up later.
+                        For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the
+                        previous read.
                       type: string
                       minLength: 1
                       maxLength: 1024
@@ -12232,7 +12232,7 @@ paths:
                       minLength: 1
                       maxLength: 1024
                     limit:
-                      description: 'For kind session: events per page, default 50. Lower it if a page is too large to return.'
+                      description: 'For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.'
                       type: integer
                       minimum: 1
                       maximum: 100
@@ -13682,8 +13682,8 @@ paths:
                       minLength: 1
                     after:
                       description: >-
-                        For kind session: pageNextAfter from the previous read to get the next page of events, or
-                        resumeAfter to catch up later.
+                        For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the
+                        previous read.
                       type: string
                       minLength: 1
                       maxLength: 1024
@@ -13695,7 +13695,7 @@ paths:
                       minLength: 1
                       maxLength: 1024
                     limit:
-                      description: 'For kind session: events per page, default 50. Lower it if a page is too large to return.'
+                      description: 'For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.'
                       type: integer
                       minimum: 1
                       maximum: 100
@@ -15143,8 +15143,8 @@ paths:
                       minLength: 1
                     after:
                       description: >-
-                        For kind session: pageNextAfter from the previous read to get the next page of events, or
-                        resumeAfter to catch up later.
+                        For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the
+                        previous read.
                       type: string
                       minLength: 1
                       maxLength: 1024
@@ -15156,7 +15156,7 @@ paths:
                       minLength: 1
                       maxLength: 1024
                     limit:
-                      description: 'For kind session: events per page, default 50. Lower it if a page is too large to return.'
+                      description: 'For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.'
                       type: integer
                       minimum: 1
                       maximum: 100
@@ -16498,8 +16498,8 @@ paths:
                       minLength: 1
                     after:
                       description: >-
-                        For kind session: pageNextAfter from the previous read to get the next page of events, or
-                        resumeAfter to catch up later.
+                        For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the
+                        previous read.
                       type: string
                       minLength: 1
                       maxLength: 1024
@@ -16511,7 +16511,7 @@ paths:
                       minLength: 1
                       maxLength: 1024
                     limit:
-                      description: 'For kind session: events per page, default 50. Lower it if a page is too large to return.'
+                      description: 'For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.'
                       type: integer
                       minimum: 1
                       maximum: 100
@@ -17853,8 +17853,8 @@ paths:
                       minLength: 1
                     after:
                       description: >-
-                        For kind session: pageNextAfter from the previous read to get the next page of events, or
-                        resumeAfter to catch up later.
+                        For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the
+                        previous read.
                       type: string
                       minLength: 1
                       maxLength: 1024
@@ -17866,7 +17866,7 @@ paths:
                       minLength: 1
                       maxLength: 1024
                     limit:
-                      description: 'For kind session: events per page, default 50. Lower it if a page is too large to return.'
+                      description: 'For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.'
                       type: integer
                       minimum: 1
                       maximum: 100
@@ -19314,8 +19314,8 @@ paths:
                       minLength: 1
                     after:
                       description: >-
-                        For kind session: pageNextAfter from the previous read to get the next page of events, or
-                        resumeAfter to catch up later.
+                        For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the
+                        previous read.
                       type: string
                       minLength: 1
                       maxLength: 1024
@@ -19327,7 +19327,7 @@ paths:
                       minLength: 1
                       maxLength: 1024
                     limit:
-                      description: 'For kind session: events per page, default 50. Lower it if a page is too large to return.'
+                      description: 'For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.'
                       type: integer
                       minimum: 1
                       maximum: 100
@@ -20775,8 +20775,8 @@ paths:
                       minLength: 1
                     after:
                       description: >-
-                        For kind session: pageNextAfter from the previous read to get the next page of events, or
-                        resumeAfter to catch up later.
+                        For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the
+                        previous read.
                       type: string
                       minLength: 1
                       maxLength: 1024
@@ -20788,7 +20788,7 @@ paths:
                       minLength: 1
                       maxLength: 1024
                     limit:
-                      description: 'For kind session: events per page, default 50. Lower it if a page is too large to return.'
+                      description: 'For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.'
                       type: integer
                       minimum: 1
                       maximum: 100
@@ -22241,8 +22241,8 @@ paths:
                       minLength: 1
                     after:
                       description: >-
-                        For kind session: pageNextAfter from the previous read to get the next page of events, or
-                        resumeAfter to catch up later.
+                        For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the
+                        previous read.
                       type: string
                       minLength: 1
                       maxLength: 1024
@@ -22254,7 +22254,7 @@ paths:
                       minLength: 1
                       maxLength: 1024
                     limit:
-                      description: 'For kind session: events per page, default 50. Lower it if a page is too large to return.'
+                      description: 'For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.'
                       type: integer
                       minimum: 1
                       maximum: 100
@@ -23707,8 +23707,8 @@ paths:
                       minLength: 1
                     after:
                       description: >-
-                        For kind session: pageNextAfter from the previous read to get the next page of events, or
-                        resumeAfter to catch up later.
+                        For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the
+                        previous read.
                       type: string
                       minLength: 1
                       maxLength: 1024
@@ -23720,7 +23720,7 @@ paths:
                       minLength: 1
                       maxLength: 1024
                     limit:
-                      description: 'For kind session: events per page, default 50. Lower it if a page is too large to return.'
+                      description: 'For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.'
                       type: integer
                       minimum: 1
                       maximum: 100
@@ -25173,8 +25173,8 @@ paths:
                       minLength: 1
                     after:
                       description: >-
-                        For kind session: pageNextAfter from the previous read to get the next page of events, or
-                        resumeAfter to catch up later.
+                        For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the
+                        previous read.
                       type: string
                       minLength: 1
                       maxLength: 1024
@@ -25186,7 +25186,7 @@ paths:
                       minLength: 1
                       maxLength: 1024
                     limit:
-                      description: 'For kind session: events per page, default 50. Lower it if a page is too large to return.'
+                      description: 'For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.'
                       type: integer
                       minimum: 1
                       maximum: 100
@@ -26639,8 +26639,8 @@ paths:
                       minLength: 1
                     after:
                       description: >-
-                        For kind session: pageNextAfter from the previous read to get the next page of events, or
-                        resumeAfter to catch up later.
+                        For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the
+                        previous read.
                       type: string
                       minLength: 1
                       maxLength: 1024
@@ -26652,7 +26652,7 @@ paths:
                       minLength: 1
                       maxLength: 1024
                     limit:
-                      description: 'For kind session: events per page, default 50. Lower it if a page is too large to return.'
+                      description: 'For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.'
                       type: integer
                       minimum: 1
                       maximum: 100
@@ -28106,8 +28106,8 @@ paths:
                       minLength: 1
                     after:
                       description: >-
-                        For kind session: pageNextAfter from the previous read to get the next page of events, or
-                        resumeAfter to catch up later.
+                        For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the
+                        previous read.
                       type: string
                       minLength: 1
                       maxLength: 1024
@@ -28119,7 +28119,7 @@ paths:
                       minLength: 1
                       maxLength: 1024
                     limit:
-                      description: 'For kind session: events per page, default 50. Lower it if a page is too large to return.'
+                      description: 'For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.'
                       type: integer
                       minimum: 1
                       maximum: 100
@@ -29461,8 +29461,8 @@ paths:
                       minLength: 1
                     after:
                       description: >-
-                        For kind session: pageNextAfter from the previous read to get the next page of events, or
-                        resumeAfter to catch up later.
+                        For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the
+                        previous read.
                       type: string
                       minLength: 1
                       maxLength: 1024
@@ -29474,7 +29474,7 @@ paths:
                       minLength: 1
                       maxLength: 1024
                     limit:
-                      description: 'For kind session: events per page, default 50. Lower it if a page is too large to return.'
+                      description: 'For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.'
                       type: integer
                       minimum: 1
                       maximum: 100
@@ -30816,8 +30816,8 @@ paths:
                       minLength: 1
                     after:
                       description: >-
-                        For kind session: pageNextAfter from the previous read to get the next page of events, or
-                        resumeAfter to catch up later.
+                        For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the
+                        previous read.
                       type: string
                       minLength: 1
                       maxLength: 1024
@@ -30829,7 +30829,7 @@ paths:
                       minLength: 1
                       maxLength: 1024
                     limit:
-                      description: 'For kind session: events per page, default 50. Lower it if a page is too large to return.'
+                      description: 'For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.'
                       type: integer
                       minimum: 1
                       maximum: 100
@@ -75146,8 +75146,8 @@ paths:
                             - attention
                         campaignId:
                           description: >-
-                            Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
-                            this or advertiserId, not both. Buyer media_buy needs one.
+                            Campaign id. Proposal takes this or rfpId. creative, creative_collection, and
+                            creative_session take this or advertiserId, not both. Buyer media_buy needs one.
                           type: string
                         needsSorting:
                           description: 'For Buyer material or library_request: whether the assignment needs sorting.'
@@ -75555,7 +75555,7 @@ paths:
                             type: string
                             minLength: 1
                         rfpId:
-                          description: 'For kind rfp_turn: only turns of this RFP, by the RFP id from search.'
+                          description: 'For kind rfp_turn: turns of this RFP. For kind proposal: proposals of this buyer RFP.'
                           type: string
                           minLength: 1
                         responseState:
@@ -77223,8 +77223,8 @@ paths:
                             - attention
                         campaignId:
                           description: >-
-                            Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
-                            this or advertiserId, not both. Buyer media_buy needs one.
+                            Campaign id. Proposal takes this or rfpId. creative, creative_collection, and
+                            creative_session take this or advertiserId, not both. Buyer media_buy needs one.
                           type: string
                         needsSorting:
                           description: 'For Buyer material or library_request: whether the assignment needs sorting.'
@@ -77632,7 +77632,7 @@ paths:
                             type: string
                             minLength: 1
                         rfpId:
-                          description: 'For kind rfp_turn: only turns of this RFP, by the RFP id from search.'
+                          description: 'For kind rfp_turn: turns of this RFP. For kind proposal: proposals of this buyer RFP.'
                           type: string
                           minLength: 1
                         responseState:
@@ -80165,8 +80165,8 @@ paths:
                             - attention
                         campaignId:
                           description: >-
-                            Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
-                            this or advertiserId, not both. Buyer media_buy needs one.
+                            Campaign id. Proposal takes this or rfpId. creative, creative_collection, and
+                            creative_session take this or advertiserId, not both. Buyer media_buy needs one.
                           type: string
                         needsSorting:
                           description: 'For Buyer material or library_request: whether the assignment needs sorting.'
@@ -80574,7 +80574,7 @@ paths:
                             type: string
                             minLength: 1
                         rfpId:
-                          description: 'For kind rfp_turn: only turns of this RFP, by the RFP id from search.'
+                          description: 'For kind rfp_turn: turns of this RFP. For kind proposal: proposals of this buyer RFP.'
                           type: string
                           minLength: 1
                         responseState:
@@ -82234,8 +82234,8 @@ paths:
                             - attention
                         campaignId:
                           description: >-
-                            Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
-                            this or advertiserId, not both. Buyer media_buy needs one.
+                            Campaign id. Proposal takes this or rfpId. creative, creative_collection, and
+                            creative_session take this or advertiserId, not both. Buyer media_buy needs one.
                           type: string
                         needsSorting:
                           description: 'For Buyer material or library_request: whether the assignment needs sorting.'
@@ -82643,7 +82643,7 @@ paths:
                             type: string
                             minLength: 1
                         rfpId:
-                          description: 'For kind rfp_turn: only turns of this RFP, by the RFP id from search.'
+                          description: 'For kind rfp_turn: turns of this RFP. For kind proposal: proposals of this buyer RFP.'
                           type: string
                           minLength: 1
                         responseState:
@@ -84709,7 +84709,7 @@ paths:
                             type: string
                             minLength: 1
                         rfpId:
-                          description: 'For kind rfp_turn: only turns of this RFP, by the RFP id from search.'
+                          description: 'For kind rfp_turn: turns of this RFP. For kind proposal: proposals of this buyer RFP.'
                           type: string
                           minLength: 1
                         responseState:
@@ -86366,8 +86366,8 @@ paths:
                             - attention
                         campaignId:
                           description: >-
-                            Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
-                            this or advertiserId, not both. Buyer media_buy needs one.
+                            Campaign id. Proposal takes this or rfpId. creative, creative_collection, and
+                            creative_session take this or advertiserId, not both. Buyer media_buy needs one.
                           type: string
                         needsSorting:
                           description: 'For Buyer material or library_request: whether the assignment needs sorting.'
@@ -86775,7 +86775,7 @@ paths:
                             type: string
                             minLength: 1
                         rfpId:
-                          description: 'For kind rfp_turn: only turns of this RFP, by the RFP id from search.'
+                          description: 'For kind rfp_turn: turns of this RFP. For kind proposal: proposals of this buyer RFP.'
                           type: string
                           minLength: 1
                         responseState:
@@ -88848,7 +88848,7 @@ paths:
                             type: string
                             minLength: 1
                         rfpId:
-                          description: 'For kind rfp_turn: only turns of this RFP, by the RFP id from search.'
+                          description: 'For kind rfp_turn: turns of this RFP. For kind proposal: proposals of this buyer RFP.'
                           type: string
                           minLength: 1
                         responseState:
@@ -90095,8 +90095,8 @@ paths:
                       properties:
                         campaignId:
                           description: >-
-                            Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
-                            this or advertiserId, not both. Buyer media_buy needs one.
+                            Campaign id. Proposal takes this or rfpId. creative, creative_collection, and
+                            creative_session take this or advertiserId, not both. Buyer media_buy needs one.
                           type: string
                         status:
                           description: >-
@@ -92285,8 +92285,8 @@ paths:
                             - attention
                         campaignId:
                           description: >-
-                            Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
-                            this or advertiserId, not both. Buyer media_buy needs one.
+                            Campaign id. Proposal takes this or rfpId. creative, creative_collection, and
+                            creative_session take this or advertiserId, not both. Buyer media_buy needs one.
                           type: string
                         needsSorting:
                           description: 'For Buyer material or library_request: whether the assignment needs sorting.'
@@ -92694,7 +92694,7 @@ paths:
                             type: string
                             minLength: 1
                         rfpId:
-                          description: 'For kind rfp_turn: only turns of this RFP, by the RFP id from search.'
+                          description: 'For kind rfp_turn: turns of this RFP. For kind proposal: proposals of this buyer RFP.'
                           type: string
                           minLength: 1
                         responseState:
@@ -96092,8 +96092,8 @@ paths:
                             - attention
                         campaignId:
                           description: >-
-                            Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
-                            this or advertiserId, not both. Buyer media_buy needs one.
+                            Campaign id. Proposal takes this or rfpId. creative, creative_collection, and
+                            creative_session take this or advertiserId, not both. Buyer media_buy needs one.
                           type: string
                         needsSorting:
                           description: 'For Buyer material or library_request: whether the assignment needs sorting.'
@@ -96501,7 +96501,7 @@ paths:
                             type: string
                             minLength: 1
                         rfpId:
-                          description: 'For kind rfp_turn: only turns of this RFP, by the RFP id from search.'
+                          description: 'For kind rfp_turn: turns of this RFP. For kind proposal: proposals of this buyer RFP.'
                           type: string
                           minLength: 1
                         responseState:
@@ -99046,8 +99046,8 @@ paths:
                             - attention
                         campaignId:
                           description: >-
-                            Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
-                            this or advertiserId, not both. Buyer media_buy needs one.
+                            Campaign id. Proposal takes this or rfpId. creative, creative_collection, and
+                            creative_session take this or advertiserId, not both. Buyer media_buy needs one.
                           type: string
                         needsSorting:
                           description: 'For Buyer material or library_request: whether the assignment needs sorting.'
@@ -99455,7 +99455,7 @@ paths:
                             type: string
                             minLength: 1
                         rfpId:
-                          description: 'For kind rfp_turn: only turns of this RFP, by the RFP id from search.'
+                          description: 'For kind rfp_turn: turns of this RFP. For kind proposal: proposals of this buyer RFP.'
                           type: string
                           minLength: 1
                         responseState:
@@ -101122,8 +101122,8 @@ paths:
                             - attention
                         campaignId:
                           description: >-
-                            Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
-                            this or advertiserId, not both. Buyer media_buy needs one.
+                            Campaign id. Proposal takes this or rfpId. creative, creative_collection, and
+                            creative_session take this or advertiserId, not both. Buyer media_buy needs one.
                           type: string
                         needsSorting:
                           description: 'For Buyer material or library_request: whether the assignment needs sorting.'
@@ -101531,7 +101531,7 @@ paths:
                             type: string
                             minLength: 1
                         rfpId:
-                          description: 'For kind rfp_turn: only turns of this RFP, by the RFP id from search.'
+                          description: 'For kind rfp_turn: turns of this RFP. For kind proposal: proposals of this buyer RFP.'
                           type: string
                           minLength: 1
                         responseState:
@@ -103195,8 +103195,8 @@ paths:
                             - attention
                         campaignId:
                           description: >-
-                            Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
-                            this or advertiserId, not both. Buyer media_buy needs one.
+                            Campaign id. Proposal takes this or rfpId. creative, creative_collection, and
+                            creative_session take this or advertiserId, not both. Buyer media_buy needs one.
                           type: string
                         needsSorting:
                           description: 'For Buyer material or library_request: whether the assignment needs sorting.'
@@ -103604,7 +103604,7 @@ paths:
                             type: string
                             minLength: 1
                         rfpId:
-                          description: 'For kind rfp_turn: only turns of this RFP, by the RFP id from search.'
+                          description: 'For kind rfp_turn: turns of this RFP. For kind proposal: proposals of this buyer RFP.'
                           type: string
                           minLength: 1
                         responseState:
@@ -105268,8 +105268,8 @@ paths:
                             - attention
                         campaignId:
                           description: >-
-                            Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
-                            this or advertiserId, not both. Buyer media_buy needs one.
+                            Campaign id. Proposal takes this or rfpId. creative, creative_collection, and
+                            creative_session take this or advertiserId, not both. Buyer media_buy needs one.
                           type: string
                         needsSorting:
                           description: 'For Buyer material or library_request: whether the assignment needs sorting.'
@@ -105677,7 +105677,7 @@ paths:
                             type: string
                             minLength: 1
                         rfpId:
-                          description: 'For kind rfp_turn: only turns of this RFP, by the RFP id from search.'
+                          description: 'For kind rfp_turn: turns of this RFP. For kind proposal: proposals of this buyer RFP.'
                           type: string
                           minLength: 1
                         responseState:
@@ -107342,8 +107342,8 @@ paths:
                             - attention
                         campaignId:
                           description: >-
-                            Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
-                            this or advertiserId, not both. Buyer media_buy needs one.
+                            Campaign id. Proposal takes this or rfpId. creative, creative_collection, and
+                            creative_session take this or advertiserId, not both. Buyer media_buy needs one.
                           type: string
                         needsSorting:
                           description: 'For Buyer material or library_request: whether the assignment needs sorting.'
@@ -107751,7 +107751,7 @@ paths:
                             type: string
                             minLength: 1
                         rfpId:
-                          description: 'For kind rfp_turn: only turns of this RFP, by the RFP id from search.'
+                          description: 'For kind rfp_turn: turns of this RFP. For kind proposal: proposals of this buyer RFP.'
                           type: string
                           minLength: 1
                         responseState:
@@ -126570,6 +126570,346 @@ components:
           type: string
         updatedAt:
           type: string
+        sellers:
+          type: array
+          items:
+            type: object
+            properties:
+              sellerAccountId:
+                description: 'The seller Account id: the Account that owns this seller. Send it as sellerAccountId.'
+                $ref: '#/components/schemas/save_buyer_rfp_success_BuyerRfpSellersItemSellerAccountId'
+              name:
+                type: string
+              status:
+                anyOf:
+                  - type: string
+                    enum:
+                      - open
+                      - closed
+                  - type: 'null'
+                description: The seller’s AdCP opportunity status; null when left out.
+              closeReason:
+                type:
+                  - string
+                  - 'null'
+              responseDeadline:
+                type:
+                  - string
+                  - 'null'
+              leftOutReason:
+                anyOf:
+                  - type: string
+                    const: wholesale_only
+                  - type: 'null'
+              outcome:
+                anyOf:
+                  - type: object
+                    properties:
+                      sellerAccountId:
+                        description: 'The seller Account id: the Account that owns this seller. Send it as sellerAccountId.'
+                        $ref: '#/components/schemas/save_buyer_rfp_success_BuyerRfpSellersItemOutcomeSellerAccountId'
+                      sellerName:
+                        type: string
+                      status:
+                        type: string
+                        enum:
+                          - quoted
+                          - products
+                          - failed
+                      proposalIds:
+                        type: array
+                        items:
+                          type: string
+                      productQueryId:
+                        type: string
+                      products:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            productId:
+                              type: string
+                            name:
+                              type: string
+                            description:
+                              type: string
+                            sellerAccountId:
+                              description: 'The seller Account id: the Account that owns this seller. Send it as sellerAccountId.'
+                              $ref: >-
+                                #/components/schemas/save_buyer_rfp_success_BuyerRfpSellersItemOutcomeProductsItemSellerAccountId
+                            salesAgentId:
+                              type: string
+                            inventorySourceId:
+                              type: string
+                            deliveryType:
+                              type: string
+                              enum:
+                                - guaranteed
+                                - non_guaranteed
+                            inventoryType:
+                              type: string
+                              enum:
+                                - premium
+                                - run_of_site
+                                - targeted_package
+                            pricingOptions:
+                              type: array
+                              items: {}
+                            formatKinds:
+                              type: array
+                              items:
+                                type: string
+                            validUntil:
+                              type: string
+                            detailsTruncated:
+                              type: boolean
+                            overlaySupportUnavailable:
+                              type: boolean
+                            overlaySupportUnavailableReason:
+                              type: string
+                            overlaySupportCursorDescriptorsOmitted:
+                              type: number
+                            overlaySupportCursor:
+                              type: string
+                            capabilityDescriptorCursor:
+                              type: string
+                            capabilityDescriptorCount:
+                              type: number
+                            overlaySupportCursors:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  pagePath:
+                                    type: array
+                                    items:
+                                      type: string
+                                  cursor:
+                                    type: string
+                                  itemsTotal:
+                                    type: number
+                                required:
+                                  - pagePath
+                                  - cursor
+                                additionalProperties: false
+                            demographicTargetingUnavailable:
+                              type: boolean
+                            demographicTargetingUnavailableReason:
+                              type: string
+                            demographicTargetingCursorDescriptorsOmitted:
+                              type: number
+                            demographicTargetingCursor:
+                              type: string
+                            demographicTargetingCursors:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  pagePath:
+                                    type: array
+                                    items:
+                                      type: string
+                                  cursor:
+                                    type: string
+                                  itemsTotal:
+                                    type: number
+                                required:
+                                  - pagePath
+                                  - cursor
+                                additionalProperties: false
+                            demographicTargetingExecutable:
+                              type: boolean
+                              const: false
+                            demographicTargetingExecutionBlocker:
+                              type: string
+                            overlaySupport: {}
+                            demographicTargeting: {}
+                            resolvedAgeTargeting:
+                              type: object
+                              properties:
+                                min:
+                                  type: integer
+                                  minimum: 0
+                                  maximum: 150
+                                max:
+                                  type: integer
+                                  minimum: 0
+                                  maximum: 150
+                                include_unknown:
+                                  type: boolean
+                              required:
+                                - include_unknown
+                              additionalProperties: {}
+                            goalCoverage:
+                              $ref: '#/components/schemas/save_buyer_rfp_success_ProposalGoalCoverage'
+                          required:
+                            - productId
+                            - name
+                            - salesAgentId
+                          additionalProperties: false
+                      productError:
+                        $ref: '#/components/schemas/save_buyer_rfp_success_ProposalRequestSellerError'
+                      error:
+                        $ref: '#/components/schemas/save_buyer_rfp_success_ProposalRequestSellerError'
+                      proposalIdsTruncated:
+                        type: boolean
+                      outcome:
+                        oneOf:
+                          - type: object
+                            properties:
+                              kind:
+                                type: string
+                                const: returned_products
+                              productCount:
+                                type: integer
+                                exclusiveMinimum: 0
+                                maximum: 9007199254740991
+                            required:
+                              - kind
+                              - productCount
+                            additionalProperties: false
+                          - type: object
+                            properties:
+                              kind:
+                                type: string
+                                const: no_matching_products
+                              reason:
+                                type: string
+                                minLength: 1
+                                maxLength: 2000
+                              suggestions:
+                                minItems: 1
+                                maxItems: 20
+                                type: array
+                                items:
+                                  type: string
+                            required:
+                              - kind
+                            additionalProperties: false
+                          - type: object
+                            properties:
+                              kind:
+                                type: string
+                                const: no_inventory_for_request
+                            required:
+                              - kind
+                            additionalProperties: false
+                          - type: object
+                            properties:
+                              kind:
+                                type: string
+                                const: skipped
+                              reasonCode:
+                                type: string
+                                enum:
+                                  - coverage
+                                  - auth
+                                  - eligibility
+                                  - advertiser_activation
+                                  - account_pending
+                                  - account_needs_attention
+                                  - round_predates_account_rule
+                            required:
+                              - kind
+                              - reasonCode
+                            additionalProperties: false
+                          - type: object
+                            properties:
+                              kind:
+                                type: string
+                                const: failed
+                              reasonCode:
+                                type: string
+                                enum:
+                                  - timeout
+                                  - transport
+                                  - protocol
+                            required:
+                              - kind
+                              - reasonCode
+                            additionalProperties: false
+                          - type: object
+                            properties:
+                              kind:
+                                type: string
+                                const: local_refusal
+                              code:
+                                type: string
+                              message:
+                                type: string
+                              suggestion:
+                                type: string
+                            required:
+                              - kind
+                              - code
+                              - message
+                            additionalProperties: false
+                      propertyCoverage:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            domain:
+                              type: string
+                            productCount:
+                              type: integer
+                              exclusiveMinimum: 0
+                              maximum: 9007199254740991
+                          required:
+                            - domain
+                            - productCount
+                          additionalProperties: false
+                      propertyCoverageTotal:
+                        type: integer
+                        minimum: 0
+                        maximum: 9007199254740991
+                      propertyCoverageTruncated:
+                        type: boolean
+                      filterResult:
+                        type: string
+                        enum:
+                          - no_matching_products
+                          - filtered_out
+                          - partial
+                      channelExcludedProductCount:
+                        type: integer
+                        exclusiveMinimum: 0
+                        maximum: 9007199254740991
+                      inclusionPropertyList:
+                        type: object
+                        properties:
+                          filterSupported:
+                            type: boolean
+                          receiptMatchedCount:
+                            type: integer
+                            minimum: 0
+                            maximum: 9007199254740991
+                          receiptUnmatchedCount:
+                            type: integer
+                            minimum: 0
+                            maximum: 9007199254740991
+                          sellerReportedNoMatch:
+                            type: boolean
+                          incomplete:
+                            type: boolean
+                        required:
+                          - filterSupported
+                        additionalProperties: false
+                    required:
+                      - status
+                    additionalProperties: false
+                  - type: 'null'
+                description: The round result; its status describes the seller’s answer, not the opportunity.
+            required:
+              - name
+              - status
+              - closeReason
+              - responseDeadline
+              - leftOutReason
+              - outcome
+            additionalProperties: false
+        sellersNextAfter:
+          type: string
       required:
         - rfpId
         - planId
@@ -126666,6 +127006,125 @@ components:
         - closedAt
         - closedBy
       additionalProperties: false
+    save_buyer_rfp_success_ProposalGoalCoverage:
+      type: object
+      properties:
+        coversPrimaryGoal:
+          type: boolean
+        uncovered:
+          type: array
+          items:
+            type: object
+            properties:
+              priority:
+                type: number
+              code:
+                $ref: '#/components/schemas/save_buyer_rfp_success_DroppedOptimizationGoalCode'
+            required:
+              - priority
+              - code
+            additionalProperties: false
+        expected:
+          $ref: '#/components/schemas/save_buyer_rfp_success_ExpectedGoalPerformance'
+      required:
+        - coversPrimaryGoal
+        - uncovered
+      additionalProperties: false
+    save_buyer_rfp_success_DroppedOptimizationGoalCode:
+      type: string
+      enum:
+        - goal_kind_not_declared
+        - metric_not_declared
+        - target_kind_not_declared
+        - reach_unit_not_declared
+        - view_duration_not_declared
+        - viewability_standard_not_declared
+        - vendor_metric_not_declared
+        - over_max_optimization_goals
+      description: >-
+        Why the goal was not sent: the product's AdCP optimization declaration (metric_optimization,
+        conversion_tracking, vendor_metric_optimization) does not cover the goal's kind, metric, target kind, reach
+        unit, view duration, viewability standard or vendor metric, or the product's max_optimization_goals was reached.
+    save_buyer_rfp_success_ExpectedGoalPerformance:
+      type: object
+      properties:
+        basis:
+          type: string
+          enum:
+            - viewable_rate
+            - viewable_per_impression
+            - completion_rate
+        low:
+          type: number
+        mid:
+          type: number
+        high:
+          type: number
+        required:
+          type: number
+        verdict:
+          type: string
+          enum:
+            - likely
+            - possible
+            - unlikely
+      required:
+        - basis
+        - low
+        - mid
+        - high
+        - required
+        - verdict
+      additionalProperties: false
+      description: Matching-standard viewable_rate threshold or completed_views target.
+    save_buyer_rfp_success_ProposalRequestSellerError:
+      type: object
+      properties:
+        code:
+          type: string
+          minLength: 1
+          maxLength: 64
+        message:
+          type: string
+        recovery:
+          anyOf:
+            - type: string
+              const: transient
+            - type: string
+              const: correctable
+            - type: string
+              const: terminal
+        buyer_reason:
+          type: object
+          properties:
+            code:
+              type: string
+              minLength: 1
+              maxLength: 64
+            message:
+              type: string
+          required:
+            - code
+            - message
+          additionalProperties: {}
+        seller_explanation:
+          type: string
+      required:
+        - code
+        - message
+      additionalProperties: {}
+    save_buyer_rfp_success_BuyerRfpSellersItemSellerAccountId:
+      type: integer
+      exclusiveMinimum: 0
+      maximum: 9007199254740991
+    save_buyer_rfp_success_BuyerRfpSellersItemOutcomeSellerAccountId:
+      type: integer
+      exclusiveMinimum: 0
+      maximum: 9007199254740991
+    save_buyer_rfp_success_BuyerRfpSellersItemOutcomeProductsItemSellerAccountId:
+      type: integer
+      exclusiveMinimum: 0
+      maximum: 9007199254740991
     save_buyer_rfp_success_BuyerRfpBudgetRangeMin:
       type: number
       minimum: 0
