@@ -72506,12 +72506,32 @@ paths:
                         action:
                           type: string
                           const: assert
-                          description: Assert that the billing party is billable for this relationship.
+                          description: Assert that the billing party is billable, for one relationship or for an operator.
                         relationshipId:
+                          description: From get(account_relationship). Send this or operator, not both.
                           type: string
                           maxLength: 19
                           pattern: ^[1-9]\d*$
-                          description: From get(account_relationship).
+                        operator:
+                          description: >-
+                            Operator domain. Covers that operator's verified brands billed to it at this billing_entity.
+                            Needs billing operator.
+                          type: string
+                          minLength: 1
+                          maxLength: 253
+                        operator_unit:
+                          description: AdCP operator unit. Covers only that unit; without it, only brands with no unit.
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              minLength: 1
+                              maxLength: 255
+                              pattern: ^[A-Za-z0-9][A-Za-z0-9._:/-]*$
+                              description: Unit id.
+                          required:
+                            - id
+                          additionalProperties: false
                         billing:
                           type: string
                           enum:
@@ -72573,12 +72593,13 @@ paths:
                             ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
                       required:
                         - action
-                        - relationshipId
                         - billing
                         - billing_entity
                         - authority
                       additionalProperties: false
-                      description: Assert billability. A new assertion for the same party supersedes the old one.
+                      description: >-
+                        Assert billability. A new assertion for the same relationship or operator, party and entity
+                        supersedes the old one.
                     - type: object
                       properties:
                         action:
@@ -143935,6 +143956,16 @@ components:
           const: ready_to_invoice_asserted
         relationshipId:
           type: string
+        operator:
+          type: string
+        operator_unit:
+          type: object
+          properties:
+            id:
+              type: string
+          required:
+            - id
+          additionalProperties: false
         assertionId:
           type:
             - string
@@ -143947,7 +143978,6 @@ components:
       required:
         - outcome
         - action
-        - relationshipId
         - assertionId
         - billing
       additionalProperties: {}
