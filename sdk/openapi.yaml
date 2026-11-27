@@ -75399,6 +75399,12 @@ paths:
                         includeArchived:
                           description: 'For kind project: also list archived Projects. Default false.'
                           type: boolean
+                        accountLevel:
+                          description: >-
+                            For kind project: true keeps only the account-level Projects (no advertiser), false only
+                            those that belong to an advertiser. Not with advertiserId. Lists and grouped counts both
+                            take it.
+                          type: boolean
                         live:
                           description: >-
                             For kind session (RFP sessions): true for sessions seen live, false for those seen not live.
@@ -77475,6 +77481,12 @@ paths:
                             - archived
                         includeArchived:
                           description: 'For kind project: also list archived Projects. Default false.'
+                          type: boolean
+                        accountLevel:
+                          description: >-
+                            For kind project: true keeps only the account-level Projects (no advertiser), false only
+                            those that belong to an advertiser. Not with advertiserId. Lists and grouped counts both
+                            take it.
                           type: boolean
                         live:
                           description: >-
@@ -80418,6 +80430,12 @@ paths:
                         includeArchived:
                           description: 'For kind project: also list archived Projects. Default false.'
                           type: boolean
+                        accountLevel:
+                          description: >-
+                            For kind project: true keeps only the account-level Projects (no advertiser), false only
+                            those that belong to an advertiser. Not with advertiserId. Lists and grouped counts both
+                            take it.
+                          type: boolean
                         live:
                           description: >-
                             For kind session (RFP sessions): true for sessions seen live, false for those seen not live.
@@ -82486,6 +82504,12 @@ paths:
                             - archived
                         includeArchived:
                           description: 'For kind project: also list archived Projects. Default false.'
+                          type: boolean
+                        accountLevel:
+                          description: >-
+                            For kind project: true keeps only the account-level Projects (no advertiser), false only
+                            those that belong to an advertiser. Not with advertiserId. Lists and grouped counts both
+                            take it.
                           type: boolean
                         live:
                           description: >-
@@ -84553,6 +84577,12 @@ paths:
                         includeArchived:
                           description: 'For kind project: also list archived Projects. Default false.'
                           type: boolean
+                        accountLevel:
+                          description: >-
+                            For kind project: true keeps only the account-level Projects (no advertiser), false only
+                            those that belong to an advertiser. Not with advertiserId. Lists and grouped counts both
+                            take it.
+                          type: boolean
                         live:
                           description: >-
                             For kind session (RFP sessions): true for sessions seen live, false for those seen not live.
@@ -86618,6 +86648,12 @@ paths:
                             - archived
                         includeArchived:
                           description: 'For kind project: also list archived Projects. Default false.'
+                          type: boolean
+                        accountLevel:
+                          description: >-
+                            For kind project: true keeps only the account-level Projects (no advertiser), false only
+                            those that belong to an advertiser. Not with advertiserId. Lists and grouped counts both
+                            take it.
                           type: boolean
                         live:
                           description: >-
@@ -88691,6 +88727,12 @@ paths:
                             - archived
                         includeArchived:
                           description: 'For kind project: also list archived Projects. Default false.'
+                          type: boolean
+                        accountLevel:
+                          description: >-
+                            For kind project: true keeps only the account-level Projects (no advertiser), false only
+                            those that belong to an advertiser. Not with advertiserId. Lists and grouped counts both
+                            take it.
                           type: boolean
                         live:
                           description: >-
@@ -92538,6 +92580,12 @@ paths:
                         includeArchived:
                           description: 'For kind project: also list archived Projects. Default false.'
                           type: boolean
+                        accountLevel:
+                          description: >-
+                            For kind project: true keeps only the account-level Projects (no advertiser), false only
+                            those that belong to an advertiser. Not with advertiserId. Lists and grouped counts both
+                            take it.
+                          type: boolean
                         live:
                           description: >-
                             For kind session (RFP sessions): true for sessions seen live, false for those seen not live.
@@ -96345,6 +96393,12 @@ paths:
                         includeArchived:
                           description: 'For kind project: also list archived Projects. Default false.'
                           type: boolean
+                        accountLevel:
+                          description: >-
+                            For kind project: true keeps only the account-level Projects (no advertiser), false only
+                            those that belong to an advertiser. Not with advertiserId. Lists and grouped counts both
+                            take it.
+                          type: boolean
                         live:
                           description: >-
                             For kind session (RFP sessions): true for sessions seen live, false for those seen not live.
@@ -99299,6 +99353,12 @@ paths:
                         includeArchived:
                           description: 'For kind project: also list archived Projects. Default false.'
                           type: boolean
+                        accountLevel:
+                          description: >-
+                            For kind project: true keeps only the account-level Projects (no advertiser), false only
+                            those that belong to an advertiser. Not with advertiserId. Lists and grouped counts both
+                            take it.
+                          type: boolean
                         live:
                           description: >-
                             For kind session (RFP sessions): true for sessions seen live, false for those seen not live.
@@ -101375,6 +101435,12 @@ paths:
                         includeArchived:
                           description: 'For kind project: also list archived Projects. Default false.'
                           type: boolean
+                        accountLevel:
+                          description: >-
+                            For kind project: true keeps only the account-level Projects (no advertiser), false only
+                            those that belong to an advertiser. Not with advertiserId. Lists and grouped counts both
+                            take it.
+                          type: boolean
                         live:
                           description: >-
                             For kind session (RFP sessions): true for sessions seen live, false for those seen not live.
@@ -103448,6 +103514,12 @@ paths:
                         includeArchived:
                           description: 'For kind project: also list archived Projects. Default false.'
                           type: boolean
+                        accountLevel:
+                          description: >-
+                            For kind project: true keeps only the account-level Projects (no advertiser), false only
+                            those that belong to an advertiser. Not with advertiserId. Lists and grouped counts both
+                            take it.
+                          type: boolean
                         live:
                           description: >-
                             For kind session (RFP sessions): true for sessions seen live, false for those seen not live.
@@ -105520,6 +105592,12 @@ paths:
                             - archived
                         includeArchived:
                           description: 'For kind project: also list archived Projects. Default false.'
+                          type: boolean
+                        accountLevel:
+                          description: >-
+                            For kind project: true keeps only the account-level Projects (no advertiser), false only
+                            those that belong to an advertiser. Not with advertiserId. Lists and grouped counts both
+                            take it.
                           type: boolean
                         live:
                           description: >-
@@ -107594,6 +107672,12 @@ paths:
                             - archived
                         includeArchived:
                           description: 'For kind project: also list archived Projects. Default false.'
+                          type: boolean
+                        accountLevel:
+                          description: >-
+                            For kind project: true keeps only the account-level Projects (no advertiser), false only
+                            those that belong to an advertiser. Not with advertiserId. Lists and grouped counts both
+                            take it.
                           type: boolean
                         live:
                           description: >-
