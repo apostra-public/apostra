@@ -41460,7 +41460,7 @@ paths:
                   type: string
                   minLength: 1
                   maxLength: 64
-                  description: The Project whose canvas to open.
+                  description: The Project.
                 accountId:
                   description: Apostra accountId this call runs in, from get_status.
                   anyOf:
