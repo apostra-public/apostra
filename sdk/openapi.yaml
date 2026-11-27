@@ -39930,6 +39930,53 @@ paths:
                               - lifecycleState
                             additionalProperties: false
                           - type: 'null'
+                      creativeHistory:
+                        type: object
+                        properties:
+                          state:
+                            type: string
+                            enum:
+                              - queued
+                              - running
+                              - waiting
+                              - complete
+                              - failed
+                            description: >-
+                              The least advanced state across the account's ad accounts: complete only when every one
+                              is.
+                          platform:
+                            type: string
+                            const: meta
+                            description: The platform the history is read from; Meta only for now.
+                          coveredFrom:
+                            anyOf:
+                              - type: string
+                              - type: 'null'
+                            description: The first day every ad account has covered (YYYY-MM-DD); null until there are any.
+                          coveredThrough:
+                            anyOf:
+                              - type: string
+                              - type: 'null'
+                            description: The last day every ad account has covered (YYYY-MM-DD); null until there are any.
+                          months:
+                            anyOf:
+                              - type: integer
+                                minimum: 0
+                                maximum: 9007199254740991
+                              - type: 'null'
+                            description: Whole months from coveredFrom to coveredThrough; null when nothing is covered.
+                          recentReady:
+                            type: boolean
+                            description: The last 30 days are covered, whatever the state.
+                        required:
+                          - state
+                          - platform
+                          - coveredFrom
+                          - coveredThrough
+                          - months
+                          - recentReady
+                        additionalProperties: false
+                        description: Summary of the account's creative history; absent when the switch is off or there is none.
                       phase:
                         deprecated: true
                         description: Use goLive and checks from the seller readiness include. Removed on or after 14 December 2026.
