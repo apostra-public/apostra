@@ -372,6 +372,14 @@ class Apostra(SyncTransport):
         "Save advertiser/mappings. privateNotes: owning Buyer only. Confirm markets/channels (footprintProposal); needs_input=ask; never recreate for currency. identityContract:confirmed-v1; preview resolveBrand; read advertiser.brandRef. Unknown brand: ask website, brandName; register unverified AAO entry. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveAdvertiserResult], self._request_with_response("save_advertiser", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
+    def save_advertiser_access(self, input: models.SaveAdvertiserAccessInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAdvertiserAccessResult:
+        "Ask to change an advertiser's client access. Needs approval. Ids: get advertiser_access."
+        return cast("models.SaveAdvertiserAccessResult", self._request("save_advertiser_access", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
+    def save_advertiser_access_with_response(self, input: models.SaveAdvertiserAccessInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveAdvertiserAccessResult]:
+        "Ask to change an advertiser's client access. Needs approval. Ids: get advertiser_access. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.SaveAdvertiserAccessResult], self._request_with_response("save_advertiser_access", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
     def save_advertiser_grant(self, input: models.SaveAdvertiserGrantInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAdvertiserGrantResult:
         "Invite another Organization to exact advertisers, accept/reject an invitation, or revoke a grant. Limited beta: eligible Organization, entitlement, server-side exposure, and direct human-admin authority are required."
         return cast("models.SaveAdvertiserGrantResult", self._request("save_advertiser_grant", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
@@ -1108,6 +1116,14 @@ class AsyncApostra(AsyncTransport):
     async def save_advertiser_with_response(self, input: models.SaveAdvertiserInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveAdvertiserResult]:
         "Save advertiser/mappings. privateNotes: owning Buyer only. Confirm markets/channels (footprintProposal); needs_input=ask; never recreate for currency. identityContract:confirmed-v1; preview resolveBrand; read advertiser.brandRef. Unknown brand: ask website, brandName; register unverified AAO entry. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveAdvertiserResult], await self._request_with_response("save_advertiser", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
+    async def save_advertiser_access(self, input: models.SaveAdvertiserAccessInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAdvertiserAccessResult:
+        "Ask to change an advertiser's client access. Needs approval. Ids: get advertiser_access."
+        return cast("models.SaveAdvertiserAccessResult", await self._request("save_advertiser_access", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
+    async def save_advertiser_access_with_response(self, input: models.SaveAdvertiserAccessInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveAdvertiserAccessResult]:
+        "Ask to change an advertiser's client access. Needs approval. Ids: get advertiser_access. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.SaveAdvertiserAccessResult], await self._request_with_response("save_advertiser_access", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_advertiser_grant(self, input: models.SaveAdvertiserGrantInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAdvertiserGrantResult:
         "Invite another Organization to exact advertisers, accept/reject an invitation, or revoke a grant. Limited beta: eligible Organization, entitlement, server-side exposure, and direct human-admin authority are required."

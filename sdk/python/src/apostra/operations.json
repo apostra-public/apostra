@@ -944,6 +944,25 @@
     ],
     "summary": "Save advertiser/mappings. privateNotes: owning Buyer only. Confirm markets/channels (footprintProposal); needs_input=ask; never recreate for currency. identityContract:confirmed-v1; preview resolveBrand; read advertiser.brandRef. Unknown brand: ask website, brandName; register unverified AAO entry."
   },
+  "save_advertiser_access": {
+    "path": "/tools/save_advertiser_access",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": true,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:admin"
+        ]
+      }
+    ],
+    "summary": "Ask to change an advertiser's client access. Needs approval. Ids: get advertiser_access."
+  },
   "save_advertiser_grant": {
     "path": "/tools/save_advertiser_grant",
     "method": "POST",

@@ -19443,6 +19443,280 @@ export type SaveAccountSuccessSaveAccountObject = {
     requireSpendApproval: boolean | null;
 };
 
+export type SaveAdvertiserAccessData = {
+    body: {
+        /**
+         * The advertiser, from search kind advertiser.
+         */
+        advertiserId: string;
+        /**
+         * Invite a person. Send exactly one request per call.
+         */
+        invite?: {
+            /**
+             * The one person to invite.
+             */
+            email: string;
+            /**
+             * What the client can do in this advertiser.
+             */
+            role: SaveAdvertiserAccessRequestInviteRole;
+            /**
+             * The client company domain, for example example.com.
+             */
+            operatorDomain: string;
+            /**
+             * invite.eligibilityRevision from get. A newer one is refused.
+             */
+            expectedEligibilityRevision?: string;
+        };
+        /**
+         * Approve or deny a client access request.
+         */
+        accessRequest?: {
+            id: SaveAdvertiserAccessRequestAccessRequestId;
+            /**
+             * approve gives the client their role; deny declines.
+             */
+            decision: 'approve' | 'deny';
+        };
+        /**
+         * Change one client: role, suspend, reactivate or remove.
+         */
+        member?: {
+            id: SaveAdvertiserAccessRequestMemberId;
+            /**
+             * Set the role. Send one of role, suspended or remove.
+             */
+            role?: SaveAdvertiserAccessRequestMemberRole;
+            /**
+             * true suspends the client; false reactivates them.
+             */
+            suspended?: boolean;
+            /**
+             * true ends the client access.
+             */
+            remove?: true;
+        };
+        /**
+         * The client revision you read. A newer one is refused. Not for invite.
+         */
+        expectedRevision?: string;
+        /**
+         * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
+         */
+        expectedAccountId?: number | string;
+        /**
+         * Apostra accountId this call runs in, from get_status.
+         */
+        accountId?: number | string;
+    };
+    headers: {
+        /**
+         * Deprecated: send accountId in the request body instead. Retires on the announced removal date. If both are sent they must name the same account.
+         *
+         * @deprecated
+         */
+        'X-SCOPE3-CUSTOMER-ID'?: string;
+        /**
+         * Required for every write. Reuse the same key and validated body to replay the durable result for seven days. If this operation also accepts idempotencyKey in its JSON body, the values must match.
+         */
+        'Idempotency-Key': string;
+    };
+    path?: never;
+    query?: never;
+    url: '/tools/save_advertiser_access';
+};
+
+export type SaveAdvertiserAccessError = SaveAdvertiserAccessErrors[keyof SaveAdvertiserAccessErrors];
+
+export type SaveAdvertiserAccessErrors = {
+    /**
+     * Invalid operation input
+     */
+    400: V3ToolErrorResponse;
+    /**
+     * Missing or invalid API credential
+     */
+    401: V3ToolErrorResponse;
+    /**
+     * Account credit limit exceeded
+     */
+    402: V3ToolErrorResponse;
+    /**
+     * The credential or account cannot perform this operation
+     */
+    403: V3ToolErrorResponse;
+    /**
+     * Requested resource not found
+     */
+    404: V3ToolErrorResponse;
+    /**
+     * Operation conflicts with current resource state
+     */
+    409: V3ToolErrorResponse;
+    /**
+     * Request body exceeds the accepted size
+     */
+    413: V3ToolErrorResponse;
+    /**
+     * Request body encoding or character set is unsupported
+     */
+    415: V3ToolErrorResponse;
+    /**
+     * Operation cannot process the supplied input
+     */
+    422: V3ToolErrorResponse;
+    /**
+     * Request rate limit exceeded
+     */
+    429: V3ToolErrorResponse;
+    /**
+     * Unexpected operation failure
+     */
+    500: V3ToolErrorResponse;
+    /**
+     * Recognised operation behaviour is not implemented
+     */
+    501: V3ToolErrorResponse;
+    /**
+     * The write could not be durably claimed before dispatch, so it is safe to retry with the same key
+     */
+    503: V3ToolErrorResponse;
+};
+
+/**
+ * The id from get advertiser_access.
+ */
+export type SaveAdvertiserAccessRequestAccessRequestId = string;
+
+export type SaveAdvertiserAccessRequestInviteRole = 'advertiser-viewer' | 'advertiser-editor' | 'advertiser-admin';
+
+/**
+ * The id from get advertiser_access.
+ */
+export type SaveAdvertiserAccessRequestMemberId = string;
+
+export type SaveAdvertiserAccessRequestMemberRole = 'advertiser-viewer' | 'advertiser-editor' | 'advertiser-admin';
+
+export type SaveAdvertiserAccessResponse = SaveAdvertiserAccessResponses[keyof SaveAdvertiserAccessResponses];
+
+export type SaveAdvertiserAccessResponses = {
+    /**
+     * Typed operation result
+     */
+    200: {
+        data: {
+            action: 'invite' | 'decide' | 'change_role';
+            advertiserId?: string;
+            admissionId?: string;
+            state?: string;
+            roleSlug?: 'advertiser-viewer' | 'advertiser-editor' | 'advertiser-admin';
+            revision?: string;
+            deliveryState?: 'requested' | 'sent' | 'failed' | 'cancelled';
+            replay?: boolean;
+            message?: never;
+            approval?: never;
+            approvers?: never;
+            idempotencyKey?: never;
+        } | {
+            action: 'approval_required';
+            message: string;
+            approval: SaveAdvertiserAccessSuccessAgentApproval;
+            /**
+             * The account's direct administrators who can approve, when the caller cannot (Scope3 staff, or an agent or service token acting with no person present). email is null when no person is behind the call. Absent when the caller can approve; never empty.
+             */
+            approvers?: Array<{
+                name: string | null;
+                email: string | null;
+            }>;
+            idempotencyKey: string;
+            advertiserId?: never;
+            admissionId?: never;
+            state?: never;
+            roleSlug?: never;
+            revision?: never;
+            deliveryState?: never;
+            replay?: never;
+        } | {
+            action: 'unchanged';
+            advertiserId: string;
+            admissionId: string;
+            message: string;
+            state?: never;
+            roleSlug?: never;
+            revision?: never;
+            deliveryState?: never;
+            replay?: never;
+            approval?: never;
+            approvers?: never;
+            idempotencyKey?: never;
+        };
+        error: null;
+    };
+    /**
+     * The write is still running or needs recovery. Retry this operation with the same Idempotency-Key and body; do not mint a new key.
+     */
+    202: {
+        data: {
+            receipt: {
+                id: string;
+                operation: string;
+                state: 'claimed' | 'running' | 'uncertain';
+                stateVersion: number;
+                stateChangedAt: string;
+                pendingReason: string;
+            };
+        };
+        error: null;
+    };
+};
+
+export type SaveAdvertiserAccessSuccessAgentApproval = {
+    /**
+     * Approval id.
+     */
+    id: string;
+    /**
+     * Kind of sensitive action, for example `buyer_child_account.create`.
+     */
+    kind: string;
+    /**
+     * `pending` waits for a person; `executing` was approved and is running; `succeeded`, `failed`, `rejected` and `expired` are final.
+     */
+    state: 'pending' | 'executing' | 'succeeded' | 'failed' | 'rejected' | 'expired';
+    /**
+     * Account the action applies to.
+     */
+    targetCustomerId: string;
+    /**
+     * Role the approver must hold on the account.
+     */
+    requiredRole: 'ADMIN' | 'SUPER_ADMIN' | null;
+    /**
+     * What will happen, in one line. Null once the approval is final.
+     */
+    summary: string | null;
+    /**
+     * Page on our site where a signed-in person approves or rejects the request.
+     */
+    url: string;
+    createdAt: string;
+    expiresAt: string;
+    decidedAt: string | null;
+    completedAt: string | null;
+    /**
+     * Reference to the result once succeeded.
+     */
+    resultReference: {
+        [key: string]: string | number | boolean;
+    } | null;
+    /**
+     * Reason code when the action failed.
+     */
+    failureCode: string | null;
+};
+
 export type SaveAdvertiserData = {
     body: {
         /**
