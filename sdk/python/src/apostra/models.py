@@ -25450,9 +25450,13 @@ class SaveSellerInputMaterialCandidate(TypedDict):
 
 class SaveSellerInputReadyToInvoiceActionAssert(TypedDict):
     action: Literal["assert"]
-    '\n    Assert that the billing party is billable for this relationship.\n    '
-    relationshipId: str
-    '\n    From get(account_relationship).\n    '
+    '\n    Assert that the billing party is billable, for one relationship or for an operator.\n    '
+    relationshipId: NotRequired[str]
+    '\n    From get(account_relationship). Send this or operator, not both.\n    '
+    operator: NotRequired[str]
+    '\n    Operator domain. Covers that operator\'s verified brands billed to it at this billing_entity. Needs billing operator.\n    '
+    operator_unit: NotRequired[SaveSellerInputReadyToInvoiceActionAssertOperatorUnit]
+    '\n    AdCP operator unit. Covers only that unit; without it, only brands with no unit.\n    '
     billing: Literal["operator", "advertiser"]
     '\n    Who you invoice: operator or advertiser.\n    '
     billing_entity: SaveSellerInputReadyToInvoiceActionAssertBillingEntity
@@ -25479,6 +25483,10 @@ class SaveSellerInputReadyToInvoiceActionAssertEvidence(TypedDict):
     '\n    Reference in your finance system.\n    '
     note: NotRequired[str]
     '\n    Short note.\n    '
+
+class SaveSellerInputReadyToInvoiceActionAssertOperatorUnit(TypedDict):
+    id: str
+    '\n    Unit id.\n    '
 
 class SaveSellerInputReadyToInvoiceActionRevoke(TypedDict):
     action: Literal["revoke"]
@@ -25725,9 +25733,14 @@ class SaveSellerSuccessSaveSellerSuccessReadbackUnavailable(TypedDict):
 class SaveSellerSuccessSaveSellerSuccessReadyToInvoiceAsserted(TypedDict):
     outcome: Literal["ready_to_invoice_asserted"]
     action: Literal["ready_to_invoice_asserted"]
-    relationshipId: str
+    relationshipId: NotRequired[str]
+    operator: NotRequired[str]
+    operator_unit: NotRequired[SaveSellerSuccessSaveSellerSuccessReadyToInvoiceAssertedOperatorUnit]
     assertionId: str | None
     billing: Literal["operator", "advertiser"]
+
+class SaveSellerSuccessSaveSellerSuccessReadyToInvoiceAssertedOperatorUnit(TypedDict):
+    id: str
 
 class SaveSellerSuccessSaveSellerSuccessReadyToInvoiceRevoked(TypedDict):
     outcome: Literal["ready_to_invoice_revoked"]

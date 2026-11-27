@@ -42713,13 +42713,26 @@ export type SaveSellerData = {
          */
         readyToInvoice?: {
             /**
-             * Assert that the billing party is billable for this relationship.
+             * Assert that the billing party is billable, for one relationship or for an operator.
              */
             action: 'assert';
             /**
-             * From get(account_relationship).
+             * From get(account_relationship). Send this or operator, not both.
              */
-            relationshipId: string;
+            relationshipId?: string;
+            /**
+             * Operator domain. Covers that operator's verified brands billed to it at this billing_entity. Needs billing operator.
+             */
+            operator?: string;
+            /**
+             * AdCP operator unit. Covers only that unit; without it, only brands with no unit.
+             */
+            operator_unit?: {
+                /**
+                 * Unit id.
+                 */
+                id: string;
+            };
             /**
              * Who you invoice: operator or advertiser.
              */
@@ -42782,6 +42795,8 @@ export type SaveSellerData = {
              */
             reason: string;
             relationshipId?: never;
+            operator?: never;
+            operator_unit?: never;
             billing?: never;
             billing_entity?: never;
             authority?: never;
@@ -43226,7 +43241,11 @@ export type SaveSellerSuccessSaveSellerSuccessReadbackUnavailable = {
 export type SaveSellerSuccessSaveSellerSuccessReadyToInvoiceAsserted = {
     outcome: 'ready_to_invoice_asserted';
     action: 'ready_to_invoice_asserted';
-    relationshipId: string;
+    relationshipId?: string;
+    operator?: string;
+    operator_unit?: {
+        id: string;
+    };
     assertionId: string | null;
     billing: 'operator' | 'advertiser';
     [key: string]: unknown;
