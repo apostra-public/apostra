@@ -23236,6 +23236,7 @@ class SaveProjectSuccessObject(TypedDict):
     autonomy: SaveProjectSuccessObjectAutonomy
     attention: list[SaveProjectSuccessObjectAttentionItem]
     stateMark: Literal["needs_you", "awaiting_approval", "draft", "paused"] | None
+    viewerCan: SaveProjectSuccessObjectViewerCan
     url: str
 
 class SaveProjectSuccessObjectAdvertiserValue(TypedDict):
@@ -23548,6 +23549,12 @@ class SaveProjectSuccessObjectSpendValue(TypedDict):
     mediaBuysOmitted: int
     '\n    Media buys left out of the total because you cannot read them.\n    '
 
+class SaveProjectSuccessObjectViewerCan(TypedDict):
+    approve: bool
+    '\n    You hold the role the limits approval checks on this account.\n    '
+    archive: bool
+    restore: bool
+
 class SaveProjectSuccessProject(TypedDict):
     id: str
     name: str
@@ -23571,6 +23578,7 @@ class SaveProjectSuccessProject(TypedDict):
     autonomy: SaveProjectSuccessProjectAutonomy
     attention: list[SaveProjectSuccessProjectAttentionItem]
     stateMark: Literal["needs_you", "awaiting_approval", "draft", "paused"] | None
+    viewerCan: SaveProjectSuccessProjectViewerCan
     url: str
 
 class SaveProjectSuccessProjectAdvertiserValue(TypedDict):
@@ -23882,6 +23890,12 @@ class SaveProjectSuccessProjectSpendValue(TypedDict):
     '\n    Counted media buys: attached ones plus those under attached campaigns that you can read.\n    '
     mediaBuysOmitted: int
     '\n    Media buys left out of the total because you cannot read them.\n    '
+
+class SaveProjectSuccessProjectViewerCan(TypedDict):
+    approve: bool
+    '\n    You hold the role the limits approval checks on this account.\n    '
+    archive: bool
+    restore: bool
 
 class SavePropertyListInput(TypedDict):
     advertiserId: str
