@@ -469,11 +469,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveBuyerOperatorResult], self._request_with_response("save_buyer_operator", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_buyer_rfp(self, input: models.SaveBuyerRfpInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBuyerRfpResult:
-        "Create a draft RFP (the buyer’s ask: flight, budget range for proposals, channels, geo, all optional), change a draft by rfpId, or copy an RFP into a new draft with duplicateFromRfpId. Each new RFP gets its own plan. Opening an RFP to sellers is not available yet."
+        "Create a draft RFP (the buyer’s ask: flight, budget range for proposals, channels, geo, all optional), change a draft by rfpId, or copy an RFP into a new draft with duplicateFromRfpId. Each new RFP gets its own plan. Open a draft with status open to ask the selected eligible sellers."
         return cast("models.SaveBuyerRfpResult", self._request("save_buyer_rfp", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_buyer_rfp_with_response(self, input: models.SaveBuyerRfpInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveBuyerRfpResult]:
-        "Create a draft RFP (the buyer’s ask: flight, budget range for proposals, channels, geo, all optional), change a draft by rfpId, or copy an RFP into a new draft with duplicateFromRfpId. Each new RFP gets its own plan. Opening an RFP to sellers is not available yet. Returns the data together with response headers and request ID."
+        "Create a draft RFP (the buyer’s ask: flight, budget range for proposals, channels, geo, all optional), change a draft by rfpId, or copy an RFP into a new draft with duplicateFromRfpId. Each new RFP gets its own plan. Open a draft with status open to ask the selected eligible sellers. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveBuyerRfpResult], self._request_with_response("save_buyer_rfp", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_campaign(self, input: models.SaveCampaignInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveCampaignResult:
@@ -1206,11 +1206,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveBuyerOperatorResult], await self._request_with_response("save_buyer_operator", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_buyer_rfp(self, input: models.SaveBuyerRfpInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBuyerRfpResult:
-        "Create a draft RFP (the buyer’s ask: flight, budget range for proposals, channels, geo, all optional), change a draft by rfpId, or copy an RFP into a new draft with duplicateFromRfpId. Each new RFP gets its own plan. Opening an RFP to sellers is not available yet."
+        "Create a draft RFP (the buyer’s ask: flight, budget range for proposals, channels, geo, all optional), change a draft by rfpId, or copy an RFP into a new draft with duplicateFromRfpId. Each new RFP gets its own plan. Open a draft with status open to ask the selected eligible sellers."
         return cast("models.SaveBuyerRfpResult", await self._request("save_buyer_rfp", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_buyer_rfp_with_response(self, input: models.SaveBuyerRfpInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveBuyerRfpResult]:
-        "Create a draft RFP (the buyer’s ask: flight, budget range for proposals, channels, geo, all optional), change a draft by rfpId, or copy an RFP into a new draft with duplicateFromRfpId. Each new RFP gets its own plan. Opening an RFP to sellers is not available yet. Returns the data together with response headers and request ID."
+        "Create a draft RFP (the buyer’s ask: flight, budget range for proposals, channels, geo, all optional), change a draft by rfpId, or copy an RFP into a new draft with duplicateFromRfpId. Each new RFP gets its own plan. Open a draft with status open to ask the selected eligible sellers. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveBuyerRfpResult], await self._request_with_response("save_buyer_rfp", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_campaign(self, input: models.SaveCampaignInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveCampaignResult:

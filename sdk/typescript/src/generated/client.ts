@@ -953,14 +953,14 @@ export class Apostra extends Transport {
   /** Save buyer commercial identity. Read get_status; use identityContract:confirmed-v1 for preview and confirmation. Guide: /v3/identity-setup. Returns the data together with response headers and request ID. */
   saveBuyerOperatorWithResponse(input: SaveBuyerOperatorInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveBuyerOperatorResult>> { return this.requestDetailed("save_buyer_operator", input, options) }
   /**
-   * Create a draft RFP (the buyer’s ask: flight, budget range for proposals, channels, geo, all optional), change a draft by rfpId, or copy an RFP into a new draft with duplicateFromRfpId. Each new RFP gets its own plan. Opening an RFP to sellers is not available yet.
+   * Create a draft RFP (the buyer’s ask: flight, budget range for proposals, channels, geo, all optional), change a draft by rfpId, or copy an RFP into a new draft with duplicateFromRfpId. Each new RFP gets its own plan. Open a draft with status open to ask the selected eligible sellers.
    *
    * @example
    * await client.saveBuyerRfp(input, { idempotencyKey: 'stable-key' })
    */
   saveBuyerRfp(input: SaveBuyerRfpInput, options: WriteRequestOptions): Promise<SaveBuyerRfpResult> { return this.request("save_buyer_rfp", input, options) }
 
-  /** Create a draft RFP (the buyer’s ask: flight, budget range for proposals, channels, geo, all optional), change a draft by rfpId, or copy an RFP into a new draft with duplicateFromRfpId. Each new RFP gets its own plan. Opening an RFP to sellers is not available yet. Returns the data together with response headers and request ID. */
+  /** Create a draft RFP (the buyer’s ask: flight, budget range for proposals, channels, geo, all optional), change a draft by rfpId, or copy an RFP into a new draft with duplicateFromRfpId. Each new RFP gets its own plan. Open a draft with status open to ask the selected eligible sellers. Returns the data together with response headers and request ID. */
   saveBuyerRfpWithResponse(input: SaveBuyerRfpInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveBuyerRfpResult>> { return this.requestDetailed("save_buyer_rfp", input, options) }
   /**
    * Create: advertiserId/name; flight/budget optional. Receipts and launch previews show local/UTC times in the applicable IANA timezone. desiredPhase: active previews; confirmLaunch: true launches. Cancellation is irreversible: desiredPhase: canceled cancels the campaign and every live media buy.

@@ -14426,11 +14426,17 @@ class SaveBuyerRfpInput(TypedDict):
     advertiserId: NotRequired[str]
     '\n    Owning advertiser. Required to create; refused otherwise.\n    '
     rfpId: NotRequired[str]
-    '\n    RFP to change; only a draft changes. Omit to create or copy.\n    '
+    '\n    RFP to change (drafts only), open or close. Omit to create or copy.\n    '
     duplicateFromRfpId: NotRequired[str]
     '\n    Copy this RFP into a new draft in a new plan. Takes only name and idempotencyKey besides.\n    '
     expectedRevision: NotRequired[int]
     '\n    revision from the last read. Required with rfpId; a stale one is refused.\n    '
+    status: NotRequired[Literal["open", "closed"]]
+    '\n    Open this draft and send its brief to eligible sellers.\n    '
+    sellerIds: NotRequired[list[int]]
+    '\n    Seller Account ids that narrow the accepted, eligible Media Partners asked.\n    '
+    window: NotRequired[SaveBuyerRfpInputWindow]
+    '\n    Response window for the opened RFP.\n    '
     idempotencyKey: NotRequired[str]
     '\n    Retry key. Required to create or copy, refused on an update.\n    '
     name: NotRequired[str]
@@ -14449,6 +14455,10 @@ class SaveBuyerRfpInput(TypedDict):
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
+
+class SaveBuyerRfpInputWindow(TypedDict):
+    responseDeadline: NotRequired[str]
+    '\n    When responses are due: one hour to 30 days from opening. Defaults to 48 hours.\n    '
 
 class SaveBuyerRfpRequestBuyerRfpBudgetRange(TypedDict):
     min: NotRequired[SaveBuyerRfpRequestBuyerRfpBudgetRangeMin]
@@ -14680,7 +14690,7 @@ class SaveBuyerRfpSuccessProposalRequestSellerErrorBuyerReason(TypedDict):
     code: str
     message: str
 
-SaveBuyerRfpSuccessSaveBuyerRfpAction: TypeAlias = Literal["created", "duplicated", "updated"]
+SaveBuyerRfpSuccessSaveBuyerRfpAction: TypeAlias = Literal["created", "duplicated", "updated", "opened", "closed"]
 
 class SaveCampaignInput(TypedDict):
     sponsoredBuyerCustomerId: NotRequired[str]
