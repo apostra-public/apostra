@@ -22888,6 +22888,8 @@ class SaveProjectInput(TypedDict):
     '\n    Edit only, with bounds: the newest bounds revision from your last read of the Project, pendingBounds.revision when one waits, else bounds.revision. If the Project has moved to another revision since, the save is refused with CONFLICT and nothing changes; read the Project again and retry. Omit it to save without the check.\n    '
     autonomyPaused: NotRequired[bool]
     '\n    true stops this Project\'s lead at once. false resumes it, for an administrator signed in as themselves; the administrator who approved the bounds resumes at once, another needs approval. Send it with the id and only reason, idempotencyKey and dryRun.\n    '
+    isArchived: NotRequired[bool]
+    '\n    Edit only: true archives the Project, which stops its lead and makes it and its conversation read-only; false restores it, and it then needs its limits approved again. Send it alone with the id.\n    '
     reason: NotRequired[str]
     '\n    Edit only, with autonomyPaused: why, kept with the stop.\n    '
     idempotencyKey: NotRequired[str]

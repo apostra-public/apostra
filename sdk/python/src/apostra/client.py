@@ -621,11 +621,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SavePlaybookResult], self._request_with_response("save_playbook", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_project(self, input: models.SaveProjectInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveProjectResult:
-        "Create a Buyer account's Project (omit id), or with id make one change: details, one attach or detach, bounds, or autonomyPaused (stop; an administrator resumes). Wider bounds return approval_required. reallocation_threshold is a currency amount."
+        "Create a Buyer account's Project (omit id), or with id make one change: details, one attach or detach, bounds, autonomyPaused (stop; an administrator resumes), or isArchived (archive or restore). Wider bounds return approval_required. reallocation_threshold is a currency amount."
         return cast("models.SaveProjectResult", self._request("save_project", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_project_with_response(self, input: models.SaveProjectInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveProjectResult]:
-        "Create a Buyer account's Project (omit id), or with id make one change: details, one attach or detach, bounds, or autonomyPaused (stop; an administrator resumes). Wider bounds return approval_required. reallocation_threshold is a currency amount. Returns the data together with response headers and request ID."
+        "Create a Buyer account's Project (omit id), or with id make one change: details, one attach or detach, bounds, autonomyPaused (stop; an administrator resumes), or isArchived (archive or restore). Wider bounds return approval_required. reallocation_threshold is a currency amount. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveProjectResult], self._request_with_response("save_project", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_property_list(self, input: models.SavePropertyListInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SavePropertyListResult:
@@ -1350,11 +1350,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SavePlaybookResult], await self._request_with_response("save_playbook", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_project(self, input: models.SaveProjectInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveProjectResult:
-        "Create a Buyer account's Project (omit id), or with id make one change: details, one attach or detach, bounds, or autonomyPaused (stop; an administrator resumes). Wider bounds return approval_required. reallocation_threshold is a currency amount."
+        "Create a Buyer account's Project (omit id), or with id make one change: details, one attach or detach, bounds, autonomyPaused (stop; an administrator resumes), or isArchived (archive or restore). Wider bounds return approval_required. reallocation_threshold is a currency amount."
         return cast("models.SaveProjectResult", await self._request("save_project", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_project_with_response(self, input: models.SaveProjectInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveProjectResult]:
-        "Create a Buyer account's Project (omit id), or with id make one change: details, one attach or detach, bounds, or autonomyPaused (stop; an administrator resumes). Wider bounds return approval_required. reallocation_threshold is a currency amount. Returns the data together with response headers and request ID."
+        "Create a Buyer account's Project (omit id), or with id make one change: details, one attach or detach, bounds, autonomyPaused (stop; an administrator resumes), or isArchived (archive or restore). Wider bounds return approval_required. reallocation_threshold is a currency amount. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveProjectResult], await self._request_with_response("save_project", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_property_list(self, input: models.SavePropertyListInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SavePropertyListResult:

@@ -38830,6 +38830,10 @@ export type SaveProjectData = {
          */
         autonomyPaused?: boolean;
         /**
+         * Edit only: true archives the Project, which stops its lead and makes it and its conversation read-only; false restores it, and it then needs its limits approved again. Send it alone with the id.
+         */
+        isArchived?: boolean;
+        /**
          * Edit only, with autonomyPaused: why, kept with the stop.
          */
         reason?: string;

@@ -1560,7 +1560,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Create a Buyer account's Project (omit id), or with id make one change: details, one attach or detach, bounds, or autonomyPaused (stop; an administrator resumes). Wider bounds return approval_required. reallocation_threshold is a currency amount."
+    "summary": "Create a Buyer account's Project (omit id), or with id make one change: details, one attach or detach, bounds, autonomyPaused (stop; an administrator resumes), or isArchived (archive or restore). Wider bounds return approval_required. reallocation_threshold is a currency amount."
   },
   "save_property_list": {
     "path": "/tools/save_property_list",
