@@ -8052,6 +8052,7 @@ class GetStatusResult(TypedDict):
     serverTime: str
     account: GetStatusResultAccount
     listedToolAccountKinds: list[Literal["buyer", "seller", "org", "developer"]]
+    caller: NotRequired[GetStatusResultCaller]
     state: str
     canTransact: NotRequired[bool]
     platformReady: NotRequired[bool]
@@ -8194,6 +8195,14 @@ class GetStatusResultBlockersItem(TypedDict):
     why: NotRequired[str]
     effect: NotRequired[str]
     fix: NotRequired[str]
+
+class GetStatusResultCaller(TypedDict):
+    apps: list[GetStatusResultCallerAppsItem]
+    '\n    The caller\'s own apps.\n    '
+
+class GetStatusResultCallerAppsItem(TypedDict):
+    platform: Literal["mac", "iphone", "android"]
+    lastSignedInAt: str
 
 class GetStatusResultChanges(TypedDict):
     notices: list[GetStatusResultChangesNoticesItem]
