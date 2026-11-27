@@ -22814,6 +22814,11 @@ class SavePlaybookSuccessLessonsProposedLessonsProposedItem(TypedDict):
     lessonId: str
     revision: int
     status: Literal["proposed"]
+    scope: SavePlaybookSuccessLessonsProposedLessonsProposedItemScope
+    sellerWords: str
+
+class SavePlaybookSuccessLessonsProposedLessonsProposedItemScope(TypedDict):
+    kind: Literal["all_briefs", "advertiser", "buyer", "category", "channel", "market"]
 
 SavePlaybookSuccessLessonsProposedPlaybook: TypeAlias = dict[str, JsonValue]
 

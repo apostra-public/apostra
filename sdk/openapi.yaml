@@ -137651,10 +137651,29 @@ components:
               status:
                 type: string
                 const: proposed
+              scope:
+                type: object
+                properties:
+                  kind:
+                    type: string
+                    enum:
+                      - all_briefs
+                      - advertiser
+                      - buyer
+                      - category
+                      - channel
+                      - market
+                required:
+                  - kind
+                additionalProperties: {}
+              sellerWords:
+                type: string
             required:
               - lessonId
               - revision
               - status
+              - scope
+              - sellerWords
             additionalProperties: {}
         deprecated:
           type: boolean
