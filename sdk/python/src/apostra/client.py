@@ -636,6 +636,14 @@ class Apostra(SyncTransport):
         "Write selling guidance. `active` turns Playbook prose and its optional seller note into proposed Lessons; the active Playbook is unchanged. `pricing` replaces facts. `discounts` sets or removes brand/operator rules. `limits` sets what your brain may offer. Halves never roll back each other. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SavePlaybookResult], self._request_with_response("save_playbook", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
+    def save_prime_function(self, input: models.SavePrimeFunctionInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SavePrimeFunctionResult:
+        "Propose, pause or resume a Prime function: a workspace .py file revision that runs on a schedule, an event or a webhook, read-only. Only the account’s own agent proposes, in a turn a person started; an administrator reads the code and approves it on our site."
+        return cast("models.SavePrimeFunctionResult", self._request("save_prime_function", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
+    def save_prime_function_with_response(self, input: models.SavePrimeFunctionInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SavePrimeFunctionResult]:
+        "Propose, pause or resume a Prime function: a workspace .py file revision that runs on a schedule, an event or a webhook, read-only. Only the account’s own agent proposes, in a turn a person started; an administrator reads the code and approves it on our site. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.SavePrimeFunctionResult], self._request_with_response("save_prime_function", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
     def save_project(self, input: models.SaveProjectInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveProjectResult:
         "Create a Buyer account's Project (omit id), or with id make one change: details, one attach or detach, bounds, autonomyPaused (stop; an administrator resumes), or isArchived (archive or restore). Wider bounds return approval_required. reallocation_threshold is a currency amount."
         return cast("models.SaveProjectResult", self._request("save_project", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
@@ -1380,6 +1388,14 @@ class AsyncApostra(AsyncTransport):
     async def save_playbook_with_response(self, input: models.SavePlaybookInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SavePlaybookResult]:
         "Write selling guidance. `active` turns Playbook prose and its optional seller note into proposed Lessons; the active Playbook is unchanged. `pricing` replaces facts. `discounts` sets or removes brand/operator rules. `limits` sets what your brain may offer. Halves never roll back each other. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SavePlaybookResult], await self._request_with_response("save_playbook", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
+    async def save_prime_function(self, input: models.SavePrimeFunctionInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SavePrimeFunctionResult:
+        "Propose, pause or resume a Prime function: a workspace .py file revision that runs on a schedule, an event or a webhook, read-only. Only the account’s own agent proposes, in a turn a person started; an administrator reads the code and approves it on our site."
+        return cast("models.SavePrimeFunctionResult", await self._request("save_prime_function", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
+    async def save_prime_function_with_response(self, input: models.SavePrimeFunctionInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SavePrimeFunctionResult]:
+        "Propose, pause or resume a Prime function: a workspace .py file revision that runs on a schedule, an event or a webhook, read-only. Only the account’s own agent proposes, in a turn a person started; an administrator reads the code and approves it on our site. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.SavePrimeFunctionResult], await self._request_with_response("save_prime_function", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_project(self, input: models.SaveProjectInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveProjectResult:
         "Create a Buyer account's Project (omit id), or with id make one change: details, one attach or detach, bounds, autonomyPaused (stop; an administrator resumes), or isArchived (archive or restore). Wider bounds return approval_required. reallocation_threshold is a currency amount."

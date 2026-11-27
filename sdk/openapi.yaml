@@ -3521,6 +3521,7 @@ paths:
                               - buyer_rfp
                               - agent_record
                               - workspace_file
+                              - prime_function
                         required:
                           - kind
                 - type: object
@@ -32269,6 +32270,1361 @@ paths:
                                   const: diagnostics
                             required:
                               - include
+                - type: object
+                  properties:
+                    kind:
+                      const: prime_function
+                    id:
+                      description: >-
+                        The id from search or an earlier result; never guess one. For skill, an exact id the user gave
+                        also works. A brand's id is its domain, or domain/brand_id. Omit it for singleton kinds,
+                        audience, and a property_list report read by reportId. A work_item also needs workItemKind.
+                      type: string
+                      minLength: 1
+                    after:
+                      description: >-
+                        For kind session: pageNextAfter or resumeAfter. For buyer_rfp: sellersNextAfter from the
+                        previous read.
+                      type: string
+                      minLength: 1
+                      maxLength: 1024
+                    through:
+                      description: >-
+                        For kind session, with after: the snapshotThrough from the previous read, so new events do not
+                        shift the pages.
+                      type: string
+                      minLength: 1
+                      maxLength: 1024
+                    limit:
+                      description: 'For kind session: events per page, default 50. For buyer_rfp: sellers per page, default 25.'
+                      type: integer
+                      minimum: 1
+                      maximum: 100
+                    threadStates:
+                      description: 'For a Project conversation: keep only thread starts in these states.'
+                      minItems: 1
+                      maxItems: 32
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - needs_you
+                          - evaluating
+                          - new
+                          - drafted
+                          - fixed
+                          - no_action_needed
+                    threadGroups:
+                      description: 'For a Project conversation: keep only thread starts in these groups (a thread shows its group).'
+                      minItems: 1
+                      maxItems: 16
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - needs_you
+                          - working
+                          - done
+                    openThreads:
+                      description: 'For a Project conversation: keep only open threads.'
+                      type: boolean
+                      const: true
+                    buyerAccountId:
+                      description: >-
+                        For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone
+                        is ambiguous across buyers.
+                      type: integer
+                      exclusiveMinimum: 0
+                      maximum: 9007199254740991
+                    memberAccountId:
+                      description: 'Required for kind member: the account the member belongs to, this account or a direct child.'
+                      type: integer
+                      exclusiveMinimum: 0
+                      maximum: 9007199254740991
+                    accountId:
+                      description: >-
+                        The Apostra accountId this call runs in, from get_status. On a member read without
+                        memberAccountId: deprecated, read as memberAccountId.
+                      type: integer
+                      exclusiveMinimum: 0
+                      maximum: 9007199254740991
+                    advertiserId:
+                      description: >-
+                        The owning advertiser id. Required for event_source, catalog, creative_format, audience, and
+                        property_list (except a report read). creative and creative_collection take this or a campaign
+                        sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser
+                        to price include products for and read partnerStatus for, instead of the account.
+                      type: string
+                      pattern: ^[1-9]\d*$
+                    destination:
+                      type: object
+                      properties:
+                        channel:
+                          type: string
+                          enum:
+                            - display
+                            - olv
+                            - social
+                            - search
+                            - ctv
+                            - linear_tv
+                            - radio
+                            - streaming_audio
+                            - podcast
+                            - dooh
+                            - ooh
+                            - print
+                            - cinema
+                            - email
+                            - gaming
+                            - retail_media
+                            - influencer
+                            - affiliate
+                            - product_placement
+                            - sponsored_intelligence
+                          description: AdCP channel the asset would run on.
+                        countries:
+                          description: ISO country codes. Omit for worldwide.
+                          maxItems: 250
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
+                      required:
+                        - channel
+                      additionalProperties: false
+                      description: 'creative_asset: where it would run. Each row then carries permission.'
+                    reportId:
+                      description: >-
+                        For kind property_list with include report: the report id returned by a save_property_list
+                        check. No list id is needed.
+                      type: string
+                      minLength: 1
+                    identifierOffset:
+                      description: 'For kind property_list: where to start the next page of identifiers, from the previous read.'
+                      type: integer
+                      minimum: 0
+                      maximum: 9007199254740991
+                    identifierCategory:
+                      description: >-
+                        For kind property_list: which identifiers to page through: all (the default), unresolved, or
+                        registered.
+                      type: string
+                      enum:
+                        - all
+                        - unresolved
+                        - registered
+                    productQueryId:
+                      description: >-
+                        For kind seller with include products and advertiserId: the productQueryId from the previous
+                        read, to poll products that were still loading.
+                      type: string
+                      minLength: 1
+                      maxLength: 128
+                    productRevision:
+                      description: >-
+                        For kind seller, with productQueryId: the productRevision from the previous read, so only
+                        changes since then come back.
+                      type: integer
+                      minimum: 0
+                      maximum: 9007199254740991
+                    validationRunId:
+                      description: 'For kind agent with include diagnostics: one validation run id taken from validationRuns.'
+                      type: string
+                      format: uuid
+                      pattern: >-
+                        ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                    variantId:
+                      description: 'creative_session preview: a variants[].build_variant_id; omit for the saved draft.'
+                      type: string
+                      minLength: 1
+                    placement:
+                      description: >-
+                        Meta preview placement; the default is facebook_feed. A Creative is offered only the placements
+                        its format declares.
+                      type: string
+                      enum:
+                        - facebook_feed
+                        - instagram_feed
+                        - facebook_stories
+                        - instagram_stories
+                        - facebook_reels
+                        - instagram_reels
+                    pageId:
+                      description: >-
+                        creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account
+                        with several Pages and a Creative that keeps none.
+                      type: string
+                      minLength: 1
+                    sourceId:
+                      description: >-
+                        Which scope holds the object. Required for wholesale_product and modular_source work_item: the
+                        inventory source id from search. signal: the ad-server source; omit for a seller-catalog signal.
+                        creative, creative_collection, creative_session: the campaign id. creative_asset: the advertiser
+                        id.
+                      type: string
+                      minLength: 1
+                    workItemKind:
+                      description: >-
+                        Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other
+                        queues take no sourceId.
+                      type: string
+                      enum:
+                        - creative_review
+                        - media_buy_approval
+                        - modular_source
+                        - contract_conflict
+                        - gam_cleanup
+                    include:
+                      not: {}
+                    items:
+                      description: 'For kind catalog with include items: which items to return and the cursor for the next page.'
+                      type: object
+                      properties:
+                        filter:
+                          description: Filters for the catalog items page; every filter given must match.
+                          type: object
+                          properties:
+                            ids:
+                              description: Only catalog items with these exact AdCP item keys (e.g. hotel_id), up to 50.
+                              maxItems: 50
+                              type: array
+                              items:
+                                type: string
+                                minLength: 1
+                            gtins:
+                              description: Only catalog items with these exact product GTINs, up to 50.
+                              maxItems: 50
+                              type: array
+                              items:
+                                type: string
+                                minLength: 8
+                                maxLength: 14
+                            tags:
+                              description: Only catalog items carrying any of these tags.
+                              maxItems: 50
+                              type: array
+                              items:
+                                type: string
+                                minLength: 1
+                                maxLength: 64
+                            category:
+                              description: Only catalog items in exactly this category.
+                              type: string
+                              minLength: 1
+                              maxLength: 255
+                            text:
+                              description: Only catalog items whose text contains this phrase.
+                              type: string
+                              minLength: 1
+                              maxLength: 1000
+                          additionalProperties: false
+                        cursor:
+                          description: The cursor from the previous catalog items page.
+                          type: string
+                          minLength: 1
+                          maxLength: 128
+                      additionalProperties: false
+                    options:
+                      description: >-
+                        For kind material: which revision to read, paging for each collection, and selectors that narrow
+                        them.
+                      type: object
+                      properties:
+                        sourceRevision:
+                          description: Read this exact past source revision instead of the current one.
+                          type: integer
+                          exclusiveMinimum: 0
+                          maximum: 9007199254740991
+                        renditionRevision:
+                          description: Read this rendition of the source revision; omit for the active rendition.
+                          type: integer
+                          exclusiveMinimum: 0
+                          maximum: 9007199254740991
+                        pages:
+                          description: >-
+                            Paging for each collection in a material read. A candidates page needs no include; a page
+                            for any other collection applies only when you also request its matching include.
+                          type: object
+                          properties:
+                            candidates:
+                              description: >-
+                                Page through the extracted facts proposed for the playbook, rules, products, or seller
+                                profile. Default 25 rows; no include needed.
+                              $ref: '#/components/schemas/get_request_OptionsPagesCandidates'
+                            rendition_blocks:
+                              description: >-
+                                Page through extracted text blocks in reading order. Needs include rendition_blocks;
+                                default 50 rows.
+                              $ref: '#/components/schemas/get_request_OptionsPagesRenditionBlocks'
+                            visual_assets:
+                              description: Page through extracted images. Needs include visual_assets; default 25 rows, at most 50.
+                              $ref: '#/components/schemas/get_request_OptionsPagesVisualAssets'
+                            extraction_diagnostics:
+                              description: >-
+                                Page through extraction warnings and errors. Needs include extraction_diagnostics;
+                                default 50 rows.
+                              $ref: '#/components/schemas/get_request_OptionsPagesExtractionDiagnostics'
+                            composition_receipts:
+                              description: >-
+                                Page through records of this material being used in RFP responses. Needs include
+                                composition_receipts; default 50 rows.
+                              $ref: '#/components/schemas/get_request_OptionsPagesCompositionReceipts'
+                            usage:
+                              description: >-
+                                Page through where this material was used. Needs include usage; at most 48 rows, sent to
+                                the app rather than to you.
+                              $ref: '#/components/schemas/get_request_OptionsPagesUsage'
+                            product_sheet:
+                              description: Page through the rows of a product-sheet preview. Needs include product_sheet_preview.
+                              $ref: '#/components/schemas/get_request_OptionsPagesProductSheet'
+                          additionalProperties: false
+                        select:
+                          description: >-
+                            Narrow the text blocks, images, and usage returned. A selector is ignored for collections it
+                            does not apply to.
+                          type: object
+                          properties:
+                            blockKinds:
+                              description: Keep only text blocks of these kinds, such as heading, table, or speaker_notes.
+                              maxItems: 9
+                              type: array
+                              items:
+                                type: string
+                                enum:
+                                  - heading
+                                  - paragraph
+                                  - list
+                                  - table
+                                  - caption
+                                  - speaker_notes
+                                  - ocr
+                                  - accessibility_text
+                                  - other
+                            unitId:
+                              description: Limit text blocks, images, and usage to one page, slide, or sheet by its unit ID.
+                              type: string
+                              minLength: 1
+                              maxLength: 80
+                            assetKinds:
+                              description: Keep only images of these kinds, such as photo, logo, or chart.
+                              maxItems: 8
+                              type: array
+                              items:
+                                type: string
+                                enum:
+                                  - photo
+                                  - illustration
+                                  - logo
+                                  - chart
+                                  - diagram
+                                  - screenshot
+                                  - background
+                                  - other
+                            reusePolicies:
+                              description: >-
+                                Keep only images whose reuse rights are any of these, for example allowed or
+                                requires_approval.
+                              maxItems: 4
+                              type: array
+                              items:
+                                type: string
+                                enum:
+                                  - allowed
+                                  - requires_approval
+                                  - prohibited
+                                  - unknown
+                            assetStatuses:
+                              description: Keep only images whose extraction finished as ready, degraded, or failed.
+                              maxItems: 3
+                              type: array
+                              items:
+                                type: string
+                                enum:
+                                  - ready
+                                  - degraded
+                                  - failed
+                          additionalProperties: false
+                      additionalProperties: false
+                    version:
+                      description: >-
+                        For kind playbook: read this past version with its content, for example to save it again as
+                        current. For business_rules, with businessRulesPolicy.
+                      type: integer
+                      minimum: 1
+                      maximum: 9007199254740991
+                    revision:
+                      description: 'For kind workspace_file: the revision to read, not the current one.'
+                      type: integer
+                      minimum: 1
+                      maximum: 9007199254740991
+                    businessRulesPolicy:
+                      description: 'For kind business_rules with version: the policy that numbers it.'
+                      type: string
+                      enum:
+                        - brief_acceptance
+                        - creative_policy
+                    subscriptionsOffset:
+                      description: >-
+                        For kind notification_config: where to start the next page of notification and agent event
+                        subscriptions, which come newest first.
+                      type: integer
+                      minimum: 0
+                      maximum: 9007199254740991
+                    connectionAccountsOffset:
+                      description: 'For kind connection: where to start the next page of provider accounts found on the connection.'
+                      type: integer
+                      minimum: 0
+                      maximum: 9007199254740991
+                    connectionMappingsOffset:
+                      description: 'For kind connection: where to start the next page of advertiser-to-account mappings.'
+                      type: integer
+                      minimum: 0
+                      maximum: 9007199254740991
+                    connectionAccountId:
+                      description: >-
+                        Required for kind connection with include inventory: the accounts[].id whose event sources and
+                        audiences to list.
+                      type: string
+                      pattern: ^[1-9]\d{0,18}$
+                    connectionInventoryOffset:
+                      description: 'For kind connection with include inventory: where to start the next page, 50 per page.'
+                      type: integer
+                      minimum: 0
+                      maximum: 9007199254740991
+                    connectionInventoryObjectType:
+                      description: 'For kind connection with include inventory: limit the page to seller audiences or event sources.'
+                      type: string
+                      enum:
+                        - audience
+                        - event_source
+                    connectionTarget:
+                      description: >-
+                        For kind connection: the seller or creative engine you expect this connection to reach. The read
+                        fails if it reaches another one.
+                      type: object
+                      properties:
+                        kind:
+                          type: string
+                          enum:
+                            - seller
+                            - creative_engine
+                          description: Whether the target is a seller or a creative engine.
+                        sellerAccountId:
+                          description: >-
+                            For kind seller: the seller's Account id. Not the seller object's id, which is a different
+                            number.
+                          type: integer
+                          exclusiveMinimum: 0
+                          maximum: 9007199254740991
+                        engineAccountId:
+                          description: >-
+                            For kind creative_engine: the engine's Account id. Not the engine object's id, which is a
+                            different number.
+                          type: integer
+                          exclusiveMinimum: 0
+                          maximum: 2147483647
+                      required:
+                        - kind
+                      additionalProperties: false
+                    feedbackOffset:
+                      description: 'For kind rfp_turn: where to start the next page of feedback, 20 per page.'
+                      type: integer
+                      minimum: 0
+                      maximum: 9007199254740991
+                    representationOffset:
+                      description: >-
+                        For kind rfp_turn: where to start the next page of representations, 50 per page. Not with
+                        representationCursor.
+                      type: integer
+                      minimum: 0
+                      maximum: 9007199254740991
+                    representationCursor:
+                      description: >-
+                        For kind rfp_turn: the representations cursor from the previous read, which keeps pages stable.
+                        Not with representationOffset.
+                      type: string
+                      minLength: 1
+                      maxLength: 2048
+                    audienceOffset:
+                      description: 'For kind audience: where to start the next page of audiences, 50 per page; default 0.'
+                      type: integer
+                      minimum: 0
+                      maximum: 9007199254740991
+                    proposalProductsCursor:
+                      description: >-
+                        For kind proposal with include products: the cursor from the previous products page of the same
+                        proposal.
+                      type: string
+                      minLength: 1
+                      maxLength: 2048
+                    canvasSourceCursor:
+                      description: 'For include canvas_source: the nextCursor from the previous page of the same canvas.'
+                      type: string
+                      minLength: 1
+                      maxLength: 1024
+                  required:
+                    - kind
+                    - id
+                  additionalProperties: false
+                  allOf:
+                    - if:
+                        anyOf:
+                          - required:
+                              - after
+                          - required:
+                              - through
+                          - required:
+                              - limit
+                      then:
+                        properties:
+                          kind:
+                            const: session
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          kind:
+                            const: skill
+                        required:
+                          - kind
+                      then:
+                        not:
+                          required:
+                            - include
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: preview
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: creative
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: attachTargets
+                        required:
+                          - include
+                      then:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: creative
+                            required:
+                              - kind
+                          - required:
+                              - advertiserId
+                    - if:
+                        properties:
+                          kind:
+                            const: catalog
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - advertiserId
+                    - if:
+                        properties:
+                          items:
+                            properties:
+                              filter:
+                                required:
+                                  - status
+                            required:
+                              - filter
+                        required:
+                          - items
+                      then:
+                        properties:
+                          items:
+                            properties:
+                              filter:
+                                properties:
+                                  status:
+                                    const: approved
+                            required:
+                              - filter
+                        required:
+                          - items
+                    - if:
+                        required:
+                          - items
+                      then:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: catalog
+                            required:
+                              - kind
+                          - properties:
+                              include:
+                                contains:
+                                  const: items
+                            required:
+                              - include
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: items
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: catalog
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          kind:
+                            const: creative_session
+                        required:
+                          - kind
+                      then:
+                        not:
+                          required:
+                            - include
+                    - if:
+                        properties:
+                          kind:
+                            const: creative_session
+                        required:
+                          - kind
+                      then:
+                        not:
+                          allOf:
+                            - required:
+                                - sourceId
+                            - required:
+                                - advertiserId
+                    - if:
+                        properties:
+                          kind:
+                            const: creative_engine
+                        required:
+                          - kind
+                      then:
+                        not:
+                          required:
+                            - include
+                    - if:
+                        properties:
+                          kind:
+                            const: event_source
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - advertiserId
+                    - if:
+                        required:
+                          - connectionTarget
+                      then:
+                        properties:
+                          kind:
+                            const: connection
+                        required:
+                          - kind
+                    - if:
+                        required:
+                          - connectionMappingsOffset
+                      then:
+                        properties:
+                          kind:
+                            const: connection
+                        required:
+                          - kind
+                    - if:
+                        required:
+                          - connectionAccountsOffset
+                      then:
+                        properties:
+                          kind:
+                            const: connection
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: inventory
+                        required:
+                          - include
+                      then:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: connection
+                            required:
+                              - kind
+                          - required:
+                              - connectionAccountId
+                    - if:
+                        required:
+                          - connectionAccountId
+                      then:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: connection
+                            required:
+                              - kind
+                          - properties:
+                              include:
+                                contains:
+                                  const: inventory
+                            required:
+                              - include
+                    - if:
+                        required:
+                          - connectionInventoryOffset
+                      then:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: connection
+                            required:
+                              - kind
+                          - properties:
+                              include:
+                                contains:
+                                  const: inventory
+                            required:
+                              - include
+                    - if:
+                        required:
+                          - connectionInventoryObjectType
+                      then:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: connection
+                            required:
+                              - kind
+                          - properties:
+                              include:
+                                contains:
+                                  const: inventory
+                            required:
+                              - include
+                    - if:
+                        properties:
+                          kind:
+                            const: wholesale_product
+                        required:
+                          - kind
+                      then:
+                        oneOf:
+                          - allOf:
+                              - required:
+                                  - sourceId
+                              - not:
+                                  required:
+                                    - advertiserId
+                          - allOf:
+                              - not:
+                                  required:
+                                    - sourceId
+                              - required:
+                                  - advertiserId
+                    - if:
+                        required:
+                          - options
+                      then:
+                        properties:
+                          kind:
+                            const: material
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          kind:
+                            enum:
+                              - creative_collection
+                              - creative
+                        required:
+                          - kind
+                      then:
+                        oneOf:
+                          - allOf:
+                              - required:
+                                  - sourceId
+                              - not:
+                                  required:
+                                    - advertiserId
+                          - allOf:
+                              - not:
+                                  required:
+                                    - sourceId
+                              - required:
+                                  - advertiserId
+                    - if:
+                        properties:
+                          kind:
+                            const: work_item
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - workItemKind
+                    - if:
+                        properties:
+                          workItemKind:
+                            const: modular_source
+                        required:
+                          - workItemKind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        required:
+                          - queue
+                      then:
+                        properties:
+                          kind:
+                            const: work_item
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          workItemKind:
+                            const: modular_source
+                        required:
+                          - workItemKind
+                      then:
+                        not:
+                          required:
+                            - queue
+                    - if:
+                        allOf:
+                          - required:
+                              - queue
+                          - required:
+                              - status
+                      then:
+                        properties:
+                          status:
+                            const: pending
+                        required:
+                          - status
+                    - if:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: work_item
+                            required:
+                              - kind
+                          - not:
+                              properties:
+                                workItemKind:
+                                  const: modular_source
+                              required:
+                                - workItemKind
+                      then:
+                        not:
+                          required:
+                            - sourceId
+                    - if:
+                        properties:
+                          kind:
+                            enum:
+                              - audience
+                              - advertiser_access
+                        required:
+                          - kind
+                      then:
+                        not:
+                          required:
+                            - id
+                    - if:
+                        allOf:
+                          - not:
+                              properties:
+                                kind:
+                                  enum:
+                                    - source_options
+                                    - listing
+                                    - media_kit
+                                    - playbook
+                                    - business_rules
+                                    - coverage
+                                    - distribution
+                                    - notification_config
+                                    - audience
+                                    - advertiser_access
+                                    - seller
+                              required:
+                                - kind
+                      then:
+                        required:
+                          - id
+                    - if:
+                        required:
+                          - version
+                      then:
+                        properties:
+                          kind:
+                            const: playbook
+                        required:
+                          - kind
+                    - if:
+                        required:
+                          - revision
+                      then:
+                        properties:
+                          kind:
+                            const: workspace_file
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: revisions
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: workspace_file
+                        required:
+                          - kind
+                    - if:
+                        required:
+                          - buyerAccountId
+                      then:
+                        properties:
+                          kind:
+                            const: media_buy
+                        required:
+                          - kind
+                    - if:
+                        required:
+                          - advertiserId
+                      then:
+                        properties:
+                          kind:
+                            enum:
+                              - seller
+                              - event_source
+                              - creative
+                              - creative_format
+                              - creative_collection
+                              - catalog
+                              - audience
+                              - advertiser_access
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          kind:
+                            const: audience
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - advertiserId
+                    - if:
+                        properties:
+                          kind:
+                            const: advertiser_access
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - advertiserId
+                    - if:
+                        properties:
+                          kind:
+                            const: creative_format
+                        required:
+                          - kind
+                      then:
+                        allOf:
+                          - required:
+                              - advertiserId
+                          - allOf:
+                              - not:
+                                  required:
+                                    - sourceId
+                              - not:
+                                  required:
+                                    - include
+                    - if:
+                        anyOf:
+                          - required:
+                              - productQueryId
+                          - required:
+                              - productRevision
+                      then:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: seller
+                            required:
+                              - kind
+                          - required:
+                              - advertiserId
+                          - properties:
+                              include:
+                                contains:
+                                  const: products
+                            required:
+                              - include
+                          - required:
+                              - productQueryId
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: products
+                        required:
+                          - include
+                      then:
+                        anyOf:
+                          - allOf:
+                              - properties:
+                                  kind:
+                                    const: seller
+                                required:
+                                  - kind
+                              - required:
+                                  - advertiserId
+                          - properties:
+                              kind:
+                                const: proposal
+                            required:
+                              - kind
+                          - properties:
+                              kind:
+                                const: media_buy
+                            required:
+                              - kind
+                    - if:
+                        required:
+                          - subscriptionsOffset
+                      then:
+                        properties:
+                          kind:
+                            const: notification_config
+                        required:
+                          - kind
+                    - if:
+                        required:
+                          - feedbackOffset
+                      then:
+                        properties:
+                          kind:
+                            const: rfp_turn
+                        required:
+                          - kind
+                    - if:
+                        required:
+                          - representationOffset
+                      then:
+                        properties:
+                          kind:
+                            const: rfp_turn
+                        required:
+                          - kind
+                    - if:
+                        required:
+                          - representationCursor
+                      then:
+                        properties:
+                          kind:
+                            const: rfp_turn
+                        required:
+                          - kind
+                    - if:
+                        required:
+                          - audienceOffset
+                      then:
+                        properties:
+                          kind:
+                            const: audience
+                        required:
+                          - kind
+                    - if:
+                        required:
+                          - proposalProductsCursor
+                      then:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: proposal
+                            required:
+                              - kind
+                          - properties:
+                              include:
+                                contains:
+                                  const: products
+                            required:
+                              - include
+                    - not:
+                        allOf:
+                          - required:
+                              - representationCursor
+                          - required:
+                              - representationOffset
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: discounts
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: playbook
+                        required:
+                          - kind
+                    - if:
+                        anyOf:
+                          - properties:
+                              include:
+                                contains:
+                                  const: listing
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: discoveryCard
+                            required:
+                              - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: readiness
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: teaching
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: analytics
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: demoEvaluation
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: prebid
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        anyOf:
+                          - properties:
+                              include:
+                                contains:
+                                  const: decisionRecord
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: briefArtifact
+                            required:
+                              - include
+                      then:
+                        properties:
+                          kind:
+                            const: intelligence_run
+                        required:
+                          - kind
+                    - if:
+                        anyOf:
+                          - properties:
+                              include:
+                                contains:
+                                  const: poweredByAgent
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: testRuns
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: connectionContract
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: capabilities
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: creativeFormats
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: publisherProperties
+                            required:
+                              - include
+                      then:
+                        properties:
+                          kind:
+                            const: inventory_source
+                        required:
+                          - kind
+                    - if:
+                        anyOf:
+                          - properties:
+                              include:
+                                contains:
+                                  const: operating
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: entitlements
+                            required:
+                              - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: certification
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: agent
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: accounts
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: advertiser
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: validationRuns
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: agent
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: webhookDeliveries
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: agent
+                        required:
+                          - kind
+                    - if:
+                        required:
+                          - validationRunId
+                      then:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: agent
+                            required:
+                              - kind
+                          - properties:
+                              include:
+                                contains:
+                                  const: diagnostics
+                            required:
+                              - include
       responses:
         '200':
           description: Typed operation result
@@ -33737,6 +35093,7 @@ paths:
                               - buyer_rfp
                               - agent_record
                               - workspace_file
+                              - prime_function
                               - property_list
                               - creative
                               - creative_format
@@ -69788,6 +71145,366 @@ paths:
           content:
             application/json:
               schema: *ref_84
+  /tools/save_prime_function:
+    post:
+      operationId: save_prime_function
+      summary: >-
+        Propose, pause or resume a Prime function: a workspace .py file revision that runs on a schedule, an event or a
+        webhook, read-only. Only the account’s own agent proposes, in a turn a person started; an administrator reads
+        the code and approves it on our site.
+      description: >-
+        Propose, pause or resume a Prime function: a workspace .py file revision that runs on a schedule, an event or a
+        webhook, read-only. Only the account’s own agent proposes, in a turn a person started; an administrator reads
+        the code and approves it on our site.
+      security:
+        - apiKeyAuth: []
+        - m2mOAuth:
+            - interchange:write
+      parameters:
+        - name: X-SCOPE3-CUSTOMER-ID
+          in: header
+          required: false
+          deprecated: true
+          description: >-
+            Deprecated: send accountId in the request body instead. Retires on the announced removal date. If both are
+            sent they must name the same account.
+          schema:
+            type: string
+            pattern: ^[1-9][0-9]*$
+        - *ref_8
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  description: >-
+                    The function to change. Omit to propose a new one. With expectedVersion and the propose fields,
+                    proposes a new version; with state alone, pauses or resumes it.
+                  type: string
+                  pattern: ^fn_[0-9a-f]{24}$
+                expectedVersion:
+                  description: version from the last read, with id, when proposing a new version. A stale one is refused.
+                  type: integer
+                  minimum: 1
+                  maximum: 9007199254740991
+                state:
+                  description: >-
+                    paused stops it at once. active resumes it: a person’s pause at once, by an administrator; after
+                    five failed runs, once an administrator approves it on our site.
+                  type: string
+                  enum:
+                    - paused
+                    - active
+                workspaceFileId:
+                  description: >-
+                    The workspace file (a .py file of at most 256 KB) the function runs: in its Project’s workspace, or
+                    the account’s when it has no Project. Required to propose.
+                  type: string
+                  pattern: ^wsf_[0-9a-f]{24}$
+                workspaceRevision:
+                  description: The file revision it pins. A function never follows a newer revision. Required to propose.
+                  type: integer
+                  minimum: 1
+                  maximum: 9007199254740991
+                trigger:
+                  description: >-
+                    What starts a run: {kind:"schedule", schedule} with {kind:"cron", expression, timezone},
+                    {kind:"every", intervalMinutes} (15 or more) or {kind:"at", runAt}; {kind:"event", eventTypes} (1 to
+                    10 exact event names); or {kind:"webhook"}. Required to propose.
+                  oneOf:
+                    - type: object
+                      properties:
+                        kind:
+                          type: string
+                          const: schedule
+                          description: Runs on a schedule.
+                        schedule:
+                          oneOf:
+                            - type: object
+                              properties:
+                                kind:
+                                  type: string
+                                  const: cron
+                                  description: A cron schedule.
+                                expression:
+                                  type: string
+                                  minLength: 1
+                                  maxLength: 120
+                                  description: A cron expression, at most every 15 minutes.
+                                timezone:
+                                  type: string
+                                  minLength: 1
+                                  maxLength: 64
+                                  description: An IANA timezone, such as America/New_York.
+                              required:
+                                - kind
+                                - expression
+                                - timezone
+                              additionalProperties: false
+                            - type: object
+                              properties:
+                                kind:
+                                  type: string
+                                  const: every
+                                  description: A fixed interval.
+                                intervalMinutes:
+                                  type: integer
+                                  minimum: -9007199254740991
+                                  maximum: 9007199254740991
+                                  description: Minutes between runs, 15 or more.
+                              required:
+                                - kind
+                                - intervalMinutes
+                              additionalProperties: false
+                            - type: object
+                              properties:
+                                kind:
+                                  type: string
+                                  const: at
+                                  description: One run at a set time.
+                                runAt:
+                                  type: string
+                                  format: date-time
+                                  pattern: >-
+                                    ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z|([+-](?:[01]\d|2[0-3]):[0-5]\d)))$
+                                  description: When to run, an ISO 8601 time with an offset.
+                              required:
+                                - kind
+                                - runAt
+                              additionalProperties: false
+                          description: A cron expression, an interval or a single time.
+                      required:
+                        - kind
+                        - schedule
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        kind:
+                          type: string
+                          const: event
+                          description: Runs when a platform event happens.
+                        eventTypes:
+                          minItems: 1
+                          maxItems: 10
+                          type: array
+                          items:
+                            type: string
+                            enum:
+                              - creative.rejected
+                              - creative.changes_requested
+                              - media_buy.source_rejected
+                              - media_buy.stuck
+                              - proposals.received
+                          description: One to 10 exact event names. No wildcards, no repeats.
+                      required:
+                        - kind
+                        - eventTypes
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        kind:
+                          type: string
+                          const: webhook
+                          description: Runs when a signed webhook arrives.
+                      required:
+                        - kind
+                      additionalProperties: false
+                advertiserId:
+                  description: The one advertiser it runs for. Or send advertiserIds.
+                  type: string
+                advertiserIds:
+                  description: An account-level function’s advertisers, 1 to 20. Or send advertiserId.
+                  minItems: 1
+                  maxItems: 20
+                  type: array
+                  items:
+                    type: string
+                projectId:
+                  description: >-
+                    The Project it works for: that advertiser’s, or an account-level Project holding every named
+                    advertiser.
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+                outputs:
+                  description: The one memory record type a run may save (fact or event), or null for none. Required to propose.
+                  type: object
+                  properties:
+                    recordType:
+                      anyOf:
+                        - type: string
+                          enum:
+                            - fact
+                            - event
+                        - type: 'null'
+                      description: fact, event or null for none.
+                  required:
+                    - recordType
+                  additionalProperties: false
+                reason:
+                  description: Why the person asked for this function.
+                  type: string
+                  minLength: 1
+                  maxLength: 500
+                idempotencyKey:
+                  description: >-
+                    New function only: unique key that makes a retried proposal find the first function and its
+                    approval.
+                  type: string
+                  format: uuid
+                  pattern: >-
+                    ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                expectedAccountId:
+                  description: Apostra accountId you are working in (from get_status). The write fails if the account has changed.
+                  anyOf:
+                    - type: integer
+                      minimum: 1
+                    - type: string
+                      pattern: ^[1-9][0-9]*$
+                accountId:
+                  description: Apostra accountId this call runs in, from get_status.
+                  anyOf:
+                    - type: integer
+                      minimum: 1
+                    - type: string
+                      pattern: ^[1-9][0-9]*$
+              additionalProperties: false
+      responses:
+        '200':
+          description: Typed operation result
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                properties:
+                  data:
+                    anyOf:
+                      - type: object
+                        properties:
+                          kind:
+                            type: string
+                            const: prime_function
+                          object:
+                            $ref: '#/components/schemas/save_prime_function_success_PrimeFunction'
+                        required:
+                          - kind
+                          - object
+                        additionalProperties: false
+                      - type: object
+                        properties:
+                          action:
+                            type: string
+                            const: approval_required
+                          message:
+                            type: string
+                          approval:
+                            $ref: '#/components/schemas/save_prime_function_success_AgentApproval'
+                          approvers:
+                            description: >-
+                              The account's direct administrators who can approve, when the caller cannot (Scope3 staff,
+                              or an agent or service token acting with no person present). email is null when no person
+                              is behind the call. Absent when the caller can approve; never empty.
+                            minItems: 1
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                name:
+                                  type:
+                                    - string
+                                    - 'null'
+                                email:
+                                  type:
+                                    - string
+                                    - 'null'
+                              required:
+                                - name
+                                - email
+                              additionalProperties: false
+                          primeFunction:
+                            $ref: '#/components/schemas/save_prime_function_success_PrimeFunction'
+                        required:
+                          - action
+                          - message
+                          - approval
+                          - primeFunction
+                        additionalProperties: false
+                  error:
+                    type: 'null'
+                required:
+                  - data
+                  - error
+        '202': *ref_9
+        '400':
+          description: Invalid operation input
+          content:
+            application/json:
+              schema: &ref_85
+                $ref: '#/components/schemas/V3ToolErrorResponse'
+        '401':
+          description: Missing or invalid API credential
+          content:
+            application/json:
+              schema: *ref_85
+        '402':
+          description: Account credit limit exceeded
+          content:
+            application/json:
+              schema: *ref_85
+        '403':
+          description: The credential or account cannot perform this operation
+          content:
+            application/json:
+              schema: *ref_85
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema: *ref_85
+        '409':
+          description: Operation conflicts with current resource state
+          content:
+            application/json:
+              schema: *ref_85
+        '413':
+          description: Request body exceeds the accepted size
+          content:
+            application/json:
+              schema: *ref_85
+        '415':
+          description: Request body encoding or character set is unsupported
+          content:
+            application/json:
+              schema: *ref_85
+        '422':
+          description: Operation cannot process the supplied input
+          content:
+            application/json:
+              schema: *ref_85
+        '429':
+          description: Request rate limit exceeded
+          content:
+            application/json:
+              schema: *ref_85
+        '500':
+          description: Unexpected operation failure
+          content:
+            application/json:
+              schema: *ref_85
+        '501':
+          description: Recognised operation behaviour is not implemented
+          content:
+            application/json:
+              schema: *ref_85
+        '503':
+          description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
+          content:
+            application/json:
+              schema: *ref_85
   /tools/save_project:
     post:
       operationId: save_project
@@ -70259,68 +71976,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_85
+              schema: &ref_86
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_85
+              schema: *ref_86
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_85
+              schema: *ref_86
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_85
+              schema: *ref_86
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_85
+              schema: *ref_86
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_85
+              schema: *ref_86
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_85
+              schema: *ref_86
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_85
+              schema: *ref_86
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_85
+              schema: *ref_86
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_85
+              schema: *ref_86
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_85
+              schema: *ref_86
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_85
+              schema: *ref_86
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_85
+              schema: *ref_86
   /tools/save_property_list:
     post:
       operationId: save_property_list
@@ -70665,68 +72382,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_86
+              schema: &ref_87
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_86
+              schema: *ref_87
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_86
+              schema: *ref_87
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_86
+              schema: *ref_87
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_86
+              schema: *ref_87
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_86
+              schema: *ref_87
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_86
+              schema: *ref_87
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_86
+              schema: *ref_87
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_86
+              schema: *ref_87
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_86
+              schema: *ref_87
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_86
+              schema: *ref_87
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_86
+              schema: *ref_87
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_86
+              schema: *ref_87
   /tools/save_rfp:
     post:
       operationId: save_rfp
@@ -71520,68 +73237,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_87
+              schema: &ref_88
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_87
+              schema: *ref_88
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_87
+              schema: *ref_88
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_87
+              schema: *ref_88
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_87
+              schema: *ref_88
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_87
+              schema: *ref_88
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_87
+              schema: *ref_88
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_87
+              schema: *ref_88
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_87
+              schema: *ref_88
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_87
+              schema: *ref_88
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_87
+              schema: *ref_88
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_87
+              schema: *ref_88
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_87
+              schema: *ref_88
   /tools/save_rfp_turn:
     post:
       operationId: save_rfp_turn
@@ -71824,68 +73541,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_88
+              schema: &ref_89
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_88
+              schema: *ref_89
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_88
+              schema: *ref_89
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_88
+              schema: *ref_89
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_88
+              schema: *ref_89
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_88
+              schema: *ref_89
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_88
+              schema: *ref_89
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_88
+              schema: *ref_89
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_88
+              schema: *ref_89
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_88
+              schema: *ref_89
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_88
+              schema: *ref_89
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_88
+              schema: *ref_89
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_88
+              schema: *ref_89
   /tools/save_seller:
     post:
       operationId: save_seller
@@ -73124,68 +74841,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_89
+              schema: &ref_90
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_89
+              schema: *ref_90
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_89
+              schema: *ref_90
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_89
+              schema: *ref_90
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_89
+              schema: *ref_90
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_89
+              schema: *ref_90
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_89
+              schema: *ref_90
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_89
+              schema: *ref_90
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_89
+              schema: *ref_90
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_89
+              schema: *ref_90
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_89
+              schema: *ref_90
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_89
+              schema: *ref_90
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_89
+              schema: *ref_90
   /tools/save_session:
     post:
       operationId: save_session
@@ -73403,68 +75120,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_90
+              schema: &ref_91
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_90
+              schema: *ref_91
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_90
+              schema: *ref_91
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_90
+              schema: *ref_91
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_90
+              schema: *ref_91
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_90
+              schema: *ref_91
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_90
+              schema: *ref_91
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_90
+              schema: *ref_91
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_90
+              schema: *ref_91
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_90
+              schema: *ref_91
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_90
+              schema: *ref_91
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_90
+              schema: *ref_91
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_90
+              schema: *ref_91
   /tools/save_signal:
     post:
       operationId: save_signal
@@ -73643,68 +75360,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_91
+              schema: &ref_92
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_91
+              schema: *ref_92
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_91
+              schema: *ref_92
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_91
+              schema: *ref_92
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_91
+              schema: *ref_92
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_91
+              schema: *ref_92
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_91
+              schema: *ref_92
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_91
+              schema: *ref_92
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_91
+              schema: *ref_92
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_91
+              schema: *ref_92
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_91
+              schema: *ref_92
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_91
+              schema: *ref_92
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_91
+              schema: *ref_92
   /tools/save_wholesale_product:
     post:
       operationId: save_wholesale_product
@@ -74433,68 +76150,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_92
+              schema: &ref_93
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_92
+              schema: *ref_93
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_92
+              schema: *ref_93
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_92
+              schema: *ref_93
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_92
+              schema: *ref_93
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_92
+              schema: *ref_93
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_92
+              schema: *ref_93
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_92
+              schema: *ref_93
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_92
+              schema: *ref_93
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_92
+              schema: *ref_93
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_92
+              schema: *ref_93
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_92
+              schema: *ref_93
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_92
+              schema: *ref_93
   /tools/save_work_item:
     post:
       operationId: save_work_item
@@ -74811,68 +76528,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_93
+              schema: &ref_94
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_93
+              schema: *ref_94
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_93
+              schema: *ref_94
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_93
+              schema: *ref_94
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_93
+              schema: *ref_94
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_93
+              schema: *ref_94
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_93
+              schema: *ref_94
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_93
+              schema: *ref_94
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_93
+              schema: *ref_94
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_93
+              schema: *ref_94
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_93
+              schema: *ref_94
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_93
+              schema: *ref_94
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_93
+              schema: *ref_94
   /tools/save_workspace_file:
     post:
       operationId: save_workspace_file
@@ -74974,68 +76691,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_94
+              schema: &ref_95
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_94
+              schema: *ref_95
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_94
+              schema: *ref_95
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_94
+              schema: *ref_95
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_94
+              schema: *ref_95
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_94
+              schema: *ref_95
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_94
+              schema: *ref_95
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_94
+              schema: *ref_95
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_94
+              schema: *ref_95
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_94
+              schema: *ref_95
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_94
+              schema: *ref_95
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_94
+              schema: *ref_95
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_94
+              schema: *ref_95
   /tools/search:
     post:
       operationId: search
@@ -75574,8 +77291,8 @@ paths:
                             - person
                         projectId:
                           description: >-
-                            For kind agent_record or workspace_file: only this Project’s (a Project id); for
-                            workspace_file, null means the account’s.
+                            For kind agent_record, workspace_file or prime_function: only this Project’s (a Project id);
+                            for workspace_file, null means the account’s.
                           anyOf:
                             - type: string
                               minLength: 1
@@ -75842,7 +77559,7 @@ paths:
                           description: >-
                             Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn:
                             open, released, closed. project: draft, active, paused, archived; archived implies
-                            includeArchived.
+                            includeArchived. prime_function: one of pending_approval, active, paused, disabled.
                           type: array
                           items:
                             type: string
@@ -75858,6 +77575,19 @@ paths:
                               - active
                               - paused
                               - archived
+                              - pending_approval
+                              - disabled
+                        triggerKind:
+                          description: 'For kind prime_function: only functions started by a schedule, an event or a webhook.'
+                          type: string
+                          enum:
+                            - schedule
+                            - event
+                            - webhook
+                        workspaceFileId:
+                          description: 'For kind prime_function: only functions that pin this workspace file.'
+                          type: string
+                          pattern: ^wsf_[0-9a-f]{24}$
                         sellerAccountId:
                           description: >-
                             For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by
@@ -77657,8 +79387,8 @@ paths:
                             - person
                         projectId:
                           description: >-
-                            For kind agent_record or workspace_file: only this Project’s (a Project id); for
-                            workspace_file, null means the account’s.
+                            For kind agent_record, workspace_file or prime_function: only this Project’s (a Project id);
+                            for workspace_file, null means the account’s.
                           anyOf:
                             - type: string
                               minLength: 1
@@ -77925,7 +79655,7 @@ paths:
                           description: >-
                             Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn:
                             open, released, closed. project: draft, active, paused, archived; archived implies
-                            includeArchived.
+                            includeArchived. prime_function: one of pending_approval, active, paused, disabled.
                           type: array
                           items:
                             type: string
@@ -77941,6 +79671,19 @@ paths:
                               - active
                               - paused
                               - archived
+                              - pending_approval
+                              - disabled
+                        triggerKind:
+                          description: 'For kind prime_function: only functions started by a schedule, an event or a webhook.'
+                          type: string
+                          enum:
+                            - schedule
+                            - event
+                            - webhook
+                        workspaceFileId:
+                          description: 'For kind prime_function: only functions that pin this workspace file.'
+                          type: string
+                          pattern: ^wsf_[0-9a-f]{24}$
                         sellerAccountId:
                           description: >-
                             For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by
@@ -80605,8 +82348,8 @@ paths:
                             - person
                         projectId:
                           description: >-
-                            For kind agent_record or workspace_file: only this Project’s (a Project id); for
-                            workspace_file, null means the account’s.
+                            For kind agent_record, workspace_file or prime_function: only this Project’s (a Project id);
+                            for workspace_file, null means the account’s.
                           anyOf:
                             - type: string
                               minLength: 1
@@ -80873,7 +82616,7 @@ paths:
                           description: >-
                             Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn:
                             open, released, closed. project: draft, active, paused, archived; archived implies
-                            includeArchived.
+                            includeArchived. prime_function: one of pending_approval, active, paused, disabled.
                           type: array
                           items:
                             type: string
@@ -80889,6 +82632,19 @@ paths:
                               - active
                               - paused
                               - archived
+                              - pending_approval
+                              - disabled
+                        triggerKind:
+                          description: 'For kind prime_function: only functions started by a schedule, an event or a webhook.'
+                          type: string
+                          enum:
+                            - schedule
+                            - event
+                            - webhook
+                        workspaceFileId:
+                          description: 'For kind prime_function: only functions that pin this workspace file.'
+                          type: string
+                          pattern: ^wsf_[0-9a-f]{24}$
                         sellerAccountId:
                           description: >-
                             For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by
@@ -82680,8 +84436,8 @@ paths:
                             - person
                         projectId:
                           description: >-
-                            For kind agent_record or workspace_file: only this Project’s (a Project id); for
-                            workspace_file, null means the account’s.
+                            For kind agent_record, workspace_file or prime_function: only this Project’s (a Project id);
+                            for workspace_file, null means the account’s.
                           anyOf:
                             - type: string
                               minLength: 1
@@ -82948,7 +84704,7 @@ paths:
                           description: >-
                             Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn:
                             open, released, closed. project: draft, active, paused, archived; archived implies
-                            includeArchived.
+                            includeArchived. prime_function: one of pending_approval, active, paused, disabled.
                           type: array
                           items:
                             type: string
@@ -82964,6 +84720,19 @@ paths:
                               - active
                               - paused
                               - archived
+                              - pending_approval
+                              - disabled
+                        triggerKind:
+                          description: 'For kind prime_function: only functions started by a schedule, an event or a webhook.'
+                          type: string
+                          enum:
+                            - schedule
+                            - event
+                            - webhook
+                        workspaceFileId:
+                          description: 'For kind prime_function: only functions that pin this workspace file.'
+                          type: string
+                          pattern: ^wsf_[0-9a-f]{24}$
                         sellerAccountId:
                           description: >-
                             For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by
@@ -84757,8 +86526,8 @@ paths:
                             - person
                         projectId:
                           description: >-
-                            For kind agent_record or workspace_file: only this Project’s (a Project id); for
-                            workspace_file, null means the account’s.
+                            For kind agent_record, workspace_file or prime_function: only this Project’s (a Project id);
+                            for workspace_file, null means the account’s.
                           anyOf:
                             - type: string
                               minLength: 1
@@ -85020,7 +86789,7 @@ paths:
                           description: >-
                             Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn:
                             open, released, closed. project: draft, active, paused, archived; archived implies
-                            includeArchived.
+                            includeArchived. prime_function: one of pending_approval, active, paused, disabled.
                           type: array
                           items:
                             type: string
@@ -85036,6 +86805,19 @@ paths:
                               - active
                               - paused
                               - archived
+                              - pending_approval
+                              - disabled
+                        triggerKind:
+                          description: 'For kind prime_function: only functions started by a schedule, an event or a webhook.'
+                          type: string
+                          enum:
+                            - schedule
+                            - event
+                            - webhook
+                        workspaceFileId:
+                          description: 'For kind prime_function: only functions that pin this workspace file.'
+                          type: string
+                          pattern: ^wsf_[0-9a-f]{24}$
                         sellerAccountId:
                           description: >-
                             For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by
@@ -86824,8 +88606,8 @@ paths:
                             - person
                         projectId:
                           description: >-
-                            For kind agent_record or workspace_file: only this Project’s (a Project id); for
-                            workspace_file, null means the account’s.
+                            For kind agent_record, workspace_file or prime_function: only this Project’s (a Project id);
+                            for workspace_file, null means the account’s.
                           anyOf:
                             - type: string
                               minLength: 1
@@ -87092,7 +88874,7 @@ paths:
                           description: >-
                             Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn:
                             open, released, closed. project: draft, active, paused, archived; archived implies
-                            includeArchived.
+                            includeArchived. prime_function: one of pending_approval, active, paused, disabled.
                           type: array
                           items:
                             type: string
@@ -87108,6 +88890,19 @@ paths:
                               - active
                               - paused
                               - archived
+                              - pending_approval
+                              - disabled
+                        triggerKind:
+                          description: 'For kind prime_function: only functions started by a schedule, an event or a webhook.'
+                          type: string
+                          enum:
+                            - schedule
+                            - event
+                            - webhook
+                        workspaceFileId:
+                          description: 'For kind prime_function: only functions that pin this workspace file.'
+                          type: string
+                          pattern: ^wsf_[0-9a-f]{24}$
                         sellerAccountId:
                           description: >-
                             For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by
@@ -88908,8 +90703,8 @@ paths:
                             - person
                         projectId:
                           description: >-
-                            For kind agent_record or workspace_file: only this Project’s (a Project id); for
-                            workspace_file, null means the account’s.
+                            For kind agent_record, workspace_file or prime_function: only this Project’s (a Project id);
+                            for workspace_file, null means the account’s.
                           anyOf:
                             - type: string
                               minLength: 1
@@ -89171,7 +90966,7 @@ paths:
                           description: >-
                             Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn:
                             open, released, closed. project: draft, active, paused, archived; archived implies
-                            includeArchived.
+                            includeArchived. prime_function: one of pending_approval, active, paused, disabled.
                           type: array
                           items:
                             type: string
@@ -89187,6 +90982,19 @@ paths:
                               - active
                               - paused
                               - archived
+                              - pending_approval
+                              - disabled
+                        triggerKind:
+                          description: 'For kind prime_function: only functions started by a schedule, an event or a webhook.'
+                          type: string
+                          enum:
+                            - schedule
+                            - event
+                            - webhook
+                        workspaceFileId:
+                          description: 'For kind prime_function: only functions that pin this workspace file.'
+                          type: string
+                          pattern: ^wsf_[0-9a-f]{24}$
                         sellerAccountId:
                           description: >-
                             For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by
@@ -92755,8 +94563,8 @@ paths:
                             - person
                         projectId:
                           description: >-
-                            For kind agent_record or workspace_file: only this Project’s (a Project id); for
-                            workspace_file, null means the account’s.
+                            For kind agent_record, workspace_file or prime_function: only this Project’s (a Project id);
+                            for workspace_file, null means the account’s.
                           anyOf:
                             - type: string
                               minLength: 1
@@ -93023,7 +94831,7 @@ paths:
                           description: >-
                             Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn:
                             open, released, closed. project: draft, active, paused, archived; archived implies
-                            includeArchived.
+                            includeArchived. prime_function: one of pending_approval, active, paused, disabled.
                           type: array
                           items:
                             type: string
@@ -93039,6 +94847,19 @@ paths:
                               - active
                               - paused
                               - archived
+                              - pending_approval
+                              - disabled
+                        triggerKind:
+                          description: 'For kind prime_function: only functions started by a schedule, an event or a webhook.'
+                          type: string
+                          enum:
+                            - schedule
+                            - event
+                            - webhook
+                        workspaceFileId:
+                          description: 'For kind prime_function: only functions that pin this workspace file.'
+                          type: string
+                          pattern: ^wsf_[0-9a-f]{24}$
                         sellerAccountId:
                           description: >-
                             For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by
@@ -96568,8 +98389,8 @@ paths:
                             - person
                         projectId:
                           description: >-
-                            For kind agent_record or workspace_file: only this Project’s (a Project id); for
-                            workspace_file, null means the account’s.
+                            For kind agent_record, workspace_file or prime_function: only this Project’s (a Project id);
+                            for workspace_file, null means the account’s.
                           anyOf:
                             - type: string
                               minLength: 1
@@ -96836,7 +98657,7 @@ paths:
                           description: >-
                             Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn:
                             open, released, closed. project: draft, active, paused, archived; archived implies
-                            includeArchived.
+                            includeArchived. prime_function: one of pending_approval, active, paused, disabled.
                           type: array
                           items:
                             type: string
@@ -96852,6 +98673,19 @@ paths:
                               - active
                               - paused
                               - archived
+                              - pending_approval
+                              - disabled
+                        triggerKind:
+                          description: 'For kind prime_function: only functions started by a schedule, an event or a webhook.'
+                          type: string
+                          enum:
+                            - schedule
+                            - event
+                            - webhook
+                        workspaceFileId:
+                          description: 'For kind prime_function: only functions that pin this workspace file.'
+                          type: string
+                          pattern: ^wsf_[0-9a-f]{24}$
                         sellerAccountId:
                           description: >-
                             For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by
@@ -99528,8 +101362,8 @@ paths:
                             - person
                         projectId:
                           description: >-
-                            For kind agent_record or workspace_file: only this Project’s (a Project id); for
-                            workspace_file, null means the account’s.
+                            For kind agent_record, workspace_file or prime_function: only this Project’s (a Project id);
+                            for workspace_file, null means the account’s.
                           anyOf:
                             - type: string
                               minLength: 1
@@ -99796,7 +101630,7 @@ paths:
                           description: >-
                             Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn:
                             open, released, closed. project: draft, active, paused, archived; archived implies
-                            includeArchived.
+                            includeArchived. prime_function: one of pending_approval, active, paused, disabled.
                           type: array
                           items:
                             type: string
@@ -99812,6 +101646,19 @@ paths:
                               - active
                               - paused
                               - archived
+                              - pending_approval
+                              - disabled
+                        triggerKind:
+                          description: 'For kind prime_function: only functions started by a schedule, an event or a webhook.'
+                          type: string
+                          enum:
+                            - schedule
+                            - event
+                            - webhook
+                        workspaceFileId:
+                          description: 'For kind prime_function: only functions that pin this workspace file.'
+                          type: string
+                          pattern: ^wsf_[0-9a-f]{24}$
                         sellerAccountId:
                           description: >-
                             For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by
@@ -101610,8 +103457,8 @@ paths:
                             - person
                         projectId:
                           description: >-
-                            For kind agent_record or workspace_file: only this Project’s (a Project id); for
-                            workspace_file, null means the account’s.
+                            For kind agent_record, workspace_file or prime_function: only this Project’s (a Project id);
+                            for workspace_file, null means the account’s.
                           anyOf:
                             - type: string
                               minLength: 1
@@ -101878,7 +103725,7 @@ paths:
                           description: >-
                             Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn:
                             open, released, closed. project: draft, active, paused, archived; archived implies
-                            includeArchived.
+                            includeArchived. prime_function: one of pending_approval, active, paused, disabled.
                           type: array
                           items:
                             type: string
@@ -101894,6 +103741,19 @@ paths:
                               - active
                               - paused
                               - archived
+                              - pending_approval
+                              - disabled
+                        triggerKind:
+                          description: 'For kind prime_function: only functions started by a schedule, an event or a webhook.'
+                          type: string
+                          enum:
+                            - schedule
+                            - event
+                            - webhook
+                        workspaceFileId:
+                          description: 'For kind prime_function: only functions that pin this workspace file.'
+                          type: string
+                          pattern: ^wsf_[0-9a-f]{24}$
                         sellerAccountId:
                           description: >-
                             For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by
@@ -103689,8 +105549,8 @@ paths:
                             - person
                         projectId:
                           description: >-
-                            For kind agent_record or workspace_file: only this Project’s (a Project id); for
-                            workspace_file, null means the account’s.
+                            For kind agent_record, workspace_file or prime_function: only this Project’s (a Project id);
+                            for workspace_file, null means the account’s.
                           anyOf:
                             - type: string
                               minLength: 1
@@ -103957,7 +105817,7 @@ paths:
                           description: >-
                             Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn:
                             open, released, closed. project: draft, active, paused, archived; archived implies
-                            includeArchived.
+                            includeArchived. prime_function: one of pending_approval, active, paused, disabled.
                           type: array
                           items:
                             type: string
@@ -103973,6 +105833,19 @@ paths:
                               - active
                               - paused
                               - archived
+                              - pending_approval
+                              - disabled
+                        triggerKind:
+                          description: 'For kind prime_function: only functions started by a schedule, an event or a webhook.'
+                          type: string
+                          enum:
+                            - schedule
+                            - event
+                            - webhook
+                        workspaceFileId:
+                          description: 'For kind prime_function: only functions that pin this workspace file.'
+                          type: string
+                          pattern: ^wsf_[0-9a-f]{24}$
                         sellerAccountId:
                           description: >-
                             For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by
@@ -105768,8 +107641,8 @@ paths:
                             - person
                         projectId:
                           description: >-
-                            For kind agent_record or workspace_file: only this Project’s (a Project id); for
-                            workspace_file, null means the account’s.
+                            For kind agent_record, workspace_file or prime_function: only this Project’s (a Project id);
+                            for workspace_file, null means the account’s.
                           anyOf:
                             - type: string
                               minLength: 1
@@ -106036,7 +107909,7 @@ paths:
                           description: >-
                             Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn:
                             open, released, closed. project: draft, active, paused, archived; archived implies
-                            includeArchived.
+                            includeArchived. prime_function: one of pending_approval, active, paused, disabled.
                           type: array
                           items:
                             type: string
@@ -106052,6 +107925,19 @@ paths:
                               - active
                               - paused
                               - archived
+                              - pending_approval
+                              - disabled
+                        triggerKind:
+                          description: 'For kind prime_function: only functions started by a schedule, an event or a webhook.'
+                          type: string
+                          enum:
+                            - schedule
+                            - event
+                            - webhook
+                        workspaceFileId:
+                          description: 'For kind prime_function: only functions that pin this workspace file.'
+                          type: string
+                          pattern: ^wsf_[0-9a-f]{24}$
                         sellerAccountId:
                           description: >-
                             For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by
@@ -107848,8 +109734,8 @@ paths:
                             - person
                         projectId:
                           description: >-
-                            For kind agent_record or workspace_file: only this Project’s (a Project id); for
-                            workspace_file, null means the account’s.
+                            For kind agent_record, workspace_file or prime_function: only this Project’s (a Project id);
+                            for workspace_file, null means the account’s.
                           anyOf:
                             - type: string
                               minLength: 1
@@ -108116,7 +110002,7 @@ paths:
                           description: >-
                             Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn:
                             open, released, closed. project: draft, active, paused, archived; archived implies
-                            includeArchived.
+                            includeArchived. prime_function: one of pending_approval, active, paused, disabled.
                           type: array
                           items:
                             type: string
@@ -108132,6 +110018,19 @@ paths:
                               - active
                               - paused
                               - archived
+                              - pending_approval
+                              - disabled
+                        triggerKind:
+                          description: 'For kind prime_function: only functions started by a schedule, an event or a webhook.'
+                          type: string
+                          enum:
+                            - schedule
+                            - event
+                            - webhook
+                        workspaceFileId:
+                          description: 'For kind prime_function: only functions that pin this workspace file.'
+                          type: string
+                          pattern: ^wsf_[0-9a-f]{24}$
                         sellerAccountId:
                           description: >-
                             For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by
@@ -109536,6 +111435,7 @@ paths:
                               - $ref: '#/components/schemas/search_success_SearchBuyerRfpPageOutput'
                               - $ref: '#/components/schemas/search_success_SearchAgentRecordPageOutput'
                               - $ref: '#/components/schemas/search_success_SearchWorkspaceFilePageOutput'
+                              - $ref: '#/components/schemas/search_success_SearchPrimeFunctionPageOutput'
                               - $ref: '#/components/schemas/search_success_SearchTargetingValuePageOutput'
                               - $ref: '#/components/schemas/search_success_SearchProjectPageOutput'
                               - $ref: '#/components/schemas/search_success_SearchSessionPageOutput'
@@ -109673,6 +111573,7 @@ paths:
                                     - $ref: '#/components/schemas/search_success_SearchBuyerRfpPageOutput'
                                     - $ref: '#/components/schemas/search_success_SearchAgentRecordPageOutput'
                                     - $ref: '#/components/schemas/search_success_SearchWorkspaceFilePageOutput'
+                                    - $ref: '#/components/schemas/search_success_SearchPrimeFunctionPageOutput'
                                     - $ref: '#/components/schemas/search_success_SearchTargetingValuePageOutput'
                                     - $ref: '#/components/schemas/search_success_SearchProjectPageOutput'
                                     - $ref: '#/components/schemas/search_success_SearchSessionPageOutput'
@@ -109727,6 +111628,7 @@ paths:
                                     - $ref: '#/components/schemas/search_success_SearchBuyerRfpUnavailableOutput'
                                     - $ref: '#/components/schemas/search_success_SearchAgentRecordUnavailableOutput'
                                     - $ref: '#/components/schemas/search_success_SearchWorkspaceFileUnavailableOutput'
+                                    - $ref: '#/components/schemas/search_success_SearchPrimeFunctionUnavailableOutput'
                                     - $ref: '#/components/schemas/search_success_SearchTargetingValueUnavailableOutput'
                                     - $ref: '#/components/schemas/search_success_SearchProjectUnavailableOutput'
                                     - $ref: '#/components/schemas/search_success_SearchSessionUnavailableOutput'
@@ -109762,68 +111664,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_95
+              schema: &ref_96
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_95
+              schema: *ref_96
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_95
+              schema: *ref_96
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_95
+              schema: *ref_96
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_95
+              schema: *ref_96
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_95
+              schema: *ref_96
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_95
+              schema: *ref_96
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_95
+              schema: *ref_96
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_95
+              schema: *ref_96
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_95
+              schema: *ref_96
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_95
+              schema: *ref_96
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_95
+              schema: *ref_96
         '503':
           description: A required service is unavailable
           content:
             application/json:
-              schema: *ref_95
+              schema: *ref_96
   /tools/start_certification_run:
     post:
       operationId: start_certification_run
@@ -109933,68 +111835,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_96
+              schema: &ref_97
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_96
+              schema: *ref_97
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_96
+              schema: *ref_97
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_96
+              schema: *ref_97
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_96
+              schema: *ref_97
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_96
+              schema: *ref_97
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_96
+              schema: *ref_97
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_96
+              schema: *ref_97
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_96
+              schema: *ref_97
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_96
+              schema: *ref_97
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_96
+              schema: *ref_97
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_96
+              schema: *ref_97
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_96
+              schema: *ref_97
   /tools/test_creative_macros:
     post:
       operationId: test_creative_macros
@@ -110562,68 +112464,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_97
+              schema: &ref_98
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_97
+              schema: *ref_98
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_97
+              schema: *ref_98
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_97
+              schema: *ref_98
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_97
+              schema: *ref_98
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_97
+              schema: *ref_98
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_97
+              schema: *ref_98
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_97
+              schema: *ref_98
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_97
+              schema: *ref_98
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_97
+              schema: *ref_98
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_97
+              schema: *ref_98
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_97
+              schema: *ref_98
         '503':
           description: A required service is unavailable
           content:
             application/json:
-              schema: *ref_97
+              schema: *ref_98
   /tools/upload_creative_asset:
     post:
       operationId: upload_creative_asset
@@ -110813,68 +112715,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_98
+              schema: &ref_99
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_98
+              schema: *ref_99
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_98
+              schema: *ref_99
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_98
+              schema: *ref_99
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_98
+              schema: *ref_99
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_98
+              schema: *ref_99
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_98
+              schema: *ref_99
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_98
+              schema: *ref_99
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_98
+              schema: *ref_99
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_98
+              schema: *ref_99
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_98
+              schema: *ref_99
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_98
+              schema: *ref_99
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_98
+              schema: *ref_99
 components:
   securitySchemes:
     apiKeyAuth:
@@ -138991,6 +140893,338 @@ components:
       propertyNames:
         type: string
       additionalProperties: {}
+    save_prime_function_success_PrimeFunction:
+      type: object
+      properties:
+        id:
+          type: string
+        accountId:
+          type: string
+        advertiserId:
+          type:
+            - string
+            - 'null'
+        advertiserIds:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: 'null'
+        projectId:
+          type:
+            - string
+            - 'null'
+        workspaceFileId:
+          type:
+            - string
+            - 'null'
+        workspaceRevision:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        contentSha256:
+          type: string
+        interpreter:
+          type: string
+          const: python3
+        trigger:
+          oneOf:
+            - type: object
+              properties:
+                kind:
+                  type: string
+                  const: schedule
+                  description: Runs on a schedule.
+                schedule:
+                  oneOf:
+                    - type: object
+                      properties:
+                        kind:
+                          type: string
+                          const: cron
+                          description: A cron schedule.
+                        expression:
+                          type: string
+                          minLength: 1
+                          maxLength: 120
+                          description: A cron expression, at most every 15 minutes.
+                        timezone:
+                          type: string
+                          minLength: 1
+                          maxLength: 64
+                          description: An IANA timezone, such as America/New_York.
+                      required:
+                        - kind
+                        - expression
+                        - timezone
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        kind:
+                          type: string
+                          const: every
+                          description: A fixed interval.
+                        intervalMinutes:
+                          type: integer
+                          minimum: -9007199254740991
+                          maximum: 9007199254740991
+                          description: Minutes between runs, 15 or more.
+                      required:
+                        - kind
+                        - intervalMinutes
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        kind:
+                          type: string
+                          const: at
+                          description: One run at a set time.
+                        runAt:
+                          type: string
+                          format: date-time
+                          pattern: >-
+                            ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z|([+-](?:[01]\d|2[0-3]):[0-5]\d)))$
+                          description: When to run, an ISO 8601 time with an offset.
+                      required:
+                        - kind
+                        - runAt
+                      additionalProperties: false
+                  description: A cron expression, an interval or a single time.
+              required:
+                - kind
+                - schedule
+              additionalProperties: false
+            - type: object
+              properties:
+                kind:
+                  type: string
+                  const: event
+                  description: Runs when a platform event happens.
+                eventTypes:
+                  minItems: 1
+                  maxItems: 10
+                  type: array
+                  items:
+                    type: string
+                    enum:
+                      - creative.rejected
+                      - creative.changes_requested
+                      - media_buy.source_rejected
+                      - media_buy.stuck
+                      - proposals.received
+                  description: One to 10 exact event names. No wildcards, no repeats.
+              required:
+                - kind
+                - eventTypes
+              additionalProperties: false
+            - type: object
+              properties:
+                kind:
+                  type: string
+                  const: webhook
+                  description: Runs when a signed webhook arrives.
+              required:
+                - kind
+              additionalProperties: false
+        accountableUserId:
+          type:
+            - string
+            - 'null'
+        outputs:
+          type: object
+          properties:
+            recordType:
+              anyOf:
+                - type: string
+                  enum:
+                    - fact
+                    - event
+                - type: 'null'
+          required:
+            - recordType
+          additionalProperties: false
+        state:
+          type: string
+          enum:
+            - pending_approval
+            - active
+            - paused
+            - disabled
+        pausedReason:
+          anyOf:
+            - type: string
+              enum:
+                - by_person
+                - accountable_person_left
+            - type: 'null'
+        disabledReason:
+          anyOf:
+            - type: string
+              enum:
+                - consecutive_failures
+                - script_unavailable
+                - script_changed
+                - declined
+            - type: 'null'
+        consecutiveFailures:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        version:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        approvalId:
+          type:
+            - string
+            - 'null'
+        webhook:
+          type: 'null'
+        lastRun:
+          type: 'null'
+        proposedByAgentId:
+          type:
+            - string
+            - 'null'
+        approvedByUserId:
+          type:
+            - string
+            - 'null'
+        approvedAt:
+          type:
+            - string
+            - 'null'
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+      required:
+        - id
+        - accountId
+        - advertiserId
+        - advertiserIds
+        - projectId
+        - workspaceFileId
+        - workspaceRevision
+        - contentSha256
+        - interpreter
+        - trigger
+        - accountableUserId
+        - outputs
+        - state
+        - pausedReason
+        - disabledReason
+        - consecutiveFailures
+        - version
+        - approvalId
+        - webhook
+        - lastRun
+        - proposedByAgentId
+        - approvedByUserId
+        - approvedAt
+        - createdAt
+        - updatedAt
+      additionalProperties: false
+    save_prime_function_success_AgentApproval:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          pattern: >-
+            ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+          description: Approval id.
+        kind:
+          type: string
+          description: Kind of sensitive action, for example `buyer_child_account.create`.
+        state:
+          type: string
+          enum:
+            - pending
+            - executing
+            - succeeded
+            - failed
+            - rejected
+            - expired
+          description: >-
+            `pending` waits for a person; `executing` was approved and is running; `succeeded`, `failed`, `rejected` and
+            `expired` are final.
+        targetCustomerId:
+          type: string
+          description: Account the action applies to.
+        requiredRole:
+          anyOf:
+            - type: string
+              enum:
+                - ADMIN
+                - SUPER_ADMIN
+            - type: 'null'
+          description: Role the approver must hold on the account.
+        summary:
+          anyOf:
+            - type: string
+            - type: 'null'
+          description: What will happen, in one line. Null once the approval is final.
+        url:
+          type: string
+          format: uri
+          description: Page on our site where a signed-in person approves or rejects the request.
+        createdAt:
+          type: string
+          format: date-time
+          pattern: >-
+            ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+        expiresAt:
+          type: string
+          format: date-time
+          pattern: >-
+            ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+        decidedAt:
+          anyOf:
+            - type: string
+              format: date-time
+              pattern: >-
+                ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+            - type: 'null'
+        completedAt:
+          anyOf:
+            - type: string
+              format: date-time
+              pattern: >-
+                ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+            - type: 'null'
+        resultReference:
+          anyOf:
+            - type: object
+              propertyNames:
+                type: string
+              additionalProperties:
+                type:
+                  - string
+                  - number
+                  - boolean
+            - type: 'null'
+          description: Reference to the result once succeeded.
+        failureCode:
+          anyOf:
+            - type: string
+            - type: 'null'
+          description: Reason code when the action failed.
+      required:
+        - id
+        - kind
+        - state
+        - targetCustomerId
+        - requiredRole
+        - summary
+        - url
+        - createdAt
+        - expiresAt
+        - decidedAt
+        - completedAt
+        - resultReference
+        - failureCode
+      additionalProperties: false
     save_project_request_Id:
       type: string
       minLength: 1
@@ -148765,6 +150999,35 @@ components:
         - kind
       additionalProperties:
         $ref: '#/components/schemas/search_success_SearchWorkspaceFilePageOutputValue'
+    search_success_SearchPrimeFunctionPageOutput:
+      type: object
+      properties:
+        total:
+          $ref: '#/components/schemas/search_success_SearchPrimeFunctionPageOutputTotal'
+        totalLowerBound:
+          $ref: '#/components/schemas/search_success_SearchPrimeFunctionPageOutputTotalLowerBound'
+        returned:
+          $ref: '#/components/schemas/search_success_SearchPrimeFunctionPageOutputReturned'
+        hasMore:
+          $ref: '#/components/schemas/search_success_SearchPrimeFunctionPageOutputHasMore'
+        truncated:
+          $ref: '#/components/schemas/search_success_SearchPrimeFunctionPageOutputTruncated'
+        nextCursor:
+          $ref: '#/components/schemas/search_success_SearchPrimeFunctionPageOutputNextCursor'
+        results:
+          $ref: '#/components/schemas/search_success_SearchPrimeFunctionPageOutputResults'
+        outcome:
+          type: string
+          const: page_prime_function
+        kind:
+          type: string
+          const: prime_function
+      required:
+        - results
+        - outcome
+        - kind
+      additionalProperties:
+        $ref: '#/components/schemas/search_success_SearchPrimeFunctionPageOutputValue'
     search_success_SearchTargetingValuePageOutput:
       type: object
       properties:
@@ -149811,6 +152074,25 @@ components:
         kind:
           type: string
           const: workspace_file
+        unavailable:
+          type: string
+        message:
+          type: string
+      required:
+        - outcome
+        - kind
+        - unavailable
+        - message
+      additionalProperties: {}
+    search_success_SearchPrimeFunctionUnavailableOutput:
+      type: object
+      properties:
+        outcome:
+          type: string
+          const: unavailable_prime_function
+        kind:
+          type: string
+          const: prime_function
         unavailable:
           type: string
         message:
@@ -155361,6 +157643,113 @@ components:
             additionalProperties: false
         additionalProperties: {}
     search_success_SearchWorkspaceFilePageOutputValue: {}
+    search_success_SearchPrimeFunctionPageOutputTotal:
+      type: number
+    search_success_SearchPrimeFunctionPageOutputTotalLowerBound:
+      type: number
+    search_success_SearchPrimeFunctionPageOutputReturned:
+      type: number
+    search_success_SearchPrimeFunctionPageOutputHasMore:
+      type: boolean
+    search_success_SearchPrimeFunctionPageOutputTruncated:
+      type: boolean
+    search_success_SearchPrimeFunctionPageOutputNextCursor:
+      type: string
+    search_success_SearchPrimeFunctionPageOutputResults:
+      type: array
+      items:
+        type: object
+        properties:
+          advertiserId:
+            type: string
+          name:
+            type:
+              - string
+              - 'null'
+          sandbox:
+            type: boolean
+          sourceType:
+            anyOf:
+              - type: string
+                enum:
+                  - inline
+                  - url
+                  - file
+              - type: 'null'
+            description: 'Where the items come from: url when url is set, file when file is set.'
+          lastChangeSummary:
+            anyOf:
+              - type: object
+                properties:
+                  added:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  updated:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  unchanged:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  removed:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                required:
+                  - added
+                  - updated
+                  - unchanged
+                  - removed
+                additionalProperties: false
+              - type: 'null'
+            description: Items in the latest version against the one before it.
+          transform:
+            anyOf:
+              - type: object
+                properties:
+                  name:
+                    type: string
+                  updatedAt:
+                    type: string
+                required:
+                  - name
+                  - updatedAt
+                additionalProperties: false
+              - type: 'null'
+            description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
+        additionalProperties: {}
+    search_success_SearchPrimeFunctionPageOutputValue: {}
     search_success_SearchTargetingValuePageOutputTotal:
       type: number
     search_success_SearchTargetingValuePageOutputTotalLowerBound:
