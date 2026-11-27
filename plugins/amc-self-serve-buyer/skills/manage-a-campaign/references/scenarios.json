@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "skillId": "manage-a-campaign",
-  "skillVersion": "1.6.3",
+  "skillVersion": "1.6.4",
   "scenarios": [
     {
       "id": "html5-zip-upload-finished-before-attach",
@@ -71,6 +71,18 @@
         "The agent calls search with kind campaign and no filter.phase, not filter.phase active, so the draft campaigns are in the read.",
         "It reports the count in each phase from phaseCounts, names each draft with its start date, and says a draft has no delivery yet.",
         "It does not call get_delivery for a draft campaign or describe one as running, booked or delivering."
+      ]
+    },
+    {
+      "id": "which-ads-worked-across-history",
+      "title": "Answer which ads worked and which wore out across an advertiser's history",
+      "given": "The buyer asks which of their ads worked over the last year and which have worn out, for an advertiser with 14 months of Meta daily ad history across several campaigns, where one ad name ran as three creatives and some creatives are not in the Library.",
+      "expect": [
+        "The agent calls get_delivery with report campaign_creative_delivery, filters.advertiserId and consecutive ranges of at most 366 days that meet without overlapping, follows nextCursor to the last page, and retrieves the Creative delivery by day page before answering.",
+        "It ranks each creative_id with its creative_name as the label, then gives a separate roll-up by creative_name labelled as by ad name with how many creatives each name holds, ranks within one currency, and states the ranking metric and the minimum spend it used.",
+        "It compares video and image only for creatives it read the format of with get, and says what share of spend has no format.",
+        "It judges wear-out against each ad's own first week by the page's rule, leaves out ads that were already running when the history began or delivered fewer than 14 days, and says how many it left out and why.",
+        "It states the dates covered, any campaign in coverage.unread, that conversions are the platform's own, and says an ad went with better results rather than caused them. It does not write SQL or ask anyone to."
       ]
     }
   ]
