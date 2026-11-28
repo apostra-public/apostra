@@ -438,6 +438,10 @@ class GetDeliveryInput(TypedDict):
     '\n    Maximum rows in this page (1-100).\n    '
     cursor: NotRequired[str]
     '\n    Opaque nextCursor from the same query and limit.\n    '
+    rollup: NotRequired[Literal["creative", "creative_name"]]
+    '\n    campaign_creative_delivery: one ranked row per creative, or per exact ad name, across all buys (answer.rollup).\n    '
+    sort: NotRequired[GetDeliveryInputSort]
+    '\n    With rollup: rank by an AdCP metric; default spend, desc.\n    '
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
 
@@ -462,6 +466,8 @@ class GetDeliveryInputFilters(TypedDict):
     '\n    Filter to one product.\n    '
     creativeId: NotRequired[str]
     '\n    campaign_creative_delivery: filter to one creative.\n    '
+    minSpend: NotRequired[float]
+    '\n    With rollup: leave out rows that spent less. A ranking by a rate gets a server-chosen floor, echoed in the answer.\n    '
 
 class GetDeliveryInputRange(TypedDict):
     startDate: NotRequired[str]
@@ -471,10 +477,18 @@ class GetDeliveryInputRange(TypedDict):
     lifetime: NotRequired[Literal[True]]
     '\n    Campaign delivery only: provider-supported or stored history, no dates.\n    '
 
+class GetDeliveryInputSort(TypedDict):
+    sort_by: Literal["spend", "impressions", "clicks", "ctr", "conversions", "conversion_value", "views", "completed_views", "cpm", "cost_per_click", "cost_per_acquisition", "roas"]
+    '\n    AdCP metric to rank rows by.\n    '
+    sort_direction: NotRequired[Literal["asc", "desc"]]
+    '\n    desc (default) is largest first.\n    '
+
 class GetDeliveryResultReportCampaignCreativeDelivery(TypedDict):
     report: Literal["campaign_creative_delivery"]
     query: GetDeliveryResultReportCampaignCreativeDeliveryQuery
     media_buy_deliveries: list[GetDeliverySuccessCampaignCreativeMediaBuy]
+    rollup: NotRequired[GetDeliverySuccessCampaignCreativeRollup]
+    '\n    Set when the request set rollup; media_buy_deliveries is then empty.\n    '
     coverage: GetDeliveryResultReportCampaignCreativeDeliveryCoverage
     page: GetDeliveryResultReportCampaignCreativeDeliveryPage
     semantics: GetDeliveryResultReportCampaignCreativeDeliverySemantics
@@ -524,6 +538,7 @@ class GetDeliveryResultReportCampaignCreativeDeliveryQueryFilters(TypedDict):
     mediaBuyId: NotRequired[str]
     packageId: NotRequired[str]
     creativeId: NotRequired[str]
+    minSpend: NotRequired[float]
 
 class GetDeliveryResultReportCampaignCreativeDeliveryQueryRange(TypedDict):
     startDate: str
@@ -1037,18 +1052,18 @@ GetDeliverySuccessAdPackageDeliverySpend: TypeAlias = float
 class GetDeliverySuccessCampaignCreativeDelivery(TypedDict):
     creative_id: str
     creative_name: NotRequired[str]
-    impressions: NotRequired[float]
-    spend: NotRequired[float]
-    clicks: NotRequired[float]
-    ctr: NotRequired[float]
-    conversions: NotRequired[float]
-    conversion_value: NotRequired[float]
-    views: NotRequired[float]
-    completed_views: NotRequired[float]
-    cpm: NotRequired[float]
-    cost_per_click: NotRequired[float]
-    cost_per_acquisition: NotRequired[float]
-    roas: NotRequired[float]
+    impressions: NotRequired[GetDeliverySuccessCampaignCreativeDeliveryImpressions]
+    spend: NotRequired[GetDeliverySuccessCampaignCreativeDeliverySpend]
+    clicks: NotRequired[GetDeliverySuccessCampaignCreativeDeliveryClicks]
+    ctr: NotRequired[GetDeliverySuccessCampaignCreativeDeliveryCtr]
+    conversions: NotRequired[GetDeliverySuccessCampaignCreativeDeliveryConversions]
+    conversion_value: NotRequired[GetDeliverySuccessCampaignCreativeDeliveryConversionValue]
+    views: NotRequired[GetDeliverySuccessCampaignCreativeDeliveryViews]
+    completed_views: NotRequired[GetDeliverySuccessCampaignCreativeDeliveryCompletedViews]
+    cpm: NotRequired[GetDeliverySuccessCampaignCreativeDeliveryCpm]
+    cost_per_click: NotRequired[GetDeliverySuccessCampaignCreativeDeliveryCostPerClick]
+    cost_per_acquisition: NotRequired[GetDeliverySuccessCampaignCreativeDeliveryCostPerAcquisition]
+    roas: NotRequired[GetDeliverySuccessCampaignCreativeDeliveryRoas]
     creative_in_library: NotRequired[bool]
     '\n    true for a creative in the advertiser\'s Library, false when Apostra or the seller assigned the id to a creative made in the platform\'s own tools. Absent when the seller did not say.\n    '
     platform_ads: NotRequired[list[GetDeliverySuccessCampaignCreativeDeliveryPlatformAdsItem]]
@@ -1060,9 +1075,33 @@ class GetDeliverySuccessCampaignCreativeDelivery(TypedDict):
     daily_breakdown_truncated: NotRequired[Literal[True]]
     daily_breakdown_truncated_before: NotRequired[str]
 
+GetDeliverySuccessCampaignCreativeDeliveryClicks: TypeAlias = float
+
+GetDeliverySuccessCampaignCreativeDeliveryCompletedViews: TypeAlias = float
+
+GetDeliverySuccessCampaignCreativeDeliveryConversionValue: TypeAlias = float
+
+GetDeliverySuccessCampaignCreativeDeliveryConversions: TypeAlias = float
+
+GetDeliverySuccessCampaignCreativeDeliveryCostPerAcquisition: TypeAlias = float
+
+GetDeliverySuccessCampaignCreativeDeliveryCostPerClick: TypeAlias = float
+
+GetDeliverySuccessCampaignCreativeDeliveryCpm: TypeAlias = float
+
+GetDeliverySuccessCampaignCreativeDeliveryCtr: TypeAlias = float
+
+GetDeliverySuccessCampaignCreativeDeliveryImpressions: TypeAlias = float
+
 class GetDeliverySuccessCampaignCreativeDeliveryPlatformAdsItem(TypedDict):
     platform_ad_id: str
     platform_ad_name: str | None
+
+GetDeliverySuccessCampaignCreativeDeliveryRoas: TypeAlias = float
+
+GetDeliverySuccessCampaignCreativeDeliverySpend: TypeAlias = float
+
+GetDeliverySuccessCampaignCreativeDeliveryViews: TypeAlias = float
 
 class GetDeliverySuccessCampaignCreativeMediaBuy(TypedDict):
     media_buy_id: str
@@ -1077,6 +1116,71 @@ class GetDeliverySuccessCampaignCreativePackage(TypedDict):
     by_creative: list[GetDeliverySuccessCampaignCreativeDelivery]
     by_creative_truncated: bool
     '\n    true when the seller cut this package creative list on a day in the range.\n    '
+
+class GetDeliverySuccessCampaignCreativeRollup(TypedDict):
+    by: Literal["creative", "creative_name"]
+    sorted_by: Literal["spend", "impressions", "clicks", "ctr", "conversions", "conversion_value", "views", "completed_views", "cpm", "cost_per_click", "cost_per_acquisition", "roas"]
+    sort_direction: Literal["asc", "desc"]
+    min_spend: list[GetDeliverySuccessCampaignCreativeRollupMinSpendItem]
+    '\n    Spend floor applied per currency; source says who set it.\n    '
+    below_min_spend: float
+    '\n    Rows the floor left out.\n    '
+    by_creative_truncated: bool
+    '\n    true when a seller cut a package creative list on a day in the range, so a creative it left out is in no row.\n    '
+    rows: list[GetDeliverySuccessCampaignCreativeRollupRow]
+
+class GetDeliverySuccessCampaignCreativeRollupMinSpendItem(TypedDict):
+    currency: str | None
+    amount: float
+    source: Literal["request", "default"]
+
+class GetDeliverySuccessCampaignCreativeRollupRow(TypedDict):
+    impressions: NotRequired[GetDeliverySuccessCampaignCreativeRollupRowImpressions]
+    spend: NotRequired[GetDeliverySuccessCampaignCreativeRollupRowSpend]
+    clicks: NotRequired[GetDeliverySuccessCampaignCreativeRollupRowClicks]
+    ctr: NotRequired[GetDeliverySuccessCampaignCreativeRollupRowCtr]
+    conversions: NotRequired[GetDeliverySuccessCampaignCreativeRollupRowConversions]
+    conversion_value: NotRequired[GetDeliverySuccessCampaignCreativeRollupRowConversionValue]
+    views: NotRequired[GetDeliverySuccessCampaignCreativeRollupRowViews]
+    completed_views: NotRequired[GetDeliverySuccessCampaignCreativeRollupRowCompletedViews]
+    cpm: NotRequired[GetDeliverySuccessCampaignCreativeRollupRowCpm]
+    cost_per_click: NotRequired[GetDeliverySuccessCampaignCreativeRollupRowCostPerClick]
+    cost_per_acquisition: NotRequired[GetDeliverySuccessCampaignCreativeRollupRowCostPerAcquisition]
+    roas: NotRequired[GetDeliverySuccessCampaignCreativeRollupRowRoas]
+    key: str
+    creative_name: NotRequired[str]
+    creative_ids: list[str]
+    '\n    Distinct ids, at most 20; creative_count is exact, so two storefronts that use one id count twice.\n    '
+    creative_count: float
+    currency: str | None
+    media_buy_count: float
+    package_count: float
+    creative_in_library: NotRequired[bool]
+    '\n    true only when every creative in the row is.\n    '
+
+GetDeliverySuccessCampaignCreativeRollupRowClicks: TypeAlias = float
+
+GetDeliverySuccessCampaignCreativeRollupRowCompletedViews: TypeAlias = float
+
+GetDeliverySuccessCampaignCreativeRollupRowConversionValue: TypeAlias = float
+
+GetDeliverySuccessCampaignCreativeRollupRowConversions: TypeAlias = float
+
+GetDeliverySuccessCampaignCreativeRollupRowCostPerAcquisition: TypeAlias = float
+
+GetDeliverySuccessCampaignCreativeRollupRowCostPerClick: TypeAlias = float
+
+GetDeliverySuccessCampaignCreativeRollupRowCpm: TypeAlias = float
+
+GetDeliverySuccessCampaignCreativeRollupRowCtr: TypeAlias = float
+
+GetDeliverySuccessCampaignCreativeRollupRowImpressions: TypeAlias = float
+
+GetDeliverySuccessCampaignCreativeRollupRowRoas: TypeAlias = float
+
+GetDeliverySuccessCampaignCreativeRollupRowSpend: TypeAlias = float
+
+GetDeliverySuccessCampaignCreativeRollupRowViews: TypeAlias = float
 
 class GetDeliverySuccessCampaignDeliveryCoverage(TypedDict):
     inFlightCampaigns: int
@@ -2242,6 +2346,8 @@ class GetDeliverySuccessQueryFilters(TypedDict):
     '\n    Filter to one product.\n    '
     creativeId: NotRequired[str]
     '\n    campaign_creative_delivery: filter to one creative.\n    '
+    minSpend: NotRequired[float]
+    '\n    With rollup: leave out rows that spent less. A ranking by a rate gets a server-chosen floor, echoed in the answer.\n    '
 
 class GetDeliverySuccessQueryRange(TypedDict):
     startDate: NotRequired[str]
@@ -10244,6 +10350,10 @@ JsonValue: TypeAlias = Union[str, int, float, bool, None, list['JsonValue'], dic
 GetDeliverySuccessAdDailyDeliveryValue: TypeAlias = JsonValue
 
 GetDeliverySuccessAdPackageDeliveryValue: TypeAlias = JsonValue
+
+GetDeliverySuccessCampaignCreativeDeliveryValue: TypeAlias = JsonValue
+
+GetDeliverySuccessCampaignCreativeRollupRowValue: TypeAlias = JsonValue
 
 GetDeliverySuccessGetDeliveryGoalDeliveryProjection: TypeAlias = JsonValue
 

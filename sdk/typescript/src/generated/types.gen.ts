@@ -7510,6 +7510,10 @@ export type GetDeliveryData = {
              * campaign_creative_delivery: filter to one creative.
              */
             creativeId?: string;
+            /**
+             * With rollup: leave out rows that spent less. A ranking by a rate gets a server-chosen floor, echoed in the answer.
+             */
+            minSpend?: number;
         };
         /**
          * campaign_delivery only, bounded range: also return the change against the previous period of the same length, as comparison.
@@ -7527,6 +7531,23 @@ export type GetDeliveryData = {
          * Opaque nextCursor from the same query and limit.
          */
         cursor?: string;
+        /**
+         * campaign_creative_delivery: one ranked row per creative, or per exact ad name, across all buys (answer.rollup).
+         */
+        rollup?: 'creative' | 'creative_name';
+        /**
+         * With rollup: rank by an AdCP metric; default spend, desc.
+         */
+        sort?: {
+            /**
+             * AdCP metric to rank rows by.
+             */
+            sort_by: 'spend' | 'impressions' | 'clicks' | 'ctr' | 'conversions' | 'conversion_value' | 'views' | 'completed_views' | 'cpm' | 'cost_per_click' | 'cost_per_acquisition' | 'roas';
+            /**
+             * desc (default) is largest first.
+             */
+            sort_direction?: 'asc' | 'desc';
+        };
         /**
          * Apostra accountId this call runs in, from get_status.
          */
@@ -7660,6 +7681,7 @@ export type GetDeliveryResponses = {
             reporting_period?: never;
             by_package?: never;
             media_buy_deliveries?: never;
+            rollup?: never;
         } | {
             report: 'campaign_delivery';
             query: GetDeliverySuccessQuery;
@@ -7711,6 +7733,7 @@ export type GetDeliveryResponses = {
             reporting_period?: never;
             by_package?: never;
             media_buy_deliveries?: never;
+            rollup?: never;
         } | {
             report: 'margin';
             query: GetDeliverySuccessQuery;
@@ -7762,6 +7785,7 @@ export type GetDeliveryResponses = {
             reporting_period?: never;
             by_package?: never;
             media_buy_deliveries?: never;
+            rollup?: never;
         } | {
             report: 'live_campaign_delivery';
             query: {
@@ -8017,6 +8041,7 @@ export type GetDeliveryResponses = {
             reporting_period?: never;
             by_package?: never;
             media_buy_deliveries?: never;
+            rollup?: never;
         } | {
             report: 'campaign_property_delivery';
             query: GetDeliverySuccessQuery;
@@ -8055,6 +8080,7 @@ export type GetDeliveryResponses = {
             reporting_period?: never;
             by_package?: never;
             media_buy_deliveries?: never;
+            rollup?: never;
         } | {
             report: 'live_ad_delivery';
             query: {
@@ -8109,6 +8135,7 @@ export type GetDeliveryResponses = {
             deliverySummary?: never;
             propertyDelivery?: never;
             media_buy_deliveries?: never;
+            rollup?: never;
         } | {
             report: 'campaign_creative_delivery';
             query: {
@@ -8122,9 +8149,14 @@ export type GetDeliveryResponses = {
                     mediaBuyId?: string;
                     packageId?: string;
                     creativeId?: string;
+                    minSpend?: number;
                 };
             };
             media_buy_deliveries: Array<GetDeliverySuccessCampaignCreativeMediaBuy>;
+            /**
+             * Set when the request set rollup; media_buy_deliveries is then empty.
+             */
+            rollup?: GetDeliverySuccessCampaignCreativeRollup;
             coverage: {
                 mediaBuysInScope: number;
                 fromDate?: string;
@@ -8327,18 +8359,18 @@ export type GetDeliverySuccessAdPackageDeliveryValue = unknown;
 export type GetDeliverySuccessCampaignCreativeDelivery = {
     creative_id: string;
     creative_name?: string;
-    impressions?: number;
-    spend?: number;
-    clicks?: number;
-    ctr?: number;
-    conversions?: number;
-    conversion_value?: number;
-    views?: number;
-    completed_views?: number;
-    cpm?: number;
-    cost_per_click?: number;
-    cost_per_acquisition?: number;
-    roas?: number;
+    impressions?: GetDeliverySuccessCampaignCreativeDeliveryImpressions;
+    spend?: GetDeliverySuccessCampaignCreativeDeliverySpend;
+    clicks?: GetDeliverySuccessCampaignCreativeDeliveryClicks;
+    ctr?: GetDeliverySuccessCampaignCreativeDeliveryCtr;
+    conversions?: GetDeliverySuccessCampaignCreativeDeliveryConversions;
+    conversion_value?: GetDeliverySuccessCampaignCreativeDeliveryConversionValue;
+    views?: GetDeliverySuccessCampaignCreativeDeliveryViews;
+    completed_views?: GetDeliverySuccessCampaignCreativeDeliveryCompletedViews;
+    cpm?: GetDeliverySuccessCampaignCreativeDeliveryCpm;
+    cost_per_click?: GetDeliverySuccessCampaignCreativeDeliveryCostPerClick;
+    cost_per_acquisition?: GetDeliverySuccessCampaignCreativeDeliveryCostPerAcquisition;
+    roas?: GetDeliverySuccessCampaignCreativeDeliveryRoas;
     /**
      * true for a creative in the advertiser's Library, false when Apostra or the seller assigned the id to a creative made in the platform's own tools. Absent when the seller did not say.
      */
@@ -8358,8 +8390,37 @@ export type GetDeliverySuccessCampaignCreativeDelivery = {
     daily_breakdown: Array<GetDeliverySuccessCreativeDailyDelivery>;
     daily_breakdown_truncated?: true;
     daily_breakdown_truncated_before?: string;
-    [key: string]: unknown;
+    [key: string]: GetDeliverySuccessCampaignCreativeDeliveryValue | string | GetDeliverySuccessCampaignCreativeDeliveryImpressions | GetDeliverySuccessCampaignCreativeDeliverySpend | GetDeliverySuccessCampaignCreativeDeliveryClicks | GetDeliverySuccessCampaignCreativeDeliveryCtr | GetDeliverySuccessCampaignCreativeDeliveryConversions | GetDeliverySuccessCampaignCreativeDeliveryConversionValue | GetDeliverySuccessCampaignCreativeDeliveryViews | GetDeliverySuccessCampaignCreativeDeliveryCompletedViews | GetDeliverySuccessCampaignCreativeDeliveryCpm | GetDeliverySuccessCampaignCreativeDeliveryCostPerClick | GetDeliverySuccessCampaignCreativeDeliveryCostPerAcquisition | GetDeliverySuccessCampaignCreativeDeliveryRoas | boolean | Array<{
+        platform_ad_id: string;
+        platform_ad_name: string | null;
+    }> | Array<GetDeliverySuccessCreativeDailyDelivery> | true | undefined;
 };
+
+export type GetDeliverySuccessCampaignCreativeDeliveryClicks = number;
+
+export type GetDeliverySuccessCampaignCreativeDeliveryCompletedViews = number;
+
+export type GetDeliverySuccessCampaignCreativeDeliveryConversionValue = number;
+
+export type GetDeliverySuccessCampaignCreativeDeliveryConversions = number;
+
+export type GetDeliverySuccessCampaignCreativeDeliveryCostPerAcquisition = number;
+
+export type GetDeliverySuccessCampaignCreativeDeliveryCostPerClick = number;
+
+export type GetDeliverySuccessCampaignCreativeDeliveryCpm = number;
+
+export type GetDeliverySuccessCampaignCreativeDeliveryCtr = number;
+
+export type GetDeliverySuccessCampaignCreativeDeliveryImpressions = number;
+
+export type GetDeliverySuccessCampaignCreativeDeliveryRoas = number;
+
+export type GetDeliverySuccessCampaignCreativeDeliverySpend = number;
+
+export type GetDeliverySuccessCampaignCreativeDeliveryValue = unknown;
+
+export type GetDeliverySuccessCampaignCreativeDeliveryViews = number;
 
 export type GetDeliverySuccessCampaignCreativeMediaBuy = {
     media_buy_id: string;
@@ -8378,6 +8439,85 @@ export type GetDeliverySuccessCampaignCreativePackage = {
      */
     by_creative_truncated: boolean;
 };
+
+export type GetDeliverySuccessCampaignCreativeRollup = {
+    by: 'creative' | 'creative_name';
+    sorted_by: 'spend' | 'impressions' | 'clicks' | 'ctr' | 'conversions' | 'conversion_value' | 'views' | 'completed_views' | 'cpm' | 'cost_per_click' | 'cost_per_acquisition' | 'roas';
+    sort_direction: 'asc' | 'desc';
+    /**
+     * Spend floor applied per currency; source says who set it.
+     */
+    min_spend: Array<{
+        currency: string | null;
+        amount: number;
+        source: 'request' | 'default';
+    }>;
+    /**
+     * Rows the floor left out.
+     */
+    below_min_spend: number;
+    /**
+     * true when a seller cut a package creative list on a day in the range, so a creative it left out is in no row.
+     */
+    by_creative_truncated: boolean;
+    rows: Array<GetDeliverySuccessCampaignCreativeRollupRow>;
+};
+
+export type GetDeliverySuccessCampaignCreativeRollupRow = {
+    impressions?: GetDeliverySuccessCampaignCreativeRollupRowImpressions;
+    spend?: GetDeliverySuccessCampaignCreativeRollupRowSpend;
+    clicks?: GetDeliverySuccessCampaignCreativeRollupRowClicks;
+    ctr?: GetDeliverySuccessCampaignCreativeRollupRowCtr;
+    conversions?: GetDeliverySuccessCampaignCreativeRollupRowConversions;
+    conversion_value?: GetDeliverySuccessCampaignCreativeRollupRowConversionValue;
+    views?: GetDeliverySuccessCampaignCreativeRollupRowViews;
+    completed_views?: GetDeliverySuccessCampaignCreativeRollupRowCompletedViews;
+    cpm?: GetDeliverySuccessCampaignCreativeRollupRowCpm;
+    cost_per_click?: GetDeliverySuccessCampaignCreativeRollupRowCostPerClick;
+    cost_per_acquisition?: GetDeliverySuccessCampaignCreativeRollupRowCostPerAcquisition;
+    roas?: GetDeliverySuccessCampaignCreativeRollupRowRoas;
+    key: string;
+    creative_name?: string;
+    /**
+     * Distinct ids, at most 20; creative_count is exact, so two storefronts that use one id count twice.
+     */
+    creative_ids: Array<string>;
+    creative_count: number;
+    currency: string | null;
+    media_buy_count: number;
+    package_count: number;
+    /**
+     * true only when every creative in the row is.
+     */
+    creative_in_library?: boolean;
+    [key: string]: GetDeliverySuccessCampaignCreativeRollupRowValue | GetDeliverySuccessCampaignCreativeRollupRowImpressions | GetDeliverySuccessCampaignCreativeRollupRowSpend | GetDeliverySuccessCampaignCreativeRollupRowClicks | GetDeliverySuccessCampaignCreativeRollupRowCtr | GetDeliverySuccessCampaignCreativeRollupRowConversions | GetDeliverySuccessCampaignCreativeRollupRowConversionValue | GetDeliverySuccessCampaignCreativeRollupRowViews | GetDeliverySuccessCampaignCreativeRollupRowCompletedViews | GetDeliverySuccessCampaignCreativeRollupRowCpm | GetDeliverySuccessCampaignCreativeRollupRowCostPerClick | GetDeliverySuccessCampaignCreativeRollupRowCostPerAcquisition | GetDeliverySuccessCampaignCreativeRollupRowRoas | string | Array<string> | number | string | null | boolean | undefined;
+};
+
+export type GetDeliverySuccessCampaignCreativeRollupRowClicks = number;
+
+export type GetDeliverySuccessCampaignCreativeRollupRowCompletedViews = number;
+
+export type GetDeliverySuccessCampaignCreativeRollupRowConversionValue = number;
+
+export type GetDeliverySuccessCampaignCreativeRollupRowConversions = number;
+
+export type GetDeliverySuccessCampaignCreativeRollupRowCostPerAcquisition = number;
+
+export type GetDeliverySuccessCampaignCreativeRollupRowCostPerClick = number;
+
+export type GetDeliverySuccessCampaignCreativeRollupRowCpm = number;
+
+export type GetDeliverySuccessCampaignCreativeRollupRowCtr = number;
+
+export type GetDeliverySuccessCampaignCreativeRollupRowImpressions = number;
+
+export type GetDeliverySuccessCampaignCreativeRollupRowRoas = number;
+
+export type GetDeliverySuccessCampaignCreativeRollupRowSpend = number;
+
+export type GetDeliverySuccessCampaignCreativeRollupRowValue = unknown;
+
+export type GetDeliverySuccessCampaignCreativeRollupRowViews = number;
 
 export type GetDeliverySuccessCampaignDeliveryCoverage = {
     /**
@@ -9764,6 +9904,10 @@ export type GetDeliverySuccessQuery = {
          * campaign_creative_delivery: filter to one creative.
          */
         creativeId?: string;
+        /**
+         * With rollup: leave out rows that spent less. A ranking by a rate gets a server-chosen floor, echoed in the answer.
+         */
+        minSpend?: number;
     };
 };
 
