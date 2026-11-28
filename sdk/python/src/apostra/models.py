@@ -23576,7 +23576,7 @@ class SaveProjectInput(TypedDict):
     objectives: NotRequired[str]
     '\n    What success is, in words, up to 2,000 characters (AdCP objectives).\n    '
     advertiserId: NotRequired[SaveProjectRequestAdvertiserId]
-    '\n    Create only: the Project belongs to this advertiser. Omit it for an account-level Project. Never changes.\n    '
+    '\n    The Project belongs to this advertiser; omit for an account-level Project. With an id: sets it once on an empty account-level Project. Then fixed.\n    '
     sessionId: NotRequired[SaveProjectRequestSessionId]
     '\n    Create only: an existing active, shared chat of yours that becomes the Project\'s conversation, once. Omit it to make a new conversation.\n    '
     attachments: NotRequired[list[SaveProjectRequestAttachmentsItem]]

@@ -40137,7 +40137,7 @@ export type SaveProjectData = {
          */
         objectives?: string;
         /**
-         * Create only: the Project belongs to this advertiser. Omit it for an account-level Project. Never changes.
+         * The Project belongs to this advertiser; omit for an account-level Project. With an id: sets it once on an empty account-level Project. Then fixed.
          */
         advertiserId?: SaveProjectRequestAdvertiserId;
         /**
