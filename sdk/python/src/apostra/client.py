@@ -284,6 +284,14 @@ class Apostra(SyncTransport):
         "Open the organization's Plan & Billing Page: plan, Terms, payment terms, payment method, payer and payout details, invoices, and requests waiting for an administrator. Use it when the person wants to see or change any of these. To answer one question, read `get` with `kind: \"billing\"` instead. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.OpenPlanAndBillingResult], self._request_with_response("open_plan_and_billing", input, account_id=account_id, timeout=timeout))
 
+    def open_project_page(self, input: models.OpenProjectPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenProjectPageResult:
+        "Open a Project as a page. The page loads itself, so do not repeat what it shows."
+        return cast("models.OpenProjectPageResult", self._request("open_project_page", input, account_id=account_id, timeout=timeout))
+
+    def open_project_page_with_response(self, input: models.OpenProjectPageInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenProjectPageResult]:
+        "Open a Project as a page. The page loads itself, so do not repeat what it shows. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.OpenProjectPageResult], self._request_with_response("open_project_page", input, account_id=account_id, timeout=timeout))
+
     def open_proposal_pass(self, input: models.OpenProposalPassInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenProposalPassResult:
         "Open Proposal Pass on one exact immutable RFP turn. Supply the matching rfpId and turnId from save_rfp or get; the Page loads the private response itself."
         return cast("models.OpenProposalPassResult", self._request("open_proposal_pass", input, account_id=account_id, timeout=timeout))
@@ -1036,6 +1044,14 @@ class AsyncApostra(AsyncTransport):
     async def open_plan_and_billing_with_response(self, input: models.OpenPlanAndBillingInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenPlanAndBillingResult]:
         "Open the organization's Plan & Billing Page: plan, Terms, payment terms, payment method, payer and payout details, invoices, and requests waiting for an administrator. Use it when the person wants to see or change any of these. To answer one question, read `get` with `kind: \"billing\"` instead. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.OpenPlanAndBillingResult], await self._request_with_response("open_plan_and_billing", input, account_id=account_id, timeout=timeout))
+
+    async def open_project_page(self, input: models.OpenProjectPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenProjectPageResult:
+        "Open a Project as a page. The page loads itself, so do not repeat what it shows."
+        return cast("models.OpenProjectPageResult", await self._request("open_project_page", input, account_id=account_id, timeout=timeout))
+
+    async def open_project_page_with_response(self, input: models.OpenProjectPageInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenProjectPageResult]:
+        "Open a Project as a page. The page loads itself, so do not repeat what it shows. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.OpenProjectPageResult], await self._request_with_response("open_project_page", input, account_id=account_id, timeout=timeout))
 
     async def open_proposal_pass(self, input: models.OpenProposalPassInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenProposalPassResult:
         "Open Proposal Pass on one exact immutable RFP turn. Supply the matching rfpId and turnId from save_rfp or get; the Page loads the private response itself."

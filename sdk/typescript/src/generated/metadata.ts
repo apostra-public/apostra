@@ -737,6 +737,25 @@ export const operations = {
     ],
     "summary": "Open the organization's Plan & Billing Page: plan, Terms, payment terms, payment method, payer and payout details, invoices, and requests waiting for an administrator. Use it when the person wants to see or change any of these. To answer one question, read `get` with `kind: \"billing\"` instead."
   },
+  "open_project_page": {
+    "path": "/tools/open_project_page",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": false,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:read"
+        ]
+      }
+    ],
+    "summary": "Open a Project as a page. The page loads itself, so do not repeat what it shows."
+  },
   "open_proposal_pass": {
     "path": "/tools/open_proposal_pass",
     "method": "POST",
