@@ -8260,6 +8260,7 @@ class GetStatusResult(TypedDict):
     agent: NotRequired[GetStatusResultAgentValue | None]
     creativeHistory: NotRequired[GetStatusResultCreativeHistory]
     '\n    Summary of the account\'s creative history; absent when the switch is off or there is none.\n    '
+    presence: NotRequired[list[GetStatusResultPresenceItem]]
     phase: NotRequired[str]
     '\n    Use goLive and checks from the seller readiness include. Removed on or after 14 December 2026.\n    '
     libraryRequirements: NotRequired[list[GetStatusResultLibraryRequirementsItem] | None]
@@ -8512,6 +8513,10 @@ class GetStatusResultOperatorIdentityOrganization(TypedDict):
     domain: str | None
     relationship: Literal["same_organization", "portfolio_brand", "external_operator", "unresolved"]
     verificationSource: Literal["member_or_admin", "organization_domain", "aao_house", "none"]
+
+class GetStatusResultPresenceItem(TypedDict):
+    name: str
+    lastSeenAt: str
 
 class GetStatusResultReachableAccountsItem(TypedDict):
     customerId: float
