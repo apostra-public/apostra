@@ -1479,6 +1479,7 @@
       "GetStatusResultOperatorIdentityDomainProof": "object",
       "GetStatusResultOperatorIdentityOperatorUnitValue": "other",
       "GetStatusResultOperatorIdentityOrganization": "object",
+      "GetStatusResultPresenceItem": "object",
       "GetStatusResultReachableAccountsItem": "object",
       "GetStatusResultRegistrationValue": "object",
       "GetStatusResultResourcesItem": "object",

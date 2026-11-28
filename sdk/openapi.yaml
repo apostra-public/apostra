@@ -40439,6 +40439,20 @@ paths:
                           - recentReady
                         additionalProperties: false
                         description: Summary of the account's creative history; absent when the switch is off or there is none.
+                      presence:
+                        maxItems: 50
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            lastSeenAt:
+                              type: string
+                          required:
+                            - name
+                            - lastSeenAt
+                          additionalProperties: false
                       phase:
                         deprecated: true
                         description: Use goLive and checks from the seller readiness include. Removed on or after 14 December 2026.

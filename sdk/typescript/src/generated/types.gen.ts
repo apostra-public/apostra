@@ -11967,6 +11967,10 @@ export type GetStatusResponses = {
                  */
                 recentReady: boolean;
             };
+            presence?: Array<{
+                name: string;
+                lastSeenAt: string;
+            }>;
             /**
              * Use goLive and checks from the seller readiness include. Removed on or after 14 December 2026.
              *
