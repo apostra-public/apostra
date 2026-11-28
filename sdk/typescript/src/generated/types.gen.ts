@@ -1038,6 +1038,10 @@ export type GetData = {
          */
         openThreads?: true;
         /**
+         * For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one turn.
+         */
+        eventKinds?: Array<'message' | 'request' | 'response' | 'action' | 'delivery' | 'note' | 'approval_decision' | 'evidence_capture' | 'amendment' | 'system' | 'turn_summary'>;
+        /**
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
         buyerAccountId?: number;
@@ -1326,6 +1330,10 @@ export type GetData = {
          * For a Project conversation: keep only open threads.
          */
         openThreads?: true;
+        /**
+         * For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one turn.
+         */
+        eventKinds?: Array<'message' | 'request' | 'response' | 'action' | 'delivery' | 'note' | 'approval_decision' | 'evidence_capture' | 'amendment' | 'system' | 'turn_summary'>;
         /**
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
@@ -1616,6 +1624,10 @@ export type GetData = {
          */
         openThreads?: true;
         /**
+         * For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one turn.
+         */
+        eventKinds?: Array<'message' | 'request' | 'response' | 'action' | 'delivery' | 'note' | 'approval_decision' | 'evidence_capture' | 'amendment' | 'system' | 'turn_summary'>;
+        /**
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
         buyerAccountId?: number;
@@ -1900,6 +1912,10 @@ export type GetData = {
          * For a Project conversation: keep only open threads.
          */
         openThreads?: true;
+        /**
+         * For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one turn.
+         */
+        eventKinds?: Array<'message' | 'request' | 'response' | 'action' | 'delivery' | 'note' | 'approval_decision' | 'evidence_capture' | 'amendment' | 'system' | 'turn_summary'>;
         /**
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
@@ -2186,6 +2202,10 @@ export type GetData = {
          * For a Project conversation: keep only open threads.
          */
         openThreads?: true;
+        /**
+         * For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one turn.
+         */
+        eventKinds?: Array<'message' | 'request' | 'response' | 'action' | 'delivery' | 'note' | 'approval_decision' | 'evidence_capture' | 'amendment' | 'system' | 'turn_summary'>;
         /**
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
@@ -2477,6 +2497,10 @@ export type GetData = {
          */
         openThreads?: true;
         /**
+         * For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one turn.
+         */
+        eventKinds?: Array<'message' | 'request' | 'response' | 'action' | 'delivery' | 'note' | 'approval_decision' | 'evidence_capture' | 'amendment' | 'system' | 'turn_summary'>;
+        /**
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
         buyerAccountId?: number;
@@ -2766,6 +2790,10 @@ export type GetData = {
          */
         openThreads?: true;
         /**
+         * For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one turn.
+         */
+        eventKinds?: Array<'message' | 'request' | 'response' | 'action' | 'delivery' | 'note' | 'approval_decision' | 'evidence_capture' | 'amendment' | 'system' | 'turn_summary'>;
+        /**
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
         buyerAccountId?: number;
@@ -3048,6 +3076,10 @@ export type GetData = {
          * For a Project conversation: keep only open threads.
          */
         openThreads?: true;
+        /**
+         * For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one turn.
+         */
+        eventKinds?: Array<'message' | 'request' | 'response' | 'action' | 'delivery' | 'note' | 'approval_decision' | 'evidence_capture' | 'amendment' | 'system' | 'turn_summary'>;
         /**
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
@@ -3334,6 +3366,10 @@ export type GetData = {
          * For a Project conversation: keep only open threads.
          */
         openThreads?: true;
+        /**
+         * For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one turn.
+         */
+        eventKinds?: Array<'message' | 'request' | 'response' | 'action' | 'delivery' | 'note' | 'approval_decision' | 'evidence_capture' | 'amendment' | 'system' | 'turn_summary'>;
         /**
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
@@ -3621,6 +3657,10 @@ export type GetData = {
          */
         openThreads?: true;
         /**
+         * For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one turn.
+         */
+        eventKinds?: Array<'message' | 'request' | 'response' | 'action' | 'delivery' | 'note' | 'approval_decision' | 'evidence_capture' | 'amendment' | 'system' | 'turn_summary'>;
+        /**
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
         buyerAccountId?: number;
@@ -3907,6 +3947,10 @@ export type GetData = {
          */
         openThreads?: true;
         /**
+         * For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one turn.
+         */
+        eventKinds?: Array<'message' | 'request' | 'response' | 'action' | 'delivery' | 'note' | 'approval_decision' | 'evidence_capture' | 'amendment' | 'system' | 'turn_summary'>;
+        /**
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
         buyerAccountId?: number;
@@ -4192,6 +4236,10 @@ export type GetData = {
          * For a Project conversation: keep only open threads.
          */
         openThreads?: true;
+        /**
+         * For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one turn.
+         */
+        eventKinds?: Array<'message' | 'request' | 'response' | 'action' | 'delivery' | 'note' | 'approval_decision' | 'evidence_capture' | 'amendment' | 'system' | 'turn_summary'>;
         /**
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
@@ -4479,6 +4527,10 @@ export type GetData = {
          */
         openThreads?: true;
         /**
+         * For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one turn.
+         */
+        eventKinds?: Array<'message' | 'request' | 'response' | 'action' | 'delivery' | 'note' | 'approval_decision' | 'evidence_capture' | 'amendment' | 'system' | 'turn_summary'>;
+        /**
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
         buyerAccountId?: number;
@@ -4764,6 +4816,10 @@ export type GetData = {
          * For a Project conversation: keep only open threads.
          */
         openThreads?: true;
+        /**
+         * For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one turn.
+         */
+        eventKinds?: Array<'message' | 'request' | 'response' | 'action' | 'delivery' | 'note' | 'approval_decision' | 'evidence_capture' | 'amendment' | 'system' | 'turn_summary'>;
         /**
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
@@ -5054,6 +5110,10 @@ export type GetData = {
          */
         openThreads?: true;
         /**
+         * For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one turn.
+         */
+        eventKinds?: Array<'message' | 'request' | 'response' | 'action' | 'delivery' | 'note' | 'approval_decision' | 'evidence_capture' | 'amendment' | 'system' | 'turn_summary'>;
+        /**
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
         buyerAccountId?: number;
@@ -5342,6 +5402,10 @@ export type GetData = {
          * For a Project conversation: keep only open threads.
          */
         openThreads?: true;
+        /**
+         * For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one turn.
+         */
+        eventKinds?: Array<'message' | 'request' | 'response' | 'action' | 'delivery' | 'note' | 'approval_decision' | 'evidence_capture' | 'amendment' | 'system' | 'turn_summary'>;
         /**
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
@@ -5632,6 +5696,10 @@ export type GetData = {
          */
         openThreads?: true;
         /**
+         * For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one turn.
+         */
+        eventKinds?: Array<'message' | 'request' | 'response' | 'action' | 'delivery' | 'note' | 'approval_decision' | 'evidence_capture' | 'amendment' | 'system' | 'turn_summary'>;
+        /**
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
         buyerAccountId?: number;
@@ -5920,6 +5988,10 @@ export type GetData = {
          * For a Project conversation: keep only open threads.
          */
         openThreads?: true;
+        /**
+         * For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one turn.
+         */
+        eventKinds?: Array<'message' | 'request' | 'response' | 'action' | 'delivery' | 'note' | 'approval_decision' | 'evidence_capture' | 'amendment' | 'system' | 'turn_summary'>;
         /**
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
@@ -6210,6 +6282,10 @@ export type GetData = {
          */
         openThreads?: true;
         /**
+         * For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one turn.
+         */
+        eventKinds?: Array<'message' | 'request' | 'response' | 'action' | 'delivery' | 'note' | 'approval_decision' | 'evidence_capture' | 'amendment' | 'system' | 'turn_summary'>;
+        /**
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
         buyerAccountId?: number;
@@ -6496,6 +6572,10 @@ export type GetData = {
          */
         openThreads?: true;
         /**
+         * For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one turn.
+         */
+        eventKinds?: Array<'message' | 'request' | 'response' | 'action' | 'delivery' | 'note' | 'approval_decision' | 'evidence_capture' | 'amendment' | 'system' | 'turn_summary'>;
+        /**
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
         buyerAccountId?: number;
@@ -6781,6 +6861,10 @@ export type GetData = {
          * For a Project conversation: keep only open threads.
          */
         openThreads?: true;
+        /**
+         * For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one turn.
+         */
+        eventKinds?: Array<'message' | 'request' | 'response' | 'action' | 'delivery' | 'note' | 'approval_decision' | 'evidence_capture' | 'amendment' | 'system' | 'turn_summary'>;
         /**
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
@@ -7070,6 +7154,10 @@ export type GetData = {
          * For a Project conversation: keep only open threads.
          */
         openThreads?: true;
+        /**
+         * For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one turn.
+         */
+        eventKinds?: Array<'message' | 'request' | 'response' | 'action' | 'delivery' | 'note' | 'approval_decision' | 'evidence_capture' | 'amendment' | 'system' | 'turn_summary'>;
         /**
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
