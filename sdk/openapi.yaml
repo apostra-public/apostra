@@ -2083,6 +2083,27 @@ paths:
                       description: 'For a Project conversation: keep only open threads.'
                       type: boolean
                       const: true
+                    eventKinds:
+                      description: >-
+                        For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one
+                        turn.
+                      minItems: 1
+                      maxItems: 11
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - message
+                          - request
+                          - response
+                          - action
+                          - delivery
+                          - note
+                          - approval_decision
+                          - evidence_capture
+                          - amendment
+                          - system
+                          - turn_summary
                     buyerAccountId:
                       description: >-
                         For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone
@@ -3583,6 +3604,27 @@ paths:
                       description: 'For a Project conversation: keep only open threads.'
                       type: boolean
                       const: true
+                    eventKinds:
+                      description: >-
+                        For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one
+                        turn.
+                      minItems: 1
+                      maxItems: 11
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - message
+                          - request
+                          - response
+                          - action
+                          - delivery
+                          - note
+                          - approval_decision
+                          - evidence_capture
+                          - amendment
+                          - system
+                          - turn_summary
                     buyerAccountId:
                       description: >-
                         For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone
@@ -5058,6 +5100,27 @@ paths:
                       description: 'For a Project conversation: keep only open threads.'
                       type: boolean
                       const: true
+                    eventKinds:
+                      description: >-
+                        For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one
+                        turn.
+                      minItems: 1
+                      maxItems: 11
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - message
+                          - request
+                          - response
+                          - action
+                          - delivery
+                          - note
+                          - approval_decision
+                          - evidence_capture
+                          - amendment
+                          - system
+                          - turn_summary
                     buyerAccountId:
                       description: >-
                         For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone
@@ -6518,6 +6581,27 @@ paths:
                       description: 'For a Project conversation: keep only open threads.'
                       type: boolean
                       const: true
+                    eventKinds:
+                      description: >-
+                        For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one
+                        turn.
+                      minItems: 1
+                      maxItems: 11
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - message
+                          - request
+                          - response
+                          - action
+                          - delivery
+                          - note
+                          - approval_decision
+                          - evidence_capture
+                          - amendment
+                          - system
+                          - turn_summary
                     buyerAccountId:
                       description: >-
                         For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone
@@ -7979,6 +8063,27 @@ paths:
                       description: 'For a Project conversation: keep only open threads.'
                       type: boolean
                       const: true
+                    eventKinds:
+                      description: >-
+                        For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one
+                        turn.
+                      minItems: 1
+                      maxItems: 11
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - message
+                          - request
+                          - response
+                          - action
+                          - delivery
+                          - note
+                          - approval_decision
+                          - evidence_capture
+                          - amendment
+                          - system
+                          - turn_summary
                     buyerAccountId:
                       description: >-
                         For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone
@@ -9447,6 +9552,27 @@ paths:
                       description: 'For a Project conversation: keep only open threads.'
                       type: boolean
                       const: true
+                    eventKinds:
+                      description: >-
+                        For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one
+                        turn.
+                      minItems: 1
+                      maxItems: 11
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - message
+                          - request
+                          - response
+                          - action
+                          - delivery
+                          - note
+                          - approval_decision
+                          - evidence_capture
+                          - amendment
+                          - system
+                          - turn_summary
                     buyerAccountId:
                       description: >-
                         For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone
@@ -10914,6 +11040,27 @@ paths:
                       description: 'For a Project conversation: keep only open threads.'
                       type: boolean
                       const: true
+                    eventKinds:
+                      description: >-
+                        For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one
+                        turn.
+                      minItems: 1
+                      maxItems: 11
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - message
+                          - request
+                          - response
+                          - action
+                          - delivery
+                          - note
+                          - approval_decision
+                          - evidence_capture
+                          - amendment
+                          - system
+                          - turn_summary
                     buyerAccountId:
                       description: >-
                         For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone
@@ -12266,6 +12413,27 @@ paths:
                       description: 'For a Project conversation: keep only open threads.'
                       type: boolean
                       const: true
+                    eventKinds:
+                      description: >-
+                        For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one
+                        turn.
+                      minItems: 1
+                      maxItems: 11
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - message
+                          - request
+                          - response
+                          - action
+                          - delivery
+                          - note
+                          - approval_decision
+                          - evidence_capture
+                          - amendment
+                          - system
+                          - turn_summary
                     buyerAccountId:
                       description: >-
                         For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone
@@ -13729,6 +13897,27 @@ paths:
                       description: 'For a Project conversation: keep only open threads.'
                       type: boolean
                       const: true
+                    eventKinds:
+                      description: >-
+                        For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one
+                        turn.
+                      minItems: 1
+                      maxItems: 11
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - message
+                          - request
+                          - response
+                          - action
+                          - delivery
+                          - note
+                          - approval_decision
+                          - evidence_capture
+                          - amendment
+                          - system
+                          - turn_summary
                     buyerAccountId:
                       description: >-
                         For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone
@@ -15190,6 +15379,27 @@ paths:
                       description: 'For a Project conversation: keep only open threads.'
                       type: boolean
                       const: true
+                    eventKinds:
+                      description: >-
+                        For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one
+                        turn.
+                      minItems: 1
+                      maxItems: 11
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - message
+                          - request
+                          - response
+                          - action
+                          - delivery
+                          - note
+                          - approval_decision
+                          - evidence_capture
+                          - amendment
+                          - system
+                          - turn_summary
                     buyerAccountId:
                       description: >-
                         For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone
@@ -16545,6 +16755,27 @@ paths:
                       description: 'For a Project conversation: keep only open threads.'
                       type: boolean
                       const: true
+                    eventKinds:
+                      description: >-
+                        For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one
+                        turn.
+                      minItems: 1
+                      maxItems: 11
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - message
+                          - request
+                          - response
+                          - action
+                          - delivery
+                          - note
+                          - approval_decision
+                          - evidence_capture
+                          - amendment
+                          - system
+                          - turn_summary
                     buyerAccountId:
                       description: >-
                         For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone
@@ -17900,6 +18131,27 @@ paths:
                       description: 'For a Project conversation: keep only open threads.'
                       type: boolean
                       const: true
+                    eventKinds:
+                      description: >-
+                        For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one
+                        turn.
+                      minItems: 1
+                      maxItems: 11
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - message
+                          - request
+                          - response
+                          - action
+                          - delivery
+                          - note
+                          - approval_decision
+                          - evidence_capture
+                          - amendment
+                          - system
+                          - turn_summary
                     buyerAccountId:
                       description: >-
                         For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone
@@ -19361,6 +19613,27 @@ paths:
                       description: 'For a Project conversation: keep only open threads.'
                       type: boolean
                       const: true
+                    eventKinds:
+                      description: >-
+                        For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one
+                        turn.
+                      minItems: 1
+                      maxItems: 11
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - message
+                          - request
+                          - response
+                          - action
+                          - delivery
+                          - note
+                          - approval_decision
+                          - evidence_capture
+                          - amendment
+                          - system
+                          - turn_summary
                     buyerAccountId:
                       description: >-
                         For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone
@@ -20822,6 +21095,27 @@ paths:
                       description: 'For a Project conversation: keep only open threads.'
                       type: boolean
                       const: true
+                    eventKinds:
+                      description: >-
+                        For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one
+                        turn.
+                      minItems: 1
+                      maxItems: 11
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - message
+                          - request
+                          - response
+                          - action
+                          - delivery
+                          - note
+                          - approval_decision
+                          - evidence_capture
+                          - amendment
+                          - system
+                          - turn_summary
                     buyerAccountId:
                       description: >-
                         For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone
@@ -22288,6 +22582,27 @@ paths:
                       description: 'For a Project conversation: keep only open threads.'
                       type: boolean
                       const: true
+                    eventKinds:
+                      description: >-
+                        For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one
+                        turn.
+                      minItems: 1
+                      maxItems: 11
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - message
+                          - request
+                          - response
+                          - action
+                          - delivery
+                          - note
+                          - approval_decision
+                          - evidence_capture
+                          - amendment
+                          - system
+                          - turn_summary
                     buyerAccountId:
                       description: >-
                         For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone
@@ -23754,6 +24069,27 @@ paths:
                       description: 'For a Project conversation: keep only open threads.'
                       type: boolean
                       const: true
+                    eventKinds:
+                      description: >-
+                        For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one
+                        turn.
+                      minItems: 1
+                      maxItems: 11
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - message
+                          - request
+                          - response
+                          - action
+                          - delivery
+                          - note
+                          - approval_decision
+                          - evidence_capture
+                          - amendment
+                          - system
+                          - turn_summary
                     buyerAccountId:
                       description: >-
                         For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone
@@ -25220,6 +25556,27 @@ paths:
                       description: 'For a Project conversation: keep only open threads.'
                       type: boolean
                       const: true
+                    eventKinds:
+                      description: >-
+                        For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one
+                        turn.
+                      minItems: 1
+                      maxItems: 11
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - message
+                          - request
+                          - response
+                          - action
+                          - delivery
+                          - note
+                          - approval_decision
+                          - evidence_capture
+                          - amendment
+                          - system
+                          - turn_summary
                     buyerAccountId:
                       description: >-
                         For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone
@@ -26686,6 +27043,27 @@ paths:
                       description: 'For a Project conversation: keep only open threads.'
                       type: boolean
                       const: true
+                    eventKinds:
+                      description: >-
+                        For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one
+                        turn.
+                      minItems: 1
+                      maxItems: 11
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - message
+                          - request
+                          - response
+                          - action
+                          - delivery
+                          - note
+                          - approval_decision
+                          - evidence_capture
+                          - amendment
+                          - system
+                          - turn_summary
                     buyerAccountId:
                       description: >-
                         For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone
@@ -28153,6 +28531,27 @@ paths:
                       description: 'For a Project conversation: keep only open threads.'
                       type: boolean
                       const: true
+                    eventKinds:
+                      description: >-
+                        For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one
+                        turn.
+                      minItems: 1
+                      maxItems: 11
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - message
+                          - request
+                          - response
+                          - action
+                          - delivery
+                          - note
+                          - approval_decision
+                          - evidence_capture
+                          - amendment
+                          - system
+                          - turn_summary
                     buyerAccountId:
                       description: >-
                         For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone
@@ -29508,6 +29907,27 @@ paths:
                       description: 'For a Project conversation: keep only open threads.'
                       type: boolean
                       const: true
+                    eventKinds:
+                      description: >-
+                        For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one
+                        turn.
+                      minItems: 1
+                      maxItems: 11
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - message
+                          - request
+                          - response
+                          - action
+                          - delivery
+                          - note
+                          - approval_decision
+                          - evidence_capture
+                          - amendment
+                          - system
+                          - turn_summary
                     buyerAccountId:
                       description: >-
                         For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone
@@ -30863,6 +31283,27 @@ paths:
                       description: 'For a Project conversation: keep only open threads.'
                       type: boolean
                       const: true
+                    eventKinds:
+                      description: >-
+                        For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one
+                        turn.
+                      minItems: 1
+                      maxItems: 11
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - message
+                          - request
+                          - response
+                          - action
+                          - delivery
+                          - note
+                          - approval_decision
+                          - evidence_capture
+                          - amendment
+                          - system
+                          - turn_summary
                     buyerAccountId:
                       description: >-
                         For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone
@@ -32329,6 +32770,27 @@ paths:
                       description: 'For a Project conversation: keep only open threads.'
                       type: boolean
                       const: true
+                    eventKinds:
+                      description: >-
+                        For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one
+                        turn.
+                      minItems: 1
+                      maxItems: 11
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - message
+                          - request
+                          - response
+                          - action
+                          - delivery
+                          - note
+                          - approval_decision
+                          - evidence_capture
+                          - amendment
+                          - system
+                          - turn_summary
                     buyerAccountId:
                       description: >-
                         For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone

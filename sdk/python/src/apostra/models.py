@@ -2518,6 +2518,8 @@ class GetInputKindAdvertiserAccess(TypedDict):
     '\n    For a Project conversation: keep only thread starts in these groups (a thread shows its group).\n    '
     openThreads: NotRequired[Literal[True]]
     '\n    For a Project conversation: keep only open threads.\n    '
+    eventKinds: NotRequired[list[Literal["message", "request", "response", "action", "delivery", "note", "approval_decision", "evidence_capture", "amendment", "system", "turn_summary"]]]
+    '\n    For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one turn.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     memberAccountId: NotRequired[int]
@@ -2673,6 +2675,8 @@ class GetInputKindAgentAndBuyerAgentAndProjectAndSkillAndInventorySourceAndAdver
     '\n    For a Project conversation: keep only thread starts in these groups (a thread shows its group).\n    '
     openThreads: NotRequired[Literal[True]]
     '\n    For a Project conversation: keep only open threads.\n    '
+    eventKinds: NotRequired[list[Literal["message", "request", "response", "action", "delivery", "note", "approval_decision", "evidence_capture", "amendment", "system", "turn_summary"]]]
+    '\n    For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one turn.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     memberAccountId: NotRequired[int]
@@ -2842,6 +2846,8 @@ class GetInputKindAgentRecord(TypedDict):
     '\n    For a Project conversation: keep only thread starts in these groups (a thread shows its group).\n    '
     openThreads: NotRequired[Literal[True]]
     '\n    For a Project conversation: keep only open threads.\n    '
+    eventKinds: NotRequired[list[Literal["message", "request", "response", "action", "delivery", "note", "approval_decision", "evidence_capture", "amendment", "system", "turn_summary"]]]
+    '\n    For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one turn.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     memberAccountId: NotRequired[int]
@@ -2993,6 +2999,8 @@ class GetInputKindAudience(TypedDict):
     '\n    For a Project conversation: keep only thread starts in these groups (a thread shows its group).\n    '
     openThreads: NotRequired[Literal[True]]
     '\n    For a Project conversation: keep only open threads.\n    '
+    eventKinds: NotRequired[list[Literal["message", "request", "response", "action", "delivery", "note", "approval_decision", "evidence_capture", "amendment", "system", "turn_summary"]]]
+    '\n    For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one turn.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     memberAccountId: NotRequired[int]
@@ -3148,6 +3156,8 @@ class GetInputKindBuyerRfp(TypedDict):
     '\n    For a Project conversation: keep only thread starts in these groups (a thread shows its group).\n    '
     openThreads: NotRequired[Literal[True]]
     '\n    For a Project conversation: keep only open threads.\n    '
+    eventKinds: NotRequired[list[Literal["message", "request", "response", "action", "delivery", "note", "approval_decision", "evidence_capture", "amendment", "system", "turn_summary"]]]
+    '\n    For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one turn.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     memberAccountId: NotRequired[int]
@@ -3301,6 +3311,8 @@ class GetInputKindCatalogAndEventSource(TypedDict):
     '\n    For a Project conversation: keep only thread starts in these groups (a thread shows its group).\n    '
     openThreads: NotRequired[Literal[True]]
     '\n    For a Project conversation: keep only open threads.\n    '
+    eventKinds: NotRequired[list[Literal["message", "request", "response", "action", "delivery", "note", "approval_decision", "evidence_capture", "amendment", "system", "turn_summary"]]]
+    '\n    For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one turn.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     memberAccountId: NotRequired[int]
@@ -3456,6 +3468,8 @@ class GetInputKindConnection(TypedDict):
     '\n    For a Project conversation: keep only thread starts in these groups (a thread shows its group).\n    '
     openThreads: NotRequired[Literal[True]]
     '\n    For a Project conversation: keep only open threads.\n    '
+    eventKinds: NotRequired[list[Literal["message", "request", "response", "action", "delivery", "note", "approval_decision", "evidence_capture", "amendment", "system", "turn_summary"]]]
+    '\n    For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one turn.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     memberAccountId: NotRequired[int]
@@ -3611,6 +3625,8 @@ class GetInputKindCreativeAndCreativeCollectionWithAdvertiserId(TypedDict):
     '\n    For a Project conversation: keep only thread starts in these groups (a thread shows its group).\n    '
     openThreads: NotRequired[Literal[True]]
     '\n    For a Project conversation: keep only open threads.\n    '
+    eventKinds: NotRequired[list[Literal["message", "request", "response", "action", "delivery", "note", "approval_decision", "evidence_capture", "amendment", "system", "turn_summary"]]]
+    '\n    For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one turn.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     memberAccountId: NotRequired[int]
@@ -3766,6 +3782,8 @@ class GetInputKindCreativeAndCreativeCollectionWithSourceId(TypedDict):
     '\n    For a Project conversation: keep only thread starts in these groups (a thread shows its group).\n    '
     openThreads: NotRequired[Literal[True]]
     '\n    For a Project conversation: keep only open threads.\n    '
+    eventKinds: NotRequired[list[Literal["message", "request", "response", "action", "delivery", "note", "approval_decision", "evidence_capture", "amendment", "system", "turn_summary"]]]
+    '\n    For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one turn.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     memberAccountId: NotRequired[int]
@@ -3919,6 +3937,8 @@ class GetInputKindCreativeEngine(TypedDict):
     '\n    For a Project conversation: keep only thread starts in these groups (a thread shows its group).\n    '
     openThreads: NotRequired[Literal[True]]
     '\n    For a Project conversation: keep only open threads.\n    '
+    eventKinds: NotRequired[list[Literal["message", "request", "response", "action", "delivery", "note", "approval_decision", "evidence_capture", "amendment", "system", "turn_summary"]]]
+    '\n    For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one turn.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     memberAccountId: NotRequired[int]
@@ -4072,6 +4092,8 @@ class GetInputKindCreativeFormat(TypedDict):
     '\n    For a Project conversation: keep only thread starts in these groups (a thread shows its group).\n    '
     openThreads: NotRequired[Literal[True]]
     '\n    For a Project conversation: keep only open threads.\n    '
+    eventKinds: NotRequired[list[Literal["message", "request", "response", "action", "delivery", "note", "approval_decision", "evidence_capture", "amendment", "system", "turn_summary"]]]
+    '\n    For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one turn.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     memberAccountId: NotRequired[int]
@@ -4225,6 +4247,8 @@ class GetInputKindCreativeSession(TypedDict):
     '\n    For a Project conversation: keep only thread starts in these groups (a thread shows its group).\n    '
     openThreads: NotRequired[Literal[True]]
     '\n    For a Project conversation: keep only open threads.\n    '
+    eventKinds: NotRequired[list[Literal["message", "request", "response", "action", "delivery", "note", "approval_decision", "evidence_capture", "amendment", "system", "turn_summary"]]]
+    '\n    For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one turn.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     memberAccountId: NotRequired[int]
@@ -4378,6 +4402,8 @@ class GetInputKindMaterial(TypedDict):
     '\n    For a Project conversation: keep only thread starts in these groups (a thread shows its group).\n    '
     openThreads: NotRequired[Literal[True]]
     '\n    For a Project conversation: keep only open threads.\n    '
+    eventKinds: NotRequired[list[Literal["message", "request", "response", "action", "delivery", "note", "approval_decision", "evidence_capture", "amendment", "system", "turn_summary"]]]
+    '\n    For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one turn.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     memberAccountId: NotRequired[int]
@@ -4533,6 +4559,8 @@ class GetInputKindPrimeFunction(TypedDict):
     '\n    For a Project conversation: keep only thread starts in these groups (a thread shows its group).\n    '
     openThreads: NotRequired[Literal[True]]
     '\n    For a Project conversation: keep only open threads.\n    '
+    eventKinds: NotRequired[list[Literal["message", "request", "response", "action", "delivery", "note", "approval_decision", "evidence_capture", "amendment", "system", "turn_summary"]]]
+    '\n    For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one turn.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     memberAccountId: NotRequired[int]
@@ -4686,6 +4714,8 @@ class GetInputKindProposal(TypedDict):
     '\n    For a Project conversation: keep only thread starts in these groups (a thread shows its group).\n    '
     openThreads: NotRequired[Literal[True]]
     '\n    For a Project conversation: keep only open threads.\n    '
+    eventKinds: NotRequired[list[Literal["message", "request", "response", "action", "delivery", "note", "approval_decision", "evidence_capture", "amendment", "system", "turn_summary"]]]
+    '\n    For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one turn.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     memberAccountId: NotRequired[int]
@@ -4841,6 +4871,8 @@ class GetInputKindSeller(TypedDict):
     '\n    For a Project conversation: keep only thread starts in these groups (a thread shows its group).\n    '
     openThreads: NotRequired[Literal[True]]
     '\n    For a Project conversation: keep only open threads.\n    '
+    eventKinds: NotRequired[list[Literal["message", "request", "response", "action", "delivery", "note", "approval_decision", "evidence_capture", "amendment", "system", "turn_summary"]]]
+    '\n    For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one turn.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     memberAccountId: NotRequired[int]
@@ -4996,6 +5028,8 @@ class GetInputKindSession(TypedDict):
     '\n    For a Project conversation: keep only thread starts in these groups (a thread shows its group).\n    '
     openThreads: NotRequired[Literal[True]]
     '\n    For a Project conversation: keep only open threads.\n    '
+    eventKinds: NotRequired[list[Literal["message", "request", "response", "action", "delivery", "note", "approval_decision", "evidence_capture", "amendment", "system", "turn_summary"]]]
+    '\n    For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one turn.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     memberAccountId: NotRequired[int]
@@ -5151,6 +5185,8 @@ class GetInputKindSourceOptionsAndListingAndMediaKitAndPlaybookAndBusinessRulesA
     '\n    For a Project conversation: keep only thread starts in these groups (a thread shows its group).\n    '
     openThreads: NotRequired[Literal[True]]
     '\n    For a Project conversation: keep only open threads.\n    '
+    eventKinds: NotRequired[list[Literal["message", "request", "response", "action", "delivery", "note", "approval_decision", "evidence_capture", "amendment", "system", "turn_summary"]]]
+    '\n    For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one turn.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     memberAccountId: NotRequired[int]
@@ -5320,6 +5356,8 @@ class GetInputKindWholesaleProductWithAdvertiserId(TypedDict):
     '\n    For a Project conversation: keep only thread starts in these groups (a thread shows its group).\n    '
     openThreads: NotRequired[Literal[True]]
     '\n    For a Project conversation: keep only open threads.\n    '
+    eventKinds: NotRequired[list[Literal["message", "request", "response", "action", "delivery", "note", "approval_decision", "evidence_capture", "amendment", "system", "turn_summary"]]]
+    '\n    For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one turn.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     memberAccountId: NotRequired[int]
@@ -5475,6 +5513,8 @@ class GetInputKindWholesaleProductWithSourceId(TypedDict):
     '\n    For a Project conversation: keep only thread starts in these groups (a thread shows its group).\n    '
     openThreads: NotRequired[Literal[True]]
     '\n    For a Project conversation: keep only open threads.\n    '
+    eventKinds: NotRequired[list[Literal["message", "request", "response", "action", "delivery", "note", "approval_decision", "evidence_capture", "amendment", "system", "turn_summary"]]]
+    '\n    For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one turn.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     memberAccountId: NotRequired[int]
@@ -5642,6 +5682,8 @@ class GetInputKindWorkItem(TypedDict):
     '\n    For a Project conversation: keep only thread starts in these groups (a thread shows its group).\n    '
     openThreads: NotRequired[Literal[True]]
     '\n    For a Project conversation: keep only open threads.\n    '
+    eventKinds: NotRequired[list[Literal["message", "request", "response", "action", "delivery", "note", "approval_decision", "evidence_capture", "amendment", "system", "turn_summary"]]]
+    '\n    For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one turn.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     memberAccountId: NotRequired[int]
@@ -5797,6 +5839,8 @@ class GetInputKindWorkspaceFile(TypedDict):
     '\n    For a Project conversation: keep only thread starts in these groups (a thread shows its group).\n    '
     openThreads: NotRequired[Literal[True]]
     '\n    For a Project conversation: keep only open threads.\n    '
+    eventKinds: NotRequired[list[Literal["message", "request", "response", "action", "delivery", "note", "approval_decision", "evidence_capture", "amendment", "system", "turn_summary"]]]
+    '\n    For kind session: keep only events of these kinds. A `turn_summary` is what Prime did in one turn.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     memberAccountId: NotRequired[int]
