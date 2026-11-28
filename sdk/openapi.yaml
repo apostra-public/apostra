@@ -72164,8 +72164,8 @@ paths:
                   maxLength: 2000
                 advertiserId:
                   description: >-
-                    Create only: the Project belongs to this advertiser. Omit it for an account-level Project. Never
-                    changes.
+                    The Project belongs to this advertiser; omit for an account-level Project. With an id: sets it once
+                    on an empty account-level Project. Then fixed.
                   $ref: '#/components/schemas/save_project_request_AdvertiserId'
                   type: string
                 sessionId:
