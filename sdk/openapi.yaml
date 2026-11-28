@@ -36796,6 +36796,12 @@ paths:
                       type: string
                       minLength: 1
                       maxLength: 200
+                    minSpend:
+                      description: >-
+                        With rollup: leave out rows that spent less. A ranking by a rate gets a server-chosen floor,
+                        echoed in the answer.
+                      type: number
+                      minimum: 0
                   additionalProperties: false
                 compare:
                   description: >-
@@ -36817,6 +36823,43 @@ paths:
                   type: string
                   minLength: 1
                   maxLength: 200
+                rollup:
+                  description: >-
+                    campaign_creative_delivery: one ranked row per creative, or per exact ad name, across all buys
+                    (answer.rollup).
+                  type: string
+                  enum:
+                    - creative
+                    - creative_name
+                sort:
+                  description: 'With rollup: rank by an AdCP metric; default spend, desc.'
+                  type: object
+                  properties:
+                    sort_by:
+                      type: string
+                      enum:
+                        - spend
+                        - impressions
+                        - clicks
+                        - ctr
+                        - conversions
+                        - conversion_value
+                        - views
+                        - completed_views
+                        - cpm
+                        - cost_per_click
+                        - cost_per_acquisition
+                        - roas
+                      description: AdCP metric to rank rows by.
+                    sort_direction:
+                      description: desc (default) is largest first.
+                      type: string
+                      enum:
+                        - asc
+                        - desc
+                  required:
+                    - sort_by
+                  additionalProperties: false
                 accountId:
                   description: Apostra accountId this call runs in, from get_status.
                   anyOf:
@@ -38148,6 +38191,8 @@ paths:
                                     type: string
                                   creativeId:
                                     type: string
+                                  minSpend:
+                                    type: number
                                 additionalProperties: false
                             required:
                               - range
@@ -38157,6 +38202,9 @@ paths:
                             type: array
                             items:
                               $ref: '#/components/schemas/get_delivery_success_CampaignCreativeMediaBuy'
+                          rollup:
+                            description: Set when the request set rollup; media_buy_deliveries is then empty.
+                            $ref: '#/components/schemas/get_delivery_success_CampaignCreativeRollup'
                           coverage:
                             type: object
                             properties:
@@ -121621,42 +121669,29 @@ components:
         creative_name:
           type: string
         impressions:
-          type: number
-          minimum: 0
+          $ref: '#/components/schemas/get_delivery_success_CampaignCreativeDeliveryImpressions'
         spend:
-          type: number
-          minimum: 0
+          $ref: '#/components/schemas/get_delivery_success_CampaignCreativeDeliverySpend'
         clicks:
-          type: number
-          minimum: 0
+          $ref: '#/components/schemas/get_delivery_success_CampaignCreativeDeliveryClicks'
         ctr:
-          type: number
-          minimum: 0
-          maximum: 1
+          $ref: '#/components/schemas/get_delivery_success_CampaignCreativeDeliveryCtr'
         conversions:
-          type: number
-          minimum: 0
+          $ref: '#/components/schemas/get_delivery_success_CampaignCreativeDeliveryConversions'
         conversion_value:
-          type: number
-          minimum: 0
+          $ref: '#/components/schemas/get_delivery_success_CampaignCreativeDeliveryConversionValue'
         views:
-          type: number
-          minimum: 0
+          $ref: '#/components/schemas/get_delivery_success_CampaignCreativeDeliveryViews'
         completed_views:
-          type: number
-          minimum: 0
+          $ref: '#/components/schemas/get_delivery_success_CampaignCreativeDeliveryCompletedViews'
         cpm:
-          type: number
-          minimum: 0
+          $ref: '#/components/schemas/get_delivery_success_CampaignCreativeDeliveryCpm'
         cost_per_click:
-          type: number
-          minimum: 0
+          $ref: '#/components/schemas/get_delivery_success_CampaignCreativeDeliveryCostPerClick'
         cost_per_acquisition:
-          type: number
-          minimum: 0
+          $ref: '#/components/schemas/get_delivery_success_CampaignCreativeDeliveryCostPerAcquisition'
         roas:
-          type: number
-          minimum: 0
+          $ref: '#/components/schemas/get_delivery_success_CampaignCreativeDeliveryRoas'
         creative_in_library:
           description: >-
             true for a creative in the advertiser's Library, false when Apostra or the seller assigned the id to a
@@ -121699,7 +121734,8 @@ components:
       required:
         - creative_id
         - daily_breakdown
-      additionalProperties: {}
+      additionalProperties:
+        $ref: '#/components/schemas/get_delivery_success_CampaignCreativeDeliveryValue'
     get_delivery_success_CreativeDailyDelivery:
       type: object
       properties:
@@ -121871,6 +121907,135 @@ components:
       required:
         - date
       additionalProperties: {}
+    get_delivery_success_CampaignCreativeRollup:
+      type: object
+      properties:
+        by:
+          type: string
+          enum:
+            - creative
+            - creative_name
+        sorted_by:
+          type: string
+          enum:
+            - spend
+            - impressions
+            - clicks
+            - ctr
+            - conversions
+            - conversion_value
+            - views
+            - completed_views
+            - cpm
+            - cost_per_click
+            - cost_per_acquisition
+            - roas
+        sort_direction:
+          type: string
+          enum:
+            - asc
+            - desc
+        min_spend:
+          type: array
+          items:
+            type: object
+            properties:
+              currency:
+                type:
+                  - string
+                  - 'null'
+              amount:
+                type: number
+              source:
+                type: string
+                enum:
+                  - request
+                  - default
+            required:
+              - currency
+              - amount
+              - source
+            additionalProperties: false
+          description: Spend floor applied per currency; source says who set it.
+        below_min_spend:
+          type: number
+          description: Rows the floor left out.
+        by_creative_truncated:
+          type: boolean
+          description: >-
+            true when a seller cut a package creative list on a day in the range, so a creative it left out is in no
+            row.
+        rows:
+          type: array
+          items:
+            $ref: '#/components/schemas/get_delivery_success_CampaignCreativeRollupRow'
+      required:
+        - by
+        - sorted_by
+        - sort_direction
+        - min_spend
+        - below_min_spend
+        - by_creative_truncated
+        - rows
+      additionalProperties: false
+    get_delivery_success_CampaignCreativeRollupRow:
+      type: object
+      properties:
+        impressions:
+          $ref: '#/components/schemas/get_delivery_success_CampaignCreativeRollupRowImpressions'
+        spend:
+          $ref: '#/components/schemas/get_delivery_success_CampaignCreativeRollupRowSpend'
+        clicks:
+          $ref: '#/components/schemas/get_delivery_success_CampaignCreativeRollupRowClicks'
+        ctr:
+          $ref: '#/components/schemas/get_delivery_success_CampaignCreativeRollupRowCtr'
+        conversions:
+          $ref: '#/components/schemas/get_delivery_success_CampaignCreativeRollupRowConversions'
+        conversion_value:
+          $ref: '#/components/schemas/get_delivery_success_CampaignCreativeRollupRowConversionValue'
+        views:
+          $ref: '#/components/schemas/get_delivery_success_CampaignCreativeRollupRowViews'
+        completed_views:
+          $ref: '#/components/schemas/get_delivery_success_CampaignCreativeRollupRowCompletedViews'
+        cpm:
+          $ref: '#/components/schemas/get_delivery_success_CampaignCreativeRollupRowCpm'
+        cost_per_click:
+          $ref: '#/components/schemas/get_delivery_success_CampaignCreativeRollupRowCostPerClick'
+        cost_per_acquisition:
+          $ref: '#/components/schemas/get_delivery_success_CampaignCreativeRollupRowCostPerAcquisition'
+        roas:
+          $ref: '#/components/schemas/get_delivery_success_CampaignCreativeRollupRowRoas'
+        key:
+          type: string
+        creative_name:
+          type: string
+        creative_ids:
+          type: array
+          items:
+            type: string
+          description: Distinct ids, at most 20; creative_count is exact, so two storefronts that use one id count twice.
+        creative_count:
+          type: number
+        currency:
+          type:
+            - string
+            - 'null'
+        media_buy_count:
+          type: number
+        package_count:
+          type: number
+        creative_in_library:
+          description: true only when every creative in the row is.
+          type: boolean
+      required:
+        - key
+        - creative_ids
+        - creative_count
+        - currency
+        - media_buy_count
+        - package_count
+      additionalProperties:
+        $ref: '#/components/schemas/get_delivery_success_CampaignCreativeRollupRowValue'
     get_delivery_success_CreativeHistoryCoverage:
       type: object
       properties:
@@ -122038,6 +122203,12 @@ components:
               type: string
               minLength: 1
               maxLength: 200
+            minSpend:
+              description: >-
+                With rollup: leave out rows that spent less. A ranking by a rate gets a server-chosen floor, echoed in
+                the answer.
+              type: number
+              minimum: 0
           additionalProperties: false
       required:
         - metrics
@@ -123895,6 +124066,82 @@ components:
           - count
         additionalProperties: {}
     get_delivery_success_AdDailyDeliveryValue: {}
+    get_delivery_success_CampaignCreativeDeliveryImpressions:
+      type: number
+      minimum: 0
+    get_delivery_success_CampaignCreativeDeliverySpend:
+      type: number
+      minimum: 0
+    get_delivery_success_CampaignCreativeDeliveryClicks:
+      type: number
+      minimum: 0
+    get_delivery_success_CampaignCreativeDeliveryCtr:
+      type: number
+      minimum: 0
+      maximum: 1
+    get_delivery_success_CampaignCreativeDeliveryConversions:
+      type: number
+      minimum: 0
+    get_delivery_success_CampaignCreativeDeliveryConversionValue:
+      type: number
+      minimum: 0
+    get_delivery_success_CampaignCreativeDeliveryViews:
+      type: number
+      minimum: 0
+    get_delivery_success_CampaignCreativeDeliveryCompletedViews:
+      type: number
+      minimum: 0
+    get_delivery_success_CampaignCreativeDeliveryCpm:
+      type: number
+      minimum: 0
+    get_delivery_success_CampaignCreativeDeliveryCostPerClick:
+      type: number
+      minimum: 0
+    get_delivery_success_CampaignCreativeDeliveryCostPerAcquisition:
+      type: number
+      minimum: 0
+    get_delivery_success_CampaignCreativeDeliveryRoas:
+      type: number
+      minimum: 0
+    get_delivery_success_CampaignCreativeDeliveryValue: {}
+    get_delivery_success_CampaignCreativeRollupRowImpressions:
+      type: number
+      minimum: 0
+    get_delivery_success_CampaignCreativeRollupRowSpend:
+      type: number
+      minimum: 0
+    get_delivery_success_CampaignCreativeRollupRowClicks:
+      type: number
+      minimum: 0
+    get_delivery_success_CampaignCreativeRollupRowCtr:
+      type: number
+      minimum: 0
+      maximum: 1
+    get_delivery_success_CampaignCreativeRollupRowConversions:
+      type: number
+      minimum: 0
+    get_delivery_success_CampaignCreativeRollupRowConversionValue:
+      type: number
+      minimum: 0
+    get_delivery_success_CampaignCreativeRollupRowViews:
+      type: number
+      minimum: 0
+    get_delivery_success_CampaignCreativeRollupRowCompletedViews:
+      type: number
+      minimum: 0
+    get_delivery_success_CampaignCreativeRollupRowCpm:
+      type: number
+      minimum: 0
+    get_delivery_success_CampaignCreativeRollupRowCostPerClick:
+      type: number
+      minimum: 0
+    get_delivery_success_CampaignCreativeRollupRowCostPerAcquisition:
+      type: number
+      minimum: 0
+    get_delivery_success_CampaignCreativeRollupRowRoas:
+      type: number
+      minimum: 0
+    get_delivery_success_CampaignCreativeRollupRowValue: {}
     get_delivery_success_RowsItemMetricsValue:
       type: object
       properties:
